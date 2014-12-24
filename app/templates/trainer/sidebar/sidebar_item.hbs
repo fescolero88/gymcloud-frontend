@@ -1,0 +1,15 @@
+<div class="gc-sidebar-folder">
+  <a href="#" class="row {{#if isFolder}}toggle-menu{{/if}}">
+    <span class="col-xs-2">
+      <span class="{{#if isFolder}}fa fa-folder-o {{else}}glyphicon glyphicon-th{{/if}}"></span>
+    </span>
+    <span class="col-xs-10 gc-sidebar-folder-name">
+      {{title}}
+    </span>
+  </a>
+  <div class="gc-sidebar-sub">
+    {{#each items}}
+      {{> sidebar_item}}
+    {{/each}}
+  </div>
+</div>
