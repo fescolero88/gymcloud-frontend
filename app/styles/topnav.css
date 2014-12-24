@@ -110,14 +110,17 @@
     height: 46px;
     width: 46px;
     border-radius: 50px;
-    background: #3398db url('../img/avatar-placeholder.png') center center no-repeat;
-    background-size: 50%;
+    background: #3398db url('../images/avatar-placeholder.png') center center no-repeat;
+    background-size: 60%;
     border: 2px solid #fff;
 }
 .gc-topbar-avatar a img {
     width: 42px;
     height: 42px;
     border-radius: 50px;
+}
+.gc-topbar-avatar a img[src$='defaultimage.png'] {
+    display: none;
 }
 .gc-topbar-dropdown-icon {
     display: inline-block;

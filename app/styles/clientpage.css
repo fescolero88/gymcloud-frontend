@@ -1,0 +1,18 @@
+#clientpage-nav-region {
+  background: #3398db;
+  height: 105px;
+  margin: 0 -15px;
+}
+#clientpage-content-region {
+  background: #fff;
+  height: 100%;
+  min-height: 100%;
+  margin: 0 -15px;
+}
+.gc-clientpage-exercises h2 {
+  text-transform: uppercase;
+  color: #757575;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 30px 25px;
+}

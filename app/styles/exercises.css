@@ -224,6 +224,9 @@
   border-bottom: 1px solid #ededed;
   padding: 15px 0;
 }
+.gc-exercises-assign-list > .row > div {
+  padding: 0;
+}
 .gc-exercises-assign-list .gc-exercises-link {
   color: #3398db;
   text-transform: uppercase;
@@ -261,7 +264,9 @@
   line-height: 20px;
   border-radius: 50px;
   padding: 4px 8px;
-  margin-right: 15px;
+}
+.gc-exercises-assign-btn + .btn {
+  margin-left: 15px;
 }
 .gc-exercises-assign-btn:hover,
 .gc-exercises-assign-btn:active,

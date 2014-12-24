@@ -1,16 +1,15 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
-ClientsController = require '../../controllers/trainer/clients/clients-controller.coffee'
-ClientsRouter = require '../../routers/trainer/clients/clients-router.coffee'
+ClientPageController = require '../../controllers/client/clientpage-controller.coffee'
+ClientPageRouter = require '../../routers/client/clientpage-router.coffee'
 
 MessagesController = require '../../controllers/general/messages/messages-controller.coffee'
 MessagesRouter = require '../../routers/general/messages/messages-router.coffee'
 
 MainView = require '../../views/general/main-view.coffee'
-SideBarView = require '../../views/trainer/sidebar-view.coffee'
+SideBarView = require '../../views/client/clientpage-sidebar-view.coffee'
 HeaderView = require '../../views/general/header-view.coffee'
-ModalView = require '../../views/general/modal-view.coffee'
 
 module.exports = class MainClientModule extends Marionette.Module
   initialize: =>
@@ -22,17 +21,17 @@ module.exports = class MainClientModule extends Marionette.Module
     @addInitializer (options) =>
       @main_view = new MainView()
       @header_view = new HeaderView()
-      @modal_view = new ModalView()
+      @sidebar_view = new SideBarView()
 
       @app.appRegion.show @main_view
 
       @main_view.header.show @header_view
-      @main_view.modals.show @modal_view
+      @main_view.menu.show @sidebar_view
 
-    # Clients
+    # Client's page
     @addInitializer (options) =>
-      @clients_controller = new ClientsController { main_view: @main_view }
-      @clients_router = new ClientsRouter { controller: @clients_controller }
+      @clientpage_controller = new ClientPageController { main_view: @main_view }
+      @clientpage_router = new ClientPageRouter { controller: @clientpage_controller }
 
     # Messages
     @addInitializer (options) =>
@@ -40,5 +39,5 @@ module.exports = class MainClientModule extends Marionette.Module
       @messages_router = new MessagesRouter { controller: @messages_controller }
 
 
-      @on 'stop', () =>
-        @app.appRegion.reset()
+    @on 'stop', () =>
+      @app.appRegion.reset()

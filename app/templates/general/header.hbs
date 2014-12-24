@@ -25,11 +25,11 @@
     <span class="gc-topbar-notifications danger">3</span>
   </a>
 </div>
+{{#withProfile}}
+{{#ifNot account_type 'Client'}}
 <div class="gc-topbar-item gc-topbar-avatar dropdown">
   <a href="#" id="gc-user-topbar-avatar" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-    {{#withProfile}}
     <img src="{{avatar_url}}" alt="">
-    {{/withProfile}}
   </a>
   <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="gc-user-topbar-avatar">
     <li>
@@ -66,3 +66,11 @@
     </li>
   </ul>
 </div>
+{{else}}
+  <div class="gc-topbar-item">
+    <a href="#" class="btn btn-default" type="button" id="temp-logout">
+      <i class="fa fa-power-off"></i>
+    </a>
+  </div>
+{{/ifNot}}
+{{/withProfile}}
