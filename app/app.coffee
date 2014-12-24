@@ -23,10 +23,10 @@ class App extends Marionette.Application
 
     @addInitializer ->
       spinner = new Spinner
-      @vent.on "startMainSpinner", ->
+      @vent.on "spinner:global:start", ->
         spinner.spin(document.getElementById('center-spin'))
 
-      @vent.on "stopMainSpinner", ->
+      @vent.on "spinner:global:stop", ->
         spinner.stop()
 
       $(document).ajaxError ->
@@ -39,14 +39,14 @@ class App extends Marionette.Application
 
       $.ajaxPrefilter ( options, originalOptions, jqXHR ) =>
         options.url = "//gymcloud-stagingapp.herokuapp.com" + options.url
-        if window.localStorage.access_token
-          options.url += "?access_token=#{window.localStorage.access_token}"
+        if window.localStorage.accessToken
+          options.url += "?access_token=#{window.localStorage.accessToken}"
         options
 
 
     @module 'Auth', AuthModule
-    if window.localStorage.access_token
-      @profile_model.url = "//gymcloud-stagingapp.herokuapp.com/api/mobile/me?access_token=#{window.localStorage.access_token}"
+    if window.localStorage.accessToken
+      @profile_model.url = "//gymcloud-stagingapp.herokuapp.com/api/mobile/me?access_token=#{window.localStorage.accessToken}"
       @profile_model.fetch().then =>
         if @profile_model.get('account_type') is 'Client'
             @module 'Main', MainClientModule
@@ -56,7 +56,7 @@ class App extends Marionette.Application
       window.location.replace('#login')
 
     @addInitializer ->
-      @vent.on "startMainModule", () =>
+      @vent.on "modules:main:start", () =>
         @profile_model.url = "/api/mobile/me"
         @profile_model.fetch().then =>
           if @profile_model.get('account_type') is 'Client'
@@ -66,7 +66,7 @@ class App extends Marionette.Application
           @module('Main').start()
           window.location.replace('#clients')
 
-      @vent.on "startAuthModule", () =>
+      @vent.on "modules:auth:start", () =>
         @module('Main').stop()
         delete @Main
         window.location.replace('#login')

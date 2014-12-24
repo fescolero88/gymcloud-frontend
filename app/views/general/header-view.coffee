@@ -10,7 +10,7 @@ module.exports = class HeaderView extends Marionette.ItemView
 
   logout: (ev)=>
     ev.preventDefault()
-    window.localStorage.removeItem 'access_token'
+    window.localStorage.removeItem 'accessToken'
     App.vent.trigger "startAuthModule"
 
   searchblur: (ev)->

@@ -18,13 +18,13 @@ MessagesView = require '../../views/general/messages/messages-view.coffee'
 module.exports = class ClientPageController extends Marionette.Controller
 
   initialize: (options) =>
-    @main_view = options.main_view
+    @mainView = options.mainView
     @user_page_view = null
 
   beforeAction: () =>
     if not @user_page_view
       @user_page_view = new ClientPageView()
-      @main_view.content.show @user_page_view
+      @mainView.content.show @user_page_view
 
       @nav_view = new ClientPageNavView()
       @user_page_view.nav.show @nav_view

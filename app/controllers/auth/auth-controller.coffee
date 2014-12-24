@@ -8,7 +8,7 @@ module.exports = class AuthController extends Marionette.Controller
 
   login: ->
     view = new @view
-    if window.localStorage.access_token
+    if window.localStorage.accessToken
       window.location.replace('#')
     else
       @region.show(view)
@@ -32,5 +32,5 @@ module.exports = class AuthController extends Marionette.Controller
       dataType: 'json'
       data: JSON.stringify data
       success: (data) ->
-        window.localStorage.setItem 'access_token', data.access_token
+        window.localStorage.setItem 'accessToken', data.access_token
         authorized()

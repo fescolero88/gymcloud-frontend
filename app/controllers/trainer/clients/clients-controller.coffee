@@ -26,20 +26,20 @@ MessagesView = require '../../../views/general/messages/messages-view.coffee'
 module.exports = class ClientsController extends Marionette.Controller
 
   initialize: (options) =>
-    @main_view = options.main_view
+    @mainView = options.mainView
     @client_page_view = null
 
   beforeAction: () =>
-    if not @client_page_view
+    if not @client_page_view or not @client_page_view.header
       @client_page_view = new ClientView()
-      @main_view.content.show @client_page_view
+      @mainView.content.show @client_page_view
 
       @nav_view = new ClientNavView()
       @client_page_view.nav.show @nav_view
 
   clients: (view_type) =>
     clients_page_view = new ClientsView view_type
-    @main_view.content.show clients_page_view
+    @mainView.content.show clients_page_view
 
     if view_type != 'groups'
       client_collection = new Backbone.Collection()
@@ -58,8 +58,8 @@ module.exports = class ClientsController extends Marionette.Controller
   client: (id) =>
     @beforeAction()
 
-    header_view = new ClientHeaderView()
-    @client_page_view.header.show header_view
+    headerView = new ClientHeaderView()
+    @client_page_view.header.show headerView
 
     left_view = new ClientLeftView()
     @client_page_view.leftside.show left_view
@@ -70,8 +70,8 @@ module.exports = class ClientsController extends Marionette.Controller
   clientCalendarDay: (id) =>
     @beforeAction()
 
-    header_view = new ClientHeaderView()
-    @client_page_view.header.show header_view
+    headerView = new ClientHeaderView()
+    @client_page_view.header.show headerView
 
     left_view = new CalendarDayView()
     @client_page_view.leftside.show left_view
@@ -82,8 +82,8 @@ module.exports = class ClientsController extends Marionette.Controller
   clientCalendarWeek: (id) =>
     @beforeAction()
 
-    header_view = new ClientHeaderView()
-    @client_page_view.header.show header_view
+    headerView = new ClientHeaderView()
+    @client_page_view.header.show headerView
 
     left_view = new CalendarWeekView()
     @client_page_view.leftside.show left_view
@@ -94,8 +94,8 @@ module.exports = class ClientsController extends Marionette.Controller
   clientCalendarMonth: (id) =>
     @beforeAction()
 
-    header_view = new ClientHeaderView()
-    @client_page_view.header.show header_view
+    headerView = new ClientHeaderView()
+    @client_page_view.header.show headerView
 
     left_view = new CalendarMonthView()
     @client_page_view.leftside.show left_view
@@ -106,8 +106,8 @@ module.exports = class ClientsController extends Marionette.Controller
   clientExercises: (id) =>
     @beforeAction()
 
-    header_view = new ClientHeaderView()
-    @client_page_view.header.show header_view
+    headerView = new ClientHeaderView()
+    @client_page_view.header.show headerView
 
     left_view = new ExercisesView()
     @client_page_view.leftside.show left_view
@@ -118,8 +118,8 @@ module.exports = class ClientsController extends Marionette.Controller
   clientExercise: (id) =>
     @beforeAction()
 
-    header_view = new ClientCompactHeaderView()
-    @client_page_view.header.show header_view
+    headerView = new ClientCompactHeaderView()
+    @client_page_view.header.show headerView
 
     left_view = new ExerciseView()
     @client_page_view.leftside.show left_view
@@ -131,4 +131,4 @@ module.exports = class ClientsController extends Marionette.Controller
     @beforeAction()
 
     group_page_view = new GroupView()
-    @main_view.content.show group_page_view
+    @mainView.content.show group_page_view

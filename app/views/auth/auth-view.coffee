@@ -11,14 +11,14 @@ module.exports = class AuthView extends Marionette.ItemView
   initialize: =>
     @template = require '../../templates/auth/auth'
 
-  login:  (event) ->
+  login: (event) ->
     event.preventDefault()
-    App.vent.trigger('startMainSpinner')
+    App.vent.trigger('spinner:global:start')
     username = @ui.inputEmail.val()
     password = @ui.inputPassword.val()
     authorized = @onAuthorized
     @trigger 'authenticate', { username, password, authorized }
 
-  onAuthorized: =>
-    App.vent.trigger "stopMainSpinner"
-    App.vent.trigger "startMainModule"
+  onAuthorized: ->
+    App.vent.trigger "spinner:global:stop"
+    App.vent.trigger "modules:main:start"

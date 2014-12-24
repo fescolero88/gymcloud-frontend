@@ -7,16 +7,16 @@ AuthView = require '../../views/auth/auth-view.coffee'
 
 module.exports = class AuthModule extends Marionette.Module
   initialize: =>
-    @on 'start', () ->
+    @on 'start', ->
       if Backbone.history
         Backbone.history.stop()
         Backbone.history.start()
 
-    @addInitializer (options) =>
+    @addInitializer (options) ->
       @auth_view = AuthView
       @controller = new AuthController { region: @app.appRegion, @auth_view }
       @router = new AuthRouter { @controller }
 
-    @on 'stop', () =>
+    @on 'stop', ->
       @controller.destroy()
       @app.appRegion.reset()

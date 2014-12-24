@@ -14,32 +14,32 @@ ModalView = require '../../views/general/modal-view.coffee'
 
 module.exports = class MainTrainerModule extends Marionette.Module
   initialize: =>
-    @on 'start', () ->
+    @on 'start', ->
       if Backbone.history
         Backbone.history.stop()
         Backbone.history.start()
 
     @addInitializer (options) =>
-      @main_view = new MainView()
+      @mainView = new MainView()
       @sidebar_view = new SideBarView()
-      @header_view = new HeaderView()
-      @modal_view = new ModalView()
+      @headerView = new HeaderView()
+      @modalView = new ModalView()
 
-      @app.appRegion.show @main_view
+      @app.appRegion.show @mainView
 
-      @main_view.header.show @header_view
-      @main_view.menu.show @sidebar_view
-      @main_view.modals.show @modal_view
+      @mainView.header.show @headerView
+      @mainView.menu.show @sidebar_view
+      @mainView.modals.show @modalView
 
     # Clients
-    @addInitializer (options) =>
-      @clients_controller = new ClientsController { main_view: @main_view }
+    @addInitializer (options) ->
+      @clients_controller = new ClientsController { mainView: @mainView }
       @clients_router = new ClientsRouter { controller: @clients_controller }
 
     # Messages
-    @addInitializer (options) =>
-      @messages_controller = new MessagesController { main_view: @main_view }
+    @addInitializer (options) ->
+      @messages_controller = new MessagesController { mainView: @mainView }
       @messages_router = new MessagesRouter { controller: @messages_controller }
 
-    @on 'stop', () =>
+    @on 'stop', ->
       @app.appRegion.reset()

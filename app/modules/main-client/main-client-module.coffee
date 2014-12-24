@@ -13,31 +13,31 @@ HeaderView = require '../../views/general/header-view.coffee'
 
 module.exports = class MainClientModule extends Marionette.Module
   initialize: =>
-    @on 'start', () ->
+    @on 'start', ->
       if Backbone.history
         Backbone.history.stop()
         Backbone.history.start()
 
-    @addInitializer (options) =>
-      @main_view = new MainView()
-      @header_view = new HeaderView()
+    @addInitializer (options) ->
+      @mainView = new MainView()
+      @headerView = new HeaderView()
       @sidebar_view = new SideBarView()
 
-      @app.appRegion.show @main_view
+      @app.appRegion.show @mainView
 
-      @main_view.header.show @header_view
-      @main_view.menu.show @sidebar_view
+      @mainView.header.show @headerView
+      @mainView.menu.show @sidebar_view
 
     # Client's page
-    @addInitializer (options) =>
-      @clientpage_controller = new ClientPageController { main_view: @main_view }
+    @addInitializer (options) ->
+      @clientpage_controller = new ClientPageController { mainView: @mainView }
       @clientpage_router = new ClientPageRouter { controller: @clientpage_controller }
 
     # Messages
-    @addInitializer (options) =>
-      @messages_controller = new MessagesController { main_view: @main_view }
+    @addInitializer (options) ->
+      @messages_controller = new MessagesController { mainView: @mainView }
       @messages_router = new MessagesRouter { controller: @messages_controller }
 
 
-    @on 'stop', () =>
+    @on 'stop', () ->
       @app.appRegion.reset()
