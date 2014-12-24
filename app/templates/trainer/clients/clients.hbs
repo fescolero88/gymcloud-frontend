@@ -1,0 +1,269 @@
+<div class="gc-main-workspace row">
+  <div class="col-xs-12 gc-content-both">
+    <div class="gc-clients-nav-wrapper row">
+      <div class="col-xs-6 gc-clients-nav-left">
+        <label class="gc-content-nav-checkall">
+          <input type="checkbox">
+        </label>
+        <h2>Clients</h2>
+        {{#ifNot view_type 'groups'}}
+        <a href="#" class="btn btn-link" data-toggle="modal" data-target="#gc-add-client-modal">
+          <span class="fa fa-plus"></span>
+          Add client
+        </a>
+        {{/ifNot}}
+        {{#ifNot view_type 'individuals'}}
+        <a href="#" class="btn btn-link" data-toggle="modal" data-target="#gc-add-group-modal">
+          <span class="fa fa-plus"></span>
+          Add group
+        </a>
+        {{/ifNot}}
+      </div>
+      {{#ifNot view_type 'individuals'}}
+      <div class="col-xs-6 gc-clients-nav-right text-right">
+        <a href="#" class="btn btn-link" data-toggle="modal" data-target="#gc-move-to-group-modal">Move to group</a>
+        <a href="#" id="rm-event" class="btn btn-danger">
+          <span class="fa fa-trash"></span>
+        </a>
+      </div>
+      {{/ifNot}}
+    </div>
+    <div class="gc-clients-list-wrapper row">
+      <div class="col-xs-12" id="clients-region"></div>
+      <div class="col-xs-12" id="groups-region"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade gc-modal" id="gc-add-group-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>Close</span></button>
+        <h4 class="modal-title">
+          <span><img src="../static/images/icon-individuals.png" alt=""></span>
+          Add group
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-3">
+             <div class="gc-edit-profile-modal-upload-wrapper">
+              <input type="file" class="gc-edit-profile-modal-upload-input">
+              <p href="#" class="gc-edit-profile-modal-upload-text">
+                <span class="fa fa-plus"></span>
+                Upload
+                <br>
+                photo
+              </p>
+            </div>
+          </div>
+          <div class="col-xs-9">
+            <form class="form" role="form">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="">Group name</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-xs-12 text-right"><button type="button" class="btn btn-primary">Save</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade gc-modal" id="gc-add-client-modal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>Close</span></button>
+        <h4 class="modal-title">
+          <span><img src="../static/images/icon-individuals.png" alt=""></span>
+          Add client
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-3">
+             <div class="gc-edit-profile-modal-upload-wrapper">
+              <input type="file" class="gc-edit-profile-modal-upload-input">
+              <p href="#" class="gc-edit-profile-modal-upload-text">
+                <span class="fa fa-plus"></span>
+                Upload
+                <br>
+                photo
+              </p>
+            </div>
+          </div>
+          <div class="col-xs-9">
+            <form class="form" role="form">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-2">
+                    <label for="r1">Gender</label>
+                  </div>
+                  <div class="col-xs-2">
+                    <label>
+                      <input type="radio" name="r1"> <span>Male</span>
+                    </label>
+                  </div>
+                  <div class="col-xs-2">
+                    <label>
+                      <input type="radio" name="r1"> <span>Female</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label for="">Weight</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control">
+                      <div class="input-group-addon">KG</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label for="">Height</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control">
+                      <div class="input-group-addon">CM</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label for="">Bodyfat</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="">First name</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="">Last name</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-8">
+                  <div class="form-group">
+                    <label for="">Location</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label for="">ZIP</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="">Employer</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label for="">Date of birth</label>
+                    <input type="date" class="form-control">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-xs-12 text-right"><button type="button" class="btn btn-primary">Save</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade gc-modal" id="gc-move-to-group-modal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>Close</span></button>
+        <h4 class="modal-title">
+          <span><img src="../static/images/icon-individuals.png" alt=""></span>
+          Move to Group(s)
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-12">
+            <form class="form gc-move-to-group-form" role="form">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"> Group 1
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"> Group 2
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"> Group 3
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"> Group 4
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"> Group 5
+                </label>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-xs-12 text-right"><button type="button" class="btn btn-primary">Move to Group(s)</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
