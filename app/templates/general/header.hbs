@@ -1,0 +1,68 @@
+<div class="gc-topbar-search">
+  <div class="input-group">
+    <input id="gc-topnav-search" type="text" class="form-control" placeholder="Search GymCloud">
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="button">
+        <i class="glyphicon glyphicon-search"></i>
+      </button>
+    </span>
+  </div>
+</div>
+<div class="gc-topbar-item">
+  <a href="#" class="btn btn-default" type="button">
+    <i class="fa fa-question"></i>
+  </a>
+</div>
+<div class="gc-topbar-item">
+  <a href="#messages" class="btn btn-default" type="button">
+    <i class="fa fa-envelope-o"></i>
+    <span class="gc-topbar-notifications success">12</span>
+  </a>
+</div>
+<div class="gc-topbar-item">
+  <a href="#" class="btn btn-default" type="button">
+    <i class="fa fa-bell-o"></i>
+    <span class="gc-topbar-notifications danger">3</span>
+  </a>
+</div>
+<div class="gc-topbar-item gc-topbar-avatar dropdown">
+  <a href="#" id="gc-user-topbar-avatar" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+    {{#withProfile}}
+    <img src="{{avatar_url}}" alt="">
+    {{/withProfile}}
+  </a>
+  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="gc-user-topbar-avatar">
+    <li>
+      <a class="row" href="#">
+        <span class="col-xs-3">
+          <span class="gc-topbar-dropdown-icon gc-topbar-dropdown-icon-profile"></span>
+        </span>
+        <span class="col-xs-9">Profile</span>
+      </a>
+    </li>
+    <li>
+      <a class="row" href="#clients">
+      <span class="col-xs-3">
+        <span class="gc-topbar-dropdown-icon gc-topbar-dropdown-icon-clients"></span>
+      </span>
+      <span class="col-xs-9">Clients</span>
+      </a>
+    </li>
+    <li>
+      <a class="row" href="#">
+        <span class="col-xs-3">
+          <span class="gc-topbar-dropdown-icon gc-topbar-dropdown-icon-trainigs"></span>
+        </span>
+        <span class="col-xs-9">Trainings</span>
+      </a>
+    </li>
+    <li>
+      <a class="row" href="#" id="temp-logout">
+        <span class="col-xs-3">
+          <span class="gc-topbar-dropdown-icon gc-topbar-dropdown-icon-signout"></span>
+        </span>
+        <span class="col-xs-9">Sign out</span>
+      </a>
+    </li>
+  </ul>
+</div>
