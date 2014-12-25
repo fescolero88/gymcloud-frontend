@@ -1,0 +1,127 @@
+<a href="#" class="gc-sidebar-logo">
+  <img src="../static/images/gymcloud-logo.png" alt="">
+</a>
+<div class="gc-sidebar-menu-list">
+  <div class="gc-sidebar-cat">
+    <a href="#dashboard" class="row toggle-menu">
+      <span class="col-xs-2">
+        <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-dashboard.png')"></span>
+      </span>
+      <span class="col-xs-8 gc-sidebar-cat-name">
+        Dashboard
+      </span>
+      <span class="col-xs-2">
+        <span class="fa fa-chevron-right"></span>
+      </span>
+    </a>
+  </div>
+  {{#if exercises}}
+  <div class="gc-sidebar-cat">
+    <a href="#exercises" class="row toggle-menu">
+      <span class="col-xs-2">
+        <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-exercises.png')"></span>
+      </span>
+      <span class="col-xs-8 gc-sidebar-cat-name">
+        Exercises
+      </span>
+      <span class="col-xs-2">
+        <span class="fa fa-chevron-right"></span>
+      </span>
+    </a>
+    <div class="gc-sidebar-sub">
+      {{#each exercises}}
+        {{> sidebar_item}}
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
+  {{#if workouts}}
+  <div class="gc-sidebar-cat">
+    <a href="#workouts" class="row toggle-menu">
+      <span class="col-xs-2">
+        <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-workouts.png')"></span>
+      </span>
+      <span class="col-xs-8 gc-sidebar-cat-name">
+        Workouts
+      </span>
+      <span class="col-xs-2">
+        <span class="fa fa-chevron-right"></span>
+      </span>
+    </a>
+    <div class="gc-sidebar-sub">
+      {{#each workouts}}
+        {{> sidebar_item}}
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
+  {{#if programs}}
+  <div class="gc-sidebar-cat">
+    <a href="#programs" class="row toggle-menu">
+      <span class="col-xs-2">
+        <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-programs.png')"></span>
+      </span>
+      <span class="col-xs-8 gc-sidebar-cat-name">
+        Programs
+      </span>
+      <span class="col-xs-2">
+        <span class="fa fa-chevron-right"></span>
+      </span>
+    </a>
+    <div class="gc-sidebar-sub">
+      {{#each programs}}
+        {{> sidebar_item}}
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
+  <div class="gc-sidebar-cat">
+    <a href="#clients" class="row toggle-menu">
+      <span class="col-xs-2">
+        <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-clients.png')"></span>
+      </span>
+      <span class="col-xs-8 gc-sidebar-cat-name">
+        Clients
+      </span>
+      <span class="col-xs-2">
+        <span class="fa fa-chevron-right"></span>
+      </span>
+    </a>
+    <div class="gc-sidebar-sub">
+      <div class="gc-sidebar-cat">
+        <a href="#clients/groups" class="row toggle-menu gc-sidebar-cat-name">
+          <span class="col-xs-2">
+            <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-groups.png')"></span>
+          </span>
+          <span class="col-xs-8 gc-sidebar-cat-name">
+            Groups
+          </span>
+        </a>
+      </div>
+      <div class="gc-sidebar-cat">
+        <a href="#clients/individuals" class="row toggle-menu gc-sidebar-cat-name">
+          <span class="col-xs-2">
+            <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-individuals.png')"></span>
+          </span>
+          <span class="col-xs-8 gc-sidebar-cat-name">
+            Individuals
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="gc-sidebar-cat">
+    <a href="#properties" class="row toggle-menu">
+      <span class="col-xs-2">
+        <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-properties.png')"></span>
+      </span>
+      <span class="col-xs-8 gc-sidebar-cat-name">
+        Properties
+      </span>
+      <span class="col-xs-2">
+        <span class="fa fa-chevron-right"></span>
+      </span>
+    </a>
+  </div>
+</div>
+

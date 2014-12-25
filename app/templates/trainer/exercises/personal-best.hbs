@@ -1,0 +1,128 @@
+<header>
+  <h3>
+    Personal best
+  </h3>
+</header>
+<ul class="gc-exercises-bests">
+  <li class="gc-exercises-bests-best">
+    <div class="row">
+      <div class="col-xs-2">
+        <span class="gc-exercises-bests-icon">
+          <img src="../static/images/icon-cup-blue.png" alt="">
+        </span>
+      </div>
+      <div class="col-xs-10">
+        <h6>28 November, 2014</h6>
+      </div>
+    </div>
+    <div class="row gc-exercises-bests-result">
+      <div class="col-xs-8">Reps</div>
+      <div class="col-xs-4">23</div>
+    </div>
+    <div class="row gc-exercises-bests-result">
+      <div class="col-xs-8">Weigth (LBS)</div>
+      <div class="col-xs-4">100KG</div>
+    </div>
+    <div class="row gc-exercises-bests-result">
+      <div class="col-xs-8">Distance</div>
+      <div class="col-xs-4">230 M</div>
+    </div>
+  </li>
+  <li class="gc-exercises-bests-best">
+    <div class="row">
+      <div class="col-xs-2">
+        <span class="gc-exercises-bests-icon">
+          <img src="../static/images/icon-cup-blue.png" alt="">
+        </span>
+      </div>
+      <div class="col-xs-10">
+        <h6>28 November, 2014</h6>
+      </div>
+    </div>
+    <div class="row gc-exercises-bests-result">
+      <div class="col-xs-8">Reps</div>
+      <div class="col-xs-4">23</div>
+    </div>
+    <div class="row gc-exercises-bests-result">
+      <div class="col-xs-8">Weigth (LBS)</div>
+      <div class="col-xs-4">100KG</div>
+    </div>
+    <div class="row gc-exercises-bests-result">
+      <div class="col-xs-8">Distance</div>
+      <div class="col-xs-4">230 M</div>
+    </div>
+  </li>
+</ul>
+<div class="gc-exercises-add-best">
+  <a href="#" data-toggle="modal" data-target="#gc-add-personal-best-modal">
+    Add new personal best
+  </a>
+</div>
+
+<div class="modal fade gc-add-personal-best-modal" id="gc-add-personal-best-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>Close</span></button>
+        <h4 class="modal-title">
+          <img src="../static/images/icon-cup-white.png" alt="">
+          Add new personal best
+        </h4>
+      </div>
+      <div class="modal-body">
+        <form class="form" role="form">
+          <div class="form-group">
+            <label class="control-label">Date</label>
+            <div class="input-group gc-add-personal-best-date">
+              <input type="text" class="form-control" placeholder="12/2/2014 1:03 PM">
+              <span class="input-group-addon">
+                <span class="fa fa-calendar"></span>
+                <span class="fa fa-clock-o"></span>
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Property</label>
+            <div class="row gc-add-personal-best-property">
+              <div class="col-xs-4">
+                <select class="form-control">
+                  <option value="1">Select</option>
+                  <option value="2">Reps</option>
+                  <option value="3">Time</option>
+                </select>
+              </div>
+              <div class="col-xs-6">
+                <input type="text" class="form-control">
+              </div>
+              <div class="col-xs-2 text-right">
+                <button type="button" class="btn btn-secondary btn-block">Add</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <ul class="gc-add-personal-best-list">
+          <li class="row">
+            <div class="col-xs-3">Reps</div>
+            <div class="col-xs-6">23</div>
+            <div class="col-xs-3 text-right">
+              <a href="#" class="btn btn-link">Delete</a>
+            </div>
+          </li>
+          <li class="row">
+            <div class="col-xs-3">Time</div>
+            <div class="col-xs-6">2 minutes 23 seconds</div>
+            <div class="col-xs-3 text-right">
+              <a href="#" class="btn btn-link">Delete</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-xs-6 text-left"><button type="button" class="btn btn-link">Clear all</button></div>
+          <div class="col-xs-6 text-right"><button type="button" class="btn btn-primary">Add personal best</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

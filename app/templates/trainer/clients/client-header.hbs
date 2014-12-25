@@ -1,0 +1,248 @@
+<div class="gc-usercard-large row">
+  <div class="col-xs-2 text-center">
+    <img class="gc-usercard-avatar" src="../static/images/portrait-2.jpg" alt="">
+  </div>
+  <div class="col-xs-8 gc-usercard-info">
+    <h1 class="gc-usercard-name">John Doe</h1>
+    <p class="gc-usercard-address">Some Street, #45, Some State, 012345</p>
+    <input type="text" value="http://gymcloud.com/clients/john-doe" class="gc-usercard-link" readonly="readonly">
+    <div class="btn-group gc-usercard-actions" role="group">
+      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#gc-new-message-modal">New message</button>
+      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#gc-invite-client-modal">Invite client</button>
+      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#gc-edit-profile-modal">Edit profile</button>
+    </div>
+  </div>
+  <div class="col-xs-2 gc-usercard-params text-right">
+    <dl>
+      <dt>Height</dt>
+      <dd>197cm</dd>
+      <dt>Weight</dt>
+      <dd>100kg</dd>
+      <dt>Bodyfat</dt>
+      <dd>26728/78</dd>
+      <dt>Age</dt>
+      <dd>37</dd>
+      <dt>Sex</dt>
+      <dd>Male</dd>
+    </dl>
+  </div>
+</div>
+
+<div class="modal fade gc-modal" id="gc-edit-profile-modal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>Close</span></button>
+        <h4 class="modal-title">
+          <span><img src="../static/images/icon-individuals.png" alt=""></span>
+          Edit John Doe information
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-3">
+             <div class="gc-edit-profile-modal-upload-wrapper">
+              <input type="file" class="gc-edit-profile-modal-upload-input">
+              <p href="#" class="gc-edit-profile-modal-upload-text">
+                <span class="fa fa-plus"></span>
+                Upload
+                <br>
+                photo
+              </p>
+              <img src="../static/images/portrait-2.jpg" alt=" " class="gc-edit-profile-modal-avatar">
+            </div>
+          </div>
+          <div class="col-xs-9">
+            <form class="form" role="form">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-2">
+                    <label for="r1">Gender</label>
+                  </div>
+                  <div class="col-xs-2">
+                    <label>
+                      <input type="radio" name="r1"> <span>Male</span>
+                    </label>
+                  </div>
+                  <div class="col-xs-2">
+                    <label>
+                      <input type="radio" name="r1"> <span>Female</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label for="">Weight</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label for="">Height</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label for="">Bodyfat</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="">First name</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="">Last name</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-8">
+                  <div class="form-group">
+                    <label for="">Location</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label for="">ZIP</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="">Employer</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <label for="">Date of birth</label>
+                    <input type="date" class="form-control">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-xs-12 text-right"><button type="button" class="btn btn-primary">Save</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade gc-modal" id="gc-invite-client-modal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>Close</span></button>
+        <h4 class="modal-title">
+          <span><img src="../static/images/icon-individuals.png" alt=""></span>
+          Invite client
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-12">
+            <form class="form" role="form">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="">Client's email</label>
+                    <input type="text" class="form-control" placeholder="Email">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-xs-12 text-right"><button type="button" class="btn btn-primary">Invite</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade gc-modal" id="gc-new-message-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>Close</span></button>
+        <h4 class="modal-title">
+          <span><img src="../static/images/icon-individuals.png" alt=""></span>
+          Send message
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-12">
+            <form class="form" role="form">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="">Send to:</label>
+                    <input type="text" class="form-control">
+                  </div>
+                  <div class="gc-message-modal-actions row">
+                    <div class="col-xs-3">
+                        <a href="#" class="btn btn-link"><span class="fa fa-check"></span> Select all</a>
+                    </div>
+                    <div class="col-xs-5">
+                      <a href="#" class="btn btn-link"><span class="fa fa-remove"></span> Select none</a>
+                    </div>
+                    <div class="col-xs-4 text-right">
+                      <a href="#" class="btn btn-link"><span class="fa fa-repeat"></span> Reset</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="">Message:</label>
+                    <textarea class="form-control"></textarea>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-xs-12 text-right"><button type="button" class="btn btn-primary">Send</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

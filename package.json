@@ -1,0 +1,62 @@
+{
+  "name": "gymcloud-frontend",
+  "version": "0.0.1",
+  "author": "Vladimir Pal <mail.vpal@gmail.com>",
+  "private": true,
+  "devDependencies": {
+    "browser-sync": "^1.5.8",
+    "browserify": "^5.10.0",
+    "browserify-ngannotate": "^0.1.0",
+    "browserify-shim": "^3.8.0",
+    "coffeeify": "",
+    "del": "^0.1.3",
+    "express": "^4.7.2",
+    "gulp": "^3.8.8",
+    "gulp-concat": "^2.4.2",
+    "gulp-changed": "^1.0.0",
+    "gulp-declare": "^0.3.0",
+    "gulp-define-module": "^0.1.1",
+    "gulp-handlebars": "^3.0.1",
+    "gulp-if": "^1.2.5",
+    "gulp-imagemin": "^2.0.0",
+    "gulp-notify": "^2.0.0",
+    "gulp-replace": "^0.5.0",
+    "gulp-streamify": "0.0.5",
+    "gulp-template": "^1.1",
+    "gulp-uglify": "^1.0.1",
+    "gulp-util": "^3.0.1",
+    "gulp-wrap": "^0.5.0",
+    "handlebars": "^2.0.0",
+    "morgan": "^1.2.2",
+    "run-sequence": "^0.3.6",
+    "vinyl-source-stream": "^0.1.1",
+    "watchify": "^2.0.0"
+  },
+  "dependencies": {
+    "backbone": "^1.1.2",
+    "backbone.marionette": "^2.2.2",
+    "jquery": "^2.1.1",
+    "express": "~4.4.3"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim",
+      "coffeeify"
+    ]
+  },
+  "browser": {
+    "jquery": "./node_modules/jquery/dist/jquery.js",
+    "backbone": "./node_modules/backbone/backbone.js",
+    "handlebars": "./node_modules/handlebars/dist/handlebars.js",
+    "backbone.marionette": "./node_modules/backbone.marionette/lib/core/backbone.marionette.js",
+    "spinner": "./bower_components/spin.js/spin.js"
+  },
+  "browserify-shim": {
+    "jquery": {
+      "exports": "$"
+    },
+    "spinner": {
+      "exports": "Spinner"
+    }
+  }
+}
