@@ -13,11 +13,6 @@ HeaderView = require '../../views/general/header-view.coffee'
 
 module.exports = class MainClientModule extends Marionette.Module
   initialize: =>
-    @on 'start', ->
-      if Backbone.history
-        Backbone.history.stop()
-        Backbone.history.start()
-
     @addInitializer (options) ->
       @mainView = new MainView()
       @headerView = new HeaderView()

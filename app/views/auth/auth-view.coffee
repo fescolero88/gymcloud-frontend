@@ -1,15 +1,15 @@
 Marionette = require 'backbone.marionette'
+myTemplate = require '../../templates/auth/auth'
 
 module.exports = class AuthView extends Marionette.ItemView
+  template: myTemplate
+
   events:
     "submit form": "login"
 
   ui:
     inputEmail: "input[type='email']"
     inputPassword: "input[type='password']"
-
-  initialize: =>
-    @template = require '../../templates/auth/auth'
 
   login: (event) ->
     event.preventDefault()

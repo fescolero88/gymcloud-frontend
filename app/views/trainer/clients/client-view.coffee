@@ -1,7 +1,8 @@
 Marionette = require 'backbone.marionette'
+myTemplate = require '../../../templates/trainer/clients/client'
 
 module.exports = class ClientView extends Marionette.LayoutView
-  template: require '../../../templates/trainer/clients/client'
+  template: myTemplate
 
   regions:
     'header': '#client-header-region'

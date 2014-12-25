@@ -1,7 +1,8 @@
 Marionette = require 'backbone.marionette'
+myTemplate = require '../../../templates/trainer/clients/client-nav'
 
 module.exports = class ClientNavView extends Marionette.ItemView
-  template: require '../../../templates/trainer/clients/client-nav'
+  template: myTemplate
 
   events:
     'click .gc-content-nav :not(.gc-content-nav-back) a': 'navLinkClick'

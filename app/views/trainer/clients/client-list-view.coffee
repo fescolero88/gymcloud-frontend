@@ -1,12 +1,14 @@
 Marionette = require 'backbone.marionette'
+clientItemTemplate = require '../../../templates/trainer/clients/client-item'
+clientListTemplate = require '../../../templates/trainer/clients/client-list'
 
 module.exports = class ClientItemView extends Marionette.ItemView
-  template: require '../../../templates/trainer/clients/client-item'
+  template: clientItemTemplate
   tagName: 'li'
   className: 'row'
 
 module.exports = class ClientListView extends Marionette.CompositeView
-  template: require '../../../templates/trainer/clients/client-list'
+  template: clientListTemplate
   childView: ClientItemView
   childViewContainer: 'ul'
 

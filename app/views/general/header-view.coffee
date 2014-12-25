@@ -1,4 +1,5 @@
 Marionette = require 'backbone.marionette'
+myTemplate = require '../../templates/general/header'
 
 module.exports = class HeaderView extends Marionette.ItemView
   events:
@@ -6,12 +7,12 @@ module.exports = class HeaderView extends Marionette.ItemView
     "blur #gc-topnav-search": "searchblur"
 
   initialize: =>
-    @template = require '../../templates/general/header'
+    @template = myTemplate
 
   logout: (ev)=>
     ev.preventDefault()
     window.localStorage.removeItem 'accessToken'
-    App.vent.trigger "startAuthModule"
+    App.vent.trigger "modules:auth:start"
 
   searchblur: (ev)->
     ev.preventDefault()

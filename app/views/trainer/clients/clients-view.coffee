@@ -1,7 +1,8 @@
 Marionette = require 'backbone.marionette'
+myTemplate = require '../../../templates/trainer/clients/clients'
 
 module.exports = class ClientsView extends Marionette.LayoutView
-  template: require '../../../templates/trainer/clients/clients'
+  template: myTemplate
 
   events:
     "click .gc-content-nav-checkall": "toggle_check"

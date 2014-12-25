@@ -16,6 +16,15 @@ class App extends Marionette.Application
   initialize: ->
     @profile_model = new Backbone.Model()
 
+    @on 'start', ->
+      @vent.trigger 'app:start-history'
+
+    @addInitializer (options) =>
+      @vent.on 'app:start-history', ->
+        if Backbone.history
+          Backbone.history.stop()
+          Backbone.history.start()
+
     @addInitializer (options) =>
       new ViewHelper().initialize(Handlebars)
       @addRegions
@@ -44,19 +53,21 @@ class App extends Marionette.Application
         options
 
 
-    @module 'Auth', AuthModule
-    if window.localStorage.accessToken
-      @profile_model.url = "//gymcloud-stagingapp.herokuapp.com/api/mobile/me?access_token=#{window.localStorage.accessToken}"
-      @profile_model.fetch().then =>
-        if @profile_model.get('account_type') is 'Client'
-            @module 'Main', MainClientModule
-          else
-            @module 'Main', MainTrainerModule
-    else
-      window.location.replace('#login')
+    @addInitializer ->
+      @module 'Auth', AuthModule
+      if window.localStorage.accessToken
+        @profile_model.url = "/api/mobile/me"
+        @profile_model.fetch().then =>
+          if @profile_model.get('account_type') is 'Client'
+              @module 'Main', MainClientModule
+            else
+              @module 'Main', MainTrainerModule
+            @vent.trigger 'app:start-history'
+      else
+        window.location.replace('#login')
 
     @addInitializer ->
-      @vent.on "modules:main:start", () =>
+      @vent.on 'modules:main:start', () =>
         @profile_model.url = "/api/mobile/me"
         @profile_model.fetch().then =>
           if @profile_model.get('account_type') is 'Client'
@@ -64,6 +75,7 @@ class App extends Marionette.Application
           else
             @module 'Main', MainTrainerModule
           @module('Main').start()
+          @vent.trigger 'app:start-history'
           window.location.replace('#clients')
 
       @vent.on "modules:auth:start", () =>
@@ -71,8 +83,7 @@ class App extends Marionette.Application
         delete @Main
         window.location.replace('#login')
 
-    @start()
-
 
 $ ->
   window.App = new App()
+  window.App.start()

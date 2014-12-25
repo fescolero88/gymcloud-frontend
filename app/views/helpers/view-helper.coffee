@@ -1,6 +1,8 @@
+sidebarItemTemplate = require '../../templates/trainer/sidebar/sidebar_item'
+
 module.exports = class ViewHelper
   initialize: (Handlebars)->
-    Handlebars.registerPartial "sidebar_item", require '../../templates/trainer/sidebar/sidebar_item'
+    Handlebars.registerPartial "sidebar_item", sidebarItemTemplate
 
     Handlebars.registerHelper 'ifNot', (v1, v2, options) ->
       if v1 is v2

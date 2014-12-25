@@ -1,12 +1,14 @@
 Marionette = require 'backbone.marionette'
+groupItemTemplate = require '../../../templates/trainer/clients/group-item'
+groupListTemplate = require '../../../templates/trainer/clients/group-list'
 
 module.exports = class GroupItemView extends Marionette.ItemView
-  template: require '../../../templates/trainer/clients/group-item'
+  template: groupItemTemplate
   tagName: 'li'
   className: 'row'
 
 module.exports = class GroupListView extends Marionette.CompositeView
-  template: require '../../../templates/trainer/clients/group-list'
+  template: groupListTemplate
   childView: GroupItemView
   childViewContainer: 'ul'
 

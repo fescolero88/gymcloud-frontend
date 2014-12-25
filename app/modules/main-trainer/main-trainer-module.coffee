@@ -14,11 +14,6 @@ ModalView = require '../../views/general/modal-view.coffee'
 
 module.exports = class MainTrainerModule extends Marionette.Module
   initialize: =>
-    @on 'start', ->
-      if Backbone.history
-        Backbone.history.stop()
-        Backbone.history.start()
-
     @addInitializer (options) =>
       @mainView = new MainView()
       @sidebar_view = new SideBarView()

@@ -1,4 +1,5 @@
 Marionette = require 'backbone.marionette'
+myTemplate = require '../../templates/trainer/sidebar/sidebar'
 
 module.exports = class SideBarView extends Marionette.ItemView
   exercises: []
