@@ -2,18 +2,18 @@ Marionette = require 'backbone.marionette'
 myTemplate = require '../../templates/trainer/sidebar/sidebar'
 
 module.exports = class SideBarView extends Marionette.ItemView
-  exercises: []
-  workouts: []
-  programs: []
-  clients: []
-  groups: []
-
   template: require '../../templates/trainer/sidebar/sidebar'
 
   events:
     "click .toggle-menu": "toggle_menu"
 
   initialize: =>
+    @exercises = []
+    @workouts = []
+    @programs = []
+    @clients = []
+    @groups = []
+
     @get_data()
 
   templateHelpers: =>
