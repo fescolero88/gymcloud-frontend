@@ -1,7 +1,10 @@
 #clientpage-nav-region {
   background: #3398db;
-  height: 105px;
+  height: 126px;
   margin: 0 -15px;
+}
+#clientpage-nav-region >div > div {
+  padding: 0;
 }
 #clientpage-content-region {
   background: #fff;
@@ -15,4 +18,135 @@
   font-size: 14px;
   font-weight: bold;
   margin: 30px 25px;
+}
+.gc-clientpage-calendar-nav-title {
+  text-transform: uppercase;
+  color: #757575;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 30px 40px 20px 40px;
+}
+.gc-clientpage-nav-tabs {
+  margin: 0px 0 0 10px;
+  padding: 0;
+  font-size: 0;
+}
+.gc-clientpage-nav-tabs li {
+  display: inline-block;
+  list-style-type: none;
+  font-size: 12px;
+  padding: 0 2px;
+}
+.gc-clientpage-nav-tab {
+  display: inline-block;
+  color: #fff;
+  background: transparent;
+  text-transform: uppercase;
+  line-height: 16px;
+  padding: 13px 18px;
+  border-radius: 20px 20px 0 0;
+}
+.gc-clientpage-nav-tab.active {
+  color: #3398db;
+  background: #fff;
+  text-decoration: none;
+}
+.gc-clientpage-nav-tab.active:hover {
+  background: #fff;
+  color: #3398db;
+}
+.gc-clientpage-nav-tab:hover,
+.gc-clientpage-nav-tab:active {
+  text-decoration: none;
+  background: #2c91d3;
+  color: #fff;
+}
+.gc-clientpage-nav-tab > span {
+  display: inline-block;
+  margin: 0 1px;
+  line-height: 16px;
+  vertical-align: middle;
+}
+.gc-clientpage-nav-tab-icon {
+  height: 16px;
+  width: 16px;
+  background: transparent left 50% no-repeat;
+  background-size: cover;
+}
+.gc-clientpage-nav-tab-icon-e {
+  background-image: url('../images/icon-exercises.png');
+  background-size: 230%;
+  background-position: -2px 50%;
+}
+.gc-clientpage-nav-tab-icon-w {
+  background-image: url('../images/icon-workouts.png');
+}
+.gc-clientpage-nav-tab-icon-p {
+  background-image: url('../images/icon-programs.png');
+}
+.gc-clientpage-nav-tab-icon-c {
+  background-image: url('../images/icon-calendar.png');
+  background-size: 260%;
+  background-position: -3px 50%;
+}
+.gc-clientpage-nav-tab.active .gc-clientpage-nav-tab-icon-e {
+  background-position: -20px 50%;
+}
+.gc-clientpage-nav-tab.active .gc-clientpage-nav-tab-icon-w {
+  background-position: right 50%;
+}
+.gc-clientpage-nav-tab.active .gc-clientpage-nav-tab-icon-p {
+  background-position: right 50%;
+}
+.gc-clientpage-nav-tab.active .gc-clientpage-nav-tab-icon-c {
+  background-position: -24px 50%;
+}
+.gc-clientpage-nav-trainer-wrapper > .row {
+  margin: 0;
+}
+.gc-clientpage-nav-trainer-wrapper > .row > div {
+  padding: 0;
+}
+.gc-clientpage-nav-trainer-action-wrapper p {
+  color: #fff;
+  font-size: -12px;
+  margin: 10px 0 6px 0;
+}
+.gc-clientpage-nav-trainer-action-wrapper p span {
+  opacity: 0.5;
+}
+.gc-clientpage-nav-trainer-action-wrapper .btn {
+  border-color: #fff;
+  text-decoration: none;
+  border-radius: 20px;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #fff;
+}
+.gc-clientpage-nav-trainer-avatar-wrapper {
+  border-radius: 100px;
+  height: 52px;
+  width: 52px;
+  background: #5da6dd url('../images/avatar-placeholder.png') center center no-repeat;
+  background-size: 60%;
+  border: 3px solid #5da6dd;
+  margin: 13px 0 0 0;
+  border-radius: 100px;
+  display: inline-block;
+}
+.gc-clientpage-nav-trainer-avatar-wrapper img {
+  height: 46px;
+  width: 46px;
+  border-radius: 100px;
+}
+.gc-clientpage-nav-trainer-avatar-wrapper img[src$='defaultimage.png'] {
+    display: none;
+}
+@media (min-width: 992px) {
+  #clientpage-nav-region {
+    height: 78px;
+  }
+  .gc-clientpage-nav-tabs {
+    margin: 35px 0 0 40px;
+  }
 }

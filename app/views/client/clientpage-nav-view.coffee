@@ -1,5 +1,9 @@
 Marionette = require 'backbone.marionette'
-myTemplate = require '../../templates/client/nav'
 
 module.exports = class ClientPageNavView extends Marionette.ItemView
-  template: myTemplate
+  template: Templates.client.nav
+
+  initialize: ->
+    App.vent.on 'clientpage:nav-click', (navId) =>
+      @$el.find('.gc-clientpage-nav-tab').removeClass('active')
+      @$el.find(navId).addClass('active')

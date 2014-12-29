@@ -1,1 +1,49 @@
-TOPNAV
+<div class="col-xs-12 col-md-3 col-md-push-9 gc-clientpage-nav-trainer-wrapper">
+  <div class="row">
+    <div class="col-xs-5 col-xs-offset-5 col-md-7 col-md-offset-2 gc-clientpage-nav-trainer-action-wrapper text-xs-right text-md-center">
+      <p>
+        <span>
+          Trainer:
+        </span>
+        Alex Smithson
+      </p>
+      <button class="btn btn-link">Message trainer</button>
+    </div>
+    <div class="col-xs-2 col-md-3 text-center">
+      <div class="gc-clientpage-nav-trainer-avatar-wrapper">
+        {{#withProfile}}
+        <img src="{{avatar_url}}" alt="">
+        {{/withProfile}}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-xs-12 col-md-9 col-md-pull-3 gc-clientpage-nav-tabs-wrapper">
+  <ul class="gc-clientpage-nav-tabs">
+    <li>
+      <a href="/#user/id/1/exercises/" class="gc-clientpage-nav-tab active" id="gc-clientpage-nav-tab-e">
+        <span class="gc-clientpage-nav-tab-icon gc-clientpage-nav-tab-icon-e"></span>
+        <span class="gc-clientpage-nav-tab-text">Exercises</span>
+      </a>
+    </li>
+    <li>
+      <a href="/#user/id/1/workouts/" class="gc-clientpage-nav-tab" id="gc-clientpage-nav-tab-w">
+        <span class="gc-clientpage-nav-tab-icon gc-clientpage-nav-tab-icon-w"></span>
+        <span class="gc-clientpage-nav-tab-text">Workouts</span>
+      </a>
+    </li>
+    <li>
+      <a href="/#user/id/1/programs/" class="gc-clientpage-nav-tab" id="gc-clientpage-nav-tab-p">
+        <span class="gc-clientpage-nav-tab-icon gc-clientpage-nav-tab-icon-p"></span>
+        <span class="gc-clientpage-nav-tab-text">Programs</span>
+      </a>
+    </li>
+    <li>
+      <a href="/#user/id/1/calendar/" class="gc-clientpage-nav-tab" id="gc-clientpage-nav-tab-c">
+        <span class="gc-clientpage-nav-tab-icon gc-clientpage-nav-tab-icon-c"></span>
+        <span class="gc-clientpage-nav-tab-text">Calendar</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
