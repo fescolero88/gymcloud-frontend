@@ -1,8 +1,7 @@
 Marionette = require 'backbone.marionette'
-myTemplate = require '../../templates/trainer/sidebar/sidebar'
 
 module.exports = class SideBarView extends Marionette.ItemView
-  template: require '../../templates/trainer/sidebar/sidebar'
+  template: Templates.trainer.sidebar.sidebar
 
   events:
     "click .toggle-menu": "toggle_menu"

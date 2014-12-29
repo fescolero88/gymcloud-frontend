@@ -1,9 +1,9 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
-AuthController = require '../../controllers/auth/auth-controller.coffee'
-AuthRouter = require '../../routers/auth/auth-router.coffee'
-AuthView = require '../../views/auth/auth-view.coffee'
+AuthController = require 'controllers/auth/auth-controller'
+AuthRouter = require 'routers/auth/auth-router'
+AuthView = require 'views/auth/auth-view'
 
 module.exports = class AuthModule extends Marionette.Module
   initialize: =>

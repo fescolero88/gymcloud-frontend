@@ -1,11 +1,8 @@
 Marionette = require 'backbone.marionette'
-myTemplate = require '../../templates/general/main'
 
 module.exports = class MainView extends Marionette.LayoutView
+  template: Templates.general.main
   className: 'container-fluid'
-
-  initialize: =>
-    @template = myTemplate
 
   regions:
     'header':    ".gc-topbar"

@@ -8,7 +8,8 @@
   position: relative;
 }
 .gc-sidebar-wrapper:after {
-  clear: bothnone  display: table;
+  clear: both;
+  display: table;
   content: " ";
 }
 .gc-sidebar-wrapper:before {

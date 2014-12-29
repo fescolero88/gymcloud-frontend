@@ -1,11 +1,9 @@
 Marionette = require 'backbone.marionette'
-personalBestTemplate = require '../../../templates/trainer/exercises/personal-best'
-personalBestEmptyTemplate = require '../../../templates/trainer/exercises/personal-best-empty'
 
 module.exports = class PersonalBestView extends Marionette.ItemView
 
   template: ->
     if Math.round(Math.random())
-       personalBestTemplate
+       Templates.trainer.exercises.personal_best
     else
-        personalBestEmptyTemplate
+      Templates.trainer.exercises.personal_best_empty

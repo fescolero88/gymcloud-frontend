@@ -7,6 +7,6 @@ gulp.task('dev', ['clean'], function(cb) {
 
   cb = cb || function() {};
 
-  runSequence('styles', 'images', 'fonts', 'templates', 'browserify', 'watch', cb);
+  runSequence(['styles', 'images', 'fonts'], 'templates', 'browserify', 'watch', cb);
 
 });

@@ -1,27 +1,27 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
-ClientsView = require '../../../views/trainer/clients/clients-view.coffee'
-ClientListView = require '../../../views/trainer/clients/client-list-view.coffee'
-GroupListView = require '../../../views/trainer/clients/group-list-view.coffee'
-GroupView = require '../../../views/trainer/groups/group-view.coffee'
+ClientsView = require 'views/trainer/clients/clients-view'
+ClientListView = require 'views/trainer/clients/client-list-view'
+GroupListView = require 'views/trainer/clients/group-list-view'
+GroupView = require 'views/trainer/groups/group-view'
 
-ClientView = require '../../../views/trainer/clients/client-view.coffee'
-ClientHeaderView = require '../../../views/trainer/clients/client-header-view.coffee'
-ClientNavView = require '../../../views/trainer/clients/client-nav-view.coffee'
-ClientCompactHeaderView = require '../../../views/trainer/clients/client-compact-header-view.coffee'
-ClientLeftView = require '../../../views/trainer/clients/client-left-view.coffee'
-ClientRightView = require '../../../views/trainer/clients/client-right-view.coffee'
+ClientView = require 'views/trainer/clients/client-view'
+ClientHeaderView = require 'views/trainer/clients/client-header-view'
+ClientNavView = require 'views/trainer/clients/client-nav-view'
+ClientCompactHeaderView = require 'views/trainer/clients/client-compact-header-view'
+ClientLeftView = require 'views/trainer/clients/client-left-view'
+ClientRightView = require 'views/trainer/clients/client-right-view'
 
-ExercisesView = require '../../../views/trainer/exercises/exercises-view.coffee'
-ExerciseView = require '../../../views/trainer/exercises/exercise-view.coffee'
-PersonalBestView = require '../../../views/trainer/exercises/personal-best-view.coffee'
+ExercisesView = require 'views/trainer/exercises/exercises-view'
+ExerciseView = require 'views/trainer/exercises/exercise-view'
+PersonalBestView = require 'views/trainer/exercises/personal-best-view'
 
-CalendarDayView = require '../../../views/trainer/calendar/calendar-day-view.coffee'
-CalendarWeekView = require '../../../views/trainer/calendar/calendar-week-view.coffee'
-CalendarMonthView = require '../../../views/trainer/calendar/calendar-month-view.coffee'
+CalendarDayView = require 'views/trainer/calendar/calendar-day-view'
+CalendarWeekView = require 'views/trainer/calendar/calendar-week-view'
+CalendarMonthView = require 'views/trainer/calendar/calendar-month-view'
 
-MessagesView = require '../../../views/general/messages/messages-view.coffee'
+MessagesView = require 'views/general/messages/messages-view'
 
 module.exports = class ClientsController extends Marionette.Controller
 
