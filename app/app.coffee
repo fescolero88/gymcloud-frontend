@@ -1,16 +1,19 @@
+window.Templates = require 'templates/templates_build.js'
+
 Spinner = require 'spinner'
+Handlebars = require 'handlebars'
 
 Backbone = require 'backbone'
 Backbone.$ = require 'jquery'
 Marionette = require 'backbone.marionette'
 
-Handlebars = require 'handlebars'
-ViewHelper = require './views/helpers/view-helper.coffee'
+ViewHelper = require 'views/helpers/view-helper'
 
-AuthModule = require './modules/auth/auth-module.coffee'
+AuthModule = require 'modules/auth/auth-module'
 
-MainTrainerModule = require './modules/main-trainer/main-trainer-module.coffee'
-MainClientModule = require './modules/main-client/main-client-module.coffee'
+MainTrainerModule = require 'modules/main-trainer/main-trainer-module'
+MainClientModule = require 'modules/main-client/main-client-module'
+
 
 class App extends Marionette.Application
   initialize: ->

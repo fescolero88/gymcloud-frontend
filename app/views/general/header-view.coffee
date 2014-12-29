@@ -1,13 +1,11 @@
 Marionette = require 'backbone.marionette'
-myTemplate = require '../../templates/general/header'
 
 module.exports = class HeaderView extends Marionette.ItemView
+  template: Templates.general.header
+
   events:
     "click #temp-logout": "logout"
     "blur #gc-topnav-search": "searchblur"
-
-  initialize: =>
-    @template = myTemplate
 
   logout: (ev)=>
     ev.preventDefault()

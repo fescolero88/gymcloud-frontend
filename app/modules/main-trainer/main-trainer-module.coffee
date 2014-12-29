@@ -1,16 +1,16 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
-ClientsController = require '../../controllers/trainer/clients/clients-controller.coffee'
-ClientsRouter = require '../../routers/trainer/clients/clients-router.coffee'
+ClientsController = require 'controllers/trainer/clients/clients-controller'
+ClientsRouter = require 'routers/trainer/clients/clients-router'
 
-MessagesController = require '../../controllers/general/messages/messages-controller.coffee'
-MessagesRouter = require '../../routers/general/messages/messages-router.coffee'
+MessagesController = require 'controllers/general/messages/messages-controller'
+MessagesRouter = require 'routers/general/messages/messages-router'
 
-MainView = require '../../views/general/main-view.coffee'
-SideBarView = require '../../views/trainer/sidebar-view.coffee'
-HeaderView = require '../../views/general/header-view.coffee'
-ModalView = require '../../views/general/modal-view.coffee'
+MainView = require 'views/general/main-view'
+SideBarView = require 'views/trainer/sidebar-view'
+HeaderView = require 'views/general/header-view'
+ModalView = require 'views/general/modal-view'
 
 module.exports = class MainTrainerModule extends Marionette.Module
   initialize: =>

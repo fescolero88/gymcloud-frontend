@@ -1,0 +1,10 @@
+.gc-calendar-activity {
+  margin: 0;
+  padding: 15px 0 0 0;
+}
+
+.gc-calendar-activity li {
+  margin: 0 0 10px 0;
+  list-style-type: none;
+  position: relative;
+}
