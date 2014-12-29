@@ -1,7 +1,7 @@
 'use strict';
 
-var dest = "./static";
-var src = './app';
+var dest = "static";
+var src = 'app';
 
 module.exports = {
 
@@ -52,8 +52,9 @@ module.exports = {
   browserify: {
     debug: true,
     extensions: ['.coffee'],
-    entries   : [src + '/app.coffee'],
-    bundleName: 'app.js'
+    entries   : ['./' + src + '/app.coffee'],
+    bundleName: 'app.js',
+    paths: ['./app']
   },
 
   test: {
