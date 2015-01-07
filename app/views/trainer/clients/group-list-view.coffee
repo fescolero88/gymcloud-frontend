@@ -12,16 +12,16 @@ module.exports = class GroupListView extends Marionette.CompositeView
   childViewContainer: 'ul'
 
   initialize: =>
-    @on 'rm-group', @rm_group
-    @on 'submit-group-form', @submit_group_form
+    @on 'rm-group', @rmGroup
+    @on 'submit-group-form', @submitGroupForm
 
-  rm_group: =>
+  rmGroup: =>
     for check in @$el.find('input[type=checkbox]')
       if $(check).is(':checked')
         model = @collection.get $(check).data('id')
         model.destroy()
 
-  submit_group_form: (name)->
+  submitGroupForm: (name)->
     new_group = new Backbone.Model()
     new_group.set 'name', name
     new_group.url = '/api/mobile/client_groups'
