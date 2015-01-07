@@ -7,6 +7,8 @@ module.exports = class ClientsView extends Marionette.LayoutView
     "click .gc-content-nav-checkall": "toggle_check"
     "click .gc-clients-list-client-chb": "check_all"
     "click #rm-event": "rm_event"
+    "change .gc-edit-profile-modal-upload-input": "show_thumbnail"
+    "submit .group-form": "submit_group_form"
 
   ui:
     mainCheckbox: ".gc-content-nav-checkall input[type='checkbox']"
@@ -39,3 +41,19 @@ module.exports = class ClientsView extends Marionette.LayoutView
     ev.preventDefault()
     @clients.currentView.trigger 'rm-client'
     @groups.currentView.trigger 'rm-group'
+
+  show_thumbnail: (ev) ->
+    input = ev.target
+    if input.files && input.files[0]
+      reader = new FileReader()
+      reader.onload = (e)->
+        $(ev.target).parents('form').find('.gc-edit-profile-modal-avatar').attr('src', e.target.result)
+      reader.readAsDataURL(input.files[0])
+
+  submit_group_form: (ev) ->
+    ev.preventDefault()
+    #TODO validation
+    name = $(ev.target).find('input[name=group_name]').val()
+    avatar = $(ev.target).find('input[type=file]')
+    @groups.currentView.trigger 'submit-group-form', name
+    @$el.find('#gc-add-group-modal').modal('hide')
