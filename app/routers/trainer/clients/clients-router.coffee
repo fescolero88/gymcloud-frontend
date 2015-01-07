@@ -3,6 +3,7 @@ Marionette = require 'backbone.marionette'
 module.exports = class ClientsRouter extends Marionette.AppRouter
 
   appRoutes:
+    '': 'clients'
     'clients(/)(/:view_type)': 'clients'
     'clients/id/:id(/)': 'clientExercises'
     'clients/id/:id/exercises(/)': 'clientExercises'

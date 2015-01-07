@@ -4,9 +4,11 @@ module.exports = class ClientsView extends Marionette.LayoutView
   template: Templates.trainer.clients.clients
 
   events:
-    "click .gc-content-nav-checkall": "toggle_check"
-    "click .gc-clients-list-client-chb": "check_all"
-    "click #rm-event": "rm_event"
+    "click .gc-content-nav-checkall": "toggleCheck"
+    "click .gc-clients-list-client-chb": "checkAll"
+    "click #rm-event": "rmEvent"
+    "change .gc-edit-profile-modal-upload-input": "showThumbnail"
+    "submit .group-form": "submitGroupForm"
 
   ui:
     mainCheckbox: ".gc-content-nav-checkall input[type='checkbox']"
@@ -21,11 +23,11 @@ module.exports = class ClientsView extends Marionette.LayoutView
   initialize: (view_type)=>
     @view_type = view_type
 
-  toggle_check: (ev) =>
+  toggleCheck: (ev) =>
     checked = @ui.mainCheckbox.is(':checked')
     @$el.find('.gc-clients-list-wrapper').find('input[type=checkbox]').prop('checked', checked)
 
-  check_all: (ev) =>
+  checkAll: (ev) =>
     for check in @$el.find('.gc-clients-list-wrapper').find('input[type=checkbox]')
       if need_toggle?
         if need_toggle != $(check).is(':checked')
@@ -35,7 +37,23 @@ module.exports = class ClientsView extends Marionette.LayoutView
     if need_toggle
       @ui.mainCheckbox.prop 'checked', true
 
-  rm_event: (ev) =>
+  rmEvent: (ev) =>
     ev.preventDefault()
     @clients.currentView.trigger 'rm-client'
     @groups.currentView.trigger 'rm-group'
+
+  showThumbnail: (ev) ->
+    input = ev.target
+    if input.files && input.files[0]
+      reader = new FileReader()
+      reader.onload = (e)->
+        $(ev.target).parents('form').find('.gc-edit-profile-modal-avatar').attr('src', e.target.result)
+      reader.readAsDataURL(input.files[0])
+
+  submitGroupForm: (ev) ->
+    ev.preventDefault()
+    #TODO validation
+    name = $(ev.target).find('input[name=group_name]').val()
+    avatar = $(ev.target).find('input[type=file]')
+    @groups.currentView.trigger 'submit-group-form', name
+    @$el.find('#gc-add-group-modal').modal('hide')
