@@ -48,7 +48,8 @@
     "backbone": "./node_modules/backbone/backbone.js",
     "handlebars": "./node_modules/handlebars/dist/handlebars.js",
     "backbone.marionette": "./node_modules/backbone.marionette/lib/core/backbone.marionette.js",
-    "spinner": "./bower_components/spin.js/spin.js"
+    "spinner": "./bower_components/spin.js/spin.js",
+    "jquery-sortable": "./bower_components/jquery-sortable/source/js/jquery-sortable-min.js"
   },
   "browserify-shim": {
     "jquery": {
@@ -56,6 +57,9 @@
     },
     "spinner": {
       "exports": "Spinner"
+    },
+    "jquery-sortable": {
+      "depends": [ "jquery" ]
     }
   }
 }

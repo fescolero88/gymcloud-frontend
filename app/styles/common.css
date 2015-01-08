@@ -289,3 +289,14 @@ body > region > .container-fluid {
   color: #ee6d5d;
   border-color: #ee6d5d;
 }
+.modal-dialog.modal-md {
+  width: 480px;
+}
+.btn:hover,
+.btn:active,
+.btn:focus {
+  outline: none;
+}
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
