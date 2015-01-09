@@ -8,6 +8,7 @@ Backbone.$ = require 'jquery'
 Marionette = require 'backbone.marionette'
 
 ViewHelper = require 'views/helpers/view-helper'
+JqueryHelper = require 'views/helpers/jquery-helper'
 
 AuthModule = require 'modules/auth/auth-module'
 
@@ -91,14 +92,4 @@ $ ->
   window.App = new App()
   window.App.start()
 
-$.fn.serializeObject = ->
-  o = {}
-  a = @serializeArray()
-  $.each a, ->
-    if o[@name] isnt `undefined`
-      o[@name] = [o[@name]]  unless o[@name].push
-      o[@name].push @value or ""
-    else
-      o[@name] = @value or ""
-    return
-  o
+new JqueryHelper().initialize()

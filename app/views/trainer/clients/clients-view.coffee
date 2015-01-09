@@ -61,10 +61,8 @@ module.exports = class ClientsView extends Marionette.LayoutView
 
   rmEvent: (ev) =>
     ev.preventDefault()
-    if @groups.currentView?
-      @groups.currentView.trigger 'rm-group'
-    if @clients.currentView?
-      @clients.currentView.trigger 'rm-client'
+    @clients.currentView?.trigger 'rm-client'
+    @groups.currentView?.trigger 'rm-group'
 
   showMovetogroupModal: (ev) ->
     ev.preventDefault()

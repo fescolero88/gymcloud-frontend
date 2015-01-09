@@ -15,6 +15,9 @@ module.exports = class ClientListView extends Marionette.CompositeView
   childView: ClientItemView
   childViewContainer: 'ul'
 
+  ui:
+    checkedCheckboxes: 'input[type=checkbox]:checked'
+
   initialize: =>
     @on 'rm-client', @rm_client
     @on 'submit-client-form', @submitClientForm
@@ -26,21 +29,21 @@ module.exports = class ClientListView extends Marionette.CompositeView
         model.destroy()
 
   submitClientForm: (params)->
-    new_client = new Backbone.Model()
-    new_client.set params.form_data
-    new_client.set 'account_type', 3
-    new_client.url = '/api/mobile/clients'
-    new_client.save().then =>
+    newClient = new Backbone.Model()
+    newClient.set params.form_data
+    newClient.set 'account_type', 3
+    newClient.url = '/api/mobile/clients'
+    newClient.save().then =>
       if params.avatar[0].files[0]
         data = new FormData()
         data.append("avatar", params.avatar[0].files[0])
         # Get a new avatar url and then rerender itemview
         $.ajax
-          url: "#{new_client.url}/#{new_client.id}/avatar"
+          url: "#{newClient.url}/#{newClient.id}/avatar"
           type: 'PUT'
           data: data
           cache: false
           dataType: 'json'
           processData: false
           contentType: false
-    @collection.add new_client
+    @collection.add newClient
