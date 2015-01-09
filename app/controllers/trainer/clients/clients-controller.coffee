@@ -48,12 +48,13 @@ module.exports = class ClientsController extends Marionette.Controller
       clients_view = new ClientListView collection: client_collection
       clients_page_view.clients.show clients_view
 
-    if view_type != 'individuals'
-      group_collection = new Backbone.Collection()
-      group_collection.url = '/api/mobile/client_groups'
-      group_collection.fetch()
-      groups_view = new GroupListView collection: group_collection
-      clients_page_view.groups.show groups_view
+    group_collection = new Backbone.Collection()
+    group_collection.url = '/api/mobile/client_groups'
+    group_collection.fetch()
+    groups_view = new GroupListView collection: group_collection
+    clients_page_view.groups.show groups_view
+    if view_type is 'individuals'
+      groups_view.$el.hide()
 
   client: (id) =>
     @beforeAction()
@@ -106,7 +107,11 @@ module.exports = class ClientsController extends Marionette.Controller
   clientExercises: (id) =>
     @beforeAction()
 
-    headerView = new ClientHeaderView()
+    client_model = new Backbone.Model()
+    client_model.url = "/api/mobile/clients/#{id}"
+    client_model.fetch()
+
+    headerView = new ClientHeaderView model: client_model
     @client_page_view.header.show headerView
 
     left_view = new ExercisesView()
@@ -130,5 +135,9 @@ module.exports = class ClientsController extends Marionette.Controller
   group: (id) =>
     @beforeAction()
 
-    group_page_view = new GroupView()
+    group_model = new Backbone.Model()
+    group_model.url = "/api/mobile/client_groups/#{id}"
+    group_model.fetch()
+
+    group_page_view = new GroupView model: group_model
     @mainView.content.show group_page_view
