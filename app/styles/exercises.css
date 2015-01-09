@@ -244,7 +244,7 @@
 .gc-exercises-chb {
   display: inline-block;
   padding: 5px;
-  margin: 0 0 0 -20px;
+  margin: 0 0 0 -6px;
   position: relative;
   top: 3px;
   cursor: pointer;
@@ -266,12 +266,12 @@
   padding: 4px 8px;
 }
 .gc-exercises-assign-btn + .btn {
-  margin-left: 15px;
+  margin: 0 15px;
 }
 .gc-exercises-assign-btn:hover,
 .gc-exercises-assign-btn:active,
 .gc-exercises-assign-btn:focus {
-  color: #3398db;
+  color: #fff;
   border-color: #3398db;
   text-decoration: none;
 }
@@ -285,7 +285,7 @@
 .gc-exercises-assign-btn-del:hover,
 .gc-exercises-assign-btn-del:active,
 .gc-exercises-assign-btn-del:focus {
-  color: rgba(40, 45, 48, 0.4);
+  color: #ee6d5d;
 }
 .gc-exercises-assign-empty {
   margin: 15% auto 0 auto;

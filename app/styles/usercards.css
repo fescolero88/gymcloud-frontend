@@ -2,6 +2,12 @@
   background: #3398db;
   max-height: 185px;
 }
+.gc-usercard-large .gc-usercard-avatar-wrapper {
+  max-width: 146px;
+  margin: 0 35px 0 5px;
+  display: inline-block;
+  vertical-align: top;
+}
 .gc-usercard-large .gc-usercard-avatar {
   height: 100%;
   width: 100%;
@@ -17,6 +23,10 @@
   max-width: 140px;
   max-height: 140px;
   border-radius: 100px;
+}
+.gc-usercard-large .gc-usercard-info {
+  display: inline-block;
+  vertical-align: top;
 }
 .gc-usercard-large .gc-usercard-name {
   color: #fff;
