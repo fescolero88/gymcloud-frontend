@@ -1,4 +1,4 @@
-<div class="gc-sidebar-folder">
+{{#if isFolder}}<div class="gc-sidebar-folder">{{else}}<div class="gc-sidebar-item">{{/if}}
   <a href="#" class="row {{#if isFolder}}toggle-menu{{/if}}">
     <span class="col-xs-2">
       <span class="{{#if isFolder}}fa fa-folder-o {{else}}glyphicon glyphicon-th{{/if}}"></span>
