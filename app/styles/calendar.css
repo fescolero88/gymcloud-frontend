@@ -37,6 +37,9 @@
   color: #808080;
   margin-bottom: 0;
 }
+.gc-calendar-activity li p a {
+  color: #3398db;
+}
 .gc-calendar-nav {
   height: 50px;
   margin: 0;
@@ -53,6 +56,7 @@
 .gc-calendar-nav-date .btn-group .btn:active,
 .gc-calendar-nav-date .btn-group .btn:focus {
   outline: none;
+  background: #fff;
 }
 .gc-calendar-nav-date p {
   font-size: 10px;
@@ -74,6 +78,7 @@
 .gc-calendar-nav-views .btn-group .btn:focus,
 .gc-calendar-nav-views .btn-group .btn.active {
   color: #3398db;
+  background: #fff;
   text-decoration: none;
   outline: none;
 }
