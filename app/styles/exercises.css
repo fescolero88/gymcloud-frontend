@@ -3,15 +3,15 @@
   margin-top: 15px;
 }
 .gc-exercises-add-best a {
-  height: 28px;
   font-size: 10px;
   color: #3398db;
   display: inline-block;
   text-transform: uppercase;
   border: 1px solid #3398db;
   border-radius: 50px;
-  line-height: 20px;
-  padding: 3px 12px;
+  line-height: 10px;
+  padding: 2px 4px;
+  margin: 0 3px;
 }
 .gc-exercises-add-best a:hover,
 .gc-exercises-add-best a:active,
@@ -21,13 +21,13 @@
   outline: none;
 }
 .gc-exercises-no-best {
-  background: transparent url('../images/icon-cup-large.png') center 55px no-repeat;
+  background: transparent url('../images/icon-cup-large.png') center 10px no-repeat;
   text-align: center;
-  background-size: 18%;
-  padding: 120px 40px 10px 40px;
+  background-size: 40%;
+  padding: 60px 10px 0px 10px;
   color: #cbcacb;
   font-size: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 .gc-exercises-exercise-view {
   padding: 28px 23px 5px 23px;
@@ -43,35 +43,36 @@
   color: #404447;
 }
 .gc-exercises-bests {
-  padding: 0 10px;
+  padding: 0;
   margin-top: 20px;
 }
 .gc-exercises-bests-best {
   list-style-type: none;
+  margin-bottom: 15px;
 }
-.gc-exercises-bests-best > .row > div:first-child {
+.gc-exercises-bests-best > .row > div {
   padding: 0 5px;
 }
 .gc-exercises-bests-best h6 {
   color: #3398db;
   font-size: 12px;
-  margin-left: -10px;
   margin-top: 6px;
 }
 .gc-exercises-bests-icon {
-  height: 16px;
   border: 1px solid #3398db;
   border-radius: 50px;
   text-align: center;
-  height: 25px;
-  width: 25px;
+  height: 20px;
+  width: 20px;
   display: inline-block;
+  margin: 0 0 -6px -6px;
 }
 .gc-exercises-bests-icon img {
   height: 10px;
+  margin-top: -3px;
 }
 .gc-exercises-bests-best > .row {
-  margin: 0 0 10px 0;
+  margin: 0 0 1px 0;
 }
 .gc-exercises-bests-result {
   color: #404447;
@@ -120,17 +121,10 @@
   background: #fff;
   font-size: 18px;
   color: #3398db;
-  border-color: rgba(51,152,219,0.4);
-}
-.gc-add-personal-best-date input[type=text] {
-  border-color: rgba(51,152,219,0.4);
+  border-color: #cbd4d7;
 }
 .gc-add-personal-best-date .input-group-addon .fa + .fa {
   margin-left: 3px;
-}
-.gc-add-personal-best-property input[type=text],
-.gc-add-personal-best-property select {
-  border-color: rgba(51,152,219,0.4);
 }
 .gc-add-personal-best-property input[type=text] {
 }
@@ -196,6 +190,8 @@
 .gc-add-personal-best-list > li > div > .btn:focus,
 .gc-add-personal-best-list > li > div > .btn:active {
   outline: none;
+  background: #fff;
+  text-decoration: none;
 }
 .gc-add-personal-best-modal .modal-footer .btn {
   font-size: 12px;
@@ -333,4 +329,50 @@
   font-size: 12px;
   color: #cbcacb;
   line-height: 15px;
+}
+@media (min-width: 1200px) {
+  .gc-exercises-bests-icon {
+    border: 1px solid #3398db;
+    border-radius: 50px;
+    text-align: center;
+    height: 25px;
+    width: 25px;
+    display: inline-block;
+    margin: 0;
+  }
+  .gc-exercises-bests-icon img {
+    height: 10px;
+    margin: 0;
+  }
+}
+@media (min-width: 992px) {
+  .gc-exercises-bests {
+    padding: 0 10px;
+  }
+  .gc-exercises-bests-best > .row > div {
+    padding: 0 15px;
+  }
+  .gc-exercises-bests-best > .row > div:first-child {
+    padding: 0 5px;
+  }
+  .gc-exercises-bests-best h6 {
+    margin-left: -10px;
+  }
+  .gc-exercises-bests-best > .row {
+    margin: 0 0 10px 0;
+  }
+  .gc-exercises-bests-best {
+    margin: 0;
+  }
+  .gc-exercises-add-best a {
+    line-height: 20px;
+    padding: 3px 12px;
+    margin: 0;
+  }
+  .gc-exercises-no-best {
+    background-position: center 55px;
+    background-size: 18%;
+    padding: 120px 40px 10px 40px;
+    margin-bottom: 10px;
+  }
 }

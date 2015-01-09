@@ -113,7 +113,7 @@ body > region > .container-fluid {
   border-bottom: 1px solid rgba(40,45,48,0.1);
 }
 .gc-content-right header h3 {
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
   color: #9ea0a1;
   text-align: center;
@@ -239,6 +239,7 @@ body > region > .container-fluid {
     padding: 11px 30px 0 0;
   }
   .gc-content-right header h3 {
+    font-size: 12px;
     text-align: center;
     line-height: 50px;
     margin: 0;
