@@ -70,6 +70,10 @@
 .gc-usercard-large .gc-usercard-actions .btn:active {
   outline: none;
 }
+.gc-usercard-actions .btn:hover {
+  color: #3398db;
+  background: #fff;
+}
 .gc-usercard-large .gc-usercard-actions .btn + .btn {
   margin-left: 10px;
 }

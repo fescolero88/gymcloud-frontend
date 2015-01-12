@@ -32,7 +32,9 @@
 .gc-sidebar-cat > a {
   display: block;
   margin: 0;
-  font-size: 12px;
+  font-size: 15px;
+  font-weight: 200;
+  line-height: 18px;
   color: rgba(255,255,255,0.65);
   text-transform: uppercase;
   padding: 14px 0;
@@ -90,7 +92,9 @@
 .gc-sidebar-folder > a {
   display: block;
   margin: 0;
-  font-size: 12px;
+  font-size: 15px;
+  font-weight: 200;
+  line-height: 18px;
   color: rgba(255,255,255,0.65);
   padding: 14px 0;
   height: 46px;
@@ -116,8 +120,8 @@
   display: block;
   content: " ";
   position: absolute;
-  bottom: -19px;
-  top: 11px;
+  bottom: -14px;
+  top: 13px;
   left: 20px;
   width: 0;
   border-left: 1px solid #3398db;
@@ -135,13 +139,17 @@
 .gc-sidebar-item > a {
   display: block;
   margin: 0;
-  font-size: 12px;
+  font-size: 15px;
+  font-weight: 200;
+  line-height: 18px;
   color: rgba(255,255,255,0.65);
   padding: 14px 0;
   height: 46px;
 }
 .gc-sidebar-item > a .glyphicon-th {
-  font-size: 10px;
+  font-size: 12px;
+  position: relative;
+  top: 0px;
 }
 .gc-sidebar-item > a:hover {
   color: #3398db;
