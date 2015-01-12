@@ -287,9 +287,9 @@ body > region > .container-fluid {
 }
 .gc-clients-nav-right p {
   display: inline-block;
-  font-size: 10px;
+  font-size: 12px;
   color: #3398db;
-  margin: 20px 10px 20px 0;
+  margin: 19px 10px 19px 0;
   line-height: 10px;
 }
 .gc-clients-nav-right .btn {
@@ -327,4 +327,35 @@ body > region > .container-fluid {
 .btn:hover {
   background: #3398db;
   color: #fff;
+}
+.form-group.gc-valid input.form-control {
+  border-color: #3598dc;
+  position: relative;
+}
+.form-group .gc-valid-icon {
+  display: none;
+}
+.form-group.gc-valid .gc-valid-icon {
+  content: "✔";
+  display: block;
+  position: absolute;
+  right: 25px;
+  bottom: 25px;
+  color: #3598dc;
+  font-size: 12px;
+}
+.form-group.gc-invalid input.form-control {
+  border-color: #ff560a;
+}
+.form-group .gc-req {
+  color: #ff560a;
+}
+.form-group .gc-error-message {
+  color: #ff560a;
+  position: absolute;
+  right: 15px;
+  display: none;
+}
+.form-group.gc-invalid .gc-error-message {
+  display: inline-block;
 }

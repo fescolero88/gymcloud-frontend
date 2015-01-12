@@ -201,6 +201,19 @@
   vertical-align: top;
   background: green url('/static/images/icon-individual-right.png') center top no-repeat;
   background-size: contain;
+  text-align: center;
+}
+.gc-clients-list-avatar-wrapper.gc-clients-list-avatar-group {
+  border-radius: 0;
+  background: green url('/static/images/icon-group.png') center top no-repeat;
+  background-size: cover;
+  width: 28px;
+}
+.gc-clients-list-avatar-wrapper img {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  border-radius: 50px;
 }
 .gc-clients-nav-left > .gc-content-nav-checkall {
   margin: 0 -10px 0 10px;

@@ -20,6 +20,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
     groupForm: ".group-form"
     clientFormModal: "#gc-add-client-modal"
     clientForm: ".client-form"
+    checkedCounter: ".gc-clients-nav-right p"
 
   regions:
     'clients': '#clients-region'
@@ -50,6 +51,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
 
   checkAll: (ev) =>
     @checkButtons()
+    @countSelected()
     for check in @$el.find('.gc-clients-list-wrapper').find('input[type=checkbox]')
       if needToggle?
         if needToggle != $(check).is(':checked')
@@ -58,6 +60,13 @@ module.exports = class ClientsView extends Marionette.LayoutView
       needToggle = $(check).is(':checked')
     if needToggle
       @ui.mainCheckbox.prop 'checked', true
+
+  countSelected: =>
+    count = @$el.find('.gc-clients-list-wrapper').find('input[type=checkbox]:checked').length
+    if count
+      @ui.checkedCounter.removeClass('hidden').find('span').text(count)
+    else
+      @ui.checkedCounter.addClass('hidden')
 
   rmEvent: (ev) =>
     ev.preventDefault()
