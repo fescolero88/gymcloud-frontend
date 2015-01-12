@@ -30,7 +30,6 @@ module.exports = class GroupListView extends Marionette.CompositeView
     newGroup = new GroupModel
     newGroup.set 'name', params.name
     newGroup.save().then =>
-      newGroup.url = "/api/mobile/client_groups/#{newGroup.id}"
       if params.avatar[0].files[0]
         data = new FormData()
         data.append("avatar", params.avatar[0].files[0])
@@ -43,4 +42,4 @@ module.exports = class GroupListView extends Marionette.CompositeView
           dataType: 'json'
           processData: false
           contentType: false
-      @collection.unshift newGroup
+    @collection.unshift newGroup

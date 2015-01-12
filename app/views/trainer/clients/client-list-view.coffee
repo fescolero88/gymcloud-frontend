@@ -35,7 +35,6 @@ module.exports = class ClientListView extends Marionette.CompositeView
     newClient.set params.form_data
     newClient.set 'account_type', 3
     newClient.save().then =>
-      newClient.url = "/api/mobile/clients/#{newClient.id}"
       if params.avatar[0].files[0]
         data = new FormData()
         data.append("avatar", params.avatar[0].files[0])
@@ -48,4 +47,4 @@ module.exports = class ClientListView extends Marionette.CompositeView
           dataType: 'json'
           processData: false
           contentType: false
-      @collection.add newClient
+    @collection.add newClient
