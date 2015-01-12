@@ -19,61 +19,61 @@ module.exports = class ClientPageController extends Marionette.Controller
 
   initialize: (options) =>
     @mainView = options.mainView
-    @user_page_view = null
+    @userPageView = null
 
   beforeAction: () =>
-    if not @user_page_view
-      @user_page_view = new ClientPageView()
-      @mainView.content.show @user_page_view
+    if not @userPageView
+      @userPageView = new ClientPageView()
+      @mainView.content.show @userPageView
 
-      @nav_view = new ClientPageNavView()
-      @user_page_view.nav.show @nav_view
+      @navView = new ClientPageNavView()
+      @userPageView.nav.show @navView
 
   clientPageExercises: (id) =>
     @beforeAction()
 
-    content_view = new ExercisesView()
-    @user_page_view.content.show content_view
+    contentView = new ExercisesView()
+    @userPageView.content.show contentView
 
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-e'
 
   clientPageWorkouts: (id) =>
     @beforeAction()
 
-    content_view = new WorkoutsView()
-    @user_page_view.content.show content_view
+    contentView = new WorkoutsView()
+    @userPageView.content.show contentView
 
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-w'
 
   clientPagePrograms: (id) =>
     @beforeAction()
 
-    content_view = new ProgramsView()
-    @user_page_view.content.show content_view
+    contentView = new ProgramsView()
+    @userPageView.content.show contentView
 
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-p'
 
   clientPageCalendarDay: (id) =>
     @beforeAction()
 
-    content_view = new CalendarDayView()
-    @user_page_view.content.show content_view
+    contentView = new CalendarDayView()
+    @userPageView.content.show contentView
 
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-c'
 
   clientPageCalendarWeek: (id) =>
     @beforeAction()
 
-    content_view = new CalendarWeekView()
-    @user_page_view.content.show content_view
+    contentView = new CalendarWeekView()
+    @userPageView.content.show contentView
 
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-c'
 
   clientPageCalendarMonth: (id) =>
     @beforeAction()
 
-    content_view = new CalendarMonthView()
-    @user_page_view.content.show content_view
+    contentView = new CalendarMonthView()
+    @userPageView.content.show contentView
 
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-c'
 

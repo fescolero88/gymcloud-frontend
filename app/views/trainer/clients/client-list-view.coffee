@@ -1,6 +1,8 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
+ClientModel = require 'models/trainer/client-model'
+
 module.exports = class ClientItemView extends Marionette.ItemView
   template: Templates.trainer.clients.client_item
   tagName: 'li'
@@ -19,21 +21,21 @@ module.exports = class ClientListView extends Marionette.CompositeView
     checkedCheckboxes: 'input[type=checkbox]:checked'
 
   initialize: =>
-    @on 'rm-client', @rm_client
+    @on 'rm-client', @rmClient
     @on 'submit-client-form', @submitClientForm
 
-  rm_client: =>
+  rmClient: =>
     for check in @$el.find('input[type=checkbox]')
       if $(check).is(':checked')
         model = @collection.get $(check).data('id')
         model.destroy()
 
   submitClientForm: (params)->
-    newClient = new Backbone.Model()
+    newClient = new ClientModel
     newClient.set params.form_data
     newClient.set 'account_type', 3
-    newClient.url = '/api/mobile/clients'
     newClient.save().then =>
+      newClient.url = "/api/mobile/clients/#{newClient.id}"
       if params.avatar[0].files[0]
         data = new FormData()
         data.append("avatar", params.avatar[0].files[0])
@@ -46,4 +48,4 @@ module.exports = class ClientListView extends Marionette.CompositeView
           dataType: 'json'
           processData: false
           contentType: false
-    @collection.add newClient
+      @collection.add newClient

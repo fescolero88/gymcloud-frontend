@@ -1,6 +1,8 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
+GroupModel = require 'models/trainer/group-model'
+
 module.exports = class GroupItemView extends Marionette.ItemView
   template: Templates.trainer.clients.group_item
   tagName: 'li'
@@ -25,20 +27,20 @@ module.exports = class GroupListView extends Marionette.CompositeView
         model.destroy()
 
   submitGroupForm: (params)->
-    new_group = new Backbone.Model()
-    new_group.set 'name', params.name
-    new_group.url = '/api/mobile/client_groups'
-    new_group.save().then =>
+    newGroup = new GroupModel
+    newGroup.set 'name', params.name
+    newGroup.save().then =>
+      newGroup.url = "/api/mobile/client_groups/#{newGroup.id}"
       if params.avatar[0].files[0]
         data = new FormData()
         data.append("avatar", params.avatar[0].files[0])
         # Get a new avatar url and then rerender itemview
         $.ajax
-          url: "#{new_group.url}/#{new_group.id}/avatar"
+          url: "#{newGroup.url}/#{newGroup.id}/avatar"
           type: 'PUT'
           data: data
           cache: false
           dataType: 'json'
           processData: false
           contentType: false
-    @collection.unshift new_group
+      @collection.unshift newGroup

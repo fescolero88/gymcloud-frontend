@@ -24,13 +24,13 @@ module.exports = class ClientsView extends Marionette.LayoutView
   regions:
     'clients': '#clients-region'
     'groups': '#groups-region'
-    'move_to_group': '#gc-move-to-group-modal'
+    'moveToGroup': '#gc-move-to-group-modal'
 
   templateHelpers: =>
-    view_type: @view_type
+    view_type: @viewType
 
-  initialize: (view_type)=>
-    @view_type = view_type
+  initialize: (viewType)=>
+    @viewType = viewType
     @checkButtons()
 
   toggleCheck: (ev) =>
@@ -51,12 +51,12 @@ module.exports = class ClientsView extends Marionette.LayoutView
   checkAll: (ev) =>
     @checkButtons()
     for check in @$el.find('.gc-clients-list-wrapper').find('input[type=checkbox]')
-      if need_toggle?
-        if need_toggle != $(check).is(':checked')
+      if needToggle?
+        if needToggle != $(check).is(':checked')
           @ui.mainCheckbox.prop 'checked', false
           return
-      need_toggle = $(check).is(':checked')
-    if need_toggle
+      needToggle = $(check).is(':checked')
+    if needToggle
       @ui.mainCheckbox.prop 'checked', true
 
   rmEvent: (ev) =>
@@ -66,8 +66,8 @@ module.exports = class ClientsView extends Marionette.LayoutView
 
   showMovetogroupModal: (ev) ->
     ev.preventDefault()
-    move_to_group_view = new MoveToGroupView collection: @groups.currentView.collection
-    @move_to_group.show move_to_group_view
+    moveToGroupView = new MoveToGroupView collection: @groups.currentView.collection
+    @moveToGroup.show moveToGroupView
     @$el.find('#gc-move-to-group-modal').modal('show')
 
   showThumbnail: (ev) ->
@@ -81,12 +81,12 @@ module.exports = class ClientsView extends Marionette.LayoutView
   submitMovetogroupForm: (ev) ->
     ev.preventDefault()
     #TODO validation
-    clients_id = []
-    groups_id = []
+    clientsId = []
+    groupsId = []
     for check in @$el.find('#clients-region').find('input[type=checkbox]:checked')
-      clients_id.push $(check).data('id')
+      clientsId.push $(check).data('id')
     for check in @$el.find('.gc-move-to-group-form').find('input[type=checkbox]:checked')
-      groups_id.push $(check).data('id')
+      groupsId.push $(check).data('id')
     #TODO Submit when will be API
 
   submitGroupForm: (ev) =>
@@ -101,6 +101,6 @@ module.exports = class ClientsView extends Marionette.LayoutView
     ev.preventDefault()
     #TODO validation
     avatar = $(ev.target).find('input[type=file]')
-    form_data = @ui.clientForm.serializeObject()
-    @clients.currentView.trigger 'submit-client-form', {form_data, avatar}
+    formData = @ui.clientForm.serializeObject()
+    @clients.currentView.trigger 'submit-client-form', {formData, avatar}
     @ui.clientFormModal.modal('hide')

@@ -11,6 +11,7 @@ ViewHelper = require 'views/helpers/view-helper'
 JqueryHelper = require 'views/helpers/jquery-helper'
 
 AuthModule = require 'modules/auth/auth-module'
+ProfileModel = require 'models/auth/profile-model'
 
 MainTrainerModule = require 'modules/main-trainer/main-trainer-module'
 MainClientModule = require 'modules/main-client/main-client-module'
@@ -18,7 +19,7 @@ MainClientModule = require 'modules/main-client/main-client-module'
 
 class App extends Marionette.Application
   initialize: ->
-    @profile_model = new Backbone.Model()
+    @profileModel = new ProfileModel()
 
     @on 'start', ->
       @vent.trigger 'app:start-history'
@@ -60,9 +61,8 @@ class App extends Marionette.Application
     @addInitializer ->
       @module 'Auth', AuthModule
       if window.localStorage.accessToken
-        @profile_model.url = "/api/mobile/me"
-        @profile_model.fetch().then =>
-          if @profile_model.get('account_type') is 'Client'
+        @profileModel.fetch().then =>
+          if @profileModel.get('account_type') is 'Client'
               @module 'Main', MainClientModule
             else
               @module 'Main', MainTrainerModule
@@ -72,9 +72,8 @@ class App extends Marionette.Application
 
     @addInitializer ->
       @vent.on 'modules:main:start', () =>
-        @profile_model.url = "/api/mobile/me"
-        @profile_model.fetch().then =>
-          if @profile_model.get('account_type') is 'Client'
+        @profileModel.fetch().then =>
+          if @profileModel.get('account_type') is 'Client'
             @module 'Main', MainClientModule
           else
             @module 'Main', MainTrainerModule

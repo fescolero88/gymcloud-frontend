@@ -16,22 +16,22 @@ module.exports = class MainClientModule extends Marionette.Module
     @addInitializer (options) ->
       @mainView = new MainView()
       @headerView = new HeaderView()
-      @sidebar_view = new SideBarView()
+      @sidebarView = new SideBarView()
 
       @app.appRegion.show @mainView
 
       @mainView.header.show @headerView
-      @mainView.menu.show @sidebar_view
+      @mainView.menu.show @sidebarView
 
     # Client's page
     @addInitializer (options) ->
-      @clientpage_controller = new ClientPageController { mainView: @mainView }
-      @clientpage_router = new ClientPageRouter { controller: @clientpage_controller }
+      @clientpageController = new ClientPageController { mainView: @mainView }
+      @clientpageRouter = new ClientPageRouter { controller: @clientpageController }
 
     # Messages
     @addInitializer (options) ->
-      @messages_controller = new MessagesController { mainView: @mainView }
-      @messages_router = new MessagesRouter { controller: @messages_controller }
+      @messagesController = new MessagesController { mainView: @mainView }
+      @messagesRouter = new MessagesRouter { controller: @messagesController }
 
 
     @on 'stop', () ->

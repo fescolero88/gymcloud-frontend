@@ -1,10 +1,14 @@
 Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
 
 ClientsView = require 'views/trainer/clients/clients-view'
 ClientListView = require 'views/trainer/clients/client-list-view'
 GroupListView = require 'views/trainer/clients/group-list-view'
 GroupView = require 'views/trainer/groups/group-view'
+
+ClientModel = require 'models/trainer/client-model'
+ClientCollection = require 'models/trainer/client-collection'
+GroupModel = require 'models/trainer/group-model'
+GroupCollection = require 'models/trainer/group-collection'
 
 ClientView = require 'views/trainer/clients/client-view'
 ClientHeaderView = require 'views/trainer/clients/client-header-view'
@@ -27,117 +31,115 @@ module.exports = class ClientsController extends Marionette.Controller
 
   initialize: (options) =>
     @mainView = options.mainView
-    @client_page_view = null
+    @clientPageView = null
 
   beforeAction: () =>
-    if not @client_page_view or not @client_page_view.header
-      @client_page_view = new ClientView()
-      @mainView.content.show @client_page_view
+    if not @clientPageView or not @clientPageView.header
+      @clientPageView = new ClientView()
+      @mainView.content.show @clientPageView
 
-      @nav_view = new ClientNavView()
-      @client_page_view.nav.show @nav_view
+      @navView = new ClientNavView()
+      @clientPageView.nav.show @navView
 
   clients: (view_type) =>
-    clients_page_view = new ClientsView view_type
-    @mainView.content.show clients_page_view
+    clientsPageView = new ClientsView view_type
+    @mainView.content.show clientsPageView
 
     if view_type != 'groups'
-      client_collection = new Backbone.Collection()
-      client_collection.url = '/api/mobile/clients'
-      client_collection.fetch()
-      clients_view = new ClientListView collection: client_collection
-      clients_page_view.clients.show clients_view
+      clientCollection = new ClientCollection
+      clientCollection.fetch()
+      clientsView = new ClientListView collection: clientCollection
+      clientsPageView.clients.show clientsView
 
-    group_collection = new Backbone.Collection()
-    group_collection.url = '/api/mobile/client_groups'
-    group_collection.fetch()
-    groups_view = new GroupListView collection: group_collection
-    clients_page_view.groups.show groups_view
+    groupCollection = new GroupCollection
+    groupCollection.fetch()
+    groupsView = new GroupListView collection: groupCollection
+    clientsPageView.groups.show groupsView
     if view_type is 'individuals'
-      groups_view.$el.hide()
+      groupsView.$el.hide()
 
   client: (id) =>
     @beforeAction()
 
     headerView = new ClientHeaderView()
-    @client_page_view.header.show headerView
+    @clientPageView.header.show headerView
 
-    left_view = new ClientLeftView()
-    @client_page_view.leftside.show left_view
+    leftView = new ClientLeftView()
+    @clientPageView.leftside.show leftView
 
-    right_view = new ClientRightView()
-    @client_page_view.rightside.show right_view
+    rightView = new ClientRightView()
+    @clientPageView.rightside.show rightView
 
   clientCalendarDay: (id) =>
     @beforeAction()
 
     headerView = new ClientHeaderView()
-    @client_page_view.header.show headerView
+    @clientPageView.header.show headerView
 
-    left_view = new CalendarDayView()
-    @client_page_view.leftside.show left_view
+    leftView = new CalendarDayView()
+    @clientPageView.leftside.show leftView
 
-    right_view = new ClientRightView()
-    @client_page_view.rightside.show right_view
+    rightView = new ClientRightView()
+    @clientPageView.rightside.show rightView
 
   clientCalendarWeek: (id) =>
     @beforeAction()
 
     headerView = new ClientHeaderView()
-    @client_page_view.header.show headerView
+    @clientPageView.header.show headerView
 
-    left_view = new CalendarWeekView()
-    @client_page_view.leftside.show left_view
+    leftView = new CalendarWeekView()
+    @clientPageView.leftside.show leftView
 
-    right_view = new ClientRightView()
-    @client_page_view.rightside.show right_view
+    rightView = new ClientRightView()
+    @clientPageView.rightside.show rightView
 
   clientCalendarMonth: (id) =>
     @beforeAction()
 
     headerView = new ClientHeaderView()
-    @client_page_view.header.show headerView
+    @clientPageView.header.show headerView
 
-    left_view = new CalendarMonthView()
-    @client_page_view.leftside.show left_view
+    leftView = new CalendarMonthView()
+    @clientPageView.leftside.show leftView
 
-    right_view = new ClientRightView()
-    @client_page_view.rightside.show right_view
+    rightView = new ClientRightView()
+    @clientPageView.rightside.show rightView
 
   clientExercises: (id) =>
     @beforeAction()
 
-    client_model = new Backbone.Model()
-    client_model.url = "/api/mobile/clients/#{id}"
-    client_model.fetch()
+    clientModel = new ClientModel
+    clientModel.url = "/api/mobile/clients/#{id}"
+    clientModel.fetch()
 
-    headerView = new ClientHeaderView model: client_model
-    @client_page_view.header.show headerView
+    headerView = new ClientHeaderView model: clientModel
+    @clientPageView.header.show headerView
 
-    left_view = new ExercisesView()
-    @client_page_view.leftside.show left_view
+    leftView = new ExercisesView()
+    @clientPageView.leftside.show leftView
 
-    right_view = new ClientRightView()
-    @client_page_view.rightside.show right_view
+    rightView = new ClientRightView()
+    @clientPageView.rightside.show rightView
 
   clientExercise: (id) =>
     @beforeAction()
 
     headerView = new ClientCompactHeaderView()
-    @client_page_view.header.show headerView
+    @clientPageView.header.show headerView
 
-    left_view = new ExerciseView()
-    @client_page_view.leftside.show left_view
+    leftView = new ExerciseView()
+    @clientPageView.leftside.show leftView
 
-    right_view = new PersonalBestView()
-    @client_page_view.rightside.show right_view
+    rightView = new PersonalBestView()
+    @clientPageView.rightside.show rightView
 
   group: (id) =>
     @beforeAction()
 
-    group_model = new Backbone.Model()
-    group_model.url = "/api/mobile/client_groups/#{id}"
-    group_model.fetch()
+    groupModel = new GroupModel
+    groupModel.url = "/api/mobile/client_groups/#{id}"
+    groupModel.fetch()
 
-    group_page_view = new GroupView model: group_model
-    @mainView.content.show group_page_view
+    groupPageView = new GroupView model: groupModel
+    @mainView.content.show groupPageView
