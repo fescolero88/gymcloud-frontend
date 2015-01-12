@@ -35,11 +35,11 @@
 }
 .gc-modal .modal-footer {
   border: none;
-  padding-top: 8px;
+  padding: 8px 25px 15px 25px;
 }
 .gc-modal .modal-body {
   border: none;
-  padding-bottom: 0;
+  padding: 15px 25px 0 25px;
 }
 .gc-edit-profile-modal-upload-wrapper {
   background: #eeeeee;
@@ -113,10 +113,11 @@
 .gc-modal input[type=text],
 .gc-modal input[type=date],
 .gc-modal textarea {
-  border-color: rgba(51,152,219,0.4);
+  border-color: #cbd4d7;
 }
 .gc-modal textarea {
   min-height: 8em;
+  border-color: #cbd4d7;
 }
 .gc-modal .modal-footer .btn {
   font-size: 12px;
@@ -130,6 +131,14 @@
 .gc-modal .modal-footer .btn:focus,
 .gc-modal .modal-footer .btn:active {
   outline: none;
+}
+.gc-modal .modal-footer .btn-link {
+  border: none;
+}
+.gc-modal .modal-footer .btn-link:hover {
+  background: #fff;
+  color: #3398db;
+  text-decoration: none;
 }
 .gc-clients-list-wrapper {
   margin: 5px 0 0 0;
@@ -216,6 +225,11 @@
   font-size: 14px;
   text-transform: uppercase;
   text-decoration: none;
+  color: #5698e5;
+}
+.gc-message-modal-actions .btn:hover {
+  color: #5698e5;
+  background: #fff;
 }
 .gc-message-modal-actions .btn .fa-remove,
 .gc-message-modal-actions .btn .fa-check {

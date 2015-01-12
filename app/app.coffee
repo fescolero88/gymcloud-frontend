@@ -1,6 +1,7 @@
 window.Templates = require 'templates/templates_build.js'
 
 Spinner = require 'spinner'
+Sortable = require 'jquery-sortable'
 Handlebars = require 'handlebars'
 
 Backbone = require 'backbone'

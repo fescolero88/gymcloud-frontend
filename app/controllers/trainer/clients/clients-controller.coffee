@@ -25,6 +25,8 @@ CalendarDayView = require 'views/trainer/calendar/calendar-day-view'
 CalendarWeekView = require 'views/trainer/calendar/calendar-week-view'
 CalendarMonthView = require 'views/trainer/calendar/calendar-month-view'
 
+PropertiesView = require 'views/trainer/properties/properties-view'
+
 MessagesView = require 'views/general/messages/messages-view'
 
 module.exports = class ClientsController extends Marionette.Controller
@@ -143,3 +145,46 @@ module.exports = class ClientsController extends Marionette.Controller
 
     groupPageView = new GroupView model: groupModel
     @mainView.content.show groupPageView
+
+  properties: =>
+    @beforeAction()
+
+    prop_collection = new Backbone.Collection [
+      {
+        'name': 'Weight (kg)'
+        'default': 0
+        'type': 'Numeric'
+        'weight': 4
+      }
+      {
+        'name': 'Distance'
+        'default': 0
+        'type': 'Numeric'
+        'weight': 2
+      }
+      {
+        'name': 'Sets'
+        'default': 'None'
+        'type': 'String'
+        'weight': 1
+      }
+      {
+        'name': 'Reps'
+        'default': 0
+        'type': 'Numeric'
+        'weight': 3
+      }
+    ]
+    properties_page_view = new PropertiesView collection: prop_collection
+    properties_page_view.collection.comparator = (model) -> model.get('weight')
+    properties_page_view.collection.sort()
+
+    @mainView.content.show properties_page_view
+
+    $('.gc-properties-list').sortable
+      handle: '.draggable-handle'
+      placeholder: '<li class="placeholder sortable-placeholder"/>'
+      onDrop: ($item) =>
+        $item.removeClass("dragged").removeAttr("style")
+        $("body").removeClass("dragging")
+        properties_page_view.resort()

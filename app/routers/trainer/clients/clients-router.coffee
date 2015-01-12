@@ -13,3 +13,4 @@ module.exports = class ClientsRouter extends Marionette.AppRouter
     'clients/id/:id/calendar/week/:week(/)': 'clientCalendarWeek'
     'clients/id/:id/calendar/day/:day(/)': 'clientCalendarDay'
     'groups/id/:id(/)': 'group'
+    'properties(/)': 'properties'
