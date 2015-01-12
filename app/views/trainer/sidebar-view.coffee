@@ -4,7 +4,7 @@ module.exports = class SideBarView extends Marionette.ItemView
   template: Templates.trainer.sidebar.sidebar
 
   events:
-    "click .toggle-menu": "toggle_menu"
+    "click .toggle-menu": "toggleMenu"
 
   initialize: =>
     @exercises = []
@@ -13,19 +13,19 @@ module.exports = class SideBarView extends Marionette.ItemView
     @clients = []
     @groups = []
 
-    @get_data()
+    @getData()
 
   templateHelpers: =>
     exercises: => @exercises
     workouts: => @workouts
     programs: => @programs
 
-  toggle_menu: (ev) ->
+  toggleMenu: (ev) ->
     if not $(ev.target).hasClass 'gc-sidebar-cat-name'
       ev.preventDefault()
       $(ev.currentTarget).toggleClass('active')
 
-  get_data: =>
+  getData: =>
     $.ajax
       url: '/api/mobile/library/'
       type: 'GET'

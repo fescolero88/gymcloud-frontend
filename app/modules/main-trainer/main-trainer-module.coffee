@@ -16,25 +16,25 @@ module.exports = class MainTrainerModule extends Marionette.Module
   initialize: =>
     @addInitializer (options) =>
       @mainView = new MainView()
-      @sidebar_view = new SideBarView()
+      @sidebarView = new SideBarView()
       @headerView = new HeaderView()
       @modalView = new ModalView()
 
       @app.appRegion.show @mainView
 
       @mainView.header.show @headerView
-      @mainView.menu.show @sidebar_view
+      @mainView.menu.show @sidebarView
       @mainView.modals.show @modalView
 
     # Clients
     @addInitializer (options) ->
-      @clients_controller = new ClientsController { mainView: @mainView }
-      @clients_router = new ClientsRouter { controller: @clients_controller }
+      @clientsController = new ClientsController { mainView: @mainView }
+      @clientsRouter = new ClientsRouter { controller: @clientsController }
 
     # Messages
     @addInitializer (options) ->
-      @messages_controller = new MessagesController { mainView: @mainView }
-      @messages_router = new MessagesRouter { controller: @messages_controller }
+      @messagesController = new MessagesController { mainView: @mainView }
+      @messagesRouter = new MessagesRouter { controller: @messagesController }
 
     @on 'stop', ->
       @app.appRegion.reset()

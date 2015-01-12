@@ -9,6 +9,6 @@ module.exports = class ViewHelper
         options.fn @
 
     Handlebars.registerHelper 'withProfile', (options) ->
-      context = App.profile_model.attributes
+      context = App.profileModel.attributes
       Handlebars.helpers.with.call(this, context, options)
 

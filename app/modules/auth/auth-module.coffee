@@ -8,8 +8,8 @@ AuthView = require 'views/auth/auth-view'
 module.exports = class AuthModule extends Marionette.Module
   initialize: =>
     @addInitializer (options) ->
-      @auth_view = AuthView
-      @controller = new AuthController { region: @app.appRegion, @auth_view }
+      @authView = AuthView
+      @controller = new AuthController { region: @app.appRegion, @authView }
       @router = new AuthRouter { @controller }
 
     @on 'stop', ->

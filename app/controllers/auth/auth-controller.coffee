@@ -3,7 +3,7 @@ Marionette = require 'backbone.marionette'
 module.exports = class AuthController extends Marionette.Controller
 
   initialize: (options) ->
-    @view = options.auth_view
+    @view = options.authView
     @region = options.region
 
   login: ->
@@ -16,8 +16,8 @@ module.exports = class AuthController extends Marionette.Controller
     @listenTo view, 'authenticate', (data) =>
       @authenticate data.username, data.password, data.authorized
 
-    @listenTo view, 'get_profile', =>
-      @get_profile()
+    @listenTo view, 'getProfile', =>
+      @getProfile()
 
   authenticate: (username, password, authorized ) ->
     data =
