@@ -76,19 +76,19 @@
               <div class="row">
                 <div class="col-xs-4">
                   <div class="form-group">
-                    <label for="">Weight</label>
+                    <label for="">Weight <span class="gc-req">*</span></label>
                     <input type="text" class="form-control">
                   </div>
                 </div>
                 <div class="col-xs-4">
                   <div class="form-group">
-                    <label for="">Height</label>
+                    <label for="">Height <span class="gc-req">*</span></label>
                     <input type="text" class="form-control">
                   </div>
                 </div>
                 <div class="col-xs-4">
                   <div class="form-group">
-                    <label for="">Bodyfat</label>
+                    <label for="">Bodyfat <span class="gc-req">*</span></label>
                     <input type="text" class="form-control">
                   </div>
                 </div>
@@ -111,23 +111,28 @@
               </div>
               <div class="row">
                 <div class="col-xs-12">
-                  <div class="form-group">
+                  <div class="form-group gc-valid">
                     <label for="">Email</label>
                     <input type="text" class="form-control">
+                    <span class="gc-valid-icon fa fa-check"></span>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-xs-8">
-                  <div class="form-group">
-                    <label for="">Location</label>
+                  <div class="form-group gc-invalid">
+                    <label for="">Location <span class="gc-req">*</span></label>
+                    <label for="" class="gc-error-message">Empty field</label>
                     <input type="text" class="form-control">
+                    <span class="gc-valid-icon fa fa-check"></span>
                   </div>
                 </div>
                 <div class="col-xs-4">
                   <div class="form-group">
                     <label for="">ZIP</label>
+                    <label for="" class="gc-error-message">Empty field</label>
                     <input type="text" class="form-control">
+                    <span class="gc-valid-icon fa fa-check"></span>
                   </div>
                 </div>
               </div>
