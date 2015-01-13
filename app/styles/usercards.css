@@ -10,8 +10,8 @@
   margin: 19px 35px 0 5px;
   display: inline-block;
   vertical-align: top;
-  background: transparent url('/static/images/avatar-placeholder.png') center 55% no-repeat;
-  background-size: 50%;
+  background: transparent url('/static/images/avatar-placeholder.png') 60% 55% no-repeat;
+  background-size: 70%;
 }
 .gc-usercard-large .gc-usercard-avatar {
   height: 100%;
