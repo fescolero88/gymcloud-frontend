@@ -1,4 +1,5 @@
 Marionette = require 'backbone.marionette'
+Backbone = require 'backbone'
 
 ClientsView = require 'views/trainer/clients/clients-view'
 ClientListView = require 'views/trainer/clients/client-list-view'
