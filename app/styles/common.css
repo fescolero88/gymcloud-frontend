@@ -336,7 +336,6 @@ body > region > .container-fluid {
   display: none;
 }
 .form-group.gc-valid .gc-valid-icon {
-  content: "✔";
   display: block;
   position: absolute;
   right: 25px;

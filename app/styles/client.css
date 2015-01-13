@@ -89,6 +89,9 @@
   left: 0;
   z-index: 5;
 }
+.gc-edit-profile-modal-avatar[src=''] {
+  display: none;
+}
 .gc-modal label {
   color: #3398db;
   font-size: 12px;
@@ -214,6 +217,9 @@
   height: 24px;
   display: inline-block;
   border-radius: 50px;
+}
+.gc-clients-list-avatar-wrapper img[src=''] {
+  display: none;
 }
 .gc-clients-nav-left > .gc-content-nav-checkall {
   margin: 0 -10px 0 10px;
