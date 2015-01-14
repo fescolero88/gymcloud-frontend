@@ -41,6 +41,7 @@
 .gc-exercises-exercise-view .gc-exercises-exercise-descr {
   font-size: 16px;
   color: #404447;
+  margin-bottom: 1em;
 }
 .gc-exercises-bests {
   padding: 0;
