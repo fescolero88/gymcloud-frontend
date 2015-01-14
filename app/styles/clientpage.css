@@ -12,12 +12,15 @@
   min-height: 100%;
   margin: 0 -15px;
 }
+.gc-clientpage-sidebar{
+  position: relative;
+}
 .gc-clientpage-exercises h2 {
   text-transform: uppercase;
   color: #757575;
-  font-size: 14px;
-  font-weight: bold;
-  margin: 30px 25px;
+  font-size: 21px;
+  font-weight: 700;
+  margin: 30px 25px 20px;
 }
 .gc-clientpage-calendar-nav-title {
   text-transform: uppercase;
@@ -43,7 +46,8 @@
   background: transparent;
   text-transform: uppercase;
   line-height: 16px;
-  padding: 13px 18px;
+  height: 43px;
+  padding: 12px 18px;
   border-radius: 20px 20px 0 0;
 }
 .gc-clientpage-nav-tab.active {
@@ -64,12 +68,13 @@
 .gc-clientpage-nav-tab > span {
   display: inline-block;
   margin: 0 1px;
+  font-size: 17px;
   line-height: 16px;
   vertical-align: middle;
 }
 .gc-clientpage-nav-tab-icon {
-  height: 16px;
-  width: 16px;
+  height: 18px;
+  width: 18px;
   background: transparent left 50% no-repeat;
   background-size: cover;
 }
@@ -86,11 +91,11 @@
 }
 .gc-clientpage-nav-tab-icon-c {
   background-image: url('../images/icon-calendar.png');
-  background-size: 260%;
+  background-size: 230%;
   background-position: -3px 50%;
 }
 .gc-clientpage-nav-tab.active .gc-clientpage-nav-tab-icon-e {
-  background-position: -20px 50%;
+  background-position: -23px 50%;
 }
 .gc-clientpage-nav-tab.active .gc-clientpage-nav-tab-icon-w {
   background-position: right 50%;
@@ -109,7 +114,7 @@
 }
 .gc-clientpage-nav-trainer-action-wrapper p {
   color: #fff;
-  font-size: -12px;
+  font-size: 15px;
   margin: 10px 0 6px 0;
 }
 .gc-clientpage-nav-trainer-action-wrapper p span {
@@ -123,12 +128,16 @@
   text-transform: uppercase;
   color: #fff;
 }
+.gc-clientpage-nav-trainer-action-wrapper .btn:hover {
+  color: #3398db;
+  background: #fff;
+}
 .gc-clientpage-nav-trainer-avatar-wrapper {
   border-radius: 100px;
   height: 52px;
   width: 52px;
-  background: #5da6dd url('../images/avatar-placeholder.png') center center no-repeat;
-  background-size: 60%;
+  background: #5da6dd url('../images/avatar-placeholder.png') 55% center no-repeat;
+  background-size: 80%;
   border: 3px solid #5da6dd;
   margin: 13px 0 0 0;
   border-radius: 100px;
@@ -141,6 +150,21 @@
 }
 .gc-clientpage-nav-trainer-avatar-wrapper img[src$='defaultimage.png'] {
     display: none;
+}
+.gc-clientpage-sidebar .gc-clientpage-sidebar-edit {
+  position: absolute;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #fff;
+  top: -10px;
+  left: 70%;
+}
+.gc-clientpage-sidebar .gc-clientpage-sidebar-edit:hover,
+.gc-clientpage-sidebar .gc-clientpage-sidebar-edit:focus,
+.gc-clientpage-sidebar .gc-clientpage-sidebar-edit:active {
+  outline: none;
+  text-decoration: none;
+  background: transparent;
 }
 @media (min-width: 992px) {
   #clientpage-nav-region {
