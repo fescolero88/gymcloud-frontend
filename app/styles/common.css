@@ -87,6 +87,9 @@ body > region > .container-fluid {
   padding: 0;
   height: 100%;
 }
+.gc-main {
+  position: relative;
+}
 .gc-main-wrapper {
   margin-left: 230px;
 }
@@ -97,6 +100,7 @@ body > region > .container-fluid {
 }
 .gc-main-workspace {
   background: #fff;
+  position: relative;
 }
 .gc-main-workspace > div {
   padding: 0;

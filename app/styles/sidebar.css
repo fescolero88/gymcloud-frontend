@@ -122,7 +122,7 @@
   position: absolute;
   bottom: -14px;
   top: 13px;
-  left: 20px;
+  left: 21px;
   width: 0;
   border-left: 1px solid #3398db;
 }
@@ -132,9 +132,21 @@
   position: absolute;
   bottom: 14px;
   top: -19px;
-  left: 20px;
+  left: 21px;
   width: 0;
   border-left: 1px solid #3398db;
+}
+.gc-sidebar-item.dragged {
+  position: absolute;
+  z-index: 9999;
+  background: #2f3539;
+  box-shadow: 0 0 3px #eee;
+}
+.gc-sidebar-item.dragged a:hover {
+  color: rgba(255,255,255,0.65);
+}
+.gc-sidebar-item.sortable-placeholder {
+  position: relative;
 }
 .gc-sidebar-item > a {
   display: block;
