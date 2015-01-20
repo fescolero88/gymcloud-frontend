@@ -23,11 +23,13 @@ module.exports = class MainView extends Marionette.LayoutView
     'modals':    ".gc-modals"
 
   dragStart: =>
-    @ui.dndArea.appendTo(@ui.mainArea)
+    if @.content.currentView.isDroppable
+      @ui.dndArea.appendTo(@ui.mainArea)
 
   drop: (model, e) =>
-    offset = @ui.mainArea.offset()
-    dropped = (e.pageX >= offset.left and e.pageY >= offset.top)
-    if dropped
-      console.debug 'Assigned item #' + model.get 'key'
-    @ui.dndArea.appendTo('body')
+    if @.content.currentView.isDroppable
+      offset = @ui.mainArea.offset()
+      dropped = (e.pageX >= offset.left and e.pageY >= offset.top)
+      if dropped
+        App.vent.trigger 'drag:complete', model
+      @ui.dndArea.appendTo('body')

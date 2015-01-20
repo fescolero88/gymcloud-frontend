@@ -9,6 +9,10 @@ ExercisesView = require 'views/client/clientpage-exercises-view'
 WorkoutsView = require 'views/client/clientpage-workouts-view'
 ProgramsView = require 'views/client/clientpage-programs-view'
 
+ExercisesCollection = require 'models/trainer/exercises-collection'
+WorkoutsCollection = require 'models/trainer/workouts-collection'
+ProgramsCollection = require 'models/trainer/programs-collection'
+
 CalendarDayView = require 'views/client/clientpage-calendar-day-view'
 CalendarWeekView = require 'views/client/clientpage-calendar-week-view'
 CalendarMonthView = require 'views/client/clientpage-calendar-month-view'
@@ -32,7 +36,10 @@ module.exports = class ClientPageController extends Marionette.Controller
   clientPageExercises: (id) =>
     @beforeAction()
 
-    contentView = new ExercisesView()
+    exercisesCollection = new ExercisesCollection
+    exercisesCollection.url = "/api/mobile/me/client_exercises"
+    exercisesCollection.fetch()
+    contentView = new ExercisesView collection: exercisesCollection
     @userPageView.content.show contentView
 
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-e'
@@ -40,7 +47,10 @@ module.exports = class ClientPageController extends Marionette.Controller
   clientPageWorkouts: (id) =>
     @beforeAction()
 
-    contentView = new WorkoutsView()
+    workoutsCollection = new WorkoutsCollection
+    workoutsCollection.url = "/api/mobile/me/client_workouts"
+    workoutsCollection.fetch()
+    contentView = new WorkoutsView collection: workoutsCollection
     @userPageView.content.show contentView
 
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-w'
@@ -48,7 +58,10 @@ module.exports = class ClientPageController extends Marionette.Controller
   clientPagePrograms: (id) =>
     @beforeAction()
 
-    contentView = new ProgramsView()
+    programsCollection = new ProgramsCollection
+    programsCollection.url = "/api/mobile/me/client_programs"
+    programsCollection.fetch()
+    contentView = new ProgramsView collection: programsCollection
     @userPageView.content.show contentView
 
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-p'

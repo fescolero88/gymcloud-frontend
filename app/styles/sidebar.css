@@ -202,7 +202,7 @@
   border: 3px solid #2d3537;
   border-radius: 100px;
   margin: 25px auto 15px auto;
-  background: #2d3537 url('../images/avatar-placeholder.png') center center no-repeat;
+  background: #2d3537 url('../images/avatar-placeholder.png') 55% center no-repeat;
   background-size: 60%;
 }
 .gc-clientpage-sidebar-avatar img {

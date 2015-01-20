@@ -26,9 +26,9 @@ module.exports = class SideBarView extends Marionette.ItemView
       @initDragAndDrop()
 
   templateHelpers: =>
-    exercises: => @exercises
-    workouts: => @workouts
-    programs: => @programs
+    exercises: => window.App.exercises
+    workouts: => window.App.workouts
+    programs: => window.App.programs
 
   toggleMenu: (ev) ->
     if not $(ev.target).hasClass 'gc-sidebar-cat-name'
@@ -43,9 +43,10 @@ module.exports = class SideBarView extends Marionette.ItemView
       success: (data) =>
         for item in data
           switch item.title
-            when "Exercises" then @exercises = item.items
-            when "Workouts" then @workouts = item.items
-            when "Programs" then @programs = item.items
+            when "Exercises" then window.App.exercises = item.items
+            when "Workouts" then window.App.workouts = item.items
+            when "Programs" then window.App.programs = item.items
+        window.App.vent.trigger 'assignments:loaded'
         @render()
 
   initDragAndDrop: () =>
@@ -61,7 +62,9 @@ module.exports = class SideBarView extends Marionette.ItemView
         $item.css
           height: $item.height()
           width: $item.width()
-        $item.addClass("dragged").parents('.gc-sidebar-sub').css 'overflow', 'visible'
+        $item.addClass("dragged")
+          .data 'category', $item.closest('.gc-sidebar-cat').data 'category'
+          .parents('.gc-sidebar-sub').css 'overflow', 'visible'
         $("body").addClass("dragging")
         if not container.options.drop
           $item.clone()
@@ -74,7 +77,9 @@ module.exports = class SideBarView extends Marionette.ItemView
         $item.removeClass("dragged").removeAttr("style")
         @ui.subs.removeAttr("style")
         $("body").removeClass("dragging")
-        draggable = new DraggableMenuItemModel key: $item.find('[data-key]').data('key')
+        draggable = new DraggableMenuItemModel
+          key: $item.find('[data-key]').data('key')
+          category: $item.data 'category'
         App.vent.trigger 'drag:drop', draggable, e
 
     $('.gc-assign-catch').sortable

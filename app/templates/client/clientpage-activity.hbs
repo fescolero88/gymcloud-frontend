@@ -1,0 +1,12 @@
+<h3>Latest updates:</h3>
+<ul class="gc-clientpage-sidebar-updates-list">
+  {{#each items}}
+  <li class="row">
+    <p>
+      Has entered new
+      <a href="#">Workout</a>
+    </p>
+    <span>{{prettifyDate created_at}}</span>
+  </li>
+  {{/each}}
+</ul>

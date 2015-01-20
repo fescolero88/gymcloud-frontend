@@ -1,0 +1,22 @@
+<div class="gc-exercises-assign">
+  <div class="gc-exercises-assign-input-wrapper">
+    <input type="text" class="gc-exercises-assign-input form-control live-search" placeholder="Assign Exercises, Workouts, and Programs">
+  </div>
+  <ul class="gc-exercises-assign-list">
+    {{#each items}}
+    <li class="row">
+      <div class="col-xs-8">
+        <label class="gc-exercises-chb">
+          <input type="checkbox">
+        </label>
+        <a class="gc-exercises-link" href="/#clients/id/{{../client_id}}/{{../assign_name}}/{{id}}/">{{name}}</a>
+      </div>
+      <div class="col-xs-4 text-right">
+        <a href="#" class="btn btn-link gc-exercises-assign-btn">Schedule</a>
+        <a href="#" class="btn btn-link gc-exercises-assign-btn">Enter results</a>
+        <a href="#" class="gc-exercises-assign-btn-del"><span class="fa fa-trash"></span></a>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+</div>
