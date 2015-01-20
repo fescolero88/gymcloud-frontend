@@ -17,10 +17,10 @@ module.exports = class ViewHelper
         age = moment().diff(date, 'years')
 
     Handlebars.registerHelper 'getSex', (gender, options) ->
-      if gender
-        'Women'
-      else
-        'Man'
+      map =
+        false: 'Women'
+        true: 'Man'
+      map[gender]
 
     Handlebars.registerHelper "prettifyDate", (timestamp) ->
       moment(new Date(timestamp)).fromNow()

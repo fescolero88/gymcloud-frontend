@@ -35,7 +35,6 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
   submitClientForm: (ev)->
     #TODO validation
     ev.preventDefault()
-    @ui.inviteModal.modal('hide')
     formData = @ui.inviteForm.serializeObject()
 
     $.ajax
@@ -43,6 +42,16 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
       type: 'POST'
       data: JSON.stringify formData
       dataType: 'json'
+      success: =>
+        @ui.inviteModal.modal('hide')
+      error: (data)=>
+        errorMsg = data.responseJSON.error
+        if errorMsg?
+          $input = @ui.inviteForm.find("input[name=email]")
+          $inputGroup = $input.closest('.form-group')
+          $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
+          $inputGroup.find('.gc-error-message').text(errorMsg)
+
 
   showClientEditModal: (ev) ->
     ev.preventDefault()

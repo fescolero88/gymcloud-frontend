@@ -5,11 +5,12 @@ module.exports = class ClientGroupNavView extends Marionette.ItemView
   template: Templates.trainer.clients.client_group_nav
 
   events:
-    'click .gc-content-nav :not(.gc-content-nav-back) a': 'navLinkClick'
+    'click @ui.navLink': 'navLinkClick'
     'click .gc-content-nav-back a': 'navBack'
 
   ui:
     nav: ".gc-content-nav a"
+    navLink: '.gc-content-nav :not(.gc-content-nav-back) a'
 
   templateHelpers: =>
     client_id: @itemId
@@ -28,7 +29,7 @@ module.exports = class ClientGroupNavView extends Marionette.ItemView
     href = $(ev.currentTarget).attr 'href'
     Backbone.history.navigate(href, { trigger:false, replace: true })
 
-    @$el.find('.gc-content-nav a').parent().removeClass('active')
+    @ui.nav.parent().removeClass('active')
     @$el.find(ev.currentTarget).parent().addClass('active')
     navView = @$el.find(ev.currentTarget).data('nav-view')
     @trigger 'navView', navView
@@ -45,5 +46,5 @@ module.exports = class ClientGroupNavView extends Marionette.ItemView
     window.history.back()
 
   changeActive: (category) =>
-    @$el.find('.gc-content-nav a').parent().removeClass('active')
+    @ui.nav.parent().removeClass('active')
     @$el.find(".gc-content-nav a[data-nav-view = #{category}]").parent().addClass('active')

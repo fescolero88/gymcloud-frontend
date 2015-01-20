@@ -26,9 +26,9 @@ module.exports = class SideBarView extends Marionette.ItemView
       @initDragAndDrop()
 
   templateHelpers: =>
-    exercises: => window.App.exercises
-    workouts: => window.App.workouts
-    programs: => window.App.programs
+    exercises: => App.request 'data:exercises'
+    workouts: => App.request 'data:workouts'
+    programs: => App.request 'data:programs'
 
   toggleMenu: (ev) ->
     if not $(ev.target).hasClass 'gc-sidebar-cat-name'
@@ -43,9 +43,9 @@ module.exports = class SideBarView extends Marionette.ItemView
       success: (data) =>
         for item in data
           switch item.title
-            when "Exercises" then window.App.exercises = item.items
-            when "Workouts" then window.App.workouts = item.items
-            when "Programs" then window.App.programs = item.items
+            when "Exercises" then App.request 'data:exercises:reset', item.items
+            when "Workouts" then App.request 'data:workouts:reset', item.items
+            when "Programs" then App.request 'data:programs:reset', item.items
         window.App.vent.trigger 'assignments:loaded'
         @render()
 
@@ -78,7 +78,8 @@ module.exports = class SideBarView extends Marionette.ItemView
         @ui.subs.removeAttr("style")
         $("body").removeClass("dragging")
         draggable = new DraggableMenuItemModel
-          key: $item.find('[data-key]').data('key')
+          id: $item.find('[data-key]').data('key')
+          name: $item.find('[data-key]').text()
           category: $item.data 'category'
         App.vent.trigger 'drag:drop', draggable, e
 

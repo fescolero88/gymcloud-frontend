@@ -47,6 +47,28 @@ class App extends Marionette.Application
           Backbone.history.stop()
           Backbone.history.start()
 
+    @addInitializer ->
+      App.data = {}
+
+      @reqres.setHandler 'data:exercises', ->
+        App.data.exercises
+
+      @reqres.setHandler 'data:exercises:reset', (data)->
+        App.data.exercises = data
+
+      @reqres.setHandler 'data:workouts', ->
+        App.data.workouts
+
+      @reqres.setHandler 'data:workouts:reset', (data)->
+        App.data.workouts = data
+
+      @reqres.setHandler 'data:programs', ->
+        App.data.programs
+
+      @reqres.setHandler 'data:programs:reset', (data)->
+        App.data.programs = data
+
+
     @addInitializer (options) =>
       new ViewHelper().initialize(Handlebars)
       @addRegions

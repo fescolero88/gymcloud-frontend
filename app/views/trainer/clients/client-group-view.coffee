@@ -24,10 +24,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
     @isDroppable = true
     @itemId = data.itemId
     @viewType = data.viewType
-    if data.assign
-      @assign = data.assign
-    else
-      @assign = 'exercises'
+    @assign = data.assign || 'exercises'
     @calendarType = data.calendarType
 
     @headerView = new ClientGroupHeaderView model: data.itemModel, viewType: @viewType
@@ -37,6 +34,9 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
     @listenTo @navView, 'navView', @loadCenterView
 
     App.vent.on 'drag:complete', @assignDragged
+
+  onDestroy: =>
+    App.vent.off 'drag:complete', @assgnDragged
 
   onShow: ->
     @header.show @headerView
@@ -76,5 +76,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
     @leftside.show @centerView
 
   assignDragged: (item) =>
-    @loadCenterView item.get 'category'
+    @centerView.trigger 'assign', item
+    if @centerView.assignName != item.get 'category'
+      @loadCenterView item.get 'category'
     @navView.trigger 'changeActive', item.get 'category'

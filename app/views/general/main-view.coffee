@@ -27,7 +27,7 @@ module.exports = class MainView extends Marionette.LayoutView
       @ui.dndArea.appendTo(@ui.mainArea)
 
   drop: (model, e) =>
-    if @.content.currentView.isDroppable
+    if @content.currentView.isDroppable
       offset = @ui.mainArea.offset()
       dropped = (e.pageX >= offset.left and e.pageY >= offset.top)
       if dropped

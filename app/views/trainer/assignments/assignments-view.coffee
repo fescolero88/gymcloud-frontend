@@ -4,7 +4,7 @@ module.exports = class AssignmentsView extends Marionette.ItemView
   template: Templates.trainer.assignments.assignments
 
   collectionEvents:
-    "sync": "render"
+    "sync": "initSearchSelect"
 
   templateHelpers: =>
     client_id: @clientId
@@ -13,22 +13,25 @@ module.exports = class AssignmentsView extends Marionette.ItemView
   initialize: (data) =>
     @clientId = data.clientId
     @assignName = data.assignName
-    window.App.vent.on 'assignments:loaded', @render
+    window.App.vent.on 'assignments:loaded', @initSearchSelect
+    @on 'assign', (item) ->
+      @collection.add item
+      @render()
 
-  render: ->
-    super
-    search = (items, title)->
-      search_items = []
-      for item in items
-        if item.isFolder
-          search_items = search_items.concat(search(item.items, item.title))
-        else
-          item.folder = title
-          search_items.push item
-      search_items
+  searchItems: (items, title) ->
+    listItems = []
+    for item in items
+      if item.isFolder
+        listItems = listItems.concat(@searchItems(item.items, item.title))
+      else
+        item.folder = title
+        listItems.push item
+    listItems
 
+  initSearchSelect: =>
+    @render()
     if window.App[@assignName]?
-      options = search window.App[@assignName], @assignName
+      options = @searchItems window.App[@assignName], @assignName
       this_ = @
       @$el.find('.live-search').selectize
         #openOnFocus: false
@@ -40,7 +43,7 @@ module.exports = class AssignmentsView extends Marionette.ItemView
         onItemAdd: (value, $item) ->
           @clear()
           this_.collection.add {name: $item.text(), id: value}
-          this_.render()
+          this_.initSearchSelect()
         render:
           item: (item, escape) ->
               return '<div>' +
