@@ -1,0 +1,21 @@
+<header>
+  <h3>
+    Recent activity
+  </h3>
+</header>
+<ul class="gc-calendar-activity">
+  {{#each items}}
+  <li class="row">
+    <div class="col-xs-2 text-right">
+      <span class="fa fa-clock-o"></span>
+    </div>
+    <div class="col-xs-10">
+      <h6>{{prettifyDate created_at}}</h6>
+      <p>
+        Has entered new
+        <a href="#">Workout</a>
+      </p>
+    </div>
+  </li>
+  {{/each}}
+</ul>

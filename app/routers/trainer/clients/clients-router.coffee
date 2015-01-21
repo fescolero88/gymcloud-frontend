@@ -5,12 +5,11 @@ module.exports = class ClientsRouter extends Marionette.AppRouter
   appRoutes:
     '': 'clients'
     'clients(/)(/:view_type)': 'clients'
-    'clients/id/:id(/)': 'clientExercises'
-    'clients/id/:id/exercises(/)': 'clientExercises'
-    'clients/id/:id/exercises/:exid(/)': 'clientExercise'
-    'clients/id/:id/calendar(/)': 'clientCalendarDay'
-    'clients/id/:id/calendar/month/:month(/)': 'clientCalendarMonth'
-    'clients/id/:id/calendar/week/:week(/)': 'clientCalendarWeek'
-    'clients/id/:id/calendar/day/:day(/)': 'clientCalendarDay'
+    'clients/id/:id(/)': 'client'
+    'clients/id/:id/:assign(/)': 'client'
+    'clients/id/:id/:assign/:calendarType(/)': 'client'
     'groups/id/:id(/)': 'group'
+    'groups/id/:id/:assign(/)': 'group'
+    'groups/id/:id/:assign/:calendarType(/)': 'group'
+
     'properties(/)': 'properties'

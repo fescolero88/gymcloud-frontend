@@ -12,3 +12,15 @@ module.exports = class ViewHelper
       context = App.profileModel.attributes
       Handlebars.helpers.with.call(this, context, options)
 
+    Handlebars.registerHelper 'getAge', (date, options) ->
+      if date
+        age = moment().diff(date, 'years')
+
+    Handlebars.registerHelper 'getSex', (gender, options) ->
+      map =
+        false: 'Women'
+        true: 'Man'
+      map[gender]
+
+    Handlebars.registerHelper "prettifyDate", (timestamp) ->
+      moment(new Date(timestamp)).fromNow()

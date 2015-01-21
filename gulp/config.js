@@ -12,6 +12,7 @@ module.exports = {
     src : [
         './bower_components/bootstrap/dist/css/bootstrap.min.css',
         './bower_components/fontawesome/css/font-awesome.min.css',
+        './bower_components/selectize/dist/css/selectize.bootstrap3.css',
         src + '/styles/**/*.css'
     ],
     dest: dest + '/css'

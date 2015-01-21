@@ -188,6 +188,7 @@
   }
   .gc-usercard-params dd:last-child {
     padding-bottom: 0.1em;
+    min-height: 18px;
   }
   .gc-usercard-params dd {
     color: #fff;
@@ -197,6 +198,7 @@
     margin: 0 0 0 70px;
     padding: 0 0 1em 10px;
     border-left: 1px solid rgba(255, 255, 255, 0.5);
+    min-height: 31px;
   }
   .gc-usercard-params dl {
     margin-top: 25px;

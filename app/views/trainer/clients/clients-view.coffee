@@ -1,5 +1,13 @@
 Marionette = require 'backbone.marionette'
+
 MoveToGroupView = require 'views/trainer/clients/move-to-group-view'
+
+ClientFormModalView = require 'views/trainer/clients/client-form-modal-view'
+ClientModel = require 'models/trainer/client-model'
+
+GroupFormModalView = require 'views/trainer/clients/group-form-modal-view'
+GroupModel = require 'models/trainer/group-model'
+
 
 module.exports = class ClientsView extends Marionette.LayoutView
   template: Templates.trainer.clients.clients
@@ -8,24 +16,25 @@ module.exports = class ClientsView extends Marionette.LayoutView
     "click .gc-content-nav-checkall": "toggleCheck"
     "click .gc-clients-list-client-chb": "checkAll"
     "click #rm-event": "rmEvent"
-    "change .gc-edit-profile-modal-upload-input": "showThumbnail"
     "click .move-to-group-show": "showMovetogroupModal"
-    "submit @ui.groupForm": "submitGroupForm"
+    "click .show-client-form": "showClientAddModal"
+    "click .show-group-form": "showGroupAddModal"
     "submit .gc-move-to-group-form": "submitMovetogroupForm"
-    "submit @ui.clientForm": "submitClientForm"
 
   ui:
     mainCheckbox: ".gc-content-nav-checkall input[type='checkbox']"
     groupFormModal: "#gc-add-group-modal"
     groupForm: ".group-form"
     clientFormModal: "#gc-add-client-modal"
-    clientForm: ".client-form"
     checkedCounter: ".gc-clients-nav-right p"
+    moveToGroupModal: '#gc-move-to-group-modal'
 
   regions:
     'clients': '#clients-region'
     'groups': '#groups-region'
     'moveToGroup': '#gc-move-to-group-modal'
+    'clientForm': '#gc-add-client-modal'
+    'groupForm': '#gc-add-group-modal'
 
   templateHelpers: =>
     view_type: @viewType
@@ -38,6 +47,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
     checked = @ui.mainCheckbox.is(':checked')
     @$el.find('.gc-clients-list-wrapper').find('input[type=checkbox]').prop('checked', checked)
     @checkButtons()
+    @countSelected()
 
   checkButtons: ->
     if @$el.find('#clients-region').find('input[type=checkbox]:checked').length
@@ -62,7 +72,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
       @ui.mainCheckbox.prop 'checked', true
 
   countSelected: =>
-    count = @$el.find('.gc-clients-list-wrapper').find('input[type=checkbox]:checked').length
+    count = @$el.find('.gc-clients-list-ind').find('input[type=checkbox]:checked').length
     if count
       @ui.checkedCounter.removeClass('hidden').find('span').text(count)
     else
@@ -72,20 +82,39 @@ module.exports = class ClientsView extends Marionette.LayoutView
     ev.preventDefault()
     @clients.currentView?.trigger 'rm-client'
     @groups.currentView?.trigger 'rm-group'
+    @checkAll()
+
+  showClientAddModal: (ev) ->
+    ev.preventDefault()
+    clientModel = new ClientModel
+    clientFormModal = new ClientFormModalView model: clientModel
+
+    @listenTo clientFormModal, 'closeModal', =>
+      @ui.clientFormModal.modal('hide')
+    @listenTo clientFormModal, 'addToClientsCollection', (model)=>
+      @clients.currentView.collection.add model
+
+    @clientForm.show clientFormModal
+    @ui.clientFormModal.modal('show')
+
+  showGroupAddModal: (ev) ->
+    ev.preventDefault()
+    groupModel = new GroupModel
+    groupFormModal = new GroupFormModalView model: groupModel
+
+    @listenTo groupFormModal, 'closeModal', =>
+      @ui.groupFormModal.modal('hide')
+    @listenTo groupFormModal, 'addToGroupsCollection', (model)=>
+      @groups.currentView.collection.unshift model
+
+    @groupForm.show groupFormModal
+    @ui.groupFormModal.modal('show')
 
   showMovetogroupModal: (ev) ->
     ev.preventDefault()
     moveToGroupView = new MoveToGroupView collection: @groups.currentView.collection
     @moveToGroup.show moveToGroupView
-    @$el.find('#gc-move-to-group-modal').modal('show')
-
-  showThumbnail: (ev) ->
-    input = ev.target
-    if input.files && input.files[0]
-      reader = new FileReader()
-      reader.onload = (e)->
-        $(ev.target).parents('form').find('.gc-edit-profile-modal-avatar').attr('src', e.target.result)
-      reader.readAsDataURL(input.files[0])
+    @ui.moveToGroupModal.modal('show')
 
   submitMovetogroupForm: (ev) ->
     ev.preventDefault()
@@ -96,20 +125,14 @@ module.exports = class ClientsView extends Marionette.LayoutView
       clientsId.push $(check).data('id')
     for check in @$el.find('.gc-move-to-group-form').find('input[type=checkbox]:checked')
       groupsId.push $(check).data('id')
-    #TODO Submit when will be API
+    data =
+      client_ids: clientsId
+      client_group_ids: groupsId
 
-  submitGroupForm: (ev) =>
-    ev.preventDefault()
-    #TODO validation
-    name = $(ev.target).find('input[name=group_name]').val()
-    avatar = $(ev.target).find('input[type=file]')
-    @groups.currentView.trigger 'submit-group-form', {name, avatar}
-    @ui.groupFormModal.modal('hide')
+    @ui.moveToGroupModal.modal('hide')
 
-  submitClientForm: (ev) =>
-    ev.preventDefault()
-    #TODO validation
-    avatar = $(ev.target).find('input[type=file]')
-    formData = @ui.clientForm.serializeObject()
-    @clients.currentView.trigger 'submit-client-form', {formData, avatar}
-    @ui.clientFormModal.modal('hide')
+    $.ajax
+      url: "/api/mobile/client_groups/add"
+      type: 'POST'
+      data: JSON.stringify data
+      dataType: 'json'

@@ -141,6 +141,10 @@
   border: none;
   font-size: 14px;
 }
+.gc-modal .modal-footer .btn-primary:hover {
+  background: #3398db;
+  color: #fff;
+}
 .gc-modal .modal-footer .btn-link:hover {
   background: #fff;
   color: #3398db;
@@ -214,6 +218,9 @@
   background: green url('/static/images/icon-group.png') center top no-repeat;
   background-size: cover;
   width: 28px;
+}
+.gc-clients-list-avatar-wrapper.gc-clients-list-avatar-none {
+  background: none;
 }
 .gc-clients-list-avatar-wrapper img {
   width: 24px;

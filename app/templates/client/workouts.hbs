@@ -1,61 +1,15 @@
 <div class="gc-clientpage-exercises col-xs-12">
   <h2>Workouts</h2>
   <ul class="gc-exercises-assign-list">
+    {{#each items}}
     <li class="row">
       <div class="col-xs-6">
         <a class="gc-exercises-link" href="/#clients/id/1/exercises/1/">
           <span class="fa fa-folder-o"></span>
-          Barbell press
+          {{name}}
         </a>
       </div>
     </li>
-    <li class="row">
-      <div class="col-xs-6">
-        <a class="gc-exercises-link" href="/#clients/id/1/exercises/1/">
-          <span class="fa fa-folder-o"></span>
-          Barbell bench press
-        </a>
-      </div>
-    </li>
-    <li class="row">
-      <div class="col-xs-6">
-        <a class="gc-exercises-link" href="/#clients/id/1/exercises/1/">
-          <span class="fa fa-folder-o"></span>
-          Barbell press
-        </a>
-      </div>
-    </li>
-    <li class="row">
-      <div class="col-xs-6">
-        <a class="gc-exercises-link" href="/#clients/id/1/exercises/1/">
-          <span class="fa fa-folder-o"></span>
-          Barbell bench
-        </a>
-      </div>
-    </li>
-    <li class="row">
-      <div class="col-xs-6">
-        <a class="gc-exercises-link" href="/#clients/id/1/exercises/1/">
-          <span class="fa fa-folder-o"></span>
-          Bench press
-        </a>
-      </div>
-    </li>
-    <li class="row">
-      <div class="col-xs-6">
-        <a class="gc-exercises-link" href="/#clients/id/1/exercises/1/">
-          <span class="fa fa-folder-o"></span>
-          Barbell press
-        </a>
-      </div>
-    </li>
-    <li class="row">
-      <div class="col-xs-6">
-        <a class="gc-exercises-link" href="/#clients/id/1/exercises/1/">
-          <span class="fa fa-folder-o"></span>
-          Barbell press
-        </a>
-      </div>
-    </li>
+    {{/each}}
   </ul>
 </div>

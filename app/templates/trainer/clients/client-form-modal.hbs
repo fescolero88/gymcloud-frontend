@@ -1,0 +1,145 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span>Close</span></button>
+    <h4 class="modal-title">
+      <span><img src="../static/images/icon-individuals.png" alt=""></span>
+      {{#if id}}
+      Edit {{first_name}} {{last_name}} information
+      {{else}}
+      Create a new client
+      {{/if}}
+    </h4>
+  </div>
+  <form class="form" role="form">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-xs-3">
+            <div class="gc-edit-profile-modal-upload-wrapper">
+            <input type="file" class="gc-edit-profile-modal-upload-input">
+            <p href="#" class="gc-edit-profile-modal-upload-text">
+              <span class="fa fa-plus"></span>
+              Upload
+              <br>
+              photo
+            </p>
+            <img src="{{avatar_url}}" alt=" " class="gc-edit-profile-modal-avatar">
+          </div>
+        </div>
+        <div class="col-xs-9">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-2">
+                <label for="r1">Gender</label>
+              </div>
+              <div class="col-xs-2">
+                <label>
+                  <input type="radio" checked value="0" name="gender"> <span>Male</span>
+                </label>
+              </div>
+              <div class="col-xs-2">
+                <label>
+                  <input type="radio" value="1" name="gender"> <span>Female</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">
+              <div class="form-group">
+                <label for="weight">Weight</label>
+                <input name="weight" type="text" class="form-control" value="{{weight}}">
+                <span class="gc-valid-icon fa fa-check hide"></span>
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <div class="form-group">
+                <label for="height">Height</label>
+                <input name="height" type="text" class="form-control" value="{{height}}">
+                <span class="gc-valid-icon fa fa-check hide"></span>
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <div class="form-group">
+                <label for="bodyfat">Bodyfat</label>
+                <input name="bodyfat" type="text" class="form-control" value="{{bodyfat}}">
+                <span class="gc-valid-icon fa fa-check hide"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <label for="first_name">First name <span class="gc-req">*</span></label>
+                <label class="gc-error-message"></label>
+                <input name="first_name" type="text" class="form-control" value="{{first_name}}">
+                <span class="gc-valid-icon fa fa-check hide"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <label for="last_name">Last name <span class="gc-req">*</span></label>
+                <label class="gc-error-message"></label>
+                <input name="last_name" type="text" class="form-control" value="{{last_name}}">
+                <span class="gc-valid-icon fa fa-check hide"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <label for="email">Email <span class="gc-req">*</span></label>
+                <label class="gc-error-message"></label>
+                <input name="email" type="text" class="form-control" value="{{email}}">
+                <span class="gc-valid-icon fa fa-check hide"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-8">
+              <div class="form-group">
+                <label for="address">Location</label>
+                <label class="gc-error-message"></label>
+                <input name="address" type="text" class="form-control" value="{{address}}">
+                <span class="gc-valid-icon fa fa-check hide"></span>
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <div class="form-group">
+                <label for="zip">ZIP</label>
+                <label class="gc-error-message"></label>
+                <input name="zip" type="text" class="form-control" value="{{zip}}">
+                <span class="gc-valid-icon fa fa-check hide"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <label for="works_at">Employer</label>
+                <label class="gc-error-message"></label>
+                <input name="works_at" type="text" class="form-control" value="{{works_at}}">
+                <span class="gc-valid-icon fa fa-check hide"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">
+              <div class="form-group">
+                <label for="dob">Date of birth</label>
+                <input name="dob" type="date" class="form-control" value="{{dob}}">
+                <span class="gc-valid-icon fa fa-check hide"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="row">
+        <div class="col-xs-12 text-right"><button type="submit" class="btn btn-primary">Save</button></div>
+      </div>
+    </div>
+  </form>
+</div>

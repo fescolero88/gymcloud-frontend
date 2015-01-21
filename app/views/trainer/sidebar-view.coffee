@@ -26,9 +26,9 @@ module.exports = class SideBarView extends Marionette.ItemView
       @initDragAndDrop()
 
   templateHelpers: =>
-    exercises: => @exercises
-    workouts: => @workouts
-    programs: => @programs
+    exercises: => App.request 'data:exercises'
+    workouts: => App.request 'data:workouts'
+    programs: => App.request 'data:programs'
 
   toggleMenu: (ev) ->
     if not $(ev.target).hasClass 'gc-sidebar-cat-name'
@@ -43,9 +43,10 @@ module.exports = class SideBarView extends Marionette.ItemView
       success: (data) =>
         for item in data
           switch item.title
-            when "Exercises" then @exercises = item.items
-            when "Workouts" then @workouts = item.items
-            when "Programs" then @programs = item.items
+            when "Exercises" then App.request 'data:exercises:reset', item.items
+            when "Workouts" then App.request 'data:workouts:reset', item.items
+            when "Programs" then App.request 'data:programs:reset', item.items
+        window.App.vent.trigger 'assignments:loaded'
         @render()
 
   initDragAndDrop: () =>
@@ -61,7 +62,9 @@ module.exports = class SideBarView extends Marionette.ItemView
         $item.css
           height: $item.height()
           width: $item.width()
-        $item.addClass("dragged").parents('.gc-sidebar-sub').css 'overflow', 'visible'
+        $item.addClass("dragged")
+          .data 'category', $item.closest('.gc-sidebar-cat').data 'category'
+          .parents('.gc-sidebar-sub').css 'overflow', 'visible'
         $("body").addClass("dragging")
         if not container.options.drop
           $item.clone()
@@ -74,7 +77,10 @@ module.exports = class SideBarView extends Marionette.ItemView
         $item.removeClass("dragged").removeAttr("style")
         @ui.subs.removeAttr("style")
         $("body").removeClass("dragging")
-        draggable = new DraggableMenuItemModel key: $item.find('[data-key]').data('key')
+        draggable = new DraggableMenuItemModel
+          id: $item.find('[data-key]').data('key')
+          name: $item.find('[data-key]').text()
+          category: $item.data 'category'
         App.vent.trigger 'drag:drop', draggable, e
 
     $('.gc-assign-catch').sortable
