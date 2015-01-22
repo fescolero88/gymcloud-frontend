@@ -3,6 +3,7 @@
     Recent activity
   </h3>
 </header>
+{{#if items}}
 <ul class="gc-calendar-activity">
   {{#each items}}
   <li class="row">
@@ -19,3 +20,13 @@
   </li>
   {{/each}}
 </ul>
+{{else}}
+<div class="gc-content-right-exercises-empty">
+  <img src="/static/images/icon-plane-large.png" alt=" ">
+  <p>
+    Soon you will see
+    <br>
+    activity updates here
+  </p>
+</div>
+{{/if}}

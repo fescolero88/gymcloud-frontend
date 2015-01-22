@@ -2,6 +2,7 @@
   <div class="gc-exercises-assign-input-wrapper">
     <input type="text" class="gc-exercises-assign-input form-control live-search" placeholder="Assign Exercises, Workouts, and Programs">
   </div>
+  {{#if items}}
   <ul class="gc-exercises-assign-list">
     {{#each items}}
     <li class="row">
@@ -19,4 +20,13 @@
     </li>
     {{/each}}
   </ul>
+  {{else}}
+  <div class="gc-exercises-assign">
+    <div class="gc-exercises-assign-empty">
+      <img src="../static/images/icon-weight-large.png" alt=" ">
+      <p>No {{assign_name}} currently assigned to this client</p>
+      <a href="" class="btn btn-link gc-exercises-assign-add">Add first {{assign_name}}</a>
+    </div>
+  </div>
+  {{/if}}
 </div>
