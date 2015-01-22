@@ -8,6 +8,9 @@ module.exports = {
   serverport: 3000,
   server_root: 'static',
 
+  configFile: src + '/config.coffee',
+  configFileDest: src,
+
   styles: {
     src : [
         './bower_components/bootstrap/dist/css/bootstrap.min.css',

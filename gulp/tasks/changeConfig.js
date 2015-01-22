@@ -5,6 +5,7 @@ var gulp        = require('gulp');
 var replace     = require('gulp-replace');
 
 gulp.task('changeConfig', function() {
-  gulp.src(config.src + '/config.cofee')
+  return gulp.src(config.configFile)
     .pipe(replace('production = false', 'production = true'))
+    .pipe(gulp.dest(config.configFileDest));
 });

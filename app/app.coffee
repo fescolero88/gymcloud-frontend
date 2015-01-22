@@ -47,13 +47,15 @@ class App extends Marionette.Application
           Backbone.history.start()
 
     @addInitializer ->
-      @vent.on "App:check-auth", ->
-        if !window.localStorage.accessToken
-          window.location.replace '#login'
-
-    @addInitializer ->
       App.data = {}
       App.data.profileModel = new ProfileModel()
+
+      @reqres.setHandler 'auth:isAuthorized', ->
+        if window.localStorage.accessToken
+          true
+        else
+          window.location.replace '#login'
+          false
 
       @reqres.setHandler 'data:profile', ->
         App.data.profileModel
