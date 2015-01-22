@@ -142,6 +142,12 @@ class App extends Marionette.Application
           accountType = profileModel.get('account_type')
           @vent.trigger 'spinner:global:stop'
           @vent.trigger "module:main-#{accountType}:start"
+          if accountType is 'trainer'
+            if window.location.hash.split('/')[0] != '#tr'
+              window.location.replace('#tr')
+          else
+            if window.location.hash.split('/')[0] is '#tr'
+              window.location.replace('#')
       else
         @module('Auth').start()
         @vent.trigger "App:history:start"
