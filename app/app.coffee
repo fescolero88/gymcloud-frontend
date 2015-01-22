@@ -1,5 +1,5 @@
-config = require 'config'
 window.Templates = require 'templates/templates_build.js'
+config = require 'config'
 require 'moment'
 
 Spinner = require 'spinner'
@@ -30,6 +30,10 @@ class App extends Marionette.Application
     new FormValidatorHelper().initialize()
 
     @on 'start', ->
+      console.log 'history'
+      if Backbone.history
+        Backbone.history.start()
+
       @loadingCount = 0
       $(document).ajaxStart () =>
         @vent.trigger "spinner:global:start"  if ++@loadingCount is 1
@@ -37,14 +41,6 @@ class App extends Marionette.Application
       $(document).ajaxComplete () =>
         if @loadingCount > 0
           @vent.trigger "spinner:global:stop"  if --@loadingCount is 0
-
-    @addInitializer ->
-      @vent.on "App:modules:load", (order)=>
-        @module 'MainClient', MainClientModule
-        @module 'MainTrainer', MainTrainerModule
-        @vent.trigger "controller:main-#{order}:refresh"
-        if Backbone.history
-          Backbone.history.start()
 
     @addInitializer ->
       App.data = {}
@@ -113,15 +109,16 @@ class App extends Marionette.Application
 
 
     @addInitializer ->
+      console.log '-----'
+      @module 'MainTrainer', MainTrainerModule
+      @module 'MainClient', MainClientModule
       @module 'Auth', AuthModule
+      console.log '-----'
+
       if window.localStorage.accessToken
         @vent.trigger 'spinner:global:start'
         profileModel = @request 'data:profile'
         profileModel.fetch().then =>
-          if profileModel.get('account_type') is 'trainer'
-            @vent.trigger 'App:modules:load', 'trainer'
-          else
-            @vent.trigger 'App:modules:load', 'client'
           @vent.trigger 'spinner:global:stop'
       else
         @vent.trigger 'App:modules:load'
