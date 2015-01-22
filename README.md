@@ -14,6 +14,11 @@ $ npm install
 
 ### Development
 
+Copy sample config and change api url if it needed:
+```sh
+$ cp app/config_sample.coffee app/config.coffee
+```
+
 Run gulp watcher:
 ```sh
 $ gulp dev

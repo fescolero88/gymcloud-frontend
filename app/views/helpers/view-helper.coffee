@@ -9,7 +9,8 @@ module.exports = class ViewHelper
         options.fn @
 
     Handlebars.registerHelper 'withProfile', (options) ->
-      context = App.profileModel.attributes
+      profileModel = App.request('data:profile')
+      context = profileModel.attributes
       Handlebars.helpers.with.call(this, context, options)
 
     Handlebars.registerHelper 'getAge', (date, options) ->

@@ -40,6 +40,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
     view_type: @viewType
 
   initialize: (viewType)=>
+    viewType = 'clients' if typeof viewType is 'object'
     @viewType = viewType
     @checkButtons()
 

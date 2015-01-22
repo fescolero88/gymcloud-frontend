@@ -1,3 +1,4 @@
+config = require 'config'
 window.Templates = require 'templates/templates_build.js'
 require 'moment'
 
@@ -28,11 +29,7 @@ class App extends Marionette.Application
   initialize: ->
     new FormValidatorHelper().initialize()
 
-    @profileModel = new ProfileModel()
-
     @on 'start', ->
-      @vent.trigger 'app:start-history'
-
       @loadingCount = 0
       $(document).ajaxStart () =>
         @vent.trigger "spinner:global:start"  if ++@loadingCount is 1
@@ -41,14 +38,27 @@ class App extends Marionette.Application
         if @loadingCount > 0
           @vent.trigger "spinner:global:stop"  if --@loadingCount is 0
 
-    @addInitializer (options) =>
-      @vent.on 'app:start-history', ->
+    @addInitializer ->
+      @vent.on "App:modules:load", (order)=>
+        @module 'MainClient', MainClientModule
+        @module 'MainTrainer', MainTrainerModule
+        @vent.trigger "controller:main-#{order}:refresh"
         if Backbone.history
-          Backbone.history.stop()
           Backbone.history.start()
 
     @addInitializer ->
       App.data = {}
+      App.data.profileModel = new ProfileModel()
+
+      @reqres.setHandler 'auth:isAuthorized', ->
+        if window.localStorage.accessToken
+          true
+        else
+          window.location.replace '#login'
+          false
+
+      @reqres.setHandler 'data:profile', ->
+        App.data.profileModel
 
       @reqres.setHandler 'data:exercises', ->
         App.data.exercises
@@ -82,7 +92,9 @@ class App extends Marionette.Application
       @vent.on "spinner:global:stop", ->
         spinner.stop()
 
-      $(document).ajaxError ->
+      $(document).ajaxError (event, jqxhr, settings, thrownError)->
+        if jqxhr.status in [401]
+          window.location.replace '#/logout'
         spinner.stop()
 
     @addInitializer ->
@@ -91,7 +103,7 @@ class App extends Marionette.Application
         contentType: "application/json"
 
       $.ajaxPrefilter ( options, originalOptions, jqXHR ) =>
-        options.url = "//gymcloud-stagingapp.herokuapp.com" + options.url
+        options.url = config.api.url + options.url
         if window.localStorage.accessToken
           if options.url.indexOf('?') > 0
             options.url += "&access_token=#{window.localStorage.accessToken}"
@@ -103,31 +115,16 @@ class App extends Marionette.Application
     @addInitializer ->
       @module 'Auth', AuthModule
       if window.localStorage.accessToken
-        @profileModel.fetch().then =>
-          if @profileModel.get('account_type') is 'Client'
-              @module 'Main', MainClientModule
-            else
-              @module 'Main', MainTrainerModule
-            @vent.trigger 'app:start-history'
-      else
-        window.location.replace('#login')
-
-    @addInitializer ->
-      @vent.on 'modules:main:start', () =>
-        @profileModel.fetch().then =>
-          if @profileModel.get('account_type') is 'Client'
-            @module 'Main', MainClientModule
+        @vent.trigger 'spinner:global:start'
+        profileModel = @request 'data:profile'
+        profileModel.fetch().then =>
+          if profileModel.get('account_type') is 'trainer'
+            @vent.trigger 'App:modules:load', 'trainer'
           else
-            @module 'Main', MainTrainerModule
-          @module('Main').start()
-          @vent.trigger 'app:start-history'
-          window.location.replace('#clients')
-
-      @vent.on "modules:auth:start", () =>
-        @module('Main').stop()
-        delete @Main
-        window.location.replace('#login')
-
+            @vent.trigger 'App:modules:load', 'client'
+          @vent.trigger 'spinner:global:stop'
+      else
+        @vent.trigger 'App:modules:load'
 
 $ ->
   window.App = new App()

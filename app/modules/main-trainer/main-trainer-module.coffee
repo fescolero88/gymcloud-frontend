@@ -1,8 +1,8 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
-ClientsController = require 'controllers/trainer/clients/clients-controller'
-ClientsRouter = require 'routers/trainer/clients/clients-router'
+TrainerController = require 'controllers/trainer/trainer-controller'
+TrainerRouter = require 'routers/trainer/trainer-router'
 
 MessagesController = require 'controllers/general/messages/messages-controller'
 MessagesRouter = require 'routers/general/messages/messages-router'
@@ -14,22 +14,16 @@ ModalView = require 'views/general/modal-view'
 
 module.exports = class MainTrainerModule extends Marionette.Module
   initialize: =>
+    App.vent.on 'controller:main-trainer:refresh', =>
+      @refresh(true)
+
     @addInitializer (options) =>
-      @mainView = new MainView()
-      @sidebarView = new SideBarView()
-      @headerView = new HeaderView()
-      @modalView = new ModalView()
-
-      @app.appRegion.show @mainView
-
-      @mainView.header.show @headerView
-      @mainView.menu.show @sidebarView
-      @mainView.modals.show @modalView
+      @refresh(false)
 
     # Clients
     @addInitializer (options) ->
-      @clientsController = new ClientsController { mainView: @mainView }
-      @clientsRouter = new ClientsRouter { controller: @clientsController }
+      @trainerController = new TrainerController { mainView: @mainView }
+      @trainerRouter = new TrainerRouter { controller: @trainerController }
 
     # Messages
     @addInitializer (options) ->
@@ -38,3 +32,15 @@ module.exports = class MainTrainerModule extends Marionette.Module
 
     @on 'stop', ->
       @app.appRegion.reset()
+
+  refresh: (newView)->
+    @mainView = new MainView()
+    @sidebarView = new SideBarView()
+    @headerView = new HeaderView()
+
+
+    if newView
+      @app.appRegion.show @mainView
+      @mainView.header.show @headerView
+      @mainView.menu.show @sidebarView
+      @trainerController.newMainView @mainView

@@ -1,6 +1,9 @@
 Marionette = require 'backbone.marionette'
 
-module.exports = class ClientPageRouter extends Marionette.AppRouter
+module.exports = class ClientRouter extends Marionette.AppRouter
+  processAppRoutes: (routeName, routeArgs) ->
+    return unless App.request('auth:isAuthorized', 'client')
+    super
 
   appRoutes:
     '': 'clientPageExercises'

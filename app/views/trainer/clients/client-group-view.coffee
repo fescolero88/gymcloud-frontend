@@ -49,34 +49,37 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
     switch navView
       when "exercises"
         exercisesCollection = new ExercisesCollection
-        exercisesCollection.url = "/api/mobile/#{@viewType}/#{@itemId}/client_exercises"
+        exercisesCollection.url = "/api/mobile/#{@viewType}/#{@itemId}/exercises"
         exercisesCollection.fetch()
         @centerView = new AssignmentsView
           collection: exercisesCollection
           clientId: @itemId
+          viewType: @viewType
           assignName: navView
       when "workouts"
         workoutsCollection = new WorkoutsCollection
-        workoutsCollection.url = "/api/mobile/#{@viewType}/#{@itemId}/client_workouts"
+        workoutsCollection.url = "/api/mobile/#{@viewType}/#{@itemId}/workouts"
         workoutsCollection.fetch()
         @centerView = new AssignmentsView
           collection: workoutsCollection
           clientId: @itemId
+          viewType: @viewType
           assignName: navView
       when "programs"
         programsCollection = new ProgramsCollection
-        programsCollection.url = "/api/mobile/#{@viewType}/#{@itemId}/client_programs"
+        programsCollection.url = "/api/mobile/#{@viewType}/#{@itemId}/programs"
         programsCollection.fetch()
         @centerView = new AssignmentsView
           collection: programsCollection
           clientId: @itemId
+          viewType: @viewType
           assignName: navView
       when "calendar"
         @centerView = new CalendarView
     @leftside.show @centerView
 
   assignDragged: (item) =>
-    @centerView.trigger 'assign', item
     if @centerView.assignName != item.get 'category'
       @loadCenterView item.get 'category'
+    @centerView.trigger 'assign', item
     @navView.trigger 'changeActive', item.get 'category'
