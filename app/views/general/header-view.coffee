@@ -5,15 +5,6 @@ module.exports = class HeaderView extends Marionette.ItemView
 
   events:
     "blur #gc-topnav-search": "searchblur"
-  #  "click @ui.logoutBtn": "logout"
-
-  #ui:
-  #  logoutBtn: "#logout-btn"
-
-  #logout: (ev)=>
-  #  ev.preventDefault()
-  #  App.vent.trigger 'module:auth:login'
-  #  window.location.replace '#login'
 
   searchblur: (ev)->
     ev.preventDefault()

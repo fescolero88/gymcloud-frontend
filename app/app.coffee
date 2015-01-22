@@ -39,18 +39,15 @@ class App extends Marionette.Application
           @vent.trigger "spinner:global:stop"  if --@loadingCount is 0
 
     @addInitializer ->
-      @historyStarted = false
       @vent.on "App:history:start", =>
-        if Backbone.history and !@historyStarted
+        if Backbone.history and !Backbone.History.started
           Backbone.history.start()
-          @historyStarted = true
 
     @addInitializer ->
       App.data = {}
       App.data.profileModel = new ProfileModel()
 
-      @reqres.setHandler 'auth:isAuthorized', (permission)->
-        accountType = App.data.profileModel.get('account_type')
+      @reqres.setHandler 'auth:isAuthorized', ->
         if window.localStorage.accessToken
           true
         else
@@ -95,7 +92,6 @@ class App extends Marionette.Application
       $(document).ajaxError (event, jqxhr, settings, thrownError)->
         if jqxhr.status in [401]
           window.location.replace '#/logout'
-        spinner.stop()
         spinner.stop()
 
     @addInitializer ->
