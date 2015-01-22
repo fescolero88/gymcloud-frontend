@@ -34,7 +34,8 @@ module.exports = class ClientPageSidebarView extends Marionette.LayoutView
 
   showClientEditModal: (ev) ->
     ev.preventDefault()
-    clientFormModal = new ClientFormModalView model: window.App.profileModel
+    profileModel = App.request 'data:profile'
+    clientFormModal = new ClientFormModalView model: profileModel
 
     @listenTo clientFormModal, 'closeModal', =>
       @ui.clientFormModal.modal('hide')

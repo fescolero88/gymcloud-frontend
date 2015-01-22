@@ -15,17 +15,19 @@ ClientGroupView = require 'views/trainer/clients/client-group-view'
 
 PropertiesView = require 'views/trainer/properties/properties-view'
 
-module.exports = class ClientsController extends Marionette.Controller
+module.exports = class TrainerController extends Marionette.Controller
 
   initialize: (options) =>
     @mainView = options.mainView
-    @clientPageView = null
 
-  clients: (view_type) =>
-    clientsPageView = new ClientsView view_type
+  newMainView: (view)->
+    @mainView = view
+
+  clients: (viewType) =>
+    clientsPageView = new ClientsView viewType
     @mainView.content.show clientsPageView
 
-    if view_type != 'groups'
+    if viewType != 'groups'
       clientCollection = new ClientCollection
       clientCollection.fetch()
       clientsView = new ClientListView collection: clientCollection
@@ -35,7 +37,7 @@ module.exports = class ClientsController extends Marionette.Controller
     groupCollection.fetch()
     groupsView = new GroupListView collection: groupCollection
     clientsPageView.groups.show groupsView
-    if view_type is 'individuals'
+    if viewType is 'individuals'
       groupsView.$el.hide()
 
   clientOrGroup: (type, id, assign, calendarType) ->
