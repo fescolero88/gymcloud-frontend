@@ -6,10 +6,6 @@ module.exports = class HeaderView extends Marionette.ItemView
   events:
     "blur #gc-topnav-search": "searchblur"
 
-  logout: (ev)=>
-    ev.preventDefault()
-    window.localStorage.removeItem 'accessToken'
-
   searchblur: (ev)->
     ev.preventDefault()
     $sr = $(ev.currentTarget)

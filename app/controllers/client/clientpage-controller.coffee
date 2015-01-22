@@ -25,9 +25,6 @@ module.exports = class ClientPageController extends Marionette.Controller
     @mainView = options.mainView
     @userPageView = null
 
-  newMainView: (view)->
-    @mainView = view
-
   beforeAction: () =>
     if not @userPageView or !@userPageView.content
       @userPageView = new ClientPageView()

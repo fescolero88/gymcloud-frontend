@@ -12,6 +12,8 @@ SideBarView = require 'views/client/clientpage-sidebar-view'
 HeaderView = require 'views/general/header-view'
 
 module.exports = class MainClientModule extends Marionette.Module
+  startWithParent: false
+
   initialize: =>
     App.vent.on 'controller:main-client:refresh', =>
       @refresh true
@@ -27,14 +29,14 @@ module.exports = class MainClientModule extends Marionette.Module
     @on 'stop', () ->
       @app.appRegion.reset()
 
-  refresh: (newView)->
+  refresh: (needRefresh)->
     @mainView = new MainView()
     @headerView = new HeaderView()
     @sidebarView = new SideBarView()
 
-    if newView
-      @app.appRegion.show @mainView
-      @mainView.header.show @headerView
-      @mainView.menu.show @sidebarView
+    @app.appRegion.show @mainView
+    @mainView.header.show @headerView
+    @mainView.menu.show @sidebarView
 
-      @clientController.newMainView @mainView
+    if needRefresh
+      @clientController.mainView = @mainView

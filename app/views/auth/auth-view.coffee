@@ -31,9 +31,9 @@ module.exports = class AuthView extends Marionette.ItemView
   getProfile: ->
     profileModel = App.request 'data:profile'
     profileModel.fetch().then =>
-      if profileModel.get('account_type') is 'trainer'
-        App.vent.trigger 'controller:main-trainer:refresh'
+      accountType = profileModel.get('account_type')
+      App.vent.trigger("module:main-#{accountType}:start")
+      if accountType is 'trainer'
         window.location.replace '#/tr'
       else
-        App.vent.trigger 'controller:main-client:refresh'
         window.location.replace '#'

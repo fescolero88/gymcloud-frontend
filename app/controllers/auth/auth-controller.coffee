@@ -9,12 +9,14 @@ module.exports = class AuthController extends Marionette.Controller
     @region = options.region
 
   login: ->
+    view = new AuthView
     if window.localStorage.accessToken
       window.location.replace '#'
     else
-      view = new AuthView
       @region.show(view)
 
   logout: ->
+    #App.vent.trigger 'module:auth:login'
     window.localStorage.removeItem 'accessToken'
     window.location.replace '#login'
+

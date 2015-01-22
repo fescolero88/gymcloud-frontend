@@ -1,5 +1,5 @@
-config = require 'config'
 window.Templates = require 'templates/templates_build.js'
+config = require 'config'
 require 'moment'
 
 Spinner = require 'spinner'
@@ -39,11 +39,8 @@ class App extends Marionette.Application
           @vent.trigger "spinner:global:stop"  if --@loadingCount is 0
 
     @addInitializer ->
-      @vent.on "App:modules:load", (order)=>
-        @module 'MainClient', MainClientModule
-        @module 'MainTrainer', MainTrainerModule
-        @vent.trigger "controller:main-#{order}:refresh"
-        if Backbone.history
+      @vent.on "App:history:start", =>
+        if Backbone.history and !Backbone.History.started
           Backbone.history.start()
 
     @addInitializer ->
@@ -111,20 +108,45 @@ class App extends Marionette.Application
             options.url += "?access_token=#{window.localStorage.accessToken}"
         options
 
+    @addInitializer ->
+      @vent.on "module:main-trainer:start", =>
+        mainTrainerModule = @module('MainTrainer')
+        if mainTrainerModule._isInitialized?
+          @vent.trigger 'controller:main-trainer:refresh'
+        else
+          mainTrainerModule.start()
+          @vent.trigger "App:history:start"
+
+      @vent.on "module:main-client:start", =>
+        mainClientModule = @module('MainClient')
+        if mainClientModule._isInitialized?
+          @vent.trigger 'controller:main-client:refresh'
+        else
+          mainClientModule.start()
+          @vent.trigger "App:history:start"
+
 
     @addInitializer ->
       @module 'Auth', AuthModule
+      @module 'MainTrainer', MainTrainerModule
+      @module 'MainClient', MainClientModule
+
       if window.localStorage.accessToken
         @vent.trigger 'spinner:global:start'
         profileModel = @request 'data:profile'
         profileModel.fetch().then =>
-          if profileModel.get('account_type') is 'trainer'
-            @vent.trigger 'App:modules:load', 'trainer'
-          else
-            @vent.trigger 'App:modules:load', 'client'
+          accountType = profileModel.get('account_type')
           @vent.trigger 'spinner:global:stop'
+          @vent.trigger "module:main-#{accountType}:start"
+          if accountType is 'trainer'
+            if window.location.hash.split('/')[0] != '#tr'
+              window.location.replace('#tr')
+          else
+            if window.location.hash.split('/')[0] is '#tr'
+              window.location.replace('#')
       else
-        @vent.trigger 'App:modules:load'
+        @module('Auth').start()
+        @vent.trigger "App:history:start"
 
 $ ->
   window.App = new App()

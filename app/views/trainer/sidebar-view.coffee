@@ -22,6 +22,7 @@ module.exports = class SideBarView extends Marionette.ItemView
     @clients = []
     @groups = []
 
+  onShow: ->
     @getData().then =>
       @initDragAndDrop()
 
