@@ -34,6 +34,9 @@
 .gc-properties-list > li.dragged .row {
   border: none;
 }
+.gc-properties-list > li .draggable-handle {
+  cursor: pointer;
+}
 .gc-properties-list .row {
   border-bottom: 1px solid #ededed;
 }

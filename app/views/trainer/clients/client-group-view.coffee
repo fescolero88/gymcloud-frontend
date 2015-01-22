@@ -36,7 +36,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
     App.vent.on 'drag:complete', @assignDragged
 
   onDestroy: =>
-    App.vent.off 'drag:complete', @assgnDragged
+    App.vent.off 'drag:complete', @assignDragged
 
   onShow: ->
     @header.show @headerView
