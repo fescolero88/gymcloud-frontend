@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 
 module.exports = class TrainerRouter extends Marionette.AppRouter
   processAppRoutes: (routeName, routeArgs) ->
-    App.vent.trigger 'App:check-auth', 'trainer'
+    App.vent.trigger 'App:check-auth'
     super
 
   appRoutes:

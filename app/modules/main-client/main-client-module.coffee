@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 ClientController = require 'controllers/client/clientpage-controller'
-ClientPageRouter = require 'routers/client/clientpage-router'
+ClientRouter = require 'routers/client/client-router'
 
 MessagesController = require 'controllers/general/messages/messages-controller'
 MessagesRouter = require 'routers/general/messages/messages-router'
@@ -22,7 +22,7 @@ module.exports = class MainClientModule extends Marionette.Module
     # Client's page
     @addInitializer (options) ->
       @clientController = new ClientController { mainView: @mainView }
-      @clientpageRouter = new ClientPageRouter { controller: @clientController }
+      @clientRouter = new ClientRouter { controller: @clientController }
 
     @on 'stop', () ->
       @app.appRegion.reset()

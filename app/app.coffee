@@ -1,3 +1,4 @@
+config = require 'config'
 window.Templates = require 'templates/templates_build.js'
 require 'moment'
 
@@ -46,12 +47,9 @@ class App extends Marionette.Application
           Backbone.history.start()
 
     @addInitializer ->
-      @vent.on "App:check-auth", (permission)=>
+      @vent.on "App:check-auth", ->
         if !window.localStorage.accessToken
           window.location.replace '#login'
-        else
-          profileModel = @request 'data:profile'
-          accountType = profileModel.get 'account_type'
 
     @addInitializer ->
       App.data = {}
@@ -103,7 +101,7 @@ class App extends Marionette.Application
         contentType: "application/json"
 
       $.ajaxPrefilter ( options, originalOptions, jqXHR ) =>
-        options.url = "//gymcloud-stagingapp.herokuapp.com" + options.url
+        options.url = config.api.url + options.url
         if window.localStorage.accessToken
           if options.url.indexOf('?') > 0
             options.url += "&access_token=#{window.localStorage.accessToken}"
