@@ -30,10 +30,6 @@ class App extends Marionette.Application
     new FormValidatorHelper().initialize()
 
     @on 'start', ->
-      console.log 'history'
-      if Backbone.history
-        Backbone.history.start()
-
       @loadingCount = 0
       $(document).ajaxStart () =>
         @vent.trigger "spinner:global:start"  if ++@loadingCount is 1
@@ -43,10 +39,18 @@ class App extends Marionette.Application
           @vent.trigger "spinner:global:stop"  if --@loadingCount is 0
 
     @addInitializer ->
+      @historyStarted = false
+      @vent.on "App:history:start", =>
+        if Backbone.history and !@historyStarted
+          Backbone.history.start()
+          @historyStarted = true
+
+    @addInitializer ->
       App.data = {}
       App.data.profileModel = new ProfileModel()
 
-      @reqres.setHandler 'auth:isAuthorized', ->
+      @reqres.setHandler 'auth:isAuthorized', (permission)->
+        accountType = App.data.profileModel.get('account_type')
         if window.localStorage.accessToken
           true
         else
@@ -92,6 +96,7 @@ class App extends Marionette.Application
         if jqxhr.status in [401]
           window.location.replace '#/logout'
         spinner.stop()
+        spinner.stop()
 
     @addInitializer ->
       $.ajaxSetup
@@ -107,21 +112,39 @@ class App extends Marionette.Application
             options.url += "?access_token=#{window.localStorage.accessToken}"
         options
 
+    @addInitializer ->
+      @vent.on "module:main-trainer:start", =>
+        mainTrainerModule = @module('MainTrainer')
+        if mainTrainerModule._isInitialized?
+          @vent.trigger 'controller:main-trainer:refresh'
+        else
+          mainTrainerModule.start()
+          @vent.trigger "App:history:start"
+
+      @vent.on "module:main-client:start", =>
+        mainClientModule = @module('MainClient')
+        if mainClientModule._isInitialized?
+          @vent.trigger 'controller:main-client:refresh'
+        else
+          mainClientModule.start()
+          @vent.trigger "App:history:start"
+
 
     @addInitializer ->
-      console.log '-----'
+      @module 'Auth', AuthModule
       @module 'MainTrainer', MainTrainerModule
       @module 'MainClient', MainClientModule
-      @module 'Auth', AuthModule
-      console.log '-----'
 
       if window.localStorage.accessToken
         @vent.trigger 'spinner:global:start'
         profileModel = @request 'data:profile'
         profileModel.fetch().then =>
+          accountType = profileModel.get('account_type')
           @vent.trigger 'spinner:global:stop'
+          @vent.trigger "module:main-#{accountType}:start"
       else
-        @vent.trigger 'App:modules:load'
+        @module('Auth').start()
+        @vent.trigger "App:history:start"
 
 $ ->
   window.App = new App()

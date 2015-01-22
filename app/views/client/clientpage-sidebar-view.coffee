@@ -22,14 +22,13 @@ module.exports = class ClientPageSidebarView extends Marionette.LayoutView
   ui:
     clientFormModal: "#gc-edit-client-modal"
 
-  initialize: =>
+  onShow: =>
     clientRecentActivity = new ClientActivityCollection
     clientRecentActivity.url = "/api/mobile/notifications"
     clientRecentActivity.fetch()
 
     @activityView = new ClientPageActivityView collection: clientRecentActivity
 
-  onShow: =>
     @activity.show @activityView
 
   showClientEditModal: (ev) ->

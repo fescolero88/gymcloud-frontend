@@ -13,6 +13,8 @@ HeaderView = require 'views/general/header-view'
 ModalView = require 'views/general/modal-view'
 
 module.exports = class MainTrainerModule extends Marionette.Module
+  startWithParent: false
+
   initialize: =>
     App.vent.on 'controller:main-trainer:refresh', =>
       @refresh true
@@ -32,8 +34,7 @@ module.exports = class MainTrainerModule extends Marionette.Module
     @on 'stop', ->
       @app.appRegion.reset()
 
-  refresh: (nedRefresh) ->
-    console.log 'refresh'
+  refresh: (needRefresh) ->
     @mainView = new MainView()
     @sidebarView = new SideBarView()
     @headerView = new HeaderView()
@@ -42,6 +43,5 @@ module.exports = class MainTrainerModule extends Marionette.Module
     @mainView.header.show @headerView
     @mainView.menu.show @sidebarView
 
-    if nedRefresh
-      console.log 'new main'
+    if needRefresh
       @trainerController.mainView = @mainView

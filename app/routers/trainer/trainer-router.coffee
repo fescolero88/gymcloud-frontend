@@ -2,8 +2,7 @@ Marionette = require 'backbone.marionette'
 
 module.exports = class TrainerRouter extends Marionette.AppRouter
   processAppRoutes: (routeName, routeArgs) ->
-    console.log App.request('auth:isAuthorized', 'trainer')
-    return unless App.request('auth:isAuthorized', 'trainer')
+    return unless App.request('auth:isAuthorized')
     super
 
   appRoutes:
