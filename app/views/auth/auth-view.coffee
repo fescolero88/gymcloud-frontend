@@ -12,12 +12,27 @@ module.exports = class AuthView extends Marionette.ItemView
 
   login: (event) ->
     event.preventDefault()
-    App.vent.trigger('spinner:global:start')
-    username = @ui.inputEmail.val()
-    password = @ui.inputPassword.val()
-    authorized = @onAuthorized
-    @trigger 'authenticate', { username, password, authorized }
+    data =
+      username: @ui.inputEmail.val()
+      password: @ui.inputPassword.val()
+      grant_type: 'password'
+      client_id: '3f4e4ee19f38ca1839a29e47c21c9cd541faeaf42760d81ff415b0bb84037306'
 
-  onAuthorized: ->
-    App.vent.trigger "spinner:global:stop"
-    App.vent.trigger "modules:main:start"
+    $.ajax
+      url: '/oauth/token'
+      type: 'POST'
+      dataType: 'json'
+      data: JSON.stringify data
+      success: (data) =>
+        window.localStorage.setItem 'accessToken', data.access_token
+        @getProfile()
+
+  getProfile: ->
+    profileModel = App.request 'data:profile'
+    profileModel.fetch().then =>
+      if profileModel.get('account_type') is 'trainer'
+        App.vent.trigger 'controller:main-trainer:refresh'
+        window.location.replace '#/tr'
+      else
+        App.vent.trigger 'controller:main-client:refresh'
+        window.location.replace '#'

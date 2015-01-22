@@ -6,6 +6,12 @@ module.exports = class AssignmentsView extends Marionette.ItemView
   collectionEvents:
     "sync": "initSearchSelect"
 
+  events:
+    "click @ui.rmAssign": "rmAssign"
+
+  ui:
+    rmAssign: ".gc-exercises-assign-btn-del"
+
   templateHelpers: =>
     client_id: @clientId
     assign_name: @assignName
@@ -13,10 +19,10 @@ module.exports = class AssignmentsView extends Marionette.ItemView
   initialize: (data) =>
     @clientId = data.clientId
     @assignName = data.assignName
+    @viewType = data.viewType
     window.App.vent.on 'assignments:loaded', @initSearchSelect
     @on 'assign', (item) ->
-      @collection.add item
-      @render()
+      @assignItem item
 
   searchItems: (items, title) ->
     listItems = []
@@ -28,10 +34,31 @@ module.exports = class AssignmentsView extends Marionette.ItemView
         listItems.push item
     listItems
 
+  rmAssign: (ev)=>
+    ev.preventDefault()
+    assignId = $(ev.currentTarget).data 'id'
+    model = @collection.get assignId
+    model.destroy().then =>
+      @render()
+
+  assignItem: (item)=>
+    data =
+      id: @clientId
+      item_id: item.id
+    $.ajax
+      url: "/api/mobile/#{@viewType}/#{@clientId}/#{@assignName}"
+      type: 'POST'
+      dataType: 'json'
+      data: JSON.stringify data
+      success: (data) =>
+        @collection.add data
+        @initSearchSelect()
+
   initSearchSelect: =>
     @render()
-    if window.App[@assignName]?
-      options = @searchItems window.App[@assignName], @assignName
+    assignments = App.request "data:#{@assignName}"
+    if assignments?
+      options = @searchItems assignments, @assignName
       this_ = @
       @$el.find('.live-search').selectize
         #openOnFocus: false
@@ -42,8 +69,7 @@ module.exports = class AssignmentsView extends Marionette.ItemView
         options: options
         onItemAdd: (value, $item) ->
           @clear()
-          this_.collection.add {name: $item.text(), id: value}
-          this_.initSearchSelect()
+          this_.assignItem {name: $item.text(), id: value}
         render:
           item: (item, escape) ->
               return '<div>' +

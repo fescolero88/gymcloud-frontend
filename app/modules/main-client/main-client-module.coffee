@@ -1,7 +1,7 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
-ClientPageController = require 'controllers/client/clientpage-controller'
+ClientController = require 'controllers/client/clientpage-controller'
 ClientPageRouter = require 'routers/client/clientpage-router'
 
 MessagesController = require 'controllers/general/messages/messages-controller'
@@ -13,26 +13,28 @@ HeaderView = require 'views/general/header-view'
 
 module.exports = class MainClientModule extends Marionette.Module
   initialize: =>
+    App.vent.on 'controller:main-client:refresh', =>
+      @refresh true
+
     @addInitializer (options) ->
-      @mainView = new MainView()
-      @headerView = new HeaderView()
-      @sidebarView = new SideBarView()
-
-      @app.appRegion.show @mainView
-
-      @mainView.header.show @headerView
-      @mainView.menu.show @sidebarView
+      @refresh false
 
     # Client's page
     @addInitializer (options) ->
-      @clientpageController = new ClientPageController { mainView: @mainView }
-      @clientpageRouter = new ClientPageRouter { controller: @clientpageController }
-
-    # Messages
-    @addInitializer (options) ->
-      @messagesController = new MessagesController { mainView: @mainView }
-      @messagesRouter = new MessagesRouter { controller: @messagesController }
-
+      @clientController = new ClientController { mainView: @mainView }
+      @clientpageRouter = new ClientPageRouter { controller: @clientController }
 
     @on 'stop', () ->
       @app.appRegion.reset()
+
+  refresh: (newView)->
+    @mainView = new MainView()
+    @headerView = new HeaderView()
+    @sidebarView = new SideBarView()
+
+    if newView
+      @app.appRegion.show @mainView
+      @mainView.header.show @headerView
+      @mainView.menu.show @sidebarView
+
+      @clientController.newMainView @mainView
