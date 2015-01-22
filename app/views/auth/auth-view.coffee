@@ -1,3 +1,4 @@
+config = require 'config'
 Marionette = require 'backbone.marionette'
 
 module.exports = class AuthView extends Marionette.ItemView
@@ -16,7 +17,7 @@ module.exports = class AuthView extends Marionette.ItemView
       username: @ui.inputEmail.val()
       password: @ui.inputPassword.val()
       grant_type: 'password'
-      client_id: '3f4e4ee19f38ca1839a29e47c21c9cd541faeaf42760d81ff415b0bb84037306'
+      client_id: config.oauthClientId
 
     $.ajax
       url: '/oauth/token'
