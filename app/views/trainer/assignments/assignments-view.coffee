@@ -39,7 +39,7 @@ module.exports = class AssignmentsView extends Marionette.ItemView
     assignId = $(ev.currentTarget).data 'id'
     model = @collection.get assignId
     model.destroy().then =>
-      @render()
+      @initSearchSelect()
 
   assignItem: (item)=>
     data =
