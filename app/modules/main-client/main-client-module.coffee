@@ -12,31 +12,22 @@ SideBarView = require 'views/client/clientpage-sidebar-view'
 HeaderView = require 'views/general/header-view'
 
 module.exports = class MainClientModule extends Marionette.Module
-  startWithParent: false
-
   initialize: =>
-    App.vent.on 'controller:main-client:refresh', =>
-      @refresh true
-
-    @addInitializer (options) ->
-      @refresh false
-
-    # Client's page
-    @addInitializer (options) ->
-      @clientController = new ClientController { mainView: @mainView }
+    @on 'start', ->
+      @clientController = new ClientController
       @clientRouter = new ClientRouter { controller: @clientController }
 
-    @on 'stop', () ->
-      @app.appRegion.reset()
+    App.vent.on 'module:main-client:beforeAction', =>
+      @refresh()
 
-  refresh: (needRefresh)->
-    @mainView = new MainView()
-    @headerView = new HeaderView()
-    @sidebarView = new SideBarView()
-
-    @app.appRegion.show @mainView
-    @mainView.header.show @headerView
-    @mainView.menu.show @sidebarView
-
-    if needRefresh
+  refresh: ->
+    if !@mainView? or @mainView.isDestroyed
+      @mainView = new MainView()
+      @app.appRegion.show @mainView
       @clientController.mainView = @mainView
+    if !@sidebarView? or @sidebarView.isDestroyed
+      @sidebarView = new SideBarView()
+      @mainView.menu.show @sidebarView
+    if !@headerView? or @headerView.isDestroyed
+      @headerView = new HeaderView()
+      @mainView.header.show @headerView

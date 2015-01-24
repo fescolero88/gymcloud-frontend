@@ -34,7 +34,7 @@
   "dependencies": {
     "backbone": "^1.1.2",
     "backbone-validation": "^0.9.1",
-    "backbone.marionette": "^2.3.0",
+    "backbone.marionette": "^2.3.1",
     "express": "~4.10.6",
     "gulp-replace": "^0.5.2",
     "jquery": "^2.1.3",

@@ -18,6 +18,8 @@ ViewHelper = require 'views/helpers/view-helper'
 FormValidatorHelper = require 'views/helpers/form-validator-helper'
 JqueryHelper = require 'views/helpers/jquery-helper'
 
+BaseView = require 'views/general/base-view'
+
 AuthModule = require 'modules/auth/auth-module'
 ProfileModel = require 'models/auth/profile-model'
 
@@ -27,9 +29,23 @@ MainClientModule = require 'modules/main-client/main-client-module'
 
 class App extends Marionette.Application
   initialize: ->
-    new FormValidatorHelper().initialize()
-
     @on 'start', ->
+      # --- Helpers -----
+      new JqueryHelper().initialize()
+      new ViewHelper().initialize(Handlebars)
+      new FormValidatorHelper().initialize()
+      # --- Helpers -----
+
+      # --- Globar spinner -----
+      spinner = new Spinner
+      @vent.on "spinner:global:start", ->
+        spinner.spin(document.getElementById('center-spin'))
+
+      @vent.on "spinner:global:stop", ->
+        spinner.stop()
+      # --- Globar spinner -----
+
+      # --- Ajax handlers -----
       @loadingCount = 0
       $(document).ajaxStart () =>
         @vent.trigger "spinner:global:start"  if ++@loadingCount is 1
@@ -38,18 +54,43 @@ class App extends Marionette.Application
         if @loadingCount > 0
           @vent.trigger "spinner:global:stop"  if --@loadingCount is 0
 
-    @addInitializer ->
-      @vent.on "App:history:start", =>
-        if Backbone.history and !Backbone.History.started
-          Backbone.history.start()
+      $(document).ajaxError (event, jqxhr, settings, thrownError)->
+        if jqxhr.status in [401]
+          window.location.replace '#/logout'
+        spinner.stop()
 
-    @addInitializer ->
+      $.ajaxSetup
+        headers: {'X-Requested-With': 'XMLHttpRequest'}
+        contentType: "application/json"
+
+      $.ajaxPrefilter ( options, originalOptions, jqXHR ) =>
+        options.url = config.api.url + options.url
+        if window.localStorage.accessToken
+          if options.url.indexOf('?') > 0
+            options.url += "&access_token=#{window.localStorage.accessToken}"
+          else
+            options.url += "?access_token=#{window.localStorage.accessToken}"
+        options
+      # --- Ajax handlers -----
+
+      # --- Data handlers -----
       App.data = {}
       App.data.profileModel = new ProfileModel()
 
-      @reqres.setHandler 'auth:isAuthorized', ->
+      @reqres.setHandler 'auth:isAuthorized', (permission)=>
         if window.localStorage.accessToken
-          true
+          if permission?
+            accountType = App.data.profileModel.get('account_type')
+            if accountType?
+              if permission != accountType
+                if accountType is 'trainer'
+                  window.location.replace '#tr'
+                else
+                  window.location.replace '#'
+            else
+              @checkPermission =  permission
+          else
+            true
         else
           window.location.replace '#login'
           false
@@ -74,82 +115,36 @@ class App extends Marionette.Application
 
       @reqres.setHandler 'data:programs:reset', (data)->
         App.data.programs = data
+      # --- Data handlers -----
 
+      # --- Base layout -----
+      baseView = new BaseView()
+      baseView.render()
+      @appRegion = baseView.appRegion
+      # --- Base layout -----
 
-    @addInitializer (options) =>
-      new ViewHelper().initialize(Handlebars)
-      @addRegions
-        appRegion: 'region[data-name="app"]'
-
-    @addInitializer ->
-      spinner = new Spinner
-      @vent.on "spinner:global:start", ->
-        spinner.spin(document.getElementById('center-spin'))
-
-      @vent.on "spinner:global:stop", ->
-        spinner.stop()
-
-      $(document).ajaxError (event, jqxhr, settings, thrownError)->
-        if jqxhr.status in [401]
-          window.location.replace '#/logout'
-        spinner.stop()
-
-    @addInitializer ->
-      $.ajaxSetup
-        headers: {'X-Requested-With': 'XMLHttpRequest'}
-        contentType: "application/json"
-
-      $.ajaxPrefilter ( options, originalOptions, jqXHR ) =>
-        options.url = config.api.url + options.url
-        if window.localStorage.accessToken
-          if options.url.indexOf('?') > 0
-            options.url += "&access_token=#{window.localStorage.accessToken}"
-          else
-            options.url += "?access_token=#{window.localStorage.accessToken}"
-        options
-
-    @addInitializer ->
-      @vent.on "module:main-trainer:start", =>
-        mainTrainerModule = @module('MainTrainer')
-        if mainTrainerModule._isInitialized?
-          @vent.trigger 'controller:main-trainer:refresh'
-        else
-          mainTrainerModule.start()
-          @vent.trigger "App:history:start"
-
-      @vent.on "module:main-client:start", =>
-        mainClientModule = @module('MainClient')
-        if mainClientModule._isInitialized?
-          @vent.trigger 'controller:main-client:refresh'
-        else
-          mainClientModule.start()
-          @vent.trigger "App:history:start"
-
-
-    @addInitializer ->
+      # --- Add modules -----
       @module 'Auth', AuthModule
       @module 'MainTrainer', MainTrainerModule
       @module 'MainClient', MainClientModule
 
+      if Backbone.history
+        Backbone.history.start()
+      # --- Add modules -----
+
+      # --- Get profile -----
       if window.localStorage.accessToken
-        @vent.trigger 'spinner:global:start'
         profileModel = @request 'data:profile'
         profileModel.fetch().then =>
-          accountType = profileModel.get('account_type')
-          @vent.trigger 'spinner:global:stop'
-          @vent.trigger "module:main-#{accountType}:start"
-          if accountType is 'trainer'
-            if window.location.hash.split('/')[0] != '#tr'
-              window.location.replace('#tr')
-          else
-            if window.location.hash.split('/')[0] is '#tr'
-              window.location.replace('#')
-      else
-        @module('Auth').start()
-        @vent.trigger "App:history:start"
+          accountType = profileModel.get 'account_type'
+          if @checkPermission?
+            if @checkPermission != accountType
+              if accountType is 'trainer'
+                window.location.replace '#tr'
+              else
+                window.location.replace '#'
+      # --- Get profile -----
 
 $ ->
   window.App = new App()
   window.App.start()
-
-new JqueryHelper().initialize()
