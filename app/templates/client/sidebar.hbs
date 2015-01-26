@@ -2,14 +2,8 @@
   <img src="../static/images/gymcloud-logo.png" alt="">
 </a>
 <div class="gc-clientpage-sidebar">
-  {{#withProfile}}
-  <div class="gc-clientpage-sidebar-avatar">
-    <img src="{{avatar_url}}" alt="">
+  <div id="gc-clientpage-sidebar-profile">
   </div>
-  <button type="button" class="btn btn-link gc-clientpage-sidebar-edit show-client-form">Edit</button>
-  <h2 class="gc-clientpage-sidebar-name">{{full_name}}</h2>
-  <input class="gc-clientpage-sidebar-userlink" type="text" disabled="disabled" value="http://gymcloud.com/clients/id/{{id}}">
-  {{/withProfile}}
   <div class="gc-clientpage-sidebar-updates-wrapper" id="gc-clientpage-sidebar-activity">
   </div>
 </div>

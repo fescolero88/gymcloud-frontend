@@ -6,6 +6,12 @@ module.exports = class HeaderView extends Marionette.ItemView
   events:
     "blur #gc-topnav-search": "searchblur"
 
+  initialize: =>
+    App.vent.on 'profile:ready', @render
+
+  onDestroy: =>
+    App.vent.off 'profile:ready', @render
+
   searchblur: (ev)->
     ev.preventDefault()
     $sr = $(ev.currentTarget)

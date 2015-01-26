@@ -60,6 +60,7 @@
   text-transform: uppercase;
   font-size: 12px;
   padding: 6px 6px;
+  line-height: 18px;
 }
 .gc-usercard-large .gc-usercard-actions .btn:hover,
 .gc-usercard-large .gc-usercard-actions .btn:focus,
@@ -167,7 +168,7 @@
 }
 @media (min-width: 992px) {
   .gc-usercard-large .gc-usercard-actions .btn {
-    padding: 6px 12px;
+    padding: 5px 12px;
   }
     .gc-usercard-large .gc-usercard-actions .btn + .btn {
     margin-left: 10px;
