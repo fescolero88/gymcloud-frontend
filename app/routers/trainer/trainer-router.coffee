@@ -1,10 +1,6 @@
-Marionette = require 'backbone.marionette'
+CustomRouter  = require 'routers/general/custom-router'
 
-module.exports = class TrainerRouter extends Marionette.AppRouter
-  processAppRoutes: (routeName, routeArgs) ->
-    return unless App.request('auth:isAuthorized')
-    super
-
+module.exports = class TrainerRouter extends CustomRouter
   appRoutes:
     'tr(/)': 'clients'
     'tr/clients(/)(/:view_type)': 'clients'
@@ -16,3 +12,7 @@ module.exports = class TrainerRouter extends Marionette.AppRouter
     'tr/groups/id/:id/:assign/:calendarType(/)': 'group'
 
     'tr/properties(/)': 'properties'
+
+  before: (methodName)=>
+    App.vent.trigger 'module:main-trainer:beforeAction'
+    App.request 'auth:isAuthorized', 'trainer'
