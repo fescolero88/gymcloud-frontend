@@ -151,7 +151,7 @@ body > region > .container-fluid {
   text-transform: uppercase;
   color: #9ea0a1;
   line-height: 46px;
-  padding: 2px 0;
+  padding: 2px 4px;
 }
 .gc-content-nav li a:hover,
 .gc-content-nav li a:active,
@@ -232,6 +232,11 @@ body > region > .container-fluid {
 .gc-content-nav .gc-content-nav-back a:hover {
   cursor: pointer;
 }
+@media (min-width: 1025px) {
+  .gc-content-nav li a {
+    padding: 2px 7px;
+  }
+}
 @media (min-width: 992px) {
   .gc-content-nav {
     padding: 0 0 0 15px;
@@ -239,9 +244,7 @@ body > region > .container-fluid {
   .gc-content-nav-wrapper > div {
     padding: 0 15px;
   }
-  .gc-content-nav li a {
-    padding: 2px 7px;
-  }
+
   .gc-content-nav-wrapper > .gc-content-nav-actions {
     padding: 11px 30px 0 0;
   }
