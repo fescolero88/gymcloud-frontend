@@ -136,6 +136,7 @@ class App extends Marionette.Application
       if window.localStorage.accessToken
         profileModel = @request 'data:profile'
         profileModel.fetch().then =>
+          @vent.trigger 'profile:ready'
           accountType = profileModel.get 'account_type'
           if @checkPermission?
             if @checkPermission != accountType

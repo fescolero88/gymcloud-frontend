@@ -1,6 +1,7 @@
 Marionette = require 'backbone.marionette'
 
 ClientActivityCollection = require 'models/trainer/activity-collection'
+ClientProfileView = require 'views/client/clientpage-profile-view'
 ClientPageActivityView = require 'views/client/clientpage-activity-view'
 ClientFormModalView = require 'views/trainer/clients/client-form-modal-view'
 ClientModel = require 'models/trainer/client-model'
@@ -14,6 +15,7 @@ module.exports = class ClientPageSidebarView extends Marionette.LayoutView
 
   regions:
     'activity': '#gc-clientpage-sidebar-activity'
+    'profile': '#gc-clientpage-sidebar-profile'
     'clientForm': '#gc-edit-client-modal'
 
   events:
@@ -21,6 +23,12 @@ module.exports = class ClientPageSidebarView extends Marionette.LayoutView
 
   ui:
     clientFormModal: "#gc-edit-client-modal"
+
+  initialize: =>
+    App.vent.on 'profile:ready', @updateProfile
+
+  onDestroy: =>
+    App.vent.off 'profile:ready', @updateProfile
 
   onShow: =>
     clientRecentActivity = new ClientActivityCollection
@@ -43,3 +51,7 @@ module.exports = class ClientPageSidebarView extends Marionette.LayoutView
 
     @clientForm.show clientFormModal
     @ui.clientFormModal.modal('show')
+
+  updateProfile: =>
+    @profile.show new ClientProfileView
+

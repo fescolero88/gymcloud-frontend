@@ -231,13 +231,13 @@
 }
 @media (min-width: 992px) {
   .gc-calendar-nav-views .btn {
-    padding: 6px 12px;
+    padding: 5px 12px;
   }
     .gc-calendar-nav-date .btn-group {
     margin: 4px 0;
   }
   .gc-calendar-nav-date .btn-group .btn {
-    padding: 6px 12px;
+    padding: 5px 12px;
   }
   .gc-calendar-nav-date p {
     font-size: 14px;

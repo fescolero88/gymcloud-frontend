@@ -220,6 +220,9 @@ body > region > .container-fluid {
   background: #5b9be6;
   color: #fff;
 }
+.gc-content-nav-actions .btn .fa {
+  line-height: 27px;
+}
 .gc-content-nav .gc-content-nav-back {
   margin-left: -15px;
 }
@@ -264,7 +267,7 @@ body > region > .container-fluid {
   border-color: #3398db;
   border-radius: 50px;
   text-align: center;
-  line-height: 14px;
+  line-height: 16px;
   margin-top: -5px;
 }
 .gc-clients-nav-wrapper .btn + .btn {
@@ -362,4 +365,7 @@ body > region > .container-fluid {
 }
 .form-group.gc-invalid .gc-error-message {
   display: inline-block;
+}
+.col-padding-5 {
+  padding: 0 5px;
 }

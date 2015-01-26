@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 module.exports = class ClientFormModalView extends Marionette.ItemView
-  className: 'modal-dialog modal-lg'
+  className: 'modal-dialog'
   template: Templates.trainer.clients.client_form_modal
 
   events:

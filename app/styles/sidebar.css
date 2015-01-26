@@ -211,7 +211,8 @@
   display: block;
   border-radius: 100px;
 }
-.gc-clientpage-sidebar-avatar img[src$='defaultimage.png'] {
+.gc-clientpage-sidebar-avatar img[src$='defaultimage.png'],
+.gc-clientpage-sidebar-avatar img[src=''] {
     display: none;
 }
 .gc-clientpage-sidebar-name {
