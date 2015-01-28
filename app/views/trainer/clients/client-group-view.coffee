@@ -60,10 +60,8 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
 
     @navView.navigate @assign
 
-  loadCenterView: (navView, href) =>
+  loadCenterView: (navView) =>
     if @key
-      href = href || window.location.hash + @key
-      Backbone.history.navigate(href, { trigger:false, replace: true })
       exercise = new ClientExerciseModel
       exercise.url = "#{exercise.urlRoot}/#{@itemId}/#{@assign}/#{@key}"
       exercise.fetch()
@@ -115,4 +113,5 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
     ev.preventDefault()
     @key = $(ev.currentTarget).data 'eid'
     href = $(ev.currentTarget).attr 'href'
-    @loadCenterView @assign, href
+    Backbone.history.navigate(href, { trigger:false, replace: true })
+    @loadCenterView @assign
