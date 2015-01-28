@@ -176,6 +176,10 @@
   overflow-x: hidden;
   text-overflow: ellipsis;
 }
+.gc-sidebar-folder > .gc-sidebar-sub
+> .gc-sidebar-item:first-child {
+  margin-top: -10px;
+}
 .gc-sidebar-folder .gc-sidebar-folder > .gc-sidebar-sub
 > .gc-sidebar-item > a > .col-xs-2 {
   padding: 0 0 0 10px;
@@ -243,7 +247,7 @@
   margin: 0 0 20px 0;
 }
 .gc-clientpage-sidebar-updates-list {
-  padding: 0 0 0 16px;
+  padding: 0 0 0 32px;
   margin: 0;
 }
 .gc-clientpage-sidebar-updates-list li {
