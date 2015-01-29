@@ -60,6 +60,11 @@
   padding: 0;
   text-align: center;
 }
+.gc-sidebar-cat > a .fa-chevron-right {
+  font-size: 13px;
+  top: -1px;
+  position: relative;
+}
 .gc-sidebar-cat-icon {
   display: block;
   height: 22px;
