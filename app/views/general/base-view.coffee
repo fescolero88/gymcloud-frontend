@@ -6,3 +6,10 @@ module.exports = class MainView extends Marionette.LayoutView
 
   regions:
     appRegion: 'region[data-name="app"]'
+
+  ui:
+    'appRegion': 'region[data-name="app"]'
+
+  show: ->
+    @ui.appRegion.removeClass('hide')
+

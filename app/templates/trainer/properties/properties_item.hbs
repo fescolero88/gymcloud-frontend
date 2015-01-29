@@ -4,17 +4,17 @@
     <span data-weight="{{weight}}">{{name}}</span>
   </div>
   <div class="col-xs-3">
-    {{default}}
+    {{defaultvalue}}
   </div>
   <div class="col-xs-4">
-    {{type}}
+    {{value_type}}
   </div>
   <div class="col-xs-2 gc-properties-property-actions">
-    <button type="button" class="btn btn-primary gc-properties-property-edit" data-toggle="modal" data-target="#gc-edit-property-modal">
+    <a href="#" data-id="{{id}}" class="btn btn-primary gc-properties-property-edit">
       Edit
-    </button>
-    <button type="button" class="btn btn-link gc-properties-property-delete">
+    </a>
+    <a href="#" data-id="{{id}}" class="btn btn-link gc-properties-property-delete">
       <i class="fa fa-trash"></i>
-    </button>
+    </a>
   </div>
 </div>

@@ -14,6 +14,10 @@ GroupCollection = require 'models/trainer/group-collection'
 ClientGroupView = require 'views/trainer/clients/client-group-view'
 
 PropertiesView = require 'views/trainer/properties/properties-view'
+PropertyListView = require 'views/trainer/properties/property-list-view'
+PropertyModalView = require 'views/trainer/properties/property-modal-view'
+PropertyModel = require 'models/trainer/property-model'
+PropertyCollection = require 'models/trainer/property-collection'
 
 module.exports = class TrainerController extends Marionette.Controller
 
@@ -69,42 +73,15 @@ module.exports = class TrainerController extends Marionette.Controller
     @clientOrGroup 'client_groups', id, assign, calendarType
 
   properties: =>
-    prop_collection = new Backbone.Collection [
-      {
-        'name': 'Weight (kg)'
-        'default': 0
-        'type': 'Numeric'
-        'weight': 4
-      }
-      {
-        'name': 'Distance'
-        'default': 0
-        'type': 'Numeric'
-        'weight': 2
-      }
-      {
-        'name': 'Sets'
-        'default': 'None'
-        'type': 'String'
-        'weight': 1
-      }
-      {
-        'name': 'Reps'
-        'default': 0
-        'type': 'Numeric'
-        'weight': 3
-      }
-    ]
-    properties_page_view = new PropertiesView collection: prop_collection
-    properties_page_view.collection.comparator = (model) -> model.get('weight')
-    properties_page_view.collection.sort()
+    propertyCollection = new PropertyCollection
+    propertyCollection.fetch()
 
-    @mainView.content.show properties_page_view
+    propertiesPageView = new PropertiesView
+    @mainView.content.show propertiesPageView
 
-    $('.gc-properties-list').sortable
-      handle: '.draggable-handle'
-      placeholder: '<li class="placeholder sortable-placeholder"/>'
-      onDrop: ($item) =>
-        $item.removeClass("dragged").removeAttr("style")
-        $("body").removeClass("dragging")
-        properties_page_view.resort()
+    propertyListView = new PropertyListView collection: propertyCollection
+    propertiesPageView.propertyList.show propertyListView
+
+    propertyModel = new PropertyModel
+    propertyModalView = new PropertyModalView model: propertyModel
+    propertiesPageView.propertyModalView.show propertyModalView
