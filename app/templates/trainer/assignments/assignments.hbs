@@ -1,6 +1,6 @@
 <div class="gc-exercises-assign">
   <div class="gc-exercises-assign-input-wrapper">
-    <input type="text" class="gc-exercises-assign-input form-control live-search" placeholder="Assign Exercises, Workouts, and Programs">
+    <input type="text" class="gc-exercises-assign-input form-control live-search" placeholder="Search and Assign Exercises, Workouts, and Programs">
   </div>
   {{#if items}}
   <ul class="gc-exercises-assign-list">
@@ -30,7 +30,11 @@
     <div class="gc-exercises-assign-empty">
       <img src="../static/images/icon-weight-large.png" alt=" ">
       <p>No {{assign_name}} currently assigned to this client</p>
-      <a href="" class="btn btn-link gc-exercises-assign-add">Add first {{assign_name}}</a>
+      <p>
+        To add specific exercise, enter exercise name in search bar above.
+        To see a list of exercises in your library, select "See {{assign_name}} list" below.
+      </p>
+      <a href="" class="btn btn-link gc-exercises-assign-add">See {{assign_name}} list</a>
     </div>
   </div>
   {{/if}}

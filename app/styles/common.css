@@ -236,6 +236,13 @@ body > region > .container-fluid {
   .gc-content-nav li a {
     padding: 2px 7px;
   }
+  .gc-content-right header h3 {
+    font-size: 18px;
+    text-align: center;
+    line-height: 50px;
+    margin: 0;
+    padding: 0;
+  }
 }
 @media (min-width: 992px) {
   .gc-content-nav {
@@ -247,13 +254,6 @@ body > region > .container-fluid {
 
   .gc-content-nav-wrapper > .gc-content-nav-actions {
     padding: 11px 30px 0 0;
-  }
-  .gc-content-right header h3 {
-    font-size: 18px;
-    text-align: center;
-    line-height: 50px;
-    margin: 0;
-    padding: 0;
   }
 }
 .gc-clients-nav-wrapper {

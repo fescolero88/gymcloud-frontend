@@ -47,7 +47,7 @@ module.exports = class ClientPageSidebarView extends Marionette.LayoutView
     @listenTo clientFormModal, 'closeModal', =>
       @ui.clientFormModal.modal('hide')
     @listenTo clientFormModal, 'avatarChange', =>
-      @render()
+      @profile.show new ClientProfileView
 
     @clientForm.show clientFormModal
     @ui.clientFormModal.modal('show')

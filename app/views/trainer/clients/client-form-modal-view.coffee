@@ -74,7 +74,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
               data = new FormData()
               data.append("avatar", avatar[0].files[0])
               $.ajax
-                url: "#{model.urlRoot}/#{model.id}/avatar"
+                url: if model.urlRoot then "#{model.urlRoot}/#{model.id}/avatar" else "#{model.url}/avatar"
                 type: 'PUT'
                 data: data
                 cache: false
