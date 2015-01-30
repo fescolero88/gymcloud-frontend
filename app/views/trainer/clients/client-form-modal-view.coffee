@@ -58,10 +58,8 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
     @model.set formData
     @model.set 'account_type', 3
     if @model.isValid true
-      App.vent.trigger('spinner:global:start')
       @model.save null,
         success: (model, data)=>
-          App.vent.trigger "spinner:global:stop"
           if data.error
             for name, error_msg of data.error
               $input = @$el.find("input[name=#{name}]")

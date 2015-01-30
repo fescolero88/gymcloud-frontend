@@ -13,5 +13,5 @@ module.exports = class ClientRouter extends CustomRouter
     'calendar/month/:month(/)': 'clientPageCalendarMonth'
 
   before: (methodName)=>
-    App.vent.trigger 'module:main-client:beforeAction'
     App.request 'auth:isAuthorized', 'client'
+    App.vent.trigger 'module:main-client:beforeAction'

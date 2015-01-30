@@ -12,5 +12,5 @@ module.exports = class TrainerRouter extends CustomRouter
     'tr/properties(/)': 'properties'
 
   before: (methodName)=>
-    App.vent.trigger 'module:main-trainer:beforeAction'
     App.request 'auth:isAuthorized', 'trainer'
+    App.vent.trigger 'module:main-trainer:beforeAction'

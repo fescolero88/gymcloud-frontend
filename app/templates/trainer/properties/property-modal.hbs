@@ -1,0 +1,47 @@
+<div class="modal fade gc-modal" id="gc-add-property-modal">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>Close</span></button>
+        <h4 class="modal-title">
+          <span>
+            <img src="../static/images/icon-properties.png" alt="">
+          </span>
+          {{#if is_edit}}
+          Edit Property
+          {{else}}
+          Add Property
+          {{/if}}
+        </h4>
+      </div>
+      <form class="form" role="form">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="control-label">Property Name</label>
+            <label class="gc-error-message"></label>
+            <input type="text" class="form-control" name="name" value="{{name}}">
+            <span class="gc-valid-icon fa fa-check hide"></span>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Default Value</label>
+            <label class="gc-error-message"></label>
+            <input type="text" class="form-control" name="defaultvalue" value="{{defaultvalue}}">
+            <span class="gc-valid-icon fa fa-check hide"></span>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Value Type</label>
+            <select name="value_type" type="text" class="form-control">
+              <option {{#ifCond value_type '==' 'Numeric'}}selected{{/ifCond}} value="Numeric">Numeric</option>
+              <option {{#ifCond value_type '==' 'String'}}selected{{/ifCond}} value="String">String</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="row">
+            <div class="col-xs-12 text-right"><button type="submit" class="btn btn-primary">Save</button></div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

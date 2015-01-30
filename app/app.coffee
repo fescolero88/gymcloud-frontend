@@ -144,6 +144,9 @@ class App extends Marionette.Application
                 window.location.replace '#tr'
               else
                 window.location.replace '#'
+          baseView.show()
+      else
+        baseView.show()
       # --- Get profile -----
 
 $ ->

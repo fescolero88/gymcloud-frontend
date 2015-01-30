@@ -32,7 +32,7 @@ module.exports = class SideBarView extends Marionette.ItemView
     programs: => App.request 'data:programs'
 
   toggleMenu: (ev) ->
-    if not $(ev.target).hasClass 'gc-sidebar-cat-name'
+    if $(ev.target).hasClass('toggle-it') or $(ev.currentTarget).hasClass('toggle-it')
       ev.preventDefault()
       $(ev.currentTarget).toggleClass('active')
 
