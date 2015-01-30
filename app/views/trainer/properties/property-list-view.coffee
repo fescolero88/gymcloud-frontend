@@ -1,6 +1,11 @@
 Marionette = require 'backbone.marionette'
 
-module.exports = class PropertiesItemView extends Marionette.ItemView
+
+class EmptyView extends Marionette.ItemView
+  template: Templates.trainer.properties.properties_empty
+
+
+class PropertiesItemView extends Marionette.ItemView
   template: Templates.trainer.properties.properties_item
   tagName: 'li'
 
@@ -11,10 +16,12 @@ module.exports = class PropertiesItemView extends Marionette.ItemView
     super
     @$el.data('id', @model.id)
 
+
 module.exports = class PropertyListView extends Marionette.CompositeView
   template: Templates.trainer.properties.property_list
   childView: PropertiesItemView
   childViewContainer: 'ul'
+  emptyView: EmptyView
 
   events:
     "click @ui.rmProperty": "rmProperty"
@@ -27,6 +34,7 @@ module.exports = class PropertyListView extends Marionette.CompositeView
 
   initialize: ->
     App.vent.on 'properties:addModel', @addProperty
+
 
   addProperty: (model)=>
     @collection.unshift model

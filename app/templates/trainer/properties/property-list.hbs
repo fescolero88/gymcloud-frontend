@@ -1,24 +1,13 @@
 <div class="gc-properties-list-wrapper row">
   <div class="col-xs-12">
-    {{#if collection}}
+    {{#if collection.length}}
     <div class="row gc-properties-list-header">
       <div class="col-xs-3">Property Name</div>
       <div class="col-xs-3">Default Value</div>
       <div class="col-xs-4">Value Type</div>
       <div class="col-xs-2">Actions</div>
     </div>
-    <ul class="gc-properties-list">
-    </ul>
-    {{else}}
-    <div class="gc-properties-list-empty">
-      <img src="../static/images/icon-properties-empty.png" alt="">
-      <p>
-        You don't have
-        <br>
-        any properties set.
-      </p>
-      <a href="#" class="btn btn-link add-property-btn">Add new property</a>
-    </div>
     {{/if}}
+    <ul class="gc-properties-list"></ul>
   </div>
 </div>
