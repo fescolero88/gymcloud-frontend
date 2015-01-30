@@ -15,6 +15,7 @@ module.exports = class AssignmentsView extends Marionette.ItemView
   templateHelpers: =>
     client_id: @clientId
     assign_name: @assignName
+    view_type: @viewType
 
   initialize: (data) =>
     @clientId = data.clientId

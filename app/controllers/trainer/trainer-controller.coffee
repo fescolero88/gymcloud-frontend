@@ -37,7 +37,7 @@ module.exports = class TrainerController extends Marionette.Controller
     if viewType is 'individuals'
       groupsView.$el.hide()
 
-  clientOrGroup: (type, id, assign, calendarType) ->
+  clientOrGroup: (type, id, assign, key) ->
     if type is 'clients'
       itemModel = new ClientModel
       itemModel.url = "/api/mobile/clients/#{id}"
@@ -58,15 +58,15 @@ module.exports = class TrainerController extends Marionette.Controller
       recentActivity: recentActivity
       itemId: id
       assign: assign
-      calendayType: calendarType
+      key: key
       viewType: type
     @mainView.content.show itemPageView
 
-  client: (id, assign, calendarType) =>
-    @clientOrGroup 'clients', id, assign, calendarType
+  client: (id, assign, key) =>
+    @clientOrGroup 'clients', id, assign, key
 
-  group: (id, assign, calendarType) =>
-    @clientOrGroup 'client_groups', id, assign, calendarType
+  group: (id, assign, key) =>
+    @clientOrGroup 'client_groups', id, assign, key
 
   properties: =>
     prop_collection = new Backbone.Collection [

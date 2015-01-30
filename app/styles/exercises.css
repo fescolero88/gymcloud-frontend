@@ -13,12 +13,16 @@
   padding: 2px 4px;
   margin: 0 3px;
 }
-.gc-exercises-add-best a:hover,
 .gc-exercises-add-best a:active,
 .gc-exercises-add-best a:focus {
   text-decoration: none;
   color: #3398db;
   outline: none;
+}
+.gc-exercises-add-best a:hover {
+  background-color: #3398db;
+  color: #fff;
+  text-decoration: none;
 }
 .gc-exercises-no-best {
   background: transparent url('../images/icon-cup-large.png') center 10px no-repeat;

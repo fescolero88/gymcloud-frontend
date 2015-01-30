@@ -8,6 +8,12 @@ module.exports = class ViewHelper
       else
         options.fn @
 
+    Handlebars.registerHelper "ifEqual", (v1, v2, options) ->
+      if v1 is v2
+        options.fn @
+      else
+        return options.inverse @
+
     Handlebars.registerHelper 'withProfile', (options) ->
       profileModel = App.request('data:profile')
       context = profileModel.attributes

@@ -1,12 +1,13 @@
 <div class="gc-exercises-exercise-view">
-  <h2>Exercise number one</h2>
+  <h2>{{name}}</h2>
+  {{#if description}}
   <p class="gc-exercises-exercise-descr">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-    Quidem nulla ea inventore, dolorum. Tempora ad, nemo maxime
-    vitae porro velit vel modi doloremque, autem sequi quasi,
-    qui provident aliquam illo.
+    {{description}}
   </p>
+  {{/if}}
+  {{#if video_url}}
   <div class="gc-exercises-exercise-video">
-    <iframe width="853" height="480" src="//www.youtube.com/embed/S6Eg-Qai6f0?rel=0" frameborder="0" allowfullscreen></iframe>
+    <iframe width="853" height="480" src="{{video_url}}" frameborder="0" allowfullscreen></iframe>
   </div>
+  {{/if}}
 </div>
