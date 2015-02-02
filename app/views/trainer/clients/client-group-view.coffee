@@ -19,6 +19,9 @@ PersonalBestView = require 'views/trainer/exercises/personal-best-view'
 module.exports = class ClientGroupView extends Marionette.LayoutView
   template: Templates.trainer.clients.client
 
+  collectionEvents:
+    "sync": "showCenterView"
+
   regions:
     'header': '#client-header-region'
     'nav': '#client-content-nav-region'
@@ -70,37 +73,43 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
       personalBestView = new PersonalBestView
       @rightside.show personalBestView
       @key = null
+      @showCenterView()
     else
       switch navView
         when "exercises"
-          exercisesCollection = new ExercisesCollection
-          exercisesCollection.url = "/api/mobile/#{@viewType}/#{@itemId}/exercises"
-          exercisesCollection.fetch()
+          @collection = new ExercisesCollection
+          @collection.url = "/api/mobile/#{@viewType}/#{@itemId}/exercises"
+          @collection.fetch().then =>
+            @showCenterView()
           @centerView = new AssignmentsView
-            collection: exercisesCollection
+            collection: @collection
             clientId: @itemId
             viewType: @viewType
             assignName: navView
         when "workouts"
-          workoutsCollection = new WorkoutsCollection
-          workoutsCollection.url = "/api/mobile/#{@viewType}/#{@itemId}/workouts"
-          workoutsCollection.fetch()
+          @collection = new WorkoutsCollection
+          @collection.url = "/api/mobile/#{@viewType}/#{@itemId}/workouts"
+          @collection.fetch().then =>
+            @showCenterView()
           @centerView = new AssignmentsView
-            collection: workoutsCollection
+            collection: @collection
             clientId: @itemId
             viewType: @viewType
             assignName: navView
         when "programs"
-          programsCollection = new ProgramsCollection
-          programsCollection.url = "/api/mobile/#{@viewType}/#{@itemId}/programs"
-          programsCollection.fetch()
+          @collection = new ProgramsCollection
+          @collection.url = "/api/mobile/#{@viewType}/#{@itemId}/programs"
+          @collection.fetch().then =>
+            @showCenterView()
           @centerView = new AssignmentsView
-            collection: programsCollection
+            collection: @collection
             clientId: @itemId
             viewType: @viewType
             assignName: navView
         when "calendar"
           @centerView = new CalendarView
+
+  showCenterView: ->
     @leftside.show @centerView
 
   assignDragged: (item) =>

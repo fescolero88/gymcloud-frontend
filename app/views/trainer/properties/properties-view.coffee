@@ -4,6 +4,9 @@ PropertyModel = require 'models/trainer/property-model'
 module.exports = class PropertiesView extends Marionette.LayoutView
   template: Templates.trainer.properties.properties
 
+  collectionEvents:
+    "sync": "showCollection"
+
   regions:
     'propertyModalView': '#property-modal'
     'propertyList': '#property-list'
@@ -16,6 +19,13 @@ module.exports = class PropertiesView extends Marionette.LayoutView
     propertyModalBtn: '.add-property-btn'
     editProperty: ".gc-properties-property-edit"
 
+  initialize: (data) ->
+    @collection = data.collection
+    @collectionView = data.listView
+
+  showCollection: ->
+    @propertyList.show @collectionView
+
   propertyModalShow: (ev) ->
     ev.preventDefault()
     model = new PropertyModel
@@ -24,5 +34,5 @@ module.exports = class PropertiesView extends Marionette.LayoutView
   editProperty: (ev) ->
     ev.preventDefault()
     model_id = $(ev.currentTarget).data('id')
-    model = @propertyList.currentView.collection.get model_id
+    model = @collection.get model_id
     @propertyModalView.currentView.trigger 'showModal', {model: model, is_edit: true}

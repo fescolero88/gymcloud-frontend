@@ -35,6 +35,8 @@ module.exports = class PropertyListView extends Marionette.CompositeView
   initialize: ->
     App.vent.on 'properties:addModel', @addProperty
 
+  isEmpty: (collection) ->
+    return !collection.length
 
   addProperty: (model)=>
     @collection.unshift model
