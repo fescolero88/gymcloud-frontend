@@ -115,6 +115,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
             assignName: navView
         when "calendar"
           @centerView = new CalendarView
+          @showCenterView()
 
   showCenterView: ->
     if !@key
