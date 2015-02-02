@@ -40,10 +40,11 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
     @viewType = data.viewType
     @assign = data.assign || 'exercises'
     @key = data.key
+    @recentActivityCollection = data.recentActivity
 
     @headerView = new ClientGroupHeaderView model: data.itemModel, viewType: @viewType
     @navView = new ClientGroupNavView itemId: @itemId, viewType: @viewType
-    @activityView = new ActivityView collection: data.recentActivity
+    @showActivity(false)
 
     @listenTo @navView, 'navView', @loadCenterView
 
@@ -63,6 +64,12 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
 
     @navView.navigate @assign
 
+  showActivity: (isShow)->
+    if !@activityView? or @activityView.isDestroyed
+      @activityView = new ActivityView collection: @recentActivityCollection
+      if isShow
+        @rightside.show @activityView
+
   loadCenterView: (navView) =>
     if @key
       exercise = new ClientExerciseModel
@@ -72,8 +79,8 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
         model: exercise
       personalBestView = new PersonalBestView
       @rightside.show personalBestView
-      @key = null
       @showCenterView()
+      @key = null
     else
       switch navView
         when "exercises"
@@ -110,6 +117,8 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
           @centerView = new CalendarView
 
   showCenterView: ->
+    if !@key
+      @showActivity(true)
     @leftside.show @centerView
 
   assignDragged: (item) =>
@@ -121,6 +130,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
   showExercise: (ev) ->
     ev.preventDefault()
     @key = $(ev.currentTarget).data 'eid'
+    @assign = $(ev.currentTarget).data 'assign'
     href = $(ev.currentTarget).attr 'href'
     Backbone.history.navigate(href, { trigger:false, replace: true })
-    @loadCenterView @assign
+    @loadCenterView(@assign)

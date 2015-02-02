@@ -10,12 +10,27 @@ class AssignmentItemView extends Marionette.ItemView
   tagName: 'li'
   className: 'row'
 
+  initialize: (data) ->
+    @viewType = data.viewType
+    @clientId = data.clientId
+    @assignName = data.assignName
+
+  templateHelpers: ->
+    client_id: @clientId
+    assign_name: @assignName
+    view_type: @viewType
+
 
 module.exports = class AssignmentsListView extends Marionette.CompositeView
   template: Templates.trainer.assignments.assignments
   childView: AssignmentItemView
   childViewContainer: 'ul'
   emptyView: EmptyView
+
+  childViewOptions: ->
+    clientId: @clientId
+    assignName: @assignName
+    viewType: @viewType
 
   events:
     "click @ui.rmAssign": "rmAssign"
@@ -25,11 +40,6 @@ module.exports = class AssignmentsListView extends Marionette.CompositeView
 
   isEmpty: (collection) ->
     !collection.length
-
-  templateHelpers: =>
-    client_id: @clientId
-    assign_name: @assignName
-    view_type: @viewType
 
   initialize: (data) =>
     @clientId = data.clientId
