@@ -2,40 +2,5 @@
   <div class="gc-exercises-assign-input-wrapper">
     <input type="text" class="gc-exercises-assign-input form-control live-search" placeholder="Search and Assign Exercises, Workouts, and Programs">
   </div>
-  {{#if items}}
-  <ul class="gc-exercises-assign-list">
-    {{#each items}}
-    <li class="row">
-      <div class="col-xs-5">
-        <label class="gc-exercises-chb">
-          <input type="checkbox">
-        </label>
-        <a
-          href="#/tr/{{../view_type}}/id/{{../client_id}}/{{../assign_name}}/{{id}}/"
-          class="gc-exercises-link gc-exercises-link-{{../assign_name}}"
-          data-assign="{{../assign_name}}"
-          data-eid="{{id}}"
-        >{{name}}</a>
-      </div>
-      <div class="col-xs-7 text-right">
-        <a href="#" class="btn btn-link gc-exercises-assign-btn">Schedule</a>
-        <a href="#" class="btn btn-link gc-exercises-assign-btn">Enter results</a>
-        <a href="#" data-id="{{id}}" class="gc-exercises-assign-btn-del"><span class="fa fa-trash"></span></a>
-      </div>
-    </li>
-    {{/each}}
-  </ul>
-  {{else}}
-  <div class="gc-exercises-assign">
-    <div class="gc-exercises-assign-empty">
-      <img src="../static/images/icon-weight-large.png" alt=" ">
-      <p>No {{assign_name}} currently assigned to this client</p>
-      <p>
-        To add specific exercise, enter exercise name in search bar above.
-        To see a list of exercises in your library, select "See {{assign_name}} list" below.
-      </p>
-      <a href="" class="btn btn-link gc-exercises-assign-add">See {{assign_name}} list</a>
-    </div>
-  </div>
-  {{/if}}
+  <ul class="gc-exercises-assign-list"></ul>
 </div>

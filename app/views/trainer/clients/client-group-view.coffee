@@ -19,6 +19,9 @@ PersonalBestView = require 'views/trainer/exercises/personal-best-view'
 module.exports = class ClientGroupView extends Marionette.LayoutView
   template: Templates.trainer.clients.client
 
+  collectionEvents:
+    "sync": "showCenterView"
+
   regions:
     'header': '#client-header-region'
     'nav': '#client-content-nav-region'
@@ -37,10 +40,11 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
     @viewType = data.viewType
     @assign = data.assign || 'exercises'
     @key = data.key
+    @recentActivityCollection = data.recentActivity
 
     @headerView = new ClientGroupHeaderView model: data.itemModel, viewType: @viewType
     @navView = new ClientGroupNavView itemId: @itemId, viewType: @viewType
-    @activityView = new ActivityView collection: data.recentActivity
+    @showActivity(false)
 
     @listenTo @navView, 'navView', @loadCenterView
 
@@ -60,6 +64,12 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
 
     @navView.navigate @assign
 
+  showActivity: (isShow)->
+    if !@activityView? or @activityView.isDestroyed
+      @activityView = new ActivityView collection: @recentActivityCollection
+      if isShow
+        @rightside.show @activityView
+
   loadCenterView: (navView) =>
     if @key
       exercise = new ClientExerciseModel
@@ -69,38 +79,47 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
         model: exercise
       personalBestView = new PersonalBestView
       @rightside.show personalBestView
+      @showCenterView()
       @key = null
     else
       switch navView
         when "exercises"
-          exercisesCollection = new ExercisesCollection
-          exercisesCollection.url = "/api/mobile/#{@viewType}/#{@itemId}/exercises"
-          exercisesCollection.fetch()
+          @collection = new ExercisesCollection
+          @collection.url = "/api/mobile/#{@viewType}/#{@itemId}/exercises"
+          @collection.fetch().then =>
+            @showCenterView()
           @centerView = new AssignmentsView
-            collection: exercisesCollection
+            collection: @collection
             clientId: @itemId
             viewType: @viewType
             assignName: navView
         when "workouts"
-          workoutsCollection = new WorkoutsCollection
-          workoutsCollection.url = "/api/mobile/#{@viewType}/#{@itemId}/workouts"
-          workoutsCollection.fetch()
+          @collection = new WorkoutsCollection
+          @collection.url = "/api/mobile/#{@viewType}/#{@itemId}/workouts"
+          @collection.fetch().then =>
+            @showCenterView()
           @centerView = new AssignmentsView
-            collection: workoutsCollection
+            collection: @collection
             clientId: @itemId
             viewType: @viewType
             assignName: navView
         when "programs"
-          programsCollection = new ProgramsCollection
-          programsCollection.url = "/api/mobile/#{@viewType}/#{@itemId}/programs"
-          programsCollection.fetch()
+          @collection = new ProgramsCollection
+          @collection.url = "/api/mobile/#{@viewType}/#{@itemId}/programs"
+          @collection.fetch().then =>
+            @showCenterView()
           @centerView = new AssignmentsView
-            collection: programsCollection
+            collection: @collection
             clientId: @itemId
             viewType: @viewType
             assignName: navView
         when "calendar"
           @centerView = new CalendarView
+          @showCenterView()
+
+  showCenterView: ->
+    if !@key
+      @showActivity(true)
     @leftside.show @centerView
 
   assignDragged: (item) =>
@@ -112,6 +131,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
   showExercise: (ev) ->
     ev.preventDefault()
     @key = $(ev.currentTarget).data 'eid'
+    @assign = $(ev.currentTarget).data 'assign'
     href = $(ev.currentTarget).attr 'href'
     Backbone.history.navigate(href, { trigger:false, replace: true })
-    @loadCenterView @assign
+    @loadCenterView(@assign)

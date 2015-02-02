@@ -1,10 +1,36 @@
 Marionette = require 'backbone.marionette'
 
-module.exports = class AssignmentsView extends Marionette.ItemView
-  template: Templates.trainer.assignments.assignments
 
-  collectionEvents:
-    "sync": "initSearchSelect"
+class EmptyView extends Marionette.ItemView
+  template: Templates.trainer.assignments.assignment_empty
+
+
+class AssignmentItemView extends Marionette.ItemView
+  template: Templates.trainer.assignments.assignment_item
+  tagName: 'li'
+  className: 'row'
+
+  initialize: (data) ->
+    @viewType = data.viewType
+    @clientId = data.clientId
+    @assignName = data.assignName
+
+  templateHelpers: ->
+    client_id: @clientId
+    assign_name: @assignName
+    view_type: @viewType
+
+
+module.exports = class AssignmentsListView extends Marionette.CompositeView
+  template: Templates.trainer.assignments.assignments
+  childView: AssignmentItemView
+  childViewContainer: 'ul'
+  emptyView: EmptyView
+
+  childViewOptions: ->
+    clientId: @clientId
+    assignName: @assignName
+    viewType: @viewType
 
   events:
     "click @ui.rmAssign": "rmAssign"
@@ -12,18 +38,18 @@ module.exports = class AssignmentsView extends Marionette.ItemView
   ui:
     rmAssign: ".gc-exercises-assign-btn-del"
 
-  templateHelpers: =>
-    client_id: @clientId
-    assign_name: @assignName
-    view_type: @viewType
+  isEmpty: (collection) ->
+    !collection.length
 
   initialize: (data) =>
     @clientId = data.clientId
     @assignName = data.assignName
     @viewType = data.viewType
-    window.App.vent.on 'assignments:loaded', @initSearchSelect
     @on 'assign', (item) ->
       @assignItem item
+
+  onShow: ->
+    @initSearchSelect()
 
   searchItems: (items, title) ->
     listItems = []
@@ -40,7 +66,8 @@ module.exports = class AssignmentsView extends Marionette.ItemView
     assignId = $(ev.currentTarget).data 'id'
     model = @collection.get assignId
     model.destroy().then =>
-      @initSearchSelect()
+      if !@collection.length
+        @collection.isFetched = false
 
   assignItem: (item)=>
     data =
@@ -53,10 +80,8 @@ module.exports = class AssignmentsView extends Marionette.ItemView
       data: JSON.stringify data
       success: (data) =>
         @collection.add data
-        @initSearchSelect()
 
   initSearchSelect: =>
-    @render()
     assignments = App.request "data:#{@assignName}"
     if assignments?
       options = @searchItems assignments, @assignName

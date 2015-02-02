@@ -75,12 +75,12 @@ module.exports = class TrainerController extends Marionette.Controller
   properties: =>
     propertyCollection = new PropertyCollection
     propertyCollection.fetch()
+    propertyListView = new PropertyListView collection: propertyCollection
 
     propertiesPageView = new PropertiesView
+      collection: propertyCollection
+      listView: propertyListView
     @mainView.content.show propertiesPageView
-
-    propertyListView = new PropertyListView collection: propertyCollection
-    propertiesPageView.propertyList.show propertyListView
 
     propertyModel = new PropertyModel
     propertyModalView = new PropertyModalView model: propertyModel

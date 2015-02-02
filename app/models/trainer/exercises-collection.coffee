@@ -1,3 +1,3 @@
-Backbone = require 'backbone'
+CustomCollection = require 'models/general/custom-collection'
 
-module.exports = class ExercisesCollection extends Backbone.Collection
+module.exports = class ExercisesCollection extends CustomCollection
