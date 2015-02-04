@@ -2,8 +2,11 @@
   <div class="col-xs-10">
     <ul class="gc-content-nav">
       <li class="gc-content-nav-back">
-        <a><span class="fa fa-chevron-left"></span></a>
+        <a>
+          <span class="fa fa-chevron-left"></span>
+        </a>
       </li>
+      <li class="{{#ifNot view_name 'groups'}}hidden{{/ifNot}}"><a data-nav-view="members" href="#tr/{{view_name}}/id/{{client_id}}/members">Members</a></li>
       <li class="active"><a data-nav-view="exercises" href="#tr/{{view_name}}/id/{{client_id}}/exercises">Exercises</a></li>
       <li><a data-nav-view="workouts" href="#tr/{{view_name}}/id/{{client_id}}/workouts">Workouts</a></li>
       <li><a data-nav-view="programs" href="#tr/{{view_name}}/id/{{client_id}}/programs">Programs</a></li>
@@ -15,7 +18,7 @@
       <button type="button" class="btn btn-default btn-primary">
         <span class="fa fa-plus"></span>
       </button>
-      <button type="button" class="btn btn-default btn-danger">
+      <button type="button" class="btn btn-default btn-danger gc-content-nav-delete">
         <span class="fa fa-trash"></span>
       </button>
     </div>

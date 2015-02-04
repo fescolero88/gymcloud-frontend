@@ -1,6 +1,7 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
+MembersCollection = require 'models/trainer/members-collection'
 ExercisesCollection = require 'models/trainer/exercises-collection'
 WorkoutsCollection = require 'models/trainer/workouts-collection'
 ProgramsCollection = require 'models/trainer/programs-collection'
@@ -12,6 +13,7 @@ ActivityView = require 'views/trainer/clients/activity-view'
 AssignmentsView = require 'views/trainer/assignments/assignments-view'
 CalendarView = require 'views/trainer/calendar/calendar-view'
 
+MembersView = require 'views/trainer/groups/members-view'
 ExerciseView = require 'views/trainer/exercises/exercise-view'
 ClientExerciseModel = require 'models/trainer/client-exercise'
 PersonalBestView = require 'views/trainer/exercises/personal-best-view'
@@ -83,6 +85,14 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
       @key = null
     else
       switch navView
+        when "members"
+          @collection = new MembersCollection
+          @collection.url = "#{@collection.urlRoot}/#{@itemId}/members"
+          @collection.fetch()
+          @centerView = new MembersView
+            groupId: @itemId
+            collection: @collection
+          @showCenterView()
         when "exercises"
           @collection = new ExercisesCollection
           @collection.url = "/api/mobile/#{@viewType}/#{@itemId}/exercises"
