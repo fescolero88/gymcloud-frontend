@@ -14,6 +14,7 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
   events:
     "submit @ui.inviteForm": "submitClientForm"
     "click .show-client-form": "showClientEditModal"
+    "show.bs.modal @ui.inviteModal": "fillClientEmail"
 
   regions:
     'clientForm': '#gc-edit-client-modal'
@@ -21,6 +22,7 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
   ui:
     inviteModal: '#gc-invite-client-modal'
     inviteForm: '.invite-client-form'
+    inviteEmail: '.invite-client-form input[name=email]'
     clientFormModal: "#gc-edit-client-modal"
 
   initialize: (data)->
@@ -31,6 +33,9 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
       view_type: 1
     else
       view_type: 0
+
+  fillClientEmail: ->
+    @ui.inviteEmail.val @model.get('email')
 
   submitClientForm: (ev)->
     #TODO validation
