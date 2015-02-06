@@ -1,6 +1,8 @@
 Marionette = require 'backbone.marionette'
 
 AuthView = require 'views/auth/auth-view'
+ForgotPasswordView = require 'views/auth/forgot-password-view'
+SignUpView = require 'views/auth/sign-up-view'
 
 
 module.exports = class AuthController extends Marionette.Controller
@@ -19,4 +21,10 @@ module.exports = class AuthController extends Marionette.Controller
     #App.vent.trigger 'module:auth:login'
     window.localStorage.removeItem 'accessToken'
     window.location.replace '#login'
+
+  forgotPassword: ->
+    @region.show new ForgotPasswordView
+
+  signUp: ->
+    @region.show new SignUpView
 
