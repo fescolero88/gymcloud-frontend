@@ -5,9 +5,12 @@
   font-weight: normal;
   font-style: normal;
 }
+body.auth {
+  background: #fff url('../images/header-login.png') 50% top no-repeat;
+  background-size: cover;
+}
 .page-wrap {
   min-height: 100%;
-  margin-bottom: -160px;
 }
 .page-wrap * {
   font-family: 'KievitPro-Regular', Helvetica, Arial;
@@ -27,12 +30,7 @@
     background: rgba(18,24,39,1);
 }
 .gc-header-standard > .container {
-    padding-top: 60px;
     min-height: 40px;
-}
-.gc-header-blog {
-    background: url(../img/header-blog.png) 50% top no-repeat;
-    background-size: cover;
 }
 .gc-blog-slider {
     min-height: 540px;
@@ -45,13 +43,7 @@
     background: rgba(18,24,39,1);
 }
 .gc-header-login {
-    background: #fff url('../images/header-login.png') 50% top no-repeat;
-    background-size: cover;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+  background: transparent;
 }
 .gc-header-login > .container {
     min-height: 0px;
@@ -131,8 +123,14 @@
     margin-top: 20px;
 }
 .gc-login-form-wrapper form [type=submit]:hover,
+.gc-login-form-wrapper form [type=submit]:focus,
 .gc-login-form-wrapper form [type=submit]:active {
     background: transparent;
+    outline: none;
+}
+.gc-login-form-wrapper form [type=submit]:hover {
+  background-color: #2f90e3;
+  color: #fff;
 }
 .gc-login-signup-wrapper {
     color: #a6a7aa;
@@ -191,6 +189,10 @@
   width: 132px;
   height: 131px;
   margin: 0;
+  -webkit-transition: all 0.3s linear 0.05s;
+  -moz-transition: all 0.3s linear 0.05s;
+  -o-transition: all 0.3s linear 0.05s;
+  transition: all 0.3s linear 0.05s;
 }
 .gc-trainer-type:hover {
   cursor: pointer;
@@ -230,14 +232,11 @@ form .checkbox {
 }
 @media (min-width: 768px) {
     .gc-header-standard > .container {
-        padding-top: 120px;
         min-height: 600px;
     }
    .gc-login-form-wrapper {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        margin: -250px 0 0 -227.5px;
+        position: relative;
+        margin: 12% auto 0 auto;
         padding: 0 15px;
     }
     .gc-login-form-wrapper > h1 {
