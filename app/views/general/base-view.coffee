@@ -1,6 +1,6 @@
 Marionette = require 'backbone.marionette'
 
-module.exports = class MainView extends Marionette.LayoutView
+module.exports = class BaseView extends Marionette.LayoutView
   template: Templates.general.base
   el: 'body'
 
