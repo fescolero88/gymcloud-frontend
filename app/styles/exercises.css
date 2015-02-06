@@ -251,6 +251,9 @@
   border-bottom: 1px solid #ededed;
   padding: 15px 0;
 }
+.gc-exercises-assign-list > .row.padding-0 {
+  padding: 0;
+}
 .gc-exercises-assign-list > .row > div {
   padding: 0;
 }

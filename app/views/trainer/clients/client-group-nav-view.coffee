@@ -6,11 +6,13 @@ module.exports = class ClientGroupNavView extends Marionette.ItemView
 
   events:
     'click @ui.navLink': 'navLinkClick'
+    'click @ui.deleteButton': 'deleteButtonClick'
     'click .gc-content-nav-back a': 'navBack'
 
   ui:
     nav: ".gc-content-nav a"
     navLink: '.gc-content-nav :not(.gc-content-nav-back) a'
+    deleteButton: '.gc-content-nav-delete'
 
   templateHelpers: =>
     client_id: @itemId
@@ -44,6 +46,9 @@ module.exports = class ClientGroupNavView extends Marionette.ItemView
 
   navBack: (ev) ->
     window.history.back()
+
+  deleteButtonClick: (ev) ->
+    App.vent.trigger 'content-nav:delete'
 
   changeActive: (category) =>
     @ui.nav.parent().removeClass('active')

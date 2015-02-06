@@ -372,3 +372,6 @@ body > region > .container-fluid {
 .col-padding-5 {
   padding: 0 5px;
 }
+.padding-0 {
+  padding: 0;
+}
