@@ -12,6 +12,9 @@ module.exports = class MainView extends Marionette.LayoutView
     App.vent.off 'drag:start', @dragStart
     App.vent.off 'drag:drop', @drop
 
+  onShow: =>
+    App.vent.trigger 'body:change-class', 'main'
+
   ui:
     dndArea: ".gc-dnd-area"
     mainArea: ".gc-main"
