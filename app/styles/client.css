@@ -267,7 +267,7 @@
 }
 .gc-message-modal-actions .btn:hover {
   color: #5698e5;
-  background: #fff;
+  background: transparent;
 }
 .gc-message-modal-actions .btn .fa-remove,
 .gc-message-modal-actions .btn .fa-check {
@@ -311,7 +311,55 @@
 .gc-dnd-area .gc-dnd-area-message p {
   margin: 0;
 }
-@media (min-width: 768px)
-.modal-dialog {
-  width: 650px;
+.gc-send-message-inpu {
+  height: 34px;
+}
+.gc-send-message-input::-webkit-input-placeholder {color: #c6c6c6;}
+.gc-send-message-input:-moz-placeholder {color: #c6c6c6; opacity: 1;}
+.gc-send-message-input::-moz-placeholder {color: #c6c6c6; opacity: 1;}
+.gc-send-message-input:-ms-input-placeholder {color: #c6c6c6;}
+.gc-send-message-input .selectize-input.focus {
+  box-shadow: none;
+  border-color: #ccc;
+  border-radius: 4px 4px 0 0;
+}
+.gc-send-message-input .selectize-dropdown {
+  border-radius: 0 0 4px 4px;
+  top: 31px !important;
+  border-color: #ccc;
+}
+.gc-send-message-input .selectize-dropdown-content > div {
+  color: #3398db;
+  text-transform: uppercase;
+  padding: 6px 12px;
+}
+.gc-send-message-input .selectize-dropdown-content > div .label {
+  color: #ccc;
+}
+.gc-send-message-input .selectize-dropdown-content > div:hover .label {
+  color: #666;
+}
+.gc-send-message-input .selectize-dropdown-content > div span.avatar {
+  border-radius: 20px;
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  vertical-align: -6px;
+  margin-right: 8px;
+  background: green url('/static/images/icon-individual-right.png') center top no-repeat;
+  background-size: contain;
+}
+.gc-send-message-input .selectize-dropdown-content > div span.avatar img {
+  border-radius: 20px;
+  display: block;
+  height: 20px;
+  width: 20px;
+}
+.gc-send-message-input .selectize-dropdown-content > div span.avatar img[src=''],
+.gc-send-message-input .selectize-dropdown-content > div span.avatar img[src='undefined'] {
+  display: none;
+}
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 650px;
 }

@@ -72,6 +72,8 @@ module.exports = class MembersView extends Marionette.CompositeView
       item.id = model.get 'id'
       item.last_name = model.get 'last_name'
       item.first_name = model.get 'first_name'
+      item.color = model.get 'avatar_background_color'
+      item.url = model.get 'avatar_url'
       listItems.push item
     listItems
 
@@ -106,6 +108,10 @@ module.exports = class MembersView extends Marionette.CompositeView
           this_.addMember {first_name: $item.data('first_name'), last_name: $item.data('last_name'), id: value}
         render:
           item: (item, escape) ->
-            return "<div>" + escape(item.first_name) + ' ' + escape(item.last_name) + '</div>';
+            return "<div><span class='avatar' style='background-color: " +  \
+              item.color + ";'><img src='" + item.url + "'></span>" + \
+              escape(item.first_name) + ' ' + escape(item.last_name) + '</div>'
           option: (item, escape) ->
-            return "<div>" + escape(item.first_name) + ' ' + escape(item.last_name) + '</div>';
+            return "<div><span class='avatar' style='background-color: " +  \
+              item.color + ";'><img src='" + item.url + "'></span>" + \
+              escape(item.first_name) + ' ' + escape(item.last_name) + '</div>'
