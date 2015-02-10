@@ -179,6 +179,9 @@
   height: 64px;
   border-bottom: 1px solid #ededed;
 }
+.gc-clients-list > .row:hover {
+  background: #fbfbfb;
+}
 .gc-clients-list > .row:first-child {
   border-top: 1px solid #ededed;
 }
