@@ -1,5 +1,6 @@
 Marionette = require 'backbone.marionette'
 
+SendMessageModalView = require 'views/trainer/clients/send-message-modal-view'
 ClientFormModalView = require 'views/trainer/clients/client-form-modal-view'
 GroupFormModalView = require 'views/trainer/clients/group-form-modal-view'
 
@@ -14,16 +15,19 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
   events:
     "submit @ui.inviteForm": "submitClientForm"
     "click .show-client-form": "showClientEditModal"
+    "click .show-message-form": "showSendMessageModal"
     "show.bs.modal @ui.inviteModal": "fillClientEmail"
 
   regions:
     'clientForm': '#gc-edit-client-modal'
+    'sendMessageForm': '#gc-send-message-modal'
 
   ui:
     inviteModal: '#gc-invite-client-modal'
     inviteForm: '.invite-client-form'
     inviteEmail: '.invite-client-form input[name=email]'
     clientFormModal: "#gc-edit-client-modal"
+    sendMessageModal: "#gc-send-message-modal"
 
   initialize: (data)->
     @viewType = data.viewType
@@ -72,3 +76,8 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
 
     @clientForm.show clientFormModal
     @ui.clientFormModal.modal('show')
+
+  showSendMessageModal: (ev) ->
+    sendMessageModal = new SendMessageModalView
+    @sendMessageForm.show sendMessageModal
+    @ui.sendMessageModal.modal('show')

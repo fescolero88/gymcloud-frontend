@@ -55,7 +55,7 @@ class App extends Marionette.Application
           @vent.trigger "spinner:global:stop"  if --@loadingCount is 0
 
       $(document).ajaxError (event, jqxhr, settings, thrownError)->
-        if jqxhr.status in [401, 403]
+        if jqxhr.status in [401] #403
           window.location.replace '#/logout'
         spinner.stop()
 

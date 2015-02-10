@@ -40,7 +40,8 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
     @isDroppable = true
     @itemId = data.itemId
     @viewType = data.viewType
-    @assign = data.assign || 'exercises'
+    assign = if @viewType is 'clients' then 'exercises' else 'members'
+    @assign = data.assign || assign
     @key = data.key
     @recentActivityCollection = data.recentActivity
 
