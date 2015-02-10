@@ -17,6 +17,7 @@ require 'selectize'
 ViewHelper = require 'views/helpers/view-helper'
 FormValidatorHelper = require 'views/helpers/form-validator-helper'
 JqueryHelper = require 'views/helpers/jquery-helper'
+MessengerHelper = require 'views/helpers/messenger-helper'
 
 BaseView = require 'views/general/base-view'
 
@@ -34,6 +35,7 @@ class App extends Marionette.Application
       new JqueryHelper().initialize()
       new ViewHelper().initialize(Handlebars)
       new FormValidatorHelper().initialize()
+      new MessengerHelper().initialize()
       # --- Helpers -----
 
       # --- Globar spinner -----
@@ -55,8 +57,15 @@ class App extends Marionette.Application
           @vent.trigger "spinner:global:stop"  if --@loadingCount is 0
 
       $(document).ajaxError (event, jqxhr, settings, thrownError)->
-        if jqxhr.status in [401] #403
+        if jqxhr.status in [401]
           window.location.replace '#/logout'
+
+        if jqxhr.status is 403
+          @request 'messenger:show',
+            hideAfter: 5
+            message: 'This action is forbidden'
+            type: 'error'
+
         spinner.stop()
 
       $.ajaxSetup
@@ -144,9 +153,9 @@ class App extends Marionette.Application
                 window.location.replace '#tr'
               else
                 window.location.replace '#'
-          baseView.show()
+          baseView.trigger('showBody')
       else
-        baseView.show()
+        baseView.trigger('showBody')
       # --- Get profile -----
 
 $ ->

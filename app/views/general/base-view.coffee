@@ -10,10 +10,11 @@ module.exports = class BaseView extends Marionette.LayoutView
   ui:
     'appRegion': 'region[data-name="app"]'
 
-  initialize: =>
+  initialize: ->
     App.vent.on 'body:change-class', @changeClass
+    @on 'showBody', @show
 
-  onDestroy: =>
+  onDestroy: ->
     App.vent.off 'body:change-class', @changeClass
 
   show: ->
@@ -21,4 +22,3 @@ module.exports = class BaseView extends Marionette.LayoutView
 
   changeClass: (className) =>
     @$el.removeClass().addClass className
-

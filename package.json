@@ -58,6 +58,7 @@
     "backbone.marionette": "./node_modules/backbone.marionette/lib/core/backbone.marionette.js",
     "bootstrap": "./bower_components/bootstrap/dist/js/bootstrap.js",
     "spinner": "./bower_components/spin.js/spin.js",
+    "messenger": "./bower_components/messenger/build/js/messenger.js",
     "moment": "./node_modules/moment/min/moment.min.js",
     "selectize": "./bower_components/selectize/dist/js/selectize.js",
     "jquery-sortable": "./bower_components/jquery-sortable/source/js/jquery-sortable-min.js"
