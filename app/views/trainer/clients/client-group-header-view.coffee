@@ -53,6 +53,9 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
       dataType: 'json'
       success: =>
         @ui.inviteModal.modal('hide')
+        App.request 'messenger:show',
+          message: "Invitation successfully sent"
+          type: 'info'
       error: (data)=>
         errorMsg = data.responseJSON.error
         if errorMsg?
