@@ -1,0 +1,74 @@
+ul.messenger.messenger-fixed.messenger-on-right.messenger-theme-gymcloud {
+  width: 242px;
+}
+.messenger-theme-gymcloud .messenger-message-slot {
+  display: none;
+  width: 242px;
+  height: 55px;
+  margin-bottom: 15px;
+}
+.messenger-theme-gymcloud .messenger-message-slot .gc-notify-inner {
+  background: #fff;
+  width: 242px;
+  height: 55px;
+  border-left: 5px solid #fff;
+  border-radius: 3px;
+  box-shadow: 0 0 5px 0 #999;
+}
+.messenger-theme-gymcloud .messenger-message-slot .gc-notify-inner-error {
+  border-color: #e54d42;
+}
+.messenger-theme-gymcloud .messenger-message-slot .gc-notify-inner-success {
+  border-color: #39ca74;
+}
+.messenger-theme-gymcloud .messenger-message-slot .gc-notify-inner-info {
+  border-color: #ff9519;
+}
+.messenger-theme-gymcloud .messenger-message-slot p {
+  font-size: 15px;
+  line-height: 16px;
+  color: #808080;
+  margin: -3px 0 0 0;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  width: 175px;
+}
+.messenger-theme-gymcloud .messenger-message-slot .gc-notify-icon-wrapper {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  margin: 15px 14px;
+  color: #fff;
+  text-align: center;
+}
+.messenger-theme-gymcloud .gc-notify-icon-wrapper-error {
+  background: #e54d42;
+  font-size: 16px;
+  line-height: 25px;
+}
+.messenger-theme-gymcloud .gc-notify-icon-wrapper-success {
+  background: #39ca74;
+  font-size: 16px;
+  line-height: 25px;
+}
+.gc-notify-icon-sucess {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-image: url('../images/icon-exercises.png');
+  background-size: cover;
+  background-position: 0 3px;
+}
+.messenger-theme-gymcloud .gc-notify-icon-wrapper-info {
+  background: #ff9519;
+  font-size: 16px;
+  line-height: 25px;
+}
+.messenger-theme-gymcloud .messenger-message-slot.messenger-shown {
+  display: block;
+}
+.gc-notify-icon-sucess {
+
+}

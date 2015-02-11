@@ -1,2 +1,16 @@
-<!-- Template for Artemy -->
-<h2>{{message}}<h2>
+<div class="gc-notify-inner gc-notify-inner-{{type}}">
+  <div class="gc-notify-icon-wrapper gc-notify-icon-wrapper-{{type}}">
+    {{#ifEqual type 'success'}}
+      <span class="gc-notify-icon-sucess"></span>
+    {{/ifEqual}}
+    {{#ifEqual type 'error'}}
+      ×
+    {{/ifEqual}}
+    {{#ifEqual type 'info'}}
+      !
+    {{/ifEqual}}
+  </div>
+  <p>
+    {{message}}
+  </p>
+</div>

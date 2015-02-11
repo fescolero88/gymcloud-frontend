@@ -18,7 +18,7 @@ module.exports = class MessengerHelper
       theme: 'gymcloud'
 
     App.reqres.setHandler 'messenger:show', (data)->
-      hideAfter = data.hideAfter ?= 1
+      hideAfter = data.hideAfter ?= 3
       Messenger().post
         message: data.message
         type: data.type
