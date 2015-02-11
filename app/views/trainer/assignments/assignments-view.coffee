@@ -68,6 +68,9 @@ module.exports = class AssignmentsListView extends Marionette.CompositeView
     model.destroy().then =>
       if !@collection.length
         @collection.isFetched = false
+      App.request 'messenger:show',
+        message: "Exercise was deleted from the list"
+        type: 'error'
 
   assignItem: (item)=>
     data =
@@ -80,6 +83,9 @@ module.exports = class AssignmentsListView extends Marionette.CompositeView
       data: JSON.stringify data
       success: (data) =>
         @collection.add data
+        App.request 'messenger:show',
+          message: "#{data.name} was assigned"
+          type: 'success'
       statusCode:
         403: (data) =>
           return
