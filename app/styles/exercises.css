@@ -271,6 +271,9 @@
   border-bottom: 1px solid #ededed;
   padding: 15px 0;
 }
+.gc-exercises-assign-list > .row:hover {
+  background: #fbfbfb;
+}
 .gc-exercises-assign-list > .row.padding-0 {
   padding: 0;
 }
@@ -388,6 +391,17 @@
   font-size: 14px;
   color: #cbcacb;
   line-height: 16px;
+}
+.selectize-control.multi .selectize-input > div {
+  background: #e1eef6;
+}
+.selectize-control.multi .selectize-input > div .remove {
+  color: #44a1e0;
+  font-size: 16px;
+  font-weight: lighter;
+}
+.selectize-control.multi .selectize-input > div .remove:active {
+  color: #fff;
 }
 @media (min-width: 1200px) {
   .gc-exercises-bests-icon {

@@ -25,8 +25,8 @@ module.exports = class ViewHelper
 
     Handlebars.registerHelper 'getSex', (gender, options) ->
       map =
-        false: 'Women'
-        true: 'Man'
+        false: 'Female'
+        true: 'Male'
       map[gender]
 
     Handlebars.registerHelper "prettifyDate", (timestamp) ->
