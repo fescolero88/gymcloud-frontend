@@ -10,14 +10,28 @@ module.exports = class ClientItemView extends Marionette.ItemView
     "sync": "render"
     "change": "render"
 
+  ui:
+    deleteSingle: '.gc-clients-list-client-delete'
+    moveSingle: '.gc-clients-list-client-move'
+
+  events:
+    'click @ui.deleteSingle': 'deleteSingle'
+    'click @ui.moveSingle': 'moveSingle'
+
+  deleteSingle: (ev) =>
+    ev.preventDefault()
+    @model.destroy()
+
+  moveSingle: (ev) =>
+    ev.preventDefault()
+    $(ev.currentTarget).closest('.row').find(':checkbox').prop('checked', true)
+    App.vent.trigger 'individual:move', ev
+
 
 module.exports = class ClientListView extends Marionette.CompositeView
   template: Templates.trainer.clients.client_list
   childView: ClientItemView
   childViewContainer: 'ul'
-
-  ui:
-    checkedCheckboxes: 'input[type=checkbox]:checked'
 
   initialize: =>
     @on 'rm-client', @rmClient

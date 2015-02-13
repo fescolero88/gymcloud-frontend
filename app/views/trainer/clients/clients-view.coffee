@@ -43,6 +43,10 @@ module.exports = class ClientsView extends Marionette.LayoutView
     viewType = 'clients' if typeof viewType is 'object'
     @viewType = viewType
     @checkButtons()
+    App.vent.on 'individual:move', @showMovetogroupModal
+
+  onDestroy: =>
+    App.vent.off 'individual:move', @showMovetogroupModal
 
   toggleCheck: (ev) =>
     checked = @ui.mainCheckbox.is(':checked')
@@ -111,7 +115,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
     @groupForm.show groupFormModal
     @ui.groupFormModal.modal('show')
 
-  showMovetogroupModal: (ev) ->
+  showMovetogroupModal: (ev) =>
     ev.preventDefault()
     moveToGroupView = new MoveToGroupView collection: @groups.currentView.collection
     @moveToGroup.show moveToGroupView
@@ -137,3 +141,5 @@ module.exports = class ClientsView extends Marionette.LayoutView
       type: 'POST'
       data: JSON.stringify data
       dataType: 'json'
+      success: =>
+        @$el.find('#clients-region').find('input[type=checkbox]:checked').removeAttr('checked')
