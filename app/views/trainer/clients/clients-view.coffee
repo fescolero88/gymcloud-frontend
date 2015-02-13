@@ -115,7 +115,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
     @ui.groupFormModal.modal('show')
 
   showMovetogroupModal: (ev) =>
-    ev.preventDefault() if ev
+    ev?.preventDefault()
     moveToGroupView = new MoveToGroupView collection: @groups.currentView.collection
     @moveToGroup.show moveToGroupView
     @ui.moveToGroupModal.modal('show')
