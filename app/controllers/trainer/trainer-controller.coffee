@@ -38,6 +38,9 @@ module.exports = class TrainerController extends Marionette.Controller
     groupCollection.fetch()
     groupsView = new GroupListView collection: groupCollection
     clientsPageView.groups.show groupsView
+
+    clientsPageView.initRegionListeners()
+
     if viewType is 'individuals'
       groupsView.$el.hide()
 

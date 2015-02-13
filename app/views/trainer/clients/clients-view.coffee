@@ -43,10 +43,9 @@ module.exports = class ClientsView extends Marionette.LayoutView
     viewType = 'clients' if typeof viewType is 'object'
     @viewType = viewType
     @checkButtons()
-    App.vent.on 'individual:move', @showMovetogroupModal
 
-  onDestroy: =>
-    App.vent.off 'individual:move', @showMovetogroupModal
+  initRegionListeners: =>
+    @listenTo @clients.currentView, 'individual:move', @showMovetogroupModal
 
   toggleCheck: (ev) =>
     checked = @ui.mainCheckbox.is(':checked')
@@ -116,7 +115,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
     @ui.groupFormModal.modal('show')
 
   showMovetogroupModal: (ev) =>
-    ev.preventDefault()
+    ev.preventDefault() if ev
     moveToGroupView = new MoveToGroupView collection: @groups.currentView.collection
     @moveToGroup.show moveToGroupView
     @ui.moveToGroupModal.modal('show')

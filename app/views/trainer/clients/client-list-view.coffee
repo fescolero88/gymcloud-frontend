@@ -25,7 +25,7 @@ module.exports = class ClientItemView extends Marionette.ItemView
   moveSingle: (ev) =>
     ev.preventDefault()
     $(ev.currentTarget).closest('.row').find(':checkbox').prop('checked', true)
-    App.vent.trigger 'individual:move', ev
+    @trigger 'individual:move'
 
 
 module.exports = class ClientListView extends Marionette.CompositeView
@@ -36,8 +36,14 @@ module.exports = class ClientListView extends Marionette.CompositeView
   initialize: =>
     @on 'rm-client', @rmClient
 
+  childEvents:
+    'individual:move': 'moveClient'
+
   rmClient: =>
     for check in @$el.find('input[type=checkbox]')
       if $(check).is(':checked')
         model = @collection.get $(check).data('id')
         model.destroy()
+
+  moveClient: =>
+    @trigger 'individual:move'
