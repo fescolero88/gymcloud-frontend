@@ -20,8 +20,7 @@ module.exports = class ClientItemView extends Marionette.ItemView
 
   deleteSingle: (ev) =>
     ev.preventDefault()
-    model = @_parent.collection.get $(ev.currentTarget).data('id')
-    model.destroy()
+    @model.destroy()
 
   moveSingle: (ev) =>
     ev.preventDefault()

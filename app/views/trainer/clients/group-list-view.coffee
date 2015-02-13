@@ -20,8 +20,7 @@ module.exports = class GroupItemView extends Marionette.ItemView
 
   deleteSingle: (ev) =>
     ev.preventDefault()
-    model = @_parent.collection.get $(ev.currentTarget).data('id')
-    model.destroy()
+    @model.destroy()
 
 
 module.exports = class GroupListView extends Marionette.CompositeView
