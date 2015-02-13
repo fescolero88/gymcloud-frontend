@@ -12,6 +12,17 @@ module.exports = class GroupItemView extends Marionette.ItemView
     "sync": "render"
     "change": "render"
 
+  ui:
+    deleteSingle: '.gc-clients-list-client-delete'
+
+  events:
+    'click @ui.deleteSingle': 'deleteSingle'
+
+  deleteSingle: (ev) =>
+    ev.preventDefault()
+    model = @_parent.collection.get $(ev.currentTarget).data('id')
+    model.destroy()
+
 
 module.exports = class GroupListView extends Marionette.CompositeView
   template: Templates.trainer.clients.group_list
@@ -21,19 +32,8 @@ module.exports = class GroupListView extends Marionette.CompositeView
   initialize: =>
     @on 'rm-group', @rmGroup
 
-  ui:
-    deleteSingle: '.gc-clients-list-client-delete'
-
-  events:
-    'click @ui.deleteSingle': 'deleteSingle'
-
   rmGroup: =>
     for check in @$el.find('input[type=checkbox]')
       if $(check).is(':checked')
         model = @collection.get $(check).data('id')
         model.destroy()
-
-  deleteSingle: (ev) =>
-    ev.preventDefault()
-    model = @collection.get $(ev.currentTarget).data('id')
-    model.destroy()
