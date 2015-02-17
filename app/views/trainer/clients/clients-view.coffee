@@ -142,3 +142,6 @@ module.exports = class ClientsView extends Marionette.LayoutView
       dataType: 'json'
       success: =>
         @$el.find('#clients-region').find('input[type=checkbox]:checked').removeAttr('checked')
+        App.request 'messenger:show',
+          message: "Success"
+          type: 'success'
