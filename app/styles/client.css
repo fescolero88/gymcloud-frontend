@@ -164,7 +164,7 @@
 }
 .gc-clients-list-wrapper h3 {
   color: #9ea0a1;
-  font-size: 14px;
+  font-size: 18px;
   margin: 15px 0 20px 0;
 }
 .gc-clients-list {
@@ -231,7 +231,7 @@
   background-size: cover;
   width: 28px;
 }
-.gc-clients-list-avatar-wrapper.gc-clients-list-avatar-none {
+.gc-clients-list-avatar-wrapper.gc-clients-list-avatar-exist {
   background: none;
 }
 .gc-clients-list-avatar-wrapper img {
