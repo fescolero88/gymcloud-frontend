@@ -58,7 +58,7 @@ module.exports = class TrainerController extends Marionette.Controller
       recentActivity.url = "/api/mobile/clients/#{id}/notifications"
     else
       recentActivity.url = "/api/mobile/client_groups/#{id}/notifications"
-    recentActivity.fetch()
+    recentActivity.loadMore()
 
     itemPageView = new ClientGroupView
       itemModel: itemModel
