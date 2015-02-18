@@ -99,7 +99,11 @@ body.auth {
 }
 .gc-login-form-wrapper form label {
     font-size: 10px;
+    font-weight: normal;
     color: #a6a7aa;
+}
+.gc-login-form-wrapper form label.gc-error-message {
+  margin-right: 25px;
 }
 .gc-login-form-wrapper form .checkbox label {
     font-size: 12.5px;
@@ -228,6 +232,15 @@ form .checkbox {
   margin-top: 30px;
 }
 .form-group input[type=radio] {
+  margin: 0;
+}
+.gc-signup-with-email-title {
+  font-size: 13px;
+  text-align: center;
+  margin: 0 0 25px 0;
+}
+#gc-signup-message .modal-body p {
+  font-size: 16px;
   margin: 0;
 }
 @media (min-width: 768px) {

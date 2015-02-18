@@ -11,7 +11,7 @@
                 <br>
                 Personal Trainer
               </span>
-              <input type="radio" checked name="trainer-type" value="personal">
+              <input type="radio" checked name="account_type" value="1">
             </label>
           </li>
           <li class="col-xs-4">
@@ -21,7 +21,7 @@
                 <br>
                 Conditioning Coach
               </span>
-              <input type="radio" name="trainer-type" value="couch">
+              <input type="radio" name="account_type" value="2">
             </label>
           </li>
           <li class="col-xs-4">
@@ -33,7 +33,7 @@
                 <br>
                 Professional
               </span>
-              <input type="radio" name="trainer-type" value="not">
+              <input type="radio" name="account_type" value="3">
             </label>
           </li>
         </ul>
@@ -41,28 +41,31 @@
           <div class="col-xs-12 col-md-6 text-xs-center text-md-left">
             <a class="btn btn-primary" href="#">
               <i class="fa fa-facebook"></i>
-              Log in with Facebook
+              Sign up with Facebook
             </a>
           </div>
           <div class="col-xs-12 col-md-6 text-xs-center text-md-right">
             <a class="btn btn-danger" href="#">
               <i class="fa fa-google-plus"></i>
-              Log in with Google+
+              Sign up with Google+
             </a>
           </div>
         </div>
+        <div class="row gc-signup-with-email-title">
+          Or register with your email:
+        </div>
         <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+          <label for="gc-signup-email">Email address</label>
+          <input type="email" name="email" class="form-control" id="gc-signup-email" placeholder="Enter email">
         </div>
         <div class="row form-group">
           <div class="col-xs-6">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <label for="gc-signup-password-1">Password</label>
+            <input type="password" name="password" class="form-control" id="gc-signup-password-1" placeholder="Password">
           </div>
           <div class="col-xs-6">
-            <label for="exampleInputPassword2">Password Confirm</label>
-            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+            <label for="gc-signup-password-2">Password Confirm</label>
+            <input type="password" name="password_confirmation" class="form-control" id="gc-signup-password-2" placeholder="Password">
           </div>
         </div>
         <div class="form-group row">
