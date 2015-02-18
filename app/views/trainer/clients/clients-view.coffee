@@ -76,9 +76,18 @@ module.exports = class ClientsView extends Marionette.LayoutView
       @ui.mainCheckbox.prop 'checked', true
 
   countSelected: =>
-    count = @$el.find('.gc-clients-list-ind').find('input[type=checkbox]:checked').length
-    if count
-      @ui.checkedCounter.removeClass('hidden').find('span').text(count)
+    count_ind = @$el.find('.gc-clients-list-ind').find('input[type=checkbox]:checked').length
+    count_gr = @$el.find('.gc-clients-list-gr').find('input[type=checkbox]:checked').length
+    if count_ind or count_gr
+      text = ""
+      if count_ind
+        text += "#{count_ind} clients(s)"
+      if count_ind and count_gr
+        text += ", "
+      if count_gr
+        text += "#{count_gr} group(s)"
+      @ui.checkedCounter.text(text + " selected")
+      @ui.checkedCounter.removeClass('hidden')
     else
       @ui.checkedCounter.addClass('hidden')
 
