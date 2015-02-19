@@ -10,6 +10,14 @@ module.exports = class AuthView extends Marionette.ItemView
   ui:
     inputEmail: "input[type='email']"
     inputPassword: "input[type='password']"
+    signUpModal: '#gc-signup-message'
+
+  initialize: (data) =>
+    @signUp = data.signUp
+
+  onShow: =>
+    if @signUp
+      @ui.signUpModal.modal 'show'
 
   login: (event) ->
     event.preventDefault()
