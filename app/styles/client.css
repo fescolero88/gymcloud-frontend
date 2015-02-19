@@ -149,6 +149,7 @@
 .gc-modal .modal-footer .btn-link {
   border: none;
   font-size: 14px;
+  text-decoration: none;
 }
 .gc-modal .modal-footer .btn-primary:hover {
   background: #3398db;
