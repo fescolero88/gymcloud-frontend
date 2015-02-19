@@ -16,6 +16,9 @@
   background: transparent url('/static/images/avatar-placeholder.png') 60% 55% no-repeat;
   background-size: 70%;
 }
+.gc-usercard-large .gc-usercard-avatar-wrapper.gc-usercard-avatar-exist {
+  background: #fff;
+}
 .gc-usercard-large .gc-usercard-avatar {
   height: 100%;
   width: 100%;
