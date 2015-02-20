@@ -130,7 +130,7 @@ class App extends Marionette.Application
       @reqres.setHandler 'client:properties', (id) ->
         App.cache?['client:properties']?[id]
 
-      @reqres.setHandler 'client:properties:set', (id, properties)->
+      @reqres.setHandler 'client:properties:set', (id, properties) ->
         App.cache ?= {}
         App.cache['client:properties'] ?= {}
         App.cache['client:properties'][id] = properties
