@@ -124,6 +124,15 @@ class App extends Marionette.Application
 
       @reqres.setHandler 'data:programs:reset', (data)->
         App.data.programs = data
+
+      @reqres.setHandler 'client:properties', (id) ->
+        App.cache?[client:properties]?[id]
+
+      @reqres.setHandler 'client:properties:set', (id, properties)->
+        App.cache? = {}
+        App.cache[client:properties]? = {}
+        App.cache[client:properties][id] = properties
+
       # --- Data handlers -----
 
       # --- Base layout -----

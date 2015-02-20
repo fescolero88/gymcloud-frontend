@@ -53,14 +53,13 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
     @collection = new Backbone.Collection
 
   onShow: =>
-    @properties = App.request("client:#{@id}:properties") || new ClientsPropertyCollection
+    @properties = App.request("client:properties", @id) || new ClientsPropertyCollection
     if @properties.length
       @fillProperties()
     else
       @properties.url = "#{@properties.urlRoot}/#{@id}/properties"
       @properties.fetch().then =>
-        App.reqres.setHandler "client:#{@id}:properties", =>
-          @properties
+        App.request "client:properties:set", @id, @properties
         @fillProperties()
 
   fillProperties: =>

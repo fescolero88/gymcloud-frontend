@@ -14,11 +14,7 @@ class PersonalBestItemView extends Marionette.ItemView
   model: PersonalBestModel
 
   modelEvents:
-    "sync": "render"
-
-  render: ->
-    super
-    @$el.data('id', @model.id)
+    sync: 'render'
 
 class PersonalBestCollectionView extends Marionette.CollectionView
   childView: PersonalBestItemView
@@ -59,7 +55,7 @@ module.exports = class PersonalBestView extends Marionette.LayoutView
     @ui.modal.modal 'show'
     @listenTo modal, 'personal_best:added', @personalBestAdded
 
-  personalBestAdded: (data) =>
+  personalBestAdded: =>
     @ui.modal.modal 'hide'
     App.request 'messenger:show',
       message: "New personal best added"
