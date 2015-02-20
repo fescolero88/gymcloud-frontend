@@ -64,7 +64,7 @@ module.exports = class SignUpView extends Marionette.LayoutView
   template: Templates.auth.sign_up
 
   regions:
-    'wrap': '.page-wrap'
+    'signUp': '#gc-signup-region'
 
   initialize: =>
     @step1 = new SignUpStep1 model: new SignUpStep1Model
@@ -73,11 +73,11 @@ module.exports = class SignUpView extends Marionette.LayoutView
     @listenTo @step2, 'final', @final
 
   onShow: =>
-    @wrap.show @step1
+    @signUp.show @step1
 
   nextStep: (dataStep1) =>
     @steps = dataStep1
-    @wrap.show @step2
+    @signUp.show @step2
 
   final: (dataStep2) =>
     @steps.set dataStep2.attributes
