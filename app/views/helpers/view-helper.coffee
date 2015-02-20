@@ -32,6 +32,10 @@ module.exports = class ViewHelper
     Handlebars.registerHelper "prettifyDate", (timestamp) ->
       moment(new Date(timestamp)).fromNow()
 
+    Handlebars.registerHelper 'date', (timestamp) ->
+      moment(timestamp).format "MMMM D, YYYY"
+
+
     Handlebars.registerHelper 'ifCond', (v1, operator, v2, options)->
       switch operator
           when '==', '==='
@@ -50,3 +54,5 @@ module.exports = class ViewHelper
               return if v1 || v2 then options.fn @ else options.inverse @
           else
               return options.inverse @
+
+

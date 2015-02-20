@@ -80,7 +80,11 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
       exercise.fetch()
       @centerView = new ExerciseView
         model: exercise
+
       personalBestView = new PersonalBestView
+        itemId: @itemId
+        assign: @assign
+        key: @key
       @rightside.show personalBestView
       @showCenterView()
       @key = null
