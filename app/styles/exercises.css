@@ -480,3 +480,27 @@
     font-size: 12px;
   }
 }
+
+.load-more {
+  color: #3398db;
+  display: inline-block;
+  text-transform: uppercase;
+  border: 1px solid #3398db;
+  border-radius: 50px;
+  cursor: pointer;
+  line-height: 20px;
+  padding: 3px 12px;
+  margin: 0;
+  font-size: 12px;
+}
+.load-more:active,
+.load-more:focus {
+  text-decoration: none;
+  color: #3398db;
+  outline: none;
+}
+.load-more:hover {
+  background-color: #3398db;
+  color: #fff;
+  text-decoration: none;
+}

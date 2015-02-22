@@ -56,16 +56,15 @@ class App extends Marionette.Application
         if @loadingCount > 0
           @vent.trigger "spinner:global:stop"  if --@loadingCount is 0
 
-      $(document).ajaxError (event, jqxhr, settings, thrownError)->
-        if jqxhr.status in [401]
+      $(document).ajaxError (event, jqxhr, settings, thrownError)=>
+        if jqxhr.status is 401
           window.location.replace '#/logout'
 
         if jqxhr.status is 403
           @request 'messenger:show',
             hideAfter: 5
-            message: 'This action is forbidden'
+            message: jqxhr.responseJSON.message
             type: 'error'
-
         spinner.stop()
 
       $.ajaxSetup

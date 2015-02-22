@@ -136,6 +136,8 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
     if !@key
       @showActivity(true)
     @leftside.show @centerView
+    @listenTo @centerView, 'activityRefresh', ->
+      @activityView.refresh()
 
   assignDragged: (item) =>
     if @centerView.assignName isnt item.get 'category'
