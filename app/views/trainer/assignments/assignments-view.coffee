@@ -83,12 +83,10 @@ module.exports = class AssignmentsListView extends Marionette.CompositeView
       data: JSON.stringify data
       success: (data) =>
         @collection.add data
+        @trigger 'activityRefresh'
         App.request 'messenger:show',
           message: "#{data.name} was assigned"
           type: 'success'
-      statusCode:
-        403: (data) =>
-          return
 
   initSearchSelect: =>
     assignments = App.request "data:#{@assignName}"

@@ -63,7 +63,7 @@ class App extends Marionette.Application
         if jqxhr.status is 403
           @request 'messenger:show',
             hideAfter: 5
-            message: jqxhr.responseJSON.error
+            message: jqxhr.responseJSON.message
             type: 'error'
         spinner.stop()
 

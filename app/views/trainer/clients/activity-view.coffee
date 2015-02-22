@@ -18,3 +18,8 @@ module.exports = class ActivityView extends Marionette.ItemView
   loadMore: (ev)->
     ev.preventDefault()
     @collection.loadMore()
+
+  refresh: (ev)->
+    @collection.page = 0
+    @collection.prevLength = 0
+    @collection.loadMore(true)
