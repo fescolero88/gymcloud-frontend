@@ -66,7 +66,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
               $inputGroup = $input.closest('.form-group')
               @switchError error_msg[0], $inputGroup
           else
-            @trigger 'closeModal'
+            @trigger 'modal:close'
             @trigger 'addToClientsCollection', model
             if avatar[0].files[0]
               data = new FormData()

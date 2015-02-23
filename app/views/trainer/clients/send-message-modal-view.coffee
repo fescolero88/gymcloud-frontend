@@ -2,12 +2,15 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 ClientCollection = require 'models/trainer/client-collection'
+MessageModel = require 'models/trainer/message-model'
 
 module.exports = class SendMessageModalView extends Marionette.ItemView
   className: 'modal-dialog'
   template: Templates.trainer.clients.send_message_modal
 
   initialize: (data)->
+    @model = new MessageModel
+    Backbone.Validation.bind @
     @selectedItems = data.selectedItems
 
   onShow: ->
@@ -17,11 +20,13 @@ module.exports = class SendMessageModalView extends Marionette.ItemView
     'liveSearch':   '.live-search'
     'form':         'form'
     'messageBody':  'textarea[name=body]'
+    'messageNone':  '.gc-send-msessage-none'
+    'messageAll':  '.gc-send-msessage-none'
 
   events:
-    'click  .gc-send-message-none': 'selectNone'
-    'click  .gc-send-message-all':  'selectAll'
-    'submit form':                  'submitForm'
+    'click  @ui.messageNone': 'selectNone'
+    'click  @ui.messageAll':  'selectAll'
+    'submit @ui.form':        'submitForm'
 
   searchItems: (models) ->
     listItems = []
@@ -78,15 +83,9 @@ module.exports = class SendMessageModalView extends Marionette.ItemView
     isError = false
     clients = @ui.liveSearch.val()
     message = @ui.messageBody.val()
-    if !clients.length
-      @switchError 'Choose client', @ui.liveSearch.closest('.form-group')
-      isError = true
-    if !message.length
-      @switchError 'Type message', @ui.messageBody.closest('.form-group')
-      isError = true
-    if !isError
-      @switchError false, @ui.liveSearch.closest('.form-group')
-      @switchError false, @ui.messageBody.closest('.form-group')
+    @model.set 'clients', clients
+    @model.set 'body', message
+    if @model.isValid true
       data =
         body: message
       for clientId in clients.split(',')
@@ -95,4 +94,4 @@ module.exports = class SendMessageModalView extends Marionette.ItemView
           type: 'POST'
           dataType: 'json'
           data: JSON.stringify data
-        @trigger 'closeModal'
+        @trigger 'modal:close'

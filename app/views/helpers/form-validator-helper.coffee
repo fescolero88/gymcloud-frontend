@@ -21,13 +21,13 @@ module.exports = class FormValidatorHelper
 
     _.extend Backbone.Validation.callbacks,
         valid: (view, attr, selector) ->
-          $inputGroup = view.$el.find("input[name=#{attr}]").closest('.form-group')
+          $inputGroup = view.$el.find("[name=#{attr}]").closest('.form-group')
           $inputGroup.removeClass('gc-invalid').addClass('gc-valid')
           $inputGroup.find('.gc-valid-icon').removeClass('hide')
           $inputGroup.find('.gc-error-message').text("")
 
         invalid: (view, attr, error, selector) ->
-          $inputGroup = view.$el.find("input[name=#{attr}]").closest('.form-group')
+          $inputGroup = view.$el.find("[name=#{attr}]").closest('.form-group')
           $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
           $inputGroup.find('.gc-valid-icon').addClass('hide')
           $inputGroup.find('.gc-error-message').text(error)
