@@ -1,3 +1,5 @@
+moment = require 'moment'
+
 module.exports = class ViewHelper
   initialize: (Handlebars)->
     Handlebars.registerPartial "sidebar_item", Templates.trainer.sidebar.sidebar_item

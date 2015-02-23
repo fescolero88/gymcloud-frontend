@@ -1,13 +1,16 @@
-window.Templates = require 'templates/templates_build.js'
+$ = require 'jquery'
+window.jQuery = $
+window.$ = $
+
 config = require 'config'
-require 'moment'
 
 Spinner = require 'spinner'
 Sortable = require 'jquery-sortable'
 Handlebars = require 'handlebars'
+window.Templates = require 'templates/templates_build.js'
 
 Backbone = require 'backbone'
-Backbone.Validation = require 'backbone.validation'
+Backbone.Validation = require 'backbone-validation'
 Backbone.$ = require 'jquery'
 Marionette = require 'backbone.marionette'
 
