@@ -6,6 +6,8 @@
   font-style: normal;
 }
 body.auth {
+  height: auto;
+  min-height: 100%;
   background: #fff url('../images/header-login.png') 50% top no-repeat;
   background-size: cover;
 }
@@ -55,7 +57,7 @@ body.auth {
 .gc-login-form-wrapper {
     margin: 2% auto 0;
     float: none;
-    max-width: 500px;
+    max-width: 510px;
     padding: 0;
 }
 .gc-login-form-wrapper > h1 {
@@ -69,7 +71,7 @@ body.auth {
 }
 .gc-login-form-wrapper form {
     background: #fff;
-    padding: 10px;
+    padding: 10px 15px;
     border-radius: 0 0 5px 5px;
 }
 .gc-login-social {
@@ -81,7 +83,7 @@ body.auth {
 .gc-login-social .btn {
     font-size: 14px;
     color: #fff;
-    padding: 12px 15px;
+    padding: 12px 23px;
     border-radius: 50px;
     font-weight: bold;
 }
@@ -105,9 +107,6 @@ body.auth {
     font-weight: normal;
     color: #a6a7aa;
     font-weight: 400;
-}
-.gc-login-form-wrapper form label.gc-error-message {
-  margin-right: 25px;
 }
 .gc-login-form-wrapper form .checkbox label {
     font-size: 12.5px;
@@ -260,6 +259,9 @@ form .checkbox {
 .gc-nav-top .icon-bar {
   background: white;
 }
+.checkbox.gc-invalid span {
+  color: #ff560a;
+}
 @media (min-width: 768px) {
   .gc-nav-top {
     position: absolute;
@@ -306,8 +308,7 @@ form .checkbox {
   }
  .gc-login-form-wrapper {
       position: relative;
-      margin: 12.5% auto 0 auto;
-      padding: 0 15px;
+      margin: 17% auto 0 auto;
   }
   .gc-login-form-wrapper > h1 {
       padding: 25px;

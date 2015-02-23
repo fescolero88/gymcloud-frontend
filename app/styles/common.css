@@ -82,7 +82,9 @@ html, body {
 body.dragging, body.dragging * {
   cursor: move !important;
 }
-
+body > region {
+  display: block;
+}
 body > region > .container-fluid {
   padding: 0;
   height: 100%;
@@ -354,7 +356,12 @@ body > region > .container-fluid {
   color: #3598dc;
   font-size: 12px;
 }
-.form-group.gc-invalid input.form-control {
+.form-group.gc-valid input.form-control,
+.form-group.gc-valid select.form-control {
+  border-color: #3598dc;
+}
+.form-group.gc-invalid input.form-control,
+.form-group.gc-invalid select.form-control {
   border-color: #ff560a;
 }
 .form-group .gc-req {

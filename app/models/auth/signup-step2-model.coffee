@@ -23,7 +23,13 @@ module.exports = class SignUpStep2Model extends Backbone.Model
       required: true
       pattern: 'digits'
 
-    birth:
+    birth_day:
+      required: true
+
+    birth_month:
+      required: true
+
+    birth_year:
       required: true
 
 
