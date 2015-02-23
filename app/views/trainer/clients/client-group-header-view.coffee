@@ -81,6 +81,9 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
     @ui.clientFormModal.modal('show')
 
   showSendMessageModal: (ev) ->
-    sendMessageModal = new SendMessageModalView
+    selectedItems = [@model.id]
+    sendMessageModal = new SendMessageModalView selectedItems: selectedItems
     @sendMessageForm.show sendMessageModal
     @ui.sendMessageModal.modal('show')
+    @listenTo sendMessageModal, 'closeModal', =>
+      @ui.sendMessageModal.modal('hide')
