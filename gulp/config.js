@@ -11,6 +11,29 @@ module.exports = {
   configFile: src + '/config.coffee',
   configFileDest: src,
 
+  bower: [
+    {
+      require: "./bower_components/jquery-sortable/source/js/jquery-sortable.js",
+      expose: 'jquery-sortable'
+    },
+    {
+      require: "./bower_components/bootstrap/dist/js/bootstrap.min.js",
+      expose: 'bootstrap'
+    },
+    {
+      require: "./bower_components/selectize/dist/js/selectize.min.js",
+      expose: 'selectize'
+    },
+    {
+      require: "./bower_components/messenger/build/js/messenger.min.js",
+      expose: 'messenger'
+    },
+    {
+      require: "./bower_components/spin.js/spin.js",
+      expose: 'spinner'
+    }
+  ],
+
   styles: {
     src : [
         './bower_components/bootstrap/dist/css/bootstrap.min.css',

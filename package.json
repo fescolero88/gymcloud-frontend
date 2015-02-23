@@ -4,15 +4,15 @@
   "author": "Vladimir Pal <mail.vpal@gmail.com>",
   "private": true,
   "devDependencies": {
+    "bower-resolve": "^2.2.1",
     "browser-sync": "^1.8.2",
     "browserify": "^7.1.0",
     "browserify-ngannotate": "^0.5.0",
-    "browserify-shim": "^3.8.1",
     "coffeeify": "",
     "del": "^1.1.1",
     "gulp": "^3.8.10",
-    "gulp-concat": "^2.4.2",
     "gulp-changed": "^1.1.0",
+    "gulp-concat": "^2.4.2",
     "gulp-declare": "^0.3.0",
     "gulp-define-module": "^0.1.1",
     "gulp-handlebars": "^3.0.1",
@@ -25,58 +25,28 @@
     "gulp-uglify": "^1.0.2",
     "gulp-util": "^3.0.1",
     "gulp-wrap": "^0.5.0",
-    "handlebars": "^2.0.0",
+    "main-bower-files": "^2.5.0",
     "morgan": "^1.5.0",
+    "resolve": "^1.1.5",
     "run-sequence": "^1.0",
     "vinyl-source-stream": "^1.0.0",
+    "express": "~4.10.6",
+    "sifter": "^0.3.4",
+    "microplugin": "0.0.3",
     "watchify": "^2.2.1"
   },
   "dependencies": {
     "backbone": "^1.1.2",
     "backbone-validation": "^0.11.3",
     "backbone.marionette": "^2.3.2",
-    "express": "~4.10.6",
-    "gulp-replace": "^0.5.2",
     "jquery": "^2.1.3",
     "lodash": "^2.4.1",
-    "microplugin": "0.0.3",
-    "moment": "^2.9.0",
-    "sifter": "^0.3.4"
+    "handlebars": "^2.0.0",
+    "moment": "^2.9.0"
   },
   "browserify": {
     "transform": [
-      "browserify-shim",
       "coffeeify"
     ]
-  },
-  "browser": {
-    "jquery": "./node_modules/jquery/dist/jquery.js",
-    "backbone": "./node_modules/backbone/backbone.js",
-    "backbone.validation": "./node_modules/backbone-validation/dist/backbone-validation-amd.js",
-    "handlebars": "./node_modules/handlebars/dist/handlebars.js",
-    "lodash": "./node_modules/lodash/dist/lodash.js",
-    "backbone.marionette": "./node_modules/backbone.marionette/lib/core/backbone.marionette.js",
-    "bootstrap": "./bower_components/bootstrap/dist/js/bootstrap.js",
-    "spinner": "./bower_components/spin.js/spin.js",
-    "messenger": "./bower_components/messenger/build/js/messenger.js",
-    "moment": "./node_modules/moment/min/moment.min.js",
-    "selectize": "./bower_components/selectize/dist/js/selectize.js",
-    "jquery-sortable": "./bower_components/jquery-sortable/source/js/jquery-sortable-min.js"
-  },
-  "browserify-shim": {
-    "jquery": {
-      "exports": "$"
-    },
-    "moment": {
-      "exports": "Moment"
-    },
-    "spinner": {
-      "exports": "Spinner"
-    },
-    "jquery-sortable": {
-      "depends": [
-        "jquery"
-      ]
-    }
   }
 }

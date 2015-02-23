@@ -1,7 +1,6 @@
 {
   "name": "gymcloud-frontend",
   "dependencies": {
-    "angular-bootstrap": "~0.12.0",
     "fontawesome": "~4.2.0",
     "bootstrap": "~3.3.2",
     "spin.js": "~2.0.1",
