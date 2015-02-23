@@ -8,8 +8,9 @@
     "browser-sync": "^1.8.2",
     "browserify": "^7.1.0",
     "browserify-ngannotate": "^0.5.0",
-    "coffeeify": "",
+    "caching-coffeeify": "^0.5.0",
     "del": "^1.1.1",
+    "express": "~4.10.6",
     "gulp": "^3.8.10",
     "gulp-changed": "^1.1.0",
     "gulp-concat": "^2.4.2",
@@ -26,13 +27,12 @@
     "gulp-util": "^3.0.1",
     "gulp-wrap": "^0.5.0",
     "main-bower-files": "^2.5.0",
+    "microplugin": "0.0.3",
     "morgan": "^1.5.0",
     "resolve": "^1.1.5",
     "run-sequence": "^1.0",
-    "vinyl-source-stream": "^1.0.0",
-    "express": "~4.10.6",
     "sifter": "^0.3.4",
-    "microplugin": "0.0.3",
+    "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.2.1"
   },
   "dependencies": {
@@ -46,7 +46,7 @@
   },
   "browserify": {
     "transform": [
-      "coffeeify"
+      "caching-coffeeify"
     ]
   }
 }
