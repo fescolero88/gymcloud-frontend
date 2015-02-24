@@ -38,15 +38,26 @@ gulp.task('build-vendor', function () {
 
 gulp.task('build-app', function () {
 
-
-  var b = watchify(browserify(_.extend(
-        {
-          entries: config.browserify.entries,
-          extensions: config.browserify.extensions,
-          paths: config.browserify.paths,
-          debug: config.browserify.debug
-        }, watchify.args)
-  ));
+  if ( global.isProd ) {
+    var b = browserify(
+          {
+            entries: config.browserify.entries,
+            extensions: config.browserify.extensions,
+            paths: config.browserify.paths,
+            debug: config.browserify.debug
+          }, watchify.args
+    );
+  }
+  else {
+    var b = watchify(browserify(_.extend(
+          {
+            entries: config.browserify.entries,
+            extensions: config.browserify.extensions,
+            paths: config.browserify.paths,
+            debug: config.browserify.debug
+          }, watchify.args)
+    ));
+  }
 
   config.bower.forEach(function (bowerPackage) {
     b.external(bowerPackage.expose);
