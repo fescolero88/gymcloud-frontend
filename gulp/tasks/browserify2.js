@@ -38,12 +38,15 @@ gulp.task('build-vendor', function () {
 
 gulp.task('build-app', function () {
 
-  var b = browserify({
-    entries: config.browserify.entries,
-    extensions: config.browserify.extensions,
-    paths: config.browserify.paths,
-    debug: config.browserify.debug
-  });
+
+  var b = watchify(browserify(_.extend(
+        {
+          entries: config.browserify.entries,
+          extensions: config.browserify.extensions,
+          paths: config.browserify.paths,
+          debug: config.browserify.debug
+        }, watchify.args)
+  ));
 
   config.bower.forEach(function (bowerPackage) {
     b.external(bowerPackage.expose);
@@ -55,7 +58,6 @@ gulp.task('build-app', function () {
   });
 
   if ( !global.isProd ) {
-    b = watchify(b);
     b.on('update', function() {
       rebundle();
     });
