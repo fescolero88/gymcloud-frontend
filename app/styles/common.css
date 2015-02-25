@@ -372,9 +372,11 @@ body > region > .container-fluid {
   position: absolute;
   right: 15px;
   display: none;
+  text-align: right;
 }
 .form-group.gc-invalid .gc-error-message {
   display: inline-block;
+  text-align: right;
 }
 .col-padding-5 {
   padding: 0 5px;

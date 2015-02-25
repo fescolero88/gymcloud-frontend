@@ -45,17 +45,7 @@ class SignUpStep1 extends Marionette.ItemView
         formData[key] = parseInt value
     @model.set formData
     if @model.isValid true
-      customValid = true
-      if @model.get('password').length < 6
-        customValid = false
-        @switchError 'Minimum 6 chars', @ui.password.closest('.form-group')
-      if @model.get('password_confirmation').length < 6
-        customValid = false
-        @switchError 'Minimum 6 chars', @ui.password_confirmation.closest('.form-group')
-      if @model.get('password') isnt @model.get('password_confirmation')
-        customValid = false
-      if customValid
-        @trigger 'next', @model
+      @trigger 'next', @model
 
 class SignUpStep2 extends Marionette.ItemView
   template: Templates.auth.sign_up_2
@@ -78,12 +68,7 @@ class SignUpStep2 extends Marionette.ItemView
         formData[key] = parseInt value
     @model.set formData
     if @model.isValid true
-      if @ui.agree.is ':checked'
-        @ui.agree.closest('.checkbox').removeClass 'gc-invalid'
-        @trigger 'final', @model
-      else
-        @ui.agree.closest('.checkbox').addClass 'gc-invalid'
-
+      @trigger 'final', @model
 
 module.exports = class SignUpView extends Marionette.LayoutView
   template: Templates.auth.sign_up

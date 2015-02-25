@@ -119,6 +119,12 @@ body.auth {
     height: 40px;
     font-size: 16px;
 }
+.gc-login-form-wrapper form .gc-invalid .checkbox label {
+  color: #ff560a;
+}
+.form-group-radio.gc-invalid label {
+  color: #ff560a;
+}
 .gc-login-form-wrapper form [type=submit] {
     font-size: 14px;
     color: #2f90e3;

@@ -37,6 +37,13 @@ module.exports = class ViewHelper
     Handlebars.registerHelper 'date', (timestamp) ->
       moment(timestamp).format "MMMM D, YYYY"
 
+    Handlebars.registerHelper 'yearsOptionsList', ->
+      fromYear = new Date().getFullYear()
+      years = ''
+      for year in [fromYear..fromYear-80]
+        years += "<option value=\"#{year}\">#{year}</option>"
+      return new Handlebars.SafeString years
+
 
     Handlebars.registerHelper 'ifCond', (v1, operator, v2, options)->
       switch operator

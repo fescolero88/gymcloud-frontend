@@ -32,4 +32,11 @@ module.exports = class SignUpStep2Model extends Backbone.Model
     birth_year:
       required: true
 
+    gender:
+      required: true
+      oneOf: [0, 1]
+
+    agree:
+      acceptance: true
+
 
