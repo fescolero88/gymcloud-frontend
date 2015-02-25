@@ -18,6 +18,7 @@ ExerciseView = require 'views/trainer/exercises/exercise-view'
 ClientExerciseModel = require 'models/trainer/client-exercise'
 PersonalBestView = require 'views/trainer/exercises/personal-best-view'
 
+
 module.exports = class ClientGroupView extends Marionette.LayoutView
   template: Templates.trainer.clients.client
 

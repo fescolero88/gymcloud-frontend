@@ -72,7 +72,7 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
     else
       clientFormModal = new GroupFormModalView model: @model
 
-    @listenTo clientFormModal, 'closeModal', =>
+    @listenTo clientFormModal, 'modal:close', =>
       @ui.clientFormModal.modal('hide')
     @listenTo clientFormModal, 'avatarChange', =>
       @render()
@@ -81,6 +81,9 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
     @ui.clientFormModal.modal('show')
 
   showSendMessageModal: (ev) ->
-    sendMessageModal = new SendMessageModalView
+    selectedItems = [@model.id]
+    sendMessageModal = new SendMessageModalView selectedItems: selectedItems
     @sendMessageForm.show sendMessageModal
     @ui.sendMessageModal.modal('show')
+    @listenTo sendMessageModal, 'modal:close', =>
+      @ui.sendMessageModal.modal('hide')

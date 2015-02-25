@@ -2,20 +2,31 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 ClientCollection = require 'models/trainer/client-collection'
+MessageModel = require 'models/trainer/message-model'
 
 module.exports = class SendMessageModalView extends Marionette.ItemView
   className: 'modal-dialog'
   template: Templates.trainer.clients.send_message_modal
 
-  onShow: =>
+  initialize: (data)->
+    @model = new MessageModel
+    Backbone.Validation.bind @
+    @selectedItems = data.selectedItems
+
+  onShow: ->
     @initSearchSelect()
 
   ui:
-    'liveSearch': '.live-search'
+    'liveSearch':   '.live-search'
+    'form':         'form'
+    'messageBody':  'textarea[name=body]'
+    'messageNone':  '.gc-send-msessage-none'
+    'messageAll':  '.gc-send-msessage-none'
 
   events:
-    'click .gc-send-message-none': 'selectNone'
-    'click .gc-send-message-all': 'selectAll'
+    'click  @ui.messageNone': 'selectNone'
+    'click  @ui.messageAll':  'selectAll'
+    'submit @ui.form':        'submitForm'
 
   searchItems: (models) ->
     listItems = []
@@ -48,6 +59,8 @@ module.exports = class SendMessageModalView extends Marionette.ItemView
             return "<div><span class='avatar' style='background-color: " +  \
               item.color + ";'><img src='" + item.url + "'></span>" + \
               escape(item.first_name) + ' ' + escape(item.last_name) + '</div>'
+      for item in @selectedItems
+        @ui.liveSearch[0].selectize.addItem item
 
   selectNone: (ev) =>
     ev.preventDefault()
@@ -57,4 +70,28 @@ module.exports = class SendMessageModalView extends Marionette.ItemView
     ev.preventDefault()
     @ui.liveSearch[0].selectize.setValue(Object.keys(@ui.liveSearch[0].selectize.options))
 
+  switchError: (error_msg, $inputGroup)=>
+    if error_msg
+      $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
+      $inputGroup.find('.gc-error-message').text(error_msg)
+    else
+      $inputGroup.removeClass('gc-invalid').addClass('gc-valid')
+      $inputGroup.find('.gc-error-message').text("")
 
+  submitForm: (ev) ->
+    ev.preventDefault()
+    isError = false
+    clients = @ui.liveSearch.val()
+    message = @ui.messageBody.val()
+    @model.set 'clients', clients
+    @model.set 'body', message
+    if @model.isValid true
+      data =
+        body: message
+      for clientId in clients.split(',')
+        $.ajax
+          url: "/api/mobile/conversations/users/#{clientId}/messages"
+          type: 'POST'
+          dataType: 'json'
+          data: JSON.stringify data
+        @trigger 'modal:close'
