@@ -27,7 +27,9 @@ gulp.task('build-vendor', function () {
   });
 
   getNPMPackageIds().forEach(function (id) {
-    b.require(nodeResolve.sync(id), { expose: id });
+    if (id !== 'express') {
+      b.require(nodeResolve.sync(id), { expose: id });
+    }
   });
 
   var stream = b.bundle().pipe(source('vendor.js'));
@@ -65,7 +67,9 @@ gulp.task('build-app', function () {
 
 
   getNPMPackageIds().forEach(function (id) {
-    b.external(id);
+    if (id !== 'express') {
+      b.external(id);
+    }
   });
 
   if ( !global.isProd ) {
