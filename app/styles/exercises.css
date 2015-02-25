@@ -336,6 +336,13 @@
   margin: 0;
   cursor: pointer;
 }
+.gc-exercises-update-time {
+  font-size: 14px;
+  line-height: 30px;
+  color: #404447;
+  display: inline-block;
+  margin-right: 15px;
+}
 .gc-exercises-assign-btn {
   background: #fff;
   color: #3398db;
@@ -404,6 +411,21 @@
   border-color: #3398db;
   background: #3398db;
   text-decoration: none;
+}
+.gc-exercises-item-icon {
+  display: inline-block;
+  background: transparent url('/static/images/icon-exercises.png') right -2px no-repeat;
+  height: 25px;
+  width: 22px;
+  background-size: cover;
+  vertical-align: middle;
+  margin: 0 5px 0 4px;
+}
+.gc-exercises-folder-icon {
+  color: #3398db;
+  display: inline-block;
+  margin: 0 9px 0 6px;
+  font-size: 16px;
 }
 .gc-content-right-exercises-empty  {
   margin: 50% auto 0 auto;

@@ -13,6 +13,8 @@ GroupCollection = require 'models/trainer/group-collection'
 
 ClientGroupView = require 'views/trainer/clients/client-group-view'
 
+ExercisesGlobalView = require 'views/trainer/exercises/exercises-global-view'
+
 PropertiesView = require 'views/trainer/properties/properties-view'
 PropertyListView = require 'views/trainer/properties/property-list-view'
 PropertyModalView = require 'views/trainer/properties/property-modal-view'
@@ -88,3 +90,7 @@ module.exports = class TrainerController extends Marionette.Controller
     propertyModel = new PropertyModel
     propertyModalView = new PropertyModalView model: propertyModel
     propertiesPageView.propertyModalView.show propertyModalView
+
+  exercises: (key) =>
+    exercisesGlobalView = new ExercisesGlobalView(id: key)
+    @mainView.content.show exercisesGlobalView

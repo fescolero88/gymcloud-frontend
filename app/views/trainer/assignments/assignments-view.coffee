@@ -42,6 +42,7 @@ module.exports = class AssignmentsListView extends Marionette.CompositeView
     !collection.length
 
   initialize: (data) =>
+    console.debug @collection
     @clientId = data.clientId
     @assignName = data.assignName
     @viewType = data.viewType
