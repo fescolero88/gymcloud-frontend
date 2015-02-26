@@ -48,7 +48,6 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
 
   updateBreadcrumbs: (breadcrumbs) =>
     @ui.title.text('')
-    # console.debug breadcrumbs
     $.each breadcrumbs, (index, value) =>
       @ui.title.append $("<span>#{value}</span>")
 
