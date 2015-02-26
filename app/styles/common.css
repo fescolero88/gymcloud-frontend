@@ -234,6 +234,14 @@ body > region > .container-fluid {
 .gc-content-nav .gc-content-nav-back a:hover {
   cursor: pointer;
 }
+.gc-clients-nav-left .gc-content-nav-back {
+  color: #3398db;
+  display: inline-block;
+  margin: -2px 0 0 10px;
+}
+.gc-clients-nav-left .gc-content-nav-back:hover; {
+  cursor: pointer;
+}
 @media (min-width: 1025px) {
   .gc-content-nav li a {
     padding: 2px 7px;
@@ -294,6 +302,20 @@ body > region > .container-fluid {
   padding: 2px 0;
   margin: 0 15px;
   font-weight: bold;
+  color: #757575;
+}
+.gc-breadcrumbs-title span:after {
+  content: "\f054";
+  color: #989898;
+  font-family: 'FontAwesome';
+  font-size: 8px;
+  line-height: 18px;
+  vertical-align: 2px;
+  margin: 0 5px;
+  display: inline-block;
+}
+.gc-breadcrumbs-title span:last-child:after {
+  display: none;
 }
 .gc-clients-nav-right {
   min-height: 50px;
