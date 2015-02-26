@@ -6,6 +6,8 @@
   font-style: normal;
 }
 body.auth {
+  height: auto;
+  min-height: 100%;
   background: #fff url('../images/header-login.png') 50% top no-repeat;
   background-size: cover;
 }
@@ -17,6 +19,9 @@ body.auth {
 }
 .page-wrap .fa {
   font-family: 'FontAwesome';
+}
+.page-wrap .glyphicon {
+  font-family: 'Glyphicons Halflings';
 }
 .gc-landing .page-wrap {
   min-height: 100%;
@@ -52,7 +57,7 @@ body.auth {
 .gc-login-form-wrapper {
     margin: 2% auto 0;
     float: none;
-    max-width: 500px;
+    max-width: 510px;
     padding: 0;
 }
 .gc-login-form-wrapper > h1 {
@@ -66,7 +71,7 @@ body.auth {
 }
 .gc-login-form-wrapper form {
     background: #fff;
-    padding: 10px;
+    padding: 10px 15px;
     border-radius: 0 0 5px 5px;
 }
 .gc-login-social {
@@ -78,7 +83,7 @@ body.auth {
 .gc-login-social .btn {
     font-size: 14px;
     color: #fff;
-    padding: 12px 15px;
+    padding: 12px 23px;
     border-radius: 50px;
     font-weight: bold;
 }
@@ -98,12 +103,10 @@ body.auth {
     padding: 0 15px;
 }
 .gc-login-form-wrapper form label {
-    font-size: 10px;
+    font-size: 13px;
     font-weight: normal;
     color: #a6a7aa;
-}
-.gc-login-form-wrapper form label.gc-error-message {
-  margin-right: 25px;
+    font-weight: 400;
 }
 .gc-login-form-wrapper form .checkbox label {
     font-size: 12.5px;
@@ -115,6 +118,12 @@ body.auth {
 .gc-login-form-wrapper form .form-control {
     height: 40px;
     font-size: 16px;
+}
+.gc-login-form-wrapper form .gc-invalid .checkbox label {
+  color: #ff560a;
+}
+.form-group-radio.gc-invalid label {
+  color: #ff560a;
 }
 .gc-login-form-wrapper form [type=submit] {
     font-size: 14px;
@@ -145,9 +154,6 @@ body.auth {
 }
 .gc-login-form-wrapper form .form-control {
   height: 45px;
-}
-.gc-login-form-wrapper form label {
-  font-size: 13px;
 }
 .gc-login-form-wrapper form [type=submit] {
   font-size: 18px;
@@ -243,24 +249,82 @@ form .checkbox {
   font-size: 16px;
   margin: 0;
 }
+.gc-nav-top {
+  background: #121827;
+  z-index: 998;
+}
+.gc-nav-top > .container {
+  position: relative;
+}
+.gc-nav-top .navbar-brand {
+  padding: 3px 15px;
+}
+.gc-nav-top .navbar-brand img {
+  max-height: 46px;
+}
+.gc-nav-top .icon-bar {
+  background: white;
+}
+.checkbox.gc-invalid span {
+  color: #ff560a;
+}
 @media (min-width: 768px) {
-    .gc-header-standard > .container {
-        min-height: 600px;
-    }
-   .gc-login-form-wrapper {
-        position: relative;
-        margin: 12% auto 0 auto;
-        padding: 0 15px;
-    }
-    .gc-login-form-wrapper > h1 {
-        padding: 25px;
-    }
+  .gc-nav-top {
+    position: absolute;
+    background: transparent;
+  }
+  .gc-nav-top .navbar-brand {
+    padding: 15px 15px 0 15px;
+    height: auto;
+  }
+  .gc-nav-top .navbar-brand img {
+    max-height: 88px;
+  }
+  .gc-nav-top .navbar-header {
+    min-height: 110px;
+  }
+  .gc-nav-top .navbar-nav.navbar-right {
+    margin-top: 35px;
+  }
+  .gc-nav-top .navbar-nav > li:hover {
+    background: none;
+  }
+  .gc-nav-top .navbar-nav > li > a {
+    color: #2f90e3;
+    font-size: 17px;
+    padding: 14px 12px;
+  }
+  .gc-nav-top .navbar-nav > li > a:hover, .gc-nav-top .navbar-nav > li > a:focus {
+    background: none;
+    color: white;
+  }
+  .gc-nav-top .navbar-nav > li.active > a {
+    background: none;
+    color: white;
+  }
+  .gc-nav-top .navbar-nav > li > a:active {
+    background: none;
+    color: white;
+  }
+  .gc-nav-top .navbar-nav > li > a > .glyphicon {
+    font-size: 12px;
+  }
+  .gc-header-standard > .container {
+      min-height: 600px;
+  }
+ .gc-login-form-wrapper {
+      position: relative;
+      margin: 17% auto 0 auto;
+  }
+  .gc-login-form-wrapper > h1 {
+      padding: 25px;
+  }
 }
 @media (min-width: 992px) {
-    .gc-login-social {
-        margin: 30px 0 30px 0;
-    }
-    .gc-login-social > div {
-        padding: 0;
-    }
+  .gc-login-social {
+      margin: 30px 0 30px 0;
+  }
+  .gc-login-social > div {
+      padding: 0;
+  }
 }

@@ -14,8 +14,16 @@ module.exports = class SignUpStep1Model extends Backbone.Model
 
     password:
       required: true
+      minLength: 6
+      msg: 'Password must be 6 characters'
 
-    password_confirmation:
+    password_confirmation: [
+      equalTo: 'password'
+      msg: 'The passwords does not match'
+    ,
       required: true
+      minLength: 6
+      msg: 'Password must be 6 characters'
+    ]
 
 
