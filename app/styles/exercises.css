@@ -453,6 +453,53 @@
 .selectize-control.multi .selectize-input > div .remove:active {
   color: #fff;
 }
+.gc-exercises-bests-best > .row > .gc-exercises-bests-delete-wrapper {
+  padding: 0 5px;
+}
+.gc-exercises-bests-delete {
+  color: #ee6d5d;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  height: 17px;
+  width: 17px;
+  line-height: 17px;
+  padding: 0;
+  text-align: center;
+}
+.gc-exercises-bests-delete:hover,
+.gc-exercises-bests-delete:active,
+.gc-exercises-bests-delete:focus {
+  background: transparent;
+  color: #ee6d5d;
+  outline: none;
+}
+.bootstrap-datetimepicker-widget td.active, .bootstrap-datetimepicker-widget td.active:hover {
+  background-color: #3398db;
+}
+.bootstrap-datetimepicker-widget thead tr:first-child th,
+.bootstrap-datetimepicker-widget .picker-switch td span {
+  color: #3398db;
+}
+.bootstrap-datetimepicker-widget td span {
+  height: 32px;
+  width: 32px;
+  line-height: 32px;
+}
+.bootstrap-datetimepicker-widget td span:hover,
+.bootstrap-datetimepicker-widget td span:active {
+  background: transparent;
+}
+@media (min-width: 1200px) {
+    .gc-exercises-no-best {
+    background-position: center 5px;
+    background-size: 18%;
+    padding: 70px 40px 10px 40px;
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+}
 @media (min-width: 1440px) {
   .gc-exercises-bests-icon {
     border: 1px solid #3398db;
@@ -494,15 +541,8 @@
     margin: 0;
     font-size: 12px;
   }
-  .gc-exercises-no-best {
-    background-position: center 55px;
-    background-size: 18%;
-    padding: 120px 40px 10px 40px;
-    margin-bottom: 10px;
-    font-size: 12px;
-  }
-}
 
+}
 .load-more {
   color: #3398db;
   display: inline-block;

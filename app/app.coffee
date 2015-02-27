@@ -6,6 +6,7 @@ config = require 'config'
 
 Spinner = require 'spinner'
 Sortable = require 'jquery-sortable'
+Datepicker = require 'datetimepicker'
 Handlebars = require 'handlebars'
 window.Templates = require 'templates/templates_build.js'
 

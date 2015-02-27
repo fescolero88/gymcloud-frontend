@@ -45,6 +45,7 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
     propertyValue: '.gc-add-personal-best-property-value'
     clearAll: '.gc-add-personal-best-clear'
     addPersonalBest: '.gc-add-personal-best-add'
+    dateWrapper: '.gc-add-personal-best-date'
     date: '.gc-add-personal-best-date input'
 
   initialize: (data) =>
@@ -52,7 +53,13 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
     @item_id = data.item_id
     @collection = new Backbone.Collection
 
+
   onShow: =>
+    @ui.dateWrapper.datetimepicker
+      icons:
+        time: 'fa fa-clock-o'
+        date: 'fa fa-calendar'
+      format: 'YYYY-MM-DD'
     @properties = App.request("client:properties", @id) || new ClientsPropertyCollection
     if @properties.length
       @fillProperties()
