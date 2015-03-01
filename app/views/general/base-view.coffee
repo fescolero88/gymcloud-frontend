@@ -1,4 +1,5 @@
 Marionette = require 'backbone.marionette'
+ModalConfirmView = require 'views/general/modal-confirm-view'
 
 module.exports = class BaseView extends Marionette.LayoutView
 
@@ -7,10 +8,12 @@ module.exports = class BaseView extends Marionette.LayoutView
   el: 'body'
 
   regions:
-    appRegion: 'region[data-name="app"]'
+    appRegion: "@ui.appRegion"
+    confirmRegion: "@ui.confirmRegion"
 
   ui:
     appRegion: 'region[data-name="app"]'
+    confirmRegion: ".confirmational-region"
 
   initialize: ->
     App.vent.on 'body:change-class', @changeClass
@@ -24,3 +27,10 @@ module.exports = class BaseView extends Marionette.LayoutView
 
   changeClass: (className) =>
     @$el.removeClass().addClass className
+
+  showConfirmModal: (data)->
+    confirmView = new ModalConfirmView data
+    @confirmRegion.show confirmView
+
+    @listenToOnce confirmView, "closeModal", ->
+      @confirmRegion.destroy()

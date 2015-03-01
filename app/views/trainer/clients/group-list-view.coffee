@@ -23,7 +23,13 @@ module.exports = class GroupItemView extends Marionette.ItemView
 
   deleteSingle: (ev) =>
     ev.preventDefault()
-    @model.destroy()
+    App.request 'base:confirmationalModal',
+      title: "Delete client"
+      content: "Are you sure you want to delete #{@model.get('name')}?"
+      confirmBtn: "Delete"
+      confirmCallBack: =>
+        @model.destroy()
+
 
 module.exports = class GroupListView extends Marionette.CompositeView
 
