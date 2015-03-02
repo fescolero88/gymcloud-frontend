@@ -6,6 +6,7 @@
     "spin.js": "~2.0.1",
     "jquery-sortable": "~0.9.12",
     "selectize": "~0.11.2",
-    "messenger": "~1.4.1"
+    "messenger": "~1.4.1",
+    "eonasdan-bootstrap-datetimepicker": "~4.0.0"
   }
 }

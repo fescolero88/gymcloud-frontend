@@ -13,8 +13,18 @@ class PersonalBestItemView extends Marionette.ItemView
   className: 'gc-exercises-bests-best'
   model: PersonalBestModel
 
+  ui:
+    'deleteButton': '.gc-exercises-bests-delete'
+
+  events:
+    'click @ui.deleteButton': 'deletePersonalBest'
+
   modelEvents:
     sync: 'render'
+
+  deletePersonalBest: (ev) =>
+    ev.preventDefault()
+    @model.destroy()
 
 class PersonalBestCollectionView extends Marionette.CollectionView
   childView: PersonalBestItemView

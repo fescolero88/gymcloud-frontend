@@ -31,6 +31,10 @@ module.exports = {
     {
       require: "./bower_components/spin.js/spin.js",
       expose: 'spinner'
+    },
+    {
+      require: "./bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
+      expose: 'datetimepicker'
     }
   ],
 
@@ -40,6 +44,7 @@ module.exports = {
         './bower_components/fontawesome/css/font-awesome.min.css',
         './bower_components/selectize/dist/css/selectize.bootstrap3.css',
         './bower_components/messenger/build/css/messenger.css',
+        './bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
         src + '/styles/**/*.css'
     ],
     dest: dest + '/css'
