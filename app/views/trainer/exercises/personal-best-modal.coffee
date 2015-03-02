@@ -53,7 +53,6 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
     @item_id = data.item_id
     @collection = new Backbone.Collection
 
-
   onShow: =>
     @ui.dateWrapper.datetimepicker
       icons:
@@ -68,6 +67,9 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
       @properties.fetch().then =>
         App.request "client:properties:set", @id, @properties
         @fillProperties()
+
+  onDestroy: =>
+    @ui.dateWrapper.data('DateTimePicker').destroy()
 
   fillProperties: =>
     @properties.each (p) =>
