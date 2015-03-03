@@ -65,7 +65,7 @@ body.auth {
     margin: 0;
     padding: 10px 25px;
     color: #fff;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     border-radius: 5px 5px 0 0;
 }
@@ -81,7 +81,7 @@ body.auth {
     padding: 5px 0;
 }
 .gc-login-social .btn {
-    font-size: 14px;
+    font-size: 15px;
     color: #fff;
     padding: 12px 18px;
     border-radius: 50px;
@@ -330,6 +330,6 @@ form .checkbox {
 }
 @media (min-width: 1200px) {
   .gc-login-social .btn {
-    padding: 12px 23px;
+    padding: 12px 27px;
   }
 }

@@ -63,7 +63,8 @@ module.exports = {
   fonts: {
     src : [
         './bower_components/fontawesome/fonts/fontawesome-webfont.*',
-        './bower_components/bootstrap/fonts/*'
+        './bower_components/bootstrap/fonts/*',
+        './app/fonts/*'
     ],
     dest: dest + '/fonts'
   },
