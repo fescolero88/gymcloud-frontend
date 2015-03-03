@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'KievitPro-Regular';
-  src: font-url('KievitPro-Regular.eot');
-  src: local('☺'), font-url('KievitPro-Regular.woff') format('woff'), font-url('KievitPro-Regular.ttf') format('truetype'), font-url('KievitPro-Regular.svg') format('svg');
+  src: url('../fonts/KievitPro-Regular.eot');
+  src: local('☺'), url('../fonts/KievitPro-Regular.woff') format('woff'), url('../fonts/KievitPro-Regular.ttf') format('truetype'), url('../fonts/KievitPro-Regular.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }
