@@ -22,18 +22,11 @@ gulp.task('templates', function() {
       root: 'module.exports',
       noRedeclare: true,
       processName: function(filePath) {
-        var count = 0;
-        var new_path = filePath.replace('app/templates/', '').replace(/\-/g,
-            function(match) {
-              count++;
-              if(count==1) {
-                return match;
-              }
-              else {
-                return '_';
-              }
-            });
-        return declare.processNameByPath(new_path);
+        var newPath = filePath.replace(/app\/templates\/(.*)/, function(match) {
+
+          return match.replace('app/templates/', '').replace(/-/g, '_');
+        });
+        return declare.processNameByPath(newPath);
       }
     }))
     .pipe(concat('templates_build.js'))
