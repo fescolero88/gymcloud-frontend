@@ -1,6 +1,7 @@
 Marionette = require 'backbone.marionette'
 
 module.exports = class ActivityView extends Marionette.ItemView
+
   template: Templates.trainer.clients.activity
 
   events:
@@ -15,11 +16,11 @@ module.exports = class ActivityView extends Marionette.ItemView
   templateHelpers: ->
     noMore: @collection.noMore
 
-  loadMore: (ev)->
+  loadMore: (ev) ->
     ev.preventDefault()
     @collection.loadMore()
 
-  refresh: (ev)->
+  refresh: (ev) ->
     @collection.page = 0
     @collection.prevLength = 0
     @collection.loadMore(true)

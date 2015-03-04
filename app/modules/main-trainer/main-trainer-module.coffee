@@ -13,6 +13,7 @@ HeaderView = require 'views/general/header-view'
 ModalView = require 'views/general/modal-view'
 
 module.exports = class MainTrainerModule extends Marionette.Module
+
   initialize: ->
     @on 'start', ->
       @trainerController = new TrainerController

@@ -1,6 +1,7 @@
 CustomRouter  = require 'routers/general/custom-router'
 
 module.exports = class ClientRouter extends CustomRouter
+
   appRoutes:
     '': 'clientPageExercises'
     '(/)': 'clientPageExercises'
@@ -12,6 +13,6 @@ module.exports = class ClientRouter extends CustomRouter
     'calendar/week/:week(/)': 'clientPageCalendarWeek'
     'calendar/month/:month(/)': 'clientPageCalendarMonth'
 
-  before: (methodName)=>
+  before: (methodName) =>
     App.request 'auth:isAuthorized', 'client'
     App.vent.trigger 'module:main-client:beforeAction'

@@ -4,13 +4,17 @@ PersonalBestCollection = require 'models/trainer/personal-best-collection'
 PersonalBestModalView = require 'views/trainer/exercises/personal-best-modal'
 
 class EmptyView extends Marionette.ItemView
+
   template: Templates.trainer.exercises.personal_best_empty
 
-
 class PersonalBestItemView extends Marionette.ItemView
+
   template: Templates.trainer.exercises.personal_best_item
+
   tagName: 'li'
+
   className: 'gc-exercises-bests-best'
+
   model: PersonalBestModel
 
   ui:
@@ -27,11 +31,15 @@ class PersonalBestItemView extends Marionette.ItemView
     @model.destroy()
 
 class PersonalBestCollectionView extends Marionette.CollectionView
+
   childView: PersonalBestItemView
+
   childViewContainer: 'ul'
+
   emptyView: EmptyView
 
 module.exports = class PersonalBestView extends Marionette.LayoutView
+
   template: Templates.trainer.exercises.personal_best
 
   ui:

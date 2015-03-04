@@ -2,7 +2,9 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 module.exports = class GroupFormModalView extends Marionette.ItemView
+
   className: 'modal-dialog'
+
   template: Templates.trainer.clients.group_form_modal
 
   events:
@@ -25,7 +27,7 @@ module.exports = class GroupFormModalView extends Marionette.ItemView
       error_msg = @model.preValidate input_name, input_value
       @switchError error_msg, $inputGroup
 
-  switchError: (error_msg, $inputGroup)=>
+  switchError: (error_msg, $inputGroup) =>
     if error_msg
       $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
       $inputGroup.find('.gc-valid-icon').addClass('hide')
@@ -35,16 +37,15 @@ module.exports = class GroupFormModalView extends Marionette.ItemView
       $inputGroup.find('.gc-valid-icon').removeClass('hide')
       $inputGroup.find('.gc-error-message').text("")
 
-
   showThumbnail: (ev) ->
     input = ev.target
     if input.files && input.files[0]
       reader = new FileReader()
-      reader.onload = (e)->
+      reader.onload = (e) ->
         $(ev.target).parents('form').find('.gc-edit-profile-modal-avatar').attr('src', e.target.result)
       reader.readAsDataURL(input.files[0])
 
-  submitGroupForm: (ev)=>
+  submitGroupForm: (ev) =>
     ev.preventDefault()
     avatar = $(ev.target).find('input[type=file]')
     formData = @ui.groupForm.serializeObject()
@@ -55,7 +56,7 @@ module.exports = class GroupFormModalView extends Marionette.ItemView
     if @model.isValid true
       App.vent.trigger('spinner:global:start')
       @model.save null,
-        success: (model, data)=>
+        success: (model, data) =>
           App.vent.trigger "spinner:global:stop"
           if data.error
             for name, error_msg of data.error

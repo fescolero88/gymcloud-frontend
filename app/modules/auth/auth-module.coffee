@@ -7,6 +7,7 @@ AuthRouter = require 'routers/auth/auth-router'
 AuthLayoutView = require 'views/auth/auth_layout_view'
 
 module.exports = class AuthModule extends Marionette.Module
+
   initialize: =>
     @addInitializer (options) ->
       @controller = new AuthController { region: @app.appRegion }

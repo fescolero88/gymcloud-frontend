@@ -20,6 +20,7 @@ PersonalBestView = require 'views/trainer/exercises/personal-best-view'
 
 
 module.exports = class ClientGroupView extends Marionette.LayoutView
+
   template: Templates.trainer.clients.client
 
   collectionEvents:
@@ -68,7 +69,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
 
     @navView.navigate @assign
 
-  showActivity: (isShow)->
+  showActivity: (isShow) ->
     if !@activityView? or @activityView.isDestroyed
       @activityView = new ActivityView collection: @recentActivityCollection
       if isShow

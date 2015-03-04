@@ -5,10 +5,12 @@ ClientCollection = require 'models/trainer/client-collection'
 MessageModel = require 'models/trainer/message-model'
 
 module.exports = class SendMessageModalView extends Marionette.ItemView
+
   className: 'modal-dialog'
+
   template: Templates.trainer.clients.send_message_modal
 
-  initialize: (data)->
+  initialize: (data) ->
     @model = new MessageModel
     Backbone.Validation.bind @
     @selectedItems = data.selectedItems
@@ -70,7 +72,7 @@ module.exports = class SendMessageModalView extends Marionette.ItemView
     ev.preventDefault()
     @ui.liveSearch[0].selectize.setValue(Object.keys(@ui.liveSearch[0].selectize.options))
 
-  switchError: (error_msg, $inputGroup)=>
+  switchError: (error_msg, $inputGroup) =>
     if error_msg
       $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
       $inputGroup.find('.gc-error-message').text(error_msg)

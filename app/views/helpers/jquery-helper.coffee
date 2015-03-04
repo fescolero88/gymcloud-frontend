@@ -1,5 +1,7 @@
 module.exports = class JqueryHelper
+
   initialize: ->
+
     $.fn.serializeObject = ->
       o = {}
       a = @serializeArray()

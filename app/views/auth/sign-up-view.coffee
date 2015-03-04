@@ -6,6 +6,7 @@ SignUpStep1Model = require 'models/auth/signup-step1-model'
 SignUpStep2Model = require 'models/auth/signup-step2-model'
 
 class SignUpStep1 extends Marionette.ItemView
+
   template: Templates.auth.sign_up_1
 
   ui:
@@ -27,7 +28,7 @@ class SignUpStep1 extends Marionette.ItemView
       @ui.types.removeClass 'active'
       $(ev.currentTarget).closest('.gc-trainer-type').addClass 'active'
 
-  switchError: (error_msg, $inputGroup)=>
+  switchError: (error_msg, $inputGroup) =>
     if error_msg
       $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
       $inputGroup.find('.gc-valid-icon').addClass('hide')
@@ -48,6 +49,7 @@ class SignUpStep1 extends Marionette.ItemView
       @trigger 'next', @model
 
 class SignUpStep2 extends Marionette.ItemView
+
   template: Templates.auth.sign_up_2
 
   ui:
@@ -71,6 +73,7 @@ class SignUpStep2 extends Marionette.ItemView
       @trigger 'final', @model
 
 module.exports = class SignUpView extends Marionette.LayoutView
+
   template: Templates.auth.sign_up
 
   regions:

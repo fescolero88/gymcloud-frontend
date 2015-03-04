@@ -1,7 +1,9 @@
 moment = require 'moment'
 
 module.exports = class ViewHelper
-  initialize: (Handlebars)->
+
+  initialize: (Handlebars) ->
+
     Handlebars.registerPartial "sidebar_item", Templates.trainer.sidebar.sidebar_item
 
     Handlebars.registerHelper 'ifNot', (v1, v2, options) ->
@@ -59,24 +61,21 @@ module.exports = class ViewHelper
         years += "<option value=\"#{year}\">#{year}</option>"
       return new Handlebars.SafeString years
 
-
-    Handlebars.registerHelper 'ifCond', (v1, operator, v2, options)->
+    Handlebars.registerHelper 'ifCond', (v1, operator, v2, options) ->
       switch operator
-          when '==', '==='
-              return if v1 is v2 then options.fn @ else options.inverse @
-          when '<'
-              return if v1 < v2 then options.fn @ else options.inverse @
-          when '<='
-              return if v1 <= v2 then options.fn @ else options.inverse @
-          when '>'
-              return if v1 > v2 then options.fn @ else options.inverse @
-          when '>='
-              return if v1 >= v2 then options.fn @ else options.inverse @
-          when '&&'
-              return if v1 && v2 then options.fn @ else options.inverse @
-          when '||'
-              return if v1 || v2 then options.fn @ else options.inverse @
-          else
-              return options.inverse @
-
-
+        when '==', '==='
+          return if v1 is v2 then options.fn @ else options.inverse @
+        when '<'
+          return if v1 < v2 then options.fn @ else options.inverse @
+        when '<='
+          return if v1 <= v2 then options.fn @ else options.inverse @
+        when '>'
+          return if v1 > v2 then options.fn @ else options.inverse @
+        when '>='
+          return if v1 >= v2 then options.fn @ else options.inverse @
+        when '&&'
+          return if v1 && v2 then options.fn @ else options.inverse @
+        when '||'
+          return if v1 || v2 then options.fn @ else options.inverse @
+        else
+          return options.inverse @

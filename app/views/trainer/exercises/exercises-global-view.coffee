@@ -4,6 +4,7 @@ Backbone = require 'backbone'
 ExercisesGlobalListView = require 'views/trainer/exercises/exercises-global-list-view'
 
 module.exports = class ExercisesGlobalView extends Marionette.LayoutView
+
   template: Templates.trainer.exercises.exercises_global
 
   regions:

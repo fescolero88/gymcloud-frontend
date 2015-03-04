@@ -33,8 +33,11 @@ MainClientModule = require 'modules/main-client/main-client-module'
 
 
 class App extends Marionette.Application
+
   initialize: ->
+
     @on 'start', ->
+
       # --- Helpers -----
       new JqueryHelper().initialize()
       new ViewHelper().initialize(Handlebars)
@@ -60,7 +63,7 @@ class App extends Marionette.Application
         if @loadingCount > 0
           @vent.trigger "spinner:global:stop"  if --@loadingCount is 0
 
-      $(document).ajaxError (event, jqxhr, settings, thrownError)=>
+      $(document).ajaxError (event, jqxhr, settings, thrownError) =>
         if jqxhr.status is 401
           window.location.replace '#/logout'
 
@@ -89,7 +92,7 @@ class App extends Marionette.Application
       App.data = {}
       App.data.profileModel = new ProfileModel()
 
-      @reqres.setHandler 'auth:isAuthorized', (permission)=>
+      @reqres.setHandler 'auth:isAuthorized', (permission) =>
         if window.localStorage.accessToken
           if permission?
             accountType = App.data.profileModel.get('account_type')
@@ -113,19 +116,19 @@ class App extends Marionette.Application
       @reqres.setHandler 'data:exercises', ->
         App.data.exercises
 
-      @reqres.setHandler 'data:exercises:reset', (data)->
+      @reqres.setHandler 'data:exercises:reset', (data) ->
         App.data.exercises = data
 
       @reqres.setHandler 'data:workouts', ->
         App.data.workouts
 
-      @reqres.setHandler 'data:workouts:reset', (data)->
+      @reqres.setHandler 'data:workouts:reset', (data) ->
         App.data.workouts = data
 
       @reqres.setHandler 'data:programs', ->
         App.data.programs
 
-      @reqres.setHandler 'data:programs:reset', (data)->
+      @reqres.setHandler 'data:programs:reset', (data) ->
         App.data.programs = data
 
       @reqres.setHandler 'client:properties', (id) ->

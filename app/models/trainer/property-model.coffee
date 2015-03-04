@@ -1,9 +1,11 @@
 Backbone = require 'backbone'
 
 module.exports = class PropertyModel extends Backbone.Model
+
   urlRoot: '/api/mobile/properties'
 
   validation:
+
     name:
       required: true
 

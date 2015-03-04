@@ -3,13 +3,14 @@ Backbone = require 'backbone'
 _ = require 'lodash'
 
 module.exports = class CustomRouter extends Marionette.AppRouter
+
   route: (route, name, callback) ->
     route = @_routeToRegExp(route)  unless _.isRegExp(route)
     if _.isFunction(name)
       callback = name
       name = ""
-    callback = this[name]  unless callback
-    router = this
+    callback = @[name]  unless callback
+    router = @
     Backbone.history.route route, (fragment) ->
       args = router._extractParameters(route, fragment)
       if router.before?
@@ -22,5 +23,4 @@ module.exports = class CustomRouter extends Marionette.AppRouter
       Backbone.history.trigger "route", router, name, args
       return
 
-    this
-
+    @

@@ -4,9 +4,10 @@ SendMessageModalView = require 'views/trainer/clients/send-message-modal-view'
 ClientFormModalView = require 'views/trainer/clients/client-form-modal-view'
 GroupFormModalView = require 'views/trainer/clients/group-form-modal-view'
 
-
 module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
+
   template: Templates.trainer.clients.client_group_header
+
   autoRender: false
 
   modelEvents:
@@ -29,7 +30,7 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
     clientFormModal: "#gc-edit-client-modal"
     sendMessageModal: "#gc-send-message-modal"
 
-  initialize: (data)->
+  initialize: (data) ->
     @viewType = data.viewType
 
   templateHelpers: ->
@@ -41,7 +42,7 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
   fillClientEmail: ->
     @ui.inviteEmail.val @model.get('email')
 
-  submitClientForm: (ev)->
+  submitClientForm: (ev) ->
     #TODO validation
     ev.preventDefault()
     formData = @ui.inviteForm.serializeObject()
@@ -56,14 +57,13 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
         App.request 'messenger:show',
           message: "Invitation successfully sent"
           type: 'info'
-      error: (data)=>
+      error: (data) =>
         errorMsg = data.responseJSON.error
         if errorMsg?
           $input = @ui.inviteForm.find("input[name=email]")
           $inputGroup = $input.closest('.form-group')
           $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
           $inputGroup.find('.gc-error-message').text(errorMsg)
-
 
   showClientEditModal: (ev) ->
     ev.preventDefault()

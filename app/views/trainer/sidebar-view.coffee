@@ -3,6 +3,7 @@ Marionette = require 'backbone.marionette'
 DraggableMenuItemModel = require 'models/trainer/draggable-menuitem-model'
 
 module.exports = class SideBarView extends Marionette.ItemView
+
   template: Templates.trainer.sidebar.sidebar
 
   events:

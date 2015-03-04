@@ -25,7 +25,7 @@ module.exports = class ClientPageController extends Marionette.Controller
     @mainView = options.mainView
     @userPageView = null
 
-  beforeAction: () =>
+  beforeAction: =>
     if not @userPageView or !@userPageView.content
       @userPageView = new ClientPageView()
       @mainView.content.show @userPageView
@@ -89,4 +89,3 @@ module.exports = class ClientPageController extends Marionette.Controller
     @userPageView.content.show contentView
 
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-c'
-

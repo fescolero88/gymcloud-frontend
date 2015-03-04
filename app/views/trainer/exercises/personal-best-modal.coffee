@@ -7,8 +7,11 @@ class PersonalBestResultModel extends Backbone.Model
 class PersonalBestResultCollection extends Backbone.Collection
 
 class PersonalBestResultView extends Marionette.ItemView
+
   template: Templates.trainer.exercises.personal_best_modal_property
+
   tagName: 'li'
+
   className: 'row'
 
   modelEvents:
@@ -24,11 +27,14 @@ class PersonalBestResultView extends Marionette.ItemView
     ev.preventDefault()
     @model.destroy()
 
-
 module.exports = class PersonalBestModalView extends Marionette.CompositeView
+
   className: 'modal-dialog modal-md'
+
   template: Templates.trainer.exercises.personal_best_modal
+
   childView: PersonalBestResultView
+
   childViewContainer: 'ul'
 
   collectionEvents:
@@ -134,5 +140,3 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
         data: JSON.stringify data
         success: (data) =>
           @trigger 'personal_best:added', data
-
-

@@ -10,6 +10,7 @@ GroupModel = require 'models/trainer/group-model'
 
 
 module.exports = class ClientsView extends Marionette.LayoutView
+
   template: Templates.trainer.clients.clients
 
   events:
@@ -39,7 +40,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
   templateHelpers: =>
     view_type: @viewType
 
-  initialize: (viewType)=>
+  initialize: (viewType) =>
     viewType = 'clients' if typeof viewType is 'object'
     @viewType = viewType
     @checkButtons()
@@ -104,7 +105,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
 
     @listenTo clientFormModal, 'closeModal', =>
       @ui.clientFormModal.modal('hide')
-    @listenTo clientFormModal, 'addToClientsCollection', (model)=>
+    @listenTo clientFormModal, 'addToClientsCollection', (model) =>
       @clients.currentView.collection.add model
 
     @clientForm.show clientFormModal
@@ -117,7 +118,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
 
     @listenTo groupFormModal, 'closeModal', =>
       @ui.groupFormModal.modal('hide')
-    @listenTo groupFormModal, 'addToGroupsCollection', (model)=>
+    @listenTo groupFormModal, 'addToGroupsCollection', (model) =>
       @groups.currentView.collection.unshift model
 
     @groupForm.show groupFormModal

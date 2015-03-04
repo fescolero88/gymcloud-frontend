@@ -7,7 +7,9 @@ ClientFormModalView = require 'views/trainer/clients/client-form-modal-view'
 ClientModel = require 'models/trainer/client-model'
 
 module.exports = class ClientPageSidebarView extends Marionette.LayoutView
+
   template: Templates.client.sidebar
+
   autoRender: false
 
   modelEvents:
@@ -54,4 +56,3 @@ module.exports = class ClientPageSidebarView extends Marionette.LayoutView
 
   updateProfile: =>
     @profile.show new ClientProfileView
-

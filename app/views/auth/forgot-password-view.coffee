@@ -3,6 +3,7 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 module.exports = class ForgotPasswordView extends Marionette.ItemView
+
   template: Templates.auth.forgot_password
 
   ui:
@@ -15,7 +16,7 @@ module.exports = class ForgotPasswordView extends Marionette.ItemView
   initialize: =>
     Backbone.Validation.bind @
 
-  switchError: (error_msg, $inputGroup)=>
+  switchError: (error_msg, $inputGroup) =>
     if error_msg
       $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
       $inputGroup.find('.gc-valid-icon').addClass('hide')
@@ -36,4 +37,3 @@ module.exports = class ForgotPasswordView extends Marionette.ItemView
             $input = @ui.emailField
             $inputGroup = $input.closest('.form-group')
             @switchError data.errors, $inputGroup
-

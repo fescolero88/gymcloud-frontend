@@ -7,6 +7,7 @@ CalendarMonthView = require 'views/trainer/calendar/calendar-month-view'
 CalendarEventCollection = require 'models/trainer/calendar-event-collection'
 
 module.exports = class CalendarView extends Marionette.LayoutView
+
   template: Templates.trainer.calendar.calendar
 
   events:
@@ -35,14 +36,14 @@ module.exports = class CalendarView extends Marionette.LayoutView
     month = @currentDate.month()+1
     @getData year, month
 
-  getData: (year, month)->
+  getData: (year, month) ->
     @calendarEventCollection.url = "#{@calendar_url}?year=#{year}&month=#{month}"
     @calendarEventCollection.fetch()
 
   onShow: =>
     @loadCalendarView 'day'
 
-  loadCalendarView: (navView)=>
+  loadCalendarView: (navView) =>
     switch navView
       when "day"
         @calendarView = new CalendarDayView

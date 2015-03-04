@@ -1,6 +1,7 @@
 Marionette = require 'backbone.marionette'
 
 module.exports = class GroupView extends Marionette.LayoutView
+
   template: Templates.trainer.groups.group
 
   modelEvents:
@@ -18,7 +19,7 @@ module.exports = class GroupView extends Marionette.LayoutView
     input = ev.target
     if input.files && input.files[0]
       reader = new FileReader()
-      reader.onload = (e)->
+      reader.onload = (e) ->
         $(ev.target).parents('form').find('.gc-edit-profile-modal-avatar').attr('src', e.target.result)
       reader.readAsDataURL(input.files[0])
 

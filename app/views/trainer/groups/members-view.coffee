@@ -3,14 +3,19 @@ Marionette = require 'backbone.marionette'
 ClientCollection = require 'models/trainer/client-collection'
 
 class MembersItemView extends Marionette.ItemView
+
   template: Templates.trainer.groups.members_item
+
   tagName: 'li'
+
   className: 'row padding-0'
 
-
 module.exports = class MembersView extends Marionette.CompositeView
+
   template: Templates.trainer.groups.members
+
   childView: MembersItemView
+
   childViewContainer: 'ul'
 
   events:

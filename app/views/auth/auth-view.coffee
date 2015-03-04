@@ -2,6 +2,7 @@ config = require 'config'
 Marionette = require 'backbone.marionette'
 
 module.exports = class AuthView extends Marionette.ItemView
+
   template: Templates.auth.auth
 
   events:

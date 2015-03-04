@@ -2,6 +2,7 @@ Marionette = require 'backbone.marionette'
 PropertyModel = require 'models/trainer/property-model'
 
 module.exports = class PropertiesView extends Marionette.LayoutView
+
   template: Templates.trainer.properties.properties
 
   collectionEvents:

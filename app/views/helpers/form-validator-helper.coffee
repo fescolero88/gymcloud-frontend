@@ -2,7 +2,9 @@ Backbone = require 'backbone'
 _ = require 'lodash'
 
 module.exports = class FormValidatorHelper
+
   initialize: ->
+
     occurrences = (string, subString, allowOverlapping) ->
       string += ""
       subString += ""

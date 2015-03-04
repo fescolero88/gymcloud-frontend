@@ -2,7 +2,9 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 module.exports = class ClientFormModalView extends Marionette.ItemView
+
   className: 'modal-dialog'
+
   template: Templates.trainer.clients.client_form_modal
 
   events:
@@ -25,7 +27,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
       error_msg = @model.preValidate input_name, input_value
       @switchError error_msg, $inputGroup
 
-  switchError: (error_msg, $inputGroup)=>
+  switchError: (error_msg, $inputGroup) =>
     if error_msg
       $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
       $inputGroup.find('.gc-valid-icon').addClass('hide')
@@ -35,16 +37,15 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
       $inputGroup.find('.gc-valid-icon').removeClass('hide')
       $inputGroup.find('.gc-error-message').text("")
 
-
   showThumbnail: (ev) ->
     input = ev.target
     if input.files && input.files[0]
       reader = new FileReader()
-      reader.onload = (e)->
+      reader.onload = (e) ->
         $(ev.target).parents('form').find('.gc-edit-profile-modal-avatar').attr('src', e.target.result)
       reader.readAsDataURL(input.files[0])
 
-  submitClientForm: (ev)=>
+  submitClientForm: (ev) =>
     ev.preventDefault()
     avatar = $(ev.target).find('input[type=file]')
     formData = @ui.clientForm.serializeObject()
@@ -59,7 +60,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
     @model.set 'account_type', 3
     if @model.isValid true
       @model.save null,
-        success: (model, data)=>
+        success: (model, data) =>
           if data.error
             for name, error_msg of data.error
               $input = @$el.find("input[name=#{name}]")

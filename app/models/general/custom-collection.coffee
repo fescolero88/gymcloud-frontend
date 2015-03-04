@@ -1,6 +1,7 @@
 Backbone = require 'backbone'
 
 module.exports = class CustomCollection extends Backbone.Collection
+
   isFetched: false
   isRequest: false
 

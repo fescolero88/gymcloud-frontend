@@ -1,12 +1,13 @@
 Marionette = require 'backbone.marionette'
 
-
 class EmptyView extends Marionette.ItemView
+
   template: Templates.trainer.properties.properties_empty
 
-
 class PropertiesItemView extends Marionette.ItemView
+
   template: Templates.trainer.properties.properties_item
+
   tagName: 'li'
 
   modelEvents:
@@ -16,11 +17,14 @@ class PropertiesItemView extends Marionette.ItemView
     super
     @$el.data('id', @model.id)
 
-
 module.exports = class PropertyListView extends Marionette.CompositeView
+
   template: Templates.trainer.properties.property_list
+
   childView: PropertiesItemView
+
   childViewContainer: 'ul'
+
   emptyView: EmptyView
 
   events:
@@ -38,10 +42,10 @@ module.exports = class PropertyListView extends Marionette.CompositeView
   isEmpty: (collection) ->
     return !collection.length
 
-  addProperty: (model)=>
+  addProperty: (model) =>
     @collection.unshift model
 
-  rmProperty: (ev)->
+  rmProperty: (ev) ->
     ev.preventDefault()
     model_id = $(ev.currentTarget).data('id')
     model = @collection.get model_id
