@@ -19,12 +19,12 @@ module.exports = class MembersView extends Marionette.CompositeView
   childViewContainer: 'ul'
 
   events:
-    "click @ui.rmAssign": "rmAssign"
-    "submit @ui.removeForm": "submitRemoveClient"
+    'click @ui.rmAssign': 'rmAssign'
+    'submit @ui.removeForm': 'submitRemoveClient'
 
   ui:
-    rmAssign: ".gc-exercises-assign-btn-del"
-    removeModal: "#gc-remove-from-group-modal"
+    rmAssign: '.gc-exercises-assign-btn-del'
+    removeModal: '#gc-remove-from-group-modal'
     checked: 'input[type=checkbox]:checked'
     removeForm: '.gc-remove-from-group-form'
 
@@ -62,7 +62,7 @@ module.exports = class MembersView extends Marionette.CompositeView
     @ui.removeModal.modal 'hide'
 
     $.ajax
-      url: "/api/mobile/client_groups/remove"
+      url: '/api/mobile/client_groups/remove'
       type: 'POST'
       data: JSON.stringify data
       dataType: 'json'
@@ -88,7 +88,7 @@ module.exports = class MembersView extends Marionette.CompositeView
       client_group_ids: [@groupId]
 
     $.ajax
-      url: "/api/mobile/client_groups/add"
+      url: '/api/mobile/client_groups/add'
       type: 'POST'
       data: JSON.stringify data
       dataType: 'json'

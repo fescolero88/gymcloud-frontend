@@ -47,21 +47,21 @@ class App extends Marionette.Application
 
       # --- Globar spinner -----
       spinner = new Spinner
-      @vent.on "spinner:global:start", ->
+      @vent.on 'spinner:global:start', ->
         spinner.spin(document.getElementById('center-spin'))
 
-      @vent.on "spinner:global:stop", ->
+      @vent.on 'spinner:global:stop', ->
         spinner.stop()
       # --- Globar spinner -----
 
       # --- Ajax handlers -----
       @loadingCount = 0
       $(document).ajaxStart () =>
-        @vent.trigger "spinner:global:start"  if ++@loadingCount is 1
+        @vent.trigger 'spinner:global:start'  if ++@loadingCount is 1
 
       $(document).ajaxComplete () =>
         if @loadingCount > 0
-          @vent.trigger "spinner:global:stop"  if --@loadingCount is 0
+          @vent.trigger 'spinner:global:stop'  if --@loadingCount is 0
 
       $(document).ajaxError (event, jqxhr, settings, thrownError) =>
         if jqxhr.status is 401
@@ -76,7 +76,7 @@ class App extends Marionette.Application
 
       $.ajaxSetup
         headers: {'X-Requested-With': 'XMLHttpRequest'}
-        contentType: "application/json"
+        contentType: 'application/json'
 
       $.ajaxPrefilter ( options, originalOptions, jqXHR ) =>
         options.url = config.api.url + options.url

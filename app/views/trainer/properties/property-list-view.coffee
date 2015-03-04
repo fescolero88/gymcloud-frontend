@@ -11,7 +11,7 @@ class PropertiesItemView extends Marionette.ItemView
   tagName: 'li'
 
   modelEvents:
-    "sync": "render"
+    sync: 'render'
 
   render: ->
     super
@@ -28,10 +28,10 @@ module.exports = class PropertyListView extends Marionette.CompositeView
   emptyView: EmptyView
 
   events:
-    "click @ui.rmProperty": "rmProperty"
+    'click @ui.rmProperty': 'rmProperty'
 
   ui:
-    rmProperty: ".gc-properties-property-delete"
+    rmProperty: '.gc-properties-property-delete'
 
   templateHelpers: =>
     collection: @collection
@@ -58,8 +58,8 @@ module.exports = class PropertyListView extends Marionette.CompositeView
       onDrop: ($item) =>
         model_id = $item.data('id')
         model = @collection.get model_id
-        $item.removeClass("dragged").removeAttr("style")
-        $("body").removeClass("dragging")
+        $item.removeClass('dragged').removeAttr('style')
+        $('body').removeClass('dragging')
         new_position = $('.gc-properties-list li').index($item)+1
         model.set 'position', new_position
         model.save()

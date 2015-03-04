@@ -8,12 +8,12 @@ module.exports = class GroupFormModalView extends Marionette.ItemView
   template: Templates.trainer.clients.group_form_modal
 
   events:
-    "submit @ui.groupForm": "submitGroupForm"
-    "change .gc-edit-profile-modal-upload-input": "showThumbnail"
-    "blur form input": "validateInput"
+    'submit @ui.groupForm': 'submitGroupForm'
+    'change .gc-edit-profile-modal-upload-input': 'showThumbnail'
+    'blur form input': 'validateInput'
 
   ui:
-    groupForm: "form"
+    groupForm: 'form'
 
   initialize: =>
     Backbone.Validation.bind @
@@ -35,7 +35,7 @@ module.exports = class GroupFormModalView extends Marionette.ItemView
     else
       $inputGroup.removeClass('gc-invalid').addClass('gc-valid')
       $inputGroup.find('.gc-valid-icon').removeClass('hide')
-      $inputGroup.find('.gc-error-message').text("")
+      $inputGroup.find('.gc-error-message').text('')
 
   showThumbnail: (ev) ->
     input = ev.target
@@ -57,7 +57,7 @@ module.exports = class GroupFormModalView extends Marionette.ItemView
       App.vent.trigger('spinner:global:start')
       @model.save null,
         success: (model, data) =>
-          App.vent.trigger "spinner:global:stop"
+          App.vent.trigger 'spinner:global:stop'
           if data.error
             for name, error_msg of data.error
               $input = @$el.find("input[name=#{name}]")
@@ -68,7 +68,7 @@ module.exports = class GroupFormModalView extends Marionette.ItemView
             @trigger 'addToGroupsCollection', model
             if avatar[0].files[0]
               data = new FormData()
-              data.append("avatar", avatar[0].files[0])
+              data.append('avatar', avatar[0].files[0])
               $.ajax
                 url: "#{model.urlRoot}/#{model.id}/avatar"
                 type: 'PUT'

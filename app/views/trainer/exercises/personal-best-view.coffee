@@ -18,7 +18,7 @@ class PersonalBestItemView extends Marionette.ItemView
   model: PersonalBestModel
 
   ui:
-    'deleteButton': '.gc-exercises-bests-delete'
+    deleteButton: '.gc-exercises-bests-delete'
 
   events:
     'click @ui.deleteButton': 'deletePersonalBest'
@@ -50,8 +50,8 @@ module.exports = class PersonalBestView extends Marionette.LayoutView
     'click @ui.showModal': 'showAddPersonalBestModal'
 
   regions:
-    'list': '#gc-personal-best-collection'
-    'modal': '#gc-add-personal-best-modal'
+    list: '#gc-personal-best-collection'
+    modal: '#gc-add-personal-best-modal'
 
   initialize: (data) =>
     @itemId = data.itemId
@@ -76,6 +76,6 @@ module.exports = class PersonalBestView extends Marionette.LayoutView
   personalBestAdded: =>
     @ui.modal.modal 'hide'
     App.request 'messenger:show',
-      message: "New personal best added"
+      message: 'New personal best added'
       type: 'info'
     @personalBest.fetch()

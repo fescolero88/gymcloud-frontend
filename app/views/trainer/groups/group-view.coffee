@@ -5,15 +5,15 @@ module.exports = class GroupView extends Marionette.LayoutView
   template: Templates.trainer.groups.group
 
   modelEvents:
-    "sync": "render"
+    sync: 'render'
 
   events:
-    "change .gc-edit-profile-modal-upload-input": "showThumbnail"
-    "submit @ui.groupForm": 'submitGroupForm'
+    'change .gc-edit-profile-modal-upload-input': 'showThumbnail'
+    'submit @ui.groupForm': 'submitGroupForm'
 
   ui:
-    groupForm: ".group-edit-form"
-    groupFormModal: "#gc-edit-group-modal"
+    groupForm: '.group-edit-form'
+    groupFormModal: '#gc-edit-group-modal'
 
   showThumbnail: (ev) ->
     input = ev.target
@@ -32,7 +32,7 @@ module.exports = class GroupView extends Marionette.LayoutView
     avatar = $(ev.target).find('input[type=file]')
     if avatar[0].files[0]
         data = new FormData()
-        data.append("avatar", avatar[0].files[0])
+        data.append('avatar', avatar[0].files[0])
         $.ajax
           url: "#{@model.url}/avatar"
           type: 'PUT'

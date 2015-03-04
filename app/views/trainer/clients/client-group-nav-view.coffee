@@ -11,7 +11,7 @@ module.exports = class ClientGroupNavView extends Marionette.ItemView
     'click .gc-content-nav-back a': 'navBack'
 
   ui:
-    nav: ".gc-content-nav a"
+    nav: '.gc-content-nav a'
     navLink: '.gc-content-nav :not(.gc-content-nav-back) a'
     deleteButton: '.gc-content-nav-delete'
 

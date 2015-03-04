@@ -38,10 +38,10 @@ module.exports = class AssignmentsListView extends Marionette.CompositeView
     viewType: @viewType
 
   events:
-    "click @ui.rmAssign": "rmAssign"
+    'click @ui.rmAssign': 'rmAssign'
 
   ui:
-    rmAssign: ".gc-exercises-assign-btn-del"
+    rmAssign: '.gc-exercises-assign-btn-del'
 
   isEmpty: (collection) ->
     !collection.length
@@ -74,7 +74,7 @@ module.exports = class AssignmentsListView extends Marionette.CompositeView
       if !@collection.length
         @collection.isFetched = false
       App.request 'messenger:show',
-        message: "Exercise was deleted from the list"
+        message: 'Exercise was deleted from the list'
         type: 'error'
 
   assignItem: (item) =>

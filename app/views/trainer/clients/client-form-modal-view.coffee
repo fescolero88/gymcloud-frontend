@@ -8,12 +8,12 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
   template: Templates.trainer.clients.client_form_modal
 
   events:
-    "submit @ui.clientForm": "submitClientForm"
-    "change .gc-edit-profile-modal-upload-input": "showThumbnail"
-    "blur form input": "validateInput"
+    'submit @ui.clientForm': 'submitClientForm'
+    'change .gc-edit-profile-modal-upload-input': 'showThumbnail'
+    'blur form input': 'validateInput'
 
   ui:
-    clientForm: "form"
+    clientForm: 'form'
 
   initialize: =>
     Backbone.Validation.bind @
@@ -35,7 +35,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
     else
       $inputGroup.removeClass('gc-invalid').addClass('gc-valid')
       $inputGroup.find('.gc-valid-icon').removeClass('hide')
-      $inputGroup.find('.gc-error-message').text("")
+      $inputGroup.find('.gc-error-message').text('')
 
   showThumbnail: (ev) ->
     input = ev.target
@@ -71,7 +71,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
             @trigger 'addToClientsCollection', model
             if avatar[0].files[0]
               data = new FormData()
-              data.append("avatar", avatar[0].files[0])
+              data.append('avatar', avatar[0].files[0])
               $.ajax
                 url: if model.urlRoot then "#{model.urlRoot}/#{model.id}/avatar" else "#{model.url}/avatar"
                 type: 'PUT'

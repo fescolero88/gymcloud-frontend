@@ -5,7 +5,7 @@ module.exports = class HeaderView extends Marionette.ItemView
   template: Templates.general.header
 
   events:
-    "blur #gc-topnav-search": "searchblur"
+    'blur #gc-topnav-search': 'searchblur'
 
   initialize: =>
     App.vent.on 'profile:ready', @render

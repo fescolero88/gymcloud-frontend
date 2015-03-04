@@ -5,13 +5,13 @@ module.exports = class ActivityView extends Marionette.ItemView
   template: Templates.trainer.clients.activity
 
   events:
-    "click @ui.loadMore": "loadMore"
+    'click @ui.loadMore': 'loadMore'
 
   ui:
-    "loadMore": ".load-more"
+    loadMore: '.load-more'
 
   collectionEvents:
-    "sync": "render"
+    sync: 'render'
 
   templateHelpers: ->
     noMore: @collection.noMore

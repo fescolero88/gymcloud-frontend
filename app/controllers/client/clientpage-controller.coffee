@@ -37,7 +37,7 @@ module.exports = class ClientPageController extends Marionette.Controller
     @beforeAction()
 
     exercisesCollection = new ExercisesCollection
-    exercisesCollection.url = "/api/mobile/me/exercises"
+    exercisesCollection.url = '/api/mobile/me/exercises'
     exercisesCollection.fetch()
     contentView = new ExercisesView collection: exercisesCollection
     @userPageView.content.show contentView
@@ -48,7 +48,7 @@ module.exports = class ClientPageController extends Marionette.Controller
     @beforeAction()
 
     workoutsCollection = new WorkoutsCollection
-    workoutsCollection.url = "/api/mobile/me/workouts"
+    workoutsCollection.url = '/api/mobile/me/workouts'
     workoutsCollection.fetch()
     contentView = new WorkoutsView collection: workoutsCollection
     @userPageView.content.show contentView
@@ -59,7 +59,7 @@ module.exports = class ClientPageController extends Marionette.Controller
     @beforeAction()
 
     programsCollection = new ProgramsCollection
-    programsCollection.url = "/api/mobile/me/programs"
+    programsCollection.url = '/api/mobile/me/programs'
     programsCollection.fetch()
     contentView = new ProgramsView collection: programsCollection
     @userPageView.content.show contentView

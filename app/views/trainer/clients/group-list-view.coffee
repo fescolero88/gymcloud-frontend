@@ -12,8 +12,8 @@ module.exports = class GroupItemView extends Marionette.ItemView
   className: 'row'
 
   modelEvents:
-    "sync": "render"
-    "change": "render"
+    sync: 'render'
+    change: 'render'
 
   ui:
     deleteSingle: '.gc-clients-list-client-delete'

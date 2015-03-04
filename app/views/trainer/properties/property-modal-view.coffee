@@ -6,8 +6,8 @@ module.exports = class PropertyModalView extends Marionette.ItemView
   template: Templates.trainer.properties.property_modal
 
   events:
-    "submit form": "submitForm"
-    "blur form input": "validateInput"
+    'submit form': 'submitForm'
+    'blur form input': 'validateInput'
 
   ui:
     propertyModal: '#gc-add-property-modal'
@@ -43,7 +43,7 @@ module.exports = class PropertyModalView extends Marionette.ItemView
     else
       $inputGroup.removeClass('gc-invalid').addClass('gc-valid')
       $inputGroup.find('.gc-valid-icon').removeClass('hide')
-      $inputGroup.find('.gc-error-message').text("")
+      $inputGroup.find('.gc-error-message').text('')
 
   submitForm: (ev) ->
     ev.preventDefault()

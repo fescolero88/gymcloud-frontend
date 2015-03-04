@@ -5,5 +5,5 @@ module.exports = class ExerciseView extends Marionette.ItemView
   template: Templates.trainer.exercises.exercise
 
   modelEvents:
-    "sync": "render"
-    "change": "render"
+    sync: 'render'
+    change: 'render'

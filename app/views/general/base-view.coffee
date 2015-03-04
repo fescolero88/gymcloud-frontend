@@ -10,7 +10,7 @@ module.exports = class BaseView extends Marionette.LayoutView
     appRegion: 'region[data-name="app"]'
 
   ui:
-    'appRegion': 'region[data-name="app"]'
+    appRegion: 'region[data-name="app"]'
 
   initialize: ->
     App.vent.on 'body:change-class', @changeClass

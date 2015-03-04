@@ -13,7 +13,7 @@ module.exports = class ClientPageSidebarView extends Marionette.LayoutView
   autoRender: false
 
   modelEvents:
-    "sync": "render"
+    sync: 'render'
 
   regions:
     'activity': '#gc-clientpage-sidebar-activity'
@@ -21,10 +21,10 @@ module.exports = class ClientPageSidebarView extends Marionette.LayoutView
     'clientForm': '#gc-edit-client-modal'
 
   events:
-    "click .show-client-form": "showClientEditModal"
+    'click .show-client-form': 'showClientEditModal'
 
   ui:
-    clientFormModal: "#gc-edit-client-modal"
+    clientFormModal: '#gc-edit-client-modal'
 
   initialize: =>
     App.vent.on 'profile:ready', @updateProfile
@@ -34,7 +34,7 @@ module.exports = class ClientPageSidebarView extends Marionette.LayoutView
 
   onShow: =>
     clientRecentActivity = new ClientActivityCollection
-    clientRecentActivity.url = "/api/mobile/notifications"
+    clientRecentActivity.url = '/api/mobile/notifications'
     clientRecentActivity.fetch()
 
     @activityView = new ClientPageActivityView collection: clientRecentActivity

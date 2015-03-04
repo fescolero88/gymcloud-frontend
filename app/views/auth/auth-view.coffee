@@ -6,7 +6,7 @@ module.exports = class AuthView extends Marionette.ItemView
   template: Templates.auth.auth
 
   events:
-    "submit form": "login"
+    'submit form': 'login'
 
   ui:
     inputEmail: "input[type='email']"

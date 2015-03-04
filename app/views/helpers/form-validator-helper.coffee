@@ -6,8 +6,8 @@ module.exports = class FormValidatorHelper
   initialize: ->
 
     occurrences = (string, subString, allowOverlapping) ->
-      string += ""
-      subString += ""
+      string += ''
+      subString += ''
       return string.length + 1  if subString.length <= 0
       n = 0
       pos = 0
@@ -26,7 +26,7 @@ module.exports = class FormValidatorHelper
           $inputGroup = view.$el.find("[name=#{attr}]").closest('.form-group')
           $inputGroup.removeClass('gc-invalid').addClass('gc-valid')
           $inputGroup.find('.gc-valid-icon').removeClass('hide')
-          $inputGroup.find('.gc-error-message').text("")
+          $inputGroup.find('.gc-error-message').text('')
 
         invalid: (view, attr, error, selector) ->
           $inputGroup = view.$el.find("[name=#{attr}]").closest('.form-group')
@@ -39,8 +39,8 @@ module.exports = class FormValidatorHelper
         if value
           value = value.replace(/\,/g,'.')
           if occurrences(value, '.') > 1
-            return "error"
+            return 'error'
           if value.match(/^[0-9\.]+$/) is null
-            return "error"
+            return 'error'
           if not parseFloat value
-            return "error"
+            return 'error'

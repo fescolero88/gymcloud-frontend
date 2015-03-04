@@ -11,7 +11,7 @@ module.exports = class ForgotPasswordView extends Marionette.ItemView
     emailField: '.gc-forgot-password-email'
 
   events:
-    "submit @ui.form": "submitForm"
+    'submit @ui.form': 'submitForm'
 
   initialize: =>
     Backbone.Validation.bind @
@@ -24,7 +24,7 @@ module.exports = class ForgotPasswordView extends Marionette.ItemView
     else
       $inputGroup.removeClass('gc-invalid').addClass('gc-valid')
       $inputGroup.find('.gc-valid-icon').removeClass('hide')
-      $inputGroup.find('.gc-error-message').text("")
+      $inputGroup.find('.gc-error-message').text('')
 
   submitForm: (ev) =>
     ev.preventDefault()

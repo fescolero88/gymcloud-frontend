@@ -14,28 +14,28 @@ module.exports = class ClientsView extends Marionette.LayoutView
   template: Templates.trainer.clients.clients
 
   events:
-    "click .gc-content-nav-checkall": "toggleCheck"
-    "click .gc-clients-list-client-chb": "checkAll"
-    "click #rm-event": "rmEvent"
-    "click .move-to-group-show": "showMovetogroupModal"
-    "click .show-client-form": "showClientAddModal"
-    "click .show-group-form": "showGroupAddModal"
-    "submit .gc-move-to-group-form": "submitMovetogroupForm"
+    'click .gc-content-nav-checkall': 'toggleCheck'
+    'click .gc-clients-list-client-chb': 'checkAll'
+    'click #rm-event': 'rmEvent'
+    'click .move-to-group-show': 'showMovetogroupModal'
+    'click .show-client-form': 'showClientAddModal'
+    'click .show-group-form': 'showGroupAddModal'
+    'submit .gc-move-to-group-form': 'submitMovetogroupForm'
 
   ui:
     mainCheckbox: ".gc-content-nav-checkall input[type='checkbox']"
-    groupFormModal: "#gc-add-group-modal"
-    groupForm: ".group-form"
-    clientFormModal: "#gc-add-client-modal"
-    checkedCounter: ".gc-clients-nav-right p"
+    groupFormModal: '#gc-add-group-modal'
+    groupForm: '.group-form'
+    clientFormModal: '#gc-add-client-modal'
+    checkedCounter: '.gc-clients-nav-right p'
     moveToGroupModal: '#gc-move-to-group-modal'
 
   regions:
-    'clients': '#clients-region'
-    'groups': '#groups-region'
-    'moveToGroup': '#gc-move-to-group-modal'
-    'clientForm': '#gc-add-client-modal'
-    'groupForm': '#gc-add-group-modal'
+    clients: '#clients-region'
+    groups: '#groups-region'
+    moveToGroup: '#gc-move-to-group-modal'
+    clientForm: '#gc-add-client-modal'
+    groupForm: '#gc-add-group-modal'
 
   templateHelpers: =>
     view_type: @viewType
@@ -80,14 +80,14 @@ module.exports = class ClientsView extends Marionette.LayoutView
     count_ind = @$el.find('.gc-clients-list-ind').find('input[type=checkbox]:checked').length
     count_gr = @$el.find('.gc-clients-list-gr').find('input[type=checkbox]:checked').length
     if count_ind or count_gr
-      text = ""
+      text = ''
       if count_ind
         text += "#{count_ind} clients(s)"
       if count_ind and count_gr
-        text += ", "
+        text += ', '
       if count_gr
         text += "#{count_gr} group(s)"
-      @ui.checkedCounter.text(text + " selected")
+      @ui.checkedCounter.text(text + ' selected')
       @ui.checkedCounter.removeClass('hidden')
     else
       @ui.checkedCounter.addClass('hidden')
@@ -146,12 +146,12 @@ module.exports = class ClientsView extends Marionette.LayoutView
     @ui.moveToGroupModal.modal('hide')
 
     $.ajax
-      url: "/api/mobile/client_groups/add"
+      url: '/api/mobile/client_groups/add'
       type: 'POST'
       data: JSON.stringify data
       dataType: 'json'
       success: =>
         @$el.find('#clients-region').find('input[type=checkbox]:checked').removeAttr('checked')
         App.request 'messenger:show',
-          message: "Success"
+          message: 'Success'
           type: 'success'

@@ -7,14 +7,14 @@ module.exports = class SideBarView extends Marionette.ItemView
   template: Templates.trainer.sidebar.sidebar
 
   events:
-    "click .toggle-menu": "toggleMenu"
+    'click .toggle-menu': 'toggleMenu'
 
   ui:
-    subs: ".gc-sidebar-folder > .gc-sidebar-sub, .gc-sidebar-cat > .gc-sidebar-sub"
-    sidebar: ".gc-sidebar-menu-list"
-    dndArea: ".gc-dnd-area"
-    mainArea: ".gc-main"
-    catchList: ".gc-assign-catch"
+    subs: '.gc-sidebar-folder > .gc-sidebar-sub, .gc-sidebar-cat > .gc-sidebar-sub'
+    sidebar: '.gc-sidebar-menu-list'
+    dndArea: '.gc-dnd-area'
+    mainArea: '.gc-main'
+    catchList: '.gc-assign-catch'
 
   initialize: =>
     @exercises = []
@@ -45,9 +45,9 @@ module.exports = class SideBarView extends Marionette.ItemView
       success: (data) =>
         for item in data
           switch item.title
-            when "Exercises" then App.request 'data:exercises:reset', item.items
-            when "Workouts" then App.request 'data:workouts:reset', item.items
-            when "Programs" then App.request 'data:programs:reset', item.items
+            when 'Exercises' then App.request 'data:exercises:reset', item.items
+            when 'Workouts' then App.request 'data:workouts:reset', item.items
+            when 'Programs' then App.request 'data:programs:reset', item.items
         window.App.vent.trigger 'assignments:loaded'
         @render()
 
@@ -64,21 +64,21 @@ module.exports = class SideBarView extends Marionette.ItemView
         $item.css
           height: $item.height()
           width: $item.width()
-        $item.addClass("dragged")
+        $item.addClass('dragged')
           .data 'category', $item.closest('.gc-sidebar-cat').data 'category'
           .parents('.gc-sidebar-sub').css 'overflow', 'visible'
-        $("body").addClass("dragging")
+        $('body').addClass('dragging')
         if not container.options.drop
           $item.clone()
             .insertAfter($item)
             .removeClass('dragged')
-            .removeAttr("style")
+            .removeAttr('style')
         _super $item
         App.vent.trigger 'drag:start'
       onDrop: ($item, container, _super, e) =>
-        $item.removeClass("dragged").removeAttr("style")
-        @ui.subs.removeAttr("style")
-        $("body").removeClass("dragging")
+        $item.removeClass('dragged').removeAttr('style')
+        @ui.subs.removeAttr('style')
+        $('body').removeClass('dragging')
         draggable = new DraggableMenuItemModel
           id: $item.find('[data-key]').data('key')
           name: $item.find('[data-key]').text()

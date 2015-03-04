@@ -15,13 +15,13 @@ class PersonalBestResultView extends Marionette.ItemView
   className: 'row'
 
   modelEvents:
-    "sync": "render"
+    sync: 'render'
 
   ui:
     deleteButton: '.gc-personl-best-modal-delete-property'
 
   events:
-    "click @ui.deleteButton": "deleteProperty"
+    'click @ui.deleteButton': 'deleteProperty'
 
   deleteProperty: (ev) =>
     ev.preventDefault()
@@ -38,15 +38,15 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
   childViewContainer: 'ul'
 
   collectionEvents:
-    "sync": "render"
+    sync: 'render'
 
   events:
-    "submit @ui.groupForm": "submitGroupForm"
-    "click @ui.clearAll": "clearAll"
-    "click @ui.addPersonalBest": "addPersonalBest"
+    'submit @ui.groupForm': 'submitGroupForm'
+    'click @ui.clearAll': 'clearAll'
+    'click @ui.addPersonalBest': 'addPersonalBest'
 
   ui:
-    groupForm: "form"
+    groupForm: 'form'
     properties: 'select'
     propertyValue: '.gc-add-personal-best-property-value'
     clearAll: '.gc-add-personal-best-clear'
@@ -65,13 +65,13 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
         time: 'fa fa-clock-o'
         date: 'fa fa-calendar'
       format: 'YYYY-MM-DD'
-    @properties = App.request("client:properties", @id) || new ClientsPropertyCollection
+    @properties = App.request('client:properties', @id) || new ClientsPropertyCollection
     if @properties.length
       @fillProperties()
     else
       @properties.url = "#{@properties.urlRoot}/#{@id}/properties"
       @properties.fetch().then =>
-        App.request "client:properties:set", @id, @properties
+        App.request 'client:properties:set', @id, @properties
         @fillProperties()
 
   onDestroy: =>
