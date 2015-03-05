@@ -84,6 +84,8 @@ body.dragging, body.dragging * {
 }
 body > region {
   display: block;
+  height: 100%;
+  min-height: 100%;
 }
 body > region > .container-fluid {
   padding: 0;
