@@ -2,22 +2,23 @@ Marionette = require 'backbone.marionette'
 PropertyModel = require 'models/trainer/property-model'
 
 module.exports = class PropertiesView extends Marionette.LayoutView
+
   template: Templates.trainer.properties.properties
 
   collectionEvents:
-    "sync": "showCollection"
+    sync: 'showCollection'
 
   regions:
     'propertyModalView': '#property-modal'
     'propertyList': '#property-list'
 
   events:
-    "click @ui.propertyModalBtn": "propertyModalShow"
-    "click @ui.editProperty": "editProperty"
+    'click @ui.propertyModalBtn': 'propertyModalShow'
+    'click @ui.editProperty': 'editProperty'
 
   ui:
     propertyModalBtn: '.add-property-btn'
-    editProperty: ".gc-properties-property-edit"
+    editProperty: '.gc-properties-property-edit'
 
   initialize: (data) ->
     @collection = data.collection

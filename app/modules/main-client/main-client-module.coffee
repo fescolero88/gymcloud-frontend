@@ -12,6 +12,7 @@ SideBarView = require 'views/client/clientpage-sidebar-view'
 HeaderView = require 'views/general/header-view'
 
 module.exports = class MainClientModule extends Marionette.Module
+
   initialize: =>
     @on 'start', ->
       @clientController = new ClientController

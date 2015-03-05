@@ -1,7 +1,9 @@
 Marionette = require 'backbone.marionette'
 
 module.exports = class MainView extends Marionette.LayoutView
+
   template: Templates.general.main
+
   className: 'container-fluid'
 
   initialize: =>
@@ -16,14 +18,14 @@ module.exports = class MainView extends Marionette.LayoutView
     App.vent.trigger 'body:change-class', 'main'
 
   ui:
-    dndArea: ".gc-dnd-area"
-    mainArea: ".gc-main"
+    dndArea: '.gc-dnd-area'
+    mainArea: '.gc-main'
 
   regions:
-    'header':    ".gc-topbar"
-    'menu':      ".gc-sidebar-wrapper"
-    'content':   ".gc-main"
-    'modals':    ".gc-modals"
+    header: '.gc-topbar'
+    menu: '.gc-sidebar-wrapper'
+    content: '.gc-main'
+    modals: '.gc-modals'
 
   dragStart: =>
     if @.content.currentView.isDroppable

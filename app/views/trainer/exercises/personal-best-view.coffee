@@ -4,17 +4,21 @@ PersonalBestCollection = require 'models/trainer/personal-best-collection'
 PersonalBestModalView = require 'views/trainer/exercises/personal-best-modal'
 
 class EmptyView extends Marionette.ItemView
+
   template: Templates.trainer.exercises.personal_best_empty
 
-
 class PersonalBestItemView extends Marionette.ItemView
+
   template: Templates.trainer.exercises.personal_best_item
+
   tagName: 'li'
+
   className: 'gc-exercises-bests-best'
+
   model: PersonalBestModel
 
   ui:
-    'deleteButton': '.gc-exercises-bests-delete'
+    deleteButton: '.gc-exercises-bests-delete'
 
   events:
     'click @ui.deleteButton': 'deletePersonalBest'
@@ -27,11 +31,15 @@ class PersonalBestItemView extends Marionette.ItemView
     @model.destroy()
 
 class PersonalBestCollectionView extends Marionette.CollectionView
+
   childView: PersonalBestItemView
+
   childViewContainer: 'ul'
+
   emptyView: EmptyView
 
 module.exports = class PersonalBestView extends Marionette.LayoutView
+
   template: Templates.trainer.exercises.personal_best
 
   ui:
@@ -42,8 +50,8 @@ module.exports = class PersonalBestView extends Marionette.LayoutView
     'click @ui.showModal': 'showAddPersonalBestModal'
 
   regions:
-    'list': '#gc-personal-best-collection'
-    'modal': '#gc-add-personal-best-modal'
+    list: '#gc-personal-best-collection'
+    modal: '#gc-add-personal-best-modal'
 
   initialize: (data) =>
     @itemId = data.itemId
@@ -68,6 +76,6 @@ module.exports = class PersonalBestView extends Marionette.LayoutView
   personalBestAdded: =>
     @ui.modal.modal 'hide'
     App.request 'messenger:show',
-      message: "New personal best added"
+      message: 'New personal best added'
       type: 'info'
     @personalBest.fetch()

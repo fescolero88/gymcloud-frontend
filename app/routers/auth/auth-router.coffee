@@ -9,7 +9,6 @@ module.exports = class AuthRouter extends CustomRouter
     'forgot-password(/)': 'forgotPassword'
     'signup(/)': 'signUp'
 
-  before: (methodName)=>
+  before: (methodName) =>
     App.vent.trigger 'body:change-class', 'auth'
     App.vent.trigger 'module:auth:beforeAction'
-

@@ -20,16 +20,17 @@ PersonalBestView = require 'views/trainer/exercises/personal-best-view'
 
 
 module.exports = class ClientGroupView extends Marionette.LayoutView
+
   template: Templates.trainer.clients.client
 
   collectionEvents:
-    "sync": "showCenterView"
+    sync: 'showCenterView'
 
   regions:
-    'header': '#client-header-region'
-    'nav': '#client-content-nav-region'
-    'leftside': '#client-left-region'
-    'rightside': '#client-right-region'
+    header: '#client-header-region'
+    nav: '#client-content-nav-region'
+    leftside: '#client-left-region'
+    rightside: '#client-right-region'
 
   ui:
     itemsLinks: '.gc-exercises-link-exercises, .gc-exercises-link-workouts, .gc-exercises-link-programs'
@@ -68,7 +69,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
 
     @navView.navigate @assign
 
-  showActivity: (isShow)->
+  showActivity: (isShow) ->
     if !@activityView? or @activityView.isDestroyed
       @activityView = new ActivityView collection: @recentActivityCollection
       if isShow
@@ -91,7 +92,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
       @key = null
     else
       switch navView
-        when "members"
+        when 'members'
           @collection = new MembersCollection
           @collection.url = "#{@collection.urlRoot}/#{@itemId}/members"
           @collection.fetch()
@@ -99,7 +100,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
             groupId: @itemId
             collection: @collection
           @showCenterView()
-        when "exercises"
+        when 'exercises'
           @collection = new ExercisesCollection
           @collection.url = "/api/mobile/#{@viewType}/#{@itemId}/exercises"
           @collection.fetch().then =>
@@ -109,7 +110,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
             clientId: @itemId
             viewType: @viewType
             assignName: navView
-        when "workouts"
+        when 'workouts'
           @collection = new WorkoutsCollection
           @collection.url = "/api/mobile/#{@viewType}/#{@itemId}/workouts"
           @collection.fetch().then =>
@@ -119,7 +120,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
             clientId: @itemId
             viewType: @viewType
             assignName: navView
-        when "programs"
+        when 'programs'
           @collection = new ProgramsCollection
           @collection.url = "/api/mobile/#{@viewType}/#{@itemId}/programs"
           @collection.fetch().then =>
@@ -129,7 +130,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
             clientId: @itemId
             viewType: @viewType
             assignName: navView
-        when "calendar"
+        when 'calendar'
           @centerView = new CalendarView
           @showCenterView()
 

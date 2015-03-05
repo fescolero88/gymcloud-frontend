@@ -4,16 +4,17 @@ Backbone = require 'backbone'
 ExercisesGlobalListView = require 'views/trainer/exercises/exercises-global-list-view'
 
 module.exports = class ExercisesGlobalView extends Marionette.LayoutView
+
   template: Templates.trainer.exercises.exercises_global
 
   regions:
-    'exercises': '#exercises-region'
+    exercises: '#exercises-region'
 
   ui:
-    'title': '.gc-breadcrumbs-title'
-    'liveSearch': '.live-search'
-    'mainCheckbox': '.gc-content-nav-checkall input'
-    'itemsRegion': '#exercises-region'
+    title: '.gc-breadcrumbs-title'
+    liveSearch: '.live-search'
+    mainCheckbox: '.gc-content-nav-checkall input'
+    itemsRegion: '#exercises-region'
 
   events:
     'click @ui.mainCheckbox': 'toggleCheck'

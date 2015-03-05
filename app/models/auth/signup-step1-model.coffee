@@ -1,9 +1,11 @@
 Backbone = require 'backbone'
 
 module.exports = class SignUpStep1Model extends Backbone.Model
+
   urlRoot: '/api/mobile/clients'
 
   validation:
+
     account_type:
       required: false
       pattern: 'digits'
@@ -25,5 +27,3 @@ module.exports = class SignUpStep1Model extends Backbone.Model
       minLength: 6
       msg: 'Password must be 6 characters'
     ]
-
-

@@ -2,6 +2,7 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 module.exports = class ClientGroupNavView extends Marionette.ItemView
+
   template: Templates.trainer.clients.client_group_nav
 
   events:
@@ -10,7 +11,7 @@ module.exports = class ClientGroupNavView extends Marionette.ItemView
     'click .gc-content-nav-back a': 'navBack'
 
   ui:
-    nav: ".gc-content-nav a"
+    nav: '.gc-content-nav a'
     navLink: '.gc-content-nav :not(.gc-content-nav-back) a'
     deleteButton: '.gc-content-nav-delete'
 
@@ -38,7 +39,7 @@ module.exports = class ClientGroupNavView extends Marionette.ItemView
 
   navigate: (navView) ->
     @ui.nav.parent().removeClass('active')
-    @ui.nav.each (index, element)->
+    @ui.nav.each (index, element) ->
       if $(element).data('nav-view') == navView
         $nav = $(element)
         $nav.parent().addClass('active')

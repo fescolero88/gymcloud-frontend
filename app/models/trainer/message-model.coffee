@@ -3,6 +3,7 @@ Backbone = require 'backbone'
 module.exports = class MessageModel extends Backbone.Model
 
   validation:
+
     body:
       required: true
       msg: 'Type message'

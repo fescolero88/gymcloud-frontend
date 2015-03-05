@@ -1,13 +1,15 @@
 Marionette = require 'backbone.marionette'
 
-
 class EmptyView extends Marionette.ItemView
+
   template: Templates.trainer.assignments.assignment_empty
 
-
 class AssignmentItemView extends Marionette.ItemView
+
   template: Templates.trainer.assignments.assignment_item
+
   tagName: 'li'
+
   className: 'row'
 
   initialize: (data) ->
@@ -20,11 +22,14 @@ class AssignmentItemView extends Marionette.ItemView
     assign_name: @assignName
     view_type: @viewType
 
-
 module.exports = class AssignmentsListView extends Marionette.CompositeView
+
   template: Templates.trainer.assignments.assignments
+
   childView: AssignmentItemView
+
   childViewContainer: 'ul'
+
   emptyView: EmptyView
 
   childViewOptions: ->
@@ -33,10 +38,10 @@ module.exports = class AssignmentsListView extends Marionette.CompositeView
     viewType: @viewType
 
   events:
-    "click @ui.rmAssign": "rmAssign"
+    'click @ui.rmAssign': 'rmAssign'
 
   ui:
-    rmAssign: ".gc-exercises-assign-btn-del"
+    rmAssign: '.gc-exercises-assign-btn-del'
 
   isEmpty: (collection) ->
     !collection.length
@@ -61,7 +66,7 @@ module.exports = class AssignmentsListView extends Marionette.CompositeView
         listItems.push item
     listItems
 
-  rmAssign: (ev)=>
+  rmAssign: (ev) =>
     ev.preventDefault()
     assignId = $(ev.currentTarget).data 'id'
     model = @collection.get assignId
@@ -69,10 +74,10 @@ module.exports = class AssignmentsListView extends Marionette.CompositeView
       if !@collection.length
         @collection.isFetched = false
       App.request 'messenger:show',
-        message: "Exercise was deleted from the list"
+        message: 'Exercise was deleted from the list'
         type: 'error'
 
-  assignItem: (item)=>
+  assignItem: (item) =>
     data =
       id: @clientId
       item_id: item.id

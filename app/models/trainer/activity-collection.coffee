@@ -1,6 +1,7 @@
 Backbone = require 'backbone'
 
 module.exports = class ActivityCollection extends Backbone.Collection
+
   initialize: ->
     super
     @page = 0
@@ -8,7 +9,7 @@ module.exports = class ActivityCollection extends Backbone.Collection
     @prevLength = 0
     @noMore = false
 
-  loadMore: (remove)->
+  loadMore: (remove) ->
     remove ?= false
     @page += 1
     @fetch

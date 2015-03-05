@@ -36,4 +36,3 @@ module.exports = class AuthController extends Marionette.Controller
       href = '#login'
       Backbone.history.navigate(href, { trigger:false, replace: true })
       @login true
-

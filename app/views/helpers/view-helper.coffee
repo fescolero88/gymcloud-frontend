@@ -1,8 +1,10 @@
 moment = require 'moment'
 
 module.exports = class ViewHelper
-  initialize: (Handlebars)->
-    Handlebars.registerPartial "sidebar_item", Templates.trainer.sidebar.sidebar_item
+
+  initialize: (Handlebars) ->
+
+    Handlebars.registerPartial 'sidebar_item', Templates.trainer.sidebar.sidebar_item
 
     Handlebars.registerHelper 'ifNot', (v1, v2, options) ->
       if v1 is v2
@@ -10,7 +12,7 @@ module.exports = class ViewHelper
       else
         options.fn @
 
-    Handlebars.registerHelper "ifEqual", (v1, v2, options) ->
+    Handlebars.registerHelper 'ifEqual', (v1, v2, options) ->
       if v1 is v2
         options.fn @
       else
@@ -31,14 +33,14 @@ module.exports = class ViewHelper
         true: 'Male'
       map[gender]
 
-    Handlebars.registerHelper "activityMessage", (item) ->
+    Handlebars.registerHelper 'activityMessage', (item) ->
       activtyMapMessages =
         message_received:
-          message: "Received message from"
+          message: 'Received message from'
           link: ->
             "<a href=#>#{item.sender_full_name}</a>"
         new_item_assigned:
-          message: "Was assigned new"
+          message: 'Was assigned new'
           link: ->
             "#{item.context.assign_type} <a href=#>#{item.context.assign_name}</a>"
       activityLog = activtyMapMessages[item.type]
@@ -46,11 +48,11 @@ module.exports = class ViewHelper
         #{activityLog.message} #{activityLog.link()}
       """
 
-    Handlebars.registerHelper "prettifyDate", (timestamp) ->
+    Handlebars.registerHelper 'prettifyDate', (timestamp) ->
       moment(new Date(timestamp)).fromNow()
 
     Handlebars.registerHelper 'date', (timestamp) ->
-      moment(timestamp).format "MMMM D, YYYY"
+      moment(timestamp).format 'MMMM D, YYYY'
 
     Handlebars.registerHelper 'yearsOptionsList', ->
       fromYear = new Date().getFullYear()
@@ -59,24 +61,21 @@ module.exports = class ViewHelper
         years += "<option value=\"#{year}\">#{year}</option>"
       return new Handlebars.SafeString years
 
-
-    Handlebars.registerHelper 'ifCond', (v1, operator, v2, options)->
+    Handlebars.registerHelper 'ifCond', (v1, operator, v2, options) ->
       switch operator
-          when '==', '==='
-              return if v1 is v2 then options.fn @ else options.inverse @
-          when '<'
-              return if v1 < v2 then options.fn @ else options.inverse @
-          when '<='
-              return if v1 <= v2 then options.fn @ else options.inverse @
-          when '>'
-              return if v1 > v2 then options.fn @ else options.inverse @
-          when '>='
-              return if v1 >= v2 then options.fn @ else options.inverse @
-          when '&&'
-              return if v1 && v2 then options.fn @ else options.inverse @
-          when '||'
-              return if v1 || v2 then options.fn @ else options.inverse @
-          else
-              return options.inverse @
-
-
+        when '==', '==='
+          return if v1 is v2 then options.fn @ else options.inverse @
+        when '<'
+          return if v1 < v2 then options.fn @ else options.inverse @
+        when '<='
+          return if v1 <= v2 then options.fn @ else options.inverse @
+        when '>'
+          return if v1 > v2 then options.fn @ else options.inverse @
+        when '>='
+          return if v1 >= v2 then options.fn @ else options.inverse @
+        when '&&'
+          return if v1 && v2 then options.fn @ else options.inverse @
+        when '||'
+          return if v1 || v2 then options.fn @ else options.inverse @
+        else
+          return options.inverse @

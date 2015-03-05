@@ -33,8 +33,11 @@ MainClientModule = require 'modules/main-client/main-client-module'
 
 
 class App extends Marionette.Application
+
   initialize: ->
+
     @on 'start', ->
+
       # --- Helpers -----
       new JqueryHelper().initialize()
       new ViewHelper().initialize(Handlebars)
@@ -44,23 +47,23 @@ class App extends Marionette.Application
 
       # --- Globar spinner -----
       spinner = new Spinner
-      @vent.on "spinner:global:start", ->
+      @vent.on 'spinner:global:start', ->
         spinner.spin(document.getElementById('center-spin'))
 
-      @vent.on "spinner:global:stop", ->
+      @vent.on 'spinner:global:stop', ->
         spinner.stop()
       # --- Globar spinner -----
 
       # --- Ajax handlers -----
       @loadingCount = 0
       $(document).ajaxStart () =>
-        @vent.trigger "spinner:global:start"  if ++@loadingCount is 1
+        @vent.trigger 'spinner:global:start'  if ++@loadingCount is 1
 
       $(document).ajaxComplete () =>
         if @loadingCount > 0
-          @vent.trigger "spinner:global:stop"  if --@loadingCount is 0
+          @vent.trigger 'spinner:global:stop'  if --@loadingCount is 0
 
-      $(document).ajaxError (event, jqxhr, settings, thrownError)=>
+      $(document).ajaxError (event, jqxhr, settings, thrownError) =>
         if jqxhr.status is 401
           window.location.replace '#/logout'
 
@@ -73,7 +76,7 @@ class App extends Marionette.Application
 
       $.ajaxSetup
         headers: {'X-Requested-With': 'XMLHttpRequest'}
-        contentType: "application/json"
+        contentType: 'application/json'
 
       $.ajaxPrefilter ( options, originalOptions, jqXHR ) =>
         options.url = config.api.url + options.url
@@ -89,7 +92,7 @@ class App extends Marionette.Application
       App.data = {}
       App.data.profileModel = new ProfileModel()
 
-      @reqres.setHandler 'auth:isAuthorized', (permission)=>
+      @reqres.setHandler 'auth:isAuthorized', (permission) =>
         if window.localStorage.accessToken
           if permission?
             accountType = App.data.profileModel.get('account_type')
@@ -113,19 +116,19 @@ class App extends Marionette.Application
       @reqres.setHandler 'data:exercises', ->
         App.data.exercises
 
-      @reqres.setHandler 'data:exercises:reset', (data)->
+      @reqres.setHandler 'data:exercises:reset', (data) ->
         App.data.exercises = data
 
       @reqres.setHandler 'data:workouts', ->
         App.data.workouts
 
-      @reqres.setHandler 'data:workouts:reset', (data)->
+      @reqres.setHandler 'data:workouts:reset', (data) ->
         App.data.workouts = data
 
       @reqres.setHandler 'data:programs', ->
         App.data.programs
 
-      @reqres.setHandler 'data:programs:reset', (data)->
+      @reqres.setHandler 'data:programs:reset', (data) ->
         App.data.programs = data
 
       @reqres.setHandler 'client:properties', (id) ->

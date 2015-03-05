@@ -5,10 +5,12 @@ ClientCollection = require 'models/trainer/client-collection'
 MessageModel = require 'models/trainer/message-model'
 
 module.exports = class SendMessageModalView extends Marionette.ItemView
+
   className: 'modal-dialog'
+
   template: Templates.trainer.clients.send_message_modal
 
-  initialize: (data)->
+  initialize: (data) ->
     @model = new MessageModel
     Backbone.Validation.bind @
     @selectedItems = data.selectedItems
@@ -17,11 +19,11 @@ module.exports = class SendMessageModalView extends Marionette.ItemView
     @initSearchSelect()
 
   ui:
-    'liveSearch':   '.live-search'
-    'form':         'form'
-    'messageBody':  'textarea[name=body]'
-    'messageNone':  '.gc-send-msessage-none'
-    'messageAll':  '.gc-send-msessage-none'
+    liveSearch:   '.live-search'
+    form:         'form'
+    messageBody:  'textarea[name=body]'
+    messageNone:  '.gc-send-msessage-none'
+    messageAll:   '.gc-send-msessage-none'
 
   events:
     'click  @ui.messageNone': 'selectNone'
@@ -54,7 +56,7 @@ module.exports = class SendMessageModalView extends Marionette.ItemView
         options: options
         render:
           item: (item, escape) ->
-            return "<div>" + escape(item.first_name) + ' ' + escape(item.last_name) + '</div>'
+            return '<div>' + escape(item.first_name) + ' ' + escape(item.last_name) + '</div>'
           option: (item, escape) ->
             return "<div><span class='avatar' style='background-color: " +  \
               item.color + ";'><img src='" + item.url + "'></span>" + \
@@ -70,13 +72,13 @@ module.exports = class SendMessageModalView extends Marionette.ItemView
     ev.preventDefault()
     @ui.liveSearch[0].selectize.setValue(Object.keys(@ui.liveSearch[0].selectize.options))
 
-  switchError: (error_msg, $inputGroup)=>
+  switchError: (error_msg, $inputGroup) =>
     if error_msg
       $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
       $inputGroup.find('.gc-error-message').text(error_msg)
     else
       $inputGroup.removeClass('gc-invalid').addClass('gc-valid')
-      $inputGroup.find('.gc-error-message').text("")
+      $inputGroup.find('.gc-error-message').text('')
 
   submitForm: (ev) ->
     ev.preventDefault()

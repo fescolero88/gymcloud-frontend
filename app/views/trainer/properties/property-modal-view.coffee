@@ -2,11 +2,12 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 module.exports = class PropertyModalView extends Marionette.ItemView
+
   template: Templates.trainer.properties.property_modal
 
   events:
-    "submit form": "submitForm"
-    "blur form input": "validateInput"
+    'submit form': 'submitForm'
+    'blur form input': 'validateInput'
 
   ui:
     propertyModal: '#gc-add-property-modal'
@@ -34,7 +35,7 @@ module.exports = class PropertyModalView extends Marionette.ItemView
       error_msg = @model.preValidate input_name, input_value
       @switchError error_msg, $inputGroup
 
-  switchError: (error_msg, $inputGroup)=>
+  switchError: (error_msg, $inputGroup) =>
     if error_msg
       $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
       $inputGroup.find('.gc-valid-icon').addClass('hide')
@@ -42,8 +43,7 @@ module.exports = class PropertyModalView extends Marionette.ItemView
     else
       $inputGroup.removeClass('gc-invalid').addClass('gc-valid')
       $inputGroup.find('.gc-valid-icon').removeClass('hide')
-      $inputGroup.find('.gc-error-message').text("")
-
+      $inputGroup.find('.gc-error-message').text('')
 
   submitForm: (ev) ->
     ev.preventDefault()
@@ -53,7 +53,7 @@ module.exports = class PropertyModalView extends Marionette.ItemView
       @model.set 'position', 1
     if @model.isValid true
       @model.save null,
-        success: (model, data)=>
+        success: (model, data) =>
           if data.error
             for name, error_msg of data.error
               $input = @$el.find("input[name=#{name}]")

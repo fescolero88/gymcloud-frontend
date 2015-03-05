@@ -6,14 +6,15 @@ SignUpStep1Model = require 'models/auth/signup-step1-model'
 SignUpStep2Model = require 'models/auth/signup-step2-model'
 
 class SignUpStep1 extends Marionette.ItemView
+
   template: Templates.auth.sign_up_1
 
   ui:
-    'types': '.gc-trainer-type'
-    'radio': '.gc-trainer-type input[type=radio]'
-    'form': "#gc-signup-step-1"
-    'password': "#gc-signup-password-1"
-    'password_confirmation': "#gc-signup-password-2"
+    types: '.gc-trainer-type'
+    radio: '.gc-trainer-type input[type=radio]'
+    form: '#gc-signup-step-1'
+    password: '#gc-signup-password-1'
+    password_confirmation: '#gc-signup-password-2'
 
   events:
     'change @ui.radio': 'switchType'
@@ -27,7 +28,7 @@ class SignUpStep1 extends Marionette.ItemView
       @ui.types.removeClass 'active'
       $(ev.currentTarget).closest('.gc-trainer-type').addClass 'active'
 
-  switchError: (error_msg, $inputGroup)=>
+  switchError: (error_msg, $inputGroup) =>
     if error_msg
       $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
       $inputGroup.find('.gc-valid-icon').addClass('hide')
@@ -35,7 +36,7 @@ class SignUpStep1 extends Marionette.ItemView
     else
       $inputGroup.removeClass('gc-invalid').addClass('gc-valid')
       $inputGroup.find('.gc-valid-icon').removeClass('hide')
-      $inputGroup.find('.gc-error-message').text("")
+      $inputGroup.find('.gc-error-message').text('')
 
   submit: (ev) =>
     ev.preventDefault()
@@ -48,11 +49,12 @@ class SignUpStep1 extends Marionette.ItemView
       @trigger 'next', @model
 
 class SignUpStep2 extends Marionette.ItemView
+
   template: Templates.auth.sign_up_2
 
   ui:
-    'form': "#gc-signup-step-2"
-    'agree': '.gc-signup-agree'
+    form: '#gc-signup-step-2'
+    agree: '.gc-signup-agree'
 
   events:
     'submit @ui.form': 'submit'
@@ -71,10 +73,11 @@ class SignUpStep2 extends Marionette.ItemView
       @trigger 'final', @model
 
 module.exports = class SignUpView extends Marionette.LayoutView
+
   template: Templates.auth.sign_up
 
   regions:
-    'signUp': '#gc-signup-region'
+    signUp: '#gc-signup-region'
 
   initialize: =>
     @step1 = new SignUpStep1 model: new SignUpStep1Model
@@ -99,7 +102,7 @@ module.exports = class SignUpView extends Marionette.LayoutView
       dataType: 'json'
       data: JSON.stringify @steps.attributes
       success: (data) =>
-        App.vent.trigger "spinner:global:stop"
+        App.vent.trigger 'spinner:global:stop'
         if data.errors
             for name, error_msg of data.errors
               $input = @$el.find("input[name=#{name}]")
