@@ -1,0 +1,21 @@
+Backbone = require 'backbone'
+
+module.exports = class ResetPasswordModel extends Backbone.Model
+
+  urlRoot: '/api/mobile/clients'
+
+  validation:
+
+    password:
+      required: true
+      minLength: 6
+      msg: 'Password must be 6 characters'
+
+    password_confirmation: [
+      equalTo: 'password'
+      msg: 'The passwords does not match'
+    ,
+      required: true
+      minLength: 6
+      msg: 'Password must be 6 characters'
+    ]
