@@ -5,6 +5,7 @@ AuthLayoutView = require 'views/auth/auth_layout_view'
 AuthView = require 'views/auth/auth-view'
 ForgotPasswordView = require 'views/auth/forgot-password-view'
 SignUpView = require 'views/auth/sign-up-view'
+ResetPasswordView = require 'views/auth/reset-password-view'
 
 ForgotPasswordModel = require 'models/auth/forgot-password-model'
 
@@ -36,3 +37,7 @@ module.exports = class AuthController extends Marionette.Controller
       href = '#login'
       Backbone.history.navigate(href, { trigger:false, replace: true })
       @login true
+
+  resetPassword: =>
+    @resetPassword = new ResetPasswordView
+    @layoutView.mainRegion.show @resetPassword
