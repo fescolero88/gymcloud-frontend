@@ -19,7 +19,11 @@
 .gc-usercard-large .gc-usercard-avatar-wrapper.gc-usercard-avatar-exist {
   background: #fff;
 }
+.gc-usercard-large .gc-usercard-avatar-wrapper.gc-usercard-avatar-exist .gc-usercard-avatar {
+  display: block;
+}
 .gc-usercard-large .gc-usercard-avatar {
+  display: none;
   height: 100%;
   width: 100%;
   max-width: 94px;

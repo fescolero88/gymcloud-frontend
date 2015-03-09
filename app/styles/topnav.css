@@ -117,9 +117,13 @@
     border: 2px solid #fff;
 }
 .gc-topbar-avatar a img {
+    display: none;
     width: 42px;
     height: 42px;
     border-radius: 50px;
+}
+.gc-topbar-avatar a.gc-topbar-avatar-exist img {
+    display: block;
 }
 .gc-topbar-avatar a img[src$='defaultimage.png'] {
     display: none;

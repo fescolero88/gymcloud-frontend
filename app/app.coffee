@@ -139,12 +139,15 @@ class App extends Marionette.Application
         App.cache['client:properties'] ?= {}
         App.cache['client:properties'][id] = properties
 
+      @reqres.setHandler 'base:confirmationalModal', (data) =>
+        @baseView.showConfirmModal data
+
       # --- Data handlers -----
 
       # --- Base layout -----
-      baseView = new BaseView()
-      baseView.render()
-      @appRegion = baseView.appRegion
+      @baseView = new BaseView()
+      @baseView.render()
+      @appRegion = @baseView.appRegion
       # --- Base layout -----
 
       # --- Add modules -----
@@ -168,9 +171,9 @@ class App extends Marionette.Application
                 window.location.replace '#tr'
               else
                 window.location.replace '#'
-          baseView.trigger('showBody')
+          @baseView.trigger('showBody')
       else
-        baseView.trigger('showBody')
+        @baseView.trigger('showBody')
       # --- Get profile -----
 
 $ ->

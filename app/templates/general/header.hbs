@@ -28,7 +28,7 @@
 {{#withProfile}}
 {{#ifNot account_type 'client'}}
 <div class="gc-topbar-item gc-topbar-avatar dropdown">
-  <a href="#" id="gc-user-topbar-avatar" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+  <a href="#" class="{{#if avatar_url}}gc-topbar-avatar-exist{{/if}}" id="gc-user-topbar-avatar" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
     <img src="{{avatar_url}}" alt="">
   </a>
   <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="gc-user-topbar-avatar">
