@@ -107,7 +107,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
     clientFormModal = new ClientFormModalView model: clientModel
 
     @listenTo clientFormModal, 'closeModal', =>
-      @ui.clientFormModal.modal('hide')
+      @ui.modalContainer.modal('hide')
     @listenTo clientFormModal, 'addToClientsCollection', (model) =>
       @ui.modalContainer.modal('hide')
     @listenTo clientFormModal, 'addToClientsCollection', (model)=>
@@ -122,7 +122,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
     groupFormModal = new GroupFormModalView model: groupModel
 
     @listenTo groupFormModal, 'closeModal', =>
-      @ui.groupFormModal.modal('hide')
+      @ui.modalContainer.modal('hide')
     @listenTo groupFormModal, 'addToGroupsCollection', (model) =>
       @ui.modalContainer.modal('hide')
     @listenTo groupFormModal, 'addToGroupsCollection', (model)=>

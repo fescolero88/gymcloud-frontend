@@ -82,12 +82,12 @@ html, body {
 body.dragging, body.dragging * {
   cursor: move !important;
 }
-body > region {
+body > region[data-name="app"] {
   display: block;
   height: 100%;
   min-height: 100%;
 }
-body > region > .container-fluid {
+body > region[data-name="app"] > .container-fluid {
   padding: 0;
   height: 100%;
 }
@@ -421,7 +421,7 @@ body > region > .container-fluid {
   padding: 0;
 }
 .gc-remove-modal .gc-rm-text > p {
-  width: 40%;
+  width: 80%;
   margin-bottom: 0;
 }
 .gc-remove-modal .gc-rm-buttons {
