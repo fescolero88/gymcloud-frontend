@@ -9,17 +9,17 @@
           <span class="fa fa-chevron-left"></span>
         </a>
         <h2 class="gc-breadcrumbs-title"></h2>
-        <a href="#" class="btn btn-link show-group-form">
+        <a class="btn btn-link gc-show-add-exercise-modal">
           <span class="fa fa-plus"></span>
           Add exercise
         </a>
       </div>
       <div class="col-xs-5 gc-clients-nav-right text-right">
-        <a href="#" class="btn btn-link move-to-group-show">
+        <a class="btn btn-link gc-show-add-exercise-folder-modal">
           <span class="fa fa-plus"></span>
           Add folder
         </a>
-        <a href="#" class="btn btn-link move-to-group-show">Duplicate</a>
+        <a class="btn btn-link gc-show-duplicate-modal">Duplicate</a>
         <a href="#" id="rm-event" class="btn btn-danger">
           <span class="fa fa-trash"></span>
         </a>
@@ -35,3 +35,8 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade gc-modal" id="gc-add-exercise-modal"></div>
+<div class="modal fade gc-modal" id="gc-add-exercise-folder-modal"></div>
+<div class="modal fade gc-modal" id="gc-duplicate-exercise-modal"></div>
+<div class="modal fade gc-modal" id="gc-delete-exercise-modal"></div>

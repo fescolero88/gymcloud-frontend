@@ -3,21 +3,38 @@ Backbone = require 'backbone'
 
 ExercisesGlobalListView = require 'views/trainer/exercises/exercises-global-list-view'
 
+AddExerciseModalView = require 'views/trainer/exercises/add-exercise-modal'
+AddExerciseFolderModalView = require 'views/trainer/exercises/add-exercise-folder-modal'
+DeplicateExerciseModalView = require 'views/trainer/exercises/duplicate-exercise-modal'
+
 module.exports = class ExercisesGlobalView extends Marionette.LayoutView
 
   template: Templates.trainer.exercises.exercises_global
 
   regions:
     exercises: '#exercises-region'
+    addExercise: '#gc-add-exercise-modal'
+    addExerciseFolder: '#gc-add-exercise-folder-modal'
+    duplicateExercise: '#gc-duplicate-exercise-modal'
+    removeExercise: '#gc-remove-exercise-modal'
 
   ui:
     title: '.gc-breadcrumbs-title'
     liveSearch: '.live-search'
     mainCheckbox: '.gc-content-nav-checkall input'
     itemsRegion: '#exercises-region'
+    addExerciseButton: '.gc-show-add-exercise-modal'
+    addExerciseFolderButton: '.gc-show-add-exercise-folder-modal'
+    duplicateButton: '.gc-show-duplicate-modal'
+    addExerciseModal: '#gc-add-exercise-modal'
+    addExerciseFolderModal: '#gc-add-exercise-folder-modal'
+    duplicateModal: '#gc-duplicate-exercise-modal'
 
   events:
     'click @ui.mainCheckbox': 'toggleCheck'
+    'click @ui.addExerciseButton': 'showAddExerciseModal'
+    'click @ui.addExerciseFolderButton': 'showAddExerciseFolderModal'
+    'click @ui.duplicateButton': 'showDuplicateExerciseModal'
 
   initialize: (data) =>
     @item_id = data.id
@@ -104,3 +121,21 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
 
   loadItem: (key) =>
     @loadItemById key
+
+  showAddExerciseModal: (ev) =>
+    ev.preventDefault()
+    @addExercise.show new AddExerciseModalView
+    @ui.addExerciseModal.modal 'show'
+
+  showAddExerciseFolderModal: (ev) =>
+    ev.preventDefault()
+    @addExerciseFolder.show new AddExerciseFolderModalView
+    @ui.addExerciseFolderModal.modal 'show'
+
+  showDuplicateExerciseModal: (ev) =>
+    ev.preventDefault()
+    duplicateView = new DeplicateExerciseModalView
+      exercises: @exercisesList
+    @duplicateExercise.show duplicateView
+    @ui.duplicateModal.modal 'show'
+
