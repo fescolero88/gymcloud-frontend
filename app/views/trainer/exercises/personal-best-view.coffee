@@ -28,7 +28,12 @@ class PersonalBestItemView extends Marionette.ItemView
 
   deletePersonalBest: (ev) =>
     ev.preventDefault()
-    @model.destroy()
+    App.request 'base:confirmationalModal',
+      title: "Delete personal best"
+      content: "Are you sure you want to delete this personal best?"
+      confirmBtn: "Delete"
+      confirmCallBack: =>
+        @model.destroy()
 
 class PersonalBestCollectionView extends Marionette.CollectionView
 
