@@ -32,5 +32,5 @@ module.exports = class BaseView extends Marionette.LayoutView
     confirmView = new ModalConfirmView data
     @confirmRegion.show confirmView
 
-    @listenToOnce confirmView, "closeModal", ->
+    @listenToOnce confirmView, "modal:closed", ->
       @confirmRegion.destroy()

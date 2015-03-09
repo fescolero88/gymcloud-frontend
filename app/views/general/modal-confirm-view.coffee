@@ -37,4 +37,4 @@ module.exports = class ModalConfirmView extends Marionette.ItemView
       @confirmData.cancelCallBack()
 
   closeModal: ->
-    @trigger "closeModal"
+    @trigger "modal:closed"
