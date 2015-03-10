@@ -13,10 +13,7 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
 
   regions:
     exercises: '#exercises-region'
-    addExercise: '#gc-add-exercise-modal'
-    addExerciseFolder: '#gc-add-exercise-folder-modal'
-    duplicateExercise: '#gc-duplicate-exercise-modal'
-    removeExercise: '#gc-remove-exercise-modal'
+    modalRegion: '#gc-modal-region'
 
   ui:
     title: '.gc-breadcrumbs-title'
@@ -26,9 +23,7 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
     addExerciseButton: '.gc-show-add-exercise-modal'
     addExerciseFolderButton: '.gc-show-add-exercise-folder-modal'
     duplicateButton: '.gc-show-duplicate-modal'
-    addExerciseModal: '#gc-add-exercise-modal'
-    addExerciseFolderModal: '#gc-add-exercise-folder-modal'
-    duplicateModal: '#gc-duplicate-exercise-modal'
+    actionModal: '#gc-modal-region'
 
   events:
     'click @ui.mainCheckbox': 'toggleCheck'
@@ -124,18 +119,18 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
 
   showAddExerciseModal: (ev) =>
     ev.preventDefault()
-    @addExercise.show new AddExerciseModalView
-    @ui.addExerciseModal.modal 'show'
+    @modalRegion.show new AddExerciseModalView
+    @ui.actionModal.modal 'show'
 
   showAddExerciseFolderModal: (ev) =>
     ev.preventDefault()
-    @addExerciseFolder.show new AddExerciseFolderModalView
-    @ui.addExerciseFolderModal.modal 'show'
+    @modalRegion.show new AddExerciseFolderModalView
+    @ui.actionModal.modal 'show'
 
   showDuplicateExerciseModal: (ev) =>
     ev.preventDefault()
     duplicateView = new DeplicateExerciseModalView
       exercises: @exercisesList
-    @duplicateExercise.show duplicateView
-    @ui.duplicateModal.modal 'show'
+    @modalRegion.show duplicateView
+    @ui.actionModal.modal 'show'
 
