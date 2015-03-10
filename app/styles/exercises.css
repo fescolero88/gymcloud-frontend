@@ -416,7 +416,7 @@
   display: inline-block;
   background: transparent url('/static/images/icon-exercises.png') right -2px no-repeat;
   height: 25px;
-  width: 22px;
+  width: 23px;
   background-size: cover;
   vertical-align: middle;
   margin: 0 5px 0 4px;
@@ -424,7 +424,7 @@
 .gc-exercises-folder-icon {
   color: #3398db;
   display: inline-block;
-  margin: 0 9px 0 6px;
+  margin: 0 9px 0 7px;
   font-size: 16px;
 }
 .gc-content-right-exercises-empty  {

@@ -3,21 +3,33 @@ Backbone = require 'backbone'
 
 ExercisesGlobalListView = require 'views/trainer/exercises/exercises-global-list-view'
 
+AddExerciseModalView = require 'views/trainer/exercises/add-exercise-modal'
+AddExerciseFolderModalView = require 'views/trainer/exercises/add-exercise-folder-modal'
+DeplicateExerciseModalView = require 'views/trainer/exercises/duplicate-exercise-modal'
+
 module.exports = class ExercisesGlobalView extends Marionette.LayoutView
 
   template: Templates.trainer.exercises.exercises_global
 
   regions:
     exercises: '#exercises-region'
+    modalRegion: '#gc-modal-region'
 
   ui:
     title: '.gc-breadcrumbs-title'
     liveSearch: '.live-search'
     mainCheckbox: '.gc-content-nav-checkall input'
     itemsRegion: '#exercises-region'
+    addExerciseButton: '.gc-show-add-exercise-modal'
+    addExerciseFolderButton: '.gc-show-add-exercise-folder-modal'
+    duplicateButton: '.gc-show-duplicate-modal'
+    actionModal: '#gc-modal-region'
 
   events:
     'click @ui.mainCheckbox': 'toggleCheck'
+    'click @ui.addExerciseButton': 'showAddExerciseModal'
+    'click @ui.addExerciseFolderButton': 'showAddExerciseFolderModal'
+    'click @ui.duplicateButton': 'showDuplicateExerciseModal'
 
   initialize: (data) =>
     @item_id = data.id
@@ -104,3 +116,21 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
 
   loadItem: (key) =>
     @loadItemById key
+
+  showAddExerciseModal: (ev) =>
+    ev.preventDefault()
+    @modalRegion.show new AddExerciseModalView
+    @ui.actionModal.modal 'show'
+
+  showAddExerciseFolderModal: (ev) =>
+    ev.preventDefault()
+    @modalRegion.show new AddExerciseFolderModalView
+    @ui.actionModal.modal 'show'
+
+  showDuplicateExerciseModal: (ev) =>
+    ev.preventDefault()
+    duplicateView = new DeplicateExerciseModalView
+      exercises: @exercisesList
+    @modalRegion.show duplicateView
+    @ui.actionModal.modal 'show'
+
