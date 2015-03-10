@@ -260,10 +260,10 @@ form .checkbox {
   position: relative;
 }
 .gc-nav-top .navbar-brand {
-  padding: 3px 15px;
+  padding: 12px 15px;
 }
 .gc-nav-top .navbar-brand img {
-  max-height: 46px;
+  max-height: 27px;
 }
 .gc-nav-top .icon-bar {
   background: white;
@@ -287,11 +287,11 @@ form .checkbox {
     background: transparent;
   }
   .gc-nav-top .navbar-brand {
-    padding: 15px 15px 0 15px;
+    padding: 40px 15px 0 15px;
     height: auto;
   }
   .gc-nav-top .navbar-brand img {
-    max-height: 88px;
+    max-height: 47px;
   }
   .gc-nav-top .navbar-header {
     min-height: 110px;

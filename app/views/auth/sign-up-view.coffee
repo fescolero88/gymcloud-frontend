@@ -14,8 +14,7 @@ class SignUpStep1 extends Marionette.ItemView
     types: '.gc-trainer-type'
     radio: '.gc-trainer-type input[type=radio]'
     form: '#gc-signup-step-1'
-    password: '#gc-signup-password-1'
-    password_confirmation: '#gc-signup-password-2'
+    emailGroup: '.gc-email-form-group'
 
   events:
     'change @ui.radio': 'switchType'
@@ -47,7 +46,18 @@ class SignUpStep1 extends Marionette.ItemView
         formData[key] = parseInt value
     @model.set formData
     if @model.isValid true
-      @trigger 'next', @model
+      $.ajax
+        method: 'GET'
+        url: '/api/mobile/users/is_email_in_use'
+        dataType: 'json'
+        data:
+          email: @model.get 'email'
+        success: (data) =>
+          @trigger 'next', @model
+        statusCode:
+          403: (data) =>
+            @switchError data.responseJSON.message, @ui.emailGroup
+
 
 class SignUpStep2 extends Marionette.ItemView
 
