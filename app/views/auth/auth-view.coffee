@@ -1,5 +1,6 @@
 config = require 'config'
 Marionette = require 'backbone.marionette'
+Backbone = require 'backbone'
 
 module.exports = class AuthView extends Marionette.ItemView
 
@@ -9,12 +10,12 @@ module.exports = class AuthView extends Marionette.ItemView
     'submit form': 'login'
 
   ui:
-    inputEmail: "input[type='email']"
-    inputPassword: "input[type='password']"
+    form: '.gc-login-form'
     signUpModal: '#gc-signup-message'
 
   initialize: (data) =>
     @signUp = data.signUp
+    Backbone.Validation.bind @
 
   onShow: =>
     if @signUp
@@ -22,20 +23,29 @@ module.exports = class AuthView extends Marionette.ItemView
 
   login: (event) ->
     event.preventDefault()
-    data =
-      username: @ui.inputEmail.val()
-      password: @ui.inputPassword.val()
-      grant_type: 'password'
-      client_id: config.oauthClientId
+    formData = @ui.form.serializeObject()
+    @model.set formData
+    if @model.isValid true
+      data =
+        username: @model.get 'email'
+        password: @model.get 'password'
+        grant_type: 'password'
+        client_id: config.oauthClientId
 
-    $.ajax
-      url: '/oauth/token'
-      type: 'POST'
-      dataType: 'json'
-      data: JSON.stringify data
-      success: (data) =>
-        window.localStorage.setItem 'accessToken', data.access_token
-        @getProfile()
+      $.ajax
+        url: '/oauth/token'
+        type: 'POST'
+        dataType: 'json'
+        data: JSON.stringify data
+        success: (data) =>
+          window.localStorage.setItem 'accessToken', data.access_token
+          @getProfile()
+        statusCode:
+          401: (data) =>
+            App.request 'messenger:show',
+              hideAfter: 10
+              message: "The email or password you entered is incorrect"
+              type: 'error'
 
   getProfile: ->
     profileModel = App.request 'data:profile'

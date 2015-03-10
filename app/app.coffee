@@ -68,10 +68,11 @@ class App extends Marionette.Application
           window.location.replace '#/logout'
 
         if jqxhr.status is 403
-          @request 'messenger:show',
-            hideAfter: 5
-            message: jqxhr.responseJSON.message
-            type: 'error'
+          for name, error_msg of jqxhr.responseJSON.message
+            @request 'messenger:show',
+              hideAfter: 5
+              message: "#{name}: #{error_msg[0]}"
+              type: 'error'
         spinner.stop()
 
       $.ajaxSetup

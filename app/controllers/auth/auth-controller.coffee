@@ -8,6 +8,7 @@ SignUpView = require 'views/auth/sign-up-view'
 ResetPasswordView = require 'views/auth/reset-password-view'
 
 ForgotPasswordModel = require 'models/auth/forgot-password-model'
+LoginModel = require 'models/auth/login-model'
 
 module.exports = class AuthController extends Marionette.Controller
 
@@ -16,14 +17,13 @@ module.exports = class AuthController extends Marionette.Controller
     @layoutView = options.layoutView
 
   login: (signUp) =>
-    @auth = new AuthView(signUp: signUp)
+    @auth = new AuthView(signUp: signUp, model: new LoginModel)
     if window.localStorage.accessToken
       window.location.replace '#'
     else
       @layoutView.mainRegion.show @auth
 
   logout: =>
-    #App.vent.trigger 'module:auth:login'
     window.localStorage.removeItem 'accessToken'
     window.location.replace '#login'
 
