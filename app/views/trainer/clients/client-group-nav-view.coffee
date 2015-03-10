@@ -6,7 +6,6 @@ module.exports = class ClientGroupNavView extends Marionette.ItemView
   template: Templates.trainer.clients.client_group_nav
 
   events:
-    'click @ui.navLink': 'navLinkClick'
     'click @ui.deleteButton': 'deleteButtonClick'
     'click .gc-content-nav-back a': 'navBack'
 
@@ -26,16 +25,6 @@ module.exports = class ClientGroupNavView extends Marionette.ItemView
     else
       @viewName = 'groups'
     @on 'changeActive', @changeActive
-
-  navLinkClick: (ev) ->
-    ev.preventDefault()
-    href = $(ev.currentTarget).attr 'href'
-    Backbone.history.navigate(href, { trigger:false, replace: true })
-
-    @ui.nav.parent().removeClass('active')
-    @$el.find(ev.currentTarget).parent().addClass('active')
-    navView = @$el.find(ev.currentTarget).data('nav-view')
-    @trigger 'navView', navView
 
   navigate: (navView) ->
     @ui.nav.parent().removeClass('active')

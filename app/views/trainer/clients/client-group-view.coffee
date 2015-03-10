@@ -35,9 +35,6 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
   ui:
     itemsLinks: '.gc-exercises-link-exercises, .gc-exercises-link-workouts, .gc-exercises-link-programs'
 
-  events:
-    'click @ui.itemsLinks': 'showExercise'
-
   initialize: (data) ->
     @isDroppable = true
     @itemId = data.itemId
@@ -55,9 +52,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
 
     App.vent.on 'drag:complete', @assignDragged
 
-    if not data.assign
-      href = window.location.hash + @assign
-      Backbone.history.navigate(href, { trigger:false, replace: true })
+    @on 'load:view', @loadView
 
   onDestroy: =>
     App.vent.off 'drag:complete', @assignDragged
@@ -74,6 +69,12 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
       @activityView = new ActivityView collection: @recentActivityCollection
       if isShow
         @rightside.show @activityView
+
+  loadView: (assign, key) =>
+    @key = key
+    @assign = assign
+    @navView.trigger 'changeActive', assign
+    @loadCenterView(assign)
 
   loadCenterView: (navView) =>
     if @key
@@ -146,11 +147,3 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
       @loadCenterView item.get 'category'
     @centerView.trigger 'assign', item
     @navView.trigger 'changeActive', item.get 'category'
-
-  showExercise: (ev) ->
-    ev.preventDefault()
-    @key = $(ev.currentTarget).data 'eid'
-    @assign = $(ev.currentTarget).data 'assign'
-    href = $(ev.currentTarget).attr 'href'
-    Backbone.history.navigate(href, { trigger:false, replace: true })
-    @loadCenterView(@assign)
