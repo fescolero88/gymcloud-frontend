@@ -467,6 +467,10 @@
   line-height: 17px;
   padding: 0;
   text-align: center;
+  display: none;
+}
+.gc-exercises-bests-best:hover .gc-exercises-bests-delete {
+  display: inline-block;
 }
 .gc-exercises-bests-delete:hover,
 .gc-exercises-bests-delete:active,
