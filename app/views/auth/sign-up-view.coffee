@@ -56,7 +56,7 @@ class SignUpStep1 extends Marionette.ItemView
           @trigger 'next', @model
         statusCode:
           403: (data) =>
-            @switchError data.responseJSON.message, @ui.emailGroup
+            @switchError data.responseJSON.message.email, @ui.emailGroup
 
 
 class SignUpStep2 extends Marionette.ItemView
