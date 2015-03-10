@@ -68,14 +68,19 @@ module.exports = class AssignmentsListView extends Marionette.CompositeView
 
   rmAssign: (ev) =>
     ev.preventDefault()
-    assignId = $(ev.currentTarget).data 'id'
-    model = @collection.get assignId
-    model.destroy().then =>
-      if !@collection.length
-        @collection.isFetched = false
-      App.request 'messenger:show',
-        message: 'Exercise was deleted from the list'
-        type: 'error'
+    App.request 'base:confirmationalModal',
+      title: "Delete item(s)"
+      content: "Are you sure you want to delete selected items?"
+      confirmBtn: "Delete"
+      confirmCallBack: =>
+        assignId = $(ev.currentTarget).data 'id'
+        model = @collection.get assignId
+        model.destroy().then =>
+          if !@collection.length
+            @collection.isFetched = false
+          App.request 'messenger:show',
+            message: 'Exercise was deleted from the list'
+            type: 'error'
 
   assignItem: (item) =>
     data =
