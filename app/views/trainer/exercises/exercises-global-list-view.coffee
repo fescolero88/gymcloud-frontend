@@ -14,14 +14,7 @@ class ExercisesGlobalItemView extends Marionette.ItemView
     checkbox: '.gc-exercises-chb input'
 
   events:
-    'click @ui.childItemLink': 'childItemLinkClicked'
     'click @ui.checkbox': 'itemChecked'
-
-  childItemLinkClicked: (ev) =>
-    ev.preventDefault()
-    href = $(ev.currentTarget).attr 'href'
-    key = $(ev.currentTarget).data 'key'
-    @trigger 'navigate:exercise', href, key
 
   itemChecked: (ev) =>
     @trigger 'exercise:clicked'

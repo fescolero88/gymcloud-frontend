@@ -47,29 +47,33 @@ module.exports = class TrainerController extends Marionette.Controller
       groupsView.$el.hide()
 
   clientOrGroup: (type, id, assign, key) ->
-    if type is 'clients'
-      itemModel = new ClientModel
-      itemModel.url = "/api/mobile/clients/#{id}"
+    currentViewName = @mainView.content.currentView?.constructor.name
+    if currentViewName is 'ClientGroupView'
+      @mainView.content.currentView.trigger 'load:view', assign, key
     else
-      itemModel = new GroupModel
-      itemModel.url = "/api/mobile/client_groups/#{id}"
-    itemModel.fetch()
+      if type is 'clients'
+        itemModel = new ClientModel
+        itemModel.url = "/api/mobile/clients/#{id}"
+      else
+        itemModel = new GroupModel
+        itemModel.url = "/api/mobile/client_groups/#{id}"
+      itemModel.fetch()
 
-    recentActivity = new ActivityCollection
-    if type is 'clients'
-      recentActivity.url = "/api/mobile/clients/#{id}/notifications"
-    else
-      recentActivity.url = "/api/mobile/client_groups/#{id}/notifications"
-    recentActivity.loadMore()
+      recentActivity = new ActivityCollection
+      if type is 'clients'
+        recentActivity.url = "/api/mobile/clients/#{id}/notifications"
+      else
+        recentActivity.url = "/api/mobile/client_groups/#{id}/notifications"
+      recentActivity.loadMore()
 
-    itemPageView = new ClientGroupView
-      itemModel: itemModel
-      recentActivity: recentActivity
-      itemId: id
-      assign: assign
-      key: key
-      viewType: type
-    @mainView.content.show itemPageView
+      itemPageView = new ClientGroupView
+        itemModel: itemModel
+        recentActivity: recentActivity
+        itemId: id
+        assign: assign
+        key: key
+        viewType: type
+      @mainView.content.show itemPageView
 
   client: (id, assign, key) =>
     @clientOrGroup 'clients', id, assign, key

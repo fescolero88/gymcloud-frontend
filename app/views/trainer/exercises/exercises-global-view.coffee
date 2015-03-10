@@ -67,7 +67,6 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
       @ui.mainCheckbox.prop 'checked', true
 
   navigateToItem: (href, key) =>
-    Backbone.history.navigate(href, { trigger:false, replace: true })
     @loadItemById key
 
   searchItems: (items, category) =>
