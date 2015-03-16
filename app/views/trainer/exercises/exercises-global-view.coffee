@@ -32,32 +32,19 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
     'click @ui.duplicateButton': 'showDuplicateExerciseModal'
 
   initialize: (data) =>
-    @item_id = data.id
+    @item_id = data.model?.get 'key'
+    @exercisesList = data.items
+    @breadcrumbs = data.breadcrumbs
 
   onShow: =>
-    @exercisesList = App.request 'data:exercises'
-    if @exercisesList?.length
-      @initSearchSelect()
-    else
-      App.vent.on 'assignments:loaded', @loadExercises
+    @initSearchSelect()
     @loadItemById @item_id
-    if not @item_id
-      @updateBreadcrumbs(['Exercises'])
-    @exercises.show @listView
-
-  onDestroy: =>
-    App.vent.off 'assignments:loaded', @loadExercises
+    @updateBreadcrumbs @breadcrumbs
 
   loadItemById: (key) =>
-    @listView = new ExercisesGlobalListView(id: key)
-    @listenTo @listView, 'breadcrumbs:change', @updateBreadcrumbs
+    @listView = new ExercisesGlobalListView collection: new Backbone.Collection(@exercisesList)
     @listenTo @listView, 'exercise:clicked', @updateSelectedItems
-    @listenTo @listView, 'navigate:exercise', @navigateToItem
     @exercises.show @listView
-
-  loadExercises: =>
-    @exercisesList = App.request 'data:exercises'
-    @initSearchSelect()
 
   updateBreadcrumbs: (breadcrumbs) =>
     @ui.title.text('')
@@ -78,9 +65,6 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
     if needToggle
       @ui.mainCheckbox.prop 'checked', true
 
-  navigateToItem: (href, key) =>
-    @loadItemById key
-
   searchItems: (items, category) =>
     result = []
     $.each items, (index, item) =>
@@ -95,7 +79,7 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
     return result
 
   initSearchSelect: =>
-    searchOptions = @searchItems @exercisesList, 'exercises'
+    searchOptions = @searchItems App.request('data:exercises'), 'exercises'
     this_ = @
     @ui.liveSearch.selectize
       hideSelected: true
@@ -105,16 +89,13 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
       options: searchOptions
       onItemAdd: (value, $item) ->
         @clear()
-        this_.loadItem value
+        this_.loadItemById value
       render:
         item: (item, escape) ->
             return '<div>' + escape(item.title) + '</div>'
         option: (item, escape) ->
             return '<div><span class="label">' + escape(item.label) +
               '</span> ' + escape(item.title) + '</div>'
-
-  loadItem: (key) =>
-    @loadItemById key
 
   showAddExerciseModal: (ev) =>
     ev.preventDefault()
