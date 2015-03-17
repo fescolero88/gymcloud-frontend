@@ -163,10 +163,11 @@
   padding: 14px 0;
   height: 46px;
 }
-.gc-sidebar-item > a .glyphicon-th {
+.gc-sidebar-item > a .glyphicon-th,
+.gc-sidebar-item > a .fa-arrows {
   font-size: 12px;
   position: relative;
-  top: 0px;
+  top: -1px;
 }
 .gc-sidebar-item > a:hover {
   color: #3398db;
