@@ -55,7 +55,7 @@ module.exports = class SideBarView extends Marionette.ItemView
     @ui.subs.sortable
       group: 'assignEx'
       drop: false
-      handle: '.glyphicon'
+      handle: '.draggable-handle'
       containerSelector: '.gc-sidebar-sub'
       placeholder: '<div class="placeholder sortable-placeholder"/>'
       itemSelector: '.gc-sidebar-item'
