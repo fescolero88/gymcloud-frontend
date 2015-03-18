@@ -299,31 +299,6 @@ body > region[data-name="app"] > .container-fluid {
   text-decoration: none;
   outline: none;
 }
-.gc-clients-nav-wrapper h2 {
-  display: inline-block;
-  text-transform: uppercase;
-  font-size: 18px;
-  text-transform: uppercase;
-  color: #9ea0a1;
-  line-height: 46px;
-  padding: 2px 0;
-  margin: 0 15px;
-  font-weight: bold;
-  color: #757575;
-}
-.gc-breadcrumbs-title span:after {
-  content: "\f054";
-  color: #989898;
-  font-family: 'FontAwesome';
-  font-size: 8px;
-  line-height: 18px;
-  vertical-align: 2px;
-  margin: 0 5px;
-  display: inline-block;
-}
-.gc-breadcrumbs-title span:last-child:after {
-  display: none;
-}
 .gc-clients-nav-right {
   min-height: 50px;
 }

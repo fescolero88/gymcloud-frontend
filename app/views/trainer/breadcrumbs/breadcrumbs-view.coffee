@@ -11,22 +11,11 @@ class BreadcrumbsItemView extends Marionette.ItemView
   modelEvents:
     sync: 'render'
 
-class BreadcrumbsCollectionView extends Marionette.CollectionView
-  childView: PersonalBestItemView
+module.exports = class BreadcrumbsView extends Marionette.CompositeView
+  childView: BreadcrumbsItemView
   childViewContainer: 'h2'
   emptyView: EmptyView
-
-module.exports = class BreadcrumbsView extends Marionette.CompositeView
   template: Templates.trainer.breadcrumbs.breadcrumbs
 
-  initialize: (data) =>
-    @itemId = data.itemId
-    @assign = data.assign
-    @key = data.key
-
-  onShow: =>
-    @personalBest = new PersonalBestCollection
-    @personalBest.url = "#{@personalBest.urlRoot}/#{@itemId}/#{@assign}/#{@key}/records"
-    @personalBest.fetch()
-    personalBestView = new PersonalBestCollectionView collection: @personalBest
-    @list.show personalBestView
+  collectionEvents:
+    sync: 'render'

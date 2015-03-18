@@ -106,7 +106,7 @@ module.exports = class TrainerController extends Marionette.Controller
     @exerciseKey = key
     items = App.request('data:exercises')
     if items?
-      breadcrumbs = ['Exercises']
+      breadcrumbs = [{title:'Exercises'}]
       if @exerciseKey
         searchResults = @searchInLibrary(new Backbone.Collection(items), @exerciseKey, breadcrumbs)
         childModel = searchResults.model
@@ -130,11 +130,11 @@ module.exports = class TrainerController extends Marionette.Controller
     filtered = items.where({key: parseInt(key)})
     if filtered.length
       result = filtered[0]
-      breadcrumbs.push(result.get 'title')
+      breadcrumbs.push({title: result.get('title')})
     else
       items.each (item) =>
         if item.has('items')
-          searchResults = @searchInLibrary(new Backbone.Collection(item.get('items')), key, [item.get 'title'])
+          searchResults = @searchInLibrary(new Backbone.Collection(item.get('items')), key, [{title: item.get 'title'}])
           if searchResults.model
             result = searchResults.model
             breadcrumbs = breadcrumbs.concat searchResults.path

@@ -6,6 +6,8 @@ ExercisesGlobalListView = require 'views/trainer/exercises/exercises-global-list
 AddExerciseModalView = require 'views/trainer/exercises/add-exercise-modal'
 AddExerciseFolderModalView = require 'views/trainer/exercises/add-exercise-folder-modal'
 DeplicateExerciseModalView = require 'views/trainer/exercises/duplicate-exercise-modal'
+BreadcrumbsView = require 'views/trainer/breadcrumbs/breadcrumbs-view'
+BreadcrumbsCollection = require 'models/trainer/breadcrumbs'
 
 module.exports = class ExercisesGlobalView extends Marionette.LayoutView
 
@@ -14,6 +16,7 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
   regions:
     exercises: '#exercises-region'
     modalRegion: '#gc-modal-region'
+    breadcrumbsRegion: '#breadcrumbs'
 
   ui:
     title: '.gc-breadcrumbs-title'
@@ -34,22 +37,18 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
   initialize: (data) =>
     @item_id = data.model?.get 'key'
     @exercisesList = data.items
-    @breadcrumbs = data.breadcrumbs
+    @breadcrumbsView = new BreadcrumbsView
+      collection: new BreadcrumbsCollection data.breadcrumbs
 
   onShow: =>
     @initSearchSelect()
     @loadItemById @item_id
-    @updateBreadcrumbs @breadcrumbs
+    @breadcrumbsRegion.show @breadcrumbsView
 
   loadItemById: (key) =>
     @listView = new ExercisesGlobalListView collection: new Backbone.Collection(@exercisesList)
     @listenTo @listView, 'exercise:clicked', @updateSelectedItems
     @exercises.show @listView
-
-  updateBreadcrumbs: (breadcrumbs) =>
-    @ui.title.text('')
-    $.each breadcrumbs, (index, value) =>
-      @ui.title.append $("<span>#{value}</span>")
 
   toggleCheck: (ev) =>
     checked = @ui.mainCheckbox.is(':checked')

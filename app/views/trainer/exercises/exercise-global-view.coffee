@@ -6,25 +6,24 @@ ExercisesGlobalListView = require 'views/trainer/exercises/exercises-global-list
 AddExerciseModalView = require 'views/trainer/exercises/add-exercise-modal'
 AddExerciseFolderModalView = require 'views/trainer/exercises/add-exercise-folder-modal'
 DeplicateExerciseModalView = require 'views/trainer/exercises/duplicate-exercise-modal'
+BreadcrumbsView = require 'views/trainer/breadcrumbs/breadcrumbs-view'
+BreadcrumbsCollection = require 'models/trainer/breadcrumbs'
 
-module.exports = class ExerciseGlobalView extends Marionette.ItemView
+module.exports = class ExerciseGlobalView extends Marionette.LayoutView
 
   template: Templates.trainer.exercises.exercise_global
 
   regions:
     exercises: '#exercises-region'
     modalRegion: '#gc-modal-region'
+    breadcrumbsRegion: '#breadcrumbs'
 
   ui:
     title: '.gc-breadcrumbs-title'
 
   initialize: (data) =>
-    @breadcrumbs = data.breadcrumbs
+    @breadcrumbsView = new BreadcrumbsView
+      collection: new BreadcrumbsCollection data.breadcrumbs
 
   onShow: =>
-    @updateBreadcrumbs @breadcrumbs
-
-  updateBreadcrumbs: (breadcrumbs) =>
-    @ui.title.text('')
-    $.each breadcrumbs, (index, value) =>
-      @ui.title.append $("<span>#{value}</span>")
+    @breadcrumbsRegion.show @breadcrumbsView
