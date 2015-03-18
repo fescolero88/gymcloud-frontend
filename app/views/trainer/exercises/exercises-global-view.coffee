@@ -27,12 +27,14 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
     addExerciseFolderButton: '.gc-show-add-exercise-folder-modal'
     duplicateButton: '.gc-show-duplicate-modal'
     actionModal: '#gc-modal-region'
+    deleteButton: '#rm-event'
 
   events:
     'click @ui.mainCheckbox': 'toggleCheck'
     'click @ui.addExerciseButton': 'showAddExerciseModal'
     'click @ui.addExerciseFolderButton': 'showAddExerciseFolderModal'
     'click @ui.duplicateButton': 'showDuplicateExerciseModal'
+    'click @ui.deleteButton': 'rmAssign'
 
   initialize: (data) =>
     @item_id = data.model?.get 'key'
@@ -96,14 +98,30 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
             return '<div><span class="label">' + escape(item.label) +
               '</span> ' + escape(item.title) + '</div>'
 
+  rmAssign: (ev) =>
+    ev.preventDefault()
+    App.request 'base:confirmationalModal',
+      title: "Delete item(s)"
+      content: "Are you sure you want to delete selected items?"
+      confirmBtn: "Delete"
+      confirmCallBack: =>
+        ids = []
+        for check in @ui.itemsRegion.find('input[type=checkbox]')
+          if $(check).is ':checked'
+            ids.push $(check).data('id')
+        console.debug ids
+
+  loadItem: (key) =>
+    @loadItemById key
+
   showAddExerciseModal: (ev) =>
     ev.preventDefault()
-    @modalRegion.show new AddExerciseModalView
+    @modalRegion.show new AddExerciseModalView folderId: @item_id
     @ui.actionModal.modal 'show'
 
   showAddExerciseFolderModal: (ev) =>
     ev.preventDefault()
-    @modalRegion.show new AddExerciseFolderModalView
+    @modalRegion.show new AddExerciseFolderModalView folderId: @item_id
     @ui.actionModal.modal 'show'
 
   showDuplicateExerciseModal: (ev) =>
