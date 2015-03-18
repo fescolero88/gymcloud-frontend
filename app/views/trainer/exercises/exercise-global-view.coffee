@@ -6,8 +6,8 @@ ExercisesGlobalListView = require 'views/trainer/exercises/exercises-global-list
 AddExerciseModalView = require 'views/trainer/exercises/add-exercise-modal'
 AddExerciseFolderModalView = require 'views/trainer/exercises/add-exercise-folder-modal'
 DeplicateExerciseModalView = require 'views/trainer/exercises/duplicate-exercise-modal'
-BreadcrumbsView = require 'views/trainer/breadcrumbs/breadcrumbs-view'
-BreadcrumbsCollection = require 'models/trainer/breadcrumbs'
+BreadcrumbsView = require 'views/general/breadcrumbs/breadcrumbs-view'
+BreadcrumbsCollection = require 'models/general/breadcrumbs'
 
 module.exports = class ExerciseGlobalView extends Marionette.LayoutView
 

@@ -1,18 +1,6 @@
 #breadcrumbs {
   display: inline-block;
 }
-.gc-clients-nav-wrapper h2 {
-  display: inline-block;
-  text-transform: uppercase;
-  font-size: 18px;
-  text-transform: uppercase;
-  color: #9ea0a1;
-  line-height: 46px;
-  padding: 2px 0;
-  margin: 0 15px;
-  font-weight: bold;
-  color: #757575;
-}
 .gc-breadcrumbs-title span:after {
   content: "\f054";
   color: #989898;
