@@ -68,11 +68,17 @@ class App extends Marionette.Application
           window.location.replace '#/logout'
 
         if jqxhr.status is 403
-          for name, error_msg of jqxhr.responseJSON.message
+          if jqxhr.responseJSON.message['generic']
             @request 'messenger:show',
               hideAfter: 5
-              message: "#{name}: #{error_msg[0]}"
+              message: jqxhr.responseJSON.message['generic']
               type: 'error'
+          else
+            for name, error_msg of jqxhr.responseJSON.message
+              @request 'messenger:show',
+                hideAfter: 5
+                message: "#{name}: #{error_msg[0]}"
+                type: 'error'
         spinner.stop()
 
       $.ajaxSetup
@@ -119,18 +125,36 @@ class App extends Marionette.Application
 
       @reqres.setHandler 'data:exercises:reset', (data) ->
         App.data.exercises = data
+        true
 
       @reqres.setHandler 'data:workouts', ->
         App.data.workouts
 
       @reqres.setHandler 'data:workouts:reset', (data) ->
         App.data.workouts = data
+        true
 
       @reqres.setHandler 'data:programs', ->
         App.data.programs
 
       @reqres.setHandler 'data:programs:reset', (data) ->
         App.data.programs = data
+        true
+
+      @reqres.setHandler 'data:reload', (category) ->
+        switch category
+          when 'exercises'
+            categoryRootId = 1225
+          when 'workouts'
+            categoryRootId = 1227
+          when 'programs'
+            categoryRootId = 1226
+        $.ajax
+          url: "/api/mobile/library/#{categoryRootId}"
+          type: 'GET'
+          dataType: 'json'
+          success: (data) =>
+            App.data[category] = data
 
       @reqres.setHandler 'client:properties', (id) ->
         App.cache?['client:properties']?[id]

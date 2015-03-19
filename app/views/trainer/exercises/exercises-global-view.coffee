@@ -42,6 +42,13 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
     @breadcrumbsView = new BreadcrumbsView
       collection: new BreadcrumbsCollection data.breadcrumbs
 
+    @addExerciseModal = new AddExerciseModalView folderId: @item_id
+    @addExerciseFolderModal = new AddExerciseFolderModalView folderId: @item_id
+    @duplicateModal = new DeplicateExerciseModalView exercises: @exercisesList
+    @listenTo @addExerciseModal, 'exercise:added', @exerciseAdded
+    @listenTo @addExerciseFolderModal, 'folder:added', @folderAdded
+    @listenTo @duplicateModal, 'exercises:duplicate', @duplicateExercises
+
   onShow: =>
     @initSearchSelect()
     @loadItemById @item_id
@@ -109,25 +116,78 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
         for check in @ui.itemsRegion.find('input[type=checkbox]')
           if $(check).is ':checked'
             ids.push $(check).data('id')
-        console.debug ids
+        @listView.trigger 'items:delete', ids
 
   loadItem: (key) =>
     @loadItemById key
 
   showAddExerciseModal: (ev) =>
     ev.preventDefault()
-    @modalRegion.show new AddExerciseModalView folderId: @item_id
+    @modalRegion.show @addExerciseModal
     @ui.actionModal.modal 'show'
 
   showAddExerciseFolderModal: (ev) =>
     ev.preventDefault()
-    @modalRegion.show new AddExerciseFolderModalView folderId: @item_id
+    @modalRegion.show @addExerciseFolderModal
     @ui.actionModal.modal 'show'
 
   showDuplicateExerciseModal: (ev) =>
     ev.preventDefault()
-    duplicateView = new DeplicateExerciseModalView
-      exercises: @exercisesList
-    @modalRegion.show duplicateView
+    @modalRegion.show @duplicateModal
     @ui.actionModal.modal 'show'
+
+  exerciseAdded: (model) =>
+    model['key'] = model['id']
+    model['title'] = model['name']
+    model['items'] = []
+    App.request('data:reload', 'exercises').then =>
+      @listView.collection.push model
+      @ui.actionModal.modal 'hide'
+      App.vent.trigger 'spinner:global:stop'
+      App.request 'messenger:show',
+        hideAfter: 5
+        message: "Exercise added"
+        type: 'success'
+
+  folderAdded: (model) =>
+    model['key'] = model['id']
+    model['title'] = model['name']
+    model['items'] = []
+    App.request('data:reload', 'exercises').then =>
+      @listView.collection.push model
+      @ui.actionModal.modal 'hide'
+      App.vent.trigger 'spinner:global:stop'
+      App.request 'messenger:show',
+        hideAfter: 5
+        message: "Folder added"
+        type: 'success'
+
+  duplicateExercises: (foldersIds) =>
+    ids = []
+    for check in @ui.itemsRegion.find('input[type=checkbox]')
+      if $(check).is ':checked'
+        ids.push $(check).data('id')
+    if ids.length
+      data =
+        exercise_ids: ids
+        target_folder_ids: foldersIds
+      $.ajax
+        method: 'POST'
+        url: '/api/mobile/exercises/duplicate'
+        dataType: 'json'
+        data: JSON.stringify data
+        success: (data) =>
+          App.request('data:reload', 'exercises').then =>
+            @ui.actionModal.modal 'hide'
+            App.vent.trigger 'spinner:global:stop'
+            App.request 'messenger:show',
+              hideAfter: 5
+              message: "Exercise(s) duplicated"
+              type: 'success'
+    else
+      App.request 'messenger:show',
+        hideAfter: 5
+        message: "No exercises was selected"
+        type: 'error'
+
 
