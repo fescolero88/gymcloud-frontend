@@ -495,6 +495,98 @@
 .bootstrap-datetimepicker-widget td span:active {
   background: transparent;
 }
+.gc-exercise-info {
+  max-height: 50px;
+}
+.gc-exercise-author-info {
+  min-width: 175px;
+  display: inline-block;
+  text-align: left;
+  padding-top: 5px;
+}
+.gc-exercise-author-avatar {
+    display: inline-block;
+    vertical-align: top;
+    height: 25px;
+    width: 25px;
+    border-radius: 30px;
+    background: #3398db url('../images/avatar-placeholder.png') center center no-repeat;
+    background-size: 80%;
+    margin: 3px 5px 0 0;
+}
+.gc-exercise-author-avatar img {
+    display: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 30px;
+}
+.gc-exercise-author-avatar.gc-exercise-author-avatar-exist img {
+    display: inline-block;
+}
+.gc-exercise-author-avatar img[src$='defaultimage.png'] {
+    display: none;
+}
+.gc-exercise-author-name {
+  display: inline-block;
+  vertical-align: top;
+  color: #cacaca;
+  margin: 0;
+  line-height: 14px;
+  font-size: 12px;
+}
+.gc-exercise-author-name a {
+  color: #3598da;
+  text-transform: uppercase;
+  font-size: 14px;
+  text-decoration: none;
+}
+.gc-exercise-rating {
+  display: inline-block;
+  vertical-align: top;
+}
+.gc-exercise-rating-count {
+  color: #cbcbcb;
+  font-size: 12px;
+}
+.gc-exercise-rating-stars {
+  display: inline-block;
+  list-style-type: none;
+  padding-left: 10px;
+  margin: 0;
+}
+.gc-exercise-rating-stars li {
+  display: inline-block;
+}
+.gc-exercise-rating-stars li > i {
+  color: #ffc800;
+}
+.gc-exercise-rating-used {
+  color: #cbcbcb;
+  font-size: 12px;
+}
+.gc-exercise-rating-used > i {
+  color: #3699dd;
+  font-size: 10px;
+  margin: 0 2px;
+}
+.gc-exercises-exercise-video-link {
+  font-size: 13px;
+  color: #747474;
+  margin-top: 10px;
+  display: inline-block;
+  text-decoration: none;
+}
+.gc-exercises-exercise-video-link span {
+  color: #cacaca;
+}
+.gc-exercises-exercise-video-link > i {
+  margin-left: 5px;
+}
+.gc-exercises-exercise-video-link:hover,
+.gc-exercises-exercise-video-link:active {
+  color: #747474;
+  text-decoration: none;
+}
 @media (min-width: 1200px) {
     .gc-exercises-no-best {
     background-position: center 5px;

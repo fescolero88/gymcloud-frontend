@@ -14,6 +14,8 @@ GroupCollection = require 'models/trainer/group-collection'
 ClientGroupView = require 'views/trainer/clients/client-group-view'
 
 ExercisesGlobalView = require 'views/trainer/exercises/exercises-global-view'
+ExerciseGlobalView = require 'views/trainer/exercises/exercise-global-view'
+GlobalExerciseModel = require 'models/trainer/global-exercise-model'
 
 PropertiesView = require 'views/trainer/properties/properties-view'
 PropertyListView = require 'views/trainer/properties/property-list-view'
@@ -22,9 +24,14 @@ PropertyModel = require 'models/trainer/property-model'
 PropertyCollection = require 'models/trainer/property-collection'
 
 module.exports = class TrainerController extends Marionette.Controller
+  exercisesMethod: false
 
   initialize: (options) =>
     @mainView = options.mainView
+    App.vent.on 'assignments:loaded', =>
+      if @exercisesMethod
+        @[@exercisesMethod](@exerciseKey)
+        @exercisesMethod = false
 
   clients: (viewType) =>
     clientsPageView = new ClientsView viewType
@@ -96,5 +103,39 @@ module.exports = class TrainerController extends Marionette.Controller
     propertiesPageView.propertyModalView.show propertyModalView
 
   exercises: (key) =>
-    exercisesGlobalView = new ExercisesGlobalView(id: key)
-    @mainView.content.show exercisesGlobalView
+    @exerciseKey = key
+    items = App.request('data:exercises')
+    if items?
+      breadcrumbs = [{title:'Exercises'}]
+      if @exerciseKey
+        searchResults = @searchInLibrary(new Backbone.Collection(items), @exerciseKey, breadcrumbs)
+        childModel = searchResults.model
+        breadcrumbs = searchResults.path
+        items = childModel.get('items')
+      else
+        childModel = new Backbone.Model
+      if childModel.get('isFolder') or not @exerciseKey
+        exercisesGlobalView = new ExercisesGlobalView(model: childModel, items: items, breadcrumbs: breadcrumbs)
+        @mainView.content.show exercisesGlobalView
+      else
+        model = new GlobalExerciseModel
+        model.url = model.urlRoot + @exerciseKey
+        model.fetch().then =>
+          exerciseGlobalView = new ExerciseGlobalView(model: model, breadcrumbs: breadcrumbs)
+          @mainView.content.show exerciseGlobalView
+    else
+      @exercisesMethod = 'exercises'
+
+  searchInLibrary: (items, key, breadcrumbs) =>
+    filtered = items.where({key: parseInt(key)})
+    if filtered.length
+      result = filtered[0]
+      breadcrumbs.push({title: result.get('title')})
+    else
+      items.each (item) =>
+        if item.has('items')
+          searchResults = @searchInLibrary(new Backbone.Collection(item.get('items')), key, [{title: item.get 'title'}])
+          if searchResults.model
+            result = searchResults.model
+            breadcrumbs = breadcrumbs.concat searchResults.path
+    return {model: result, path: breadcrumbs}
