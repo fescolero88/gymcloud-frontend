@@ -1,11 +1,8 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
-ExercisesGlobalListView = require 'views/trainer/exercises/exercises-global-list-view'
+ExerciseGlobalOverviewView = require 'views/trainer/exercises/exercise_global_overview_view'
 
-AddExerciseModalView = require 'views/trainer/exercises/add-exercise-modal'
-AddExerciseFolderModalView = require 'views/trainer/exercises/add-exercise-folder-modal'
-DeplicateExerciseModalView = require 'views/trainer/exercises/duplicate-exercise-modal'
 BreadcrumbsView = require 'views/general/breadcrumbs/breadcrumbs-view'
 BreadcrumbsCollection = require 'models/general/breadcrumbs'
 
@@ -14,8 +11,7 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
   template: Templates.trainer.exercises.exercise_global
 
   regions:
-    exercises: '#exercises-region'
-    modalRegion: '#gc-modal-region'
+    manageRegion: '#exercise-manage'
     breadcrumbsRegion: '#breadcrumbs'
 
   ui:
@@ -24,6 +20,14 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
   initialize: (data) =>
     @breadcrumbsView = new BreadcrumbsView
       collection: new BreadcrumbsCollection data.breadcrumbs
+    @overview = new ExerciseGlobalOverviewView
+        model: data.exercise
+    @exerciseAuthor = data.exercise.get('author').id
+    console.debug @exerciseAuthor
+
+  templateHelpers: ->
+    author: @exerciseAuthor
 
   onShow: =>
+    @manageRegion.show @overview
     @breadcrumbsRegion.show @breadcrumbsView

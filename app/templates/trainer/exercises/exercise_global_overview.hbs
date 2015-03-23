@@ -1,0 +1,82 @@
+{{#withProfile}}
+  <div class="row gc-exercise-info">
+    <div class="col-xs-6">
+      <h2>{{../name}}</h2>
+    </div>
+    <div class="col-xs-6 text-right">
+      {{#ifNot id ../author.id}}
+        <div class="gc-exercise-author-info">
+          <a  href="#/tr/clients/id/{{../../author.id}}/exercises/" class="gc-exercise-author-avatar gc-exercise-author-avatar-exist">
+            <img src="static/images/portrait.jpg">
+          </a>
+          <p class="gc-exercise-author-name">
+            Trainer
+            <br>
+            <a href="#/tr/clients/id/{{../../author.id}}/exercises/">{{../../author.first_name}} {{../../author.last_name}}</a>
+          </p>
+        </div>
+        <div class="gc-exercise-rating">
+          <div>
+            <span class="gc-exercise-rating-count">25</span>
+            <ul class="gc-exercise-rating-stars">
+              <li><i class="fa fa-star"></i></li>
+              <li><i class="fa fa-star"></i></li>
+              <li><i class="fa fa-star"></i></li>
+              <li><i class="fa fa-star"></i></li>
+              <li><i class="fa fa-star-o"></i></li>
+            </ul>
+          </div>
+          <p class="gc-exercise-rating-used">
+            Used by <i class="glyphicon glyphicon-user"></i> 250
+          </p>
+        </div>
+      {{/ifNot}}
+    </div>
+  </div>
+  {{#if ../description}}
+  <p class="gc-exercises-exercise-descr">
+    {{../../description}}
+  </p>
+  {{/if}}
+  {{#if ../video_url}}
+  <div class="gc-exercises-exercise-video">
+    <iframe width="853" height="480" src="{{ ../../video_url }}" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <div class="row gc-exercise-video-controls">
+    <div class="col-xs-6">
+      <a href="{{../../video_url}}" target="_blank" class="gc-exercises-exercise-video-link">
+        {{../../name}}
+        <i class="fa fa-youtube-play"></i>
+        <span>Youtube</span>
+      </a>
+    </div>
+    <div class="col-xs-6 text-right">
+      <button class="btn btn-link gc-exercise-video-update">
+        Update video
+      </button>
+      <button class="btn btn-link gc-exercise-video-delete">
+        Delete
+      </button>
+    </div>
+  </div>
+  {{/if}}
+  {{#ifEqual id ../author.id}}
+    <div class="gc-exercise-author-controls row">
+      <div class="col-xs-6">
+        <button class="btn btn-primary gc-exercise-edit-button">Edit exercise</button>
+      </div>
+      <div class="col-xs-6 text-right">
+        <div class="btn-group gc-exercise-privates" data-toggle="buttons">
+          <label class="btn btn-primary active">
+            <input type="radio" name="options" id="option1" autocomplete="off"> Public
+          </label>
+          <label class="btn btn-primary">
+            <input type="radio" name="options" id="option2" autocomplete="off" checked> Mine
+          </label>
+        </div>
+        <button class="btn btn-danger gc-exercise-delete-button">Delete</button>
+      </div>
+    </div>
+  {{/ifEqual}}
+{{/withProfile}}
+
