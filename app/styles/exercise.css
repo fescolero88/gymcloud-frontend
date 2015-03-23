@@ -71,32 +71,32 @@
   font-size: 14px;
   text-decoration: none;
 }
-.gc-exercise-rating {
+.gc-rating {
   display: inline-block;
   vertical-align: top;
 }
-.gc-exercise-rating-count {
+.gc-rating-count {
   color: #cbcbcb;
   font-size: 12px;
 }
-.gc-exercise-rating-stars {
+.gc-rating-stars {
   display: inline-block;
   list-style-type: none;
   padding-left: 10px;
   margin: 0;
 }
-.gc-exercise-rating-stars li {
+.gc-rating-stars li {
   display: inline-block;
 }
-.gc-exercise-rating-stars li > i {
+.gc-rating-stars li > i {
   color: #ffc800;
 }
-.gc-exercise-rating-used {
+.gc-rating-used {
   color: #cbcbcb;
   font-size: 12px;
   margin-bottom: 0;
 }
-.gc-exercise-rating-used > i {
+.gc-rating-used > i {
   color: #3699dd;
   font-size: 10px;
   margin: 0 2px;
