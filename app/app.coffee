@@ -79,7 +79,7 @@ class App extends Marionette.Application
                 hideAfter: 5
                 message: "#{name}: #{error_msg[0]}"
                 type: 'error'
-         spinner.stop()
+          spinner.stop()
 
       $.ajaxSetup
         headers: {'X-Requested-With': 'XMLHttpRequest'}
