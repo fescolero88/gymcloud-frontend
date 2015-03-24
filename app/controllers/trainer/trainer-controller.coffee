@@ -14,7 +14,7 @@ GroupCollection = require 'models/trainer/group-collection'
 ClientGroupView = require 'views/trainer/clients/client-group-view'
 
 ExercisesGlobalView = require 'views/trainer/exercises/exercises-global-view'
-ExerciseGlobalView = require 'views/trainer/exercises/exercise-global-view'
+ExerciseGlobalView = require 'views/trainer/exercises/exercise_global_view'
 GlobalExerciseModel = require 'models/trainer/global-exercise-model'
 
 PropertiesView = require 'views/trainer/properties/properties-view'
@@ -121,7 +121,7 @@ module.exports = class TrainerController extends Marionette.Controller
         model = new GlobalExerciseModel
         model.url = model.urlRoot + @exerciseKey
         model.fetch().then =>
-          exerciseGlobalView = new ExerciseGlobalView(model: model, breadcrumbs: breadcrumbs)
+          exerciseGlobalView = new ExerciseGlobalView(exercise: model, breadcrumbs: breadcrumbs)
           @mainView.content.show exerciseGlobalView
     else
       @exercisesMethod = 'exercises'
