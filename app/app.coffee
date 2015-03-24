@@ -68,7 +68,7 @@ class App extends Marionette.Application
           window.location.replace '#/logout'
 
         if jqxhr.status is 403
-          if jqxhr.responseJSON.message['generic']
+          if jqxhr.responseJSON.message?['generic']
             @request 'messenger:show',
               hideAfter: 5
               message: jqxhr.responseJSON.message['generic']
@@ -123,34 +123,45 @@ class App extends Marionette.Application
       @reqres.setHandler 'data:exercises', ->
         App.data.exercises
 
+      @reqres.setHandler 'data:exercises:root', ->
+        App.data.exercisesRoot
+
       @reqres.setHandler 'data:exercises:reset', (data) ->
         App.data.exercises = data
         true
 
+      @reqres.setHandler 'data:exercises:root:reset', (key) ->
+        App.data.exercisesRoot = key
+
       @reqres.setHandler 'data:workouts', ->
         App.data.workouts
+
+      @reqres.setHandler 'data:workouts:root', ->
+        App.data.workoutsRoot
 
       @reqres.setHandler 'data:workouts:reset', (data) ->
         App.data.workouts = data
         true
 
+      @reqres.setHandler 'data:workouts:root:reset', (key) ->
+        App.data.workoutsRoot = key
+
       @reqres.setHandler 'data:programs', ->
         App.data.programs
+
+      @reqres.setHandler 'data:programs:root', ->
+        App.data.programsRoot
 
       @reqres.setHandler 'data:programs:reset', (data) ->
         App.data.programs = data
         true
 
-      @reqres.setHandler 'data:reload', (category) ->
-        switch category
-          when 'exercises'
-            categoryRootId = 1225
-          when 'workouts'
-            categoryRootId = 1227
-          when 'programs'
-            categoryRootId = 1226
+      @reqres.setHandler 'data:programs:root:reset', (key) ->
+        App.data.programsRoot = key
+
+      @reqres.setHandler 'data:reload', (category, rootId) ->
         $.ajax
-          url: "/api/mobile/library/#{categoryRootId}"
+          url: "/api/mobile/library/#{rootId}"
           type: 'GET'
           dataType: 'json'
           success: (data) =>

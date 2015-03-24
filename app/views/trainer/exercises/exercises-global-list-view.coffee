@@ -40,7 +40,7 @@ module.exports = class ExercisesGlobalListView extends Marionette.CompositeView
         method: 'DELETE'
         url: model.url
       model.destroy()
-    App.request('data:reload', 'exercises').then ->
+    App.request('data:reload', 'exercises', App.request 'data:exercises:root').then ->
       App.request 'messenger:show',
         hideAfter: 5
         message: "Item(s) was deleted"

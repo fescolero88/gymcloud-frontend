@@ -13,7 +13,7 @@ module.exports = class AddExerciseFolderModalView extends Marionette.ItemView
     'submit @ui.form': 'submitForm'
 
   initialize: (data) =>
-    exercisesRootId = 1225
+    exercisesRootId = App.request 'data:exercises:root'
     @folderId = data.folderId or exercisesRootId
 
   submitForm: (ev) =>

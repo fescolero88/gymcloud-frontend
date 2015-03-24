@@ -140,9 +140,9 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
     model['key'] = model['id']
     model['title'] = model['name']
     model['items'] = []
-    App.request('data:reload', 'exercises').then =>
-      @listView.collection.push model
+    App.request('data:reload', 'exercises', App.request 'data:exercises:root').then =>
       @ui.actionModal.modal 'hide'
+      @listView.collection.push model
       App.vent.trigger 'spinner:global:stop'
       App.request 'messenger:show',
         hideAfter: 5
@@ -153,9 +153,10 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
     model['key'] = model['id']
     model['title'] = model['name']
     model['items'] = []
-    App.request('data:reload', 'exercises').then =>
-      @listView.collection.push model
+    model['isFolder'] = true
+    App.request('data:reload', 'exercises', App.request 'data:exercises:root').then =>
       @ui.actionModal.modal 'hide'
+      @listView.collection.push model
       App.vent.trigger 'spinner:global:stop'
       App.request 'messenger:show',
         hideAfter: 5
@@ -177,7 +178,7 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
         dataType: 'json'
         data: JSON.stringify data
         success: (data) =>
-          App.request('data:reload', 'exercises').then =>
+          App.request('data:reload', 'exercises', App.request 'data:exercises:root').then =>
             @ui.actionModal.modal 'hide'
             App.vent.trigger 'spinner:global:stop'
             App.request 'messenger:show',
