@@ -6,7 +6,11 @@ module.exports = class AddExerciseFolderModalView extends Marionette.ItemView
   template: Templates.trainer.exercises.duplicate_exercise_modal
 
   ui:
-    'folderInput': '.gc-folders-input'
+    folderInput: '.gc-folders-input'
+    form: '.gc-duplicate-form'
+
+  events:
+    'submit @ui.form': 'submitForm'
 
   initialize: (data) =>
     @exercises = data.exercises
@@ -28,8 +32,6 @@ module.exports = class AddExerciseFolderModalView extends Marionette.ItemView
 
   initSearchSelect: =>
     searchOptions = @searchItems @exercises, 'exercises'
-    console.debug @exercises
-    console.debug searchOptions
     this_ = @
     @ui.folderInput.selectize
       plugins: ['remove_button']
@@ -46,4 +48,8 @@ module.exports = class AddExerciseFolderModalView extends Marionette.ItemView
             return '<div><span class="label">' + escape(item.label) +
               '</span> ' + escape(item.title) + '</div>'
 
+  submitForm: (ev) =>
+    ev.preventDefault()
+    ids = @ui.folderInput.val().split(',')
+    @trigger "exercises:duplicate", ids
 

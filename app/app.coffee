@@ -68,11 +68,17 @@ class App extends Marionette.Application
           window.location.replace '#/logout'
 
         if jqxhr.status is 403
-          for name, error_msg of jqxhr.responseJSON.message
+          if jqxhr.responseJSON.message?['generic']
             @request 'messenger:show',
               hideAfter: 5
-              message: "#{name}: #{error_msg[0]}"
+              message: jqxhr.responseJSON.message['generic']
               type: 'error'
+          else
+            for name, error_msg of jqxhr.responseJSON.message
+              @request 'messenger:show',
+                hideAfter: 5
+                message: "#{name}: #{error_msg[0]}"
+                type: 'error'
         spinner.stop()
 
       $.ajaxSetup
@@ -117,20 +123,49 @@ class App extends Marionette.Application
       @reqres.setHandler 'data:exercises', ->
         App.data.exercises
 
+      @reqres.setHandler 'data:exercises:root', ->
+        App.data.exercisesRoot
+
       @reqres.setHandler 'data:exercises:reset', (data) ->
         App.data.exercises = data
+        true
+
+      @reqres.setHandler 'data:exercises:root:reset', (key) ->
+        App.data.exercisesRoot = key
 
       @reqres.setHandler 'data:workouts', ->
         App.data.workouts
 
+      @reqres.setHandler 'data:workouts:root', ->
+        App.data.workoutsRoot
+
       @reqres.setHandler 'data:workouts:reset', (data) ->
         App.data.workouts = data
+        true
+
+      @reqres.setHandler 'data:workouts:root:reset', (key) ->
+        App.data.workoutsRoot = key
 
       @reqres.setHandler 'data:programs', ->
         App.data.programs
 
+      @reqres.setHandler 'data:programs:root', ->
+        App.data.programsRoot
+
       @reqres.setHandler 'data:programs:reset', (data) ->
         App.data.programs = data
+        true
+
+      @reqres.setHandler 'data:programs:root:reset', (key) ->
+        App.data.programsRoot = key
+
+      @reqres.setHandler 'data:reload', (category, rootId) ->
+        $.ajax
+          url: "/api/mobile/library/#{rootId}"
+          type: 'GET'
+          dataType: 'json'
+          success: (data) =>
+            App.data[category] = data
 
       @reqres.setHandler 'client:properties', (id) ->
         App.cache?['client:properties']?[id]

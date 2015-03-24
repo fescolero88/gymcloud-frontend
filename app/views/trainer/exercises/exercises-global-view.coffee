@@ -27,18 +27,27 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
     addExerciseFolderButton: '.gc-show-add-exercise-folder-modal'
     duplicateButton: '.gc-show-duplicate-modal'
     actionModal: '#gc-modal-region'
+    deleteButton: '#rm-event'
 
   events:
     'click @ui.mainCheckbox': 'toggleCheck'
     'click @ui.addExerciseButton': 'showAddExerciseModal'
     'click @ui.addExerciseFolderButton': 'showAddExerciseFolderModal'
     'click @ui.duplicateButton': 'showDuplicateExerciseModal'
+    'click @ui.deleteButton': 'rmAssign'
 
   initialize: (data) =>
     @item_id = data.model?.get 'key'
     @exercisesList = data.items
     @breadcrumbsView = new BreadcrumbsView
       collection: new BreadcrumbsCollection data.breadcrumbs
+
+    @addExerciseModal = new AddExerciseModalView folderId: @item_id
+    @addExerciseFolderModal = new AddExerciseFolderModalView folderId: @item_id
+    @duplicateModal = new DeplicateExerciseModalView exercises: @exercisesList
+    @listenTo @addExerciseModal, 'exercise:added', @exerciseAdded
+    @listenTo @addExerciseFolderModal, 'folder:added', @folderAdded
+    @listenTo @duplicateModal, 'exercises:duplicate', @duplicateExercises
 
   onShow: =>
     @initSearchSelect()
@@ -96,20 +105,90 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
             return '<div><span class="label">' + escape(item.label) +
               '</span> ' + escape(item.title) + '</div>'
 
+  rmAssign: (ev) =>
+    ev.preventDefault()
+    App.request 'base:confirmationalModal',
+      title: "Delete item(s)"
+      content: "Are you sure you want to delete selected items?"
+      confirmBtn: "Delete"
+      confirmCallBack: =>
+        ids = []
+        for check in @ui.itemsRegion.find('input[type=checkbox]')
+          if $(check).is ':checked'
+            ids.push $(check).data('id')
+        @listView.trigger 'items:delete', ids
+
+  loadItem: (key) =>
+    @loadItemById key
+
   showAddExerciseModal: (ev) =>
     ev.preventDefault()
-    @modalRegion.show new AddExerciseModalView
+    @modalRegion.show @addExerciseModal
     @ui.actionModal.modal 'show'
 
   showAddExerciseFolderModal: (ev) =>
     ev.preventDefault()
-    @modalRegion.show new AddExerciseFolderModalView
+    @modalRegion.show @addExerciseFolderModal
     @ui.actionModal.modal 'show'
 
   showDuplicateExerciseModal: (ev) =>
     ev.preventDefault()
-    duplicateView = new DeplicateExerciseModalView
-      exercises: @exercisesList
-    @modalRegion.show duplicateView
+    @modalRegion.show @duplicateModal
     @ui.actionModal.modal 'show'
+
+  exerciseAdded: (model) =>
+    model['key'] = model['id']
+    model['title'] = model['name']
+    model['items'] = []
+    App.request('data:reload', 'exercises', App.request 'data:exercises:root').then =>
+      @ui.actionModal.modal 'hide'
+      @listView.collection.push model
+      App.vent.trigger 'spinner:global:stop'
+      App.request 'messenger:show',
+        hideAfter: 5
+        message: "Exercise added"
+        type: 'success'
+
+  folderAdded: (model) =>
+    model['key'] = model['id']
+    model['title'] = model['name']
+    model['items'] = []
+    model['isFolder'] = true
+    App.request('data:reload', 'exercises', App.request 'data:exercises:root').then =>
+      @ui.actionModal.modal 'hide'
+      @listView.collection.push model
+      App.vent.trigger 'spinner:global:stop'
+      App.request 'messenger:show',
+        hideAfter: 5
+        message: "Folder added"
+        type: 'success'
+
+  duplicateExercises: (foldersIds) =>
+    ids = []
+    for check in @ui.itemsRegion.find('input[type=checkbox]')
+      if $(check).is ':checked'
+        ids.push $(check).data('id')
+    if ids.length
+      data =
+        exercise_ids: ids
+        target_folder_ids: foldersIds
+      $.ajax
+        method: 'POST'
+        url: '/api/mobile/exercises/duplicate'
+        dataType: 'json'
+        data: JSON.stringify data
+        success: (data) =>
+          App.request('data:reload', 'exercises', App.request 'data:exercises:root').then =>
+            @ui.actionModal.modal 'hide'
+            App.vent.trigger 'spinner:global:stop'
+            App.request 'messenger:show',
+              hideAfter: 5
+              message: "Exercise(s) duplicated"
+              type: 'success'
+    else
+      App.request 'messenger:show',
+        hideAfter: 5
+        message: "No exercises was selected"
+        type: 'error'
+
 
