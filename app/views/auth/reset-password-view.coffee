@@ -24,15 +24,13 @@ class ResetFormView extends Marionette.ItemView
       @trigger 'next'
 
 class ResetSuccessView extends Marionette.ItemView
-
   template: Templates.auth.reset_password_success
 
 module.exports = class ResetPasswordView extends Marionette.LayoutView
-
-  template: Templates.auth.sign_up
+  template: Templates.auth.empty_layout
 
   regions:
-    signUp: '#gc-signup-region'
+    signUp: '#gc-default-region'
 
   initialize: =>
     @formView = new ResetFormView model: new ResetPasswordModel

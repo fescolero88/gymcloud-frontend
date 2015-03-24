@@ -2,8 +2,9 @@ config = require 'config'
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
-module.exports = class ForgotPasswordView extends Marionette.ItemView
+ForgotPasswordModel = require 'models/auth/forgot-password-model'
 
+class ForgotPasswordFormView extends Marionette.ItemView
   template: Templates.auth.forgot_password
 
   ui:
@@ -37,3 +38,34 @@ module.exports = class ForgotPasswordView extends Marionette.ItemView
             $input = @ui.emailField
             $inputGroup = $input.closest('.form-group')
             @switchError data.errors, $inputGroup
+        statusCode:
+          201: (data) =>
+            @trigger 'next'
+
+class ForgotPasswordSuccessView extends Marionette.ItemView
+  template: Templates.auth.forgot_password_success
+
+module.exports = class ForgotPasswordView extends Marionette.LayoutView
+  template: Templates.auth.empty_layout
+
+  regions:
+    signUp: '#gc-default-region'
+
+  initialize: =>
+    @formView = new ForgotPasswordFormView model: new ForgotPasswordModel
+    @successView = new ForgotPasswordSuccessView
+    @listenTo @formView, 'next', @nextStep
+    @listenTo @successView, 'final', @final
+
+  onShow: =>
+    @signUp.show @formView
+
+  nextStep: =>
+    @signUp.show @successView
+
+  final: () =>
+    true
+
+
+
+

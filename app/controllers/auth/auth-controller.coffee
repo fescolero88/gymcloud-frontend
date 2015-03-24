@@ -7,7 +7,6 @@ ForgotPasswordView = require 'views/auth/forgot-password-view'
 SignUpView = require 'views/auth/sign-up-view'
 ResetPasswordView = require 'views/auth/reset-password-view'
 
-ForgotPasswordModel = require 'models/auth/forgot-password-model'
 LoginModel = require 'models/auth/login-model'
 
 module.exports = class AuthController extends Marionette.Controller
@@ -28,7 +27,7 @@ module.exports = class AuthController extends Marionette.Controller
     window.location.replace '#login'
 
   forgotPassword: ->
-    @layoutView.mainRegion.show new ForgotPasswordView model: new ForgotPasswordModel
+    @layoutView.mainRegion.show new ForgotPasswordView
 
   signUp: =>
     @signUp = new SignUpView
