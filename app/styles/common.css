@@ -159,6 +159,7 @@ body > region[data-name="app"] > .container-fluid {
   padding: 0;
   margin: 0;
   height: 50px;
+  display: inline-block;
 }
 .gc-content-nav li {
   display: inline-block;
@@ -344,6 +345,30 @@ body > region[data-name="app"] > .container-fluid {
 .gc-clients-nav-wrapper .btn-danger:hover {
   background: #ee6d5d;
   color: #fff;
+}
+.gc-clients-nav-wrapper .btn-warning {
+  color: #ffac61;
+  border-color: #ffac61;
+}
+.gc-clients-nav-wrapper .btn-warning:hover {
+  background: #ffac61;
+  color: #fff;
+}
+.gc-clients-nav-wrapper span.btn-warning:hover {
+  background: #fff;
+  color: #ffac61;
+}
+.gc-clients-nav-wrapper .btn-success {
+  color: #39ca74;
+  border-color: #39ca74;
+}
+.gc-clients-nav-wrapper .btn-success:hover {
+  background: #39ca74;
+  color: #fff;
+}
+.gc-clients-nav-wrapper span.btn-success:hover {
+  background: #fff;
+  color: #39ca74;
 }
 .modal-dialog.modal-md {
   width: 480px;

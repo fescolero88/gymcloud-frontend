@@ -10,7 +10,7 @@
         </a>
         <div id="breadcrumbs"></div>
       </div>
-      <div class="col-xs-5 gc-clients-nav-right text-right">
+      <div class="col-xs-5 gc-exercises-nav-right text-right">
         {{#withProfile}}
           {{#ifEqual id ../author}}
             <ul class="gc-content-nav">
@@ -22,6 +22,14 @@
             <button class="btn brn-primary">Add to library</button>
           {{/ifEqual}}
         {{/withProfile}}
+        <span class="{{#ifNot public true}}hide{{/ifNot}} btn btn-success gc-privacy-marker gc-privacy-public">
+          <i class="fa fa-eye"></i>
+          Public
+        </span>
+        <span class="{{#if public}}hide{{/if}} btn btn-warning gc-privacy-marker gc-privacy-private">
+          <i class="fa fa-lock"></i>
+          Private
+        </span>
       </div>
     </div>
     <div id="exercise-manage"></div>

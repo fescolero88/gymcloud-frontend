@@ -16,17 +16,32 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
 
   ui:
     title: '.gc-breadcrumbs-title'
+    publicMarker: '.gc-privacy-public'
+    privateMarker: '.gc-privacy-private'
 
   initialize: (data) =>
     @breadcrumbsView = new BreadcrumbsView
       collection: new BreadcrumbsCollection data.breadcrumbs
     @overviewView = new ExerciseGlobalOverviewView
       model: data.exercise
+
     @exerciseAuthor = data.exercise.get('author').id
+    @isPublic = data.exercise.get('is_public')
+
+    @listenTo @overviewView, 'privacy:changed', @changePrivacyMarker
 
   templateHelpers: ->
     author: @exerciseAuthor
+    public: @isPublic
 
   onShow: =>
     @manageRegion.show @overviewView
     @breadcrumbsRegion.show @breadcrumbsView
+
+  changePrivacyMarker: (isPublic) =>
+    if isPublic
+      @ui.privateMarker.addClass('hide')
+      @ui.publicMarker.removeClass('hide')
+    else
+      @ui.publicMarker.addClass('hide')
+      @ui.privateMarker.removeClass('hide')

@@ -66,17 +66,9 @@
         <button class="btn btn-primary gc-exercise-edit-button">Edit exercise</button>
       </div>
       <div class="col-xs-6 text-right">
-        <div class="btn-group gc-exercise-privates" data-toggle="buttons">
-          <label class="btn btn-primary active">
-            <input type="radio" name="options" id="option1" autocomplete="off"> Public
-          </label>
-          <label class="btn btn-primary">
-            <input type="radio" name="options" id="option2" autocomplete="off" checked> Mine
-          </label>
-        </div>
+        <div id="gc-privacy-button-region"></div>
         <button class="btn btn-danger gc-exercise-delete-button">Delete</button>
       </div>
     </div>
   {{/ifEqual}}
 {{/withProfile}}
-

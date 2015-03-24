@@ -1,0 +1,8 @@
+<div class="btn-group" data-toggle="buttons">
+  <label class="btn btn-primary {{#if isPublic}}active{{/if}}">
+    <input type="radio" name="public" value="true" {{#if isPublic}}checked{{/if}}> Public
+  </label>
+  <label class="btn btn-primary {{#if isPrivate}}active{{/if}}">
+    <input type="radio" name="public" value="false" {{#if isPrivate}}checked{{/if}}> Mine
+  </label>
+</div>
