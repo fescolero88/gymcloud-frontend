@@ -17,16 +17,18 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
 
   submit: (ev) =>
     ev.preventDefault()
-    @model.set @ui.form.serializeObject()
-    @model.set 'user\[password\]', @model.get 'password'
-    @model.set 'user\[password_confirmation\]', @model.get 'password_confirmation'
-    @model.set 'user\[reset_password_token\]', @token
+    data = @ui.form.serializeObject()
+    @model.set data
     if @model.isValid true
+      for key, value of data
+        data["user[#{key}]"] = value
+        delete data[key]
+      data["user[reset_password_token]"] = @token
       $.ajax
         method: 'PUT'
         url: @model.url
         dataType: 'json'
-        data: JSON.stringify @model.attributes
+        data: JSON.stringify data
         statusCode:
           204: (data) =>
             window.location.replace '#login'
