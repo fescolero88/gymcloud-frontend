@@ -2,10 +2,7 @@ config = require 'config'
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
-ResetPasswordModel = require 'models/auth/reset-password-model'
-
-class ResetFormView extends Marionette.ItemView
-
+module.exports = class ResetPasswordView extends Marionette.LayoutView
   template: Templates.auth.reset_password
 
   ui:
@@ -14,35 +11,28 @@ class ResetFormView extends Marionette.ItemView
   events:
     'submit @ui.form': 'submit'
 
-  initialize: =>
+  initialize: (data) =>
+    @token = data.token
     Backbone.Validation.bind @
 
   submit: (ev) =>
     ev.preventDefault()
     @model.set @ui.form.serializeObject()
+    @model.set 'user\[password\]', @model.get 'password'
+    @model.set 'user\[password_confirmation\]', @model.get 'password_confirmation'
+    @model.set 'user\[reset_password_token\]', @token
     if @model.isValid true
-      @trigger 'next'
-
-class ResetSuccessView extends Marionette.ItemView
-  template: Templates.auth.reset_password_success
-
-module.exports = class ResetPasswordView extends Marionette.LayoutView
-  template: Templates.auth.empty_layout
-
-  regions:
-    signUp: '#gc-default-region'
-
-  initialize: =>
-    @formView = new ResetFormView model: new ResetPasswordModel
-    @successView = new ResetSuccessView
-    @listenTo @formView, 'next', @nextStep
-    @listenTo @successView, 'final', @final
-
-  onShow: =>
-    @signUp.show @formView
-
-  nextStep: =>
-    @signUp.show @successView
-
-  final: (dataStep2) =>
-    true
+      $.ajax
+        method: 'PUT'
+        url: @model.url
+        dataType: 'json'
+        data: JSON.stringify @model.attributes
+        statusCode:
+          204: (data) =>
+            window.location.replace '#login'
+          422: (data) =>
+            if data.errors
+              App.request 'messenger:show',
+                hideAfter: 5
+                message: "Reset password token is invalid"
+                type: 'error'

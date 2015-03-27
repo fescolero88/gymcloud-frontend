@@ -8,6 +8,7 @@ SignUpView = require 'views/auth/sign-up-view'
 ResetPasswordView = require 'views/auth/reset-password-view'
 
 LoginModel = require 'models/auth/login-model'
+ResetPasswordModel = require 'models/auth/reset-password-model'
 
 module.exports = class AuthController extends Marionette.Controller
 
@@ -37,6 +38,6 @@ module.exports = class AuthController extends Marionette.Controller
       Backbone.history.navigate(href, { trigger:false, replace: true })
       @login true
 
-  resetPassword: =>
-    @resetPassword = new ResetPasswordView
+  resetPassword: (token) =>
+    @resetPassword = new ResetPasswordView model: new ResetPasswordModel, token: token
     @layoutView.mainRegion.show @resetPassword

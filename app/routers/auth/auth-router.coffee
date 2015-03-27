@@ -8,7 +8,7 @@ module.exports = class AuthRouter extends CustomRouter
     'logout(/)': 'logout'
     'forgot-password(/)': 'forgotPassword'
     'signup(/)': 'signUp'
-    'reset(/)': 'resetPassword'
+    'reset/:token(/)': 'resetPassword'
 
   before: (methodName) =>
     App.vent.trigger 'body:change-class', 'auth'
