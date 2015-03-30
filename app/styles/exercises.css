@@ -467,6 +467,34 @@
 .bootstrap-datetimepicker-widget td span:active {
   background: transparent;
 }
+.gc-duplicate-form .modal-body > label {
+  color: #9f9f9f;
+  font-size: 15px;
+}
+.gc-duplicate-folders-list {
+  max-height: 250px;
+  overflow-x: visible;
+  overflow-y: auto;
+  border-bottom: 1px solid #eaeaea;
+  list-style-type: none;
+  padding: 15px 0 0 0;
+}
+.gc-duplicate-folders-list li {
+  padding: 4px 0;
+  font-size: 15px;
+}
+.gc-duplicate-folders-list li label {
+  color: #333;
+}
+.gc-duplicate-folders-list li input {
+  position: relative;
+  margin-right: 10px;
+  bottom: -2px;
+}
+.gc-duplicate-folders-list li input:active,
+.gc-duplicate-folders-list li input:focus {
+  outline: none;
+}
 @media (min-width: 1200px) {
     .gc-exercises-no-best {
     background-position: center 5px;
