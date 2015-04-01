@@ -5,11 +5,12 @@ class AddExerciseFolderModalItemView extends Marionette.ItemView
   template: Templates.trainer.exercises.duplicate_exercise_modal_item
   tagName: 'li'
 
-module.exports = class AddExerciseFolderModalView extends Marionette.CompositeView
+module.exports = class DuplicateGlobalEWPModalView extends Marionette.CompositeView
+  template: Templates.trainer.global_ewp.duplicate_global_ewp_modal
   className: 'modal-dialog modal-md'
-  template: Templates.trainer.exercises.duplicate_exercise_modal
   childView: AddExerciseFolderModalItemView
   childViewContainer: 'ul'
+
 
   ui:
     folderInput: '.gc-folders-input'
@@ -20,10 +21,15 @@ module.exports = class AddExerciseFolderModalView extends Marionette.CompositeVi
     'submit @ui.form': 'submitForm'
 
   initialize: (data) =>
-    @exercises = data.exercises
+    @items = data.items
+    @typeName = data.type
+
+  templateHelpers: ->
+    type: @typeName
+    typeSingle: @typeName.substring(0, @typeName.length - 1)
 
   onShow: =>
-    @collection = new Backbone.Collection(@searchItems @exercises, 'exercises')
+    @collection = new Backbone.Collection(@searchItems @items, @typeName)
     @render()
 
   searchItems: (items, category) =>
@@ -43,5 +49,4 @@ module.exports = class AddExerciseFolderModalView extends Marionette.CompositeVi
     ids = []
     for ch in @ui.itemsList.find(':checked')
       ids.push $(ch).data 'id'
-    @trigger "exercises:duplicate", ids
-
+    @trigger "items:duplicate", ids

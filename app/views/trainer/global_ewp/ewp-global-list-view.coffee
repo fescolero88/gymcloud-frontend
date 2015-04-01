@@ -1,8 +1,8 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
-class ExercisesGlobalItemView extends Marionette.ItemView
-  template: Templates.trainer.exercises.single_item
+class EWPGlobalItemView extends Marionette.ItemView
+  template: Templates.trainer.global_ewp.ewp_single_item
   tagName: 'li'
   className: 'row'
 
@@ -12,35 +12,45 @@ class ExercisesGlobalItemView extends Marionette.ItemView
   events:
     'click @ui.checkbox': 'itemChecked'
 
-  itemChecked: (ev) =>
-    @trigger 'exercise:clicked'
+  initialize: (options) =>
+    @type = options.type
 
-module.exports = class ExercisesGlobalListView extends Marionette.CompositeView
-  template: Templates.trainer.exercises.exercises_global_list
-  childView: ExercisesGlobalItemView
+  templateHelpers: ->
+    type: @type
+
+  itemChecked: (ev) =>
+    @trigger 'item:clicked'
+
+module.exports = class EWPGlobalListView extends Marionette.CompositeView
+  template: Templates.trainer.global_ewp.global_ewp_list
+  childView: EWPGlobalItemView
   childViewContainer: 'ul'
   collectionEvents:
     'sync': 'render'
 
-  childEvents:
-    'exercise:clicked': 'itemSelected'
+  childViewOptions: =>
+    'type': @typeName
 
-  initialize: =>
+  childEvents:
+    'item:clicked': 'itemSelected'
+
+  initialize: (data) =>
     @on 'items:delete', @deleteItems
+    @typeName = data.type
 
   itemSelected: =>
-    @trigger 'exercise:clicked'
+    @trigger 'item:clicked'
 
   deleteItems: (ids) =>
     for key in ids
       model = @collection.where({key: key})[0]
-      type = if model.get('isFolder') then "folders" else "exercises"
+      type = if model.get('isFolder') then "folders" else @typeName
       model.url = "/api/mobile/#{type}/#{model.get 'key'}"
       $.ajax
         method: 'DELETE'
         url: model.url
       model.destroy()
-    App.request('data:reload', 'exercises', App.request 'data:exercises:root').then ->
+    App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then ->
       App.request 'messenger:show',
         hideAfter: 5
         message: "Item(s) was deleted"

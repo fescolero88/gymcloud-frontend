@@ -1,17 +1,18 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
-ExercisesGlobalListView = require 'views/trainer/exercises/exercises-global-list-view'
+EWPGlobalListView = require 'views/trainer/global_ewp/ewp-global-list-view'
 
-AddExerciseModalView = require 'views/trainer/exercises/add-exercise-modal'
-AddExerciseFolderModalView = require 'views/trainer/exercises/add-exercise-folder-modal'
-DeplicateExerciseModalView = require 'views/trainer/exercises/duplicate-exercise-modal'
+AddGlobalEWPModalView = require 'views/trainer/global_ewp/add-global-ewp-modal'
+AddGlobalFolderModalView = require 'views/trainer/global_ewp/add-global-folder-modal'
+DuplicateGlobalEWPModalView = require 'views/trainer/global_ewp/duplicate-global-ewp-modal'
+
 BreadcrumbsView = require 'views/general/breadcrumbs/breadcrumbs-view'
 BreadcrumbsCollection = require 'models/general/breadcrumbs'
 
-module.exports = class ExercisesGlobalView extends Marionette.LayoutView
+module.exports = class EWPGlobalView extends Marionette.LayoutView
 
-  template: Templates.trainer.exercises.exercises_global
+  template: Templates.trainer.global_ewp.global_ewp_layout
 
   regions:
     exercises: '#exercises-region'
@@ -22,6 +23,7 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
     title: '.gc-breadcrumbs-title'
     liveSearch: '.live-search'
     mainCheckbox: '.gc-content-nav-checkall input'
+    backButton: '.gc-content-nav-back'
     itemsRegion: '#exercises-region'
     addExerciseButton: '.gc-show-add-exercise-modal'
     addExerciseFolderButton: '.gc-show-add-exercise-folder-modal'
@@ -31,23 +33,36 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
 
   events:
     'click @ui.mainCheckbox': 'toggleCheck'
-    'click @ui.addExerciseButton': 'showAddExerciseModal'
-    'click @ui.addExerciseFolderButton': 'showAddExerciseFolderModal'
-    'click @ui.duplicateButton': 'showDuplicateExerciseModal'
+    'click @ui.addExerciseButton': 'showaddGlobalEWPModal'
+    'click @ui.addExerciseFolderButton': 'showaddGlobalFolderModal'
+    'click @ui.duplicateButton': 'showDuplicateEWPModal'
     'click @ui.deleteButton': 'rmAssign'
+    'click @ui.backButton': 'goBack'
 
   initialize: (data) =>
     @item_id = data.model?.get 'key'
     @exercisesList = data.items
+    @typeName = data.type
     @breadcrumbsView = new BreadcrumbsView
       collection: new BreadcrumbsCollection data.breadcrumbs
 
-    @addExerciseModal = new AddExerciseModalView folderId: @item_id
-    @addExerciseFolderModal = new AddExerciseFolderModalView folderId: @item_id
-    @duplicateModal = new DeplicateExerciseModalView exercises: @exercisesList
-    @listenTo @addExerciseModal, 'exercise:added', @exerciseAdded
-    @listenTo @addExerciseFolderModal, 'folder:added', @folderAdded
-    @listenTo @duplicateModal, 'exercises:duplicate', @duplicateExercises
+    @addGlobalEWPModal = new AddGlobalEWPModalView
+      folderId: @item_id
+      type: @typeName
+    @addGlobalFolderModal = new AddGlobalFolderModalView
+      folderId: @item_id
+      type: @typeName
+    @duplicateGlobalEWPModal = new DuplicateGlobalEWPModalView
+      items: @exercisesList
+      type: @typeName
+
+    @listenTo @addGlobalEWPModal, 'item:added', @exerciseAdded
+    @listenTo @addGlobalFolderModal, 'folder:added', @folderAdded
+    @listenTo @duplicateGlobalEWPModal, 'items:duplicate', @duplicateEWP
+
+  templateHelpers: ->
+    type: @typeName
+    typeSingle: @typeName.substring(0, @typeName.length - 1)
 
   onShow: =>
     @initSearchSelect()
@@ -55,8 +70,10 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
     @breadcrumbsRegion.show @breadcrumbsView
 
   loadItemById: (key) =>
-    @listView = new ExercisesGlobalListView collection: new Backbone.Collection(@exercisesList)
-    @listenTo @listView, 'exercise:clicked', @updateSelectedItems
+    @listView = new EWPGlobalListView
+      collection: new Backbone.Collection(@exercisesList)
+      type: @typeName
+    @listenTo @listView, 'item:clicked', @updateSelectedItems
     @exercises.show @listView
 
   toggleCheck: (ev) =>
@@ -87,7 +104,7 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
     return result
 
   initSearchSelect: =>
-    searchOptions = @searchItems App.request('data:exercises'), 'exercises'
+    searchOptions = @searchItems App.request("data:#{@typeName}"), @typeName
     this_ = @
     @ui.liveSearch.selectize
       hideSelected: true
@@ -121,32 +138,32 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
   loadItem: (key) =>
     @loadItemById key
 
-  showAddExerciseModal: (ev) =>
+  showaddGlobalEWPModal: (ev) =>
     ev.preventDefault()
-    @modalRegion.show @addExerciseModal
+    @modalRegion.show @addGlobalEWPModal
     @ui.actionModal.modal 'show'
 
-  showAddExerciseFolderModal: (ev) =>
+  showaddGlobalFolderModal: (ev) =>
     ev.preventDefault()
-    @modalRegion.show @addExerciseFolderModal
+    @modalRegion.show @addGlobalFolderModal
     @ui.actionModal.modal 'show'
 
-  showDuplicateExerciseModal: (ev) =>
+  showDuplicateEWPModal: (ev) =>
     ev.preventDefault()
-    @modalRegion.show @duplicateModal
+    @modalRegion.show @duplicateGlobalEWPModal
     @ui.actionModal.modal 'show'
 
   exerciseAdded: (model) =>
     model['key'] = model['id']
     model['title'] = model['name']
     model['items'] = []
-    App.request('data:reload', 'exercises', App.request 'data:exercises:root').then =>
+    App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
       @ui.actionModal.modal 'hide'
       @listView.collection.push model
       App.vent.trigger 'spinner:global:stop'
       App.request 'messenger:show',
         hideAfter: 5
-        message: "Exercise added"
+        message: "New item added"
         type: 'success'
 
   folderAdded: (model) =>
@@ -160,35 +177,39 @@ module.exports = class ExercisesGlobalView extends Marionette.LayoutView
       App.vent.trigger 'spinner:global:stop'
       App.request 'messenger:show',
         hideAfter: 5
-        message: "Folder added"
+        message: "New folder added"
         type: 'success'
 
-  duplicateExercises: (foldersIds) =>
+  duplicateEWP: (foldersIds) =>
     ids = []
     for check in @ui.itemsRegion.find('input[type=checkbox]')
       if $(check).is ':checked'
         ids.push $(check).data('id')
     if ids.length
+      type = @typeName.substring(0, @typeName.length - 1)
       data =
-        exercise_ids: ids
         target_folder_ids: foldersIds
+      data["#{type}_ids"] = ids
       $.ajax
         method: 'POST'
-        url: '/api/mobile/exercises/duplicate'
+        url: "/api/mobile/#{@typeName}/duplicate"
         dataType: 'json'
         data: JSON.stringify data
         success: (data) =>
-          App.request('data:reload', 'exercises', App.request 'data:exercises:root').then =>
+          App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
             @ui.actionModal.modal 'hide'
             App.vent.trigger 'spinner:global:stop'
             App.request 'messenger:show',
               hideAfter: 5
-              message: "Exercise(s) duplicated"
+              message: "Item(s) duplicated"
               type: 'success'
     else
       App.request 'messenger:show',
         hideAfter: 5
-        message: "No exercises was selected"
+        message: "No @typeName was selected"
         type: 'error'
 
+  goBack: (ev) ->
+    ev.preventDefault()
+    window.history.back()
 
