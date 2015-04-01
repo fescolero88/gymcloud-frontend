@@ -18,24 +18,24 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
     title: '.gc-breadcrumbs-title'
     publicMarker: '.gc-privacy-public'
     privateMarker: '.gc-privacy-private'
+    innerNavLinks: '.gc-content-nav li a'
+
+  events:
+    'click @ui.innerNavLinks': 'changeView'
 
   initialize: (data) =>
-    @breadcrumbsView = new BreadcrumbsView
-      collection: new BreadcrumbsCollection data.breadcrumbs
-    @overviewView = new ExerciseGlobalOverviewView
-      model: data.exercise
+    @breadcrumbsView = new BreadcrumbsView(collection: new BreadcrumbsCollection(data.breadcrumbs))
+    @exerciseModel = data.exercise
 
     @exerciseAuthor = data.exercise.get('author').id
     @isPublic = data.exercise.get('is_public')
-
-    @listenTo @overviewView, 'privacy:changed', @changePrivacyMarker
 
   templateHelpers: ->
     author: @exerciseAuthor
     public: @isPublic
 
   onShow: =>
-    @manageRegion.show @overviewView
+    @changeView 'overview'
     @breadcrumbsRegion.show @breadcrumbsView
 
   changePrivacyMarker: (isPublic) =>
@@ -45,3 +45,21 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
     else
       @ui.publicMarker.addClass('hide')
       @ui.privateMarker.removeClass('hide')
+
+  changeViewEvent: (ev) =>
+    ev.preventDefault()
+    navItem = $(ev.currentTarget).parent()
+    if not $(navItem).hasClass 'active'
+      navItemView = $(navItem).data 'view'
+      @changeView navItemView
+
+  changeView: (navView) =>
+    switch navView
+      when 'overview'
+        @overviewView = new ExerciseGlobalOverviewView model: @exerciseModel
+        @listenTo @overviewView, 'privacy:changed', @changePrivacyMarker
+        @manageRegion.show @overviewView
+      when 'video'
+        true
+      when 'assign'
+        true
