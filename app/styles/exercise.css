@@ -235,3 +235,50 @@
 .gc-content-nav + .gc-privacy-marker {
   margin-left: 12px;
 }
+.gc-exercises-exercise-video-placeholder {
+  min-height: 480px;
+  width: 100%;
+  background: #f9f9f9;
+  padding: 5px;
+}
+.gc-exercises-exercise-video-placeholder-icon {
+  background: #fefefe;
+  border-radius: 100px;
+  height: 78px;
+  width: 78px;
+  text-align: center;
+  color: #3697dc;
+  font-size: 30px;
+  line-height: 84px;
+  margin: 110px auto 15px auto;
+  padding-left: 5px;
+}
+.gc-exercises-exercise-video-placeholder p {
+  color: #c1c1c1;
+  font-size: 14px;
+  line-height: 16px;
+  margin-bottom: 17px;
+}
+.gc-exercises-exercise-video-placeholder .btn {
+  border-radius: 50px;
+  font-size: 12px;
+  color: #3398db;
+  text-transform: uppercase;
+  background: transparent;
+  border-color: #3398db;
+  border-radius: 50px;
+  text-align: center;
+  line-height: 16px;
+  margin-top: -5px;
+}
+.gc-exercises-exercise-video-placeholder .btn:hover,
+.gc-exercises-exercise-video-placeholder .btn:active,
+.gc-exercises-exercise-video-placeholder .btn:focus {
+  text-decoration: none;
+  outline: none;
+}
+.gc-exercises-exercise-view .gc-exercises-exercise-descr-placeholder {
+  font-size: 16px;
+  color: #c1c1c1;
+  margin-bottom: 1em;
+}

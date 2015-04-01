@@ -179,6 +179,7 @@ body > region[data-name="app"] > .container-fluid {
 .gc-content-nav li a:active,
 .gc-content-nav li a:focus {
   text-decoration: none;
+  cursor: pointer;
 }
 .gc-content-nav li a:hover {
   color: #3398db;

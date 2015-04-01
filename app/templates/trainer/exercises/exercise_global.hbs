@@ -14,9 +14,9 @@
         {{#withProfile}}
           {{#ifEqual id ../author}}
             <ul class="gc-content-nav">
-              <li class="active"><a>Exercise</a></li>
-              <li><a>Add video</a></li>
-              <li><a>Assign</a></li>
+              <li data-view="overview" class="active"><a>Exercise</a></li>
+              <li data-view="video"><a>Add video</a></li>
+              <li data-view="assign"><a>Assign</a></li>
             </ul>
           {{else}}
             <button class="btn brn-primary">Add to library</button>

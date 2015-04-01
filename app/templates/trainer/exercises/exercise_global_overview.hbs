@@ -37,6 +37,10 @@
   <p class="gc-exercises-exercise-descr">
     {{../../description}}
   </p>
+  {{else}}
+  <p class="gc-exercises-exercise-descr-placeholder">
+    Add description here
+  </p>
   {{/if}}
   {{#if ../video_url}}
   <div class="gc-exercises-exercise-video">
@@ -58,6 +62,18 @@
         Delete
       </button>
     </div>
+  </div>
+  {{else}}
+  <div class="gc-exercises-exercise-video-placeholder text-center">
+    <div class="gc-exercises-exercise-video-placeholder-icon">
+      <i class="glyphicon glyphicon-play"></i>
+    </div>
+    <p>
+      Seems you don't have any videos.
+      <br>
+      You can either upload one or select from a list.
+    </p>
+    <button class="btn btn-primary">Add video to this exercise</button>
   </div>
   {{/if}}
   {{#ifEqual id ../author.id}}
