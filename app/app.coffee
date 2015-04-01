@@ -69,9 +69,10 @@ class App extends Marionette.Application
 
         if jqxhr.status is 403
           if jqxhr.responseJSON.message?['generic']
+            message = jqxhr.responseJSON.message['generic'].replace( /\s+(\[.+\])/, "")
             @request 'messenger:show',
               hideAfter: 5
-              message: jqxhr.responseJSON.message['generic']
+              message: message
               type: 'error'
           else
             for name, error_msg of jqxhr.responseJSON.message

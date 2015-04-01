@@ -1,9 +1,9 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
-module.exports = class AddExerciseFolderModalView extends Marionette.ItemView
+module.exports = class AddGlobalFolderModalView extends Marionette.ItemView
   className: 'modal-dialog modal-md'
-  template: Templates.trainer.exercises.add_exercise_folder_modal
+  template: Templates.trainer.global_ewp.add_global_folder_modal
 
   ui:
     form: 'form'
@@ -13,8 +13,8 @@ module.exports = class AddExerciseFolderModalView extends Marionette.ItemView
     'submit @ui.form': 'submitForm'
 
   initialize: (data) =>
-    exercisesRootId = App.request 'data:exercises:root'
-    @folderId = data.folderId or exercisesRootId
+    rootId = App.request "data:#{data.type}:root"
+    @folderId = data.folderId or rootId
 
   submitForm: (ev) =>
     ev.preventDefault()

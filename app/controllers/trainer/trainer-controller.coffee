@@ -13,7 +13,8 @@ GroupCollection = require 'models/trainer/group-collection'
 
 ClientGroupView = require 'views/trainer/clients/client-group-view'
 
-ExercisesGlobalView = require 'views/trainer/exercises/exercises-global-view'
+EWPGlobalView = require 'views/trainer/global_ewp/ewp-global-view'
+
 ExerciseGlobalView = require 'views/trainer/exercises/exercise_global_view'
 GlobalExerciseModel = require 'models/trainer/global-exercise-model'
 
@@ -29,9 +30,9 @@ module.exports = class TrainerController extends Marionette.Controller
   initialize: (options) =>
     @mainView = options.mainView
     App.vent.on 'assignments:loaded', =>
-      if @exercisesMethod
-        @[@exercisesMethod](@exerciseKey)
-        @exercisesMethod = false
+      if @globalViewMethod
+        @[@globalViewMethod](@globalType, @globalKey)
+        @globalViewMethod = false
 
   clients: (viewType) =>
     clientsPageView = new ClientsView viewType
@@ -102,29 +103,34 @@ module.exports = class TrainerController extends Marionette.Controller
     propertyModalView = new PropertyModalView model: propertyModel
     propertiesPageView.propertyModalView.show propertyModalView
 
-  exercises: (key) =>
-    @exerciseKey = key
-    items = App.request('data:exercises')
+  globalView: (type, key) =>
+    @globalType = type
+    @globalKey = key
+    items = App.request("data:#{@globalType}")
     if items?
-      breadcrumbs = [{title:'Exercises'}]
-      if @exerciseKey
-        searchResults = @searchInLibrary(new Backbone.Collection(items), @exerciseKey, breadcrumbs)
+      breadcrumbs = [{title:"#{@globalType}"}]
+      if @globalKey
+        searchResults = @searchInLibrary(new Backbone.Collection(items), @globalKey, breadcrumbs)
         childModel = searchResults.model
         breadcrumbs = searchResults.path
-        items = childModel.get('items')
+        items = childModel.get('items') or []
       else
         childModel = new Backbone.Model
-      if childModel.get('isFolder') or not @exerciseKey
-        exercisesGlobalView = new ExercisesGlobalView(model: childModel, items: items, breadcrumbs: breadcrumbs)
+      if childModel.get('isFolder') or not @globalKey
+        exercisesGlobalView = new EWPGlobalView
+          model: childModel
+          items: items
+          breadcrumbs: breadcrumbs
+          type: @globalType
         @mainView.content.show exercisesGlobalView
       else
         model = new GlobalExerciseModel
-        model.url = model.urlRoot + @exerciseKey
+        model.url = model.urlRoot + @globalKey
         model.fetch().then =>
           exerciseGlobalView = new ExerciseGlobalView(exercise: model, breadcrumbs: breadcrumbs)
           @mainView.content.show exerciseGlobalView
     else
-      @exercisesMethod = 'exercises'
+      @globalViewMethod = 'globalView'
 
   searchInLibrary: (items, key, breadcrumbs) =>
     filtered = items.where({key: parseInt(key)})

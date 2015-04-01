@@ -11,8 +11,9 @@ module.exports = class TrainerRouter extends CustomRouter
     'tr/groups/id/:id/:assign/:key(/)': 'group'
 
     'tr/properties(/)': 'properties'
-    'tr/exercises(/)': 'exercises'
-    'tr/exercises/id/:id(/)': 'exercises'
+
+    'tr/global/:assign(/)': 'globalView'
+    'tr/global/:assign/id/:id(/)': 'globalView'
 
   before: (methodName) =>
     App.request 'auth:isAuthorized', 'trainer'
