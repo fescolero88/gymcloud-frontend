@@ -1,5 +1,5 @@
 {{#if isFolder}}<div class="gc-sidebar-folder">{{else}}<div class="gc-sidebar-item">{{/if}}
-  <a href="#" class="row {{#if isFolder}}toggle-menu toggle-it{{/if}}">
+  <a href="#tr/global/{{type}}/id/{{key}}" class="row {{#if isFolder}}toggle-menu toggle-it{{/if}}">
     <span class="col-xs-2">
       <span class="{{#if isFolder}}fa fa-folder-o {{else}}fa fa-arrows draggable-handle{{/if}}"></span>
     </span>
@@ -9,7 +9,7 @@
   </a>
   <div class="gc-sidebar-sub">
     {{#each items}}
-      {{> sidebar_item}}
+      {{> sidebar_item type=../type }}
     {{/each}}
   </div>
 </div>
