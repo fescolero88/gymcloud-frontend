@@ -2,7 +2,7 @@ Backbone = require 'backbone'
 
 module.exports = class ResetPasswordModel extends Backbone.Model
 
-  url: '/users/password'
+  urlRoot: '/users/password'
 
   validation:
 

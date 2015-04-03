@@ -20,10 +20,8 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
     data = @ui.form.serializeObject()
     @model.set data
     if @model.isValid true
-      for key, value of data
-        data["user[#{key}]"] = value
-        delete data[key]
       data["user[reset_password_token]"] = @token
+      @model.url = "#{@model.urlRoot}/?user[reset_password_token]=#{@token}"
       $.ajax
         method: 'PUT'
         url: @model.url
