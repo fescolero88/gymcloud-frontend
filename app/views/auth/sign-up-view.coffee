@@ -110,10 +110,10 @@ class SignUpStep2 extends Marionette.ItemView
 
 module.exports = class SignUpView extends Marionette.LayoutView
 
-  template: Templates.auth.sign_up
+  template: Templates.auth.empty_layout
 
   regions:
-    signUp: '#gc-signup-region'
+    signUp: '#gc-default-region'
 
   initialize: =>
     @step1 = new SignUpStep1 model: new SignUpStep1Model
