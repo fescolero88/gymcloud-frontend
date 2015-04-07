@@ -222,8 +222,16 @@ class App extends Marionette.Application
           region.$el.modal('hide')
           region.destroy()
 
-      # --- Data handlers -----
+      @reqres.setHandler 'lastHash:get', ->
+        App.data.lastHash
 
+      @reqres.setHandler 'lastHash:set', (params) ->
+        App.data.lastHash =
+          hash: params.hash
+          action: params.name
+
+      # --- Data handlers -----
+      
       # --- Base layout -----
       @baseView = new BaseView()
       @baseView.render()

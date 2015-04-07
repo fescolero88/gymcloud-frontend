@@ -397,6 +397,26 @@
   vertical-align: middle;
   margin: 0 5px 0 4px;
 }
+.gc-exercises-item-play-icon {
+  display: inline-block;
+  background: transparent url('/static/images/play-button.png') right 0 no-repeat;
+  height: 25px;
+  width: 23px;
+  background-size: cover;
+  vertical-align: middle;
+  margin: 0 5px 0 4px;
+}
+.gc-check-icon {
+  display: inline-block;
+  background: transparent url('/static/images/icon-check.png') right 0 no-repeat;
+  height: 25px;
+  width: 23px;
+  background-size: cover;
+  vertical-align: middle;
+  margin: 0 5px 0 4px;
+}
+
+
 .gc-exercises-item-icon.gc-exercises-item-icon-programs {
   background: transparent url('/static/images/icon-programs.png') -19px 1px no-repeat;
   height: 25px;

@@ -1,22 +1,23 @@
 Marionette = require 'backbone.marionette'
+Backbone = require 'backbone'
+SearchBarView = require 'views/general/search/search-bar-view'
 
-module.exports = class HeaderView extends Marionette.ItemView
+module.exports = class HeaderView extends Marionette.LayoutView
 
   template: Templates.general.header
 
-  events:
-    'blur #gc-topnav-search': 'searchblur'
+  ui:
+    searchRegion: 'region[data-name="search-bar"]'
+  
+  regions:
+    searchControl: "@ui.searchRegion"
 
-  initialize: =>
+  initialize: ->
     App.vent.on 'profile:ready', @render
+
+  onRender: ->
+    searchBarView = new SearchBarView
+    @getRegion('searchControl').show searchBarView
 
   onDestroy: =>
     App.vent.off 'profile:ready', @render
-
-  searchblur: (ev) ->
-    ev.preventDefault()
-    $sr = $(ev.currentTarget)
-    if $sr.val() isnt $sr.attr('placeholder') and $sr.val() isnt ''
-      $sr.addClass('active')
-    else
-      $sr.removeClass('active')

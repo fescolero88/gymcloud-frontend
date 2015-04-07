@@ -3,6 +3,7 @@ CustomRouter  = require 'routers/general/custom-router'
 module.exports = class ClientRouter extends CustomRouter
 
   appRoutes:
+    
     '': 'clientPageAssigments'
     '(/)': 'clientPageAssigments'
     'my/:dataType(/)': 'clientPageAssigments'
