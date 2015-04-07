@@ -160,6 +160,8 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
       @ui.actionModal.modal 'hide'
       @listView.collection.push model
+      href = "#tr/global/#{@typeName}/id/#{model['key']}"
+      Backbone.history.navigate(href, { trigger:true, replace: true })
       App.vent.trigger 'spinner:global:stop'
       App.request 'messenger:show',
         hideAfter: 5
@@ -174,6 +176,8 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     App.request('data:reload', 'exercises', App.request 'data:exercises:root').then =>
       @ui.actionModal.modal 'hide'
       @listView.collection.push model
+      href = "#tr/global/#{@typeName}/id/#{model['key']}"
+      Backbone.history.navigate(href, { trigger:true, replace: true })
       App.vent.trigger 'spinner:global:stop'
       App.request 'messenger:show',
         hideAfter: 5
@@ -206,7 +210,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     else
       App.request 'messenger:show',
         hideAfter: 5
-        message: "No @typeName was selected"
+        message: "No #{@typeName}s was selected"
         type: 'error'
 
   goBack: (ev) ->
