@@ -393,6 +393,18 @@
   vertical-align: middle;
   margin: 0 5px 0 4px;
 }
+.gc-exercises-item-icon.gc-exercises-item-icon-programs {
+  background: transparent url('/static/images/icon-programs.png') -19px 1px no-repeat;
+  height: 25px;
+  width: 23px;
+  background-size: 154%;
+}
+.gc-exercises-item-icon.gc-exercises-item-icon-workouts {
+  background: transparent url('/static/images/icon-workouts.png') -18px 0px no-repeat;
+  height: 25px;
+  width: 23px;
+  background-size: 154%;
+}
 .gc-exercises-folder-icon {
   color: #3398db;
   display: inline-block;
