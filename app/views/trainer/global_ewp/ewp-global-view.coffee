@@ -161,7 +161,6 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
       @ui.actionModal.modal 'hide'
       @listView.collection.push model
       href = "#tr/global/#{@typeName}/id/#{model['key']}"
-      Backbone.history.navigate(href, { trigger:true, replace: true })
       App.vent.trigger 'spinner:global:stop'
       App.request 'messenger:show',
         hideAfter: 5
@@ -177,7 +176,6 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
       @ui.actionModal.modal 'hide'
       @listView.collection.push model
       href = "#tr/global/#{@typeName}/id/#{model['key']}"
-      Backbone.history.navigate(href, { trigger:true, replace: true })
       App.vent.trigger 'spinner:global:stop'
       App.request 'messenger:show',
         hideAfter: 5
