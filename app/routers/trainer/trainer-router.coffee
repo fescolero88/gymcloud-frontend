@@ -18,3 +18,4 @@ module.exports = class TrainerRouter extends CustomRouter
   before: (methodName) =>
     App.request 'auth:isAuthorized', 'trainer'
     App.vent.trigger 'module:main-trainer:beforeAction'
+    $('html, body').animate { scrollTop: 0 }, 'fast'
