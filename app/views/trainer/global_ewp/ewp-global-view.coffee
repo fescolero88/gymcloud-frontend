@@ -9,6 +9,7 @@ DuplicateGlobalEWPModalView = require 'views/trainer/global_ewp/duplicate-global
 
 BreadcrumbsView = require 'views/general/breadcrumbs/breadcrumbs-view'
 BreadcrumbsCollection = require 'models/general/breadcrumbs'
+EWPSortableCollection = require 'models/trainer/ewp_sortable_collection'
 
 module.exports = class EWPGlobalView extends Marionette.LayoutView
 
@@ -71,7 +72,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
 
   loadItemById: (key) =>
     @listView = new EWPGlobalListView
-      collection: new Backbone.Collection(@exercisesList)
+      collection: new EWPSortableCollection(@exercisesList)
       type: @typeName
     @listenTo @listView, 'item:clicked', @updateSelectedItems
     @exercises.show @listView
@@ -157,9 +158,14 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     model['key'] = model['id']
     model['title'] = model['name']
     model['items'] = []
+    model['isFolder'] = false
     App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
       @ui.actionModal.modal 'hide'
       @listView.collection.push model
+      @listView.collection.comparator = (model) =>
+        return [not model.get('isFolder'), model.get('title').toUpperCase()]
+      @listView.collection.sort()
+      @listView.render()
       href = "#tr/global/#{@typeName}/id/#{model['key']}"
       App.vent.trigger 'spinner:global:stop'
       App.request 'messenger:show',
@@ -175,6 +181,10 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     App.request('data:reload', 'exercises', App.request 'data:exercises:root').then =>
       @ui.actionModal.modal 'hide'
       @listView.collection.push model
+      @listView.collection.comparator = (model) =>
+        return [not model.get('isFolder'), model.get('title').toUpperCase()]
+      @listView.collection.sort()
+      @listView.render()
       href = "#tr/global/#{@typeName}/id/#{model['key']}"
       App.vent.trigger 'spinner:global:stop'
       App.request 'messenger:show',
