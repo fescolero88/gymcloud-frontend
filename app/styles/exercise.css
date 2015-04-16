@@ -282,3 +282,18 @@
   color: #c1c1c1;
   margin-bottom: 1em;
 }
+.gc-exercises-assign-view {
+  padding: 15px 23px 5px 23px;
+}
+.gc-exercises-assign-view ul a {
+  cursor: pointer;
+}
+.gc-exercises-assign-view .gc-global-ewp-assigned-mark .glyphicon {
+  color: #3398db;
+  display: none;
+}
+.gc-exercises-assign-view .gc-global-ewp-assigned-mark .glyphicon.active {
+  display: inline-block;
+  padding: 16px 0px;
+  line-height: 32px;
+}

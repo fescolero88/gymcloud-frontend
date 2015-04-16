@@ -2,6 +2,7 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 ExerciseGlobalOverviewView = require 'views/trainer/exercises/exercise_global_overview_view'
+ExerciseGlobalAssignView = require 'views/trainer/exercises/exercise_global_assign_view'
 
 BreadcrumbsView = require 'views/general/breadcrumbs/breadcrumbs-view'
 BreadcrumbsCollection = require 'models/general/breadcrumbs'
@@ -18,10 +19,11 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
     title: '.gc-breadcrumbs-title'
     publicMarker: '.gc-privacy-public'
     privateMarker: '.gc-privacy-private'
+    innerNavItems: '.gc-content-nav li'
     innerNavLinks: '.gc-content-nav li a'
 
   events:
-    'click @ui.innerNavLinks': 'changeView'
+    'click @ui.innerNavLinks': 'changeViewEvent'
 
   initialize: (data) =>
     @breadcrumbsView = new BreadcrumbsView(collection: new BreadcrumbsCollection(data.breadcrumbs))
@@ -50,6 +52,8 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
     ev.preventDefault()
     navItem = $(ev.currentTarget).parent()
     if not $(navItem).hasClass 'active'
+      @ui.innerNavItems.removeClass 'active'
+      $(navItem).addClass 'active'
       navItemView = $(navItem).data 'view'
       @changeView navItemView
 
@@ -62,4 +66,5 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
       when 'video'
         true
       when 'assign'
-        true
+        @assignView = new ExerciseGlobalAssignView model: @exerciseModel
+        @manageRegion.show @assignView
