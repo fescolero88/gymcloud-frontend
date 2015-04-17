@@ -24,13 +24,16 @@ class ExerciseGlobalAssignClientsItemView extends Marionette.ItemView
   events:
     'click a': 'toggleAssign'
 
+  onDestroy: =>
+    @model.off 'assignees:loaded', @assigneesLoaded
+
   toggleAssign: (ev) =>
     ev.preventDefault()
     assigned = @ui.mark.hasClass 'active'
     @ui.mark.toggleClass 'active'
     @trigger 'client:assign:toggle', assigned
 
-  assigneesLoaded: () =>
+  assigneesLoaded: =>
     @ui.mark.addClass 'active'
 
 class ExerciseGlobalAssignClientsListView extends Marionette.CompositeView
@@ -46,6 +49,9 @@ class ExerciseGlobalAssignClientsListView extends Marionette.CompositeView
 
   templateHelpers: =>
     type: @type
+
+  onDestroy: =>
+    @off 'assignees:loaded', @assigneesLoaded
 
   childEvents:
     'client:assign:toggle': 'toggleAssign'
@@ -92,7 +98,7 @@ module.exports = class ExerciseGlobalAssignView extends Marionette.LayoutView
     @listenTo groupsList, 'client:assign:toggle', @toggleAssign
 
     @assignees = new AssigneesList()
-    @assignees.url = @assignees.urlRoot + "/exercises/#{@item_id}/assignees"
+    @assignees.url = @assignees.urlRoot + "/#{@item_id}/assignees"
     @assignees.fetch().then =>
       clientsList.trigger 'assignees:loaded', @assignees.get 'clients'
       groupsList.trigger 'assignees:loaded', @assignees.get 'client_groups'
@@ -118,6 +124,4 @@ module.exports = class ExerciseGlobalAssignView extends Marionette.LayoutView
       data: JSON.stringify data
       success: (data) =>
         App.request 'messenger:show',
-          hideAfter: 5
           message: message
-          type: 'info'

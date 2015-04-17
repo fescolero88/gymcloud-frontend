@@ -1,4 +1,4 @@
 Backbone = require 'backbone'
 
 module.exports = class AssigneesList extends Backbone.Model
-    urlRoot: "/api/mobile"
+  urlRoot: "/api/mobile/exercises"
