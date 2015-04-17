@@ -53,4 +53,5 @@ module.exports = class AddGlobalEWPModalView extends Marionette.ItemView
               $inputGroup = $input.closest('.form-group')
               @switchError error_msg[0], $inputGroup
           else
+            @ui.nameInput.val('')
             @trigger 'item:added', model
