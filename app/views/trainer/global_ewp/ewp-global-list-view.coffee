@@ -47,9 +47,13 @@ module.exports = class EWPGlobalListView extends Marionette.CompositeView
 
   highlightNew: (model) =>
     if model
-      @ui.checkboxWrappers.find("[data-id=#{model.id}]").closest('.row').addClass 'active'
+      $row = @ui.checkboxWrappers.find("[data-id=#{model.id}]").closest('.row')
+      $row.addClass 'active'
+      $('html, body').animate({
+        scrollTop: $row.offset().top
+      }, 1000);
       setTimeout =>
-          @ui.checkboxWrappers.find("[data-id=#{model.id}]").closest('.row').removeClass 'active'
+          $row.removeClass 'active'
         , 3000
 
   deleteItems: (ids) =>
