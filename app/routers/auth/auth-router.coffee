@@ -3,12 +3,12 @@ CustomRouter  = require 'routers/general/custom-router'
 module.exports = class AuthRouter extends CustomRouter
 
   appRoutes:
-    '': 'login'
-    'login(/)': 'login'
-    'logout(/)': 'logout'
-    'forgot-password(/)': 'forgotPassword'
-    'signup(/)': 'signUp'
-    'reset/:token(/)': 'resetPassword'
+    '':                    'login'
+    'login(/)':            'login'
+    'logout(/)':           'logout'
+    'forgot-password(/)':  'forgotPassword'
+    'signup(/)':           'signUp'
+    'reset/:token(/)':     'resetPassword'
 
   before: (methodName) =>
     App.vent.trigger 'body:change-class', 'auth'

@@ -20,13 +20,16 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
     data = @ui.form.serializeObject()
     @model.set data
     if @model.isValid true
-      data["user[reset_password_token]"] = @token
-      @model.url = "#{@model.urlRoot}/?user[reset_password_token]=#{@token}"
+      newData = {}
+      url = "#{@model.urlRoot}/?user[reset_password_token]=#{@token}"
+      for key, value of data
+        newKey = "user[#{key}]"
+        url += "&#{newKey}=#{value}"
+      debugger
       $.ajax
         method: 'PUT'
-        url: @model.url
+        url: url
         dataType: 'json'
-        data: JSON.stringify data
         statusCode:
           204: (data) =>
             window.location.replace '#login'
