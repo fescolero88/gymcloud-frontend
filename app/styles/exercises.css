@@ -271,7 +271,8 @@
   border-bottom: 1px solid #ededed;
   padding: 15px 0;
 }
-.gc-exercises-assign-list > .row:hover {
+.gc-exercises-assign-list > .row:hover,
+.gc-exercises-assign-list > .row.active {
   background: #fbfbfb;
 }
 .gc-exercises-assign-list > .row.padding-0 {

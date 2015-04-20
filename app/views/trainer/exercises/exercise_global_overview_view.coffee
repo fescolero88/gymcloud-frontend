@@ -13,6 +13,7 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
   initialize: (data) =>
     @privacyButtonsView = new PrivacyButtonsView
       isPublic: @model.get('is_public')
+    @model.set('video_url', "https://www.youtube.com/watch?v=Rwjt3c4xPws")
     @listenTo @privacyButtonsView, 'privacy:changed', @setPrivacy
 
   onShow: =>
