@@ -265,6 +265,7 @@
 .gc-exercises-assign-list {
   padding: 0 40px;
   min-height: 250px;
+  position: relative;
 }
 .gc-exercises-assign-list > .row {
   list-style-type: none;
