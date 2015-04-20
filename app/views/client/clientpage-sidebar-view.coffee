@@ -40,15 +40,16 @@ module.exports = class ClientPageSidebarView extends Marionette.LayoutView
     @activityView = new ClientPageActivityView collection: clientRecentActivity
 
     @activity.show @activityView
+    @updateProfile()
 
   showClientEditModal: (ev) ->
     ev.preventDefault()
     profileModel = App.request 'data:profile'
     clientFormModal = new ClientFormModalView model: profileModel
 
-    @listenTo clientFormModal, 'closeModal', =>
+    @listenToOnce clientFormModal, 'closeModal', =>
       @ui.clientFormModal.modal('hide')
-    @listenTo clientFormModal, 'avatarChange', =>
+    @listenToOnce clientFormModal, 'avatarChange', =>
       @profile.show new ClientProfileView
 
     @clientForm.show clientFormModal

@@ -28,7 +28,6 @@ module.exports = class TrainerController extends Marionette.Controller
   exercisesMethod: false
 
   initialize: (options) =>
-    @mainView = options.mainView
     App.vent.on 'assignments:loaded', =>
       if @globalViewMethod
         @[@globalViewMethod](@globalType, @globalKey)

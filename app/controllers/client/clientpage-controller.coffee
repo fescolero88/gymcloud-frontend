@@ -1,10 +1,6 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
-ClientPageView = require 'views/client/clientpage-view'
-ClientPageSidebarView = require 'views/client/clientpage-sidebar-view'
-ClientPageNavView = require 'views/client/clientpage-nav-view'
-
 ClientEWPView = require 'views/client/clientpage-ewp-view'
 
 CalendarDayView = require 'views/client/clientpage-calendar-day-view'
@@ -17,23 +13,12 @@ module.exports = class ClientPageController extends Marionette.Controller
   ewpMethod: false
 
   initialize: (options) =>
-    @mainView = options.mainView
-    @userPageView = null
     App.vent.on 'assignments:loaded', =>
       if @ewpMethod
         @[@ewpMethod](@dataType, @ewpKey)
         @ewpMethod = false
 
-  beforeAction: =>
-    if not @userPageView or !@userPageView.content
-      @userPageView = new ClientPageView()
-      @mainView.content.show @userPageView
-
-      @navView = new ClientPageNavView()
-      @userPageView.nav.show @navView
-
   clientPageAssigments: (dataType, key) =>
-    @beforeAction()
     @dataType = dataType || 'exercises'
     @key = key
     App.vent.trigger 'clientpage:nav-click', "#gc-clientpage-nav-tab-#{@dataType}"
@@ -68,24 +53,18 @@ module.exports = class ClientPageController extends Marionette.Controller
     return {model: result, path: breadcrumbs}
 
   clientPageCalendarDay: (id) =>
-    @beforeAction()
-
     contentView = new CalendarDayView()
     @userPageView.content.show contentView
 
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-c'
 
   clientPageCalendarWeek: (id) =>
-    @beforeAction()
-
     contentView = new CalendarWeekView()
     @userPageView.content.show contentView
 
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-c'
 
   clientPageCalendarMonth: (id) =>
-    @beforeAction()
-
     contentView = new CalendarMonthView()
     @userPageView.content.show contentView
 

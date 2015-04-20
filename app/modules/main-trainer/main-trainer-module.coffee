@@ -22,11 +22,6 @@ module.exports = class MainTrainerModule extends Marionette.Module
     App.vent.on 'module:main-trainer:beforeAction', =>
       @refresh()
 
-    # Messages
-    #@addInitializer (options) ->
-    #  @messagesController = new MessagesController { mainView: @mainView }
-    #  @messagesRouter = new MessagesRouter { controller: @messagesController }
-
   refresh: ->
     if !@mainView? or @mainView.isDestroyed
       @mainView = new MainView()

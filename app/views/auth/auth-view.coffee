@@ -56,3 +56,4 @@ module.exports = class AuthView extends Marionette.ItemView
         window.location.replace '#/tr'
       else
         window.location.replace '#'
+      App.vent.trigger 'profile:ready'

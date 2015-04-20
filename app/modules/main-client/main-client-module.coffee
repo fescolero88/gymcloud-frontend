@@ -10,6 +10,8 @@ MessagesRouter = require 'routers/general/messages/messages-router'
 MainView = require 'views/general/main-view'
 SideBarView = require 'views/client/clientpage-sidebar-view'
 HeaderView = require 'views/general/header-view'
+ClientPageView = require 'views/client/clientpage-view'
+ClientPageNavView = require 'views/client/clientpage-nav-view'
 
 module.exports = class MainClientModule extends Marionette.Module
 
@@ -32,3 +34,11 @@ module.exports = class MainClientModule extends Marionette.Module
     if !@headerView? or @headerView.isDestroyed
       @headerView = new HeaderView()
       @mainView.header.show @headerView
+    if !@userPageView or @userPageView.isDestroyed
+      @userPageView = new ClientPageView()
+      @mainView.content.show @userPageView
+      @clientController.userPageView = @userPageView
+
+      @navView = new ClientPageNavView()
+      @userPageView.nav.show @navView
+
