@@ -27,6 +27,10 @@ module.exports = class EWPGlobalListView extends Marionette.CompositeView
   childViewContainer: 'ul'
   collectionEvents:
     'sync': 'render'
+    'highlight': 'highlightNew'
+
+  ui:
+    checkboxWrappers: '.gc-exercises-assign-list'
 
   childViewOptions: =>
     'type': @typeName
@@ -40,6 +44,13 @@ module.exports = class EWPGlobalListView extends Marionette.CompositeView
 
   itemSelected: =>
     @trigger 'item:clicked'
+
+  highlightNew: (model) =>
+    if model
+      @ui.checkboxWrappers.find("[data-id=#{model.id}]").closest('.row').addClass 'active'
+      setTimeout =>
+          @ui.checkboxWrappers.find("[data-id=#{model.id}]").closest('.row').removeClass 'active'
+        , 3000
 
   deleteItems: (ids) =>
     for key in ids
