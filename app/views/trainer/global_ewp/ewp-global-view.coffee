@@ -166,6 +166,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
         return [not model.get('isFolder'), model.get('title').toUpperCase()]
       @listView.collection.sort()
       @listView.render()
+      @listView.collection.trigger 'highlight', model
       href = "#tr/global/#{@typeName}/id/#{model['key']}"
       App.vent.trigger 'spinner:global:stop'
       App.request 'messenger:show',
@@ -185,6 +186,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
         return [not model.get('isFolder'), model.get('title').toUpperCase()]
       @listView.collection.sort()
       @listView.render()
+      @listView.collection.trigger 'highlight', model
       href = "#tr/global/#{@typeName}/id/#{model['key']}"
       App.vent.trigger 'spinner:global:stop'
       App.request 'messenger:show',
