@@ -32,6 +32,10 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
         dataType: 'json'
         statusCode:
           204: (data) =>
+            App.request 'messenger:show',
+              hideAfter: 5
+              message: "Password was successfully changed"
+              type: 'success'
             window.location.replace '#login'
           422: (data) =>
             if data.errors
