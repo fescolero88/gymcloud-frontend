@@ -50,6 +50,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     @addGlobalEWPModal = new AddGlobalEWPModalView
       folderId: @item_id
       type: @typeName
+      modalEntity: $("#{@ui.actionModal}")
     @addGlobalFolderModal = new AddGlobalFolderModalView
       folderId: @item_id
       type: @typeName
