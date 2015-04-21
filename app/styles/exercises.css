@@ -263,7 +263,7 @@
   display: none;
 }
 .gc-exercises-assign-list {
-  padding: 0 40px;
+  padding: 0 35px;
   min-height: 250px;
 }
 .gc-exercises-assign-list > .row {
@@ -271,9 +271,11 @@
   border-bottom: 1px solid #ededed;
   padding: 15px 0;
 }
-.gc-exercises-assign-list > .row:hover,
-.gc-exercises-assign-list > .row.active {
+.gc-exercises-assign-list > .row:hover {
   background: #fbfbfb;
+}
+.gc-exercises-assign-list > .row.active {
+  background: rgba(51, 152, 219, 0.1);
 }
 .gc-exercises-assign-list > .row.padding-0 {
   padding: 0;
@@ -298,7 +300,7 @@
 .gc-exercises-chb {
   display: inline-block;
   padding: 5px;
-  margin: 0 0 0 -6px;
+  margin: 0 0 0 -1px;
   position: relative;
   top: 1px;
   cursor: pointer;
