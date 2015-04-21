@@ -16,6 +16,17 @@ module.exports = class AddGlobalEWPModalView extends Marionette.ItemView
     @typeName = data.type
     rootId = App.request "data:#{@typeName}:root"
     @folderId = data.folderId or rootId
+    @modal = data.modalEntity
+
+  onShow: =>
+    @modal.on 'shown.bs.modal', (ev) =>
+      ev.preventDefault()
+      @ui.nameInput.focus()
+
+  onShow: =>
+    setTimeout ( =>
+        @ui.nameInput.focus()
+      ), 300
 
   templateHelpers: ->
     type: @typeName
