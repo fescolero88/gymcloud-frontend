@@ -17,6 +17,11 @@ module.exports = class AddGlobalEWPModalView extends Marionette.ItemView
     rootId = App.request "data:#{@typeName}:root"
     @folderId = data.folderId or rootId
 
+  onShow: =>
+    setTimeout ( =>
+        @ui.nameInput.focus()
+      ), 300
+
   templateHelpers: ->
     type: @typeName
     typeSingle: @typeName.substring(0, @typeName.length - 1)
