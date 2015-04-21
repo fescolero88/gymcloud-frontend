@@ -34,7 +34,8 @@ module.exports = class ClientPageController extends Marionette.Controller
         childModel = new Backbone.Model
       if childModel.get('isFolder') or not @key
         exercisesGlobalView = new ClientEWPView(collection: new Backbone.Collection(items), dataType: @dataType)
-        @userPageView.content.show exercisesGlobalView
+        if @userPageView.content?
+          @userPageView.content.show exercisesGlobalView
     else
       @ewpMethod = 'clientPageAssigments'
 
