@@ -115,7 +115,6 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
       searchField: ['title']
       options: searchOptions
       onItemAdd: (value, $item) ->
-        @clear()
         this_.loadItem value
       render:
         item: (item, escape) ->
@@ -138,7 +137,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
         @listView.trigger 'items:delete', ids
 
   loadItem: (key) =>
-    Backbone.history.navigate("#tr/global/exercises/id/#{key}/", { trigger: true, replace: true })
+    Backbone.history.navigate("#tr/global/#{@typeName}/id/#{key}/", { trigger: true, replace: true })
 
   showaddGlobalEWPModal: (ev) =>
     ev.preventDefault()
