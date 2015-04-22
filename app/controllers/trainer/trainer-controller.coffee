@@ -25,10 +25,18 @@ PropertyModel = require 'models/trainer/property-model'
 PropertyCollection = require 'models/trainer/property-collection'
 
 module.exports = class TrainerController extends Marionette.Controller
-  exercisesMethod: false
+  queueMethod: false
+
+  queue: =>
+    if @queueMethod
+      if App.request('auth:isAuthorized', 'trainer')
+        @[@queueMethod].apply(null, @queueArgs)
+        @queueMethod = false
+        @queueArgs = null
 
   initialize: (options) =>
     App.vent.on 'assignments:loaded', =>
+      @queue()
       if @globalViewMethod
         @[@globalViewMethod](@globalType, @globalKey)
         @globalViewMethod = false
@@ -103,33 +111,32 @@ module.exports = class TrainerController extends Marionette.Controller
     propertiesPageView.propertyModalView.show propertyModalView
 
   globalView: (type, key) =>
-    @globalType = type
-    @globalKey = key
-    items = App.request("data:#{@globalType}")
+    items = App.request("data:#{type}")
     if items?
-      breadcrumbs = [{title:"#{@globalType}"}]
-      if @globalKey
-        searchResults = @searchInLibrary(new Backbone.Collection(items), @globalKey, breadcrumbs)
+      breadcrumbs = [{title:"#{type}"}]
+      if key
+        searchResults = @searchInLibrary(new Backbone.Collection(items), key, breadcrumbs)
         childModel = searchResults.model
         breadcrumbs = searchResults.path
         items = childModel.get('items') or []
       else
         childModel = new Backbone.Model
-      if childModel.get('isFolder') or not @globalKey
+      if childModel.get('isFolder') or not key
         exercisesGlobalView = new EWPGlobalView
           model: childModel
           items: items
           breadcrumbs: breadcrumbs
-          type: @globalType
+          type: type
         @mainView.content.show exercisesGlobalView
       else
         model = new GlobalExerciseModel
-        model.url = model.urlRoot + @globalKey
+        model.url = model.urlRoot + key
         model.fetch().then =>
           exerciseGlobalView = new ExerciseGlobalView(exercise: model, breadcrumbs: breadcrumbs)
           @mainView.content.show exerciseGlobalView
     else
-      @globalViewMethod = 'globalView'
+      @queueMethod = 'globalView'
+      @queueArgs = arguments
 
   searchInLibrary: (items, key, breadcrumbs) =>
     filtered = items.where({key: parseInt(key)})

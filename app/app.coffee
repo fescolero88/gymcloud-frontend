@@ -110,6 +110,8 @@ class App extends Marionette.Application
                   window.location.replace '#tr'
                 else
                   window.location.replace '#'
+              else
+                true
             else
               @checkPermission =  permission
           else

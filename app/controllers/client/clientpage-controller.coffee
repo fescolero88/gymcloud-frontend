@@ -10,34 +10,38 @@ CalendarMonthView = require 'views/client/clientpage-calendar-month-view'
 MessagesView = require 'views/general/messages/messages-view'
 
 module.exports = class ClientPageController extends Marionette.Controller
-  ewpMethod: false
+  queueMethod: false
+
+  queue: =>
+    if @queueMethod
+      if App.request('auth:isAuthorized', 'client')
+        @[@queueMethod].apply(null, @queueArgs)
+        @queueMethod = false
+        @queueArgs = null
 
   initialize: (options) =>
     App.vent.on 'assignments:loaded', =>
-      if @ewpMethod
-        @[@ewpMethod](@dataType, @ewpKey)
-        @ewpMethod = false
+      @queue()
 
   clientPageAssigments: (dataType, key) =>
-    @dataType = dataType || 'exercises'
-    @key = key
-    App.vent.trigger 'clientpage:nav-click', "#gc-clientpage-nav-tab-#{@dataType}"
+    dataType = dataType || 'exercises'
+    App.vent.trigger 'clientpage:nav-click', "#gc-clientpage-nav-tab-#{dataType}"
 
-    items = App.request("data:#{@dataType}")
+    items = App.request("data:#{dataType}")
     if items?
-      breadcrumbs = [{title:"#{@dataType}"}]
-      if @key
-        searchResults = @searchInLibrary(new Backbone.Collection(items), @key, breadcrumbs)
+      breadcrumbs = [{title:"#{dataType}"}]
+      if key
+        searchResults = @searchInLibrary(new Backbone.Collection(items), key, breadcrumbs)
         childModel = searchResults.model
         items = childModel.get('items')
       else
         childModel = new Backbone.Model
-      if childModel.get('isFolder') or not @key
-        exercisesGlobalView = new ClientEWPView(collection: new Backbone.Collection(items), dataType: @dataType)
-        if @userPageView.content?
-          @userPageView.content.show exercisesGlobalView
+      if childModel.get('isFolder') or not key
+        exercisesGlobalView = new ClientEWPView(collection: new Backbone.Collection(items), dataType: dataType)
+        @userPageView.content.show exercisesGlobalView
     else
-      @ewpMethod = 'clientPageAssigments'
+      @queueMethod = 'clientPageAssigments'
+      @queueArgs = arguments
 
   searchInLibrary: (items, key, breadcrumbs) =>
     filtered = items.where({key: parseInt(key)})

@@ -22,10 +22,11 @@ module.exports = class SideBarView extends Marionette.ItemView
     @programs = []
     @clients = []
     @groups = []
+    App.vent.on 'profile:ready', =>
+      @getData()
 
   onShow: ->
-    @getData().then =>
-      @initDragAndDrop()
+    @getData()
 
   templateHelpers: =>
     exercises: => App.request 'data:exercises'
@@ -38,24 +39,26 @@ module.exports = class SideBarView extends Marionette.ItemView
       $(ev.currentTarget).toggleClass('active')
 
   getData: =>
-    $.ajax
-      url: '/api/mobile/library/'
-      type: 'GET'
-      dataType: 'json'
-      success: (data) =>
-        for item in data
-          switch item.title
-            when 'Exercises'
-              App.request 'data:exercises:reset', item.items
-              App.request 'data:exercises:root:reset', item.key
-            when 'Workouts'
-              App.request 'data:workouts:reset', item.items
-              App.request 'data:workouts:root:reset', item.key
-            when 'Programs'
-              App.request 'data:programs:reset', item.items
-              App.request 'data:programs:root:reset', item.key
-        window.App.vent.trigger 'assignments:loaded'
-        @render()
+    if !App.request 'data:exercises'
+      $.ajax
+        url: '/api/mobile/library/'
+        type: 'GET'
+        dataType: 'json'
+        success: (data) =>
+          for item in data
+            switch item.title
+              when 'Exercises'
+                App.request 'data:exercises:reset', item.items
+                App.request 'data:exercises:root:reset', item.key
+              when 'Workouts'
+                App.request 'data:workouts:reset', item.items
+                App.request 'data:workouts:root:reset', item.key
+              when 'Programs'
+                App.request 'data:programs:reset', item.items
+                App.request 'data:programs:root:reset', item.key
+          window.App.vent.trigger 'assignments:loaded'
+          @render()
+          @initDragAndDrop()
 
   initDragAndDrop: () =>
     @ui.subs.sortable
