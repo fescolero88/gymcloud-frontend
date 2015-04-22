@@ -192,6 +192,7 @@
 }
 .gc-exercise-video-controls {
   margin-top: 15px;
+  max-height: 25px;
 }
 .gc-exercise-video-controls .btn-link + .btn-link {
   margin-left: 10px;
