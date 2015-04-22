@@ -129,11 +129,13 @@ module.exports = class TrainerController extends Marionette.Controller
           type: type
         @mainView.content.show exercisesGlobalView
       else
-        model = new GlobalExerciseModel
-        model.url = model.urlRoot + key
-        model.fetch().then =>
-          exerciseGlobalView = new ExerciseGlobalView(exercise: model, breadcrumbs: breadcrumbs)
-          @mainView.content.show exerciseGlobalView
+        switch type
+          when 'exercises'
+            model = new GlobalExerciseModel
+            model.url = model.urlRoot + key
+            model.fetch().then =>
+              exerciseGlobalView = new ExerciseGlobalView(exercise: model, breadcrumbs: breadcrumbs)
+              @mainView.content.show exerciseGlobalView
     else
       @queueMethod = 'globalView'
       @queueArgs = arguments
