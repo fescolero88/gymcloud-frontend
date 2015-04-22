@@ -4,6 +4,8 @@ Backbone = require 'backbone'
 ExerciseGlobalOverviewView = require 'views/trainer/exercises/exercise_global_overview_view'
 ExerciseGlobalAssignView = require 'views/trainer/exercises/exercise_global_assign_view'
 
+ExerciseEditView = require 'views/trainer/exercises/exercise_edit_view'
+
 BreadcrumbsView = require 'views/general/breadcrumbs/breadcrumbs-view'
 BreadcrumbsCollection = require 'models/general/breadcrumbs'
 
@@ -62,9 +64,16 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
       when 'overview'
         @overviewView = new ExerciseGlobalOverviewView model: @exerciseModel
         @listenTo @overviewView, 'privacy:changed', @changePrivacyMarker
+        @listenTo @overviewView, 'exercise:edit', @enableExerciseEditView
         @manageRegion.show @overviewView
       when 'video'
         true
       when 'assign'
         @assignView = new ExerciseGlobalAssignView model: @exerciseModel
         @manageRegion.show @assignView
+
+  enableExerciseEditView: =>
+    @exerciseEditView = new ExerciseEditView model: @exerciseModel
+    @listenTo @exerciseEditView, 'exercise:back', =>
+      @changeView 'overview'
+    @manageRegion.show @exerciseEditView
