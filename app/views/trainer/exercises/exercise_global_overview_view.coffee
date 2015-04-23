@@ -10,6 +10,12 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
   regions:
     privacyButtons: '#gc-privacy-button-region'
 
+  ui:
+    editExerciseButton: '.gc-exercise-edit-button'
+
+  events:
+    'click @ui.editExerciseButton': 'editExercise'
+
   initialize: (data) =>
     @privacyButtonsView = new PrivacyButtonsView
       isPublic: @model.get('is_public')
@@ -33,3 +39,5 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
           message: "Privacy settings was changed"
           type: 'info'
 
+  editExercise: =>
+    @trigger 'exercise:edit'
