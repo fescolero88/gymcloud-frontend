@@ -74,6 +74,6 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
 
   enableExerciseEditView: =>
     @exerciseEditView = new ExerciseEditView model: @exerciseModel
-    @listenTo @exerciseEditView, 'exercise:back', =>
+    @listenToOnce @exerciseEditView, 'exercise:back', =>
       @changeView 'overview'
     @manageRegion.show @exerciseEditView

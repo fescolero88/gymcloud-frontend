@@ -6,7 +6,6 @@ module.exports = class ExerciseEditView extends Marionette.ItemView
 
   modelEvents:
     sync: 'render'
-    change: 'render'
 
   ui:
     form: 'form'
