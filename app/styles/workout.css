@@ -12,7 +12,7 @@
 .gc-workout-actions-list a:hover {
   cursor: pointer;
 }
-.dropdown-menu>li>a.text-danger {
+.dropdown-menu > li > a.text-danger {
   color: #e74c3c;
 }
 .gc-inner-nav-wrapper {
