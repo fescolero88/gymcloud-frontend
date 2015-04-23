@@ -9,11 +9,11 @@
       </div>
       <div class="col-xs-5 gc-exercises-nav-right text-right">
         {{#withProfile}}
-          {{#ifEqual id ../author}}
-            <a class="gc-topbar-avatar-exist" data-toggle="dropdown" id="gc-workout-actions-dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+          {{#ifEqual id ../workout.author.id}}
+            <a class="gc-workout-actions-button btn btn-primary" data-toggle="dropdown" id="gc-workout-actions-dropdown" aria-haspopup="true" role="button" aria-expanded="false">
               <i class="fa fa-chevron-down"></i>
             </a>
-            <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="gc-workout-actions-dropdown">
+            <ul class="dropdown-menu pull-right gc-workout-actions-list" role="menu" aria-labelledby="gc-workout-actions-dropdown">
               <li class="row">
                 <a class="col-xs-12">
                   Add Note
@@ -35,12 +35,21 @@
                 </a>
               </li>
             </ul>
+
           {{else}}
-            Nope
+            <button class="btn brn-primary">Add to library</button>
           {{/ifEqual}}
         {{/withProfile}}
       </div>
     </div>
-    <div id="exercise-manage"></div>
+    <div class="row gc-inner-nav-wrapper">
+      <div class="col-xs-6">
+        <ul class="gc-inner-nav">
+            <li class="active"><a data-view="description">Description</a></li>
+            <li><a data-view="video">Video</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="workout-manage"></div>
   </div>
 </div>

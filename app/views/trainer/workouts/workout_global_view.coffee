@@ -11,23 +11,26 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
   template: Templates.trainer.workouts.workout_global
 
   regions:
-    manageRegion: '#exercise-manage'
+    manageRegion: '#workout-manage'
     breadcrumbsRegion: '#breadcrumbs'
 
   ui:
     title: '.gc-breadcrumbs-title'
-    innerNavItems: '.gc-content-nav li'
-    innerNavLinks: '.gc-content-nav li a'
+    innerNavItems: '.gc-inner-nav li'
+    innerNavLinks: '.gc-inner-nav li a'
 
   events:
     'click @ui.innerNavLinks': 'changeViewEvent'
+
+  templateHelpers: =>
+    workout: @workoutModel.attributes
 
   initialize: (data) =>
     @breadcrumbsView = new BreadcrumbsView(collection: new BreadcrumbsCollection(data.breadcrumbs))
     @workoutModel = data.workout
 
   onShow: =>
-    @changeView 'overview'
+    @changeView 'description'
     @breadcrumbsRegion.show @breadcrumbsView
 
   changeViewEvent: (ev) =>
@@ -41,6 +44,6 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
 
   changeView: (navView) =>
     switch navView
-      when 'overview'
+      when 'description'
         @overviewView = new WorkoutGlobalOverviewView model: @workoutModel
         @manageRegion.show @overviewView

@@ -115,7 +115,10 @@ body > region[data-name="app"] > .container-fluid {
   padding: 0;
 }
 .gc-content-both {
-  float: none;
+  /*float: none;*/
+}
+.gc-content-both > .row {
+  overflow: hidden;
 }
 .gc-content-left {
   border-right: 1px solid rgba(40,45,48,0.1);
@@ -291,6 +294,10 @@ body > region[data-name="app"] > .container-fluid {
   height: 50px;
   border-bottom: 1px solid rgba(40,45,48,0.1);
   margin: 0;
+  overflow: visible;
+}
+.gc-content-both > .row.gc-clients-nav-wrapper {
+  overflow: visible;
 }
 .gc-clients-nav-wrapper .btn {
   border-radius: 50px;
