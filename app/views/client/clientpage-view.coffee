@@ -10,6 +10,13 @@ module.exports = class ClientPageView extends Marionette.LayoutView
 
   initialize: =>
     App.vent.on 'profile:ready', =>
+      @getData()
+
+  onShow: =>
+    @getData()
+
+  getData: =>
+    if !App.request 'data:exercises'
       $.ajax
         url: '/api/mobile/library/'
         type: 'GET'
@@ -27,3 +34,4 @@ module.exports = class ClientPageView extends Marionette.LayoutView
                 App.request 'data:programs:reset', item.items
                 App.request 'data:programs:root:reset', item.key
           window.App.vent.trigger 'assignments:loaded'
+
