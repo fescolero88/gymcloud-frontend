@@ -168,7 +168,7 @@ class App extends Marionette.Application
           type: 'GET'
           dataType: 'json'
           success: (data) =>
-            App.data[category] = data
+            App.data[category] = data.items
 
       @reqres.setHandler 'client:properties', (id) ->
         App.cache?['client:properties']?[id]
