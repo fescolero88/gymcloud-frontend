@@ -46,7 +46,6 @@ module.exports = class ExerciseEditView extends Marionette.ItemView
     if @model.isValid true
       @model.save null,
         success: =>
-          Backbone.Validation.unbind @
           @trigger 'exercise:back'
           App.request 'messenger:show',
             hideAfter: 5
@@ -60,5 +59,8 @@ module.exports = class ExerciseEditView extends Marionette.ItemView
 
   back: (e) =>
     e.preventDefault()
-    Backbone.Validation.unbind @
+    @model.set @model.previousAttributes()
     @trigger 'exercise:back'
+
+  onDestroy: =>
+    Backbone.Validation.unbind @
