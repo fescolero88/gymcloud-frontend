@@ -48,12 +48,12 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
       confirmBtn: 'Delete'
       confirmCallBack: =>
         @model.destroy().success =>
-          App.request 'data:delete', 'workouts', workoutId, =>
-            window.history.back()
-            App.request 'messenger:show',
-              hideAfter: 5
-              message: "Workout #{workoutName} deleted."
-              type: 'success'
+          App.request 'data:delete', 'workouts', workoutId
+          window.history.back()
+          App.request 'messenger:show',
+            hideAfter: 5
+            message: "Workout #{workoutName} deleted."
+            type: 'success'
 
   workoutDescriptionSave: =>
     @model.set 'description', @ui.workoutDescription.val()

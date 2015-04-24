@@ -170,17 +170,16 @@ class App extends Marionette.Application
           success: (data) =>
             App.data[category] = data.items
 
-      @reqres.setHandler 'data:delete', (category, key, cb) ->
+      @reqres.setHandler 'data:delete', (category, key) ->
         items = App.data[category]
-        deleteFromTree = (items, key, cb) =>
+        deleteFromTree = (items, key) =>
           for item, index in items
             if item.isFolder
-              deleteFromTree item.items, key, cb
+              deleteFromTree item.items, key
             else if item.key is key
               items.splice index, 1
-              cb()
               return
-        deleteFromTree items, key, cb
+        deleteFromTree items, key
 
       @reqres.setHandler 'client:properties', (id) ->
         App.cache?['client:properties']?[id]
