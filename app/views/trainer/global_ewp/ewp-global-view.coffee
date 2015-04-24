@@ -95,6 +95,8 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
   searchItems: (items, category) =>
     result = []
     $.each items, (index, item) =>
+      if not item
+        return true
       if item.items
         category = item.title
         result = result.concat @searchItems(item.items, category)

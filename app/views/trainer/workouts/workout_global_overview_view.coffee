@@ -39,7 +39,8 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
   workoutExerciseAdd: (e) =>
     e.preventDefault()
 
-  workoutDelete: (e) =>
+  workoutDelete: =>
+    workoutId = @model.get 'id'
     workoutName = @model.get 'name'
     App.request 'base:confirmationalModal',
       title: 'Delete workout'
@@ -47,7 +48,7 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
       confirmBtn: 'Delete'
       confirmCallBack: =>
         @model.destroy().success =>
-          App.request('data:reload', 'workouts', App.request "data:workouts:root").then =>
+          App.request 'data:delete', 'workouts', workoutId, =>
             window.history.back()
             App.request 'messenger:show',
               hideAfter: 5
