@@ -22,16 +22,17 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
     @listenTo @privacyButtonsView, 'privacy:changed', @setPrivacy
 
   templateHelpers: =>
-    video_url = @model.get 'video_url'
-    if video_url
-      video_id = video_url.split('v=')[1]
-      ampIndex = video_id.indexOf '&'
+    videoUrl = @model.get('video_url') || ''
+    videoUrlSplitted = videoUrl.split 'v='
+    if videoUrlSplitted.length > 1
+      videoId = videoUrlSplitted[1]
+      ampIndex = videoId.indexOf '&'
       if ampIndex != -1
-        video_id = video_id.substring 0, ampIndex
-      video_url = "https://youtube.com/v/#{video_id}"
+        videoId = video_id.substring 0, ampIndex
+      videoUrl = "https://youtube.com/v/#{videoId}"
 
     return {
-      video_url: video_url
+      video_url: videoUrl
     }
 
   onShow: =>
