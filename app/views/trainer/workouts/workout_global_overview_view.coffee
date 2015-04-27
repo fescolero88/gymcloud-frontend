@@ -22,9 +22,13 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
     'click @ui.workoutDeleteButton': 'workoutDelete'
     'blur @ui.workoutDescription': 'workoutDescriptionSave'
 
+  templateHelpers: =>
+    workout: @workoutModel.attributes
+
   initialize: (data) =>
     @workoutModel = data.model
     exercisesCollection = new WorkoutExercisesCollection
+    exercisesCollection.set @model.get('exercises')
     @exercisesView = new WorkoutGlobalExercisesView collection: exercisesCollection, workout: @workoutModel
 
   onShow: =>

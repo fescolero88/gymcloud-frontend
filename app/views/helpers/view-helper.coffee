@@ -18,6 +18,10 @@ module.exports = class ViewHelper
       else
         return options.inverse @
 
+    # helper for debugging
+    Handlebars.registerHelper 'log', (x) ->
+      console.log x
+
     Handlebars.registerHelper 'withProfile', (options) ->
       profileModel = App.request('data:profile')
       context = profileModel.attributes
