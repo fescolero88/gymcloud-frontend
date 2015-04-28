@@ -13,7 +13,7 @@ module.exports = class ResetPasswordModel extends Backbone.Model
 
     password_confirmation: [
       equalTo: 'password'
-      msg: 'The passwords does not match'
+      msg: 'The passwords do not match'
     ,
       required: true
       minLength: 6
