@@ -23,9 +23,11 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
     privateMarker: '.gc-privacy-private'
     innerNavItems: '.gc-content-nav li'
     innerNavLinks: '.gc-content-nav li a'
+    backButton: '.gc-content-nav-back'
 
   events:
     'click @ui.innerNavLinks': 'changeViewEvent'
+    'click @ui.backButton': 'goBack'
 
   initialize: (data) =>
     @breadcrumbsView = new BreadcrumbsView(collection: new BreadcrumbsCollection(data.breadcrumbs))
@@ -77,3 +79,7 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
     @listenToOnce @exerciseEditView, 'exercise:back', =>
       @changeView 'overview'
     @manageRegion.show @exerciseEditView
+
+  goBack: (ev) ->
+    ev.preventDefault()
+    window.history.back()
