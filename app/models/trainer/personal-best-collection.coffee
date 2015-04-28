@@ -3,6 +3,6 @@ CustomCollection = require 'models/general/custom-collection'
 
 module.exports = class PersonalBestCollection extends CustomCollection
 
-  urlRoot: '/api/mobile/clients'
+  urlRoot: '/api/mobile'
 
   model: PersonalBestModel

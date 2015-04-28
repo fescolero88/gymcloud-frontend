@@ -47,7 +47,9 @@ module.exports = class AssignmentsListView extends Marionette.CompositeView
     !collection.length
 
   initialize: (data) =>
-    @clientId = data.clientId
+    @clientId = parseInt(data.clientId)
+    if @clientId is 0
+      @myProfile = true
     @assignName = data.assignName
     @viewType = data.viewType
     @on 'assign', (item) ->
@@ -86,8 +88,12 @@ module.exports = class AssignmentsListView extends Marionette.CompositeView
     data =
       id: @clientId
       item_id: item.id
+    if @myProfile
+      url = "/api/mobile/me/#{@assignName}"
+    else
+      url = "/api/mobile/#{@viewType}/#{@clientId}/#{@assignName}"
     $.ajax
-      url: "/api/mobile/#{@viewType}/#{@clientId}/#{@assignName}"
+      url: url
       type: 'POST'
       dataType: 'json'
       data: JSON.stringify data

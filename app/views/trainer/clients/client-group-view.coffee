@@ -38,6 +38,8 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
   initialize: (data) ->
     @isDroppable = true
     @itemId = data.itemId
+    if parseInt(@itemId) is 0
+      @myProfile = true
     @viewType = data.viewType
     assign = if @viewType is 'clients' then 'exercises' else 'members'
     @assign = data.assign || assign
@@ -79,7 +81,10 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
   loadCenterView: (navView) =>
     if @key
       exercise = new ClientExerciseModel
-      exercise.url = "#{exercise.urlRoot}/#{@itemId}/#{@assign}/#{@key}"
+      if @myProfile
+        exercise.url = "#{exercise.urlRoot}/me/#{@assign}/#{@key}"
+      else
+        exercise.url = "#{exercise.urlRoot}/clients/#{@itemId}/#{@assign}/#{@key}"
       exercise.fetch()
       @centerView = new ExerciseView
         model: exercise
@@ -92,6 +97,9 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
       @showCenterView()
       @key = null
     else
+      link = "#{@viewType}/#{@itemId}"
+      if @myProfile
+        link = 'me'
       switch navView
         when 'members'
           @collection = new MembersCollection
@@ -103,7 +111,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
           @showCenterView()
         when 'exercises'
           @collection = new ExercisesCollection
-          @collection.url = "/api/mobile/#{@viewType}/#{@itemId}/exercises"
+          @collection.url = "/api/mobile/#{link}/exercises"
           @collection.fetch().then =>
             @showCenterView()
           @centerView = new AssignmentsView
@@ -113,7 +121,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
             assignName: navView
         when 'workouts'
           @collection = new WorkoutsCollection
-          @collection.url = "/api/mobile/#{@viewType}/#{@itemId}/workouts"
+          @collection.url = "/api/mobile/#{link}/workouts"
           @collection.fetch().then =>
             @showCenterView()
           @centerView = new AssignmentsView
@@ -123,7 +131,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
             assignName: navView
         when 'programs'
           @collection = new ProgramsCollection
-          @collection.url = "/api/mobile/#{@viewType}/#{@itemId}/programs"
+          @collection.url = "/api/mobile/#{link}/programs"
           @collection.fetch().then =>
             @showCenterView()
           @centerView = new AssignmentsView

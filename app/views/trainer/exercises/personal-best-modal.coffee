@@ -58,6 +58,10 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
     @id = data.id
     @item_id = data.item_id
     @collection = new Backbone.Collection
+    if parseInt(@id) is 0
+      @myProfile = true
+    @profile = App.request('data:profile')
+
 
   onShow: =>
     @ui.dateWrapper.datetimepicker
@@ -65,13 +69,22 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
         time: 'fa fa-clock-o'
         date: 'fa fa-calendar'
       format: 'YYYY-MM-DD'
-    @properties = App.request('client:properties', @id) || new ClientsPropertyCollection
+    if @myProfile
+      @properties = App.request('my:properties') || new ClientsPropertyCollection
+    else
+      @properties = App.request('client:properties', @id) || new ClientsPropertyCollection
     if @properties.length
       @fillProperties()
     else
-      @properties.url = "#{@properties.urlRoot}/#{@id}/properties"
+      if @myProfile
+        @properties.url = "#{@properties.urlRoot}/properties"
+      else
+        @properties.url = "#{@properties.urlRoot}/clients/#{@id}/properties"
       @properties.fetch().then =>
-        App.request 'client:properties:set', @id, @properties
+        if @myProfile
+          App.request 'my:properties:set', @properties
+        else
+          App.request 'client:properties:set', @id, @properties
         @fillProperties()
 
   onDestroy: =>
@@ -133,8 +146,12 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
         item_id: @item_id
         id: @id
         created_at: @ui.date.val()
+      if @myProfile
+        url = "/api/mobile/me/exercises/#{@item_id}/records"
+      else
+        url = "/api/mobile/clients/#{@id}/exercises/#{@item_id}/records"
       $.ajax
-        url: "/api/mobile/clients/#{@id}/exercises/#{@item_id}/records"
+        url: url
         type: 'POST'
         dataType: 'json'
         data: JSON.stringify data

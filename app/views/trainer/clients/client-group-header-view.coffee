@@ -32,6 +32,9 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
 
   initialize: (data) ->
     @viewType = data.viewType
+    @profile = App.request 'data:profile'
+    if @model.get('id') is @profile.get('id')
+      @myProfile = true
 
   templateHelpers: ->
     if @viewType is 'clients'
@@ -46,9 +49,12 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
     #TODO validation
     ev.preventDefault()
     formData = @ui.inviteForm.serializeObject()
-
+    if @myProfile
+      url = "/api/mobile/me/invite"
+    else
+      url = "/api/mobile/clients/#{@model.get('id')}/invite"
     $.ajax
-      url: "#{@model.url}/invite"
+      url: url
       type: 'POST'
       data: JSON.stringify formData
       dataType: 'json'

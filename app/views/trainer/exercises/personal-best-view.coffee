@@ -62,10 +62,15 @@ module.exports = class PersonalBestView extends Marionette.LayoutView
     @itemId = data.itemId
     @assign = data.assign
     @key = data.key
+    if parseInt(@itemId) is 0
+      @myProfile = true
 
   onShow: =>
     @personalBest = new PersonalBestCollection
-    @personalBest.url = "#{@personalBest.urlRoot}/#{@itemId}/#{@assign}/#{@key}/records"
+    if @myProfile
+      @personalBest.url = "#{@personalBest.urlRoot}/me/#{@assign}/#{@key}/records"
+    else
+      @personalBest.url = "#{@personalBest.urlRoot}/clients/#{@itemId}/#{@assign}/#{@key}/records"
     @personalBest.fetch()
     personalBestView = new PersonalBestCollectionView collection: @personalBest
     @list.show personalBestView
