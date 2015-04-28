@@ -172,3 +172,61 @@ textarea.gc-workout-description-editor:focus {
   border-color: #ee6d5d;
   background-color: #ee6d5d;
 }
+
+.gc-workout-description {
+  box-sizing: border-box;
+  color: #404447;
+  font: 400 14px / 18px 'Source Sans Pro';
+  height: auto;
+  width: 60%;
+  padding: 6px 12px;
+}
+
+.gc-workout-author-block {
+  padding-top: 25px;
+  width: 290px;
+}
+
+ul.gc-workout-exercises-list {
+  padding: 2px 22px;
+  overflow: hidden;
+}
+
+ul.gc-workout-exercises-list li {
+  float: left;
+  display: block;
+  width: 100%;
+  padding: 16px 0;
+}
+
+.gc-workout-exercise-circle {
+  float: left;
+  background-color: #f47b22;
+  border-radius: 50%;
+  width: 21px;
+  height: 21px;
+  color: #fff;
+  font: 400 10px / 21px 'Source Sans Pro';
+  text-align: center;
+}
+
+.gc-workout-exercise-name {
+  float: left;
+  text-transform: uppercase;
+  color: #3a99d8;
+  font: 400 14px / 21px 'Source Sans Pro';
+  margin-left: 22px;
+}
+
+.gc-workout-exercise-prop {
+  height: 21px;
+  width: 101px;
+  color: #99a6ac;
+  font: 400 14px / 21px 'Source Sans Pro';
+  text-align: right;
+  float: right;
+}
+
+.gc-workout-exercise-prop i.fa {
+  margin-right: 11px;
+}

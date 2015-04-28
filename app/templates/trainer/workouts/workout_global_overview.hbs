@@ -1,16 +1,31 @@
-<div class="row">
-  <div class="col-xs-12">
-    <div class="form-group">
-      <textarea class="gc-workout-description-editor form-control" type="text" placeholder="Start typing a description here...">{{description}}</textarea>
+{{#withProfile}}
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+
+          {{#ifEqual id ../workout.author.id}}
+            <textarea class="gc-workout-description-editor form-control" type="text" placeholder="Start typing a description here...">{{../../description}}</textarea>
+          {{else}}
+            <div class="gc-workout-description" type="text" placeholder="Start typing a description here...">{{../../description}}</div>
+          {{/ifEqual}}
+      </div>
     </div>
   </div>
-</div>
-<div id="gc-exercises-list-region"></div>
-<div class="row">
-  <div class="col-xs-6">
-    <button class="btn btn-link gc-workout-exercise-add-button">Add new exercise</button>
+  <div id="gc-exercises-list-region"></div>
+  {{#ifEqual id ../workout.author.id}}
+    <div class="row">
+      <div class="col-xs-6">
+        <button class="btn btn-link gc-workout-exercise-add-button">Add new exercise</button>
+      </div>
+      <div class="col-xs-6 text-right">
+        <button class="btn btn-primary gc-workout-delete-button">Delete workout</button>
+      </div>
+    </div>
+  {{/ifEqual}}
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+      </div>
+    </div>
   </div>
-  <div class="col-xs-6 text-right">
-    <button class="btn btn-primary gc-workout-delete-button">Delete workout</button>
-  </div>
-</div>
+{{/withProfile}}
