@@ -189,6 +189,16 @@ class App extends Marionette.Application
         App.cache['client:properties'] ?= {}
         App.cache['client:properties'][id] = properties
 
+      @reqres.setHandler 'my:properties', () =>
+        profile = @request 'data:profile'
+        App.cache?['client:properties']?[profile.get('id')]
+
+      @reqres.setHandler 'my:properties:set', (properties) =>
+        profile = @request 'data:profile'
+        App.cache ?= {}
+        App.cache['client:properties'] ?= {}
+        App.cache['client:properties'][profile.get('id')] = properties
+
       @reqres.setHandler 'base:confirmationalModal', (data) =>
         @baseView.showConfirmModal data
 

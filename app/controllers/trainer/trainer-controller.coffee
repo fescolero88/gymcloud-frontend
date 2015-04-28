@@ -69,19 +69,26 @@ module.exports = class TrainerController extends Marionette.Controller
     if currentViewName is 'ClientGroupView'
       @mainView.content.currentView.trigger 'load:view', assign, key
     else
-      if type is 'clients'
-        itemModel = new ClientModel
-        itemModel.url = "/api/mobile/clients/#{id}"
+      if id > 0
+        if type is 'clients'
+          itemModel = new ClientModel
+          itemModel.url = "/api/mobile/clients/#{id}"
+        else
+          itemModel = new GroupModel
+          itemModel.url = "/api/mobile/client_groups/#{id}"
       else
-        itemModel = new GroupModel
-        itemModel.url = "/api/mobile/client_groups/#{id}"
+        itemModel = new ClientModel
+        itemModel.url = "/api/mobile/me"
       itemModel.fetch()
 
       recentActivity = new ActivityCollection
-      if type is 'clients'
-        recentActivity.url = "/api/mobile/clients/#{id}/notifications"
+      if id > 0
+        if type is 'clients'
+          recentActivity.url = "/api/mobile/clients/#{id}/notifications"
+        else
+          recentActivity.url = "/api/mobile/client_groups/#{id}/notifications"
       else
-        recentActivity.url = "/api/mobile/client_groups/#{id}/notifications"
+        recentActivity.url = "/api/mobile/notifications"
       recentActivity.loadMore()
 
       itemPageView = new ClientGroupView
@@ -98,6 +105,10 @@ module.exports = class TrainerController extends Marionette.Controller
 
   group: (id, assign, key) =>
     @clientOrGroup 'client_groups', id, assign, key
+
+  me: (assign, key) =>
+    assign = assign || 'exercises'
+    @clientOrGroup 'clients', 0, assign, key
 
   properties: =>
     propertyCollection = new PropertyCollection

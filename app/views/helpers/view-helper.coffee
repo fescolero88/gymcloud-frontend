@@ -44,9 +44,6 @@ module.exports = class ViewHelper
           link: ->
             "#{item.context.assign_type} <a href=#>#{item.context.assign_name}</a>"
       activityLog = activtyMapMessages[item.type]
-      """
-        #{activityLog.message} #{activityLog.link()}
-      """
 
     Handlebars.registerHelper 'prettifyDate', (timestamp) ->
       moment(new Date(timestamp)).fromNow()

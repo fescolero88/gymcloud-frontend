@@ -3,6 +3,7 @@ CustomCollection = require 'models/general/custom-collection'
 
 module.exports = class ClientsPropertyCollection extends CustomCollection
 
-  urlRoot: '/api/mobile/clients'
+  urlRoot: '/api/mobile'
 
   model: PropertyModel
+

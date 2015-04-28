@@ -2,13 +2,21 @@
   <label class="gc-exercises-chb">
     <input type="checkbox">
   </label>
+  {{#ifEqual client_id "0"}}
   <a
     href="#tr/{{view_type}}/id/{{client_id}}/{{assign_name}}/{{id}}"
     class="gc-exercises-link gc-exercises-link-{{assign_name}}"
     data-assign="{{assign_name}}"
     data-eid="{{id}}">
-    <span class="gc-trainer-list-icon gc-trainer-list-icon-{{assign_name}}"></span>
-    {{name}}</a>
+  {{else}}
+  <a
+    href="#tr/me/{{assign_name}}/{{id}}"
+    class="gc-exercises-link gc-exercises-link-{{assign_name}}"
+    data-assign="{{assign_name}}"
+    data-eid="{{id}}">
+  {{/ifEqual}}
+  <span class="gc-trainer-list-icon gc-trainer-list-icon-{{assign_name}}"></span>
+  {{name}}</a>
 </div>
 <div class="col-xs-7 text-right">
   <a href="#" class="btn btn-link gc-exercises-assign-btn">Schedule</a>

@@ -131,6 +131,9 @@
   width: 0;
   border-left: 1px solid #3398db;
 }
+.gc-sidebar-folder .gc-sidebar-folder .gc-sidebar-folder > a.active .fa:after {
+  left: 15px;
+}
 .gc-sidebar-folder > .gc-sidebar-sub:before {
   display: block;
   content: " ";
