@@ -36,11 +36,9 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
     if @model.get('id') is @profile.get('id')
       @myProfile = true
 
-  templateHelpers: ->
-    if @viewType is 'clients'
-      view_type: 1
-    else
-      view_type: 0
+  templateHelpers: =>
+    if @viewType is 'clients' then view_type = 1 else view_type = 0
+    {view_type: view_type, myProfile: @myProfile}
 
   fillClientEmail: ->
     @ui.inviteEmail.val @model.get('email')
