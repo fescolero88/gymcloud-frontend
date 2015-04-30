@@ -5,7 +5,9 @@
   background: #282d30;
   min-height: 100%;
   float: left;
-  position: relative;
+  position: fixed;
+  overflow: auto;
+  max-height: 100%;
 }
 .gc-sidebar-wrapper:after {
   clear: both;
