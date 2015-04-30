@@ -1,5 +1,4 @@
 Marionette = require 'backbone.marionette'
-
 DraggableMenuItemModel = require 'models/trainer/draggable-menuitem-model'
 
 module.exports = class SideBarView extends Marionette.ItemView
@@ -8,6 +7,7 @@ module.exports = class SideBarView extends Marionette.ItemView
 
   events:
     'click .toggle-menu': 'toggleMenu'
+    'click @ui.item': 'toggleItem'
 
   ui:
     subs: '.gc-sidebar-folder > .gc-sidebar-sub, .gc-sidebar-cat > .gc-sidebar-sub'
@@ -15,6 +15,7 @@ module.exports = class SideBarView extends Marionette.ItemView
     dndArea: '.gc-dnd-area'
     mainArea: '.gc-main'
     catchList: '.gc-assign-catch'
+    item: '.gc-sidebar-item > a'
 
   initialize: =>
     @exercises = []
@@ -37,6 +38,14 @@ module.exports = class SideBarView extends Marionette.ItemView
     if $(ev.target).hasClass('toggle-it') or $(ev.currentTarget).hasClass('toggle-it')
       ev.preventDefault()
       $(ev.currentTarget).toggleClass('active')
+
+  toggleItem: (ev) ->
+    activeItem = @el.querySelector '.gc-sidebar-item > a.active'  
+    if activeItem
+      activeItem.classList.remove 'active'
+
+    ev.currentTarget.classList.add 'active'
+
 
   getData: =>
     if !App.request 'data:exercises'
