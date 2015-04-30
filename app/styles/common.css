@@ -113,28 +113,19 @@ body > region[data-name="app"] > .container-fluid {
 .gc-fixed-top-bar .gc-topbar {
   position: fixed;
   top: 0;
-  left: 230px;
-  right:0;
   z-index: 10;
-  display: block;
-  width: auto;
+  left: 230px;
+  right: 0;
   min-width: 500px;
+  max-width: 100%;
+  width: auto;
+  display: block;
+}
+.gc-fixed-top-bar .gc-topbar > div {
+  display: table;
 }
 .gc-fixed-top-bar .gc-main {
   margin-top: 64px;
-}
-.gc-fixed-top-bar .gc-topbar-search {
-  width: calc(100% - 269px);
-}
-.gc-fixed-top-bar .gc-topbar > div:after {
-  content: " ";
-  clear: both;
-  display: block;
-}
-.gc-fixed-top-bar .gc-topbar > div > .gc-topbar-search,
-.gc-fixed-top-bar .gc-topbar > div > .gc-topbar-item {
-  display: inline-block;
-  float: left;
 }
 .gc-main-workspace {
   background: #fff;
