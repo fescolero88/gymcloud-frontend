@@ -2,6 +2,7 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 WorkoutGlobalOverviewView = require 'views/trainer/workouts/workout_global_overview_view'
+WorkoutGlobalVideoView = require 'views/trainer/workouts/workout_global_video_view'
 
 module.exports = class WorkoutGlobalView extends Marionette.LayoutView
 
@@ -47,6 +48,9 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
       when 'description'
         @overviewView = new WorkoutGlobalOverviewView model: @workoutModel
         @manageRegion.show @overviewView
+      when 'video'
+        @videoView = new WorkoutGlobalVideoView model: @workoutModel
+        @manageRegion.show @videoView
 
   workoutTitleSave: =>
     @workoutModel.set 'name', @ui.workoutTitle.text()

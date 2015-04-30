@@ -174,7 +174,6 @@ textarea.gc-workout-description-editor:focus {
 }
 
 .gc-workout-description {
-  box-sizing: border-box;
   color: #404447;
   font: 400 14px / 18px 'Source Sans Pro';
   height: auto;
@@ -208,8 +207,30 @@ ul.gc-workout-exercises-list li {
   color: #fff;
   font: 400 10px / 21px 'Source Sans Pro';
   text-align: center;
+  position: relative;
 }
-
+.gc-workout-exercise-circle.first::after,
+.gc-workout-exercise-circle.middle::after {
+  content: "";
+  display: block;
+  width: 3px;
+  position: absolute;
+  bottom: -16px;
+  height: 16px;
+  background: inherit;
+  left: 9px;
+}
+.gc-workout-exercise-circle.last::before,
+.gc-workout-exercise-circle.middle::before {
+  content: "";
+  display: block;
+  width: 3px;
+  position: absolute;
+  top: -16px;
+  height: 16px;
+  background: inherit;
+  left: 9px;
+}
 .gc-workout-exercise-name {
   float: left;
   text-transform: uppercase;
@@ -217,7 +238,11 @@ ul.gc-workout-exercises-list li {
   font: 400 14px / 21px 'Source Sans Pro';
   margin-left: 22px;
 }
-
+.gc-workout-exercise-name:hover,
+.gc-workout-exercise-name:active,
+.gc-workout-exercise-name:focus {
+  text-decoration: none;
+}
 .gc-workout-exercise-prop {
   height: 21px;
   width: 101px;
@@ -229,4 +254,7 @@ ul.gc-workout-exercises-list li {
 
 .gc-workout-exercise-prop i.fa {
   margin-right: 11px;
+}
+.gc-workouts-video-view {
+  padding: 5px 15px;
 }

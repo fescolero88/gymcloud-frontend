@@ -62,6 +62,15 @@ module.exports = class ViewHelper
         years += "<option value=\"#{year}\">#{year}</option>"
       return new Handlebars.SafeString years
 
+    Handlebars.registerHelper 'letterByNumber', (number) ->
+      alpabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+      return alpabet[parseInt(number) - 1]
+
+    Handlebars.registerHelper 'colorByLetterNumber', (number) ->
+      colors = ['#38cb73', '#389adb', '#fed929', '#e54d40', '#e459fe']
+      color = colors[number % colors.length]
+      return color
+
     Handlebars.registerHelper 'ifCond', (v1, operator, v2, options) ->
       switch operator
         when '==', '==='
