@@ -107,6 +107,26 @@ body > region[data-name="app"] > .container-fluid {
   display: table;
   clear: both;
 }
+.gc-main-wrapper.gc-fixed-top-bar {
+  position: relative;
+}
+.gc-fixed-top-bar .gc-topbar {
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  left: 230px;
+  right: 0;
+  min-width: 500px;
+  max-width: 100%;
+  width: auto;
+  display: block;
+}
+.gc-fixed-top-bar .gc-topbar > div {
+  display: table;
+}
+.gc-fixed-top-bar .gc-main {
+  margin-top: 64px;
+}
 .gc-main-workspace {
   background: #fff;
   position: relative;
