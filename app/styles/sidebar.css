@@ -176,6 +176,10 @@
 .gc-sidebar-item > a:hover {
   color: #3398db;
 }
+.gc-sidebar-item > a.active {
+  color: #3398db;
+}
+
 .gc-sidebar-item-name {
   padding: 0 5px;
 }
