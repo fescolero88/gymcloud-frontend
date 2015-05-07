@@ -25,7 +25,6 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
       for key, value of data
         newKey = "user[#{key}]"
         url += "&#{newKey}=#{value}"
-      debugger
       $.ajax
         method: 'PUT'
         url: url
@@ -38,8 +37,7 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
               type: 'success'
             window.location.replace '#login'
           422: (data) =>
-            if data.errors
-              App.request 'messenger:show',
-                hideAfter: 5
-                message: "Reset password token is invalid"
-                type: 'error'
+            App.request 'messenger:show',
+              hideAfter: 5
+              message: "Reset password token is invalid"
+              type: 'error'
