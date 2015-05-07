@@ -1,0 +1,96 @@
+Marionette = require 'backbone.marionette'
+Backbone = require 'backbone'
+
+ModalAddToLibraryLibraryView = require 'views/general/modal_add_to_library_library_view'
+GlobalExerciseModel = require 'models/trainer/global-exercise-model'
+
+module.exports = class ModalAddToLibraryView extends Marionette.LayoutView
+  template: Templates.general.modal_add_to_library
+
+  ui:
+    form: 'form'
+    modal: ".modal"
+    input: '.gc-new-item-name-input'
+
+  regions:
+    library: '#gc-modal-library-region'
+
+  events:
+    "submit @ui.form": "submit"
+    'change @ui.input': 'nameChanged'
+    "hidden.bs.modal @ui.modal": "closeModal"
+
+  initialize: (data) ->
+    @type = data.type
+    @model = data.model
+    @itemsView = new ModalAddToLibraryLibraryView type: @type, name: @model.get('name')
+    @listenTo @itemsView, 'folder:selected', @folderSelected
+    @listenTo @itemsView, 'name:changed', @nameChanged
+
+  templateHelpers: ->
+    type: @type
+    typeNameSingle: @type.substring(0, @type.length - 1)
+    model: @model.attributes
+
+  onShow: ->
+    @ui.modal.modal()
+    @library.show @itemsView
+    @name = @ui.input.val()
+
+  submit: (ev) ->
+    ev.preventDefault()
+    if @name
+      root_id = App.request "data:#{@type}:root"
+      if not @parent_id
+        @parent_id = root_id
+      typeSingle = @type.substring(0, @type.length - 1)
+      @model.set "#{typeSingle}_folder_id", @parent_id
+      @model.set "name", @name
+      $.ajax
+        method: 'POST'
+        url: "/api/mobile/#{@type}/#{@model.get('id')}/import"
+        dataType: 'json'
+        data: JSON.stringify @model.attributes
+        success: (model) =>
+          importedModel = new GlobalExerciseModel(model)
+          importedModel.set 'name', @name
+          importedModel.set 'exercise_folder_id', @parent_id
+          console.debug importedModel
+          importedModel.url = importedModel.urlRoot + importedModel.get('id')
+          importedModel.save null,
+            success: (model, data) =>
+              App.request 'messenger:show',
+                message: "Item added to your library"
+              @closeModal()
+        statusCode:
+          403: (data) =>
+            App.request 'messenger:show',
+              type: 'error'
+              message: "Something goes wrong, please, try again later"
+            @closeModal()
+
+  closeModal: ->
+    @trigger "modal:closed"
+
+  folderSelected: (key) =>
+    @parent_id = key
+
+  switchError: (error_msg, $inputGroup) =>
+    if error_msg
+      $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
+      $inputGroup.find('.gc-error-message').text(error_msg)
+    else
+      $inputGroup.removeClass('gc-invalid').addClass('gc-valid')
+      $inputGroup.find('.gc-error-message').text('')
+
+  nameChanged: (ev) =>
+    ev.preventDefault()
+    @name = @ui.input.val()
+    if not @name
+      @switchError 'Please, enter name', @ui.input.closest('.form-group')
+    else
+      @switchError "", @ui.input.closest('.form-group')
+
+  closeModal: ->
+    @ui.modal.modal('hide')
+    @trigger "modal:closed"

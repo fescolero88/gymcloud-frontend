@@ -1,0 +1,11 @@
+<div class="gc-add-modal-list-wrapper">
+  {{#if items}}
+  <div class="gc-add-modal-cat active" data-category="{{typeName}}">
+    <div class="gc-add-modal-sub">
+      {{#each items}}
+        {{> add_modal_item type=../typeName }}
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
+</div>

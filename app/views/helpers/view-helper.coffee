@@ -6,6 +6,8 @@ module.exports = class ViewHelper
 
     Handlebars.registerPartial 'sidebar_item', Templates.trainer.sidebar.sidebar_item
 
+    Handlebars.registerPartial 'add_modal_item', Templates.trainer.global_ewp.add_modal_item
+
     Handlebars.registerHelper 'ifNot', (v1, v2, options) ->
       if v1 is v2
         return options.inverse @

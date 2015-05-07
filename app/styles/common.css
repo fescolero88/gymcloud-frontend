@@ -398,9 +398,6 @@ body > region[data-name="app"] > .container-fluid {
   background: #fff;
   color: #39ca74;
 }
-.modal-dialog.modal-md {
-  width: 480px;
-}
 .btn:hover,
 .btn:active,
 .btn:focus {
@@ -452,25 +449,4 @@ body > region[data-name="app"] > .container-fluid {
 }
 .padding-0 {
   padding: 0;
-}
-.gc-remove-modal h4 span {
-  margin-right: 7px;
-}
-.gc-remove-modal .gc-rm-text {
-  margin: 30px 0;
-  padding: 0;
-}
-.gc-remove-modal .gc-rm-text > p {
-  width: 80%;
-  margin-bottom: 0;
-}
-.gc-remove-modal .gc-rm-buttons {
-  margin: 30px 0 32px;
-  padding: 0;
-}
-.gc-remove-modal .gc-rm-buttons td {
-  padding: 0 10px;
-}
-.modal-dialog.gc-modal-narrow {
-  width: 470px;
 }
