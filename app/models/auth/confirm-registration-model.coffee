@@ -22,8 +22,6 @@ module.exports = class ConfirmRegistrationModel extends Backbone.Model
 
     (@sync || Backbone.sync).call(@, null, @, options)
       .then (response) =>
-        console.log 'SUCCESS'
         @trigger 'model:auth_confirm:success', response
       .fail (xhr, textStatus, errorThrown) =>
-        console.log 'FAIL'
         @trigger 'model:auth_confirm:fail'

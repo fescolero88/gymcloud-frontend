@@ -46,7 +46,6 @@ module.exports = class AuthController extends Marionette.Controller
     @layoutView.mainRegion.show @resetPassword
 
   confirmRegistration: (token) =>
-    #@confirmPassword = new ConfirmPasswordView
     confirmRegistrationModel = new ConfirmRegistrationModel
     profileModel = new ProfileModel
     @confirmRegistrationView = new ConfirmRegistrationView 
