@@ -17,14 +17,13 @@ module.exports = class ConfirmRegistrationView extends Marionette.ItemView
 
   onRender: ->
     setTimeout =>
-      @model.confirm(@token, 'gerard.arguelles@live.com')
+      @model.confirm @token
     , 2000
 
   confirmFailed: ->
-    console.log 'failed callback triggered'
+    # todo: implement resending of confirmation email
 
   confirmSuccess: (data) ->
-    console.log 'triggered confirm success'
     window.localStorage.setItem 'accessToken', data.access_token
     @profileModel.fetch()
 
