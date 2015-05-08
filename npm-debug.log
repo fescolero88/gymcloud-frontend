@@ -1,0 +1,143 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'search', 'nanoscroller' ]
+2 info using npm@1.4.3
+3 info using node@v0.10.26
+4 verbose url raw /-/all/since?stale=update_after&startkey=1412530448717
+5 verbose url resolving [ 'https://registry.npmjs.org/',
+5 verbose url resolving   './-/all/since?stale=update_after&startkey=1412530448717' ]
+6 verbose url resolved https://registry.npmjs.org/-/all/since?stale=update_after&startkey=1412530448717
+7 info trying registry request attempt 1 at 17:23:11
+8 http GET https://registry.npmjs.org/-/all/since?stale=update_after&startkey=1412530448717
+9 http 503 https://registry.npmjs.org/-/all/since?stale=update_after&startkey=1412530448717
+10 verbose bad json <?xml version="1.0" encoding="utf-8"?>
+10 verbose bad json <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+10 verbose bad json  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+10 verbose bad json <html>
+10 verbose bad json   <head>
+10 verbose bad json     <title>503 backend read error</title>
+10 verbose bad json   </head>
+10 verbose bad json   <body>
+10 verbose bad json     <h1>Error 503 backend read error</h1>
+10 verbose bad json     <p>backend read error</p>
+10 verbose bad json     <h3>Guru Mediation:</h3>
+10 verbose bad json     <p>Details: cache-hkg6824-HKG 1430990652 3017523093</p>
+10 verbose bad json     <hr>
+10 verbose bad json     <p>Varnish cache server</p>
+10 verbose bad json   </body>
+10 verbose bad json </html>
+11 error registry error parsing json
+12 info retry will retry, error on last attempt: SyntaxError: Unexpected token <
+12 info retry
+12 info retry <?xml version="1.0" encoding="utf-8"?>
+12 info retry <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+12 info retry  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+12 info retry <html>
+12 info retry   <head>
+12 info retry     <title>503 backend read error</title>
+12 info retry   </head>
+12 info retry   <body>
+12 info retry     <h1>Error 503 backend read error</h1>
+12 info retry     <p>backend read error</p>
+12 info retry     <h3>Guru Mediation:</h3>
+12 info retry     <p>Details: cache-hkg6824-HKG 1430990652 3017523093</p>
+12 info retry     <hr>
+12 info retry     <p>Varnish cache server</p>
+12 info retry   </body>
+12 info retry </html>
+13 info trying registry request attempt 2 at 17:24:23
+14 http GET https://registry.npmjs.org/-/all/since?stale=update_after&startkey=1412530448717
+15 http 503 https://registry.npmjs.org/-/all/since?stale=update_after&startkey=1412530448717
+16 verbose bad json <?xml version="1.0" encoding="utf-8"?>
+16 verbose bad json <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+16 verbose bad json  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+16 verbose bad json <html>
+16 verbose bad json   <head>
+16 verbose bad json     <title>503 backend read error</title>
+16 verbose bad json   </head>
+16 verbose bad json   <body>
+16 verbose bad json     <h1>Error 503 backend read error</h1>
+16 verbose bad json     <p>backend read error</p>
+16 verbose bad json     <h3>Guru Mediation:</h3>
+16 verbose bad json     <p>Details: cache-hkg6826-HKG 1430990726 3616858811</p>
+16 verbose bad json     <hr>
+16 verbose bad json     <p>Varnish cache server</p>
+16 verbose bad json   </body>
+16 verbose bad json </html>
+17 error registry error parsing json
+18 info retry will retry, error on last attempt: SyntaxError: Unexpected token <
+18 info retry
+18 info retry <?xml version="1.0" encoding="utf-8"?>
+18 info retry <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+18 info retry  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+18 info retry <html>
+18 info retry   <head>
+18 info retry     <title>503 backend read error</title>
+18 info retry   </head>
+18 info retry   <body>
+18 info retry     <h1>Error 503 backend read error</h1>
+18 info retry     <p>backend read error</p>
+18 info retry     <h3>Guru Mediation:</h3>
+18 info retry     <p>Details: cache-hkg6826-HKG 1430990726 3616858811</p>
+18 info retry     <hr>
+18 info retry     <p>Varnish cache server</p>
+18 info retry   </body>
+18 info retry </html>
+19 info trying registry request attempt 3 at 17:26:26
+20 http GET https://registry.npmjs.org/-/all/since?stale=update_after&startkey=1412530448717
+21 http 503 https://registry.npmjs.org/-/all/since?stale=update_after&startkey=1412530448717
+22 verbose bad json <?xml version="1.0" encoding="utf-8"?>
+22 verbose bad json <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+22 verbose bad json  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+22 verbose bad json <html>
+22 verbose bad json   <head>
+22 verbose bad json     <title>503 backend read error</title>
+22 verbose bad json   </head>
+22 verbose bad json   <body>
+22 verbose bad json     <h1>Error 503 backend read error</h1>
+22 verbose bad json     <p>backend read error</p>
+22 verbose bad json     <h3>Guru Mediation:</h3>
+22 verbose bad json     <p>Details: cache-hkg6820-HKG 1430990847 3605846927</p>
+22 verbose bad json     <hr>
+22 verbose bad json     <p>Varnish cache server</p>
+22 verbose bad json   </body>
+22 verbose bad json </html>
+23 error registry error parsing json
+24 error SyntaxError: Unexpected token <
+24 error
+24 error <?xml version="1.0" encoding="utf-8"?>
+24 error <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+24 error  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+24 error <html>
+24 error   <head>
+24 error     <title>503 backend read error</title>
+24 error   </head>
+24 error   <body>
+24 error     <h1>Error 503 backend read error</h1>
+24 error     <p>backend read error</p>
+24 error     <h3>Guru Mediation:</h3>
+24 error     <p>Details: cache-hkg6820-HKG 1430990847 3605846927</p>
+24 error     <hr>
+24 error     <p>Varnish cache server</p>
+24 error   </body>
+24 error </html>
+24 error
+24 error     at Object.parse (native)
+24 error     at RegClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:203:23)
+24 error     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:123:22)
+24 error     at Request.EventEmitter.emit (events.js:98:17)
+24 error     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:893:14)
+24 error     at Request.EventEmitter.emit (events.js:117:20)
+24 error     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:844:12)
+24 error     at IncomingMessage.EventEmitter.emit (events.js:117:20)
+24 error     at _stream_readable.js:920:16
+24 error     at process._tickCallback (node.js:415:13)
+25 error If you need help, you may report this *entire* log,
+25 error including the npm and node versions, at:
+25 error     <http://github.com/npm/npm/issues>
+26 error System Darwin 14.1.0
+27 error command "node" "/usr/local/bin/npm" "search" "nanoscroller"
+28 error cwd /Users/gerard/Code/GymCloud/gymcloud-frontend
+29 error node -v v0.10.26
+30 error npm -v 1.4.3
+31 error type unexpected_token
+32 verbose exit [ 1, true ]

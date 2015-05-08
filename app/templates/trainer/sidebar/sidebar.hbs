@@ -1,123 +1,126 @@
 <a href="#" class="gc-sidebar-logo">
   <img src="../static/images/gymcloud-logo.png" alt="">
 </a>
-<div class="gc-assign-catch" style="min-height: 50px;"></div>
-<div class="gc-sidebar-menu-list">
-  <div class="gc-sidebar-cat">
-    <a href="#dashboard" class="row toggle-menu">
-      <span class="col-xs-2">
-        <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-dashboard.png')"></span>
-      </span>
-      <span class="col-xs-10 gc-sidebar-cat-name">
-        Dashboard
-      </span>
-    </a>
-  </div>
-  {{#if exercises}}
+<div class="nano">
+  <div class="nano-content gc-sidebar-content">
+    <div class="gc-assign-catch" style="min-height: 50px;"></div>
+    <div class="gc-sidebar-menu-list">
+      <div class="gc-sidebar-cat">
+        <a href="#dashboard" class="row toggle-menu">
+          <span class="col-xs-2">
+            <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-dashboard.png')"></span>
+          </span>
+          <span class="col-xs-10 gc-sidebar-cat-name">
+            Dashboard
+          </span>
+        </a>
+      </div>
+      {{#if exercises}}
 
-  <div class="gc-sidebar-cat" data-category="exercises">
-    <a href="#tr/global/exercises" class="row toggle-menu">
-      <span class="col-xs-2">
-        <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-exercises.png')"></span>
-      </span>
-      <span class="col-xs-8 gc-sidebar-cat-name">
-        Exercises
-      </span>
-      <span class="col-xs-2 toggle-it">
-        <span class="fa fa-chevron-down toggle-it"></span>
-      </span>
-    </a>
-    <div class="gc-sidebar-sub">
-      {{#each exercises}}
-        {{> sidebar_item type="exercises"}}
-      {{/each}}
-    </div>
-  </div>
-  {{/if}}
-  {{#if workouts}}
-  <div class="gc-sidebar-cat" data-category="workouts">
-    <a href="#tr/global/workouts" class="row toggle-menu">
-      <span class="col-xs-2">
-        <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-workouts.png')"></span>
-      </span>
-      <span class="col-xs-8 gc-sidebar-cat-name">
-        Workouts
-      </span>
-      <span class="col-xs-2 toggle-it">
-        <span class="fa fa-chevron-down toggle-it"></span>
-      </span>
-    </a>
-    <div class="gc-sidebar-sub">
-      {{#each workouts}}
-        {{> sidebar_item type="workouts"}}
-      {{/each}}
-    </div>
-  </div>
-  {{/if}}
-  {{#if programs}}
-  <div class="gc-sidebar-cat" data-category="programs">
-    <a href="#tr/global/programs" class="row toggle-menu">
-      <span class="col-xs-2">
-        <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-programs.png')"></span>
-      </span>
-      <span class="col-xs-8 gc-sidebar-cat-name">
-        Programs
-      </span>
-      <span class="col-xs-2 toggle-it">
-        <span class="fa fa-chevron-down toggle-it"></span>
-      </span>
-    </a>
-    <div class="gc-sidebar-sub">
-      {{#each programs}}
-        {{> sidebar_item type="programs"}}
-      {{/each}}
-    </div>
-  </div>
-  {{/if}}
-  <div class="gc-sidebar-cat">
-    <a href="#tr/clients" class="row toggle-menu">
-      <span class="col-xs-2">
-        <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-clients.png')"></span>
-      </span>
-      <span class="col-xs-8 gc-sidebar-cat-name">
-        Clients
-      </span>
-      <span class="col-xs-2 toggle-it">
-        <span class="fa fa-chevron-down toggle-it"></span>
-      </span>
-    </a>
-    <div class="gc-sidebar-sub">
-      <div class="gc-sidebar-cat">
-        <a href="#tr/clients/individuals" class="row toggle-menu">
+      <div class="gc-sidebar-cat" data-category="exercises">
+        <a href="#tr/global/exercises" class="row toggle-menu">
           <span class="col-xs-2">
-            <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-individuals.png')"></span>
+            <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-exercises.png')"></span>
+          </span>
+          <span class="col-xs-8 gc-sidebar-cat-name">
+            Exercises
+          </span>
+          <span class="col-xs-2 toggle-it">
+            <span class="fa fa-chevron-down toggle-it"></span>
+          </span>
+        </a>
+        <div class="gc-sidebar-sub">
+          {{#each exercises}}
+            {{> sidebar_item type="exercises"}}
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+      {{#if workouts}}
+      <div class="gc-sidebar-cat" data-category="workouts">
+        <a href="#tr/global/workouts" class="row toggle-menu">
+          <span class="col-xs-2">
+            <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-workouts.png')"></span>
+          </span>
+          <span class="col-xs-8 gc-sidebar-cat-name">
+            Workouts
+          </span>
+          <span class="col-xs-2 toggle-it">
+            <span class="fa fa-chevron-down toggle-it"></span>
+          </span>
+        </a>
+        <div class="gc-sidebar-sub">
+          {{#each workouts}}
+            {{> sidebar_item type="workouts"}}
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+      {{#if programs}}
+      <div class="gc-sidebar-cat" data-category="programs">
+        <a href="#tr/global/programs" class="row toggle-menu">
+          <span class="col-xs-2">
+            <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-programs.png')"></span>
+          </span>
+          <span class="col-xs-8 gc-sidebar-cat-name">
+            Programs
+          </span>
+          <span class="col-xs-2 toggle-it">
+            <span class="fa fa-chevron-down toggle-it"></span>
+          </span>
+        </a>
+        <div class="gc-sidebar-sub">
+          {{#each programs}}
+            {{> sidebar_item type="programs"}}
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+      <div class="gc-sidebar-cat">
+        <a href="#tr/clients" class="row toggle-menu">
+          <span class="col-xs-2">
+            <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-clients.png')"></span>
+          </span>
+          <span class="col-xs-8 gc-sidebar-cat-name">
+            Clients
+          </span>
+          <span class="col-xs-2 toggle-it">
+            <span class="fa fa-chevron-down toggle-it"></span>
+          </span>
+        </a>
+        <div class="gc-sidebar-sub">
+          <div class="gc-sidebar-cat">
+            <a href="#tr/clients/individuals" class="row toggle-menu">
+              <span class="col-xs-2">
+                <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-individuals.png')"></span>
+              </span>
+              <span class="col-xs-10 gc-sidebar-cat-name">
+                Individuals
+              </span>
+            </a>
+          </div>
+          <div class="gc-sidebar-cat">
+            <a href="#tr/clients/groups" class="row toggle-menu">
+              <span class="col-xs-2">
+                <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-groups.png')"></span>
+              </span>
+              <span class="col-xs-10 gc-sidebar-cat-name">
+                Groups
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="gc-sidebar-cat">
+        <a href="#tr/properties/" class="row toggle-menu">
+          <span class="col-xs-2">
+            <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-properties.png')"></span>
           </span>
           <span class="col-xs-10 gc-sidebar-cat-name">
-            Individuals
+            Properties
           </span>
         </a>
       </div>
-      <div class="gc-sidebar-cat">
-        <a href="#tr/clients/groups" class="row toggle-menu">
-          <span class="col-xs-2">
-            <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-groups.png')"></span>
-          </span>
-          <span class="col-xs-10 gc-sidebar-cat-name">
-            Groups
-          </span>
-        </a>
-      </div>
     </div>
-  </div>
-  <div class="gc-sidebar-cat">
-    <a href="#tr/properties/" class="row toggle-menu">
-      <span class="col-xs-2">
-        <span class="gc-sidebar-cat-icon" style="background-image:url('../static/images/icon-properties.png')"></span>
-      </span>
-      <span class="col-xs-10 gc-sidebar-cat-name">
-        Properties
-      </span>
-    </a>
   </div>
 </div>
-
