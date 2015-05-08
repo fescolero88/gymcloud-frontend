@@ -11,6 +11,7 @@ ConfirmRegistrationView = require 'views/auth/confirm-registration-view'
 ConfirmRegistrationModel = require 'models/auth/confirm-registration-model'
 LoginModel = require 'models/auth/login-model'
 ResetPasswordModel = require 'models/auth/reset-password-model'
+ProfileModel = require 'models/auth/profile-model'
 
 module.exports = class AuthController extends Marionette.Controller
 
@@ -46,7 +47,11 @@ module.exports = class AuthController extends Marionette.Controller
 
   confirmRegistration: (token) =>
     #@confirmPassword = new ConfirmPasswordView
-    console.log 'test', token
     confirmRegistrationModel = new ConfirmRegistrationModel
-    @confirmRegistrationView = new ConfirmRegistrationView token: token, model: confirmRegistrationModel
+    profileModel = new ProfileModel
+    @confirmRegistrationView = new ConfirmRegistrationView 
+      token: token, 
+      model: confirmRegistrationModel,
+      profileModel: profileModel
+
     @layoutView.mainRegion.show @confirmRegistrationView

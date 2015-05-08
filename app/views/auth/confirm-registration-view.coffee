@@ -6,16 +6,33 @@ module.exports = class ConfirmRegistrationView extends Marionette.ItemView
 
   initialize: (options) ->
     @token = options.token
-    console.log 'the token', @token
+    @profileModel = options.profileModel
 
-    @listenTo @model, 'model:confirm:onConfirmFail', @confirmFailed
+    @listenTo @model, 'model:auth_confirm:fail', @confirmFailed
+    @listenTo @model, 'model:auth_confirm:success', @confirmSuccess
+    @listenTo @profileModel, 'change', @profileRetrieved
+
+  onDestroy: =>
+
 
   onRender: ->
-    alert 'rendered'
-    console.log 'the model', @model
     setTimeout =>
       @model.confirm(@token, 'gerard.arguelles@live.com')
-    , 5000
+    , 2000
 
   confirmFailed: ->
     console.log 'failed callback triggered'
+
+  confirmSuccess: (data) ->
+    console.log 'triggered confirm success'
+    window.localStorage.setItem 'accessToken', data.access_token
+    @profileModel.fetch()
+
+  profileRetrieved: ->
+    accountType = @profileModel.get 'account_type'
+    App.vent.trigger("module:main-#{accountType}:start")
+    if accountType is 'trainer'
+      window.location.replace '#/tr'
+    else
+      window.location.replace '#'
+    App.vent.trigger 'profile:ready'

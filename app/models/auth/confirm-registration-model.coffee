@@ -2,7 +2,7 @@ Backbone = require 'backbone'
 
 module.exports = class ConfirmRegistrationModel extends Backbone.Model
 
-  url: '/users/confirmation'
+  url: '/api/mobile/users/confirmation/confirm.json'
 
   validation:
     confirmation_token:
@@ -11,9 +11,8 @@ module.exports = class ConfirmRegistrationModel extends Backbone.Model
       required: true
       pattern: 'email'
 
-  confirm: (token, email) ->
+  confirm: (token) ->
     @set 'confirmation_token', token
-    @set 'email', email
 
     options = 
       url: @url
@@ -24,8 +23,7 @@ module.exports = class ConfirmRegistrationModel extends Backbone.Model
     (@sync || Backbone.sync).call(@, null, @, options)
       .then (response) =>
         console.log 'SUCCESS'
-      
+        @trigger 'model:auth_confirm:success', response
       .fail (xhr, textStatus, errorThrown) =>
         console.log 'FAIL'
-        @trigger 'model:confirm:onConfirmFail'
-
+        @trigger 'model:auth_confirm:fail'
