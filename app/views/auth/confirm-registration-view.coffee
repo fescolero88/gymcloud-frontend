@@ -29,9 +29,11 @@ module.exports = class ConfirmRegistrationView extends Marionette.ItemView
 
   profileRetrieved: ->
     accountType = @profileModel.get 'account_type'
+
     App.vent.trigger("module:main-#{accountType}:start")
     if accountType is 'trainer'
       window.location.replace '#/tr'
     else
       window.location.replace '#'
     App.vent.trigger 'profile:ready'
+    
