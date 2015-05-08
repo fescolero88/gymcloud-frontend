@@ -16,9 +16,7 @@ module.exports = class ConfirmRegistrationView extends Marionette.ItemView
 
 
   onRender: ->
-    setTimeout =>
-      @model.confirm @token
-    , 2000
+    @model.confirm @token
 
   confirmFailed: ->
     # todo: implement resending of confirmation email
