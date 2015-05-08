@@ -7,9 +7,6 @@ module.exports = class ConfirmRegistrationModel extends Backbone.Model
   validation:
     confirmation_token:
       required: true
-    email: 
-      required: true
-      pattern: 'email'
 
   confirm: (token) ->
     @set 'confirmation_token', token
