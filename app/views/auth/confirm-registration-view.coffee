@@ -1,4 +1,4 @@
-Marionette = require 'backbone.Marionette'
+Marionette = require 'backbone.marionette'
 
 module.exports = class ConfirmRegistrationView extends Marionette.ItemView
 
