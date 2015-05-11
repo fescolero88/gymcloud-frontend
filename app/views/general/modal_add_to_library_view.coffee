@@ -4,8 +4,14 @@ Backbone = require 'backbone'
 ModalAddToLibraryLibraryView = require 'views/general/modal_add_to_library_library_view'
 GlobalExerciseModel = require 'models/trainer/global-exercise-model'
 
+FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
+
 module.exports = class ModalAddToLibraryView extends Marionette.LayoutView
   template: Templates.general.modal_add_to_library
+
+  behaviors:
+    FormValidationBehaviour:
+      behaviorClass: FormValidationBehaviour
 
   ui:
     form: 'form'
@@ -75,21 +81,13 @@ module.exports = class ModalAddToLibraryView extends Marionette.LayoutView
   folderSelected: (key) =>
     @parent_id = key
 
-  switchError: (error_msg, $inputGroup) =>
-    if error_msg
-      $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
-      $inputGroup.find('.gc-error-message').text(error_msg)
-    else
-      $inputGroup.removeClass('gc-invalid').addClass('gc-valid')
-      $inputGroup.find('.gc-error-message').text('')
-
   nameChanged: (ev) =>
     ev.preventDefault()
     @name = @ui.input.val()
     if not @name
-      @switchError 'Please, enter name', @ui.input.closest('.form-group')
+      @trigger 'switchError', 'Please, enter name', @ui.input.closest('.form-group')
     else
-      @switchError "", @ui.input.closest('.form-group')
+      @trigger 'switchError', "", @ui.input.closest('.form-group')
 
   closeModal: ->
     @ui.modal.modal('hide')
