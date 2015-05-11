@@ -24,21 +24,25 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
     innerNavItems: '.gc-content-nav li'
     innerNavLinks: '.gc-content-nav li a'
     backButton: '.gc-content-nav-back'
+    addToLibraryButton: '.gc-add-to-library-button'
+    removeFromLibraryButton: '.gc-remove-from-library-button'
 
   events:
     'click @ui.innerNavLinks': 'changeViewEvent'
     'click @ui.backButton': 'goBack'
+    'click @ui.innerNavLinks': 'changeViewEvent'
+    'click @ui.addToLibraryButton': 'showAddToLibrary'
+    'click @ui.removeFromLibraryButton': 'removeFromLibrary'
 
   initialize: (data) =>
     @breadcrumbsView = new BreadcrumbsView(collection: new BreadcrumbsCollection(data.breadcrumbs))
     @exerciseModel = data.exercise
 
-    @exerciseAuthor = data.exercise.get('author').id
-    @isPublic = data.exercise.get('is_public')
-
   templateHelpers: ->
-    author: @exerciseAuthor
-    public: @isPublic
+    source: @exerciseModel.get('source_item_id')
+    author: @exerciseModel.get('user_id')
+    public: @exerciseModel.get('is_public')
+    inLibrary: @exerciseModel.get('is_in_my_library')
 
   onShow: =>
     @changeView 'overview'
@@ -83,3 +87,24 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
   goBack: (ev) ->
     ev.preventDefault()
     window.history.back()
+
+  showAddToLibrary: (ev) =>
+    ev.preventDefault()
+    App.request 'base:addToLibraryModal', type: 'exercises', model: @exerciseModel
+
+  removeFromLibrary: (ev) =>
+    ev.preventDefault()
+    copyId = $(ev.currentTarget).data('source');
+    App.request 'base:confirmationalModal',
+      title: "Remove exercise?"
+      content: "Are you sure you want to remove this exercise from exercise?"
+      confirmBtn: "Remove"
+      confirmCallBack: =>
+        $.ajax
+          method: 'DELETE'
+          url: "/api/mobile/exercises/#{copyId}"
+          dataType: 'json'
+          success: (model) =>
+            @request 'messenger:show',
+              message: 'Exercise removed from library'
+

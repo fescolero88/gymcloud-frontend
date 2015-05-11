@@ -31,6 +31,8 @@ ProfileModel = require 'models/auth/profile-model'
 MainTrainerModule = require 'modules/main-trainer/main-trainer-module'
 MainClientModule = require 'modules/main-client/main-client-module'
 
+ModalConfirmView = require 'views/general/modal-confirm-view'
+ModalAddToLibraryView = require 'views/general/modal_add_to_library_view'
 
 class App extends Marionette.Application
 
@@ -200,7 +202,21 @@ class App extends Marionette.Application
         App.cache['client:properties'][profile.get('id')] = properties
 
       @reqres.setHandler 'base:confirmationalModal', (data) =>
-        @baseView.showConfirmModal data
+        confirmView = new ModalConfirmView data
+        region = @baseView.baseModalRegion
+        region.show(confirmView)
+
+        @listenToOnce confirmView, "modal:closed", =>
+          region.destroy()
+
+
+      @reqres.setHandler 'base:addToLibraryModal', (data) =>
+        addToLibraryView = new ModalAddToLibraryView data
+        region = @baseView.baseModalRegion
+        region.show(addToLibraryView)
+
+        @listenToOnce addToLibraryView, "modal:closed", =>
+          region.destroy()
 
       # --- Data handlers -----
 

@@ -20,6 +20,9 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
     @privacyButtonsView = new PrivacyButtonsView
       isPublic: @model.get('is_public')
     @listenTo @privacyButtonsView, 'privacy:changed', @setPrivacy
+    profile = App.request 'data:profile'
+    if profile.get('id') is @model.get('author').id
+      @myItem = true
 
   templateHelpers: =>
     videoUrl = @model.get('video_url') || ''
@@ -36,7 +39,8 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
     }
 
   onShow: =>
-    @privacyButtons.show @privacyButtonsView
+    if @myItem
+      @privacyButtons.show @privacyButtonsView
 
   setPrivacy: (isPublic) =>
     @model.set 'is_public', isPublic

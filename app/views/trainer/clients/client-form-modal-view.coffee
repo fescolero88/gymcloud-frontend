@@ -1,11 +1,15 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
+FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
+
 module.exports = class ClientFormModalView extends Marionette.ItemView
-
   className: 'modal-dialog'
-
   template: Templates.trainer.clients.client_form_modal
+
+  behaviors:
+    FormValidationBehaviour:
+      behaviorClass: FormValidationBehaviour
 
   events:
     'submit @ui.clientForm': 'submitClientForm'
@@ -25,17 +29,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
     if input_value
       $inputGroup = $input.closest('.form-group')
       error_msg = @model.preValidate input_name, input_value
-      @switchError error_msg, $inputGroup
-
-  switchError: (error_msg, $inputGroup) =>
-    if error_msg
-      $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
-      $inputGroup.find('.gc-valid-icon').addClass('hide')
-      $inputGroup.find('.gc-error-message').text(error_msg)
-    else
-      $inputGroup.removeClass('gc-invalid').addClass('gc-valid')
-      $inputGroup.find('.gc-valid-icon').removeClass('hide')
-      $inputGroup.find('.gc-error-message').text('')
+      @trigger 'switchError', error_msg, $inputGroup
 
   showThumbnail: (ev) ->
     input = ev.target
@@ -65,7 +59,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
             for name, error_msg of data.error
               $input = @$el.find("input[name=#{name}]")
               $inputGroup = $input.closest('.form-group')
-              @switchError error_msg[0], $inputGroup
+              @trigger 'switchError', error_msg[0], $inputGroup
           else
             @trigger 'modal:close'
             @trigger 'addToClientsCollection', model

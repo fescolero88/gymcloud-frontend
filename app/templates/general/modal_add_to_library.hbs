@@ -1,0 +1,30 @@
+<div class="modal fade gc-modal">
+  <div class="modal-dialog modal-md">
+  <div class="modal-content gc-remove-modal">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"><span>Close</span></button>
+      <h4 class="modal-title">
+        <span><img src="../static/images/add-to-library-icon.png" alt=""></span>
+        Add to library
+      </h4>
+    </div>
+    <form class="form group-form" role="form">
+      <div class="modal-body" id="gc-modal-library-region">
+      </div>
+      <div class="form-group gc-add-modal-actions-wrapper">
+        <div class="input-group">
+          <div class="input-group-addon gc-add-modal-input-type-wrapper">
+            <span class="gc-add-modal-input-type" style="background-image:url('../static/images/icon-{{type}}.png')"></span>
+          </div>
+          <input type="text" class="form-control gc-new-item-name-input" placeholder="Enter name of {{typeNameSingle}} here" value="{{model.name}}">
+          <div class="input-group-addon gc-add-modal-submit-wrapper">
+            <button type="submit" class="btn btn-primary">Add</button>
+          </div>
+          <span class="gc-error-message"></span>
+        </div>
+      </div>
+    </form>
+  </div>
+  </div>
+</div>
+

@@ -6,9 +6,14 @@ moment = require 'moment'
 SignUpStep1Model = require 'models/auth/signup-step1-model'
 SignUpStep2Model = require 'models/auth/signup-step2-model'
 
-class SignUpStep1 extends Marionette.ItemView
+FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
+class SignUpStep1 extends Marionette.ItemView
   template: Templates.auth.sign_up_1
+
+  behaviors:
+    FormValidationBehaviour:
+      behaviorClass: FormValidationBehaviour
 
   ui:
     types: '.gc-trainer-type'
@@ -28,16 +33,6 @@ class SignUpStep1 extends Marionette.ItemView
       @ui.types.removeClass 'active'
       $(ev.currentTarget).closest('.gc-trainer-type').addClass 'active'
 
-  switchError: (error_msg, $inputGroup) =>
-    if error_msg
-      $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
-      $inputGroup.find('.gc-valid-icon').addClass('hide')
-      $inputGroup.find('.gc-error-message').text(error_msg)
-    else
-      $inputGroup.removeClass('gc-invalid').addClass('gc-valid')
-      $inputGroup.find('.gc-valid-icon').removeClass('hide')
-      $inputGroup.find('.gc-error-message').text('')
-
   submit: (ev) =>
     ev.preventDefault()
     formData = @ui.form.serializeObject()
@@ -56,12 +51,15 @@ class SignUpStep1 extends Marionette.ItemView
           @trigger 'next', @model
         statusCode:
           403: (data) =>
-            @switchError data.responseJSON.message.email, @ui.emailGroup
+            @trigger 'switchError', data.responseJSON.message.email, @ui.emailGroup
 
 
 class SignUpStep2 extends Marionette.ItemView
-
   template: Templates.auth.sign_up_2
+
+  behaviors:
+    FormValidationBehaviour:
+      behaviorClass: FormValidationBehaviour
 
   ui:
     form: '#gc-signup-step-2'
@@ -73,16 +71,6 @@ class SignUpStep2 extends Marionette.ItemView
   initialize: =>
     Backbone.Validation.bind @
     @on 'signup:errors', @returnedErrors
-
-  switchError: (error_msg, $inputGroup) =>
-    if error_msg
-      $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
-      $inputGroup.find('.gc-valid-icon').addClass('hide')
-      $inputGroup.find('.gc-error-message').text(error_msg)
-    else
-      $inputGroup.removeClass('gc-invalid').addClass('gc-valid')
-      $inputGroup.find('.gc-valid-icon').removeClass('hide')
-      $inputGroup.find('.gc-error-message').text('')
 
   submit: (ev) =>
     ev.preventDefault()
@@ -97,7 +85,7 @@ class SignUpStep2 extends Marionette.ItemView
         @model.set 'birth': birth
         @trigger 'final', @model
       else
-        @switchError 'Incorrect date', @ui.dateInputFroup
+        @trigger 'switchError', 'Incorrect date', @ui.dateInputFroup
 
   stepBack: (ev) =>
     @trigger 'signup:back'
@@ -106,7 +94,7 @@ class SignUpStep2 extends Marionette.ItemView
     for name, error_msg of errors
       $input = @$el.find("input[name=#{name}]")
       $inputGroup = $input.closest('.form-group')
-      @switchError error_msg[0], $inputGroup
+      @trigger 'switchError', error_msg[0], $inputGroup
 
 module.exports = class SignUpView extends Marionette.LayoutView
 

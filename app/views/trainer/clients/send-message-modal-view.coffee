@@ -72,14 +72,6 @@ module.exports = class SendMessageModalView extends Marionette.ItemView
     ev.preventDefault()
     @ui.liveSearch[0].selectize.setValue(Object.keys(@ui.liveSearch[0].selectize.options))
 
-  switchError: (error_msg, $inputGroup) =>
-    if error_msg
-      $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
-      $inputGroup.find('.gc-error-message').text(error_msg)
-    else
-      $inputGroup.removeClass('gc-invalid').addClass('gc-valid')
-      $inputGroup.find('.gc-error-message').text('')
-
   submitForm: (ev) ->
     ev.preventDefault()
     isError = false

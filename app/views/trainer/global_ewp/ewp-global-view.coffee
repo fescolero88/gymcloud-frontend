@@ -228,4 +228,3 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
   goBack: (ev) ->
     ev.preventDefault()
     window.history.back()
-

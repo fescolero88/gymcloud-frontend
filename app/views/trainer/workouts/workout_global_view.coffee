@@ -16,11 +16,13 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
     innerNavItems: '.gc-inner-nav li'
     innerNavLinks: '.gc-inner-nav li a'
     navBack: '.gc-content-nav-back'
+    addToLibraryButton: '.gc-add-to-library-button'
 
   events:
     'click @ui.navBack': 'navigateBack'
     'click @ui.innerNavLinks': 'changeViewEvent'
     'blur @ui.workoutTitle': 'workoutTitleSave'
+    'click @ui.addToLibraryButton': 'showAddToLibrary'
 
   templateHelpers: =>
     workout: @workoutModel.attributes
@@ -60,3 +62,7 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
           hideAfter: 5
           message: "Workout's title saved."
           type: 'success'
+
+  showAddToLibrary: (ev) =>
+    ev.preventDefault()
+    App.request 'base:addToLibraryModal', type: 'workouts', model: @workoutModel

@@ -3,9 +3,14 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 ForgotPasswordModel = require 'models/auth/forgot-password-model'
+FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
 class ForgotPasswordFormView extends Marionette.ItemView
   template: Templates.auth.forgot_password
+
+  behaviors:
+    FormValidationBehaviour:
+      behaviorClass: FormValidationBehaviour
 
   ui:
     form: '.gc-forgot-password-form'
@@ -17,16 +22,6 @@ class ForgotPasswordFormView extends Marionette.ItemView
   initialize: =>
     Backbone.Validation.bind @
 
-  switchError: (error_msg, $inputGroup) =>
-    if error_msg
-      $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
-      $inputGroup.find('.gc-valid-icon').addClass('hide')
-      $inputGroup.find('.gc-error-message').text(error_msg)
-    else
-      $inputGroup.removeClass('gc-invalid').addClass('gc-valid')
-      $inputGroup.find('.gc-valid-icon').removeClass('hide')
-      $inputGroup.find('.gc-error-message').text('')
-
   submitForm: (ev) =>
     ev.preventDefault()
     formData = @ui.form.serializeObject()
@@ -37,7 +32,7 @@ class ForgotPasswordFormView extends Marionette.ItemView
           if data.errors
             $input = @ui.emailField
             $inputGroup = $input.closest('.form-group')
-            @switchError data.errors, $inputGroup
+            @trigger 'switchError', data.error, $inputGroup
         statusCode:
           201: (data) =>
             @trigger 'next'
@@ -65,7 +60,3 @@ module.exports = class ForgotPasswordView extends Marionette.LayoutView
 
   final: () =>
     true
-
-
-
-

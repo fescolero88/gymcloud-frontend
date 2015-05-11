@@ -1,8 +1,14 @@
 Backbone = require 'backbone'
 Marionette = require 'backbone.marionette'
 
+FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
+
 module.exports = class ExerciseEditView extends Marionette.ItemView
   template: Templates.trainer.exercises.exercise_edit
+
+  behaviors:
+    FormValidationBehaviour:
+      behaviorClass: FormValidationBehaviour
 
   modelEvents:
     sync: 'render'
@@ -27,17 +33,7 @@ module.exports = class ExerciseEditView extends Marionette.ItemView
     if input_value
       $inputGroup = $input.closest('.form-group')
       error_msg = @model.preValidate input_name, input_value
-      @switchError error_msg, $inputGroup
-
-  switchError: (error_msg, $inputGroup) =>
-    if error_msg
-      $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
-      $inputGroup.find('.gc-valid-icon').addClass('hide')
-      $inputGroup.find('.gc-error-message').text(error_msg)
-    else
-      $inputGroup.removeClass('gc-invalid').addClass('gc-valid')
-      $inputGroup.find('.gc-valid-icon').removeClass('hide')
-      $inputGroup.find('.gc-error-message').text('')
+      @trigger 'switchError', error_msg, $inputGroup
 
   submitForm: (e) =>
     e.preventDefault()
@@ -55,7 +51,7 @@ module.exports = class ExerciseEditView extends Marionette.ItemView
           for name, error_msg of data.responseJSON.message
             $input = @$el.find("input[name=#{name}]")
             $inputGroup = $input.closest('.form-group')
-            @switchError error_msg[0], $inputGroup
+            @trigger 'switchError', error_msg[0], $inputGroup
 
   back: (e) =>
     e.preventDefault()

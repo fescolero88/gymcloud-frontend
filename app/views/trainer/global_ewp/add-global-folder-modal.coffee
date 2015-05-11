@@ -1,9 +1,15 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
+FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
+
 module.exports = class AddGlobalFolderModalView extends Marionette.ItemView
   className: 'modal-dialog modal-md'
   template: Templates.trainer.global_ewp.add_global_folder_modal
+
+  behaviors:
+    FormValidationBehaviour:
+      behaviorClass: FormValidationBehaviour
 
   ui:
     form: 'form'
@@ -32,6 +38,6 @@ module.exports = class AddGlobalFolderModalView extends Marionette.ItemView
             for name, error_msg of data.error
               $input = @$el.find("input[name=#{name}]")
               $inputGroup = $input.closest('.form-group')
-              @switchError error_msg[0], $inputGroup
+              @trigger 'switchError', error_msg[0], $inputGroup
           else
             @trigger 'folder:added', model
