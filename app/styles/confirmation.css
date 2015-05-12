@@ -1,0 +1,7 @@
+.gc-resend-button-container, .gc-resend-email-container {
+  padding: 10px;
+}
+
+.gc-resend-button-container .btn {
+  width: 100%;
+}

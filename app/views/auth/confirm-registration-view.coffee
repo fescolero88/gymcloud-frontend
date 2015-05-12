@@ -12,9 +12,6 @@ module.exports = class ConfirmRegistrationView extends Marionette.ItemView
     @listenTo @model, 'model:auth_confirm:success', @confirmSuccess
     @listenTo @profileModel, 'change', @profileRetrieved
 
-  onDestroy: =>
-
-
   onRender: ->
     @model.confirm @token
 
