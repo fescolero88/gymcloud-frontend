@@ -5,3 +5,7 @@
 .gc-resend-button-container .btn {
   width: 100%;
 }
+
+.gc-resend-success {
+  padding: 12px;
+}

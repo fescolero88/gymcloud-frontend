@@ -14,6 +14,8 @@ module.exports = class ResendConfirmationView extends Marionette.ItemView
   ui:
     resendButton: 'button.resend-confirmation'
     emailInput: 'input[name=email]'
+    resendFormControls: '.gc-resend-form-controls'
+    resendSuccess: '.gc-resend-success'
 
   events:
     'click @ui.resendButton': 'resendInstructions'
@@ -28,7 +30,8 @@ module.exports = class ResendConfirmationView extends Marionette.ItemView
     @model.resendConfirmation()
 
   onResendSuccess: ->
-    alert 'success'
+    @ui.resendFormControls.addClass 'hidden'
+    @ui.resendSuccess.removeClass 'hidden'
 
   onResendFailed: ->
     alert 'failed'
