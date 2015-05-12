@@ -222,7 +222,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     else
       App.request 'messenger:show',
         hideAfter: 5
-        message: "No #{@typeName}s was selected"
+        message: "No workout was selected"
         type: 'error'
 
   goBack: (ev) ->
