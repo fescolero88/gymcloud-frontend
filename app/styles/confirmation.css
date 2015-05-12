@@ -9,3 +9,9 @@
 .gc-resend-success {
   padding: 12px;
 }
+
+.gc-resend-error-text {
+  color: #DC143C;
+  display: block;
+  padding-top: 10px;
+}

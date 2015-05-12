@@ -8,30 +8,37 @@ module.exports = class ResendConfirmationView extends Marionette.ItemView
   initialize: ->
     @listenTo @model, 'model:auth_resend:success', @onResendSuccess
     @listenTo @model, 'model:auth_resend:fail', @onResendFailed
+    @listenTo @model, 'invalid', @onModelValidateFailed
 
   onRender: ->
+    Backbone.Validation.bind @
 
   ui:
     resendButton: 'button.resend-confirmation'
     emailInput: 'input[name=email]'
     resendFormControls: '.gc-resend-form-controls'
     resendSuccess: '.gc-resend-success'
+    errorText: '.gc-resend-error-text'
 
   events:
     'click @ui.resendButton': 'resendInstructions'
 
   resendInstructions: ->
-    console.log 'clicked'
     @model.set 'email', @ui.emailInput.val()
-    ###
-    isValid = @model.isValid('email')
-    console.log isValid
-    ###
     @model.resendConfirmation()
 
   onResendSuccess: ->
+    @ui.errorText.addClass('hidden')
     @ui.resendFormControls.addClass 'hidden'
     @ui.resendSuccess.removeClass 'hidden'
 
-  onResendFailed: ->
-    alert 'failed'
+  onResendFailed: (message) ->
+    @ui.errorText.removeClass 'hidden'
+    @ui.errorText.text message
+
+  onModelValidateFailed: (model, error, options) ->
+    @displayErrorText error.email
+
+  displayErrorText: (message) ->
+    @ui.errorText.text message
+    @ui.errorText.removeClass 'hidden'
