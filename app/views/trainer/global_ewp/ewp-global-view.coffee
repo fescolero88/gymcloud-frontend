@@ -31,6 +31,8 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     duplicateButton: '.gc-show-duplicate-modal'
     actionModal: '#gc-modal-region'
     deleteButton: '#rm-event'
+    listWrapper: '.gc-clients-list-wrapper'
+    listSplash: '.gc-global-list-splash'
 
   events:
     'click @ui.mainCheckbox': 'toggleCheck'
@@ -72,13 +74,18 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     @breadcrumbsRegion.show @breadcrumbsView
 
   loadItemById: (key) =>
-    @listView = new EWPGlobalListView
-      collection: new EWPSortableCollection(@exercisesList)
-      type: @typeName
+    #console.log 'LOADING LIST', @typeName, @exercisesList
+    if @exercisesList.length > 0
+      @ui.listWrapper.removeClass 'hidden'
+      @listView = new EWPGlobalListView
+        collection: new EWPSortableCollection(@exercisesList)
+        type: @typeName
 
-    console.log 'load items by', key, @exercisesList
-    @listenTo @listView, 'item:clicked', @updateSelectedItems
-    @exercises.show @listView
+      @listenTo @listView, 'item:clicked', @updateSelectedItems
+      @exercises.show @listView
+    else
+      @ui.listWrapper.addClass 'hidden'
+      @ui.listSplash.removeClass 'hidden'
 
   toggleCheck: (ev) =>
     checked = @ui.mainCheckbox.is(':checked')

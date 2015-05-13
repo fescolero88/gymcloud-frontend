@@ -458,12 +458,10 @@ body > region[data-name="app"] > .container-fluid {
 }
 .gc-global-list-splash {
   width: 480px;
-  margin: 25% auto 0;
+  margin: 18% auto 0;
   text-align: center;
 }
 .gc-global-list-splash p {
   color: #ccc;
   padding: 10px 0;
 }
-
-
