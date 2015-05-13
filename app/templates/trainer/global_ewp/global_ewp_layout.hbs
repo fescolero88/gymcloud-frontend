@@ -25,13 +25,27 @@
         </a>
       </div>
     </div>
-    <div class="gc-clients-list-wrapper row">
+    <div class="gc-clients-list-wrapper hidden row">
       <div class="gc-exercises-assign">
         <div class="gc-exercises-assign-input-wrapper">
           <input type="text" class="gc-exercises-assign-input form-control live-search" placeholder="Search Exercises">
         </div>
       </div>
       <div class="col-xs-12" id="exercises-region"></div>
+    </div>
+    <div class="gc-global-list-splash">
+      <div class="gc-splash-control">
+        <div class="gc-splash-description">
+          <img src="/static/images/icon-folder.png" />
+          <p>You dont have <br/> anything inside this folder.</p>
+        </div>
+        <div class="gc-splash-btn-container">
+          <a class="btn btn-link gc-show-add-exercise-modal">
+            <span class="fa fa-plus"></span>
+            Add {{typeSingle}}
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

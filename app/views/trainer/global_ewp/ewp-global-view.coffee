@@ -14,7 +14,7 @@ EWPSortableCollection = require 'models/trainer/ewp_sortable_collection'
 module.exports = class EWPGlobalView extends Marionette.LayoutView
 
   template: Templates.trainer.global_ewp.global_ewp_layout
-
+  className: 'gc-global-ewp-wrapper'
   regions:
     exercises: '#exercises-region'
     modalRegion: '#gc-modal-region'
@@ -75,6 +75,8 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     @listView = new EWPGlobalListView
       collection: new EWPSortableCollection(@exercisesList)
       type: @typeName
+
+    console.log 'load items by', key, @exercisesList
     @listenTo @listView, 'item:clicked', @updateSelectedItems
     @exercises.show @listView
 
