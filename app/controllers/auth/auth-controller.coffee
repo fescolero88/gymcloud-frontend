@@ -7,8 +7,10 @@ ForgotPasswordView = require 'views/auth/forgot-password-view'
 SignUpView = require 'views/auth/sign-up-view'
 ResetPasswordView = require 'views/auth/reset-password-view'
 ConfirmRegistrationView = require 'views/auth/confirm-registration-view'
+ResendConfirmationView = require 'views/auth/resend-confirmation-view'
 
 ConfirmRegistrationModel = require 'models/auth/confirm-registration-model'
+ResendConfirmationModel = require 'models/auth/resend-confirmation-model'
 LoginModel = require 'models/auth/login-model'
 ResetPasswordModel = require 'models/auth/reset-password-model'
 ProfileModel = require 'models/auth/profile-model'
@@ -54,3 +56,8 @@ module.exports = class AuthController extends Marionette.Controller
       profileModel: profileModel
 
     @layoutView.mainRegion.show @confirmRegistrationView
+
+  resendConfirmation: =>
+    resendConfirmationModel = new ResendConfirmationModel
+    @resendConfirmationView = new ResendConfirmationView model: resendConfirmationModel
+    @layoutView.mainRegion.show @resendConfirmationView
