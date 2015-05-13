@@ -74,15 +74,15 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     @breadcrumbsRegion.show @breadcrumbsView
 
   loadItemById: (key) =>
-    #console.log 'LOADING LIST', @typeName, @exercisesList
+    @listView = new EWPGlobalListView
+      collection: new EWPSortableCollection(@exercisesList)
+      type: @typeName
+    @exercises.show @listView
+    
+    @listenTo @listView, 'item:clicked', @updateSelectedItems
+
     if @exercisesList.length > 0
       @ui.listWrapper.removeClass 'hidden'
-      @listView = new EWPGlobalListView
-        collection: new EWPSortableCollection(@exercisesList)
-        type: @typeName
-
-      @listenTo @listView, 'item:clicked', @updateSelectedItems
-      @exercises.show @listView
     else
       @ui.listWrapper.addClass 'hidden'
       @ui.listSplash.removeClass 'hidden'
@@ -170,6 +170,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     model['title'] = model['name']
     model['items'] = []
     model['isFolder'] = false
+    @showListIfHidden()
     App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
       @ui.actionModal.modal 'hide'
       @listView.collection.push model
@@ -190,6 +191,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     model['title'] = model['name']
     model['items'] = []
     model['isFolder'] = true
+    @showListIfHidden()
     App.request('data:reload', 'exercises', App.request 'data:exercises:root').then =>
       @ui.actionModal.modal 'hide'
       @listView.collection.push model
@@ -237,3 +239,8 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
   goBack: (ev) ->
     ev.preventDefault()
     window.history.back()
+
+  showListIfHidden: ->
+    if @ui.listWrapper.hasClass 'hidden'
+      @ui.listWrapper.removeClass 'hidden'
+      @ui.listSplash.addClass 'hidden'
