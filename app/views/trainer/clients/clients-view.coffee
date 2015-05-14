@@ -33,12 +33,12 @@ module.exports = class ClientsView extends Marionette.LayoutView
     mainCheckbox: ".gc-content-nav-checkall input[type='checkbox']"
     clientsList: ".gc-clients-list-wrapper"
     clientsRegion: "#clients-region"
-    splashRegion: ".clients-view-main-wrapper .gc-global-list-splash"
+    groupsRegion: '#groups-region'
+    splash: '#clients-groups-splash'
 
   regions:
     clients: '@ui.clientsRegion'
     groups: '#groups-region'
-    splash: '#clients-groups-splash'
     modalContainer: '#gc-modal-container'
 
   templateHelpers: =>
@@ -49,7 +49,8 @@ module.exports = class ClientsView extends Marionette.LayoutView
     @viewType = viewType
 
   initRegionListeners: =>
-    @listenTo @clients.currentView, 'individual:move', @showMovetogroupModal
+    if @clients.currentView? # temp fix for issue
+      @listenTo @clients.currentView, 'individual:move', @showMovetogroupModal
 
   toggleCheck: (ev) =>
     checked = @ui.mainCheckbox.is(':checked')
