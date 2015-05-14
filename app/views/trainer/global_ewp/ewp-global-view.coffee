@@ -220,9 +220,10 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
               message: "Item(s) duplicated"
               type: 'success'
     else
+      typeSingle = @typeName.substring 0, @typeName.length - 1
       App.request 'messenger:show',
         hideAfter: 5
-        message: "No #{@typeName}s was selected"
+        message: "No #{typeSingle} was selected"
         type: 'error'
 
   goBack: (ev) ->
