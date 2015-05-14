@@ -45,17 +45,17 @@ module.exports = class TrainerController extends Marionette.Controller
         @globalViewMethod = false
 
   clients: (viewType) =>
-    console.log 'on controller ', viewType
     clientsPageView = new ClientsView viewType: viewType
     @mainView.content.show clientsPageView
+    clientCollection = new ClientCollection
+    groupCollection = new GroupCollection
+    @initializeSplashListeners groupCollection, clientCollection
 
     if viewType != 'groups'
-      clientCollection = new ClientCollection
       clientCollection.fetch()
       clientsView = new ClientListView collection: clientCollection
       clientsPageView.clients.show clientsView
 
-    groupCollection = new GroupCollection
     groupCollection.fetch()
     groupsView = new GroupListView collection: groupCollection
     clientsPageView.groups.show groupsView
@@ -174,3 +174,10 @@ module.exports = class TrainerController extends Marionette.Controller
             result = searchResults.model
             breadcrumbs = breadcrumbs.concat searchResults.path
     return {model: result, path: breadcrumbs}
+
+  initializeSplashListeners: (groupCollection, clientCollection) =>
+    groupCollection.on 'sync', =>
+      console.log 'group collection sync'
+
+    clientCollection.on 'sync', =>
+      console.log 'client collection sync'

@@ -33,17 +33,18 @@ module.exports = class ClientsView extends Marionette.LayoutView
     mainCheckbox: ".gc-content-nav-checkall input[type='checkbox']"
     clientsList: ".gc-clients-list-wrapper"
     clientsRegion: "#clients-region"
+    listSplash: '.gc-global-listSplash'
 
   regions:
     clients: '@ui.clientsRegion'
     groups: '#groups-region'
+    listSplash: '@ui.listSplash'
     modalContainer: '#gc-modal-container'
 
   templateHelpers: =>
     view_type: @viewType
 
   initialize: (options) =>
-    console.log 'view type', options.viewType
     viewType = options.viewType || 'clients'
     @viewType = viewType
 
