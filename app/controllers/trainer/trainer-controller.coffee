@@ -49,9 +49,9 @@ module.exports = class TrainerController extends Marionette.Controller
     @mainView.content.show clientsPageView
     clientCollection = new ClientCollection
     groupCollection = new GroupCollection
-    @initializeSplashListeners groupCollection, clientCollection
 
     if viewType != 'groups'
+      @initializeSplashListeners clientCollection, clientsPageView, viewType
       clientCollection.fetch()
       clientsView = new ClientListView collection: clientCollection
       clientsPageView.clients.show clientsView
@@ -63,6 +63,7 @@ module.exports = class TrainerController extends Marionette.Controller
     clientsPageView.initRegionListeners()
 
     if viewType is 'individuals'
+      @initializeSplashListeners groupCollection, clientsPageView, viewType
       groupsView.$el.hide()
 
   clientOrGroup: (type, id, assign, key) ->
@@ -175,9 +176,15 @@ module.exports = class TrainerController extends Marionette.Controller
             breadcrumbs = breadcrumbs.concat searchResults.path
     return {model: result, path: breadcrumbs}
 
-  initializeSplashListeners: (groupCollection, clientCollection) =>
-    groupCollection.on 'sync', =>
-      console.log 'group collection sync'
+  initializeSplashListeners: (collection, view, viewType) =>
+    region = if viewType == 'individuals' then 'clients' else 'groups'
+    viewTypeRegion = view.getRegion(region)
+    splashRegion = view.getRegion 'splash'
+    
+    console.log 'VARIABLES', view
 
-    clientCollection.on 'sync', =>
-      console.log 'client collection sync'
+    collection.on 'sync', (col) =>
+      if col.length == 0
+        console.log 'haz zero', splashRegion.$el
+        splashRegion.$el.removeClass 'hidden'
+        viewTypeRegion.$el.addClass 'hidden'

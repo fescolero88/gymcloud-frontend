@@ -33,12 +33,12 @@ module.exports = class ClientsView extends Marionette.LayoutView
     mainCheckbox: ".gc-content-nav-checkall input[type='checkbox']"
     clientsList: ".gc-clients-list-wrapper"
     clientsRegion: "#clients-region"
-    listSplash: '.gc-global-listSplash'
+    splashRegion: ".clients-view-main-wrapper .gc-global-list-splash"
 
   regions:
     clients: '@ui.clientsRegion'
     groups: '#groups-region'
-    listSplash: '@ui.listSplash'
+    splash: '#clients-groups-splash'
     modalContainer: '#gc-modal-container'
 
   templateHelpers: =>
