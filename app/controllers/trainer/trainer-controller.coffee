@@ -45,6 +45,7 @@ module.exports = class TrainerController extends Marionette.Controller
         @globalViewMethod = false
 
   clients: (viewType) =>
+    console.log 'CLIENTS', viewType
     clientsPageView = new ClientsView viewType: viewType
     @mainView.content.show clientsPageView
     clientCollection = new ClientCollection
@@ -177,11 +178,14 @@ module.exports = class TrainerController extends Marionette.Controller
     return {model: result, path: breadcrumbs}
 
   initializeSplashListeners: (collection, view, viewType) =>
-    regionName = if viewType == 'individuals' then 'clients' else 'groups'
-    console.log "#{regionName}-region"
-    viewTypeUI = view.ui["#{regionName}Region"]
-    
-    collection.on 'sync', (col) =>
-      if col.length == 0
-        view.ui.splash.removeClass 'hidden'
-        viewTypeUI.addClass 'hidden'
+    regionName = null
+    console.log 'initialize', viewType
+    if viewType == 'individuals' or viewType == 'groups'
+      regionName = if viewType == 'individuals' then 'clients' else 'groups'
+      console.log regionName
+      viewTypeUI = view.ui["#{regionName}Region"]
+      
+      collection.on 'sync', (col) =>
+        if col.length == 0
+          view.ui.splash.removeClass 'hidden'
+          viewTypeUI.addClass 'hidden'
