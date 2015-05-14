@@ -28,8 +28,33 @@
       </div>
     </div>
     <div class="gc-clients-list-wrapper row">
-      <div class="col-xs-12" id="clients-region"></div>
-      <div class="col-xs-12" id="groups-region"></div>
+      <div class="col-xs-12 hidden" id="clients-region"></div>
+      <div class="col-xs-12 hidden" id="groups-region"></div>
+
+      <div class="gc-global-list-splash">
+        <div class="gc-splash-control">
+          <div class="gc-splash-description">
+            <img src="/static/images/icon-folder.png" />
+            <p>You dont have <br/> anything inside this folder.</p>
+          </div>
+          <div class="gc-splash-btn-container">
+            {{#ifNot view_type 'groups'}}
+            <a href="#" class="btn btn-link show-client-form">
+              <span class="fa fa-plus"></span>
+              Add client
+            </a>
+            {{/ifNot}}
+            {{#ifNot view_type 'individuals'}}
+            <a href="#" class="btn btn-link show-group-form">
+              <span class="fa fa-plus"></span>
+              Add group
+            </a>
+            {{/ifNot}}
+
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

@@ -45,7 +45,8 @@ module.exports = class TrainerController extends Marionette.Controller
         @globalViewMethod = false
 
   clients: (viewType) =>
-    clientsPageView = new ClientsView viewType
+    console.log 'on controller ', viewType
+    clientsPageView = new ClientsView viewType: viewType
     @mainView.content.show clientsPageView
 
     if viewType != 'groups'

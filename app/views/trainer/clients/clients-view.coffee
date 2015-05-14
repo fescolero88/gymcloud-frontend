@@ -13,7 +13,7 @@ GroupModel = require 'models/trainer/group-model'
 module.exports = class ClientsView extends Marionette.LayoutView
 
   template: Templates.trainer.clients.clients
-
+  className: 'clients-view-main-wrapper'
   events:
     "click .gc-content-nav-checkall": "toggleCheck"
     'click .gc-clients-list-client-chb': 'updateState'
@@ -42,8 +42,9 @@ module.exports = class ClientsView extends Marionette.LayoutView
   templateHelpers: =>
     view_type: @viewType
 
-  initialize: (viewType) =>
-    viewType = 'clients' if typeof viewType is 'object'
+  initialize: (options) =>
+    console.log 'view type', options.viewType
+    viewType = options.viewType || 'clients'
     @viewType = viewType
 
   initRegionListeners: =>
