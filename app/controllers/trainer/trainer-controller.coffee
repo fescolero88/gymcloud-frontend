@@ -61,13 +61,17 @@ module.exports = class TrainerController extends Marionette.Controller
       groupCollection.fetch()
       clientsPageView.groups.show groupsView
     else # show both
+      clientsPageView.clients.show clientsView
+      clientsPageView.groups.show groupsView
       $.when(clientCollection.fetch(), groupCollection.fetch()).then (clientData, groupData) =>
+        console.log clientData, groupData
+        # if no data is present on both individual and group show splash
         if clientData[0].length == 0 and groupData[0].length == 0
           clientsPageView.ui.splash.removeClass 'hidden'
-        else
-          clientsPageView.clients.show clientsView
-          clientsPageView.groups.show groupsView
+          clientsPageView.clients.$el.addClass 'hidden'
+          clientsPageView.groups.$el.addClass 'hidden'
 
+          
     clientsPageView.initRegionListeners()
     
   clientOrGroup: (type, id, assign, key) ->

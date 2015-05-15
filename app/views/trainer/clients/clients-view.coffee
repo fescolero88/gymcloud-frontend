@@ -49,6 +49,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
     @viewType = viewType
 
   initRegionListeners: =>
+    console.log 'currentView', @clients.currentView, @groups.currentView
     if @clients.currentView? # temp fix for existing issue
       @listenTo @clients.currentView, 'individual:move', @showMovetogroupModal
 
@@ -115,6 +116,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
       @ui.modalContainer.modal('hide')
     @listenTo clientFormModal, 'addToClientsCollection', (model)=>
       @clients.currentView.collection.add model
+      @hideSplashIfVisible(@clients)
 
     @modalContainer.show clientFormModal
     @ui.modalContainer.modal('show')
