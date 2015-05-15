@@ -70,10 +70,6 @@ module.exports = class TrainerController extends Marionette.Controller
 
     clientsPageView.initRegionListeners()
     
-    ###
-    if viewType is 'individuals'
-      groupsView.$el.hide()
-    ###
   clientOrGroup: (type, id, assign, key) ->
     currentViewName = @mainView.content.currentView?.constructor.name
     if currentViewName is 'ClientGroupView'

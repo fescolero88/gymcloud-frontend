@@ -129,6 +129,8 @@ module.exports = class ClientsView extends Marionette.LayoutView
     @listenTo groupFormModal, 'addToGroupsCollection', (model) =>
       @ui.modalContainer.modal('hide')
     @listenTo groupFormModal, 'addToGroupsCollection', (model)=>
+      console.log 'groupAdded'
+      @hideSplashIfVisible(@groups)
       @groups.currentView.collection.unshift model
 
     @modalContainer.show groupFormModal
@@ -179,3 +181,10 @@ module.exports = class ClientsView extends Marionette.LayoutView
         @clients.currentView?.trigger 'rm-client'
         @groups.currentView?.trigger 'rm-group'
         @updateButtonsState()
+
+  # view can either be clients or groups view (which ever is active)
+  hideSplashIfVisible: (view) ->
+    if view.$el.hasClass 'hidden'
+      view.$el.removeClass 'hidden'
+      @ui.splash.addClass 'hidden'
+
