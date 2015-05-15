@@ -49,7 +49,6 @@ module.exports = class ClientsView extends Marionette.LayoutView
     @viewType = viewType
 
   initRegionListeners: =>
-    console.log 'currentView', @clients.currentView, @groups.currentView
     if @clients.currentView? # temp fix for existing issue
       @listenTo @clients.currentView, 'individual:move', @showMovetogroupModal
 
@@ -181,7 +180,6 @@ module.exports = class ClientsView extends Marionette.LayoutView
       confirmCallBack: =>
         @clients.currentView?.trigger 'rm-client'
         @groups.currentView?.trigger 'rm-group'
-        #console.log @clients.currentView?.collection, @groups.currentView?.collection
         clientLength = @clients.currentView?.collection.length
         groupLength = @groups.currentView?.collection.length
         if @clients.currentView? and @groups.currentView?
