@@ -14,7 +14,7 @@ EWPSortableCollection = require 'models/trainer/ewp_sortable_collection'
 module.exports = class EWPGlobalView extends Marionette.LayoutView
 
   template: Templates.trainer.global_ewp.global_ewp_layout
-
+  className: 'gc-global-ewp-wrapper'
   regions:
     exercises: '#exercises-region'
     modalRegion: '#gc-modal-region'
@@ -31,6 +31,8 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     duplicateButton: '.gc-show-duplicate-modal'
     actionModal: '#gc-modal-region'
     deleteButton: '#rm-event'
+    listWrapper: '.gc-clients-list-wrapper'
+    listSplash: '.gc-global-list-splash'
 
   events:
     'click @ui.mainCheckbox': 'toggleCheck'
@@ -75,8 +77,15 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     @listView = new EWPGlobalListView
       collection: new EWPSortableCollection(@exercisesList)
       type: @typeName
-    @listenTo @listView, 'item:clicked', @updateSelectedItems
     @exercises.show @listView
+    
+    @listenTo @listView, 'item:clicked', @updateSelectedItems
+
+    if @exercisesList.length > 0
+      @ui.listWrapper.removeClass 'hidden'
+    else
+      @ui.listWrapper.addClass 'hidden'
+      @ui.listSplash.removeClass 'hidden'
 
   toggleCheck: (ev) =>
     checked = @ui.mainCheckbox.is(':checked')
@@ -161,6 +170,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     model['title'] = model['name']
     model['items'] = []
     model['isFolder'] = false
+    @showListIfHidden()
     App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
       @ui.actionModal.modal 'hide'
       @listView.collection.push model
@@ -181,6 +191,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     model['title'] = model['name']
     model['items'] = []
     model['isFolder'] = true
+    @showListIfHidden()
     App.request('data:reload', 'exercises', App.request 'data:exercises:root').then =>
       @ui.actionModal.modal 'hide'
       @listView.collection.push model
@@ -229,3 +240,8 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
   goBack: (ev) ->
     ev.preventDefault()
     window.history.back()
+
+  showListIfHidden: ->
+    if @ui.listWrapper.hasClass 'hidden'
+      @ui.listWrapper.removeClass 'hidden'
+      @ui.listSplash.addClass 'hidden'

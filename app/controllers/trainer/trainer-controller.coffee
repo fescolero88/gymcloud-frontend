@@ -45,25 +45,35 @@ module.exports = class TrainerController extends Marionette.Controller
         @globalViewMethod = false
 
   clients: (viewType) =>
-    clientsPageView = new ClientsView viewType
+    clientsPageView = new ClientsView viewType: viewType
     @mainView.content.show clientsPageView
 
-    if viewType != 'groups'
-      clientCollection = new ClientCollection
-      clientCollection.fetch()
-      clientsView = new ClientListView collection: clientCollection
-      clientsPageView.clients.show clientsView
-
+    clientCollection = new ClientCollection
     groupCollection = new GroupCollection
-    groupCollection.fetch()
+    clientsView = new ClientListView collection: clientCollection
     groupsView = new GroupListView collection: groupCollection
-    clientsPageView.groups.show groupsView
-
-    clientsPageView.initRegionListeners()
 
     if viewType is 'individuals'
-      groupsView.$el.hide()
+      @initializeSplashListeners clientCollection, clientsPageView, viewType
+      clientCollection.fetch()
+      clientsPageView.clients.show clientsView
+    else if viewType is 'groups'
+      @initializeSplashListeners groupCollection, clientsPageView, viewType
+      groupCollection.fetch()
+      clientsPageView.groups.show groupsView
+    else # show both
+      clientsPageView.clients.show clientsView
+      clientsPageView.groups.show groupsView
 
+      $.when(clientCollection.fetch(), groupCollection.fetch()).then (clientData, groupData) =>
+        # if no data is present on both individual and group show splash
+        if clientData[0].length == 0 and groupData[0].length == 0
+          clientsPageView.ui.splash.removeClass 'hidden'
+          clientsPageView.clients.$el.addClass 'hidden'
+          clientsPageView.groups.$el.addClass 'hidden'
+          
+    clientsPageView.initRegionListeners()
+    
   clientOrGroup: (type, id, assign, key) ->
     currentViewName = @mainView.content.currentView?.constructor.name
     if currentViewName is 'ClientGroupView'
@@ -173,3 +183,14 @@ module.exports = class TrainerController extends Marionette.Controller
             result = searchResults.model
             breadcrumbs = breadcrumbs.concat searchResults.path
     return {model: result, path: breadcrumbs}
+
+  initializeSplashListeners: (collection, view, viewType) =>
+    regionName = null
+    if viewType == 'individuals' or viewType == 'groups'
+      regionName = if viewType == 'individuals' then 'clients' else 'groups'
+      viewTypeUI = view.ui["#{regionName}Region"]
+      
+      collection.on 'sync', (col) =>
+        if col.length == 0
+          view.ui.splash.removeClass 'hidden'
+          viewTypeUI.addClass 'hidden'

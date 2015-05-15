@@ -13,7 +13,7 @@ GroupModel = require 'models/trainer/group-model'
 module.exports = class ClientsView extends Marionette.LayoutView
 
   template: Templates.trainer.clients.clients
-
+  className: 'clients-view-main-wrapper'
   events:
     "click .gc-content-nav-checkall": "toggleCheck"
     'click .gc-clients-list-client-chb': 'updateState'
@@ -33,6 +33,8 @@ module.exports = class ClientsView extends Marionette.LayoutView
     mainCheckbox: ".gc-content-nav-checkall input[type='checkbox']"
     clientsList: ".gc-clients-list-wrapper"
     clientsRegion: "#clients-region"
+    groupsRegion: '#groups-region'
+    splash: '#clients-groups-splash'
 
   regions:
     clients: '@ui.clientsRegion'
@@ -42,12 +44,13 @@ module.exports = class ClientsView extends Marionette.LayoutView
   templateHelpers: =>
     view_type: @viewType
 
-  initialize: (viewType) =>
-    viewType = 'clients' if typeof viewType is 'object'
+  initialize: (options) =>
+    viewType = options.viewType || 'clients'
     @viewType = viewType
 
   initRegionListeners: =>
-    @listenTo @clients.currentView, 'individual:move', @showMovetogroupModal
+    if @clients.currentView? # temp fix for existing issue
+      @listenTo @clients.currentView, 'individual:move', @showMovetogroupModal
 
   toggleCheck: (ev) =>
     checked = @ui.mainCheckbox.is(':checked')
@@ -112,6 +115,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
       @ui.modalContainer.modal('hide')
     @listenTo clientFormModal, 'addToClientsCollection', (model)=>
       @clients.currentView.collection.add model
+      @hideSplashIfVisible(@clients)
 
     @modalContainer.show clientFormModal
     @ui.modalContainer.modal('show')
@@ -126,6 +130,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
     @listenTo groupFormModal, 'addToGroupsCollection', (model) =>
       @ui.modalContainer.modal('hide')
     @listenTo groupFormModal, 'addToGroupsCollection', (model)=>
+      @hideSplashIfVisible(@groups)
       @groups.currentView.collection.unshift model
 
     @modalContainer.show groupFormModal
@@ -175,4 +180,29 @@ module.exports = class ClientsView extends Marionette.LayoutView
       confirmCallBack: =>
         @clients.currentView?.trigger 'rm-client'
         @groups.currentView?.trigger 'rm-group'
+        clientLength = @clients.currentView?.collection.length
+        groupLength = @groups.currentView?.collection.length
+        if @clients.currentView? and @groups.currentView?
+          if clientLength == 0 and groupLength == 0
+            @showSplash([@clients, @groups])
+        else if @clients.currentView? 
+          if clientLength == 0
+            @showSplash([@clients])
+        else if @groups.currentView?
+          if groupLength == 0
+            @showSplash([@groups])
         @updateButtonsState()
+
+  # view can either be clients or groups view (which ever is active)
+  hideSplashIfVisible: (view) ->
+    if view.$el.hasClass 'hidden'
+      view.$el.removeClass 'hidden'
+      @ui.splash.addClass 'hidden'
+
+  showSplash: (views) =>
+    views.forEach (view) =>
+      view.$el.addClass 'hidden'
+
+    @ui.splash.removeClass 'hidden'
+
+
