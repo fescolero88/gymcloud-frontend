@@ -49,7 +49,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
     @viewType = viewType
 
   initRegionListeners: =>
-    if @clients.currentView? # temp fix for issue
+    if @clients.currentView? # temp fix for existing issue
       @listenTo @clients.currentView, 'individual:move', @showMovetogroupModal
 
   toggleCheck: (ev) =>

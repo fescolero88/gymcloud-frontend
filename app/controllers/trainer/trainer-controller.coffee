@@ -45,7 +45,6 @@ module.exports = class TrainerController extends Marionette.Controller
         @globalViewMethod = false
 
   clients: (viewType) =>
-    console.log 'CLIENTS', viewType
     clientsPageView = new ClientsView viewType: viewType
     @mainView.content.show clientsPageView
     clientCollection = new ClientCollection
@@ -62,11 +61,11 @@ module.exports = class TrainerController extends Marionette.Controller
     groupsView = new GroupListView collection: groupCollection
     clientsPageView.groups.show groupsView
 
-    if viewType is 'individuals'
-      groupsView.$el.hide()
-
     clientsPageView.initRegionListeners()
 
+    if viewType is 'individuals'
+      groupsView.$el.hide()
+   
   clientOrGroup: (type, id, assign, key) ->
     currentViewName = @mainView.content.currentView?.constructor.name
     if currentViewName is 'ClientGroupView'
@@ -186,6 +185,7 @@ module.exports = class TrainerController extends Marionette.Controller
       viewTypeUI = view.ui["#{regionName}Region"]
       
       collection.on 'sync', (col) =>
+        console.log 'synced'
         if col.length == 0
           view.ui.splash.removeClass 'hidden'
           viewTypeUI.addClass 'hidden'
