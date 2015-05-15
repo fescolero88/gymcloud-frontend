@@ -49,23 +49,31 @@ module.exports = class TrainerController extends Marionette.Controller
     @mainView.content.show clientsPageView
     clientCollection = new ClientCollection
     groupCollection = new GroupCollection
-
-    if viewType != 'groups'
-      @initializeSplashListeners clientCollection, clientsPageView, viewType
-      clientCollection.fetch()
-      clientsView = new ClientListView collection: clientCollection
-      clientsPageView.clients.show clientsView
-
-    @initializeSplashListeners groupCollection, clientsPageView, viewType
-    groupCollection.fetch()
+    clientsView = new ClientListView collection: clientCollection
     groupsView = new GroupListView collection: groupCollection
-    clientsPageView.groups.show groupsView
-
-    clientsPageView.initRegionListeners()
 
     if viewType is 'individuals'
+      @initializeSplashListeners clientCollection, clientsPageView, viewType
+      clientCollection.fetch()
+      clientsPageView.clients.show clientsView
+    else if viewType is 'groups'
+      @initializeSplashListeners groupCollection, clientsPageView, viewType
+      groupCollection.fetch()
+      clientsPageView.groups.show groupsView
+    else # show both
+      $.when(clientCollection.fetch(), groupCollection.fetch()).then (clientData, groupData) =>
+        if clientData[0].length == 0 and groupData[0].length == 0
+          clientsPageView.ui.splash.removeClass 'hidden'
+        else
+          clientsPageView.clients.show clientsView
+          clientsPageView.groups.show groupsView
+
+    clientsPageView.initRegionListeners()
+    
+    ###
+    if viewType is 'individuals'
       groupsView.$el.hide()
-   
+    ###
   clientOrGroup: (type, id, assign, key) ->
     currentViewName = @mainView.content.currentView?.constructor.name
     if currentViewName is 'ClientGroupView'
