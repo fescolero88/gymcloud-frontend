@@ -64,7 +64,6 @@ module.exports = class TrainerController extends Marionette.Controller
       clientsPageView.clients.show clientsView
       clientsPageView.groups.show groupsView
       $.when(clientCollection.fetch(), groupCollection.fetch()).then (clientData, groupData) =>
-        console.log clientData, groupData
         # if no data is present on both individual and group show splash
         if clientData[0].length == 0 and groupData[0].length == 0
           clientsPageView.ui.splash.removeClass 'hidden'
@@ -186,14 +185,11 @@ module.exports = class TrainerController extends Marionette.Controller
 
   initializeSplashListeners: (collection, view, viewType) =>
     regionName = null
-    console.log 'initialize', viewType
     if viewType == 'individuals' or viewType == 'groups'
       regionName = if viewType == 'individuals' then 'clients' else 'groups'
-      console.log regionName
       viewTypeUI = view.ui["#{regionName}Region"]
       
       collection.on 'sync', (col) =>
-        console.log 'synced'
         if col.length == 0
           view.ui.splash.removeClass 'hidden'
           viewTypeUI.addClass 'hidden'
