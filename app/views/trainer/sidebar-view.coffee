@@ -4,10 +4,11 @@ DraggableMenuItemModel = require 'models/trainer/draggable-menuitem-model'
 module.exports = class SideBarView extends Marionette.ItemView
 
   template: Templates.trainer.sidebar.sidebar
-
+  className: 'gc-scrollable-area'
   events:
     'click .toggle-menu': 'toggleMenu'
     'click @ui.item': 'toggleItem'
+    'click .nano': 'onClickSidebar'
 
   ui:
     subs: '.gc-sidebar-folder > .gc-sidebar-sub, .gc-sidebar-cat > .gc-sidebar-sub'
@@ -29,6 +30,9 @@ module.exports = class SideBarView extends Marionette.ItemView
   onShow: ->
     @getData()
 
+  onRender: ->
+    @$el.find('.nano').nanoScroller()
+
   templateHelpers: =>
     exercises: => App.request 'data:exercises'
     workouts: => App.request 'data:workouts'
@@ -40,11 +44,17 @@ module.exports = class SideBarView extends Marionette.ItemView
       $(ev.currentTarget).toggleClass('active')
 
   toggleItem: (ev) ->
-    activeItem = @el.querySelector '.gc-sidebar-item > a.active'  
+    activeItem = @el.querySelector '.gc-sidebar-item > a.active'
     if activeItem
       activeItem.classList.remove 'active'
 
     ev.currentTarget.classList.add 'active'
+
+  onClickSidebar: (ev) ->
+    #for catching of menu slide transition time 0.5s
+    setTimeout =>
+      @$el.find('.nano').nanoScroller()
+    , 600
 
 
   getData: =>

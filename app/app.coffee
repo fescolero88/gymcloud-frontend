@@ -8,6 +8,7 @@ Spinner = require 'spinner'
 Sortable = require 'jquery-sortable'
 Datepicker = require 'datetimepicker'
 Handlebars = require 'handlebars'
+Nanoscroller = require 'nanoscroller'
 window.Templates = require 'templates/templates_build.js'
 
 Backbone = require 'backbone'
