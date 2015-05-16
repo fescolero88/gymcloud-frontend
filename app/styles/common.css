@@ -133,6 +133,7 @@ body > region[data-name="app"] > .container-fluid {
   background: #fff;
   position: relative;
   height:100%;
+  overflow: auto;
 }
 .gc-main-workspace > div {
   padding: 0;
@@ -453,7 +454,7 @@ body > region[data-name="app"] > .container-fluid {
 .padding-0 {
   padding: 0;
 }
-.gc-global-ewp-wrapper { 
+.gc-global-ewp-wrapper {
   height: 100%;
 }
 .gc-global-list-splash {
