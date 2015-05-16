@@ -73,6 +73,9 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     @loadItemById @item_id
     @breadcrumbsRegion.show @breadcrumbsView
 
+    unless @breadcrumbsView.collection.length > 1
+      @ui.backButton.addClass 'hidden'
+
   loadItemById: (key) =>
     @listView = new EWPGlobalListView
       collection: new EWPSortableCollection(@exercisesList)
