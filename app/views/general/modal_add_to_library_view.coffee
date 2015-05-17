@@ -52,31 +52,31 @@ module.exports = class ModalAddToLibraryView extends Marionette.LayoutView
       typeSingle = @type.substring(0, @type.length - 1)
       @model.set "#{typeSingle}_folder_id", @parent_id
       @model.set "name", @name
+
       $.ajax
         method: 'POST'
         url: "/api/mobile/#{@type}/#{@model.get('id')}/import"
         dataType: 'json'
         data: JSON.stringify @model.attributes
         success: (model) =>
+          App.request 'spinner:global:start'
           importedModel = new GlobalExerciseModel(model)
           importedModel.set 'name', @name
           importedModel.set 'exercise_folder_id', @parent_id
-          console.debug importedModel
           importedModel.url = importedModel.urlRoot + importedModel.get('id')
           importedModel.save null,
             success: (model, data) =>
-              App.request 'messenger:show',
-                message: "Item added to your library"
-              @closeModal()
+              App.request('data:reload', @type, App.request "data:#{@type}:root").then =>
+                @closeModal()
+                App.request 'spinner:global:stop'
+                App.request 'messenger:show',
+                  message: "Item added to your library"
         statusCode:
           403: (data) =>
             App.request 'messenger:show',
               type: 'error'
               message: "Something goes wrong, please, try again later"
             @closeModal()
-
-  closeModal: ->
-    @trigger "modal:closed"
 
   folderSelected: (key) =>
     @parent_id = key

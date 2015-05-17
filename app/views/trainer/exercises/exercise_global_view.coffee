@@ -68,6 +68,7 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
   changeView: (navView) =>
     switch navView
       when 'overview'
+        console.debug @exerciseModel
         @overviewView = new ExerciseGlobalOverviewView model: @exerciseModel
         @listenTo @overviewView, 'privacy:changed', @changePrivacyMarker
         @listenTo @overviewView, 'exercise:edit', @enableExerciseEditView
