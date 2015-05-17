@@ -127,7 +127,7 @@ body > region[data-name="app"] > .container-fluid {
   display: table;
 }
 .gc-fixed-top-bar .gc-main {
-  margin-top: 64px;
+  padding-top: 64px;
 }
 .gc-main-workspace {
   background: #fff;
