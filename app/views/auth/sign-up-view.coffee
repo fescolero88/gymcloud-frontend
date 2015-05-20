@@ -82,7 +82,7 @@ class SignUpStep2 extends Marionette.ItemView
     if @model.isValid true
       birth = "#{@model.get('birth_year')}-#{@model.get('birth_month')}-#{@model.get('birth_day')}"
       if moment(birth, "YYYY-MM-DD", true).isValid()
-        @model.set 'birth': birth
+        @model.set 'dob', birth
         @trigger 'final', @model
       else
         @trigger 'switchError', 'Incorrect date', @ui.dateInputFroup
