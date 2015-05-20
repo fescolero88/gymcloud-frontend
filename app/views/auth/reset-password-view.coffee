@@ -21,14 +21,24 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
     @model.set data
     if @model.isValid true
       newData = {}
-      url = "#{@model.urlRoot}/?user[reset_password_token]=#{@token}"
+      ###
+      url = "#{@model.urlRoot}?user[reset_password_token]=#{@token}"
       for key, value of data
         newKey = "user[#{key}]"
         url += "&#{newKey}=#{value}"
+      ###
+      data =
+        user:
+          reset_password_token: @token
+          password: @model.get 'password'
+          password_confirmation: @model.get 'password_confirmation'
+
       $.ajax
         method: 'PUT'
-        url: url
+        url: @model.urlRoot
         dataType: 'json'
+        contentType: 'application/json'
+        data: JSON.stringify data
         statusCode:
           204: (data) =>
             App.request 'messenger:show',
@@ -41,3 +51,12 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
               hideAfter: 5
               message: "Reset password token is invalid"
               type: 'error'
+      .fail (xhr, textStatus, errorThrown) =>
+        unless errorThrown
+          App.request 'messenger:show',
+            hideAfter: 5
+            message: "Password was successfully changed"
+            type: 'success'
+          window.location.replace '#login'
+
+
