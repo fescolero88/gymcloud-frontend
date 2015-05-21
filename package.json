@@ -1,7 +1,8 @@
 {
-  "name": "gymcloud-frontend",
-  "version": "0.0.2",
-  "author": "Vladimir Pal <mail.vpal@gmail.com>",
+  "name": "gymcloud-webappp",
+  "version": "0.1.0",
+  "author": "GymCloud Team <support@gymcloud.com>",
+  "description": "GymCloud: web application",
   "private": true,
   "devDependencies": {
     "bower-resolve": "^2.2.1",
