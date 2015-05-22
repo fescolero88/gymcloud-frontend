@@ -2,10 +2,9 @@ Marionette = require 'backbone.marionette'
 
 LibraryPresetModal = require 'views/general/modal-library-preset-view'
 
-module.exports = class LibraryPresetController extends Marionette.Controller
-
-  initialize: (options) ->
-    @mainView = options.mainView
+module.exports =
 
   loadPreset: ->
-    $('region.gc-modal-preset-container').modal 'show'
+    view = new LibraryPresetModal
+    App.baseView.baseModalRegion.show(view)
+    App.baseView.baseModalRegion.$el.modal('show')

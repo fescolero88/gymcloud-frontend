@@ -9,12 +9,10 @@ module.exports = class BaseView extends Marionette.LayoutView
   regions:
     appRegion: "@ui.appRegion"
     baseModalRegion: "@ui.baseModalRegion"
-    presetModalRegion: "@ui.presetModalRegion"
 
   ui:
     appRegion: 'region[data-name="app"]'
     baseModalRegion: ".gc-base-modal-region"
-    presetModalRegion: 'region.gc-modal-preset-container'
 
   initialize: ->
     App.vent.on 'body:change-class', @changeClass

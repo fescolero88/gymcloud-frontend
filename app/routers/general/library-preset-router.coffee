@@ -1,11 +1,9 @@
 Marionette = require 'backbone.marionette'
-CustomRouter = require 'routers/general/custom-router'
+LibraryPresetController = require 'controllers/general/library-preset-controller'
 
-module.exports = class LibraryPresetRouter extends CustomRouter
+module.exports = class LibraryPresetRouter extends Marionette.AppRouter
 
-  appRoutes: 
+  controller: LibraryPresetController
+
+  appRoutes:
     'library-preset(/)': 'loadPreset'
-
-  before: (methodName) =>
-    App.request 'auth:isAuthorized', 'client'
-    App.vent.trigger 'module:library-preset:beforeAction'

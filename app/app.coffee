@@ -226,7 +226,6 @@ class App extends Marionette.Application
       @baseView = new BaseView()
       @baseView.render()
       @appRegion = @baseView.appRegion
-      @presetModalRegion = @baseView.presetModalRegion
       # --- Base layout -----
 
       # --- Add modules -----
