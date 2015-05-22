@@ -31,6 +31,7 @@ ProfileModel = require 'models/auth/profile-model'
 
 MainTrainerModule = require 'modules/main-trainer/main-trainer-module'
 MainClientModule = require 'modules/main-client/main-client-module'
+LibraryPresetModule = require 'modules/general/library-preset-module'
 
 ModalConfirmView = require 'views/general/modal-confirm-view'
 ModalAddToLibraryView = require 'views/general/modal_add_to_library_view'
@@ -225,12 +226,14 @@ class App extends Marionette.Application
       @baseView = new BaseView()
       @baseView.render()
       @appRegion = @baseView.appRegion
+      @presetModalRegion = @baseView.presetModalRegion
       # --- Base layout -----
 
       # --- Add modules -----
       @module 'Auth', AuthModule
       @module 'MainTrainer', MainTrainerModule
       @module 'MainClient', MainClientModule
+      @module 'LibraryPreset', LibraryPresetModule
 
       if Backbone.history
         Backbone.history.start()
