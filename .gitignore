@@ -5,3 +5,4 @@ bower_components/
 config.coffee
 .idea/
 *.iml
+.nvmrc
