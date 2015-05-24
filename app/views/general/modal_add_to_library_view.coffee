@@ -90,5 +90,5 @@ module.exports = class ModalAddToLibraryView extends Marionette.LayoutView
       @trigger 'switchError', "", @ui.input.closest('.form-group')
 
   closeModal: ->
-    @ui.modal.modal('hide')
+    #@ui.modal.modal('hide')
     @trigger "modal:closed"

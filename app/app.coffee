@@ -219,6 +219,7 @@ class App extends Marionette.Application
         region.$el.modal('show')
 
         @listenToOnce addToLibraryView, "modal:closed", =>
+          region.$el.modal('hide')
           region.destroy()
 
       # --- Data handlers -----
