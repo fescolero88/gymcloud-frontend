@@ -39,7 +39,7 @@ module.exports = class ModalAddToLibraryView extends Marionette.LayoutView
     model: @model.attributes
 
   onShow: ->
-    @ui.modal.modal()
+    #@ui.modal.modal()
     @library.show @itemsView
     @name = @ui.input.val()
 

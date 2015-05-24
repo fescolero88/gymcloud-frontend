@@ -216,6 +216,7 @@ class App extends Marionette.Application
         addToLibraryView = new ModalAddToLibraryView data
         region = @baseView.baseModalRegion
         region.show(addToLibraryView)
+        region.$el.modal('show')
 
         @listenToOnce addToLibraryView, "modal:closed", =>
           region.destroy()
