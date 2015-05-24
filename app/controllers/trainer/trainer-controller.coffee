@@ -142,10 +142,10 @@ module.exports = class TrainerController extends Marionette.Controller
         searchResults = @searchInLibrary(new Backbone.Collection(items), key, breadcrumbs)
         childModel = searchResults.model
         breadcrumbs = searchResults.path
-        items = childModel.get('items') or []
+        items = if childModel then childModel.get('items') else []
       else
         childModel = new Backbone.Model
-      if childModel.get('isFolder') or not key
+      if childModel and childModel.get('isFolder') or not key
         exercisesGlobalView = new EWPGlobalView
           model: childModel
           items: items
