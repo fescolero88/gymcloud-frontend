@@ -71,6 +71,7 @@ module.exports = class ModalAddToLibraryView extends Marionette.LayoutView
                 App.request 'spinner:global:stop'
                 App.request 'messenger:show',
                   message: "Item added to your library"
+                window.location.replace "#tr/global/exercises/id/#{data.id}"
         statusCode:
           403: (data) =>
             App.request 'messenger:show',
