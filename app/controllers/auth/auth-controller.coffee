@@ -22,42 +22,49 @@ module.exports = class AuthController extends Marionette.Controller
     @layoutView = options.layoutView
 
   login: (signUp) =>
-    @auth = new AuthView(signUp: signUp, model: new LoginModel)
+    model = new LoginModel
+    view = new AuthView
+      signUp: signUp
+      model: model
     if window.localStorage.accessToken
       window.location.replace '#'
     else
-      @layoutView.mainRegion.show @auth
+      @layoutView.mainRegion.show(view)
 
   logout: =>
     window.localStorage.removeItem 'accessToken'
     window.location.replace '#login'
 
   forgotPassword: ->
-    @layoutView.mainRegion.show new ForgotPasswordView
+    view = new ForgotPasswordView
+    @layoutView.mainRegion.show(view)
 
   signUp: =>
-    @signUp = new SignUpView
-    @layoutView.mainRegion.show @signUp
-    @listenTo @signUp, 'signup:complete', =>
+    view = new SignUpView
+    @layoutView.mainRegion.show(view)
+    @listenTo view, 'signup:complete', =>
       href = '#login'
       Backbone.history.navigate(href, { trigger:false, replace: true })
-      @login true
+      @login(true)
 
   resetPassword: (token) =>
-    @resetPassword = new ResetPasswordView model: new ResetPasswordModel, token: token
-    @layoutView.mainRegion.show @resetPassword
+    model = new ResetPasswordModel
+    view = new ResetPasswordView
+      model: model
+      token: token
+    @layoutView.mainRegion.show(view)
 
   confirmRegistration: (token) =>
     confirmRegistrationModel = new ConfirmRegistrationModel
     profileModel = new ProfileModel
-    @confirmRegistrationView = new ConfirmRegistrationView 
-      token: token, 
-      model: confirmRegistrationModel,
+    view = new ConfirmRegistrationView
+      token: token
+      model: confirmRegistrationMode
       profileModel: profileModel
-
-    @layoutView.mainRegion.show @confirmRegistrationView
+    @layoutView.mainRegion.show(view)
 
   resendConfirmation: =>
-    resendConfirmationModel = new ResendConfirmationModel
-    @resendConfirmationView = new ResendConfirmationView model: resendConfirmationModel
-    @layoutView.mainRegion.show @resendConfirmationView
+    model = new ResendConfirmationModel
+    view = new ResendConfirmationView
+      model: model
+    @layoutView.mainRegion.show(view)

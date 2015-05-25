@@ -1,6 +1,5 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
-
 module.exports = class ClientGroupNavView extends Marionette.ItemView
 
   template: Templates.trainer.clients.client_group_nav

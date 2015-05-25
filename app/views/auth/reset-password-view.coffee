@@ -3,6 +3,7 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 module.exports = class ResetPasswordView extends Marionette.LayoutView
+
   template: Templates.auth.reset_password
 
   ui:
@@ -58,5 +59,3 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
             message: "Password was successfully changed"
             type: 'success'
           window.location.replace '#login'
-
-

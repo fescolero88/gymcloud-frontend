@@ -5,13 +5,14 @@ module.exports = class ConfirmRegistrationModel extends Backbone.Model
   url: '/api/mobile/users/confirmation/confirm.json'
 
   validation:
+
     confirmation_token:
       required: true
 
   confirm: (token) ->
     @set 'confirmation_token', token
 
-    options = 
+    options =
       url: @url
       type: 'POST'
       contentType: 'application/json'

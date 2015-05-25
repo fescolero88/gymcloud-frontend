@@ -6,6 +6,7 @@ ForgotPasswordModel = require 'models/auth/forgot-password-model'
 FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
 class ForgotPasswordFormView extends Marionette.ItemView
+
   template: Templates.auth.forgot_password
 
   behaviors:
@@ -38,25 +39,27 @@ class ForgotPasswordFormView extends Marionette.ItemView
             @trigger 'next'
 
 class ForgotPasswordSuccessView extends Marionette.ItemView
+
   template: Templates.auth.forgot_password_success
 
 module.exports = class ForgotPasswordView extends Marionette.LayoutView
+
   template: Templates.auth.empty_layout
 
   regions:
     signUp: '#gc-default-region'
 
-  initialize: =>
+  initialize: ->
     @formView = new ForgotPasswordFormView model: new ForgotPasswordModel
     @successView = new ForgotPasswordSuccessView
     @listenTo @formView, 'next', @nextStep
     @listenTo @successView, 'final', @final
 
-  onShow: =>
+  onShow: ->
     @signUp.show @formView
 
-  nextStep: =>
+  nextStep: ->
     @signUp.show @successView
 
-  final: () =>
+  final: ->
     true

@@ -4,7 +4,9 @@ Backbone = require 'backbone'
 PrivacyButtonsView = require 'views/general/privacy-buttons-view'
 
 module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
+
   template: Templates.trainer.exercises.exercise_global_overview
+
   className: 'gc-exercises-exercise-view'
 
   regions:

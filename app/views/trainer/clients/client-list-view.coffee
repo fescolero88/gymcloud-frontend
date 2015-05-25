@@ -2,6 +2,7 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 class ClientItemView extends Marionette.ItemView
+
   template: Templates.trainer.clients.client_item
 
   tagName: 'li'

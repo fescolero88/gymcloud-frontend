@@ -4,6 +4,7 @@ Marionette = require 'backbone.marionette'
 FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
 module.exports = class ExerciseEditView extends Marionette.ItemView
+
   template: Templates.trainer.exercises.exercise_edit
 
   behaviors:

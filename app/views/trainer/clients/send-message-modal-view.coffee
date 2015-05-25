@@ -6,9 +6,9 @@ MessageModel = require 'models/trainer/message-model'
 
 module.exports = class SendMessageModalView extends Marionette.ItemView
 
-  className: 'modal-dialog'
-
   template: Templates.trainer.clients.send_message_modal
+
+  className: 'modal-dialog'
 
   initialize: (data) ->
     @model = new MessageModel

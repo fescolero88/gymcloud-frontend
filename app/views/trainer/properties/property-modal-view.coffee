@@ -4,6 +4,7 @@ Backbone = require 'backbone'
 FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
 module.exports = class PropertyModalView extends Marionette.ItemView
+
   template: Templates.trainer.properties.property_modal
 
   behaviors:

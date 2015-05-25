@@ -108,4 +108,3 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
           success: (model) =>
             @request 'messenger:show',
               message: 'Exercise removed from library'
-

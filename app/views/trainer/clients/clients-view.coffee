@@ -13,7 +13,9 @@ GroupModel = require 'models/trainer/group-model'
 module.exports = class ClientsView extends Marionette.LayoutView
 
   template: Templates.trainer.clients.clients
+
   className: 'clients-view-main-wrapper'
+
   events:
     "click .gc-content-nav-checkall": "toggleCheck"
     'click .gc-clients-list-client-chb': 'updateState'
@@ -204,5 +206,3 @@ module.exports = class ClientsView extends Marionette.LayoutView
       view.$el.addClass 'hidden'
 
     @ui.splash.removeClass 'hidden'
-
-
