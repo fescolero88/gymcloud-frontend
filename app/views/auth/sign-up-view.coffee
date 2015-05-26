@@ -9,6 +9,7 @@ SignUpStep2Model = require 'models/auth/signup-step2-model'
 FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
 class SignUpStep1 extends Marionette.ItemView
+
   template: Templates.auth.sign_up_1
 
   behaviors:
@@ -53,8 +54,8 @@ class SignUpStep1 extends Marionette.ItemView
           403: (data) =>
             @trigger 'switchError', data.responseJSON.message.email, @ui.emailGroup
 
-
 class SignUpStep2 extends Marionette.ItemView
+
   template: Templates.auth.sign_up_2
 
   behaviors:
@@ -104,8 +105,10 @@ module.exports = class SignUpView extends Marionette.LayoutView
     signUp: '#gc-default-region'
 
   initialize: =>
-    @step1 = new SignUpStep1 model: new SignUpStep1Model
-    @step2 = new SignUpStep2 model: new SignUpStep2Model
+    @step1 = new SignUpStep1
+      model: new SignUpStep1Model
+    @step2 = new SignUpStep2
+      model: new SignUpStep2Model
     @listenTo @step1, 'next', @nextStep
     @listenTo @step2, 'final', @final
 
@@ -131,4 +134,3 @@ module.exports = class SignUpView extends Marionette.LayoutView
         403: (data) =>
           if data.responseJSON.error
             @step2.trigger 'signup:errors', data.responseJSON.message
-

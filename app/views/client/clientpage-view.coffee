@@ -34,4 +34,3 @@ module.exports = class ClientPageView extends Marionette.LayoutView
                 App.request 'data:programs:reset', item.items
                 App.request 'data:programs:root:reset', item.key
           window.App.vent.trigger 'assignments:loaded'
-

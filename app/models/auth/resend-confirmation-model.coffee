@@ -11,8 +11,8 @@ module.exports = class ResendConfirmationModel extends Backbone.Model
       msg: 'Please enter a valid email'
 
   resendConfirmation: ->
-    if @.isValid 'email'
-      options = 
+    if @isValid 'email'
+      options =
         url: @url
         type: 'POST'
         contentType: 'application/json'

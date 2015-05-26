@@ -2,15 +2,20 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 class AddExerciseFolderModalItemView extends Marionette.ItemView
+
   template: Templates.trainer.exercises.duplicate_exercise_modal_item
+
   tagName: 'li'
 
 module.exports = class DuplicateGlobalEWPModalView extends Marionette.CompositeView
-  template: Templates.trainer.global_ewp.duplicate_global_ewp_modal
-  className: 'modal-dialog modal-md'
-  childView: AddExerciseFolderModalItemView
-  childViewContainer: 'ul'
 
+  template: Templates.trainer.global_ewp.duplicate_global_ewp_modal
+
+  className: 'modal-dialog modal-md'
+
+  childView: AddExerciseFolderModalItemView
+
+  childViewContainer: 'ul'
 
   ui:
     folderInput: '.gc-folders-input'

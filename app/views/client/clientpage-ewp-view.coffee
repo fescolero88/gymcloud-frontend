@@ -1,6 +1,7 @@
 Marionette = require 'backbone.marionette'
 
 class EmptyView extends Marionette.ItemView
+
   template: Templates.client.assigments_empty
 
   initialize: (data) =>
@@ -10,7 +11,9 @@ class EmptyView extends Marionette.ItemView
     dataType: @dataType
 
 class ClientEWPItemView extends Marionette.ItemView
+
   template: Templates.client.ewp_item
+
   tagName: 'li'
   className: 'row'
 
@@ -21,12 +24,16 @@ class ClientEWPItemView extends Marionette.ItemView
     dataType: @dataType
 
 module.exports = class ClientEWPView extends Marionette.CompositeView
+
   template: Templates.client.ewp_list
+
   childView: ClientEWPItemView
   childViewContainer: 'ul'
   emptyView: EmptyView
+
   collectionEvents:
     sync: 'render'
+
   childViewOptions: =>
     dataType: @dataType
 
@@ -38,5 +45,3 @@ module.exports = class ClientEWPView extends Marionette.CompositeView
 
   templateHelpers: =>
     dataType: @dataType
-
-

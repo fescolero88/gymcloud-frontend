@@ -7,6 +7,7 @@ GlobalExerciseModel = require 'models/trainer/global-exercise-model'
 FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
 module.exports = class ModalAddToLibraryView extends Marionette.LayoutView
+
   template: Templates.general.modal_add_to_library
 
   behaviors:
@@ -92,4 +93,4 @@ module.exports = class ModalAddToLibraryView extends Marionette.LayoutView
 
   closeModal: ->
     #@ui.modal.modal('hide')
-    @trigger "modal:closed"
+    @trigger 'modal:closed'

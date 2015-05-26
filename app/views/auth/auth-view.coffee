@@ -13,11 +13,11 @@ module.exports = class AuthView extends Marionette.ItemView
     form: '.gc-login-form'
     signUpModal: '#gc-signup-message'
 
-  initialize: (data) =>
+  initialize: (data) ->
     @signUp = data.signUp
     Backbone.Validation.bind @
 
-  onShow: =>
+  onShow: ->
     if @signUp
       @ui.signUpModal.modal 'show'
 

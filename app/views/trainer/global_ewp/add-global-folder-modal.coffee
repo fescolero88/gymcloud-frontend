@@ -4,8 +4,10 @@ Backbone = require 'backbone'
 FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
 module.exports = class AddGlobalFolderModalView extends Marionette.ItemView
-  className: 'modal-dialog modal-md'
+
   template: Templates.trainer.global_ewp.add_global_folder_modal
+
+  className: 'modal-dialog modal-md'
 
   behaviors:
     FormValidationBehaviour:

@@ -3,9 +3,9 @@ Backbone = require 'backbone'
 
 module.exports = class LibraryPresetModalView extends Marionette.ItemView
 
-  className: 'modal-dialog'
-  
   template: Templates.general.library_preset_modal
+
+  className: 'modal-dialog'
 
   initialize: ->
     @currentIndex = 0
@@ -27,7 +27,7 @@ module.exports = class LibraryPresetModalView extends Marionette.ItemView
     @ui.presetSteps[@currentIndex].classList.remove 'active'
     @ui.presetSteps[++@currentIndex].classList.add 'active'
 
-  onPrevious: (ev) -> 
+  onPrevious: (ev) ->
     ev.preventDefault()
     @ui.presetSteps[@currentIndex].classList.remove 'active'
     @ui.presetSteps[--@currentIndex].classList.add 'active'

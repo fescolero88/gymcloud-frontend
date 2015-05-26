@@ -31,4 +31,3 @@ module.exports = class ConfirmRegistrationView extends Marionette.ItemView
     else
       window.location.replace '#'
     App.vent.trigger 'profile:ready'
-    

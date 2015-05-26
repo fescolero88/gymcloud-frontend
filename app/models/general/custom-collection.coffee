@@ -2,10 +2,9 @@ Backbone = require 'backbone'
 
 module.exports = class CustomCollection extends Backbone.Collection
 
-  isFetched: false
-  isRequest: false
-
   initialize: =>
+    @isFetched = false
+    @isRequest = false
     @on('sync', @onSync)
     @on('request', @onRequest)
     @on('error', @onError)

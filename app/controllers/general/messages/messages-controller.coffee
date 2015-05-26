@@ -8,5 +8,5 @@ module.exports = class MessagesController extends Marionette.Controller
     @mainView = options.mainView
 
   messages: ->
-    @view = new MessagesView()
-    @mainView.content.show @view
+    view = new MessagesView
+    @mainView.content.show(view)

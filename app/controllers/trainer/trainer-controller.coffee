@@ -189,7 +189,7 @@ module.exports = class TrainerController extends Marionette.Controller
     if viewType == 'individuals' or viewType == 'groups'
       regionName = if viewType == 'individuals' then 'clients' else 'groups'
       viewTypeUI = view.ui["#{regionName}Region"]
-      
+
       collection.on 'sync', (col) =>
         if col.length == 0
           view.ui.splash.removeClass 'hidden'

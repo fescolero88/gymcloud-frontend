@@ -2,8 +2,11 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 class EWPGlobalItemView extends Marionette.ItemView
+
   template: Templates.trainer.global_ewp.ewp_single_item
+
   tagName: 'li'
+
   className: 'row'
 
   ui:
@@ -22,9 +25,13 @@ class EWPGlobalItemView extends Marionette.ItemView
     @trigger 'item:clicked'
 
 module.exports = class EWPGlobalListView extends Marionette.CompositeView
+
   template: Templates.trainer.global_ewp.global_ewp_list
+
   childView: EWPGlobalItemView
+
   childViewContainer: 'ul'
+
   collectionEvents:
     'sync': 'render'
     'highlight': 'highlightNew'

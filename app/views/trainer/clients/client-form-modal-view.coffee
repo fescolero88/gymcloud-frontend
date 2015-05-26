@@ -4,8 +4,10 @@ Backbone = require 'backbone'
 FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
 module.exports = class ClientFormModalView extends Marionette.ItemView
-  className: 'modal-dialog'
+
   template: Templates.trainer.clients.client_form_modal
+
+  className: 'modal-dialog'
 
   behaviors:
     FormValidationBehaviour:

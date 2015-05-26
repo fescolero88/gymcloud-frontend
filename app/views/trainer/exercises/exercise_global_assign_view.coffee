@@ -7,8 +7,11 @@ GroupCollection = require 'models/trainer/group-collection'
 AssigneesList = require 'models/trainer/global_exercise_assignees'
 
 class ExerciseGlobalAssignClientsItemView extends Marionette.ItemView
+
   template: Templates.trainer.clients.exercise_assign_client_item
+
   tagName: 'li'
+
   className: 'row'
 
   ui:
@@ -37,9 +40,13 @@ class ExerciseGlobalAssignClientsItemView extends Marionette.ItemView
     @ui.mark.addClass 'active'
 
 class ExerciseGlobalAssignClientsListView extends Marionette.CompositeView
+
   template: Templates.trainer.clients.universal_clients_list
+
   childView: ExerciseGlobalAssignClientsItemView
+
   childViewContainer: 'ul'
+
   childViewOptions: =>
     type: @type
 
@@ -65,7 +72,9 @@ class ExerciseGlobalAssignClientsListView extends Marionette.CompositeView
       _this.collection.where({id: v})[0].trigger 'assignees:loaded'
 
 module.exports = class ExerciseGlobalAssignView extends Marionette.LayoutView
+
   template: Templates.trainer.exercises.exercise_global_assign
+
   className: 'gc-exercises-assign-view'
 
   ui:
