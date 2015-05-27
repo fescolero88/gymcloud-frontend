@@ -59,7 +59,7 @@ module.exports = class AuthController extends Marionette.Controller
     profileModel = new ProfileModel
     view = new ConfirmRegistrationView
       token: token
-      model: confirmRegistrationMode
+      model: confirmRegistrationModel
       profileModel: profileModel
     @layoutView.mainRegion.show(view)
 
