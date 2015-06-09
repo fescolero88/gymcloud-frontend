@@ -1,0 +1,722 @@
+<h1 class="gc-prototype-title">GymCloud UI Kit</h1>
+
+<div class="gc-component">
+  <div class="gc-component-name">Normal Button</div>
+  <a href="#" class="btn btn-primary gc-custom">sample button</a>
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Disabled Button</div>
+  <a href="#" class="btn btn-primary gc-custom">sample button</a>
+</div>
+
+<div class="gc-component gc-bg-inverse">
+  <div class="gc-component-name">Inversed Button</div>
+  <a href="#" class="btn btn-inverse gc-custom">sample button</a>
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Big Button</div>
+  <a href="#" class="btn btn-primary btn-lg gc-custom">sample button</a>
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Dropdown</div>
+  <div class="form-group">
+    <label>Label</label>
+    <select class="form-control">
+      <option>default</option>
+    </select>
+  </div>
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Context Dropdown</div>
+  <ul class="dropdown-menu gc-dropdown gc-sample-active">
+    <li><a href="#">Regular link</a></li>
+    <li class="disabled"><a href="#">Disabled link</a></li>
+    <li class="gc-danger"><a href="#">Another link</a></li>
+  </ul>
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Small Text Buttons</div>
+  <a href="#" class="gc-text-link">
+    upgrade
+  </a>
+  <br/>
+  <a href="#" class="gc-text-link gc-danger">
+    discard
+  </a>
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Iconic Buttons</div>
+  <a href="#" class="gc-text-link">
+    <span class="fa fa-plus-circle"></span>
+    Add Exercise
+  </a>
+  <br/>
+  <a href="#" class="gc-text-link">
+    <span class="fa fa-arrow-down"></span>
+    Load more...
+  </a>
+  <br/>
+  <a href="#" class="gc-text-link">
+    <span class="gc-icon-link gc-icon-exercises"></span>
+    List of Exercises
+  </a>
+  <br/>
+  <a href="#" class="gc-text-link">
+    <span class="gc-icon-link gc-icon-workouts"></span>
+    List of Workouts
+  </a>
+  <br/>
+  <a href="#" class="gc-text-link">
+    <span class="gc-icon-link gc-icon-programs"></span>
+    List of Programs
+  </a>
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Inputs</div>
+  <div class="form-group">
+    <label>Inactive</label>
+    <input type="text" class="form-control" placeholder="Inactive">
+  </div>
+  <div class="form-group gc-form-alert" data-error="Empty Field">
+    <label>Alert</label>
+    <input type="text" class="form-control gc-alert" placeholder="Alert">
+  </div>
+  <div class="form-group gc-form-active">
+    <label>Active</label>
+    <input type="text" class="form-control gc-active" placeholder="Active">
+  </div>
+  <div class="form-group gc-form-disabled">
+    <label>Disabled</label>
+    <input type="text" class="form-control" placeholder="Disabled" disabled="">
+  </div>
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Input Variants</div>
+  <div class="form-group">
+    <label>Date & timepicker</label>
+    <div class="input-group gc-datetime">
+      <input type="text" class="form-control" placeholder="mm/dd/yyyy hh:mm">
+      <span class="input-group-btn gc-btn-group">
+        <button class="btn btn-default" type="button">
+          <span class="fa fa-calendar"></span>
+          <span class="fa fa-clock-o"></span>
+        </button>
+      </span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Tabs</label>
+    <div class="btn-group clearfix gc-tabs">
+      <button type="button" class="btn btn-default">Left</button>
+      <button type="button" class="btn btn-default active">Middle</button>
+      <button type="button" class="btn btn-default">Right</button>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Counter</label>
+    <div class="gc-counter">
+      <input class="form-control gc-counter-input" />
+      <div class="gc-counter-control">
+        <a href="#" class="gc-caret gc-up"><i class="fa fa-caret-up"></i></a>
+        <a href="#" class="gc-caret gc-down"><i class="fa fa-caret-down"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Textarea</div>
+  <div class="form-group">
+    <label>No Border</label>
+    <textarea class="form-control gc-textarea-no-border" placeholder="Some text here..."></textarea>
+  </div>
+  <div class="form-group">
+    <label>Normal</label>
+    <textarea class="form-control gc-textarea" placeholder="Some text here..."></textarea>
+  </div>
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Complex Tag/Settings</div>
+  <span class="gc-tag">
+    <i class="fa fa-bars"></i>
+    10 Reps
+  </span>
+  <br />
+  <span class="gc-tag gc-tag-highlight">
+    <i class="fa fa-bars"></i>
+    10 Reps
+  </span>
+  <br />
+  <div class="gc-tag-group">
+    <span class="gc-tag gc-tag-highlight">
+      <i class="fa fa-bars"></i>
+      10
+    </span>
+    <span class="gc-tag gc-tag-highlight">
+      Reps
+      <i class="fa fa-sort"></i>
+    </span>
+  </div>
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Autocomplete</div>
+
+  <div class="selectize-control form-control live-search gc-demo">
+    <div class="selectize-input items not-full has-options">
+      <input type="text" autocomplete="off" tabindex="" placeholder="Search Autocomplete">
+    </div>
+    <div class="selectize-dropdown multi gc-exercises-assign-input form-control live-search">
+      <div class="selectize-dropdown-content">
+        <div>
+          <span class="label">er</span> <span>Search Result 1</span>
+        </div>
+      </div>
+      <div class="selectize-dropdown-content">
+        <div>
+          <span class="label">er</span> <span>Search Result 2</span>
+        </div>
+      </div>
+      <div class="selectize-dropdown-content">
+        <div>
+          <span class="label">er</span> <span>Search Result 3</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Checkboxes</div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> Unchecked
+    </label>
+  </div>
+  <div class="checkbox" checked>
+    <label>
+      <input type="checkbox"> Checked
+    </label>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" disabled="" > Disabled
+    </label>
+  </div>
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Radio-buttons</div>
+  <div class="radio">
+    <label>
+      <input type="radio" id="optionsRadios1" value="option3" checked>
+      Checked
+    </label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" id="optionsRadios1" value="option2">
+      Unchecked
+    </label>
+  </div>
+   <div class="radio">
+    <label>
+      <input type="radio" id="optionsRadios1" value="option1" checked disabled="">
+      Disabled
+    </label>
+  </div>
+</div>
+
+<div class="gc-component clearfix">
+  <div class="gc-component-name">Navigation</div>
+  <ul class="gc-content-nav">
+    <li class="active"><a>Exercise</a></li>
+    <li class=""><a>Add video</a></li>
+    <li class=""><a>Assign</a></li>
+  </ul>
+  <br/>
+  <div class="gc-nav-breadcrumbs">
+    <a class="gc-content-nav-back">
+      <span class="fa fa-chevron-left"></span>
+    </a>
+    <div class="gc-breadcrumbs">
+      <div>
+        <h2 class="gc-breadcrumbs-title">
+          <span>exercises</span>
+          <span>spiderman plank crunch</span>
+        </h2>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="gc-topbar-item gc-topbar-avatar gc-topbar-dropdown">
+    <a href="#" class="" data-toggle="dropdown">
+      <img src="" alt="">
+    </a>
+    <ul class="dropdown-menu pull-left">
+      <li>
+        <a class="row" href="#">
+          <span class="col-xs-3">
+            <span class="gc-topbar-dropdown-icon gc-topbar-dropdown-icon-profile"></span>
+          </span>
+          <span class="col-xs-9">Profile</span>
+        </a>
+      </li>
+      <li>
+        <a class="row" href="#">
+        <span class="col-xs-3">
+          <span class="gc-topbar-dropdown-icon gc-topbar-dropdown-icon-clients"></span>
+        </span>
+        <span class="col-xs-9">Clients</span>
+        </a>
+      </li>
+      <li>
+        <a class="row" href="#">
+          <span class="col-xs-3">
+            <span class="gc-topbar-dropdown-icon gc-topbar-dropdown-icon-trainigs"></span>
+          </span>
+          <span class="col-xs-9">Trainings</span>
+        </a>
+      </li>
+      <li>
+        <a class="row" href="#">
+          <span class="col-xs-3">
+            <span class="gc-topbar-dropdown-icon gc-topbar-dropdown-icon-signout"></span>
+          </span>
+          <span class="col-xs-9">Sign out</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Pagination With Border</div>
+
+  <nav>
+    <ul class="pagination gc-pagination-bordered">
+      <li>
+        <a href="#" aria-label="Previous">
+          <i class="fa fa-angle-left"></i>
+        </a>
+      </li>
+      <li><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li><a href="#">5</a></li>
+      <li>
+        <a href="#" aria-label="Next">
+          <i class="fa fa-angle-right"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <nav>
+    <ul class="pagination gc-pagination">
+      <li>
+        <a href="#" aria-label="Previous">
+          <i class="fa fa-angle-left"></i>
+          Prev
+        </a>
+      </li>
+      <li><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li><a href="#">5</a></li>
+      <li>
+        <a href="#" aria-label="Next">
+          <i class="fa fa-angle-right"></i>
+          Next
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Tooltips</div>
+
+  <div class="popover bottom gc-tooltip gc-demo">
+    <div class="arrow"></div>
+    <h3 class="popover-title">Popover top</h3>
+    <div class="popover-content">
+      <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+      <a href="#" class="btn btn-primary gc-custom">sample button</a>
+    </div>
+  </div>
+  <br/>
+  <div class="popover bottom gc-tooltip gc-tooltip-no-header gc-demo">
+    <div class="arrow"></div>
+    <div class="popover-content">
+      <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+      <a href="#" class="btn btn-primary gc-custom">sample button</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Alerts</div>
+
+  <div class="gc-alert-message gc-error">
+    <div class="gc-alert-icon">
+      <span>&times;</span>
+    </div>
+    <p>Exercise was deleted</p>
+  </div>
+
+  <div class="gc-alert-message gc-warning">
+    <div class="gc-alert-icon">
+      <span>!</span>
+    </div>
+    <p>Exercise was deleted</p>
+  </div>
+
+  <div class="gc-alert-message gc-success">
+    <div class="gc-alert-icon">
+      <span></span>
+    </div>
+    <p>Exercise was deleted</p>
+  </div>
+
+
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Tables</div>
+
+  <table class="gc-table">
+    <thead>
+      <tr>
+        <td>Date</td>
+        <td>Desription</td>
+        <td>Status</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>21 Feb 2015</td>
+        <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
+        <td>active</td>
+      </tr>
+      <tr>
+        <td>21 Feb 2015</td>
+        <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
+        <td>active</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="gc-table-holder">
+    <div class="gc-table-title">
+      <span>latest entries</span>
+    </div>
+    <div class="gc-table-container">
+      <table class="gc-table">
+        <thead>
+          <tr>
+            <td>Date</td>
+            <td>Desription</td>
+            <td>Status</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>21 Feb 2015</td>
+            <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
+            <td>active</td>
+          </tr>
+          <tr>
+            <td>21 Feb 2015</td>
+            <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
+            <td>active</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Heading & Paragraphs</div>
+  <table class="gc-table">
+    <thead>
+      <tr>
+        <td>Element</td>
+        <td>Sample Text</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Heading 1</td>
+        <td>
+          <h1 class="gc-heading-1">Lorem Ipsum is simply dummy text of the printing and typesetting industry.<h1>
+        </td>
+      </tr>
+      <tr>
+        <td>Heading 2</td>
+        <td>
+          <h2 class="gc-heading-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h2>
+        </td>
+      </tr>
+      <tr>
+        <td>Paragraph</td>
+        <td>
+          <p class="gc-paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Empty States</div>
+
+  <div class="gc-row-4">
+    <div class="gc-col">
+      <div>
+        <div class="gc-empty-state">
+          <div class="gc-empty-state-image">
+            <img src="../static/images/prototypes/file-icon.png">
+          </div>
+          <div>
+            <p class="gc-empty-description">Lorem Ipsum is simply dummy text of the printing
+          and typesetting industry.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="gc-col">
+      <div>
+        <div class="gc-empty-state">
+          <div class="gc-empty-state-image">
+            <img src="../static/images/prototypes/clock-icon.png">
+          </div>
+          <p class="gc-empty-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        </div>
+      </div>
+    </div>
+    <div class="gc-col">
+      <div>
+        <div class="gc-empty-state">
+          <div class="gc-empty-state-image">
+            <img src="../static/images/prototypes/workout-icon.png">
+          </div>
+          <p class="gc-empty-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        </div>
+      </div>
+    </div>
+    <div class="gc-col">
+      <div>
+        <div class="gc-empty-state">
+          <div class="gc-empty-state-image">
+            <img src="../static/images/prototypes/folder-icon.png">
+          </div>
+          <p class="gc-empty-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+  <div class="gc-row-4">
+    <div class="gc-col">
+      <div>
+        <div class="gc-empty-state">
+          <div class="gc-empty-state-image">
+            <img src="../static/images/prototypes/heartbeat-icon.png">
+          </div>
+          <div>
+            <p class="gc-empty-description">Lorem Ipsum is simply dummy text of the printing
+          and typesetting industry.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="gc-col">
+      <div>
+        <div class="gc-empty-state">
+          <div class="gc-empty-state-image">
+            <img src="../static/images/prototypes/bar-icon.png">
+          </div>
+          <p class="gc-empty-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        </div>
+      </div>
+    </div>
+    <div class="gc-col">
+      <div>
+      </div>
+    </div>
+    <div class="gc-col">
+      <div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Building Blocks</div>
+
+  <div class="gc-exercise-author-info">
+    <a href="#" class="gc-exercise-author-avatar">
+      <img src="static/images/portrait.jpg">
+    </a>
+    <p class="gc-exercise-author-name">
+      Trainer
+      <br>
+      <a href="#">john doe</a>
+    </p>
+  </div>
+
+  <br/>
+  <br/>
+
+  <div class="gc-exercise-author-info">
+    <a href="#" class="gc-exercise-author-avatar gc-exercise-author-avatar-exist">
+      <img src="static/images/portrait.jpg">
+    </a>
+    <p class="gc-exercise-author-name">
+      Trainer
+      <br>
+      <a href="#">john doe</a>
+    </p>
+  </div>
+
+  <br/>
+  <br/>
+
+  <div class="gc-exercise-author-info">
+    <a href="#" class="gc-exercise-author-avatar gc-exercise-author-avatar-exist">
+      <img src="static/images/portrait.jpg">
+    </a>
+    <p class="gc-exercise-author-name">
+      <br>
+      <a href="#">john doe</a>
+    </p>
+  </div>
+
+  <br/>
+  <br/>
+
+  <div class="gc-rating">
+    <div>
+      <span class="gc-rating-count">25</span>
+      <ul class="gc-rating-stars">
+        <li><i class="fa fa-star"></i></li>
+        <li><i class="fa fa-star"></i></li>
+        <li><i class="fa fa-star"></i></li>
+        <li><i class="fa fa-star"></i></li>
+        <li><i class="fa fa-star-o"></i></li>
+      </ul>
+    </div>
+    <p class="gc-rating-used">
+      Used by <i class="glyphicon glyphicon-user"></i> 250
+    </p>
+  </div>
+
+  <br/>
+
+  <div>
+    <i class="fa fa-star gc-icon gc-icon-primary"></i>
+    &nbsp;
+    <i class="fa fa-star gc-icon gc-icon-highlight"></i>
+    &nbsp;
+    <i class="fa fa-star gc-icon"></i>
+  </div>
+  <br/>
+  <div>
+    <i class="gc-icon-trpohy"></i>
+    &nbsp;
+    <i class="gc-icon-trpohy-gold"></i>
+    &nbsp;
+    <i class="gc-icon-trash"></i>
+  </div>
+  <div>
+    <a href="#" class="gc-btn-round gc-btn-chevron">
+    </a>
+    <a href="#" class="gc-btn-round gc-btn-plus">
+    </a>
+  </div>
+
+  <br/>
+
+  <div class="gc-block-group clearfix">
+    <div class="gc-block">
+      <div class="gc-block-highlight">2</div>
+      <label>weeks</label>
+    </div>
+    <div class="gc-block">
+      <div class="gc-block-highlight">5</div>
+      <label>workouts</label>
+    </div>
+  </div>
+
+  <br/>
+
+  <label class="gc-pill-label gc-label-warning">
+    <i class="gc-icon-lock-orange"></i>
+    private
+  </label>
+
+  <br/>
+
+  <label class="gc-pill-label gc-label-success">
+    <i class="gc-icon-eye-green"></i>
+    public
+  </label>
+
+</div>
+
+
+<div class="gc-component">
+  <div class="gc-component-name">Labels & Icons</div>a
+  <i class="gc-icon workout"></i>
+  <i class="gc-icon calendar"></i>
+  <i class="gc-icon programs"></i>
+  <i class="gc-icon clock"></i>
+  <i class="gc-icon heartbeat"></i>
+  <i class="gc-icon folder"></i>
+<div>
+
+<div class="gc-component">
+  <div class="gc-component-name">Popup Window</div>
+
+  <div class="gc-modal-demo">
+    <div class="modal gc-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close"><span>Close</span></button>
+            <h4 class="modal-title">Modal title</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Sample form</label>
+              <input type="text" class="form-control" placeholder="Inactive">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-primary gc-custom">sample button</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

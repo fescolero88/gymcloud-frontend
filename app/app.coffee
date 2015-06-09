@@ -32,6 +32,7 @@ ProfileModel = require 'models/auth/profile-model'
 MainTrainerModule = require 'modules/main-trainer/main-trainer-module'
 MainClientModule = require 'modules/main-client/main-client-module'
 LibraryPresetModule = require 'modules/general/library-preset-module'
+PrototypeModule = require 'modules/prototype/prototype-module'
 
 ModalConfirmView = require 'views/general/modal-confirm-view'
 ModalAddToLibraryView = require 'views/general/modal_add_to_library_view'
@@ -260,6 +261,7 @@ class App extends Marionette.Application
       @module 'MainTrainer', MainTrainerModule
       @module 'MainClient', MainClientModule
       @module 'LibraryPreset', LibraryPresetModule
+      @module 'Prototype', PrototypeModule
 
       if Backbone.history
         Backbone.history.start()

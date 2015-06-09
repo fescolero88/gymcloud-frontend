@@ -6,3 +6,4 @@ config.coffee
 .idea/
 *.iml
 .nvmrc
+npm-debug.log
