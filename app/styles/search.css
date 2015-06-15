@@ -1,0 +1,114 @@
+.gc-search-results-main {
+  height: 100%;
+}
+
+.gc-author-scope label {
+  background: #ccc !important;
+  color: #999 !important;
+  border-radius: 50px 0 0 50px;
+  border-color: #ccc !important;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 16px;
+  min-width: 64px;
+  margin-top: 10px !important;
+  margin-bottom: 0px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.gc-author-scope label + label {
+  border-radius: 0 50px 50px 0;
+}
+
+.gc-author-scope label:hover,
+.gc-author-scope label:active,
+.gc-author-scope label:focus,
+.gc-author-scope label.active {
+  background: #fff !important;
+  color: #3398db !important;
+  border-color: #ccc !important;
+  box-shadow: none;
+}
+
+
+.gc-search-results-list {
+  padding: 0 5px;
+}
+
+.gc-search-results-list .row {
+  list-style-type: none;
+  border-bottom: 1px solid #ededed;
+  padding: 0 0 0 25px;
+  min-height: 71px;
+}
+
+.gc-search-results-list .row:hover {
+  background: #fbfbfb;
+}
+
+.gc-search-results-list .row:hover .gc-not-in-library > .gc-entity-download-count {
+  display: none!important;
+}
+
+.gc-search-results-list .row:hover .gc-not-in-library > .gc-add-to-library-button {
+  display: inline!important;
+}
+
+.gc-add-to-library-button {
+  margin: 18px 0;
+}
+
+.gc-search-results-list .row.padding-0 {
+  padding: 0;
+}
+
+.gc-search-results-list .row > div {
+  padding: 0;
+}
+
+.gc-search-results-list .gc-exercises-link {
+  color: #3398db;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 30px;
+  margin: 0;
+  display: inline-block;
+}
+
+.gc-search-results-list .gc-exercises-link:hover,
+.gc-search-results-list .gc-exercises-link:active,
+.gc-search-results-list .gc-exercises-link:focus {
+  text-decoration: none;
+  color: #282d30;
+}
+
+.gc-search-results-list .gc-search-entity-group {
+  padding: 30px 0 0 25px;
+}
+
+.gc-search-entity-group-header {
+  font-size: 18px;
+  color: #666;
+}
+
+.gc-search-entity-field-header {
+  font-size: 12px;
+  text-align: left;
+  color: #ccc;
+}
+
+.gc-search-entity-field {
+  text-align: left;
+}
+
+.gc-search-entity-field .gc-entity-download-count {
+  display: inline-block;
+  padding: 15px 0;
+  margin: 10px 0;
+}
+
+region[data-name="search-bar"] {
+  width: 100%;
+}

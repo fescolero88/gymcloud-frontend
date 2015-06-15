@@ -3,7 +3,6 @@ Backbone = require 'backbone'
 _ = require 'lodash'
 
 module.exports = class CustomRouter extends Marionette.AppRouter
-
   route: (route, name, callback) ->
     route = @_routeToRegExp(route)  unless _.isRegExp(route)
     if _.isFunction(name)
@@ -22,5 +21,7 @@ module.exports = class CustomRouter extends Marionette.AppRouter
         router.after.apply router, [name].concat(args)
       Backbone.history.trigger "route", router, name, args
       return
-
-    @
+  onRoute: (name, path, opts)->
+    App.request 'lastHash:set',
+      hash: window.location.hash
+      action: name

@@ -1,0 +1,34 @@
+<div class="col-xs-7">
+  <!-- todo: check if is added to library -->
+  {{#if is_in_my_library}}
+    <span class="gc-check-icon"></span>
+  {{else}}
+    <span class="gc-exercises-item-icon"></span>
+  {{/if}}
+  <a href="{{entity_link}}" class="gc-clients-list-client-link">
+    {{name}}
+  </a>
+  <span class="gc-exercises-item-play-icon"></span>
+</div>
+<div class="gc-avatar-wrapper gc-search-entity-field col-xs-3">
+  <region data-name="avatar-wrapper"></region>
+  {{#withProfile}}
+    {{#ifEqual id ../author/id}}
+      <a href="{{../../profile_link}}" class="gc-clients-list-client-link">
+        ME
+      </a>
+    {{/ifEqual}}
+    {{#ifNot id ../author/id}}
+      <a href="{{../../author_link}}" class="gc-clients-list-client-link">
+        {{../../author_full_name}}
+      </a>
+    {{/ifNot}}
+  {{/withProfile}}
+</div>
+<div class="gc-search-entity-field col-xs-2 {{#if is_in_my_library}} gc-not-in-library {{/if}} ">
+  <span class="gc-entity-download-count">93</span>
+  <button class="btn gc-btn gc-add-to-library-button hidden">Add to library</button>
+</div>
+<!--<div class="gc-search-entity-field col-xs-2 text-right">
+  TODO: Display Rating
+</div>-->

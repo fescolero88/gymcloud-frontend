@@ -4,6 +4,9 @@ Backbone = require 'backbone'
 ClientController = require 'controllers/client/clientpage-controller'
 ClientRouter = require 'routers/client/client-router'
 
+SearchController = require 'controllers/general/search-controller'
+SearchRouter = require 'routers/general/search-router'
+
 MessagesController = require 'controllers/general/messages/messages-controller'
 MessagesRouter = require 'routers/general/messages/messages-router'
 
@@ -28,6 +31,8 @@ module.exports = class MainClientModule extends Marionette.Module
       @mainView = new MainView()
       @app.appRegion.show @mainView
       @clientController.mainView = @mainView
+      App.vent.trigger 'search:initMainView', @mainView
+      
     if !@sidebarView? or @sidebarView.isDestroyed
       @sidebarView = new SideBarView()
       @mainView.menu.show @sidebarView
