@@ -51,6 +51,14 @@ module.exports = class AuthView extends Marionette.ItemView
     profileModel = App.request 'data:profile'
     profileModel.fetch().then =>
       accountType = profileModel.get('account_type')
+      # a workaround - treat a coach as a trainer, treat athlete as a client
+      if accountType is 'coach'
+        profileModel.set('account_type', 'trainer')
+        accountType = 'trainer'
+      else if accountType is 'athlete'
+        profileModel.set('account_type', 'client')
+        accountType = 'client'
+
       App.vent.trigger("module:main-#{accountType}:start")
       if accountType is 'trainer'
         window.location.replace '#/tr'

@@ -247,6 +247,14 @@ class App extends Marionette.Application
           @vent.trigger 'profile:ready'
           accountType = profileModel.get 'account_type'
           if @checkPermission?
+            # a workaround - treat a coach as a trainer, treat athlete as a client
+            if accountType is 'coach'
+              profileModel.set('account_type', 'trainer')
+              accountType = 'trainer'
+            else if accountType is 'athlete'
+              profileModel.set('account_type', 'client')
+              accountType = 'client'
+
             if @checkPermission != accountType
               if accountType is 'trainer'
                 window.location.replace '#tr'
