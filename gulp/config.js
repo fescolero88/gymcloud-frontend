@@ -55,6 +55,10 @@ module.exports = {
     dest: dest + '/css'
   },
 
+  stylus: {
+    src : src + '/styles/**/*.styl'
+  },
+
   scripts: {
     src : src + '/**/*.js',
     dest: dest + '/js'

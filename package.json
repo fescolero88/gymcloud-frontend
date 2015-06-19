@@ -34,7 +34,8 @@
     "run-sequence": "^1.0",
     "sifter": "^0.3.4",
     "vinyl-source-stream": "^1.0.0",
-    "watchify": "^2.2.1"
+    "watchify": "^2.2.1",
+    "gulp-stylus": "^2.0.5"
   },
   "dependencies": {
     "backbone": "^1.1.2",
