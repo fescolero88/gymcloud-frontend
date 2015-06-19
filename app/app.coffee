@@ -230,6 +230,13 @@ class App extends Marionette.Application
           hash: params.hash
           action: params.name
 
+      @reqres.setHandler 'ajax:options:create', (params) ->
+        options =
+          url: params.url
+          type: params.type || 'POST' # set default to post since this is commonly used for not restful requests
+          contentType: params.contentType || 'application/json'
+          data: params.data || {}
+
       # --- Data handlers -----
       
       # --- Base layout -----
