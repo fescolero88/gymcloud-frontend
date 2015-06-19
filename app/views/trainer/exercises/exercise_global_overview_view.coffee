@@ -14,14 +14,20 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
 
   ui:
     editExerciseButton: '.gc-exercise-edit-button'
+    exerciseTitle: '.gc-exercise-title > span'
+    exerciseDescription: '.gc-exercise-description-editor'
 
   events:
     'click @ui.editExerciseButton': 'editExercise'
+    'blur @ui.exerciseTitle': 'saveExerciseTitle'
+    'blur @ui.exerciseDescription': 'saveDescription'
+    'keyup @ui.exerciseDescription': 'exerciseDescriptionAutoHeight'
 
   initialize: (data) =>
     @privacyButtonsView = new PrivacyButtonsView
       isPublic: @model.get('is_public')
     @listenTo @privacyButtonsView, 'privacy:changed', @setPrivacy
+    @listenTo @model, 'sync', @exerciseTitleSaved
     profile = App.request 'data:profile'
     if profile.get('id') is @model.get('author').id
       @myItem = true
@@ -60,3 +66,26 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
 
   editExercise: =>
     @trigger 'exercise:edit'
+
+  saveExerciseTitle: (event) ->
+    @model.set 'name', @ui.exerciseTitle.text()
+
+    if @model.hasChanged()
+      @model.save()
+
+  exerciseTitleSaved: ->
+    App.request 'messenger:show',
+      hideAfter: 5
+      message: "Exercise Updated."
+      type: 'success'
+
+  saveDescription: ->
+    @model.set 'description', @ui.exerciseDescription.val()
+
+    if @model.hasChanged()
+      @model.save()
+
+  exerciseDescriptionAutoHeight: =>
+    exerciseDesc = @ui.exerciseDescription.get 0
+    if exerciseDesc.scrollHeight > exerciseDesc.clientHeight
+      exerciseDesc.style.height = "#{exerciseDesc.scrollHeight}px"
