@@ -64,7 +64,6 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
       @model.save()
 
   onSync: (model, response, options) ->
-    console.log 'onSync', model, response, options
     @trigger 'modal:close'
     @trigger 'addToClientsCollection', model
     if @avatar[0].files[0]

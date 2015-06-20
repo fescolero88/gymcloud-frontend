@@ -23,7 +23,6 @@ module.exports = class AddGlobalFolderModalView extends Marionette.ItemView
     'submit @ui.form': 'submitForm'
 
   initialize: (data) =>
-    console.log 'add folder view init'
     rootId = App.request "data:#{data.type}:root"
     @folderId = data.folderId or rootId
     @initializeModel()

@@ -52,7 +52,6 @@ module.exports = class ExerciseEditView extends Marionette.ItemView
       type: 'success'
 
   onSyncFail: (model, xhr, options) ->
-    console.log model, xhr, options
     for name, error_msg of xhr.responseJSON.message
       $input = @$el.find("input[name=#{name}]")
       $inputGroup = $input.closest('.form-group')
