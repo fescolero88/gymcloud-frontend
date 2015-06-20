@@ -1,4 +1,3 @@
-#config = require 'config'
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 

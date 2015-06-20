@@ -23,7 +23,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
     "click .show-client-form": "showClientAddModal"
     "click .show-group-form": "showGroupAddModal"
     'click @ui.removeButton': 'rmEvent'
-    #"submit .gc-move-to-group-form": "submitMovetogroupForm"
+    "submit .gc-move-to-group-form": "submitMovetogroupForm"
 
   ui:
     mainCheckbox: ".gc-content-nav-checkall input[type='checkbox']"
@@ -153,6 +153,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
       clientsId.push $(check).data('id')
     for check in @$el.find('.gc-move-to-group-form').find('input[type=checkbox]:checked')
       groupsId.push $(check).data('id')
+
     data =
       client_ids: clientsId
       client_group_ids: groupsId

@@ -63,6 +63,5 @@ module.exports = class ClientModel extends Backbone.Model
       .then (response) =>
         @trigger 'model:invite:success', response
       .fail (xhr, textStatus, errorThrown) =>
-        console.log xhr, textStatus, errorThrown
         @trigger 'model:invite:fail', if xhr.responseJSON then xhr.responseJSON.error else null
 
