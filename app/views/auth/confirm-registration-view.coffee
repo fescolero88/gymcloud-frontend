@@ -7,10 +7,11 @@ module.exports = class ConfirmRegistrationView extends Marionette.ItemView
   initialize: (options) ->
     @token = options.token
     @profileModel = options.profileModel
-
-    @listenTo @model, 'model:auth_confirm:fail', @confirmFailed
-    @listenTo @model, 'model:auth_confirm:success', @confirmSuccess
     @listenTo @profileModel, 'change', @profileRetrieved
+
+  modelEvents:
+    'model:auth_confirm:fail': 'confirmFailed'
+    'model:auth_confirm:success': 'confirmSuccess'
 
   onRender: ->
     @model.confirm @token

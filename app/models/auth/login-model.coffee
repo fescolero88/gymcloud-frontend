@@ -20,7 +20,6 @@ module.exports = class LoginModel extends Backbone.Model
       required: true
 
   login: ->
-    
     if @isValid
       options =
         url: @url
