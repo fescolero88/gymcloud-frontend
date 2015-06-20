@@ -23,6 +23,3 @@ module.exports = class GroupModel extends Backbone.Model
         @trigger 'model:avatar_update:success', response
       .fail (xhr, textStatus, errorThrown) =>
         @trigger 'model:avatar_update:fail', 'Something went wrong'
-
-
-
