@@ -37,7 +37,7 @@ module.exports = class AddGlobalEWPModalView extends Marionette.ItemView
   onRender: =>
     setTimeout ( =>
         @ui.nameInput.focus()
-      ), 300
+      ), 400
 
   templateHelpers: ->
     type: @typeName
