@@ -23,7 +23,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
     "click .show-client-form": "showClientAddModal"
     "click .show-group-form": "showGroupAddModal"
     'click @ui.removeButton': 'rmEvent'
-    "submit .gc-move-to-group-form": "submitMovetogroupForm"
+    #"submit .gc-move-to-group-form": "submitMovetogroupForm"
 
   ui:
     mainCheckbox: ".gc-content-nav-checkall input[type='checkbox']"
@@ -187,7 +187,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
         if @clients.currentView? and @groups.currentView?
           if clientLength == 0 and groupLength == 0
             @showSplash([@clients, @groups])
-        else if @clients.currentView? 
+        else if @clients.currentView?
           if clientLength == 0
             @showSplash([@clients])
         else if @groups.currentView?

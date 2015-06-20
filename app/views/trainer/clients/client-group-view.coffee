@@ -46,7 +46,6 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
     @key = data.key
     @recentActivityCollection = data.recentActivity
 
-    console.log 'model instance', data.itemModel
     @headerView = new ClientGroupHeaderView model: data.itemModel, viewType: @viewType
     @navView = new ClientGroupNavView itemId: @itemId, viewType: @viewType
     @showActivity(false)

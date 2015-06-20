@@ -13,6 +13,10 @@ module.exports = class GroupFormModalView extends Marionette.ItemView
 
   className: 'modal-dialog'
 
+  modelEvents:
+    'sync': 'onSync'
+    'model:avatar_update:success': 'onAvatarUpate'
+
   events:
     'submit @ui.groupForm': 'submitGroupForm'
     'change .gc-edit-profile-modal-upload-input': 'showThumbnail'
@@ -43,7 +47,7 @@ module.exports = class GroupFormModalView extends Marionette.ItemView
 
   submitGroupForm: (ev) =>
     ev.preventDefault()
-    avatar = $(ev.target).find('input[type=file]')
+    @avatar = $(ev.target).find('input[type=file]')
     formData = @ui.groupForm.serializeObject()
     for key, value of formData
       if not value
@@ -51,28 +55,17 @@ module.exports = class GroupFormModalView extends Marionette.ItemView
     @model.set formData
     if @model.isValid true
       App.vent.trigger('spinner:global:start')
-      @model.save null,
-        success: (model, data) =>
-          App.vent.trigger 'spinner:global:stop'
-          if data.error
-            for name, error_msg of data.error
-              $input = @$el.find("input[name=#{name}]")
-              $inputGroup = $input.closest('.form-group')
-              @trigger 'switchError', error_msg[0], $inputGroup
-          else
-            @trigger 'closeModal'
-            @trigger 'addToGroupsCollection', model
-            if avatar[0].files[0]
-              data = new FormData()
-              data.append('avatar', avatar[0].files[0])
-              $.ajax
-                url: "#{model.urlRoot}/#{model.id}/avatar"
-                type: 'PUT'
-                data: data
-                cache: false
-                dataType: 'json'
-                processData: false
-                contentType: false
-                success: (data) =>
-                  model.set 'avatar_url', data.avatar_url
-                  @trigger 'avatarChange'
+      @model.save()
+
+  onSync: ->
+    App.vent.trigger 'spinner:global:stop'
+    @trigger 'closeModal'
+    @trigger 'addToGroupsCollection', @model
+    if @avatar[0].files[0]
+      data = new FormData()
+      data.append('avatar', @avatar[0].files[0])
+      @model.updateAvatar data
+
+  onAvatarUpate: (data) ->
+    model.set 'avatar_url', data.avatar_url
+    @trigger 'avatarChange'
