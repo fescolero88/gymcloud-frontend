@@ -2,6 +2,7 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
+EWPGlobalModel = require 'models/trainer/global-ewp-model'
 
 module.exports = class AddGlobalEWPModalView extends Marionette.ItemView
 
@@ -25,13 +26,15 @@ module.exports = class AddGlobalEWPModalView extends Marionette.ItemView
     rootId = App.request "data:#{@typeName}:root"
     @folderId = data.folderId or rootId
     @modal = data.modalEntity
+    @initializeModel()
+    
+  initializeModel: ->
+    @model = new EWPGlobalModel type: @typeName
 
-  onShow: =>
-    @modal.on 'shown.bs.modal', (ev) =>
-      ev.preventDefault()
-      @ui.nameInput.focus()
+    @listenTo @model, 'sync', @onSync
+    @listenTo @model, 'error', @onSyncFail
 
-  onShow: =>
+  onRender: =>
     setTimeout ( =>
         @ui.nameInput.focus()
       ), 300
@@ -59,18 +62,17 @@ module.exports = class AddGlobalEWPModalView extends Marionette.ItemView
           duration_days: 0
           program_folder_id: @folderId
 
-    $.ajax
-      method: 'POST'
-      url: "/api/mobile/#{@typeName}"
-      dataType: 'json'
-      data: JSON.stringify data
-      statusCode:
-        201: (model, data) =>
-          if data?.error
-            for name, error_msg of data.error
-              $input = @$el.find("input[name=#{name}]")
-              $inputGroup = $input.closest('.form-group')
-              @trigger 'switchError', error_msg[0], $inputGroup
-          else
-            @ui.nameInput.val('')
-            @trigger 'item:added', model
+    @model.set data
+    @model.save()
+
+  onSync: ->
+    @ui.nameInput.val('')
+    @trigger 'item:added', @model.toJSON()
+    # reinitialize model - maybe there is a better way
+    @initializeModel()
+
+  onSyncFail: (model, data) ->
+    for name, error_msg of data.error
+      $input = @$el.find("input[name=#{name}]")
+      $inputGroup = $input.closest('.form-group')
+      @trigger 'switchError', error_msg[0], $inputGroup

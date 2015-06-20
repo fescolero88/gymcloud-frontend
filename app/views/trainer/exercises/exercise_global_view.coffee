@@ -95,7 +95,7 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
 
   removeFromLibrary: (ev) =>
     ev.preventDefault()
-    copyId = $(ev.currentTarget).data('source');
+    copyId = $(ev.currentTarget).data('source')
     App.request 'base:confirmationalModal',
       title: "Remove exercise?"
       content: "Are you sure you want to remove this exercise from exercise?"

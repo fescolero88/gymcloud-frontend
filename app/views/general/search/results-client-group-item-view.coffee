@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 AvatarView = require 'views/general/search/avatar-view'
 
-module.exports = class ResultsClientGroupItemView extends Marionette.ItemView
+module.exports = class ResultsClientGroupItemView extends Marionette.LayoutView
 
   className: 'row'
 
