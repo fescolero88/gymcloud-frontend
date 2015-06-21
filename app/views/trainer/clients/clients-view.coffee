@@ -140,9 +140,17 @@ module.exports = class ClientsView extends Marionette.LayoutView
 
   showMovetogroupModal: (ev) =>
     ev?.preventDefault()
-    moveToGroupView = new MoveToGroupView collection: @groups.currentView.collection
-    @modalContainer.show moveToGroupView
-    @ui.modalContainer.modal('show')
+
+    # add validation for empty groups
+    if @groups.currentView.collection.length is 0
+      App.request 'messenger:show',
+        hideAfter: 5
+        message: 'No available groups'
+        type: 'error'
+    else
+      moveToGroupView = new MoveToGroupView collection: @groups.currentView.collection
+      @modalContainer.show moveToGroupView
+      @ui.modalContainer.modal('show')
 
   submitMovetogroupForm: (ev) ->
     ev.preventDefault()
