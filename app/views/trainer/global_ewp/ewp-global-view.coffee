@@ -228,25 +228,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
       data =
         target_folder_ids: foldersIds
       data["#{type}_ids"] = ids
-      
       @ewpGlobalModel.duplicate(data)
-
-      ###
-      $.ajax
-        method: 'POST'
-        url: "/api/mobile/#{@typeName}/duplicate"
-        dataType: 'json'
-        data: JSON.stringify data
-        success: (data) =>
-          App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
-            @ui.actionModal.modal 'hide'
-            App.vent.trigger 'spinner:global:stop'
-            App.request 'messenger:show',
-              hideAfter: 5
-              message: "Item(s) duplicated"
-              type: 'success'
-      ###
-
     else
       typeSingle = @typeName.substring 0, @typeName.length - 1
       App.request 'messenger:show',
