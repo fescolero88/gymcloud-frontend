@@ -11,6 +11,8 @@ BreadcrumbsView = require 'views/general/breadcrumbs/breadcrumbs-view'
 BreadcrumbsCollection = require 'models/general/breadcrumbs'
 EWPSortableCollection = require 'models/trainer/ewp_sortable_collection'
 
+GlobalEWPModel = require 'models/trainer/global-ewp-model'
+
 module.exports = class EWPGlobalView extends Marionette.LayoutView
 
   template: Templates.trainer.global_ewp.global_ewp_layout
@@ -45,11 +47,14 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     'click @ui.backButton': 'goBack'
 
   initialize: (data) =>
+    #console.log 'global view model', @model
     @item_id = data.model?.get 'key'
     @exercisesList = data.items
     @typeName = data.type
     @breadcrumbsView = new BreadcrumbsView
       collection: new BreadcrumbsCollection data.breadcrumbs
+
+    @ewpGlobalModel = new GlobalEWPModel type: @typeName
 
     @addGlobalEWPModal = new AddGlobalEWPModalView
       folderId: @item_id
@@ -65,6 +70,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     @listenTo @addGlobalEWPModal, 'item:added', @exerciseAdded
     @listenTo @addGlobalFolderModal, 'folder:added', @folderAdded
     @listenTo @duplicateGlobalEWPModal, 'items:duplicate', @duplicateEWP
+    @listenTo @ewpGlobalModel, 'model:duplicate:success', @onDuplicate
 
   templateHelpers: ->
     type: @typeName
@@ -222,6 +228,10 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
       data =
         target_folder_ids: foldersIds
       data["#{type}_ids"] = ids
+      
+      @ewpGlobalModel.duplicate(data)
+
+      ###
       $.ajax
         method: 'POST'
         url: "/api/mobile/#{@typeName}/duplicate"
@@ -235,12 +245,23 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
               hideAfter: 5
               message: "Item(s) duplicated"
               type: 'success'
+      ###
+
     else
       typeSingle = @typeName.substring 0, @typeName.length - 1
       App.request 'messenger:show',
         hideAfter: 5
         message: "No #{typeSingle} was selected"
         type: 'error'
+
+  onDuplicate: ->
+    App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
+      @ui.actionModal.modal 'hide'
+      App.vent.trigger 'spinner:global:stop'
+      App.request 'messenger:show',
+        hideAfter: 5
+        message: "Item(s) duplicated"
+        type: 'success'
 
   goBack: (ev) ->
     ev.preventDefault()
