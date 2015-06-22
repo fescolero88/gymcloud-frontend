@@ -92,11 +92,12 @@ class App extends Marionette.Application
 
       $.ajaxPrefilter ( options, originalOptions, jqXHR ) =>
         options.url = config.api.url + options.url
-        if window.localStorage.accessToken
+        accessToken = @request 'accessToken:get'
+        if accessToken #window.localStorage.accessToken
           if options.url.indexOf('?') > 0
-            options.url += "&access_token=#{window.localStorage.accessToken}"
+            options.url += "&access_token=#{accessToken}"
           else
-            options.url += "?access_token=#{window.localStorage.accessToken}"
+            options.url += "?access_token=#{accessToken}"
         options
       # --- Ajax handlers -----
 
@@ -237,8 +238,17 @@ class App extends Marionette.Application
           contentType: params.contentType || 'application/json'
           data: params.data || {}
 
+      @reqres.setHandler 'accessToken:set', (token) ->
+        window.localStorage.setItem 'accessToken', token
+
+      @reqres.setHandler 'accessToken:get', ->
+        window.localStorage.getItem 'accessToken'
+
+      @reqres.setHandler 'accessToken:remove', ->
+        window.localStorage.removeItem 'accessToken'
+
       # --- Data handlers -----
-      
+
       # --- Base layout -----
       @baseView = new BaseView()
       @baseView.render()
@@ -256,7 +266,8 @@ class App extends Marionette.Application
       # --- Add modules -----
 
       # --- Get profile -----
-      if window.localStorage.accessToken
+      #if window.localStorage.accessToken
+      if @request 'accessToken:get'
         profileModel = @request 'data:profile'
         profileModel.fetch().then =>
           @vent.trigger 'profile:ready'

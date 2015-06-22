@@ -8,7 +8,7 @@ ClientModel = require 'models/trainer/client-model'
 
 GroupFormModalView = require 'views/trainer/clients/group-form-modal-view'
 GroupModel = require 'models/trainer/group-model'
-
+_ = require 'underscore'
 
 module.exports = class ClientsView extends Marionette.LayoutView
 
@@ -142,7 +142,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
     ev?.preventDefault()
 
     # add validation for empty groups
-    if @groups.currentView.collection.length is 0
+    if _.isEmpty(@groups.currentView.collection.models)
       App.request 'messenger:show',
         hideAfter: 5
         message: 'No available groups'

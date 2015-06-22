@@ -29,7 +29,8 @@ module.exports = class AddGlobalEWPModalView extends Marionette.ItemView
     @initializeModel()
     
   initializeModel: ->
-    @model = new EWPGlobalModel type: @typeName
+    @model = new EWPGlobalModel
+      type: @typeName
 
     @listenTo @model, 'sync', @onSync
     @listenTo @model, 'error', @onSyncFail

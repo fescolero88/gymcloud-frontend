@@ -20,7 +20,8 @@ module.exports = class ConfirmRegistrationView extends Marionette.ItemView
     # todo: implement resending of confirmation email
 
   confirmSuccess: (data) ->
-    window.localStorage.setItem 'accessToken', data.access_token
+    #window.localStorage.setItem 'accessToken', data.access_token
+    App.request 'accessToken:set', data.access_token
     @profileModel.fetch()
 
   profileRetrieved: ->
