@@ -93,7 +93,7 @@ class App extends Marionette.Application
       $.ajaxPrefilter ( options, originalOptions, jqXHR ) =>
         options.url = config.api.url + options.url
         accessToken = @request 'accessToken:get'
-        if accessToken #window.localStorage.accessToken
+        if accessToken
           if options.url.indexOf('?') > 0
             options.url += "&access_token=#{accessToken}"
           else
@@ -106,7 +106,7 @@ class App extends Marionette.Application
       App.data.profileModel = new ProfileModel()
 
       @reqres.setHandler 'auth:isAuthorized', (permission) =>
-        if window.localStorage.accessToken
+        if @request 'accessToken:get'
           if permission?
             accountType = App.data.profileModel.get('account_type')
             if accountType?
@@ -266,7 +266,6 @@ class App extends Marionette.Application
       # --- Add modules -----
 
       # --- Get profile -----
-      #if window.localStorage.accessToken
       if @request 'accessToken:get'
         profileModel = @request 'data:profile'
         profileModel.fetch().then =>

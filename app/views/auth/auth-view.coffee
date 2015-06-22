@@ -50,7 +50,6 @@ module.exports = class AuthView extends Marionette.ItemView
       App.vent.trigger 'profile:ready'
 
   onLoginSuccess: (data) ->
-    #window.localStorage.setItem 'accessToken', data.access_token
     App.request 'accessToken:set', data.access_token
     @getProfile()
 
