@@ -54,9 +54,7 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
   onSync: ->
     @trigger 'privacy:changed', @model.get 'is_public'
     App.request 'messenger:show',
-      hideAfter: 5
       message: "Privacy settings was changed"
-      type: 'info'
 
   editExercise: =>
     @trigger 'exercise:edit'
