@@ -74,7 +74,9 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
       @model.save()
 
   exerciseTitleSaved: ->
+    App.vent.trigger 'spinner:global:start'
     App.request('data:reload', 'exercises', App.request 'data:exercises:root').then =>
+      App.vent.trigger 'spinner:global:stop'
       App.request 'messenger:show',
       hideAfter: 5
       message: "Exercise Updated."
