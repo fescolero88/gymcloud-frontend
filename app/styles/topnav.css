@@ -8,6 +8,7 @@
 .gc-topbar > div > div {
     display: table-cell;
     vertical-align: top;
+    width: 64px;
 }
 .gc-topbar-search {
     background: #2f3538;

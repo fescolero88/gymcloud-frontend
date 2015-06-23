@@ -125,6 +125,7 @@ body > region[data-name="app"] > .container-fluid {
 }
 .gc-fixed-top-bar .gc-topbar > div {
   display: table;
+  width: 100%;
 }
 .gc-fixed-top-bar .gc-main {
   padding-top: 64px;
