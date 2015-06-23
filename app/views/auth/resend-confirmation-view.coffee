@@ -5,10 +5,10 @@ module.exports = class ResendConfirmationView extends Marionette.ItemView
 
   template: Templates.auth.resend_confirmation
 
-  initialize: ->
-    @listenTo @model, 'model:auth_resend:success', @onResendSuccess
-    @listenTo @model, 'model:auth_resend:fail', @onResendFailed
-    @listenTo @model, 'invalid', @onModelValidateFailed
+  modelEvents:
+    'model:auth_resend:success': 'onResendSuccess'
+    'model:auth_resend:fail': 'onResendFailed'
+    'invalid': 'onModelValidateFailed'
 
   onRender: ->
     Backbone.Validation.bind @

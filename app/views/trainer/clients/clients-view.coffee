@@ -8,7 +8,7 @@ ClientModel = require 'models/trainer/client-model'
 
 GroupFormModalView = require 'views/trainer/clients/group-form-modal-view'
 GroupModel = require 'models/trainer/group-model'
-
+_ = require 'underscore'
 
 module.exports = class ClientsView extends Marionette.LayoutView
 
@@ -140,9 +140,17 @@ module.exports = class ClientsView extends Marionette.LayoutView
 
   showMovetogroupModal: (ev) =>
     ev?.preventDefault()
-    moveToGroupView = new MoveToGroupView collection: @groups.currentView.collection
-    @modalContainer.show moveToGroupView
-    @ui.modalContainer.modal('show')
+
+    # add validation for empty groups
+    if _.isEmpty(@groups.currentView.collection.models)
+      App.request 'messenger:show',
+        hideAfter: 5
+        message: 'No available groups'
+        type: 'error'
+    else
+      moveToGroupView = new MoveToGroupView collection: @groups.currentView.collection
+      @modalContainer.show moveToGroupView
+      @ui.modalContainer.modal('show')
 
   submitMovetogroupForm: (ev) ->
     ev.preventDefault()
@@ -153,6 +161,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
       clientsId.push $(check).data('id')
     for check in @$el.find('.gc-move-to-group-form').find('input[type=checkbox]:checked')
       groupsId.push $(check).data('id')
+
     data =
       client_ids: clientsId
       client_group_ids: groupsId
@@ -187,7 +196,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
         if @clients.currentView? and @groups.currentView?
           if clientLength == 0 and groupLength == 0
             @showSplash([@clients, @groups])
-        else if @clients.currentView? 
+        else if @clients.currentView?
           if clientLength == 0
             @showSplash([@clients])
         else if @groups.currentView?

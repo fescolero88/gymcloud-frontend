@@ -11,7 +11,9 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
   autoRender: false
 
   modelEvents:
-    sync: 'render'
+    'sync': 'render'
+    'model:invite:success': 'onInvite'
+    'model:invite:fail': 'onInviteFail'
 
   events:
     'submit @ui.inviteForm': 'submitClientForm'
@@ -51,23 +53,21 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
       url = "/api/mobile/me/invite"
     else
       url = "/api/mobile/clients/#{@model.get('id')}/invite"
-    $.ajax
-      url: url
-      type: 'POST'
-      data: JSON.stringify formData
-      dataType: 'json'
-      success: =>
-        @ui.inviteModal.modal('hide')
-        App.request 'messenger:show',
-          message: 'Invitation successfully sent'
-          type: 'info'
-      error: (data) =>
-        errorMsg = data.responseJSON.error
-        if errorMsg?
-          $input = @ui.inviteForm.find('input[name=email]')
-          $inputGroup = $input.closest('.form-group')
-          $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
-          $inputGroup.find('.gc-error-message').text(errorMsg)
+
+    @model.invite(formData, url)
+
+  onInvite: ->
+    @ui.inviteModal.modal('hide')
+    App.request 'messenger:show',
+      message: 'Invitation successfully sent'
+      type: 'info'
+
+  onInviteFail: (error) ->
+    if error?
+      $input = @ui.inviteForm.find('input[name=email]')
+      $inputGroup = $input.closest('.form-group')
+      $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
+      $inputGroup.find('.gc-error-message').text(error)
 
   showClientEditModal: (ev) ->
     ev.preventDefault()

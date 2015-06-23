@@ -12,7 +12,8 @@ module.exports = class ExerciseEditView extends Marionette.ItemView
       behaviorClass: FormValidationBehaviour
 
   modelEvents:
-    sync: 'render'
+    sync: 'onSync'
+    error: 'onSyncFail'
 
   ui:
     form: 'form'
@@ -41,18 +42,20 @@ module.exports = class ExerciseEditView extends Marionette.ItemView
     formData = @ui.form.serializeObject()
     @model.set formData
     if @model.isValid true
-      @model.save null,
-        success: =>
-          @trigger 'exercise:back'
-          App.request 'messenger:show',
-            hideAfter: 5
-            message: "Item was edited."
-            type: 'success'
-        error: (e, data) =>
-          for name, error_msg of data.responseJSON.message
-            $input = @$el.find("input[name=#{name}]")
-            $inputGroup = $input.closest('.form-group')
-            @trigger 'switchError', error_msg[0], $inputGroup
+      @model.save()
+     
+  onSync: ->
+    @trigger 'exercise:back'
+    App.request 'messenger:show',
+      hideAfter: 5
+      message: "Item was edited."
+      type: 'success'
+
+  onSyncFail: (model, xhr, options) ->
+    for name, error_msg of xhr.responseJSON.message
+      $input = @$el.find("input[name=#{name}]")
+      $inputGroup = $input.closest('.form-group')
+      @trigger 'switchError', error_msg[0], $inputGroup
 
   back: (e) =>
     e.preventDefault()

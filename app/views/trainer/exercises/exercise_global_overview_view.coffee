@@ -23,6 +23,9 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
     'blur @ui.exerciseDescription': 'saveDescription'
     'keyup @ui.exerciseDescription': 'exerciseDescriptionAutoHeight'
 
+  modelEvents:
+    sync: 'onSync'
+
   initialize: (data) =>
     @privacyButtonsView = new PrivacyButtonsView
       isPublic: @model.get('is_public')
@@ -52,17 +55,12 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
 
   setPrivacy: (isPublic) =>
     @model.set 'is_public', isPublic
+    @model.save()
+    
+  onSync: ->
     @trigger 'privacy:changed', @model.get 'is_public'
-    $.ajax
-      url: @model.url
-      method: 'PUT'
-      dataType: 'json'
-      data: JSON.stringify @model
-      success: (data) =>
-        App.request 'messenger:show',
-          hideAfter: 5
-          message: "Privacy settings was changed"
-          type: 'info'
+    App.request 'messenger:show',
+      message: "Privacy settings was changed"
 
   editExercise: =>
     @trigger 'exercise:edit'

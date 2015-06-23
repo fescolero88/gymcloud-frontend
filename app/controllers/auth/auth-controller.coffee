@@ -26,13 +26,14 @@ module.exports = class AuthController extends Marionette.Controller
     view = new AuthView
       signUp: signUp
       model: model
-    if window.localStorage.accessToken
+    if App.request 'accessToken:get'
       window.location.replace '#'
     else
       @layoutView.mainRegion.show(view)
 
   logout: =>
-    window.localStorage.removeItem 'accessToken'
+    #window.localStorage.removeItem 'accessToken'
+    App.request 'accessToken:remove'
     window.location.replace '#login'
 
   forgotPassword: ->
