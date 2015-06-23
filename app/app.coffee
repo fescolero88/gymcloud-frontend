@@ -231,7 +231,7 @@ class App extends Marionette.Application
           action: params.name
 
       # --- Data handlers -----
-      
+
       # --- Base layout -----
       @baseView = new BaseView()
       @baseView.render()

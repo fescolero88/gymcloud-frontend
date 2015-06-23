@@ -71,9 +71,9 @@ module.exports = class TrainerController extends Marionette.Controller
           clientsPageView.ui.splash.removeClass 'hidden'
           clientsPageView.clients.$el.addClass 'hidden'
           clientsPageView.groups.$el.addClass 'hidden'
-          
+
     clientsPageView.initRegionListeners()
-    
+
   clientOrGroup: (type, id, assign, key) ->
     currentViewName = @mainView.content.currentView?.constructor.name
     if currentViewName is 'ClientGroupView'
