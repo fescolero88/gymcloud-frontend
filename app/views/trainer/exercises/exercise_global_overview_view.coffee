@@ -30,10 +30,11 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
     @privacyButtonsView = new PrivacyButtonsView
       isPublic: @model.get('is_public')
     @listenTo @privacyButtonsView, 'privacy:changed', @setPrivacy
-    @listenTo @model, 'sync', @exerciseTitleSaved
     profile = App.request 'data:profile'
     if profile.get('id') is @model.get('author').id
       @myItem = true
+
+    @updatedAttribute = '' #used for showing proper alert message of what gets modified
 
   templateHelpers: =>
     videoUrl = @model.get('video_url') || ''
@@ -56,11 +57,21 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
   setPrivacy: (isPublic) =>
     @model.set 'is_public', isPublic
     @model.save()
+    @updatedAttribute = 'privacy'
     
-  onSync: ->
-    @trigger 'privacy:changed', @model.get 'is_public'
-    App.request 'messenger:show',
-      message: "Privacy settings was changed"
+  onSync:(model, response, options) ->
+    if @updatedAttribute is 'privacy'
+      @trigger 'privacy:changed', @model.get 'is_public'
+      App.request 'messenger:show',
+        message: "Privacy settings was changed"
+    else
+      App.vent.trigger 'spinner:global:start'
+      App.request('data:reload', 'exercises', App.request 'data:exercises:root').then =>
+        App.vent.trigger 'spinner:global:stop'
+        App.request 'messenger:show',
+        hideAfter: 5
+        message: "Exercise Updated."
+        type: 'success'
 
   editExercise: =>
     @trigger 'exercise:edit'
@@ -70,15 +81,7 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
 
     if @model.hasChanged()
       @model.save()
-
-  exerciseTitleSaved: ->
-    App.vent.trigger 'spinner:global:start'
-    App.request('data:reload', 'exercises', App.request 'data:exercises:root').then =>
-      App.vent.trigger 'spinner:global:stop'
-      App.request 'messenger:show',
-      hideAfter: 5
-      message: "Exercise Updated."
-      type: 'success'
+      @updatedAttribute = 'title'
 
   saveDescription: ->
     @model.set 'description', @ui.exerciseDescription.val()
