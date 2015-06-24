@@ -32,10 +32,8 @@ module.exports = class SearchBarView extends Marionette.ItemView
 
   cancelSearch: ->
     @ui.searchTerm.val('')
-    console.log 'before toggle classes', @ui.searchIcon
     @ui.searchIcon.addClass('glyphicon-search')
     @ui.searchIcon.removeClass('glyphicon-remove')
-    console.log 'after toggle classes', @ui.searchIcon
     App.vent.trigger 'search:cancel'
 
   search: (ev) ->
