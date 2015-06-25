@@ -4,6 +4,8 @@ Backbone = require 'backbone'
 WorkoutGlobalOverviewView = require 'views/trainer/workouts/workout_global_overview_view'
 WorkoutGlobalVideoView = require 'views/trainer/workouts/workout_global_video_view'
 
+WorkoutExerciseModel = require 'models/trainer/workout-exercise-model'
+
 module.exports = class WorkoutGlobalView extends Marionette.LayoutView
 
   template: Templates.trainer.workouts.workout_global
@@ -31,7 +33,11 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
     @isDroppable = true
     @workoutModel = data.workout
 
-    App.vent.on 'drag:complete', @assignDragged
+    App.vent.on 'drag:complete', @assignExercise
+
+    @workoutExerciseModel = new WorkoutExerciseModel
+    @listenTo(@workoutExerciseModel, 'sync', @onExerciseAdded)
+
 
   onShow: =>
     @changeView 'description'
@@ -70,5 +76,15 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
     ev.preventDefault()
     App.request 'base:addToLibraryModal', type: 'workouts', model: @workoutModel
 
-  assignDragged: ->
-    console.log 'assign exercise'
+  assignExercise: (item) =>
+    category = item.get 'category'
+    if category == 'exercises'
+      workoutId = @workoutModel.get 'id'
+      exerciseId = item.get 'id'
+      @workoutExerciseModel.urlRoot = "#{@workoutExerciseModel.urlRoot}/#{workoutId}/workout_exercises"
+      @workoutExerciseModel.set 'id', workoutId
+      @workoutExerciseModel.set 'workout_exercise_id', exerciseId
+      @workoutExerciseModel.save()
+
+  onExerciseAdded: () =>
+    console.log 'exercuse added'
