@@ -5,6 +5,8 @@ WorkoutGlobalOverviewView = require 'views/trainer/workouts/workout_global_overv
 WorkoutGlobalVideoView = require 'views/trainer/workouts/workout_global_video_view'
 WorkoutGlobalAssignView = require 'views/trainer/workouts/workout_global_assign_view'
 
+WorkoutExerciseModel = require 'models/trainer/workout-exercise-model'
+
 module.exports = class WorkoutGlobalView extends Marionette.LayoutView
 
   template: require('templates/trainer/workouts/workout_global')
@@ -33,7 +35,16 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
     workout: @workoutModel.attributes
 
   initialize: (data) =>
+    @isDroppable = true
     @workoutModel = data.workout
+
+    App.vent.on 'drag:complete', @assignExercise
+
+    @workoutExerciseModel = new WorkoutExerciseModel
+    @listenTo(@workoutExerciseModel, 'sync', @onExerciseAdded)
+
+  onDestroy: =>
+    App.vent.off 'drag:complete', @assignExercise
 
   onShow: =>
     @changeView 'description'
@@ -84,3 +95,18 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
   showAddToLibrary: (ev) =>
     ev.preventDefault()
     App.request 'base:addToLibraryModal', type: 'workouts', model: @workoutModel
+
+  assignExercise: (item) =>
+    category = item.get 'category'
+    if category == 'exercises'
+      data =
+        'id': @workoutModel.get 'id'
+        'exercise_id': item.get 'id'
+
+      @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises"
+      @workoutExerciseModel.set data
+      @workoutExerciseModel.addExercise = true
+      @workoutExerciseModel.save()
+
+  onExerciseAdded: () =>
+    @workoutModel.fetch()

@@ -302,7 +302,7 @@
   top: 15px;
   left: 15px;
   right: 15px;
-  bottom: 0;
+  bottom: 15px;
   background: rgba(58, 153, 216, 0.5);
   outline: 15px solid rgba(58, 153, 216, 0.5);
   border: 2px dashed rgba(255, 255, 255, 0.5);
