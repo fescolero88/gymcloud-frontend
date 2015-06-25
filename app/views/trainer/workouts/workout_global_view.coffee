@@ -28,7 +28,10 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
     workout: @workoutModel.attributes
 
   initialize: (data) =>
+    @isDroppable = true
     @workoutModel = data.workout
+
+    App.vent.on 'drag:complete', @assignDragged
 
   onShow: =>
     @changeView 'description'
@@ -66,3 +69,6 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
   showAddToLibrary: (ev) =>
     ev.preventDefault()
     App.request 'base:addToLibraryModal', type: 'workouts', model: @workoutModel
+
+  assignDragged: ->
+    console.log 'assign exercise'
