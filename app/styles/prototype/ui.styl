@@ -1,0 +1,741 @@
+/*color constants*/
+white = #ffffff
+blue = #3a99d8
+blueSecondary = #1d74ae
+gray = #cccccc
+lighGray = fafafa
+black = #2f3539
+blackSecondary = #282d30
+
+green = #39ca74
+orange = #ff9702
+red = #e54d42
+
+/*functions*/
+transition(type, duration, animation)
+  -webkit-transition type duration animation
+  -moz-transition type duration animation
+  transition type duration animation
+
+/*base styles*/
+backgroundCenter =
+  background-repeat no-repeat
+  background-position center
+
+faIcon =
+  display block
+  position absolute
+  bottom 13px
+  right 10px
+  font-size 14px
+  display inline-block
+  font normal normal normal 14px/1 FontAwesome
+  font-size inherit
+  text-rendering auto
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+  transform translate(0, 0)
+
+/*ui styles*/
+.gc-prototype-container
+  background white
+  padding 15px
+  max-width 1100px
+  margin 0 auto
+  overflow-y auto
+
+.gc-prototype-title
+  color blue
+  margin 0
+  padding 10px 0
+
+.gc-component
+  padding 10px
+
+.gc-component .gc-component-name
+  font-size 22px
+  line-height 30px
+  font-weight 300
+  margin-bottom 15px
+
+.gc-bg-inverse
+  background-color blue
+  color white
+
+.btn.gc-custom
+  border-radius 50px
+
+.btn-primary.gc-custom
+  background-color white
+  border 1px solid blue
+  color blue
+
+.btn-primary.gc-custom:hover
+  transition(all, 0.20s, linear)
+  border-color blueSecondary
+  background-color white
+  color blueSecondary
+
+.btn-primary.gc-custom:active
+  transition(all, 0.20s, linear)
+  background-color blue
+  color white
+
+.btn-inverse.gc-custom
+  background-color transparent
+  border 1px solid white
+  color white
+
+.btn-inverse.gc-custom:hover
+  transition(all, 0.20s, linear)
+  border-color blueSecondary
+  color blueSecondary
+
+.btn-inverse.gc-custom:active
+  transition(all, 0.20s, linear)
+  background-color white
+  border-color white
+  color blue
+
+.form-group
+  position relative
+
+.form-group label
+  color #a6a7aa
+  font-weight normal
+
+.form-group.gc-form-disabled label
+  color gray
+
+.form-group.gc-form-alert:before
+  float right
+  color red
+  content attr(data-error)
+
+.form-group.gc-form-alert:after
+  color red
+  content "\f00d"
+  {faIcon}
+
+input.form-control.gc-alert
+  border-color red
+
+input.form-control.gc-active
+  border-color blue
+
+.form-group.gc-form-active input.form-control,
+.form-group.gc-form-alert input.form-control
+  padding-right 30px
+
+.form-group.gc-form-active:after
+  color blue
+  content "\f00c"
+  {faIcon}
+
+input.form-control:disabled
+  background-color white
+  color #bbb
+
+input.form-control
+  color #000
+  height 38px
+
+input.form-controlfocus
+  border-color auto
+  box-shadow none
+
+input.form-control-ms-input-placeholder
+input.form-control-moz-placeholder
+input.form-control-moz-placeholder
+input.form-control-webkit-input-placeholder
+   color gray
+
+.gc-dropdown.gc-sample-active
+  display block
+  position inherit
+  float none
+  display inline-block
+
+.gc-dropdown li.gc-danger > a
+  color red
+
+a.gc-text-link
+  color #3398db
+  text-transform uppercase
+  font-size 14px
+  line-height 30px
+  margin 0
+  display inline-block
+  outline none
+  text-decoration none
+
+a.gc-text-link.gc-danger
+  color red
+
+a.gc-text-link:hover
+  text-decoration none
+
+.gc-text-link .fa
+  width 22px
+  margin-right 6px
+  text-align center
+
+.gc-text-link .gc-icon-link
+  display inline-block
+  width 18px
+  height 30px
+  margin 0 10px 0 0
+  vertical-align middle
+
+.gc-icon-exercises
+  background transparent url('/static/images/icon-exercises.png') -21px 2px no-repeat
+  background-size 220%
+
+.gc-icon-workouts
+  background transparent url('/static/images/icon-workouts.png') -15px 3px no-repeat
+  background-size 180%
+
+.gc-icon-programs
+  background transparent url('/static/images/icon-programs.png') -13px 4px no-repeat
+  background-size 170%
+
+.input-group.gc-datetime .btn
+  height 38px
+  font-size 18px
+  padding 0px 8px
+  color blue
+
+.input-group.gc-datetime .btn:hover
+  transition(all, 0.20s, linear)
+  border-color blue
+  background-color blue
+  color white
+
+.input-group.gc-datetime .btn > .fa:first-child
+  margin-right 5px
+
+.input-group.gc-datetime > :last-child,
+.input-group.gc-datetime > :last-child > .btn
+  border-top-right-radius 6px
+  border-bottom-right-radius 6px
+
+.input-group.gc-datetime > :first-child,
+.input-group.gc-datetime > :first-child > .btn
+  border-top-left-radius 6px
+  border-bottom-left-radius 6px
+
+.btn-group.gc-tabs
+  display block
+
+.btn-group.gc-tabs > *
+  height 38px
+
+.btn-group.gc-tabs > *.:active
+  border-color blue
+  background-color blue
+  color white
+
+.btn-group.gc-tabs > *:last-child
+  border-top-right-radius 6px
+  border-bottom-right-radius 6px
+
+.btn-group.gc-tabs > *:first-child
+  border-top-left-radius 6px
+  border-bottom-left-radius 6px
+
+.gc-counter
+  display table
+  border-collapse separate
+
+.gc-counter > *
+  display table-cell
+  vertical-align top
+
+.gc-counter > .gc-counter-input
+  border-top-left-radius 6px
+  border-bottom-left-radius 6px
+  border-top-right-radius 0px
+  border-bottom-right-radius 0px
+
+.gc-counter .gc-counter-control
+  height 38px
+  padding 0
+  border-top-left-radius 0px
+  border-bottom-left-radius 0px
+  border-top-right-radius 6px
+  border-bottom-right-radius 6px
+  overflow hidden
+  border 1px solid gray
+  border-left none
+
+.gc-counter .gc-counter-control > .gc-caret
+  height 18px
+  display block
+  padding 0 10px
+
+.gc-counter .gc-counter-control > .gc-caret:hover
+  text-decoration none
+
+.gc-counter .gc-counter-control > .gc-caret:first-child
+  border-bottom 1px solid gray
+
+.gc-counter .gc-counter-control > .gc-caret i
+  display block
+  font-size 12px
+  height 100%
+  line-height 17px
+
+.gc-counter .gc-counter-control > .gc-caret:last-child i
+  line-height 18px
+
+.gc-textarea-no-border
+  border none
+  -webkit-box-shadow none
+  -moz-box-shadow none
+  box-shadow none
+  outline none
+  resize none
+
+.gc-textarea-no-borderfocus
+  -webkit-box-shadow none
+  -moz-box-shadow none
+  box-shadow none
+
+.gc-textarea
+  color #000
+  resize none
+
+.gc-tag
+  border 1px solid gray
+  padding 4px 15px
+  border-radius 50px
+  color #97A4AA
+  display inline-block
+  margin 10px 0
+
+.gc-tag.gc-tag-highlight
+  border-color blue
+  color blackSecondary
+
+.gc-tag.gc-tag-highlight i
+  color blackSecondary
+
+.gc-tag-group
+  display table
+  margin 10px 0
+
+.gc-tag-group > .gc-tag
+  display table-cell
+  border-radius 0px
+  margin 0
+
+.gc-tag-group > .gc-tag:not(:first-child)
+  border-left none
+
+.gc-tag-group > .gc-tag:first-child
+  border-top-left-radius 50px
+  border-bottom-left-radius 50px
+
+.gc-tag-group > .gc-tag:last-child
+  border-top-right-radius 50px
+  border-bottom-right-radius 50px
+
+.gc-nav-breadcrumbs .gc-breadcrumbs
+  display inline-block
+  margin-left 15px
+
+.gc-nav-breadcrumbs .gc-breadcrumbs-title
+  font-size 18px
+  font-weight bold
+
+
+.gc-topbar-item.gc-topbar-dropdown
+  position relative
+  display inline-block
+
+.gc-topbar-avatar
+  border-left none
+
+.gc-pagination-bordered > li:first-child > a
+  border-top-left-radius 50px
+  border-bottom-left-radius 50px
+
+.gc-pagination-bordered > li:last-child > a
+  border-top-right-radius 50px
+  border-bottom-right-radius 50px
+
+.gc-pagination-bordered li a
+  border-color gray
+  color #3398db
+
+.gc-pagination li a
+  border none
+  color #3398db
+  padding 6px 8px
+
+.gc-pagination li a:hover
+.gc-pagination li a span:hover
+  background white
+
+.gc-tooltip.gc-demo
+  position relative
+  display block
+
+.popover.gc-tooltip
+  border none
+  padding 0
+  border-radius 3px
+
+.gc-tooltip .popover-title
+  background blue
+  border-color blue
+  color white
+  padding 20px 10px
+
+.gc-tooltip .popover-content
+  padding 20px 10px
+
+.gc-tooltip.bottom.gc-tooltip-no-header .arrow:after
+  border-bottom-color white
+
+.gc-tooltip.bottom .arrow:after
+  border-bottom-color blue!important
+
+.gc-tooltip.gc-tooltip-no-header
+  -webkit-box-shadow 0px 2px 12px 1px rgba(0,0,0,.2)
+  box-shadow 0px 2px 12px 1px rgba(0,0,0,.2)
+
+.gc-alert-message
+  background lighGray
+  border-radius 3px
+  max-width 250px
+  -webkit-box-shadow 0 2px 8px rgba(0,0,0,.2)
+  box-shadow 0 2px 8px rgba(0,0,0,.2)
+  display table
+  margin 15px
+
+.gc-alert-message > *
+  display table-cell
+  vertical-align middle
+
+.gc-alert-message .gc-alert-icon
+  width 50px
+  padding 15px
+
+.gc-alert-message .gc-alert-icon > span
+  height 26px
+  width 26px
+  display block
+  color white
+
+.gc-alert-message p
+  width 200px
+  font-size 15px
+
+.gc-alert-message.gc-error
+  border-left 5px solid red
+
+.gc-alert-message.gc-error .gc-alert-icon > span
+  background red
+  border-radius 26px
+  font-size 18px
+  text-align center
+
+.gc-alert-message.gc-warning
+  border-left 5px solid orange
+
+.gc-alert-message.gc-warning .gc-alert-icon > span
+  background orange
+  border-radius 26px
+  font-size 18px
+  text-align center
+
+.gc-alert-message.gc-success
+  border-left 5px solid green
+
+.gc-alert-message.gc-success .gc-alert-icon > span
+  background green
+  border-radius 100%
+  position relative
+
+.gc-alert-message.gc-success .gc-alert-icon > span:after
+  content ""
+  display block
+  position absolute
+  top 4px
+  left 4px
+  width 18px
+  height 18px
+  background-image url('../images/icon-exercises.png')
+  background-size cover
+  background-position 0 0
+  background-repeat no-repeat
+
+.gc-table-holder
+  border 1px solid gray
+  border-radius 5px
+  margin 20px 0
+
+.gc-table-title
+  padding 0 20px
+  background-color lighGray
+  border-bottom 1px solid gray
+
+.gc-table-holder .gc-table-container
+  padding 20px
+
+.gc-table-title span
+  text-transform uppercase
+  font-size 15px
+  padding 20px 0
+  display inline-block
+
+.gc-table
+  border-collapse collapse
+  width 100%
+
+.gc-table thead,
+.gc-table tbody,
+.gc-table tr
+  width 100%
+
+.gc-table tr
+  border-bottom 1px solid gray
+
+.gc-table tbody tr
+  cursor pointer
+
+.gc-table tbody tr:hover td
+  background-color lighGray
+
+.gc-table td
+  padding 20px 0
+
+.gc-table thead td
+  color #C0C0C0
+
+.gc-table tbody td
+  font-size 15px
+  padding 25px 0
+
+
+.gc-heading-1,
+.gc-heading-2,
+.gc-paragraph
+  font-size 16px
+  margin 15px 0
+
+.gc-heading-1
+  color #424647
+  font-weight bold
+
+.gc-heading-2
+  color blackSecondary
+  font-weight bold
+
+.gc-empty-state
+  text-align center
+  color #C1C1C1
+  width 100%
+
+.gc-empty-state-image
+  height 45px
+  margin 15px 0
+  position relative
+
+.gc-empty-state-image img
+  position absolute
+  bottom 0
+  left 50%
+  transform translateX(-50%)
+  -webkit-transform translateX(-50%)
+
+/*for demo grid*/
+.gc-row-4:after
+  content " "
+  display block
+  clear both
+
+.gc-row-4 > .gc-col
+  float left
+  width 25%
+
+.gc-row-4 > .gc-col > div
+  padding 20px
+
+/*end*/
+.gc-modal-demo
+  background blackSecondary
+  padding 50px
+
+.gc-modal-demo .gc-modal
+  display block
+  position inherit
+
+
+/*for demo dropdown menu*/
+.gc-topbar-item .dropdown-menu.pull-left
+  left 0
+  right auto
+
+
+.gc-icon
+  display inline-block
+  height 20px
+  width 20px
+  background-size cover
+  font-size 20px
+  margin 0
+  color #EAEAEA
+
+.gc-icon.workout
+  background-image url('/static/images/icon-exercises.png')
+  background-position -18px 0
+
+.gc-icon.programs
+  background-image url('/static/images/icon-programs.png')
+  background-position -18px 0
+
+.gc-icon.clock
+  background-image url('/static/images/icon-workouts.png')
+  background-position -18px 0
+
+.gc-icon.calendar
+  background-image url('/static/images/prototypes/calendar-icon-blue.png')
+  background-size 13px 14px
+  {backgroundCenter}
+
+.gc-icon.heartbeat
+  background-image url('/static/images/prototypes/heartbeat-icon-blue.png')
+  background-size 17px 15px
+  {backgroundCenter}
+
+.gc-icon.folder
+  background-image url('/static/images/prototypes/folder-icon-blue.png')
+  background-size 18px 13px
+  {backgroundCenter}
+
+.gc-icon-primary
+  color blueSecondary
+
+.gc-icon-highlight
+  color #ffc800
+
+.gc-btn-round
+  border-radius 100%
+  font-size 14px
+  color blue
+  text-align center
+  line-height 25px
+  display inline-block
+  width 25px
+  height 25px
+
+.gc-btn-chevron
+  background-image url('/static/images/prototypes/actions-icon-blue.png')
+  background-size cover
+  background-position -25px 0px
+
+.gc-btn-plus
+  background-image url('/static/images/prototypes/actions-icon-blue.png')
+  background-size cover
+  background-position 0px 0px
+
+.gc-block-group
+  display block
+  border-collapse collapse
+  border-radius 4px
+
+.gc-block-group .gc-block
+  float left
+  padding 15px 10px
+  text-align center
+  color #757575
+  background #F9F9F9
+  border 1px solid #ededed
+  width 115px
+
+.gc-block-group > .gc-block:first-child
+  border-top-left-radius 4px
+  border-bottom-left-radius 4px
+
+.gc-block-group > .gc-block:last-child
+  border-top-right-radius 4px
+  border-bottom-right-radius 4px
+
+.gc-block-group > .gc-block:not(:first-child)
+  border-left none
+
+.gc-block-group .gc-block .gc-block-highlight
+  font-size 40px
+
+.gc-block-group .gc-block label
+  text-transform uppercase
+  font-weight normal
+
+.gc-pill-label
+  border 1px solid blue
+  padding 3px 10px
+  border-radius 50px
+  text-transform uppercase
+  color blue
+  font-weight normal
+
+.gc-pill-label i
+  margin-right 2px
+
+.gc-label-warning
+  border-color orange
+  color orange
+
+.gc-label-success
+  border-color green
+  color green
+
+.live-search.gc-demo .selectize-input
+  opacity 1
+  position relative
+  left 0px
+
+.live-search.gc-demo .selectize-dropdown
+  display block
+  width 100%
+  top -8px
+  position relative
+
+.gc-icon-trpohy
+  height 18px
+  width 16px
+  display inline-block
+  background-image url('/static/images/prototypes/trophies-icon.png')
+  background-position -16px 0px
+
+.gc-icon-trpohy-gold
+  height 18px
+  width 16px
+  display inline-block
+  background-image url('/static/images/prototypes/trophies-icon.png')
+  background-position 0px 0px
+
+.gc-icon-trash
+  height 20px
+  width 17px
+  display inline-block
+  background-image url('/static/images/prototypes/trash-icon.png')
+  background-size cover
+
+.gc-icon-lock-orange
+  display inline-block
+  background-image url('/static/images/prototypes/lock-icon-orange.png')
+  background-size contain
+  height 12px
+  width 15px
+  {backgroundCenter}
+
+.gc-icon-eye-green
+  display inline-block
+  background-image url('/static/images/prototypes/eye-icon-green.png')
+  background-size contain
+  height 11px
+  width 14px
+  {backgroundCenter}
