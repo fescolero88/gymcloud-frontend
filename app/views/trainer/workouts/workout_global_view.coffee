@@ -3,6 +3,7 @@ Backbone = require 'backbone'
 
 WorkoutGlobalOverviewView = require 'views/trainer/workouts/workout_global_overview_view'
 WorkoutGlobalVideoView = require 'views/trainer/workouts/workout_global_video_view'
+WorkoutGlobalAssignView = require 'views/trainer/workouts/workout_global_assign_view'
 
 module.exports = class WorkoutGlobalView extends Marionette.LayoutView
 
@@ -17,12 +18,14 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
     innerNavLinks: '.gc-inner-nav li a'
     navBack: '.gc-content-nav-back'
     addToLibraryButton: '.gc-add-to-library-button'
+    workoutNavTabs: '.gc-content-nav li a'
 
   events:
     'click @ui.navBack': 'navigateBack'
     'click @ui.innerNavLinks': 'changeViewEvent'
     'blur @ui.workoutTitle': 'workoutTitleSave'
     'click @ui.addToLibraryButton': 'showAddToLibrary'
+    'click @ui.workoutNavTabs': 'changeTabView'
 
   templateHelpers: =>
     workout: @workoutModel.attributes
@@ -66,3 +69,8 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
   showAddToLibrary: (ev) =>
     ev.preventDefault()
     App.request 'base:addToLibraryModal', type: 'workouts', model: @workoutModel
+
+  changeTabView: (e) ->
+    e.preventDefault()
+    console.log 'changing', e
+

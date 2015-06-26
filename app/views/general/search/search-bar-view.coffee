@@ -45,7 +45,6 @@ module.exports = class SearchBarView extends Marionette.ItemView
       @doSearch(@ui.searchTerm.val())
 
   searchFocusLost: (ev) ->
-    console.log 'search lost focus'
     ev.preventDefault()
     $sr = $(ev.currentTarget)
     if $sr.val() isnt $sr.attr('placeholder') and $sr.val() isnt ''
