@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 
 module.exports = class PrivacyButtonsView extends Marionette.ItemView
 
-  template: Templates.general.privacy_buttons
+  template: require('templates/general/privacy_buttons')
 
   className: 'gc-exercise-privates'
 

@@ -2,11 +2,11 @@ Marionette = require 'backbone.marionette'
 
 class EmptyView extends Marionette.ItemView
 
-  template: Templates.trainer.assignments.assignment_empty
+  template: require('templates/trainer/assignments/assignment_empty')
 
 class AssignmentItemView extends Marionette.ItemView
 
-  template: Templates.trainer.assignments.assignment_item
+  template: require('templates/trainer/assignments/assignment_item')
 
   tagName: 'li'
 
@@ -24,7 +24,7 @@ class AssignmentItemView extends Marionette.ItemView
 
 module.exports = class AssignmentsListView extends Marionette.CompositeView
 
-  template: Templates.trainer.assignments.assignments
+  template: require('templates/trainer/assignments/assignments')
 
   childView: AssignmentItemView
 

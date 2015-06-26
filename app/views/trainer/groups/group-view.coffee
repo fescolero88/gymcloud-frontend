@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 
 module.exports = class GroupView extends Marionette.LayoutView
 
-  template: Templates.trainer.groups.group
+  template: require('templates/trainer/groups/group')
 
   modelEvents:
     sync: 'render'

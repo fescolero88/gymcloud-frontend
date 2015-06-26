@@ -4,7 +4,7 @@ Backbone = require 'backbone'
 
 module.exports = class ResetPasswordView extends Marionette.LayoutView
 
-  template: Templates.auth.reset_password
+  template: require('templates/auth/reset_password')
 
   ui:
     form: '.gc-reset-password-form'

@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 
 module.exports = class ClientPageNavView extends Marionette.ItemView
 
-  template: Templates.client.nav
+  template: require('templates/client/nav')
 
   initialize: ->
     App.vent.on 'clientpage:nav-click', (navId) =>

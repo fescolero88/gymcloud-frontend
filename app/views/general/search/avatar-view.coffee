@@ -4,7 +4,7 @@ module.exports = class AvatarView extends Marionette.ItemView
 
   tagName: "a"
 
-  template: Templates.general.search.avatar
+  template: require('templates/general/search/avatar')
 
   className: "gc-clients-list-avatar-wrapper"
 

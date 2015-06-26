@@ -6,7 +6,7 @@ module.exports = class ResultsClientItemView extends Marionette.LayoutView
 
   className: 'row'
 
-  template: Templates.general.search.group_item_for_client
+  template: require('templates/general/search/group_item_for_client')
 
   regions:
     avatarWrapper: 'region[data-name="avatar-wrapper"]'

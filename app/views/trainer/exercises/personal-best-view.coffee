@@ -5,11 +5,11 @@ PersonalBestModalView = require 'views/trainer/exercises/personal-best-modal'
 
 class EmptyView extends Marionette.ItemView
 
-  template: Templates.trainer.exercises.personal_best_empty
+  template: require('templates/trainer/exercises/personal_best_empty')
 
 class PersonalBestItemView extends Marionette.ItemView
 
-  template: Templates.trainer.exercises.personal_best_item
+  template: require('templates/trainer/exercises/personal_best_item')
 
   tagName: 'li'
 
@@ -45,7 +45,7 @@ class PersonalBestCollectionView extends Marionette.CollectionView
 
 module.exports = class PersonalBestView extends Marionette.LayoutView
 
-  template: Templates.trainer.exercises.personal_best
+  template: require('templates/trainer/exercises/personal_best')
 
   ui:
     showModal: '.gc-add-personal-best'

@@ -10,7 +10,7 @@ FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
 class SignUpStep1 extends Marionette.ItemView
 
-  template: Templates.auth.sign_up_1
+  template: require('templates/auth/sign_up_1')
 
   behaviors:
     FormValidationBehaviour:
@@ -56,7 +56,7 @@ class SignUpStep1 extends Marionette.ItemView
 
 class SignUpStep2 extends Marionette.ItemView
 
-  template: Templates.auth.sign_up_2
+  template: require('templates/auth/sign_up_2')
 
   behaviors:
     FormValidationBehaviour:
@@ -99,7 +99,7 @@ class SignUpStep2 extends Marionette.ItemView
 
 module.exports = class SignUpView extends Marionette.LayoutView
 
-  template: Templates.auth.empty_layout
+  template: require('templates/auth/empty_layout')
 
   regions:
     signUp: '#gc-default-region'

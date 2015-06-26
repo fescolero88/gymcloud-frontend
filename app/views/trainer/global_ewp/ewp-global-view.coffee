@@ -13,7 +13,7 @@ EWPSortableCollection = require 'models/trainer/ewp_sortable_collection'
 
 module.exports = class EWPGlobalView extends Marionette.LayoutView
 
-  template: Templates.trainer.global_ewp.global_ewp_layout
+  template: require('templates/trainer/global_ewp/global_ewp_layout')
 
   className: 'gc-global-ewp-wrapper'
 

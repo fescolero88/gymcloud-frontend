@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 
 module.exports = class ActivityView extends Marionette.ItemView
 
-  template: Templates.trainer.clients.activity
+  template: require('templates/trainer/clients/activity')
 
   events:
     'click @ui.loadMore': 'loadMore'

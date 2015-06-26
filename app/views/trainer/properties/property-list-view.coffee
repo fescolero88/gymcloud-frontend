@@ -2,11 +2,11 @@ Marionette = require 'backbone.marionette'
 
 class EmptyView extends Marionette.ItemView
 
-  template: Templates.trainer.properties.properties_empty
+  template: require('templates/trainer/properties/properties_empty')
 
 class PropertiesItemView extends Marionette.ItemView
 
-  template: Templates.trainer.properties.properties_item
+  template: require('templates/trainer/properties/properties_item')
 
   tagName: 'li'
 
@@ -19,7 +19,7 @@ class PropertiesItemView extends Marionette.ItemView
 
 module.exports = class PropertyListView extends Marionette.CompositeView
 
-  template: Templates.trainer.properties.property_list
+  template: require('templates/trainer/properties/property_list')
 
   childView: PropertiesItemView
 

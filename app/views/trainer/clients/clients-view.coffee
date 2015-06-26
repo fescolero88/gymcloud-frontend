@@ -12,7 +12,7 @@ GroupModel = require 'models/trainer/group-model'
 
 module.exports = class ClientsView extends Marionette.LayoutView
 
-  template: Templates.trainer.clients.clients
+  template: require('templates/trainer/clients/clients')
 
   className: 'clients-view-main-wrapper'
 

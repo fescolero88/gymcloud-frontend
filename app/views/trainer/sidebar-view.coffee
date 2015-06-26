@@ -3,7 +3,7 @@ DraggableMenuItemModel = require 'models/trainer/draggable-menuitem-model'
 
 module.exports = class SideBarView extends Marionette.ItemView
 
-  template: Templates.trainer.sidebar.sidebar
+  template: require('templates/trainer/sidebar/sidebar')
 
   className: 'gc-scrollable-area'
 

@@ -8,7 +8,7 @@ CalendarEventCollection = require 'models/trainer/calendar-event-collection'
 
 module.exports = class CalendarView extends Marionette.LayoutView
 
-  template: Templates.trainer.calendar.calendar
+  template: require('templates/trainer/calendar/calendar')
 
   events:
     'click @ui.calendarNav': 'navLinkClick'

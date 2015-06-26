@@ -8,7 +8,7 @@ ClientModel = require 'models/trainer/client-model'
 
 module.exports = class ClientPageSidebarView extends Marionette.LayoutView
 
-  template: Templates.client.sidebar
+  template: require('templates/client/sidebar')
 
   autoRender: false
 

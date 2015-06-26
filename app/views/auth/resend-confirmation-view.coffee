@@ -3,7 +3,7 @@ Backbone = require 'backbone'
 
 module.exports = class ResendConfirmationView extends Marionette.ItemView
 
-  template: Templates.auth.resend_confirmation
+  template: require('templates/auth/resend_confirmation')
 
   initialize: ->
     @listenTo @model, 'model:auth_resend:success', @onResendSuccess

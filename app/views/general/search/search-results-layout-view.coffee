@@ -10,7 +10,7 @@ module.exports = class SearchResultsLayoutView extends Marionette.LayoutView
 
   className: 'gc-search-results-main'
 
-  template: Templates.general.search.search_results_layout
+  template: require('templates/general/search/search_results_layout')
 
   initialize: ->
     q = @model.get 'q'
