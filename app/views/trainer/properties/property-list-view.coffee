@@ -19,7 +19,7 @@ class PropertiesItemView extends Marionette.ItemView
 
 module.exports = class PropertyListView extends Marionette.CompositeView
 
-  template: require('templates/trainer/properties/property_list')
+  template: require('templates/trainer/properties/property-list')
 
   childView: PropertiesItemView
 

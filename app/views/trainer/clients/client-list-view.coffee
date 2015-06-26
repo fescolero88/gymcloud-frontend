@@ -3,7 +3,7 @@ Backbone = require 'backbone'
 
 class ClientItemView extends Marionette.ItemView
 
-  template: require('templates/trainer/clients/client_item')
+  template: require('templates/trainer/clients/client-item')
 
   tagName: 'li'
 
@@ -38,7 +38,7 @@ class ClientItemView extends Marionette.ItemView
 
 module.exports = class ClientListView extends Marionette.CompositeView
 
-  template: require('templates/trainer/clients/client_list')
+  template: require('templates/trainer/clients/client-list')
 
   childView: ClientItemView
 

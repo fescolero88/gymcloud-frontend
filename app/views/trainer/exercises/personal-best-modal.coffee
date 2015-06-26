@@ -8,7 +8,7 @@ class PersonalBestResultCollection extends Backbone.Collection
 
 class PersonalBestResultView extends Marionette.ItemView
 
-  template: require('templates/trainer/exercises/personal_best_modal_property')
+  template: require('templates/trainer/exercises/personal-best-modal-property')
 
   tagName: 'li'
 
@@ -31,7 +31,7 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
 
   className: 'modal-dialog modal-md'
 
-  template: require('templates/trainer/exercises/personal_best_modal')
+  template: require('templates/trainer/exercises/personal-best-modal')
 
   childView: PersonalBestResultView
 

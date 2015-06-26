@@ -6,7 +6,7 @@ GroupFormModalView = require 'views/trainer/clients/group-form-modal-view'
 
 module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
 
-  template: require('templates/trainer/clients/client_group_header')
+  template: require('templates/trainer/clients/client-group-header')
 
   autoRender: false
 

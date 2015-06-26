@@ -2,4 +2,4 @@ Marionette = require 'backbone.marionette'
 
 module.exports = class CalendarWeekView extends Marionette.ItemView
 
-  template: require('templates/trainer/calendar/calendar_week')
+  template: require('templates/trainer/calendar/calendar-week')

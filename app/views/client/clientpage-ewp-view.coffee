@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 
 class EmptyView extends Marionette.ItemView
 
-  template: require('templates/client/assigments_empty')
+  template: require('templates/client/assigments-empty')
 
   initialize: (data) =>
     @dataType = data.dataType

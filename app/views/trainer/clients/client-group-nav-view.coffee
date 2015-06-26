@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 module.exports = class ClientGroupNavView extends Marionette.ItemView
 
-  template: require('templates/trainer/clients/client_group_nav')
+  template: require('templates/trainer/clients/client-group-nav')
 
   events:
     'click @ui.deleteButton': 'deleteButtonClick'
