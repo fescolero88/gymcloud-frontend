@@ -258,3 +258,7 @@ ul.gc-workout-exercises-list li {
 .gc-workouts-video-view {
   padding: 5px 15px;
 }
+
+.gc-workouts-assign-clients-list {
+  padding: 0 35px;
+}

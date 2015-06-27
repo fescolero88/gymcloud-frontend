@@ -13,15 +13,16 @@
           </div>
         </div>
         <div class="col-xs-5 gc-exercises-nav-right text-right">
-          <ul class="gc-content-nav">
-            <li class="active">
+          <!-- workout tabs -->
+          <ul class="gc-content-nav" >
+            <li class="active" data-view="program">
               <a href="#">Program</a>
             </li>
-            <li class="">
+            <li class="" data-view="assign">
               <a href="#">Assign</a>
             </li>
-
           </ul>
+          <!-- /workout tabs -->
           {{#ifEqual id ../workout.author.id}}
             <a class="gc-workout-actions-button btn btn-primary" data-toggle="dropdown" id="gc-workout-actions-dropdown" aria-haspopup="true" role="button" aria-expanded="false">
               <i class="fa fa-chevron-down"></i>
