@@ -260,10 +260,10 @@ ul.gc-workout-exercises-list li {
 }
 
 .gc-workouts-assign-list {
-  padding: 0 35px;
+  padding: 0 28px;
 }
 
-.gc-workouts-assign-list .gc-workout-client-item {
+.gc-workouts-assign-list .gc-workout-client-item, .gc-workouts-assign-list .gc-workout-group-item {
   cursor: pointer;
 }
 

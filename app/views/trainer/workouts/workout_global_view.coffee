@@ -14,6 +14,7 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
 
   ui:
     workoutTitle: '.gc-workout-title span'
+    innerNav: '.gc-inner-nav'
     innerNavItems: '.gc-inner-nav li'
     innerNavLinks: '.gc-inner-nav li a'
     contentNavItems: '.gc-content-nav li'
@@ -56,18 +57,20 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
       @changeView navItemView
 
   changeView: (navView) =>
-    console.log navView
     switch navView
       when 'description', 'program'
         @overviewView = new WorkoutGlobalOverviewView model: @workoutModel
         @manageRegion.show @overviewView
+        @ui.innerNav.show()
       when 'video'
         @videoView = new WorkoutGlobalVideoView model: @workoutModel
         @manageRegion.show @videoView
+        @ui.innerNav.show()
       when 'assign'
         workoutAssignView = new WorkoutGlobalAssignView
           model: @workoutModel
         @manageRegion.show workoutAssignView
+        @ui.innerNav.hide()
 
   workoutTitleSave: =>
     @workoutModel.set 'name', @ui.workoutTitle.text()
