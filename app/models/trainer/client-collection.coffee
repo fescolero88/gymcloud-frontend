@@ -6,21 +6,28 @@ class ClientModel extends Backbone.Model
     client_group_ids: []
 
   url: (actionType) ->
+    workoutId = @get 'workoutId'
     switch actionType
       when 'assign'
-        "/api/mobile/workouts/#{@id}/assignees/bulk_assign"
+        "/api/mobile/workouts/#{workoutId}/assignees/bulk_assign"
       when 'unassign'
-        "/api/mobile/workouts/#{@id}/assignees/bulk_unassign"
+        "/api/mobile/workouts/#{workoutId}/assignees/bulk_unassign"
       else
         throw new Error('invalid action type')
 
   toggleAssign: ->
     actionType = if @get('isAssigned') then 'unassign' else 'assign'
+    @set('isAssigned', !@get('isAssigned'))
+    @set('client_ids', @get('id'))
 
     options =
       url: @url(actionType)
-      data: JSON.stringify @toJSON()
-
+      data:
+        JSON.stringify
+          id: @get 'workoutId'
+          client_ids: @get 'client_ids'
+          client_group_ids: @get 'client_group_ids'
+        
     options = App.request 'ajax:options:create', options
 
     (@sync || Backbone.sync).call(@, null, @, options)

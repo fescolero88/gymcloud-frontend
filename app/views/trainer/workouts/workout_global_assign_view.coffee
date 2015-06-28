@@ -30,10 +30,12 @@ module.exports = class WorkoutGlobalAssignView extends Marionette.LayoutView
     workoutGlobalAssignClientsListView = new WorkoutGlobalAssignClientsListView
       collection: @clientsCollection
       clientAssignees: assignees.get 'clients'
+      workoutId: @model.get 'id'
 
     workoutGlobalAssignGroupsListView = new WorkoutGlobalAssignGroupsListView
       collection: @groupsCollection
       groupAssignees: assignees.get 'client_groups'
+      workoutId: @model.get 'id'
 
     @getRegion('clients').show workoutGlobalAssignClientsListView
     @getRegion('groups').show workoutGlobalAssignGroupsListView
