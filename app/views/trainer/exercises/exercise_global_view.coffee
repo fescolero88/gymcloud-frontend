@@ -35,8 +35,11 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
     'click @ui.removeFromLibraryButton': 'removeFromLibrary'
 
   initialize: (data) =>
-    @breadcrumbsView = new BreadcrumbsView(collection: new BreadcrumbsCollection(data.breadcrumbs))
+    @breadcrumbs = data.breadcrumbs
+    @breadcrumbsView = new BreadcrumbsView(collection: new BreadcrumbsCollection(@breadcrumbs))
     @exerciseModel = data.exercise
+
+    @listenTo(@exerciseModel, 'sync', @onExerciseModelSync)
 
   templateHelpers: ->
     source: @exerciseModel.get('source_item_id')
@@ -68,7 +71,6 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
   changeView: (navView) =>
     switch navView
       when 'overview'
-        console.debug @exerciseModel
         @overviewView = new ExerciseGlobalOverviewView model: @exerciseModel
         @listenTo @overviewView, 'privacy:changed', @changePrivacyMarker
         @listenTo @overviewView, 'exercise:edit', @enableExerciseEditView
@@ -108,3 +110,9 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
           success: (model) =>
             @request 'messenger:show',
               message: 'Exercise removed from library'
+
+  onExerciseModelSync: ->
+    lastIndex = @breadcrumbs.length - 1
+    @breadcrumbs[lastIndex].title = @exerciseModel.get 'name'
+    App.vent.trigger 'breadcrumbs:reload', @breadcrumbs
+
