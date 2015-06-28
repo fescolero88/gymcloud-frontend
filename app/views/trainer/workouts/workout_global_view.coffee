@@ -4,7 +4,6 @@ Backbone = require 'backbone'
 WorkoutGlobalOverviewView = require 'views/trainer/workouts/workout_global_overview_view'
 WorkoutGlobalVideoView = require 'views/trainer/workouts/workout_global_video_view'
 WorkoutGlobalAssignView = require 'views/trainer/workouts/workout_global_assign_view'
-ClientsCollection = require 'models/trainer/client-collection'
 
 module.exports = class WorkoutGlobalView extends Marionette.LayoutView
 
@@ -68,7 +67,6 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
       when 'assign'
         workoutAssignView = new WorkoutGlobalAssignView
           model: @workoutModel
-          collections: new ClientsCollection()
         @manageRegion.show workoutAssignView
 
   workoutTitleSave: =>
