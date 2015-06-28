@@ -6,7 +6,14 @@ class WorkoutGlobalGroupView extends Marionette.ItemView
 
   template: Templates.trainer.workouts.workout_global_assign_group
 
-  className: 'row'
+  className: 'row gc-workout-group-item'
+
+  events:
+    'click': 'toggleAssign'
+
+  toggleAssign: ->
+    console.log @model.attributes
+    @model.toggleAssign()
 
 module.exports = class WorkoutGlobalAssignGroupsListView extends Marionette.CompositeView
 
@@ -21,11 +28,14 @@ module.exports = class WorkoutGlobalAssignGroupsListView extends Marionette.Comp
 
   initialize: (options) ->
     @clientGroupsAssignees = options.groupAssignees
+    @workoutId = options.workoutId
 
   childViewContainer: 'ul.gc-clients-list'
 
   applyIsAssignedProperty: ->
-    @collection.map (model) ->
+    @collection.map (model) =>
+      model.set 'workoutId', @workoutId # assign current workout id
       model.set 'isAssigned', _.contains(@clientGroupsAssignees, model.get('id'))
       return model
+    @render()
 
