@@ -262,3 +262,11 @@ ul.gc-workout-exercises-list li {
 .gc-workouts-assign-list {
   padding: 0 35px;
 }
+
+.gc-workouts-assign-list .gc-workout-client-item {
+  cursor: pointer;
+}
+
+.gc-workouts-assign-list .gc-workout-client-item i {
+  padding: 19px 10px;
+}

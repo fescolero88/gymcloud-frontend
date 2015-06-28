@@ -7,10 +7,16 @@ class WorkoutGlobalClientView extends Marionette.ItemView
 
   template: Templates.trainer.workouts.workout_global_assign_client
 
-  onRender: ->
-    console.log 'attrs', @model.attributes
+  modelEvents:
+    'model:toggle_assign:success': 'render'
 
-  className: 'row'
+  className: 'row gc-workout-client-item'
+
+  events:
+    'click': 'toggleAssign'
+
+  toggleAssign: ->
+    @model.toggleAssign()
 
 module.exports = class WorkoutGlobalAssignClientsListView extends Marionette.CompositeView
 
