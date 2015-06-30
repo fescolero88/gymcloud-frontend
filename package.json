@@ -1,41 +1,13 @@
 {
   "name": "gymcloud-webappp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "GymCloud Team <support@gymcloud.com>",
   "description": "GymCloud: web application",
   "private": true,
   "devDependencies": {
-    "bower-resolve": "^2.2.1",
-    "browser-sync": "^1.8.2",
-    "browserify": "^7.1.0",
-    "browserify-ngannotate": "^0.5.0",
-    "caching-coffeeify": "^0.5.0",
-    "del": "^1.1.1",
     "express": "~4.10.6",
     "gulp": "^3.8.10",
-    "gulp-changed": "^1.1.0",
-    "gulp-concat": "^2.4.2",
-    "gulp-declare": "^0.3.0",
-    "gulp-define-module": "^0.1.1",
-    "gulp-handlebars": "^3.0.1",
-    "gulp-if": "^1.2.5",
-    "gulp-imagemin": "^2.0.0",
-    "gulp-notify": "^2.1.0",
-    "gulp-replace": "^0.5.0",
-    "gulp-streamify": "0.0.5",
-    "gulp-template": "^1.1",
-    "gulp-uglify": "^1.0.2",
     "gulp-util": "^3.0.1",
-    "gulp-wrap": "^0.5.0",
-    "main-bower-files": "^2.5.0",
-    "microplugin": "0.0.3",
-    "morgan": "^1.5.0",
-    "resolve": "^1.1.5",
-    "run-sequence": "^1.0",
-    "sifter": "^0.3.4",
-    "vinyl-source-stream": "^1.0.0",
-    "watchify": "^2.2.1",
-    "gulp-stylus": "^2.0.5",
     "expose-loader": "^0.7.0",
     "script-loader": "^0.6.1",
     "lazypipe": "^0.2.4",
@@ -64,10 +36,5 @@
     "handlebars": "^2.0.0",
     "express": "~4.10.6",
     "moment": "^2.9.0"
-  },
-  "browserify": {
-    "transform": [
-      "caching-coffeeify"
-    ]
   }
 }
