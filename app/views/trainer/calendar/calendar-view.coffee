@@ -1,3 +1,4 @@
+moment = require 'moment'
 Marionette = require 'backbone.marionette'
 
 CalendarDayView = require 'views/trainer/calendar/calendar-day-view'
