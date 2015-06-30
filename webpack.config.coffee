@@ -96,7 +96,7 @@ module.exports =
         loader: 'file?prefix=font/&mimetype=image/svg+xml'
       }
       {
-        test: /\.woff$/
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/
         loader: 'file?prefix=font/&mimetype=application/font-woff'
       }
       {

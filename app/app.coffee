@@ -5,6 +5,7 @@ define [
   'spinner'
 
   'deps/scripts'
+  'deps/fonts'
   'deps/styles_vendor'
   'deps/styles_app'
 ], (
