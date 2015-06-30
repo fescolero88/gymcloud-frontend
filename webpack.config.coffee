@@ -23,15 +23,15 @@ module.exports =
     root: [
       path.resolve('app')
       path.resolve('.')
+      path.resolve('bower_components')
     ]
 
     alias:
-      'selectize': 'bower_components/selectize/dist/js/selectize.min'
+      'selectize': 'bower_components/selectize/dist/js/selectize'
       'spinner': 'bower_components/spin.js/spin.js'
       'jquery-sortable': 'bower_components/jquery-sortable/source/js/jquery-sortable.js'
-      'datetimepicker': 'bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
+      'datetimepicker': 'bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker'
       'nanoscroller': 'bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js'
-      'bootstrap': 'bower_components/bootstrap/dist/js/bootstrap.min.js'
       'messenger': 'bower_components/messenger/build/js/messenger.min.js'
 
     extensions: [
@@ -116,11 +116,17 @@ module.exports =
   externals: {}
 
   plugins: [
-      new webpack.ProvidePlugin
+      new webpack.ProvidePlugin(
         jQuery: 'jquery'
         $: 'jquery'
+        'window.jQuery': 'jquery'
         _: 'lodash'
         Backbone: 'backbone'
+      )
+    ,
+      new webpack.ResolverPlugin(
+        new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('bower.json', ['main'])
+      )
   ]
 
   node:

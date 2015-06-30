@@ -1,25 +1,16 @@
 define [
   'config'
-
   'backbone-validation'
   'backbone.marionette'
-
   'spinner'
 
   'deps/scripts'
   'deps/styles_vendor'
   'deps/styles_app'
-
-  #'bootstrap'
-  #'selectize'
-  'jquery-sortable'
-  #'datetimepicker'
-  'nanoscroller'
 ], (
   config
   BackboneValidation
   Marionette
-
   Spinner
 ) ->
 
