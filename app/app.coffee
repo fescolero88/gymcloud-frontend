@@ -1,6 +1,5 @@
 define [
   'config'
-  'backbone-validation'
   'backbone.marionette'
   'spinner'
 
@@ -10,13 +9,9 @@ define [
   'deps/styles_app'
 ], (
   config
-  BackboneValidation
   Marionette
   Spinner
 ) ->
-
-  Backbone.Validation = BackboneValidation
-  Backbone.$ = $
 
   FormValidatorHelper = require 'views/helpers/form-validator-helper'
   JqueryHelper = require 'views/helpers/jquery-helper'
