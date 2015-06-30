@@ -59,6 +59,11 @@ module.exports =
       {
         test: /\.hbs$/
         loader: 'handlebars'
+        query:
+          runtime: 'handlebars/runtime'
+          helperDirs: [
+            __dirname + '/app/handlers/handlebars'
+          ]
       }
       {
         test: /\.css$/
@@ -108,13 +113,14 @@ module.exports =
       }
     ]
 
+  externals: {}
+
   plugins: [
-      new webpack.ProvidePlugin(
+      new webpack.ProvidePlugin
         jQuery: 'jquery'
         $: 'jquery'
         _: 'lodash'
         Backbone: 'backbone'
-      )
   ]
 
   node:

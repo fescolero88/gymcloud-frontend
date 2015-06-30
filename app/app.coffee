@@ -1,16 +1,15 @@
 define [
   'config'
-  'jquery'
-  'backbone'
+
   'backbone-validation'
   'backbone.marionette'
 
   'spinner'
-  'handlebars'
 
   'deps/scripts'
   'deps/styles_vendor'
   'deps/styles_app'
+
   #'bootstrap'
   #'selectize'
   'jquery-sortable'
@@ -18,22 +17,17 @@ define [
   'nanoscroller'
 ], (
   config
-  $
-  Backbone
   BackboneValidation
   Marionette
 
   Spinner
-  Handlebars
 ) ->
 
   Backbone.Validation = BackboneValidation
   Backbone.$ = $
 
-  ViewHelper = require 'views/helpers/view-helper'
   FormValidatorHelper = require 'views/helpers/form-validator-helper'
   JqueryHelper = require 'views/helpers/jquery-helper'
-  #MessengerHelper = require 'views/helpers/messenger-helper'
 
   BaseView = require 'views/general/base-view'
 
@@ -55,9 +49,7 @@ define [
 
         # --- Helpers -----
         new JqueryHelper().initialize()
-        new ViewHelper().initialize(Handlebars)
         new FormValidatorHelper().initialize()
-        #new MessengerHelper().initialize()
         # --- Helpers -----
 
         # --- Globar spinner -----

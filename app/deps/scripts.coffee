@@ -4,5 +4,6 @@ define [
   'expose?_!lodash'
   'expose?Backbone!backbone'
   'backbone.marionette'
+  'expose?Handlebars!handlebars'
 
 ], ->
