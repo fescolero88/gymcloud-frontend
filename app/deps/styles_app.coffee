@@ -20,4 +20,5 @@ define [
   'styles/trainer.css'
   'styles/usercards.css'
   'styles/workout.css'
+  'styles/fix_images'
 ], ->
