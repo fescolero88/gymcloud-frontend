@@ -18,7 +18,6 @@ module.exports = class SearchBarView extends Marionette.ItemView
   className: 'gc-topbar-search'
 
   searchOnEnter: (ev)->
-    console.log ev.which
     if ev.which is 13
       @doSearch(ev)
     else if ev.which is 27
