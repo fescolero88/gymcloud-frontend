@@ -63,7 +63,7 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
             message: "Workout #{workoutName} deleted."
             type: 'success'
 
-  workoutDescriptionSave: =>
+  workoutDescriptionSave: ->
     @model.set 'description', @ui.workoutDescription.val()
     if @model.hasChanged()
       @model.save().success =>
