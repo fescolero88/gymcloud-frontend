@@ -8,6 +8,16 @@
   font-weight: 700;
   margin: 0 0 20px 0;
 }
+.gc-exercises-exercise-view h2 span[contenteditable="true"] {
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.gc-exercises-exercise-view h2 span[contenteditable="true"]:focus {
+  text-overflow: initial!important;
+}
 .gc-exercises-exercise-view .gc-exercises-exercise-descr {
   font-size: 16px;
   color: #404447;
