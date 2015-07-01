@@ -38,6 +38,8 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
     @workoutExerciseModel = new WorkoutExerciseModel
     @listenTo(@workoutExerciseModel, 'sync', @onExerciseAdded)
 
+  onDestroy: =>
+    App.vent.off 'drag:complete', @assignExercise
 
   onShow: =>
     @changeView 'description'
@@ -79,12 +81,14 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
   assignExercise: (item) =>
     category = item.get 'category'
     if category == 'exercises'
-      workoutId = @workoutModel.get 'id'
-      exerciseId = item.get 'id'
-      @workoutExerciseModel.urlRoot = "#{@workoutExerciseModel.urlRoot}/#{workoutId}/workout_exercises"
-      @workoutExerciseModel.set 'id', workoutId
-      @workoutExerciseModel.set 'workout_exercise_id', exerciseId
+      data =
+        'id': @workoutModel.get 'id'
+        'exercise_id': item.get 'id'
+
+      @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises"
+      @workoutExerciseModel.set data
+      @workoutExerciseModel.addExercise = true
       @workoutExerciseModel.save()
 
   onExerciseAdded: () =>
-    console.log 'exercuse added'
+    @workoutModel.fetch()

@@ -25,13 +25,18 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
     'blur @ui.workoutDescription': 'workoutDescriptionSave'
 
   templateHelpers: =>
-    workout: @workoutModel.attributes
+    workout: @model.attributes
 
   initialize: (data) =>
-    @workoutModel = data.model
-    exercisesCollection = new WorkoutExercisesCollection
-    exercisesCollection.set @model.get('exercises')
-    @exercisesView = new WorkoutGlobalExercisesView collection: exercisesCollection, workout: @workoutModel
+    ##@workoutModel = data.model
+    @exercisesCollection = new WorkoutExercisesCollection
+    @exercisesCollection.set @model.get('exercises')
+
+    @exercisesView = new WorkoutGlobalExercisesView
+      collection: @exercisesCollection,
+      workout: @model
+
+    @listenTo(@model, 'sync', @workoutModelChanged)
 
   onShow: =>
     @exercisesListRegion.show @exercisesView
@@ -69,3 +74,7 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
           hideAfter: 5
           message: "Workout's description saved."
           type: 'success'
+
+  workoutModelChanged: =>
+    console.log 'changed'
+    @exercisesCollection.set @model.get('exercises')

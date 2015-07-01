@@ -20,6 +20,7 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
   events:
     'click @ui.editExerciseButton': 'editExercise'
     'blur @ui.exerciseTitle': 'saveExerciseTitle'
+    'keydown @ui.exerciseTitle': 'disableNewLine'
     'blur @ui.exerciseDescription': 'saveDescription'
     'keyup @ui.exerciseDescription': 'exerciseDescriptionAutoHeight'
 
@@ -58,7 +59,7 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
     @model.set 'is_public', isPublic
     @model.save()
     @updatedAttribute = 'privacy'
-    
+
   onSync:(model, response, options) ->
     if @updatedAttribute is 'privacy'
       @trigger 'privacy:changed', @model.get 'is_public'
@@ -93,3 +94,7 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
     exerciseDesc = @ui.exerciseDescription.get 0
     if exerciseDesc.scrollHeight > exerciseDesc.clientHeight
       exerciseDesc.style.height = "#{exerciseDesc.scrollHeight}px"
+
+  disableNewLine: (event) =>
+    if event.keyCode == 13
+      return false
