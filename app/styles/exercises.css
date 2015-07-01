@@ -249,7 +249,7 @@
   width: 20px;
   vertical-align: -6px;
   margin-right: 8px;
-  background: green url('/static/images/icon-individual-right.png') center top no-repeat;
+  background: green url('../images/icon-individual-right.png') center top no-repeat;
   background-size: contain;
 }
 .gc-exercises-assign-input .selectize-dropdown-content > div span.avatar img {
@@ -390,7 +390,7 @@
 }
 .gc-exercises-item-icon {
   display: inline-block;
-  background: transparent url('/static/images/icon-exercises.png') right -2px no-repeat;
+  background: transparent url('../images/icon-exercises.png') right -2px no-repeat;
   height: 25px;
   width: 23px;
   background-size: cover;
@@ -399,7 +399,7 @@
 }
 .gc-exercises-item-play-icon {
   display: inline-block;
-  background: transparent url('/static/images/play-button.png') right 0 no-repeat;
+  background: transparent url('../images/play-button.png') right 0 no-repeat;
   height: 25px;
   width: 23px;
   background-size: cover;
@@ -408,7 +408,7 @@
 }
 .gc-check-icon {
   display: inline-block;
-  background: transparent url('/static/images/icon-check.png') right 0 no-repeat;
+  background: transparent url('../images/icon-check.png') right 0 no-repeat;
   height: 25px;
   width: 23px;
   background-size: cover;
@@ -418,13 +418,13 @@
 
 
 .gc-exercises-item-icon.gc-exercises-item-icon-programs {
-  background: transparent url('/static/images/icon-programs.png') -19px 1px no-repeat;
+  background: transparent url('../images/icon-programs.png') -19px 1px no-repeat;
   height: 25px;
   width: 23px;
   background-size: 154%;
 }
 .gc-exercises-item-icon.gc-exercises-item-icon-workouts {
-  background: transparent url('/static/images/icon-workouts.png') -18px 0px no-repeat;
+  background: transparent url('../images/icon-workouts.png') -18px 0px no-repeat;
   height: 25px;
   width: 23px;
   background-size: 154%;
