@@ -49,7 +49,6 @@ git push --force origin production
 ```sh
 gulp build
 git remote add heroku_gymcloud-webapp-production git@heroku.com:gymcloud-webapp-production.git
-git add -f index.html
 git add -f build
 git commit -m '[deploy]'
 git push --force heroku_gymcloud-webapp-production HEAD:master
