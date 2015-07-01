@@ -13,7 +13,7 @@ module.exports = class ResultsClientGroupItemView extends Marionette.LayoutView
 
   templateHelpers: ->
     id = @model.id
-    entity_link: "/#/tr/groups/id/#{id}/members/"
+    entity_link: "#/tr/groups/id/#{id}/members/"
 
   onRender: ->
     avatarView = new AvatarView
