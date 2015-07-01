@@ -12,7 +12,6 @@ class WorkoutGlobalGroupView extends Marionette.ItemView
     'click': 'toggleAssign'
 
   toggleAssign: ->
-    console.log @model.attributes
     @model.toggleAssign()
 
 module.exports = class WorkoutGlobalAssignGroupsListView extends Marionette.CompositeView

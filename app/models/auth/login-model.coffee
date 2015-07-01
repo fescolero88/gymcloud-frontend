@@ -32,4 +32,3 @@ module.exports = class LoginModel extends Backbone.Model
           @trigger 'model:login:success', response
         .fail (xhr, textStatus, errorThrown) =>
           @trigger 'model:login:fail', 'Something went wrong'
-
