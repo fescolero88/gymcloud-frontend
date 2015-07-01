@@ -11,7 +11,7 @@ module.exports = class ResultsEntityItemView extends Marionette.LayoutView
   regions:
     avatarWrapper: 'region[data-name="avatar-wrapper"]'
 
-  template: Templates.general.search.group_item_for_entity
+  template: require('templates/general/search/group_item_for_entity')
 
   onRender: ->
     avatarView = new AvatarView

@@ -3,7 +3,7 @@ Backbone = require 'backbone'
 
 module.exports = class ModalConfirmView extends Marionette.ItemView
 
-  template: Templates.general.modal_confirm
+  template: require('templates/general/modal-confirm')
 
   ui:
     confirmButton: '.confirm'

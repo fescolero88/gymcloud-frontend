@@ -8,7 +8,7 @@ AssigneesList = require 'models/trainer/global_exercise_assignees'
 
 class ExerciseGlobalAssignClientsItemView extends Marionette.ItemView
 
-  template: Templates.trainer.clients.exercise_assign_client_item
+  template: require('templates/trainer/clients/exercise_assign_client_item')
 
   tagName: 'li'
 
@@ -41,7 +41,7 @@ class ExerciseGlobalAssignClientsItemView extends Marionette.ItemView
 
 class ExerciseGlobalAssignClientsListView extends Marionette.CompositeView
 
-  template: Templates.trainer.clients.universal_clients_list
+  template: require('templates/trainer/clients/universal_clients_list')
 
   childView: ExerciseGlobalAssignClientsItemView
 
@@ -73,7 +73,7 @@ class ExerciseGlobalAssignClientsListView extends Marionette.CompositeView
 
 module.exports = class ExerciseGlobalAssignView extends Marionette.LayoutView
 
-  template: Templates.trainer.exercises.exercise_global_assign
+  template: require('templates/trainer/exercises/exercise_global_assign')
 
   className: 'gc-exercises-assign-view'
 

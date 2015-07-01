@@ -4,17 +4,17 @@ Backbone = require 'backbone'
 
 class EmptyView extends Marionette.ItemView
 
-  template: Templates.trainer.workouts.workout_global_exercises_empty
+  template: require('templates/trainer/workouts/workout_global_exercises_empty')
 
 class ExercisesItemView extends Marionette.ItemView
 
-  template: Templates.trainer.workouts.workout_global_exercise_item
+  template: require('templates/trainer/workouts/workout_global_exercise_item')
 
   tagName: 'li'
 
 module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeView
 
-  template: Templates.trainer.workouts.workout_global_exercises
+  template: require('templates/trainer/workouts/workout_global_exercises')
 
   className: 'gc-workouts-exercises-view'
 

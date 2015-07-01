@@ -3,7 +3,7 @@ Backbone = require 'backbone'
 
 class EWPGlobalItemView extends Marionette.ItemView
 
-  template: Templates.trainer.global_ewp.ewp_single_item
+  template: require('templates/trainer/global_ewp/ewp_single-item')
 
   tagName: 'li'
 
@@ -26,7 +26,7 @@ class EWPGlobalItemView extends Marionette.ItemView
 
 module.exports = class EWPGlobalListView extends Marionette.CompositeView
 
-  template: Templates.trainer.global_ewp.global_ewp_list
+  template: require('templates/trainer/global_ewp/global_ewp_list')
 
   childView: EWPGlobalItemView
 

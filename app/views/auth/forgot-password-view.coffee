@@ -7,7 +7,7 @@ FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
 class ForgotPasswordFormView extends Marionette.ItemView
 
-  template: Templates.auth.forgot_password
+  template: require('templates/auth/forgot-password')
 
   behaviors:
     FormValidationBehaviour:
@@ -40,11 +40,11 @@ class ForgotPasswordFormView extends Marionette.ItemView
 
 class ForgotPasswordSuccessView extends Marionette.ItemView
 
-  template: Templates.auth.forgot_password_success
+  template: require('templates/auth/forgot_password_success')
 
 module.exports = class ForgotPasswordView extends Marionette.LayoutView
 
-  template: Templates.auth.empty_layout
+  template: require('templates/auth/empty_layout')
 
   regions:
     signUp: '#gc-default-region'

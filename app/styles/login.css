@@ -229,13 +229,13 @@ body.auth {
   display: none;
 }
 .gc-trainer-type-personal {
-  background: transparent url('/static/images/signup-type-1.png') 50% 20px no-repeat;
+  background: transparent url('../images/signup-type-1.png') 50% 20px no-repeat;
 }
 .gc-trainer-type-couch {
-  background: transparent url('/static/images/signup-type-2.png') 50% 20px no-repeat;
+  background: transparent url('../images/signup-type-2.png') 50% 20px no-repeat;
 }
 .gc-trainer-type-not {
-  background: transparent url('/static/images/signup-type-3.png') 50% 20px no-repeat;
+  background: transparent url('../images/signup-type-3.png') 50% 20px no-repeat;
 }
 form .checkbox {
   margin-top: 30px;

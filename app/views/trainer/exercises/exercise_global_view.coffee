@@ -11,7 +11,7 @@ BreadcrumbsCollection = require 'models/general/breadcrumbs'
 
 module.exports = class ExerciseGlobalView extends Marionette.LayoutView
 
-  template: Templates.trainer.exercises.exercise_global
+  template: require('templates/trainer/exercises/exercise_global')
 
   regions:
     manageRegion: '#exercise-manage'

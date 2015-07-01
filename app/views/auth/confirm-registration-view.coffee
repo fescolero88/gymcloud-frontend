@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 
 module.exports = class ConfirmRegistrationView extends Marionette.ItemView
 
-  template: Templates.auth.confirm_registration
+  template: require('templates/auth/confirm_registration')
 
   initialize: (options) ->
     @token = options.token

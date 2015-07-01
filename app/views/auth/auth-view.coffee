@@ -3,7 +3,7 @@ Backbone = require 'backbone'
 
 module.exports = class AuthView extends Marionette.ItemView
 
-  template: Templates.auth.auth
+  template: require('templates/auth/auth')
 
   events:
     'submit form': 'login'

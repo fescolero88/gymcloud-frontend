@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 
 module.exports = class BaseView extends Marionette.LayoutView
 
-  template: Templates.general.base
+  template: require('templates/general/base')
 
   el: 'body'
 

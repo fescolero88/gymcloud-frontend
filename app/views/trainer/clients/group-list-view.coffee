@@ -5,7 +5,7 @@ GroupModel = require 'models/trainer/group-model'
 
 module.exports = class GroupItemView extends Marionette.ItemView
 
-  template: Templates.trainer.clients.group_item
+  template: require('templates/trainer/clients/group-item')
 
   tagName: 'li'
 
@@ -33,7 +33,7 @@ module.exports = class GroupItemView extends Marionette.ItemView
 
 module.exports = class GroupListView extends Marionette.CompositeView
 
-  template: Templates.trainer.clients.group_list
+  template: require('templates/trainer/clients/group-list')
 
   childView: GroupItemView
 

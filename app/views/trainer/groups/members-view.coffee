@@ -4,7 +4,7 @@ ClientCollection = require 'models/trainer/client-collection'
 
 class MembersItemView extends Marionette.ItemView
 
-  template: Templates.trainer.groups.members_item
+  template: require('templates/trainer/groups/members_item')
 
   tagName: 'li'
 
@@ -12,7 +12,7 @@ class MembersItemView extends Marionette.ItemView
 
 module.exports = class MembersView extends Marionette.CompositeView
 
-  template: Templates.trainer.groups.members
+  template: require('templates/trainer/groups/members')
 
   childView: MembersItemView
 

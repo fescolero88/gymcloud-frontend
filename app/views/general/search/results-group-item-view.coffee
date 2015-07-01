@@ -5,6 +5,9 @@ ResultsEntityItemView = require 'views/general/search/results-entity-item-view'
 ResultsClientItemView = require 'views/general/search/results-client-item-view'
 ResultsClientGroupItemView = require 'views/general/search/results-client-group-item-view'
 
+templateEntity = require('templates/general/search/group_for_entity')
+templateClients = require('templates/general/search/group_for_clients')
+
 module.exports = class ResultsGroupItemView extends Marionette.CompositeView
   tagName: 'ul'
   className: 'gc-search-results-list'
@@ -14,14 +17,13 @@ module.exports = class ResultsGroupItemView extends Marionette.CompositeView
 
   getTemplate: ->
     map =
-      'Exercises': 'group_for_entity'
-      'Workouts': 'group_for_entity'
-      'Programs': 'group_for_entity'
-      'Clients': 'group_for_clients'
-      'Client Groups': 'group_for_clients'
+      'Exercises': templateEntity
+      'Workouts': templateEntity
+      'Programs': templateEntity
+      'Clients': templateClients
+      'Client Groups': templateClients
     type = @model.get('title')
-    templateKey = map[type]
-    Templates.general.search[templateKey]
+    map[type]
 
   childViewOptions: ->
     entity_context: @model.get('title').toLowerCase()
