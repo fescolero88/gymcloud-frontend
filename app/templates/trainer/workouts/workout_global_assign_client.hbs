@@ -1,0 +1,11 @@
+<div class="col-xs-10">
+  <a href="#" data-id="{{id}}" class="gc-clients-list-avatar-wrapper {{#if avatar_url}}gc-clients-list-avatar-exist{{/if}}" style="background-color: {{avatar_background_color}}">
+    <img src="{{avatar_url}}" alt="">
+  </a>
+  <a href="/#/tr/clients/id/{{id}}/exercises/" class="gc-clients-list-client-link">
+    {{first_name}} {{last_name}}
+  </a>
+</div>
+<div class="col-xs-2 text-right gc-global-ewp-assigned-mark">
+  <i data-id="{{id}}" class="glyphicon glyphicon-ok {{#unless isAssigned}}hidden{{/unless}} "></i>
+</div>

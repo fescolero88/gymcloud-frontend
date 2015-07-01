@@ -17,35 +17,37 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
     workoutDescription: '.gc-workout-description-editor'
     workoutExerciseAddButton: '.gc-workout-add-exercise-button'
     workoutDeleteButton: '.gc-workout-delete-button'
+    workoutPrivacyControls: 'input[name="privacy"]'
 
   events:
     'keyup @ui.workoutDescription': 'workoutDescriptionAutoHeight'
     'click @ui.workoutExerciseAddButton': 'workoutExerciseAdd'
     'click @ui.workoutDeleteButton': 'workoutDelete'
     'blur @ui.workoutDescription': 'workoutDescriptionSave'
+    'change @ui.workoutPrivacyControls': 'setPrivacy'
 
-  templateHelpers: =>
+  templateHelpers: ->
     workout: @workoutModel.attributes
 
-  initialize: (data) =>
+  initialize: (data) ->
     @workoutModel = data.model
     exercisesCollection = new WorkoutExercisesCollection
     exercisesCollection.set @model.get('exercises')
     @exercisesView = new WorkoutGlobalExercisesView collection: exercisesCollection, workout: @workoutModel
 
-  onShow: =>
+  onShow: ->
     @exercisesListRegion.show @exercisesView
     @workoutDescriptionAutoHeight()
 
-  workoutDescriptionAutoHeight: =>
+  workoutDescriptionAutoHeight: ->
     workoutDesc = @ui.workoutDescription.get 0
     if workoutDesc.scrollHeight > workoutDesc.clientHeight
       workoutDesc.style.height = "#{workoutDesc.scrollHeight}px"
 
-  workoutExerciseAdd: (e) =>
+  workoutExerciseAdd: (e) ->
     e.preventDefault()
 
-  workoutDelete: =>
+  workoutDelete: ->
     workoutId = @model.get 'id'
     workoutName = @model.get 'name'
     App.request 'base:confirmationalModal',
@@ -61,7 +63,7 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
             message: "Workout #{workoutName} deleted."
             type: 'success'
 
-  workoutDescriptionSave: =>
+  workoutDescriptionSave: ->
     @model.set 'description', @ui.workoutDescription.val()
     if @model.hasChanged()
       @model.save().success =>
@@ -69,3 +71,9 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
           hideAfter: 5
           message: "Workout's description saved."
           type: 'success'
+
+  setPrivacy: (e) ->
+    @model.set('is_public', e.target.value)
+    @model.save().success =>
+      App.request 'messenger:show',
+        message: 'Privacy settings changed.'

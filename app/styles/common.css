@@ -305,7 +305,7 @@ body > region[data-name="app"] > .container-fluid {
 }
 @media (min-width: 992px) {
   .gc-content-nav {
-    padding: 0 0 0 15px;
+    padding: 0 15px 0 15px;
   }
   .gc-content-nav-wrapper > div {
     padding: 0 15px;
