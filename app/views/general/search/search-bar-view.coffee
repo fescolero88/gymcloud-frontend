@@ -6,25 +6,27 @@ module.exports = class SearchBarView extends Marionette.ItemView
 
   events:
     'blur @ui.searchTerm': 'searchFocusLost'
-    'click @ui.searchIcon': 'search'
-    'keypress @ui.searchTerm' : 'searchOnEnter'
+    'click @ui.searchButton': 'search'
+    'keyup @ui.searchTerm' : 'searchOnEnter'
     'focus @ui.searchTerm': 'activateSearch'
 
   ui:
     searchTerm: '#gc-topnav-search'
     searchIcon: '.gc-topnav-search-icon'
+    searchButton: '.gc-topnav-search-btn'
 
   className: 'gc-topbar-search'
 
   searchOnEnter: (ev)->
-    @search(ev) if ev.which is 13
-    @cancelSearch if ev.which is 27
+    console.log ev.which
+    if ev.which is 13
+      @doSearch(ev)
+    else if ev.which is 27
+      @cancelSearch()
 
   doSearch: (q)->
     if q isnt ''
       App.vent.trigger 'search:global', q
-    else
-      alert 'Enter search term'
 
   activateSearch: ->
     @ui.searchIcon.removeClass('glyphicon-search')
@@ -32,20 +34,20 @@ module.exports = class SearchBarView extends Marionette.ItemView
 
   cancelSearch: ->
     @ui.searchTerm.val('')
-    @ui.searchIcon.addClass('glyphicon-search')
-    @ui.searchIcon.removeClass('glyphicon-remove')
+    unless @ui.searchTerm.is(":focus")
+      @ui.searchIcon.addClass('glyphicon-search')
+      @ui.searchIcon.removeClass('glyphicon-remove')
     App.vent.trigger 'search:cancel'
 
   search: (ev) ->
     ev.preventDefault()
-    isSearchInProgress = $(ev.target).hasClass('glyphicon-remove')
+    isSearchInProgress = @ui.searchButton.find('i').hasClass('glyphicon-remove')
     if isSearchInProgress
       do @cancelSearch
     else
       @doSearch(@ui.searchTerm.val())
 
   searchFocusLost: (ev) ->
-    console.log 'search lost focus'
     ev.preventDefault()
     $sr = $(ev.currentTarget)
     if $sr.val() isnt $sr.attr('placeholder') and $sr.val() isnt ''
