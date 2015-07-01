@@ -4,6 +4,11 @@
   "author": "GymCloud Team <support@gymcloud.com>",
   "description": "GymCloud: web application",
   "private": true,
+  "scripts": {
+    "build": "gulp build",
+    "test": "karma start --single-run",
+    "start": "node server.js"
+  },
   "devDependencies": {
     "express": "~4.13.0",
     "gulp": "^3.8.10",
