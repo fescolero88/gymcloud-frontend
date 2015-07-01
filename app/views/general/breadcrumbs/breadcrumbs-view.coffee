@@ -21,8 +21,8 @@ module.exports = class BreadcrumbsView extends Marionette.CompositeView
     sync: 'render'
     change: 'render'
 
-  initialize: => 
-  	App.vent.on 'breadcrumbs:reload', @reloadView
+  initialize: ->
+    App.vent.on 'breadcrumbs:reload', @reloadView
 
   reloadView: (data) =>
     if data

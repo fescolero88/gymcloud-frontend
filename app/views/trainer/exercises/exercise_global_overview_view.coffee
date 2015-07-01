@@ -96,4 +96,4 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
 
   onTitleEditing: (event) ->
     if event.keyCode == 13
-      return false
+      false

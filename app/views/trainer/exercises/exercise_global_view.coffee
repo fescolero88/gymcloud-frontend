@@ -115,4 +115,3 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
     lastIndex = @breadcrumbs.length - 1
     @breadcrumbs[lastIndex].title = @exerciseModel.get 'name'
     App.vent.trigger 'breadcrumbs:reload', @breadcrumbs
-
