@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 
 class AuthorScopeButtonItemView extends Marionette.ItemView
   
-  template: Templates.general.search.author_scope_button_item
+  template: require('templates/general/search/author_scope_button_item')
   tagName: 'label'
 
   className: 'btn btn-primary'

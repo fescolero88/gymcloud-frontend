@@ -4,7 +4,7 @@ SearchBarView = require 'views/general/search/search-bar-view'
 
 module.exports = class HeaderView extends Marionette.LayoutView
 
-  template: Templates.general.header
+  template: require('templates/general/header')
 
   ui:
     searchRegion: 'region[data-name="search-bar"]'

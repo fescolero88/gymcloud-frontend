@@ -6,17 +6,17 @@
   vertical-align: middle;
 }
 .gc-trainer-list-icon-exercises {
-  background: transparent url('/static/images/icon-exercises.png') -25px top no-repeat;
+  background: transparent url('../images/icon-exercises.png') -25px top no-repeat;
   background-size: 210%;
   width: 22px;
   margin-right: 6px;
 }
 .gc-trainer-list-icon-workouts {
-  background: transparent url('/static/images/icon-workouts.png') -15px 3px no-repeat;
+  background: transparent url('../images/icon-workouts.png') -15px 3px no-repeat;
   background-size: 180%;
 }
 .gc-trainer-list-icon-programs {
-  background: transparent url('/static/images/icon-programs.png') -13px 4px no-repeat;
+  background: transparent url('../images/icon-programs.png') -13px 4px no-repeat;
   background-size: 170%;
 }
 

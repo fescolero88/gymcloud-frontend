@@ -5,7 +5,7 @@ FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
 module.exports = class ClientFormModalView extends Marionette.ItemView
 
-  template: Templates.trainer.clients.client_form_modal
+  template: require('templates/trainer/clients/client-form-modal')
 
   className: 'modal-dialog'
 

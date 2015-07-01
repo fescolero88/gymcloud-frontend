@@ -8,7 +8,7 @@ FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
 module.exports = class ModalAddToLibraryView extends Marionette.LayoutView
 
-  template: Templates.general.modal_add_to_library
+  template: require('templates/general/modal_add_to_library')
 
   behaviors:
     FormValidationBehaviour:

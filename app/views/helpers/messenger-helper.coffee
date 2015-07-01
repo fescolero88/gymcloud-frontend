@@ -3,7 +3,8 @@ require 'messenger'
 class GymCloudMessage extends window.Messenger.Message
 
   template: (opts) ->
-    myTemplate = Templates.general.notify
+    t = require('templates/general/notify')
+    myTemplate = t
         type: opts.type
         message: opts.message
       $(myTemplate)

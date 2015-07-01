@@ -54,7 +54,7 @@
   width: 24px;
   height: 24px;
   border-radius: 50px;
-  background: green url('/static/images/icon-individual-right.png') center top no-repeat;
+  background: green url('../images/icon-individual-right.png') center top no-repeat;
   background-size: contain;
   position: relative;
 }
@@ -169,7 +169,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50px;
-  background: green url('/static/images/icon-individual-right.png') center top no-repeat;
+  background: green url('../images/icon-individual-right.png') center top no-repeat;
   background-size: contain;
   position: relative;
 }
@@ -180,7 +180,7 @@
   border-radius: 50px;
 }
 .gc-im-message-to .gc-im-message-avatar {
-  background-image: url('/static/images/icon-individual-left.png');
+  background-image: url('../images/icon-individual-left.png');
 }
 .gc-im-message-from .gc-im-message-avatar-wrapper {
   float: left;

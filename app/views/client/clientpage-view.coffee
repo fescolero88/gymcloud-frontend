@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 
 module.exports = class ClientPageView extends Marionette.LayoutView
 
-  template: Templates.client.clientpage
+  template: require('templates/client/clientpage')
 
   regions:
     nav: '#clientpage-nav-region'

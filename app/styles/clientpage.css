@@ -191,17 +191,17 @@
   vertical-align: middle;
 }
 .gc-client-item-icon-exercises {
-  background: transparent url('/static/images/icon-exercises.png') -22px 2px no-repeat;
+  background: transparent url('../images/icon-exercises.png') -22px 2px no-repeat;
   background-size: 200%;
   width: 20px;
   margin-right: 2px;
 }
 .gc-client-item-icon-workouts {
-  background: transparent url('/static/images/icon-workouts.png') -15px 3px no-repeat;
+  background: transparent url('../images/icon-workouts.png') -15px 3px no-repeat;
   background-size: 180%;
 }
 .gc-client-item-icon-programs {
-  background: transparent url('/static/images/icon-programs.png') -13px 4px no-repeat;
+  background: transparent url('../images/icon-programs.png') -13px 4px no-repeat;
   background-size: 170%;
 }
 .gc-client-assignments-empty {

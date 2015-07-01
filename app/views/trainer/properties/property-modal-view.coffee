@@ -5,7 +5,7 @@ FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
 module.exports = class PropertyModalView extends Marionette.ItemView
 
-  template: Templates.trainer.properties.property_modal
+  template: require('templates/trainer/properties/property-modal')
 
   behaviors:
     FormValidationBehaviour:

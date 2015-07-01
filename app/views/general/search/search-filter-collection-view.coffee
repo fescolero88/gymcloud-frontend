@@ -4,7 +4,7 @@ class SearchFilterItemView extends Marionette.ItemView
 
   tagName: 'li'
 
-  template: Templates.general.search.search_filter_item
+  template: require('templates/general/search/search_filter_item')
 
   templateHelpers: ->
     url_filter: @url_filter

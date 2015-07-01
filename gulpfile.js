@@ -1,5 +1,2 @@
-'use strict';
-
-global.isProd = false;
-
-require('./gulp');
+require('coffee-script/register');
+require('./gulpfile.coffee');

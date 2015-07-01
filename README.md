@@ -21,7 +21,7 @@ $ cp app/config_sample.coffee app/config.coffee
 
 Run gulp watcher:
 ```sh
-$ gulp dev
+$ gulp
 ```
 
 ## Deployment
@@ -47,11 +47,9 @@ git push --force origin production
 ### option 2: directly to heroku
 
 ```sh
-gulp prod
+gulp build
 git remote add heroku_gymcloud-webapp-production git@heroku.com:gymcloud-webapp-production.git
-cp ./static/index.html ./
-git add -f index.html
-git add -f static
+git add -f build
 git commit -m '[deploy]'
 git push --force heroku_gymcloud-webapp-production HEAD:master
 ```

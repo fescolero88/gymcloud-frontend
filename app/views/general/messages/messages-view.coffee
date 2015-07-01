@@ -2,4 +2,4 @@ Marionette = require 'backbone.marionette'
 
 module.exports = class MessagesView extends Marionette.ItemView
 
-  template: Templates.general.messages.messages
+  template: require('templates/general/messages/messages')

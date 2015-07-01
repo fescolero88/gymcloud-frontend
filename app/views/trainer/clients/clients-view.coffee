@@ -8,11 +8,10 @@ ClientModel = require 'models/trainer/client-model'
 
 GroupFormModalView = require 'views/trainer/clients/group-form-modal-view'
 GroupModel = require 'models/trainer/group-model'
-_ = require 'underscore'
 
 module.exports = class ClientsView extends Marionette.LayoutView
 
-  template: Templates.trainer.clients.clients
+  template: require('templates/trainer/clients/clients')
 
   className: 'clients-view-main-wrapper'
 

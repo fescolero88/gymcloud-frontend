@@ -21,7 +21,7 @@ PersonalBestView = require 'views/trainer/exercises/personal-best-view'
 
 module.exports = class ClientGroupView extends Marionette.LayoutView
 
-  template: Templates.trainer.clients.client
+  template: require('templates/trainer/clients/client')
 
   collectionEvents:
     sync: 'showCenterView'

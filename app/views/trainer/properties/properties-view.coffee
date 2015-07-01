@@ -3,7 +3,7 @@ PropertyModel = require 'models/trainer/property-model'
 
 module.exports = class PropertiesView extends Marionette.LayoutView
 
-  template: Templates.trainer.properties.properties
+  template: require('templates/trainer/properties/properties')
 
   collectionEvents:
     sync: 'showCollection'

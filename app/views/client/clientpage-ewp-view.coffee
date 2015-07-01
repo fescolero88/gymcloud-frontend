@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 
 class EmptyView extends Marionette.ItemView
 
-  template: Templates.client.assigments_empty
+  template: require('templates/client/assigments-empty')
 
   initialize: (data) =>
     @dataType = data.dataType
@@ -12,7 +12,7 @@ class EmptyView extends Marionette.ItemView
 
 class ClientEWPItemView extends Marionette.ItemView
 
-  template: Templates.client.ewp_item
+  template: require('templates/client/ewp_item')
 
   tagName: 'li'
   className: 'row'
@@ -25,7 +25,7 @@ class ClientEWPItemView extends Marionette.ItemView
 
 module.exports = class ClientEWPView extends Marionette.CompositeView
 
-  template: Templates.client.ewp_list
+  template: require('templates/client/ewp_list')
 
   childView: ClientEWPItemView
   childViewContainer: 'ul'

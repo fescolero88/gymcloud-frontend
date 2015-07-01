@@ -3,13 +3,13 @@ Backbone = require 'backbone'
 
 class AddExerciseFolderModalItemView extends Marionette.ItemView
 
-  template: Templates.trainer.exercises.duplicate_exercise_modal_item
+  template: require('templates/trainer/exercises/duplicate_exercise_modal_item')
 
   tagName: 'li'
 
 module.exports = class DuplicateGlobalEWPModalView extends Marionette.CompositeView
 
-  template: Templates.trainer.global_ewp.duplicate_global_ewp_modal
+  template: require('templates/trainer/global_ewp/duplicate_global_ewp_modal')
 
   className: 'modal-dialog modal-md'
 

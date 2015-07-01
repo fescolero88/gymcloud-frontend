@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 
 class BreadcrumbsItemView extends Marionette.ItemView
 
-  template: Templates.general.breadcrumbs.breadcrumbs_item
+  template: require('templates/general/breadcrumbs/breadcrumbs_item')
 
   tagName: 'span'
 
@@ -11,7 +11,7 @@ class BreadcrumbsItemView extends Marionette.ItemView
 
 module.exports = class BreadcrumbsView extends Marionette.CompositeView
 
-  template: Templates.general.breadcrumbs.breadcrumbs
+  template: require('templates/general/breadcrumbs/breadcrumbs')
 
   childView: BreadcrumbsItemView
 

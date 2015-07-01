@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 
 module.exports = class SearchBarView extends Marionette.ItemView
 
-  template: Templates.general.search.search_bar
+  template: require('templates/general/search/search_bar')
 
   events:
     'blur @ui.searchTerm': 'searchFocusLost'

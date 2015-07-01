@@ -6,7 +6,7 @@ EWPGlobalModel = require 'models/trainer/global-ewp-model'
 
 module.exports = class AddGlobalEWPModalView extends Marionette.ItemView
 
-  template: Templates.trainer.global_ewp.add_global_ewp_modal
+  template: require('templates/trainer/global_ewp/add_global_ewp_modal')
 
   className: 'modal-dialog modal-md'
 

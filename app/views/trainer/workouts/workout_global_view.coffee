@@ -6,7 +6,7 @@ WorkoutGlobalVideoView = require 'views/trainer/workouts/workout_global_video_vi
 
 module.exports = class WorkoutGlobalView extends Marionette.LayoutView
 
-  template: Templates.trainer.workouts.workout_global
+  template: require('templates/trainer/workouts/workout_global')
 
   regions:
     manageRegion: '#workout-manage'

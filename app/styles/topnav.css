@@ -141,16 +141,16 @@
     left: 7px;
 }
 .gc-topbar-dropdown-icon-profile {
-    background-image: url('/static/images/icon-individuals.png');
+    background-image: url('../images/icon-individuals.png');
 }
 .gc-topbar-dropdown-icon-clients {
-    background-image: url('/static/images/icon-clients.png');
+    background-image: url('../images/icon-clients.png');
 }
 .gc-topbar-dropdown-icon-trainigs {
-    background-image: url('/static/images/icon-trainings.png');
+    background-image: url('../images/icon-trainings.png');
 }
 .gc-topbar-dropdown-icon-signout {
-    background-image: url('/static/images/icon-signout.png');
+    background-image: url('../images/icon-signout.png');
 }
 .gc-topbar-avatar .dropdown-menu {
     border: none;
