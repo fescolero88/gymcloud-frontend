@@ -1,10 +1,9 @@
 Marionette = require 'backbone.marionette'
-_ = require 'underscore'
 
 class WorkoutGlobalGroupView extends Marionette.ItemView
   tagName:'li'
 
-  template: Templates.trainer.workouts.workout_global_assign_group
+  template: require('templates/trainer/workouts/workout_global_assign_group')
 
   modelEvents:
     'model:toggle_assign:success': 'render'
@@ -19,7 +18,7 @@ class WorkoutGlobalGroupView extends Marionette.ItemView
 
 module.exports = class WorkoutGlobalAssignGroupsListView extends Marionette.CompositeView
 
-  template: Templates.trainer.workouts.workout_global_assign_groups
+  template: require('templates/trainer/workouts/workout_global_assign_groups')
 
   className: 'gc-clients-list-wrapper gc-workouts-assign-list'
 

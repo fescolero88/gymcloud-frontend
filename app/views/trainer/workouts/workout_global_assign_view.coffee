@@ -7,7 +7,7 @@ WorkoutClientAssigneesCollection = require 'models/trainer/workouts-client-assig
 
 module.exports = class WorkoutGlobalAssignView extends Marionette.LayoutView
 
-  template: Templates.trainer.workouts.workout_global_assign
+  template: require('templates/trainer/workouts/workout_global_assign')
 
   regions:
     clients: 'region[data-name="workout-clients"]'

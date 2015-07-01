@@ -1,11 +1,10 @@
 Marionette = require 'backbone.marionette'
-_ = require 'underscore'
 
 class WorkoutGlobalClientView extends Marionette.ItemView
 
   tagName: 'li'
 
-  template: Templates.trainer.workouts.workout_global_assign_client
+  template: require('templates/trainer/workouts/workout_global_assign_client')
 
   modelEvents:
     'model:toggle_assign:success': 'render'
@@ -20,7 +19,7 @@ class WorkoutGlobalClientView extends Marionette.ItemView
 
 module.exports = class WorkoutGlobalAssignClientsListView extends Marionette.CompositeView
 
-  template: Templates.trainer.workouts.workout_global_assign_clients
+  template: require('templates/trainer/workouts/workout_global_assign_clients')
 
   className: 'gc-clients-list-wrapper gc-workouts-assign-list'
 
