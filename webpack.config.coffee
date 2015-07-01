@@ -61,6 +61,7 @@ module.exports =
         loader: 'handlebars'
         query:
           runtime: 'handlebars/runtime'
+          #inlineRequires: 'app/images/'
           helperDirs: [
             __dirname + '/app/handlers/handlebars'
           ]
