@@ -13,7 +13,7 @@ module.exports = class ResultsClientItemView extends Marionette.LayoutView
 
   templateHelpers: ->
     id = @model.id
-    entity_link: "/#/tr/clients/id/#{id}/exercises/"
+    entity_link: "#/tr/clients/id/#{id}/exercises/"
 
   ui:
     avatarWrapper: '.gc-avatar-wrapper'
