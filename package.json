@@ -4,6 +4,11 @@
   "author": "GymCloud Team <support@gymcloud.com>",
   "description": "GymCloud: web application",
   "private": true,
+  "scripts": {
+    "build": "gulp build",
+    "test": "karma start --single-run",
+    "start": "node server.js"
+  },
   "devDependencies": {
     "express": "~4.13.0",
     "gulp": "^3.8.10",
@@ -25,7 +30,20 @@
     "handlebars-loader": "^1.0.2",
     "gulp-zip": "^3.0.2",
     "gulp-clean": "^0.3.1",
-    "stylus-loader": "^1.2.1"
+    "stylus-loader": "^1.2.1",
+    "karma-script-launcher": "^0.1.0",
+    "karma-chai-sinon": "^0.1.5",
+    "karma-firefox-launcher": "^0.1.6",
+    "sinon-chai": "^2.8.0",
+    "karma-mocha": "^0.2.0",
+    "karma-chai": "^0.1.0",
+    "karma-spec-reporter": "0.0.19",
+    "karma-webpack": "^1.5.1",
+    "chai": "^3.0.0",
+    "karma-chrome-launcher": "^0.2.0",
+    "sinon": "^1.15.4",
+    "mocha": "^2.2.5",
+    "karma": "^0.12.37"
   },
   "dependencies": {
     "backbone": "^1.1.2",
