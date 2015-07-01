@@ -1,6 +1,6 @@
 Backbone = require 'backbone'
 
-class GroupModel extends Backbone.Model
+class ClientGroupModel extends Backbone.Model
   defaults:
     client_ids: []
     client_group_ids: []
@@ -27,7 +27,7 @@ class GroupModel extends Backbone.Model
           id: @get 'workoutId'
           client_ids: @get 'client_ids'
           client_group_ids: @get 'client_group_ids'
-        
+
     options = App.request 'ajax:options:create', options
 
     (@sync || Backbone.sync).call(@, null, @, options)
@@ -38,6 +38,6 @@ class GroupModel extends Backbone.Model
 
 
 
-module.exports = class GroupCollection extends Backbone.Collection
-  model: GroupModel
+module.exports = class ClientGroupCollection extends Backbone.Collection
+  model: ClientGroupModel
   url: '/api/mobile/client_groups'
