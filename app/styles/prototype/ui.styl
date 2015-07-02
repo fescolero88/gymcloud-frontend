@@ -97,6 +97,9 @@ faIcon =
   border-color white
   color blue
 
+.btn.gc-custom[disabled]
+  color white
+
 .form-group
   position relative
 
@@ -395,11 +398,23 @@ a.gc-text-link:hover
 .gc-tooltip .popover-content
   padding 20px 10px
 
-.gc-tooltip.bottom.gc-tooltip-no-header .arrow:after
-  border-bottom-color white
+.popover.gc-tooltip.bottom .arrow
+  border-bottom-color rgba(205, 202, 202, 0.25)!important
 
-.gc-tooltip.bottom .arrow:after
-  border-bottom-color blue!important
+.popover.gc-tooltip.top .arrow
+  border-top-color rgba(205, 202, 202, 0.25)!important
+
+.popover.gc-tooltip.left .arrow
+  border-left-color rgba(205, 202, 202, 0.25)!important
+
+.popover.gc-tooltip.right .arrow
+  border-right-color rgba(205, 202, 202, 0.25)!important
+
+.popover.gc-tooltip.bottom .arrow:after
+  border-bottom-color blue
+
+.popover.gc-tooltip.bottom.gc-tooltip-no-header .arrow:after
+  border-bottom-color white
 
 .gc-tooltip.gc-tooltip-no-header
   -webkit-box-shadow 0px 2px 12px 1px rgba(0,0,0,.2)
