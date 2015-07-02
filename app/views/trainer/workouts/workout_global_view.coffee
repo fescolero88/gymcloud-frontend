@@ -7,6 +7,8 @@ WorkoutGlobalAssignView = require 'views/trainer/workouts/workout_global_assign_
 
 WorkoutExerciseModel = require 'models/trainer/workout-exercise-model'
 
+WorkoutExerciseModel = require 'models/trainer/workout-exercise-model'
+
 module.exports = class WorkoutGlobalView extends Marionette.LayoutView
 
   template: require('templates/trainer/workouts/workout_global')

@@ -77,11 +77,14 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
           message: "Workout's description saved."
           type: 'success'
 
+<<<<<<< HEAD
   setPrivacy: (e) ->
     @model.set('is_public', e.target.value)
     @model.save().success =>
       App.request 'messenger:show',
         message: 'Privacy settings changed.'
 
+=======
+>>>>>>> 5c8575650c3803d17ca2999853ffa01da81e906a
   workoutModelChanged: =>
     @exercisesCollection.set @model.get('exercises')
