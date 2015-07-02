@@ -277,6 +277,34 @@ ul.gc-workout-exercises-list .dragged {
   padding: 19px 10px;
 }
 
+.gc-workout-exercise-sort {
+  background-image: url("/static/images/sort-icon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 12px;
+  margin-top: 5px;
+  width: 6px;
+  height: 13px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+.gc-workout-exercise-sort:hover {
+  opacity: 1;
+}
+.gc-workout-exercises-list .gc-delete-exercise {
+  color: #acacac;
+  font-size: 22px;
+  line-height: 17px;
+  opacity: 0.7;
+  visibility: hidden;
+}
+.gc-workout-exercises-list .gc-delete-exercise:hover {
+  opacity: 1;
+}
+.gc-workout-exercises-list li:hover .gc-delete-exercise {
+  visibility: visible;
+}
+
 .gc-btn-group {
   margin: 0 15px;
 }
@@ -306,32 +334,4 @@ ul.gc-workout-exercises-list .dragged {
   border-color: #3a99d8;
   background-color: #3a99d8;
   color: #fff;
-}
-
-.gc-workout-exercise-sort {
-  background-image: url("/static/images/sort-icon.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  margin-right: 12px;
-  margin-top: 5px;
-  width: 6px;
-  height: 13px;
-  cursor: pointer;
-  opacity: 0.6;
-}
-.gc-workout-exercise-sort:hover {
-  opacity: 1;
-}
-.gc-workout-exercises-list .gc-delete-exercise {
-  color: #acacac;
-  font-size: 22px;
-  line-height: 17px;
-  opacity: 0.7;
-  visibility: hidden;
-}
-.gc-workout-exercises-list .gc-delete-exercise:hover {
-  opacity: 1;
-}
-.gc-workout-exercises-list li:hover .gc-delete-exercise {
-  visibility: visible;
 }
