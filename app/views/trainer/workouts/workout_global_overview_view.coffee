@@ -76,5 +76,4 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
           type: 'success'
 
   workoutModelChanged: =>
-    console.log 'changed'
     @exercisesCollection.set @model.get('exercises')

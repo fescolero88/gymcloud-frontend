@@ -14,6 +14,44 @@ class ExercisesItemView extends Marionette.ItemView
 
   tagName: 'li'
 
+  ui:
+    orderTag: '.gc-workout-exercise-circle'
+    deleteBtn: '.gc-delete-exercise'
+
+  initialize: ->
+    @workoutExerciseModel = new WorkoutExerciseModel
+    @listenTo @workoutExerciseModel, 'sync', @exeriseRemoved
+
+  events:
+    'click @ui.orderTag': 'addEditable'
+    'blur @ui.orderTag': 'saveOrder'
+    'click @ui.deleteBtn': 'deleteExercise'
+
+  addEditable: (event) ->
+    el = event.currentTarget
+    el.setAttribute 'contenteditable', true
+
+  saveOrder: (event) ->
+    #if @model.hasChanged()
+    App.request 'messenger:show',
+    hideAfter: 5
+    message: "Order Updated."
+    type: 'success'
+
+  deleteExercise: (event) ->
+    event.preventDefault()
+    data =
+      id: @model.get 'workout_id'
+      workout_exercise_id: @model.get 'id'
+    @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises/#{data.workout_exercise_id}"
+    @workoutExerciseModel.set data
+    @workoutExerciseModel.destroy()
+
+  exeriseRemoved: ->
+    App.request 'messenger:show',
+    message: "Exercise Removed."
+    App.vent.trigger 'workout:reload:exercises'
+
 module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeView
 
   template: Templates.trainer.workouts.workout_global_exercises
@@ -23,6 +61,11 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
   emptyView: EmptyView
 
   childView: ExercisesItemView
+
+  childViewOptions: (model) ->
+    model.set 'workout_id', @workout.get 'id'
+    return model
+
 
   childViewContainer: 'ul'
 
@@ -35,6 +78,11 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
   initialize: (data) =>
     @workout = data.workout
     @on 'render:collection', @showConnectionLines
+    App.vent.on 'workout:reload:exercises', =>
+      @workout.fetch()
+
+    @workoutExerciseModel = new WorkoutExerciseModel
+    @listenTo @workoutExerciseModel, 'sync', @onSavedOrder
 
   showConnectionLines: =>
     ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'].every (letter) =>
@@ -79,7 +127,12 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
       position: position
 
   onSavePosition: (data) =>
-    @workoutExerciseModel = new WorkoutExerciseModel
     @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises/#{data.workout_exercise_id}"
     @workoutExerciseModel.set data
     @workoutExerciseModel.save()
+
+  onSavedOrder: ->
+    App.request 'messenger:show',
+    hideAfter: 5
+    message: "Order Position Saved."
+    type: 'success'
