@@ -1,7 +1,7 @@
-Marionette = require 'backbone.marionette'
+CustomRouter  = require 'routers/general/custom-router'
 PrototypeController = require 'controllers/prototype/prototype-controller'
 
-module.exports = class PrototypeRouter extends Marionette.AppRouter
+module.exports = class PrototypeRouter extends CustomRouter
 
   controller: PrototypeController
 

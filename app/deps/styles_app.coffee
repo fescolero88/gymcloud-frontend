@@ -21,4 +21,5 @@ define [
   'styles/usercards.css'
   'styles/workout.css'
   'styles/fix_images'
+  'styles/prototype/ui.styl'
 ], ->
