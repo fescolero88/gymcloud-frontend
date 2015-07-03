@@ -24,6 +24,30 @@ Run gulp watcher:
 $ gulp
 ```
 
+Open url in browser:
+
+```sh
+http://localhost:8080/webpack-dev-server/index.html
+```
+
+### Testing
+
+Development with running tests:
+
+```sh
+$ karma start
+```
+
+Running testing suite once:
+
+```sh
+$ npm run test
+```
+or
+
+```sh
+$ karma start --single-run
+```
 ## Deployment
 
 ### prepare before deployment
