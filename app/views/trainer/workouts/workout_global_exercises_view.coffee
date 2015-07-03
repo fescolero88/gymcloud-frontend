@@ -69,6 +69,8 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
 
   ui:
     circles: '.gc-workout-exercise-circle'
+    liveSearch: '.live-search'
+    searchContainer: '.gc-exercises-assign-input-wrapper'
 
   templateHelpers: =>
     workout: @workout.attributes
@@ -82,6 +84,45 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
     @workoutExerciseModel = new WorkoutExerciseModel
     @listenTo @workoutExerciseModel, 'sync', @onSavedOrder
 
+  onShow: ->
+    @initSearchSelect()
+
+  getWorkoutData: ->
+    @workout.fetch()
+
+  searchItems: (items, category) =>
+    result = []
+    $.each items, (index, item) =>
+      if not item
+        return true
+      if item.items
+        category = item.title
+        result = result.concat @searchItems(item.items, category)
+      else
+        result.push
+          key: item.key
+          title: item.title
+          label: category
+    return result
+
+  initSearchSelect: ->
+    searchOptions = @searchItems App.request("data:exercises"), 'exercises'
+    this_ = @
+    @ui.liveSearch.selectize
+      hideSelected: true
+      valueField: 'key'
+      labelField: 'title'
+      searchField: ['title']
+      options: searchOptions
+      onItemAdd: (value, $item) ->
+        this_.addExercise value, $item
+      render:
+        item: (item, escape) ->
+            return '<div>' + escape(item.title) + '</div>'
+        option: (item, escape) ->
+            return '<div><span class="label">' + escape(item.label) +
+              '</span> ' + escape(item.title) + '</div>'
+
   showConnectionLines: =>
     ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'].every (letter) =>
       circles = @$el.find(".gc-workout-exercise-circle[data-letter=#{letter}]")
@@ -92,6 +133,7 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
       circles.eq(circles.length - 1).removeClass('middle').addClass('last')
 
     @addSortable()
+    @removeSearchValues()
 
   addSortable: ->
     @exerciseList = @$el.find '.gc-workout-exercises-list'
@@ -133,3 +175,12 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
       hideAfter: 5
       message: "Order Position Saved."
       type: 'success'
+
+  addExercise: (value, $item) =>
+    data =
+      category: 'exercises'
+      id: value
+    App.vent.trigger 'workout:add:exercise', data
+
+  removeSearchValues: ->
+    @ui.searchContainer.find('[data-value]').remove()

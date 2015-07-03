@@ -30,7 +30,6 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
     workout: @model.attributes
 
   initialize: (data) =>
-    ##@workoutModel = data.model
     @exercisesCollection = new WorkoutExercisesCollection
     @exercisesCollection.set @model.get('exercises')
 
