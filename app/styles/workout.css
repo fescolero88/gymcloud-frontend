@@ -343,3 +343,6 @@ ul.gc-workout-exercises-list .dragged {
   background-color: #3a99d8;
   color: #fff;
 }
+.gc-exercises-assign-input-wrapper .live-search {
+  height: 34px;
+}
