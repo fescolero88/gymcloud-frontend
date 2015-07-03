@@ -27,7 +27,6 @@ module.exports = class MainView extends Marionette.LayoutView
     modals: '.gc-modals'
 
   dragStart: =>
-    console.log @content.currentView
     if @content.currentView.isDroppable
       @ui.dndArea.appendTo(@ui.mainArea)
 

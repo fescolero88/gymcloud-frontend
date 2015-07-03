@@ -278,7 +278,7 @@ ul.gc-workout-exercises-list .dragged {
 }
 
 .gc-workout-exercise-sort {
-  background-image: url("/static/images/sort-icon.png");
+  background-image: url("../images/sort-icon.png");
   background-size: contain;
   background-repeat: no-repeat;
   margin-right: 12px;

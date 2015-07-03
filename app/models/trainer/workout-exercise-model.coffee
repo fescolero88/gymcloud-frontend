@@ -14,6 +14,6 @@ module.exports = class WorkoutsExercise extends Backbone.Model
 
   sync: (method, model, options) ->
     if @addExercise
-      return Backbone.sync('create', model, options);
+      Backbone.sync('create', model, options)
     else
-      return Backbone.sync(method, model, options);
+      Backbone.sync(method, model, options)

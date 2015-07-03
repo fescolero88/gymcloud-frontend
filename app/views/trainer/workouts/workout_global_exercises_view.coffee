@@ -32,11 +32,10 @@ class ExercisesItemView extends Marionette.ItemView
     el.setAttribute 'contenteditable', true
 
   saveOrder: (event) ->
-    #if @model.hasChanged()
     App.request 'messenger:show',
-    hideAfter: 5
-    message: "Order Updated."
-    type: 'success'
+      hideAfter: 5
+      message: "Order Updated."
+      type: 'success'
 
   deleteExercise: (event) ->
     event.preventDefault()
@@ -49,7 +48,7 @@ class ExercisesItemView extends Marionette.ItemView
 
   exeriseRemoved: ->
     App.request 'messenger:show',
-    message: "Exercise Removed."
+      message: "Exercise Removed."
     App.vent.trigger 'workout:reload:exercises'
 
 module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeView
@@ -65,7 +64,6 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
   childViewOptions: (model) ->
     model.set 'workout_id', @workout.get 'id'
     return model
-
 
   childViewContainer: 'ul'
 
@@ -112,7 +110,6 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
       .removeAttr 'style'
     _super $item, container
 
-
   onSortExercise: ($item, container, _super) =>
     draggable = $item.find 'span.gc-workout-exercise-sort'
     _super $item, container
@@ -133,6 +130,6 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
 
   onSavedOrder: ->
     App.request 'messenger:show',
-    hideAfter: 5
-    message: "Order Position Saved."
-    type: 'success'
+      hideAfter: 5
+      message: "Order Position Saved."
+      type: 'success'
