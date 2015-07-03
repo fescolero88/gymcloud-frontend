@@ -25,11 +25,17 @@ class ExercisesItemView extends Marionette.ItemView
   events:
     'click @ui.orderTag': 'addEditable'
     'blur @ui.orderTag': 'saveOrder'
+    'keydown @ui.orderTag': 'saveOnEnter'
     'click @ui.deleteBtn': 'deleteExercise'
 
   addEditable: (event) ->
     el = event.currentTarget
     el.setAttribute 'contenteditable', true
+
+  saveOnEnter: (event) =>
+    if event.keyCode == 13
+      @saveOrder()
+      event.preventDefault()
 
   saveOrder: (event) ->
     App.request 'messenger:show',

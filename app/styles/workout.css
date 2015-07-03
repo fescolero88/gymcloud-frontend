@@ -200,7 +200,15 @@ ul.gc-workout-exercises-list li {
 ul.gc-workout-exercises-list .dragged {
   position: absolute;
 }
-
+.gc-workout-exercise-circle[contenteditable] {
+  outline: none;
+}
+.gc-workout-exercise-circle[contenteditable=true]:active,
+.gc-workout-exercise-circle[contenteditable=true]:focus {
+  border: 1px solid #757575;
+  -webkit-box-shadow: 0px 2px 12px 1px rgba(0,0,0,.2);
+  box-shadow: 0px 2px 12px 1px rgba(0,0,0,.2);
+}
 .gc-workout-exercise-circle {
   float: left;
   background-color: #f47b22;
