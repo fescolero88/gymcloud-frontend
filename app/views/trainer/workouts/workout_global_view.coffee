@@ -39,12 +39,14 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
     @workoutModel = data.workout
 
     App.vent.on 'drag:complete', @assignExercise
+    App.vent.on 'workout:add:exercise', @assignExercise
 
     @workoutExerciseModel = new WorkoutExerciseModel
     @listenTo(@workoutExerciseModel, 'sync', @onExerciseAdded)
 
   onDestroy: =>
     App.vent.off 'drag:complete', @assignExercise
+    App.vent.off 'workout:add:exercise', @assignExercise
 
   onShow: =>
     @changeView 'description'
@@ -97,11 +99,14 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
     App.request 'base:addToLibraryModal', type: 'workouts', model: @workoutModel
 
   assignExercise: (item) =>
-    category = item.get 'category'
+    if item instanceof Backbone.Model
+      item = item.toJSON()
+
+    category = item.category
     if category == 'exercises'
       data =
         'id': @workoutModel.get 'id'
-        'exercise_id': item.get 'id'
+        'exercise_id': item.id
 
       @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises"
       @workoutExerciseModel.set data

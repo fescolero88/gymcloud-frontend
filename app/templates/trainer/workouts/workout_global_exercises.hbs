@@ -2,10 +2,23 @@
 {{#withProfile}}
   {{#ifEqual id ../workout.author.id}}
     <div class="gc-exercises-list-actions">
-      <button class="btn">
+      <!-- <button class="btn">
         <span><i class="fa fa-plus"></i></span>
         Add exercise
-      </button>
+      </button> -->
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="gc-exercises-assign-input-wrapper">
+            <input type="text" class="gc-exercises-assign-input form-control live-search" placeholder="Search Exercises">
+          </div>
+        </div>
+        <div class="col-xs-8 text-right">
+          <button class="btn">
+            <span><i class="fa fa-plus"></i></span>
+            Add New Property
+          </button>
+        </div>
+      </div>
     </div>
   {{/ifEqual}}
 {{/withProfile}}
