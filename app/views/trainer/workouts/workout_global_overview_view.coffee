@@ -26,14 +26,19 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
     'blur @ui.workoutDescription': 'workoutDescriptionSave'
     'change @ui.workoutPrivacyControls': 'setPrivacy'
 
-  templateHelpers: ->
-    workout: @workoutModel.attributes
+  templateHelpers: =>
+    workout: @model.attributes
 
-  initialize: (data) ->
-    @workoutModel = data.model
-    exercisesCollection = new WorkoutExercisesCollection
-    exercisesCollection.set @model.get('exercises')
-    @exercisesView = new WorkoutGlobalExercisesView collection: exercisesCollection, workout: @workoutModel
+  initialize: (data) =>
+    ##@workoutModel = data.model
+    @exercisesCollection = new WorkoutExercisesCollection
+    @exercisesCollection.set @model.get('exercises')
+
+    @exercisesView = new WorkoutGlobalExercisesView
+      collection: @exercisesCollection,
+      workout: @model
+
+    @listenTo(@model, 'sync', @workoutModelChanged)
 
   onShow: ->
     @exercisesListRegion.show @exercisesView
@@ -77,3 +82,6 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
     @model.save().success =>
       App.request 'messenger:show',
         message: 'Privacy settings changed.'
+
+  workoutModelChanged: =>
+    @exercisesCollection.set @model.get('exercises')
