@@ -23,6 +23,7 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
 
   events:
     'keyup @ui.workoutDescription': 'workoutDescriptionAutoHeight'
+    'keyup @ui.workoutNoteEditor': 'workoutNoteAutoHeight'
     'click @ui.workoutExerciseAddButton': 'workoutExerciseAdd'
     'click @ui.workoutDeleteButton': 'workoutDelete'
     'blur @ui.workoutDescription': 'workoutDescriptionSave'
@@ -56,6 +57,12 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
     workoutDesc = @ui.workoutDescription.get 0
     if workoutDesc.scrollHeight > workoutDesc.clientHeight
       workoutDesc.style.height = "#{workoutDesc.scrollHeight}px"
+
+  workoutNoteAutoHeight: ->
+    workoutNote = @ui.workoutNoteEditor.get 0
+    if workoutNote.scrollHeight > workoutNote.clientHeight
+      workoutNote.style.height = "#{workoutNote.scrollHeight}px"
+
 
   workoutExerciseAdd: (e) ->
     e.preventDefault()
@@ -96,20 +103,21 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
     @exercisesCollection.set @model.get('exercises')
 
   showAddNote: ->
-    console.log 'adding note', this
     hasNote = !!@model.get('notes')
-    console.log hasNote
     if hasNote
       @ui.workoutNoteEditor.addClass 'focus-state'
     else
       @ui.workoutNotesContainer.removeClass 'hidden'
       @ui.workoutNoteEditor.addClass 'focus-state'
-
     @ui.workoutNoteEditor.focus()
 
   workoutNoteSave: ->
     @model.set 'notes', @ui.workoutNoteEditor.val()
     @model.save().success =>
       @ui.workoutNoteEditor.removeClass 'focus-state'
+      if @model.get('notes') is '' #hide notes ui
+        @ui.workoutNotesContainer.addClass 'hidden'
+
       App.request 'messenger:snow',
         message: "Workout's note saved."
+
