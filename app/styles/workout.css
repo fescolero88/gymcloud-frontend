@@ -62,7 +62,7 @@
   color: #3a99d8;
   text-decoration: none;
 }
-textarea.gc-workout-description-editor {
+textarea.gc-workout-description-editor, textarea.gc-workout-note-editor {
   overflow: hidden;
   border: 1px dashed transparent;
   box-shadow: none;
@@ -76,7 +76,7 @@ textarea.gc-workout-description-editor:hover {
   border-color: #3598dc;
   cursor: pointer;
 }
-textarea.gc-workout-description-editor:focus {
+textarea.gc-workout-description-editor:focus, .gc-workout-note-editor.focus-state {
   box-shadow: none;
   outline: none;
   border-color: #3598dc;
@@ -345,4 +345,9 @@ ul.gc-workout-exercises-list .dragged {
 }
 .gc-exercises-assign-input-wrapper .live-search {
   height: 34px;
+}
+
+.gc-workout-notes-label {
+  padding-left: 11px;
+  padding-bottom: 10px;
 }

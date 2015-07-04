@@ -23,6 +23,7 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
     contentNavLinks: '.gc-content-nav li a'
     navBack: '.gc-content-nav-back'
     addToLibraryButton: '.gc-add-to-library-button'
+    addNoteButton: '.gc-workout-add-note'
 
   events:
     'click @ui.navBack': 'navigateBack'
@@ -30,6 +31,7 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
     'blur @ui.workoutTitle': 'workoutTitleSave'
     'click @ui.addToLibraryButton': 'showAddToLibrary'
     'click @ui.contentNavLinks': 'changeActiveTab'
+    'click @ui.addNoteButton': 'triggerAddNote'
 
   templateHelpers: =>
     workout: @workoutModel.attributes
@@ -115,3 +117,6 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
 
   onExerciseAdded: () =>
     @workoutModel.fetch()
+
+  triggerAddNote: ->
+    App.vent.trigger 'workout:notes:add'
