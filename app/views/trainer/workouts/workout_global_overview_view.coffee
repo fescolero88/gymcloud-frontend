@@ -94,7 +94,6 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
 
   setPrivacy: (e) ->
     @model.set('is_public', e.target.value)
-    @model.set('notes', 'a sample note')
     @model.save().success =>
       App.request 'messenger:show',
         message: 'Privacy settings changed.'
