@@ -19,7 +19,7 @@ module.exports = class SearchBarView extends Marionette.ItemView
 
   searchOnEnter: (ev)->
     if ev.which is 13
-      @doSearch(ev)
+      @doSearch @ui.searchTerm.val()
     else if ev.which is 27
       @cancelSearch()
 
