@@ -36,6 +36,7 @@ module.exports = class ClientSidebarView extends Marionette.LayoutView
     programs: => App.request 'data:programs'
 
   getData: =>
+    console.log App.request 'data:exercises'
     if !App.request 'data:exercises'
       $.ajax
         url: '/api/mobile/library/'
@@ -43,6 +44,7 @@ module.exports = class ClientSidebarView extends Marionette.LayoutView
         dataType: 'json'
         success: (data) =>
           for item in data
+            console.log data
             switch item.title
               when 'Exercises'
                 App.request 'data:exercises:reset', item.items
