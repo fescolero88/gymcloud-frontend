@@ -11,7 +11,7 @@ MessagesController = require 'controllers/general/messages/messages-controller'
 MessagesRouter = require 'routers/general/messages/messages-router'
 
 MainView = require 'views/general/main-view'
-SideBarView = require 'views/client/clientpage-sidebar-view'
+SideBarView = require 'views/client/sidebar-view'
 HeaderView = require 'views/general/header-view'
 ClientPageView = require 'views/client/clientpage-view'
 ClientPageNavView = require 'views/client/clientpage-nav-view'
@@ -32,7 +32,7 @@ module.exports = class MainClientModule extends Marionette.Module
       @app.appRegion.show @mainView
       @clientController.mainView = @mainView
       App.vent.trigger 'search:initMainView', @mainView
-      
+
     if !@sidebarView? or @sidebarView.isDestroyed
       @sidebarView = new SideBarView()
       @mainView.menu.show @sidebarView
