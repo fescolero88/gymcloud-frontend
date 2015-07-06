@@ -5,7 +5,6 @@ bower_components/
 .DS_Store
 config.coffee
 .idea/
-app/templates/templates_build.js
 *.iml
 .nvmrc
 npm-debug.log
