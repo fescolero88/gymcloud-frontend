@@ -1,6 +1,6 @@
 #clientpage-nav-region {
   background: #3398db;
-  height: 126px;
+  height: 78px;
   margin: 0 -15px;
 }
 #clientpage-nav-region >div > div {
@@ -245,9 +245,6 @@
   .gc-clientpage-nav-trainer-wrapper {
     text-align: right;
   }
-  .gc-clientpage-nav-trainer-action-wrapper {
-    text-align: center;
-  }
   .gc-clientpage-nav-trainer-avatar-block {
     display: inline-block;
     margin: 0 10px 0 0;
@@ -268,13 +265,6 @@
     height: 43px;
     padding: 12px 10px;
     border-radius: 10px 10px 0 0;
-  }
-  .gc-clientpage-nav-trainer-wrapper {
-    text-align: center;
-  }
-  .gc-clientpage-nav-trainer-avatar-block {
-    display: none;
-    margin: 0 10px 0 0;
   }
 }
 @media (min-width: 1025px) {
@@ -300,11 +290,7 @@
     width: 18px;
   }
   .gc-clientpage-nav-trainer-avatar-block {
-    margin: 0 40px 0 10px;
-  }
-  .gc-clientpage-nav-trainer-avatar-block {
-    display: inline-block;
-    margin: 0 10px 0 0;
+    margin: 0 10px 0 10px;
   }
   .gc-clientpage-nav-trainer-wrapper {
     text-align: right;
