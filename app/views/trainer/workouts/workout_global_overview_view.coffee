@@ -18,18 +18,23 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
     workoutExerciseAddButton: '.gc-workout-add-exercise-button'
     workoutDeleteButton: '.gc-workout-delete-button'
     workoutPrivacyControls: 'input[name="privacy"]'
+    workoutNotesContainer: '.gc-workout-note-container'
+    workoutNoteEditor: '.gc-workout-note-editor'
 
   events:
     'keyup @ui.workoutDescription': 'workoutDescriptionAutoHeight'
+    'keyup @ui.workoutNoteEditor': 'workoutNoteAutoHeight'
     'click @ui.workoutExerciseAddButton': 'workoutExerciseAdd'
     'click @ui.workoutDeleteButton': 'workoutDelete'
     'blur @ui.workoutDescription': 'workoutDescriptionSave'
+    'blur @ui.workoutNoteEditor': 'workoutNoteSave'
     'change @ui.workoutPrivacyControls': 'setPrivacy'
 
   templateHelpers: =>
     workout: @model.attributes
+    hasNote: !!@model.get 'notes'
 
-  initialize: (data) =>
+  initialize: (data) ->
     @exercisesCollection = new WorkoutExercisesCollection
     @exercisesCollection.set @model.get('exercises')
 
@@ -39,14 +44,25 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
 
     @listenTo(@model, 'sync', @workoutModelChanged)
 
+    App.vent.on 'workout:notes:add', @showAddNote, @
+
   onShow: ->
     @exercisesListRegion.show @exercisesView
     @workoutDescriptionAutoHeight()
+
+  onDestroy: ->
+    App.vent.off 'workout:notes:add', @showAddNote
 
   workoutDescriptionAutoHeight: ->
     workoutDesc = @ui.workoutDescription.get 0
     if workoutDesc.scrollHeight > workoutDesc.clientHeight
       workoutDesc.style.height = "#{workoutDesc.scrollHeight}px"
+
+  workoutNoteAutoHeight: ->
+    workoutNote = @ui.workoutNoteEditor.get 0
+    if workoutNote.scrollHeight > workoutNote.clientHeight
+      workoutNote.style.height = "#{workoutNote.scrollHeight}px"
+
 
   workoutExerciseAdd: (e) ->
     e.preventDefault()
@@ -84,3 +100,23 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
 
   workoutModelChanged: =>
     @exercisesCollection.set @model.get('exercises')
+
+  showAddNote: ->
+    hasNote = !!@model.get('notes')
+    if hasNote
+      @ui.workoutNoteEditor.addClass 'focus-state'
+    else
+      @ui.workoutNotesContainer.removeClass 'hidden'
+      @ui.workoutNoteEditor.addClass 'focus-state'
+    @ui.workoutNoteEditor.focus()
+
+  workoutNoteSave: ->
+    @model.set 'notes', @ui.workoutNoteEditor.val()
+    @model.save().success =>
+      @ui.workoutNoteEditor.removeClass 'focus-state'
+      if @model.get('notes') is '' #hide notes ui
+        @ui.workoutNotesContainer.addClass 'hidden'
+
+      App.request 'messenger:snow',
+        message: "Workout's note saved."
+
