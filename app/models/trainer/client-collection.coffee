@@ -18,13 +18,12 @@ class ClientModel extends Backbone.Model
   toggleAssign: ->
     actionType = if @get('isAssigned') then 'unassign' else 'assign'
     @set('isAssigned', !@get('isAssigned'))
-    @set('client_ids', @get('id'))
+    @set('client_ids', [@get('id')])
 
     options =
       url: @url(actionType)
       data:
         JSON.stringify
-          id: @get 'workoutId'
           client_ids: @get 'client_ids'
           client_group_ids: @get 'client_group_ids'
         

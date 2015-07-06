@@ -24,7 +24,6 @@ class ClientGroupModel extends Backbone.Model
       url: @url(actionType)
       data:
         JSON.stringify
-          id: @get 'workoutId'
           client_ids: @get 'client_ids'
           client_group_ids: @get 'client_group_ids'
 
