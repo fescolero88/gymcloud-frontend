@@ -58,10 +58,33 @@
   </ul>
 </div>
 {{else}}
-  <div class="gc-topbar-item">
+<div class="gc-topbar-item gc-topbar-avatar dropdown">
+  <a href="#" class="{{#if avatar_url}}gc-topbar-avatar-exist{{/if}}" id="gc-user-topbar-avatar" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+    <img src="{{avatar_url}}" alt="">
+  </a>
+  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="gc-user-topbar-avatar">
+    <li>
+      <a class="row" href="#tr/me/">
+        <span class="col-xs-3">
+          <span class="gc-topbar-dropdown-icon gc-topbar-dropdown-icon-profile"></span>
+        </span>
+        <span class="col-xs-9">Profile</span>
+      </a>
+    </li>
+    <li>
+      <a class="row" href="#logout" id="logout-btn">
+        <span class="col-xs-3">
+          <span class="gc-topbar-dropdown-icon gc-topbar-dropdown-icon-signout"></span>
+        </span>
+        <span class="col-xs-9">Sign out</span>
+      </a>
+    </li>
+  </ul>
+</div>
+  <!-- <div class="gc-topbar-item">
     <a href="#logout" class="btn btn-default" type="button" id="logout-btn">
       <i class="fa fa-power-off"></i>
     </a>
-  </div>
+  </div> -->
 {{/ifNot}}
 {{/withProfile}}
