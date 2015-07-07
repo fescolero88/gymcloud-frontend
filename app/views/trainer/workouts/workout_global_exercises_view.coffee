@@ -20,7 +20,7 @@ class ExercisesItemView extends Marionette.ItemView
 
   initialize: ->
     @workoutExerciseModel = new WorkoutExerciseModel
-    @listenTo @workoutExerciseModel, 'sync', @exeriseRemoved
+    @listenTo @workoutExerciseModel, 'sync', @refreshExercises
 
   events:
     'click @ui.orderTag': 'addEditable'
@@ -38,10 +38,17 @@ class ExercisesItemView extends Marionette.ItemView
       event.preventDefault()
 
   saveOrder: (event) ->
-    App.request 'messenger:show',
-      hideAfter: 5
-      message: "Order Updated."
-      type: 'success'
+    event.currentTarget.removeAttribute 'contenteditable'
+    data =
+      id: @model.get 'workout_id'
+      workout_exercise_id: @model.get 'id'
+      position: 1
+      order_name: 1
+    console.log @model.toJSON()
+
+    @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises/#{data.workout_exercise_id}"
+    @workoutExerciseModel.set data
+    @workoutExerciseModel.save()
 
   deleteExercise: (event) ->
     event.preventDefault()
@@ -52,9 +59,9 @@ class ExercisesItemView extends Marionette.ItemView
     @workoutExerciseModel.set data
     @workoutExerciseModel.destroy()
 
-  exeriseRemoved: ->
+  refreshExercises: ->
     App.request 'messenger:show',
-      message: "Exercise Removed."
+      message: "Exercise Updated."
     App.vent.trigger 'workout:reload:exercises'
 
 module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeView
@@ -90,9 +97,6 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
     @workoutExerciseModel = new WorkoutExerciseModel
     @listenTo @workoutExerciseModel, 'sync', @onSavedOrder
 
-  onShow: ->
-    @initSearchSelect()
-
   getWorkoutData: ->
     @workout.fetch()
 
@@ -121,6 +125,7 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
       searchField: ['title']
       options: searchOptions
       onItemAdd: (value, $item) ->
+        this_.removeSearchValues()
         this_.addExercise value, $item
       render:
         item: (item, escape) ->
@@ -130,16 +135,24 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
               '</span> ' + escape(item.title) + '</div>'
 
   showConnectionLines: =>
-    ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'].every (letter) =>
-      circles = @$el.find(".gc-workout-exercise-circle[data-letter=#{letter}]")
-      if not circles.length
-        return false
-      circles.addClass('middle')
-      circles.eq(0).removeClass('middle').addClass('first')
-      circles.eq(circles.length - 1).removeClass('middle').addClass('last')
+    circles = @$el.find(".gc-workout-exercise-circle[data-letter]")
+    previous = null
+    $.each circles, (index, item) =>
+        $item = $ item
+        letter = $item.data 'letter'
 
+        if letter
+          if previous and previous.data 'letter' == letter
+            $item.addClass 'last'
+            if previous.hasClass 'last'
+              previous.removeClass('last').addClass('middle')
+            else
+              previous.addClass('first')
+
+          previousLetter = letter
+
+    @initSearchSelect()
     @addSortable()
-    @removeSearchValues()
 
   addSortable: ->
     @exerciseList = @$el.find '.gc-workout-exercises-list'
@@ -189,4 +202,5 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
     App.vent.trigger 'workout:add:exercise', data
 
   removeSearchValues: ->
-    @ui.searchContainer.find('[data-value]').remove()
+    selectiveIput = @$el.find '.selectize-input'
+    selectiveIput.find('div').remove()

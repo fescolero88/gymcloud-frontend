@@ -29,13 +29,12 @@ module.exports = class SideBarView extends Marionette.ItemView
     @programs = []
     @clients = []
     @groups = []
-    App.vent.on 'profile:ready', =>
-      @getData()
-
+    App.vent.on 'profile:ready', @getData
     App.vent.on 'ewp:model:updated', @updateEWPName
 
   onDestroy: ->
     App.vent.off 'ewp:model:updated', @updateEWPName
+    App.vent.off 'profile:ready', @getData
 
   onShow: ->
     @getData()
@@ -110,7 +109,7 @@ module.exports = class SideBarView extends Marionette.ItemView
             .insertAfter($item)
             .removeClass('dragged')
             .removeAttr('style')
-        _super $item
+        _super $item, container
         App.vent.trigger 'drag:start'
       onDrop: ($item, container, _super, e) =>
         $item.removeClass('dragged').removeAttr('style')
