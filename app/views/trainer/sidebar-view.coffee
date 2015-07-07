@@ -19,6 +19,9 @@ module.exports = class SideBarView extends Marionette.ItemView
     mainArea: '.gc-main'
     catchList: '.gc-assign-catch'
     item: '.gc-sidebar-item > a'
+    workoutsWrapper: '[data-category="workouts"]'
+    exercisesWrapper: '[data-category="exercises"]'
+    programsWrapper: '[data-category="programs"]'
 
   initialize: =>
     @exercises = []
@@ -28,6 +31,11 @@ module.exports = class SideBarView extends Marionette.ItemView
     @groups = []
     App.vent.on 'profile:ready', =>
       @getData()
+
+    App.vent.on 'ewp:model:updated', @updateEWPName
+
+  onDestroy: ->
+    App.vent.off 'ewp:model:updated', @updateEWPName
 
   onShow: ->
     @getData()
@@ -57,7 +65,6 @@ module.exports = class SideBarView extends Marionette.ItemView
     setTimeout =>
       @$el.find('.nano').nanoScroller()
     , 600
-
 
   getData: =>
     if !App.request 'data:exercises'
@@ -118,3 +125,9 @@ module.exports = class SideBarView extends Marionette.ItemView
     $('.gc-assign-catch').sortable
       drag: false
       group: 'assignEx'
+
+  updateEWPName: (type, key, newValue) => # todo implement for exercises and programs
+    selector = "span[data-key=\"#{key}\"]"
+    switch type
+      when 'workouts'
+        @ui.workoutsWrapper.find(selector).html(newValue)

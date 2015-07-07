@@ -88,9 +88,11 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
         @ui.innerNav.hide()
 
   workoutTitleSave: =>
+    workoutId = @workoutModel.get 'id'
     @workoutModel.set 'name', @ui.workoutTitle.text()
     if @workoutModel.hasChanged()
       @workoutModel.save().success =>
+        App.vent.trigger 'ewp:model:updated', 'workouts', workoutId, @workoutModel.get('name')
         App.request 'messenger:show',
           hideAfter: 5
           message: "Workout's title saved."
