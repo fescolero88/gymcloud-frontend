@@ -159,7 +159,7 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
 
       @previous = null
       $.each circles, (index, item) =>
-        $item = $ item
+        $item = $ item###
 
     @initSearchSelect()
     @addSortable()
