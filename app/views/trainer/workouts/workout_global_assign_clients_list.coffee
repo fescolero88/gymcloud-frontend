@@ -7,7 +7,7 @@ class WorkoutGlobalClientView extends Marionette.ItemView
   template: require('templates/trainer/workouts/workout_global_assign_client')
 
   modelEvents:
-    'model:toggle_assign:success': 'render'
+    'model:toggle_assign:success': 'toggleAssignSuccess'
 
   className: 'row gc-workout-client-item'
 
@@ -16,6 +16,15 @@ class WorkoutGlobalClientView extends Marionette.ItemView
 
   toggleAssign: ->
     @model.toggleAssign()
+
+  toggleAssignSuccess: (response, actionType) ->
+    if actionType is 'assign'
+      message = 'This workout was assigned to this client'
+    else
+      message = 'This workout was unassigned to this client'
+    App.request 'messenger:show',
+      message: message
+    @render()
 
 module.exports = class WorkoutGlobalAssignClientsListView extends Marionette.CompositeView
 

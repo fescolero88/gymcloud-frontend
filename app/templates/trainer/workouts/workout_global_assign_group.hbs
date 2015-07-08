@@ -2,9 +2,9 @@
   <a href="#" data-id="{{id}}" class="gc-clients-list-avatar-wrapper gc-clients-list-avatar-group {{#if avatar_url}}gc-clients-list-avatar-exist{{/if}}" style="background-color: {{avatar_background_color}}">
     <img src="{{avatar_url}}" alt="">
   </a>
-  <a href="#tr/groups/id/{{id}}/members/" class="gc-clients-list-client-link">
+  <span class="gc-clients-list-client-link">
     {{name}}
-  </a>
+  </span>
 </div>
 <div class="col-xs-2 text-right gc-global-ewp-assigned-mark">
   <i data-id="{{id}}" class="glyphicon glyphicon-ok {{#unless isAssigned}}hidden{{/unless}} "></i>

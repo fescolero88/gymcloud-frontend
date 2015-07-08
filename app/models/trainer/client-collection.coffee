@@ -17,7 +17,6 @@ class ClientModel extends Backbone.Model
 
   toggleAssign: ->
     actionType = if @get('isAssigned') then 'unassign' else 'assign'
-    @set('isAssigned', !@get('isAssigned'))
     @set('client_ids', [@get('id')])
 
     options =
@@ -31,7 +30,8 @@ class ClientModel extends Backbone.Model
 
     (@sync || Backbone.sync).call(@, null, @, options)
       .then (response) =>
-        @trigger 'model:toggle_assign:success', response
+        @set('isAssigned', !@get('isAssigned'))
+        @trigger 'model:toggle_assign:success', response, actionType
       .fail (xhr, textStatus, errorThrown) =>
         @trigger 'model:toggle_assign:fail', 'Something went wrong'
 
