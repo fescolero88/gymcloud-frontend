@@ -32,7 +32,7 @@ module.exports =
       'jquery-sortable': 'bower_components/jquery-sortable/source/js/jquery-sortable.js'
       'datetimepicker': 'bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker'
       'nanoscroller': 'bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js'
-      'messenger': 'bower_components/messenger/build/js/messenger.min.js'
+      'messenger': 'bower_components/messenger/build/js/messenger.js'
 
     extensions: [
       ''
