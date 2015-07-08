@@ -15,6 +15,7 @@ define [
 
   FormValidatorHelper = require 'views/helpers/form-validator-helper'
   JqueryHelper = require 'views/helpers/jquery-helper'
+  MessengerHelper = require 'views/helpers/messenger-helper'
 
   BaseView = require 'views/general/base-view'
 
@@ -38,6 +39,7 @@ define [
         # --- Helpers -----
         new JqueryHelper().initialize()
         new FormValidatorHelper().initialize()
+        new MessengerHelper().initialize()
         # --- Helpers -----
 
         # --- Globar spinner -----
