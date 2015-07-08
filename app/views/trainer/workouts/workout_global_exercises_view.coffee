@@ -42,7 +42,9 @@ class ExercisesItemView extends Marionette.ItemView
     data =
       id: @model.get 'workout_id'
       workout_exercise_id: @model.get 'id'
-      position: $(event.currentTarget).text()
+      position: 1
+      order_name: 1
+    console.log @model.toJSON()
 
     @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises/#{data.workout_exercise_id}"
     @workoutExerciseModel.set data
@@ -148,18 +150,6 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
               previous.addClass('first')
 
           previousLetter = letter
-
-    ###['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'].every (letter) =>
-      circles = @$el.find(".gc-workout-exercise-circle[data-letter=#{letter}]")
-      if not circles.length
-        return false
-      circles.addClass('middle')
-      circles.eq(0).removeClass('middle').addClass('first')
-      circles.eq(circles.length - 1).removeClass('middle').addClass('last')
-
-      @previous = null
-      $.each circles, (index, item) =>
-        $item = $ item###
 
     @initSearchSelect()
     @addSortable()
