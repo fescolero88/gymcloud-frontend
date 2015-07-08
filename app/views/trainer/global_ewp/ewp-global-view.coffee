@@ -55,22 +55,30 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
       collection: new BreadcrumbsCollection data.breadcrumbs
 
     @ewpGlobalModel = new GlobalEWPModel type: @typeName
+    @listenTo @ewpGlobalModel, 'model:duplicate:success', @onDuplicate
 
-    @addGlobalEWPModal = new AddGlobalEWPModalView
-      folderId: @item_id
-      type: @typeName
-      modalEntity: $("#{@ui.actionModal}")
+    @initializeFolderModal()
+    @initializeDuplicateModal()
+    @initializeEWPModal()
+
+  initializeFolderModal: ->
     @addGlobalFolderModal = new AddGlobalFolderModalView
       folderId: @item_id
       type: @typeName
+    @listenTo @addGlobalFolderModal, 'folder:added', @folderAdded
+
+  initializeDuplicateModal: ->
     @duplicateGlobalEWPModal = new DuplicateGlobalEWPModalView
       items: @exercisesList
       type: @typeName
-
-    @listenTo @addGlobalEWPModal, 'item:added', @exerciseAdded
-    @listenTo @addGlobalFolderModal, 'folder:added', @folderAdded
     @listenTo @duplicateGlobalEWPModal, 'items:duplicate', @duplicateEWP
-    @listenTo @ewpGlobalModel, 'model:duplicate:success', @onDuplicate
+
+  initializeEWPModal: ->
+    @addGlobalEWPModal = new AddGlobalEWPModalView
+      folderId: @item_id
+      type: @typeName
+      modalEntity: $("#gc-modal-region")
+    @listenTo @addGlobalEWPModal, 'item:added', @exerciseAdded
 
   templateHelpers: ->
     type: @typeName
@@ -163,16 +171,19 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
 
   showaddGlobalEWPModal: (ev) =>
     ev.preventDefault()
+    @initializeEWPModal() if @addGlobalEWPModal.isDestroyed
     @modalRegion.show @addGlobalEWPModal
     @ui.actionModal.modal 'show'
 
   showaddGlobalFolderModal: (ev) =>
     ev.preventDefault()
+    @initializeFolderModal() if @addGlobalFolderModal.isDestroyed
     @modalRegion.show @addGlobalFolderModal
     @ui.actionModal.modal 'show'
 
   showDuplicateEWPModal: (ev) =>
     ev.preventDefault()
+    @initializeDuplicateModal() if @duplicateGlobalEWPModal.isDestroyed
     @modalRegion.show @duplicateGlobalEWPModal
     @ui.actionModal.modal 'show'
 
