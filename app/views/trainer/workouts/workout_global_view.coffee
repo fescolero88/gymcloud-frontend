@@ -32,6 +32,7 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
     'click @ui.addToLibraryButton': 'showAddToLibrary'
     'click @ui.contentNavLinks': 'changeActiveTab'
     'click @ui.addNoteButton': 'triggerAddNote'
+    'keypress @ui.workoutTitle': 'saveTitleOnEnter'
 
   templateHelpers: =>
     workout: @workoutModel.attributes
@@ -93,10 +94,11 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
     if @workoutModel.hasChanged()
       @workoutModel.save().success =>
         App.vent.trigger 'ewp:model:updated', 'workouts', workoutId, @workoutModel.get('name')
-        App.request 'messenger:show',
-          hideAfter: 5
-          message: "Workout's title saved."
-          type: 'success'
+        App.request('data:reload', 'workouts', App.request 'data:workouts:root').then =>
+          App.request 'messenger:show',
+            hideAfter: 5
+            message: "Workout's title saved."
+            type: 'success'
 
   showAddToLibrary: (ev) =>
     ev.preventDefault()
@@ -122,3 +124,8 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
 
   triggerAddNote: ->
     App.vent.trigger 'workout:notes:add'
+
+  saveTitleOnEnter: (ev) ->
+    if ev.which in [13, 27]
+      ev.preventDefault()
+      @ui.workoutTitle.blur()
