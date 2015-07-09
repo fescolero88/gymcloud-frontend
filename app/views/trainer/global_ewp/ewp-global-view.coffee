@@ -47,7 +47,6 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     'click @ui.backButton': 'goBack'
 
   initialize: (data) =>
-    #console.log 'global view model', @model
     @item_id = data.model?.get 'key'
     @exercisesList = data.items
     @typeName = data.type
@@ -56,29 +55,6 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
 
     @ewpGlobalModel = new GlobalEWPModel type: @typeName
     @listenTo @ewpGlobalModel, 'model:duplicate:success', @onDuplicate
-
-    @initializeFolderModal()
-    @initializeDuplicateModal()
-    @initializeEWPModal()
-
-  initializeFolderModal: ->
-    @addGlobalFolderModal = new AddGlobalFolderModalView
-      folderId: @item_id
-      type: @typeName
-    @listenTo @addGlobalFolderModal, 'folder:added', @folderAdded
-
-  initializeDuplicateModal: ->
-    @duplicateGlobalEWPModal = new DuplicateGlobalEWPModalView
-      items: @exercisesList
-      type: @typeName
-    @listenTo @duplicateGlobalEWPModal, 'items:duplicate', @duplicateEWP
-
-  initializeEWPModal: ->
-    @addGlobalEWPModal = new AddGlobalEWPModalView
-      folderId: @item_id
-      type: @typeName
-      modalEntity: $("#gc-modal-region")
-    @listenTo @addGlobalEWPModal, 'item:added', @exerciseAdded
 
   templateHelpers: ->
     type: @typeName
@@ -165,25 +141,42 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
           if $(check).is ':checked'
             ids.push $(check).data('id')
         @listView.trigger 'items:delete', ids
+        App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
+          @exercisesList = App.request 'data:workouts'
+
 
   loadItem: (key) =>
     Backbone.history.navigate("#tr/global/#{@typeName}/id/#{key}/", { trigger: true, replace: true })
 
   showaddGlobalEWPModal: (ev) =>
     ev.preventDefault()
-    @initializeEWPModal() if @addGlobalEWPModal.isDestroyed
+    @addGlobalEWPModal = new AddGlobalEWPModalView
+      folderId: @item_id
+      type: @typeName
+      modalEntity: $("#gc-modal-region")
+    @listenTo @addGlobalEWPModal, 'item:added', @exerciseAdded
+
     @modalRegion.show @addGlobalEWPModal
     @ui.actionModal.modal 'show'
 
   showaddGlobalFolderModal: (ev) =>
     ev.preventDefault()
-    @initializeFolderModal() if @addGlobalFolderModal.isDestroyed
+    @addGlobalFolderModal = new AddGlobalFolderModalView
+      folderId: @item_id
+      type: @typeName
+    @listenTo @addGlobalFolderModal, 'folder:added', @folderAdded
+
     @modalRegion.show @addGlobalFolderModal
     @ui.actionModal.modal 'show'
 
   showDuplicateEWPModal: (ev) =>
     ev.preventDefault()
-    @initializeDuplicateModal() if @duplicateGlobalEWPModal.isDestroyed
+    @duplicateGlobalEWPModal = new DuplicateGlobalEWPModalView
+      items: @exercisesList
+      type: @typeName
+
+    @listenTo @duplicateGlobalEWPModal, 'items:duplicate', @duplicateEWP
+
     @modalRegion.show @duplicateGlobalEWPModal
     @ui.actionModal.modal 'show'
 
@@ -214,8 +207,10 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     model['items'] = []
     model['isFolder'] = true
     @showListIfHidden()
-    App.request('data:reload', 'exercises', App.request 'data:exercises:root').then =>
+    App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
       @ui.actionModal.modal 'hide'
+      # retrieve new data
+      @exercisesList = App.request 'data:workouts'
       @listView.collection.push model
       @listView.collection.comparator = (model) =>
         return [not model.get('isFolder'), model.get('title').toUpperCase()]
