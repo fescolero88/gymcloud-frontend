@@ -344,7 +344,7 @@ ul.gc-workout-exercises-list .dragged {
   color: #fff;
 }
 .gc-exercises-assign-input-wrapper .live-search {
-  height: 34px;
+  /*height: 34px;*/
 }
 
 .gc-workout-notes-label {
