@@ -31,10 +31,13 @@
 </div>
 
 <div class="gc-component">
-  <div class="gc-component-name">Context Dropdown</div>
+  <div class="gc-component-name"> Dropdown</div>
   <ul class="dropdown-menu gc-dropdown gc-sample-active">
-    <li><a href="#">Regular link</a></li>
-    <li class="disabled"><a href="#">Disabled link</a></li>
+    <li><a href="#">Add Note</a></li>
+    <li><a href="#">Edit Description</a></li>
+    <li><a href="#">Add Video</a></li>
+    <li><a href="#">Save Workout</a></li>
+    <li><a href="#">Duplicate</a></li>
     <li class="gc-danger"><a href="#">Another link</a></li>
   </ul>
 </div>
@@ -53,12 +56,17 @@
 <div class="gc-component">
   <div class="gc-component-name">Iconic Buttons</div>
   <a href="#" class="gc-text-link">
-    <span class="fa fa-plus-circle"></span>
+    <span class="gc-icon-link gc-icon-exercises-add"></span>
     Add Exercise
   </a>
   <br/>
   <a href="#" class="gc-text-link">
-    <span class="fa fa-arrow-down"></span>
+    <span class="gc-icon-link gc-icon-add-property"></span>
+    Add New Property
+  </a>
+  <br/>
+  <a href="#" class="gc-text-link">
+    <span class="gc-icon-link gc-icon-load-more"></span>
     Load more...
   </a>
   <br/>
@@ -104,7 +112,7 @@
     <label>Date & timepicker</label>
     <div class="input-group gc-datetime">
       <input type="text" class="form-control" placeholder="mm/dd/yyyy hh:mm">
-      <span class="input-group-btn gc-btn-group">
+      <span class="input-group-btn">
         <button class="btn btn-default" type="button">
           <span class="fa fa-calendar"></span>
           <span class="fa fa-clock-o"></span>
@@ -136,27 +144,33 @@
   <div class="gc-component-name">Textarea</div>
   <div class="form-group">
     <label>No Border</label>
-    <textarea class="form-control gc-textarea-no-border" placeholder="Some text here..."></textarea>
+    <textarea class="form-control gc-textarea-no-border" placeholder="Start typing a description here..."></textarea>
   </div>
   <div class="form-group">
     <label>Normal</label>
-    <textarea class="form-control gc-textarea" placeholder="Some text here..."></textarea>
+    <textarea class="form-control gc-textarea" placeholder="Start typing a description here..."></textarea>
   </div>
 </div>
 
 <div class="gc-component">
   <div class="gc-component-name">Complex Tag/Settings</div>
 
-  <div class="btn-group clearfix">
+  <span class="gc-tag gc-property">
+    <i class="gc-icon-bars"></i>
+    10 Reps
+  </span>
+  <br />
+  <span class="gc-tag gc-tag-highlight gc-property">
+    <i class="gc-icon-bars"></i>
+    10 Reps
+  </span>
+  <br />
+  <div class="btn-group clearfix gc-property editable">
     <div class="btn-group" role="group">
-      <button type="button" class="btn btn-sm btn-primary gc-custom dropdown-toggle" data-toggle="dropdown">
-        <i class="fa fa-bars"></i>
-        &nbsp;<span>10</span>
+      <button type="button" class="btn btn-sm btn-primary gc-custom">
+        <i class="gc-icon-bars"></i>
+        &nbsp;<span contenteditable="true">10</span>
       </button>
-      <ul class="dropdown-menu">
-        <li><a href="#">Dropdown link</a></li>
-        <li><a href="#">Dropdown link</a></li>
-      </ul>
     </div>
     <div class="btn-group" role="group">
       <button type="button" class="btn btn-sm btn-primary gc-custom dropdown-toggle" data-toggle="dropdown">
@@ -170,27 +184,6 @@
     </div>
   </div>
 
-  <br />
-  <span class="gc-tag">
-    <i class="fa fa-bars"></i>
-    10 Reps
-  </span>
-  <br />
-  <span class="gc-tag gc-tag-highlight">
-    <i class="fa fa-bars"></i>
-    10 Reps
-  </span>
-  <br />
-  <div class="gc-tag-group">
-    <span class="gc-tag gc-tag-highlight">
-      <i class="fa fa-bars"></i>
-      10
-    </span>
-    <span class="gc-tag gc-tag-highlight">
-      Reps
-      <i class="fa fa-sort"></i>
-    </span>
-  </div>
 </div>
 
 <div class="gc-component">
@@ -364,8 +357,8 @@
       <li><a href="#">5</a></li>
       <li>
         <a href="#" aria-label="Next">
-          <i class="fa fa-angle-right"></i>
           Next
+          <i class="fa fa-angle-right"></i>
         </a>
       </li>
     </ul>
@@ -425,23 +418,50 @@
     <div class="gc-alert-icon">
       <span>&times;</span>
     </div>
-    <p>Exercise was deleted</p>
+    <p>Exercise was assigned to Alex Smith</p>
   </div>
 
   <div class="gc-alert-message gc-warning">
     <div class="gc-alert-icon">
       <span>!</span>
     </div>
-    <p>Exercise was deleted</p>
+    <p>Exercise was deleted from the list</p>
   </div>
 
   <div class="gc-alert-message gc-success">
-    <div class="gc-alert-icon">
+    <div class="gc-alert-icon workout">
       <span></span>
     </div>
-    <p>Exercise was deleted</p>
+    <p>Exercise was deleted from the list</p>
   </div>
 
+  <ul class="gc-demo-list">
+    <li>
+      <div class="gc-alert-icon gc-demo message success">
+        <span></span>
+      </div>
+    </li>
+    <li>
+      <div class="gc-alert-icon gc-demo calendar primary">
+        <span></span>
+      </div>
+    </li>
+    <li>
+      <div class="gc-alert-icon gc-demo flag warning">
+        <span></span>
+      </div>
+    </li>
+    <li>
+      <div class="gc-alert-icon gc-demo comment danger">
+        <span></span>
+      </div>
+    </li>
+    <li>
+      <div class="gc-alert-icon gc-demo like info">
+        <span></span>
+      </div>
+    </li>
+  </ul>
 
 </div>
 
@@ -503,7 +523,7 @@
 
 <div class="gc-component">
   <div class="gc-component-name">Heading & Paragraphs</div>
-  <table class="gc-table">
+  <table class="gc-table gc-demo">
     <thead>
       <tr>
         <td>Element</td>
@@ -526,7 +546,7 @@
       <tr>
         <td>Paragraph</td>
         <td>
-          <p class="gc-paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+          <p class="gc-paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
         </td>
       </tr>
     </tbody>
@@ -544,8 +564,7 @@
             <img src="app/images/prototypes/file-icon.png">
           </div>
           <div>
-            <p class="gc-empty-description">Lorem Ipsum is simply dummy text of the printing
-          and typesetting industry.</p>
+            <p class="gc-empty-description">Looks like you don’t any  programs assigned</p>
           </div>
         </div>
       </div>
@@ -556,7 +575,7 @@
           <div class="gc-empty-state-image">
             <img src="app/images/prototypes/clock-icon.png">
           </div>
-          <p class="gc-empty-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+          <p class="gc-empty-description">Looks like you don’t any  workouts assigned</p>
         </div>
       </div>
     </div>
@@ -566,7 +585,7 @@
           <div class="gc-empty-state-image">
             <img src="app/images/prototypes/workout-icon.png">
           </div>
-          <p class="gc-empty-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+          <p class="gc-empty-description">Looks like you don’t any  exercises assigned</p>
         </div>
       </div>
     </div>
@@ -576,7 +595,7 @@
           <div class="gc-empty-state-image">
             <img src="app/images/prototypes/folder-icon.png">
           </div>
-          <p class="gc-empty-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+          <p class="gc-empty-description">You don’t have  anything inside this folder</p>
         </div>
       </div>
     </div>
@@ -591,8 +610,7 @@
             <img src="app/images/prototypes/heartbeat-icon.png">
           </div>
           <div>
-            <p class="gc-empty-description">Lorem Ipsum is simply dummy text of the printing
-          and typesetting industry.</p>
+            <p class="gc-empty-description">You don’t have any warmup assigned</p>
           </div>
         </div>
       </div>
@@ -603,7 +621,7 @@
           <div class="gc-empty-state-image">
             <img src="app/images/prototypes/bar-icon.png">
           </div>
-          <p class="gc-empty-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+          <p class="gc-empty-description">Looks like you don’t any  measurements added </p>
         </div>
       </div>
     </div>
@@ -661,6 +679,10 @@
   </div>
 
   <br/>
+  <br/>
+
+  <i class="gc-icon-client-group"></i>
+
   <br/>
 
   <div class="gc-rating">
