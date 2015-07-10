@@ -220,6 +220,7 @@ ul.gc-workout-exercises-list .dragged {
   text-align: center;
   position: relative;
   line-height: 24px;
+  text-transform: uppercase;
 }
 .gc-workout-exercise-circle.first::after,
 .gc-workout-exercise-circle.middle::after {
@@ -293,7 +294,7 @@ ul.gc-workout-exercises-list .dragged {
   margin-top: 5px;
   width: 6px;
   height: 13px;
-  cursor: pointer;
+  cursor: move;
   opacity: 0.6;
 }
 .gc-workout-exercise-sort:hover {
@@ -343,8 +344,9 @@ ul.gc-workout-exercises-list .dragged {
   background-color: #3a99d8;
   color: #fff;
 }
-.gc-exercises-assign-input-wrapper .live-search {
-  /*height: 34px;*/
+
+.gc-exercises-assign-input-wrapper .selectize-control.live-search {
+  height: 34px;
 }
 
 .gc-workout-notes-label {
