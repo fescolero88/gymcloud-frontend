@@ -37,6 +37,10 @@ faIcon =
   transform translate(0, 0)
 
 /*ui styles*/
+input.form-control,
+textarea.form-control
+  color black!important
+
 .gc-prototype-container
   background white
   padding 15px
@@ -57,14 +61,19 @@ faIcon =
   line-height 30px
   font-weight 300
   margin-bottom 15px
+  color #808080
 
 .gc-bg-inverse
   background-color blue
   color white
 
+.gc-bg-inverse .gc-component-name
+  color white
+
 .btn.gc-custom
   border-radius 50px
   outline none
+  text-transform uppercase
 
 .btn-primary.gc-custom
   background-color white
@@ -102,7 +111,7 @@ faIcon =
   position relative
 
 .form-group label
-  color #a6a7aa
+  color blue
   font-weight normal
 
 .form-group.gc-form-disabled label
@@ -157,6 +166,9 @@ input.form-control-webkit-input-placeholder
   float none
   display inline-block
 
+.gc-dropdown li > a
+  color black
+
 .gc-dropdown li.gc-danger > a
   color red
 
@@ -200,6 +212,21 @@ a.gc-text-link:hover
   background transparent url('../../images/icon-programs.png') -13px 4px no-repeat
   background-size 170%
 
+.gc-icon-exercises-add
+  background transparent url('../../images/prototypes/add-exercise-icon.png') 3px 7px no-repeat
+  bacground-size 15px
+
+.gc-icon-add-property
+  background transparent url('../../images/prototypes/add-property-icon.png') 3px 7px no-repeat
+  bacground-size 15px
+
+.gc-icon-load-more
+  background transparent url('../../images/prototypes/load-more-icon.png') 3px 7px no-repeat
+  bacground-size 15px
+
+.input-group.gc-datetime
+  width 220px
+
 .input-group.gc-datetime .btn
   height 38px
   font-size 18px
@@ -230,8 +257,12 @@ a.gc-text-link:hover
 
 .btn-group.gc-tabs > *
   height 38px
+  color #808080
 
-.btn-group.gc-tabs > *.:active
+.btn-group.gc-tabs > *:hover
+  background #fff
+
+.btn-group.gc-tabs > .active
   border-color blue
   background-color blue
   color white
@@ -316,10 +347,6 @@ a.gc-text-link:hover
 
 .gc-tag.gc-tag-highlight
   border-color blue
-  color blackSecondary
-
-.gc-tag.gc-tag-highlight i
-  color blackSecondary
 
 .gc-tag-group
   display table
@@ -341,6 +368,19 @@ a.gc-text-link:hover
   border-top-right-radius 50px
   border-bottom-right-radius 50px
 
+.gc-property
+  margin 10px 0
+
+.gc-property.editable .btn span
+  color black
+
+.gc-property .gc-icon-bars
+  background-image url('../../images/prototypes/property-bars-icon.png')
+  {backgroundCenter}
+  height: 10px;
+  width: 10px;
+  display: inline-block;
+
 .gc-nav-breadcrumbs .gc-breadcrumbs
   display inline-block
   margin-left 15px
@@ -348,7 +388,8 @@ a.gc-text-link:hover
 .gc-nav-breadcrumbs .gc-breadcrumbs-title
   font-size 18px
   font-weight bold
-
+  color #757575
+  text-transform uppercase
 
 .gc-topbar-item.gc-topbar-dropdown
   position relative
@@ -366,7 +407,7 @@ a.gc-text-link:hover
   border-bottom-right-radius 50px
 
 .gc-pagination-bordered li a
-  border-color gray
+  border-color #e6e6e6
   color #3398db
 
 .gc-pagination li a
@@ -419,7 +460,7 @@ a.gc-text-link:hover
   box-shadow 0px 2px 12px 1px rgba(0,0,0,.2)
 
 .gc-alert-message
-  background lighGray
+  background #FAFAFA
   border-radius 3px
   max-width 250px
   -webkit-box-shadow 0 2px 8px rgba(0,0,0,.2)
@@ -444,6 +485,7 @@ a.gc-text-link:hover
 .gc-alert-message p
   width 200px
   font-size 15px
+  padding-right 10px
 
 .gc-alert-message.gc-error
   border-left 5px solid red
@@ -471,7 +513,7 @@ a.gc-text-link:hover
   border-radius 100%
   position relative
 
-.gc-alert-message.gc-success .gc-alert-icon > span:after
+.gc-alert-icon.workout > span:after
   content ""
   display block
   position absolute
@@ -484,6 +526,66 @@ a.gc-text-link:hover
   background-position 0 0
   background-repeat no-repeat
 
+.gc-alert-icon.message > span:after
+  content ""
+  display block
+  position absolute
+  top 8px
+  left 8px
+  width 11px
+  height 9px
+  background-image url('../../images/prototypes/message-icon.png')
+  background-size contain
+  background-repeat no-repeat
+
+.gc-alert-icon.calendar > span:after
+  content ""
+  display block
+  position absolute
+  top 7px
+  left 8px
+  width 10px
+  height 11px
+  background-image url('../../images/prototypes/calendar-icon-white.png')
+  background-size 10px 11px
+  background-repeat no-repeat
+
+.gc-alert-icon.flag > span:after
+  content ""
+  display block
+  position absolute
+  top 7px
+  left 7px
+  width 13px
+  height 12px
+  background-image url('../../images/prototypes/flag-icon.png')
+  background-size contain
+  background-repeat no-repeat
+
+.gc-alert-icon.comment > span:after
+  content ""
+  display block
+  position absolute
+  top 7px
+  left 7px
+  width 11px
+  height 10px
+  background-image url('../../images/prototypes/comment-icon.png')
+  background-size contain
+  background-repeat no-repeat
+
+.gc-alert-icon.like > span:after
+  content ""
+  display block
+  position absolute
+  top 7px
+  left 8px
+  width 10px
+  height 10px
+  background-image url('../../images/prototypes/like-icon.png')
+  background-size contain
+  background-repeat no-repeat
+
 .gc-table-holder
   border 1px solid gray
   border-radius 5px
@@ -491,7 +593,7 @@ a.gc-text-link:hover
 
 .gc-table-title
   padding 0 20px
-  background-color lighGray
+  background-color #FCFCFC
   border-bottom 1px solid gray
 
 .gc-table-holder .gc-table-container
@@ -502,10 +604,15 @@ a.gc-text-link:hover
   font-size 15px
   padding 20px 0
   display inline-block
+  border-bottom 2px solid blue
+  margin-bottom -1px
 
 .gc-table
   border-collapse collapse
   width 100%
+
+.gc-table.gc-demo tbody tr > td:first-child
+  width 100px
 
 .gc-table thead,
 .gc-table tbody,
@@ -519,7 +626,7 @@ a.gc-text-link:hover
   cursor pointer
 
 .gc-table tbody tr:hover td
-  background-color lighGray
+  background-color #FBFBFB
 
 .gc-table td
   padding 20px 0
@@ -600,18 +707,22 @@ a.gc-text-link:hover
   font-size 20px
   margin 0
   color #EAEAEA
+  background-repeat no-repeat
 
 .gc-icon.workout
-  background-image url('../../images/icon-exercises.png')
-  background-position -18px 0
+  background-image url('../../images/prototypes/workouts-icon.png')
+  background-size 17px 9px
+  background-position center
 
 .gc-icon.programs
-  background-image url('../../images/icon-programs.png')
-  background-position -18px 0
+  background-image url('../../images/prototypes/programs-icon.png')
+  background-position center
+  background-size 13px 18px
 
 .gc-icon.clock
-  background-image url('../../images/icon-workouts.png')
-  background-position -18px 0
+  background-image url('../../images/prototypes/clock-icon-blue-small.png')
+  background-position center
+  background-size 17px 19px
 
 .gc-icon.calendar
   background-image url('../../images/prototypes/calendar-icon-blue.png')
@@ -753,6 +864,14 @@ a.gc-text-link:hover
   width 14px
   {backgroundCenter}
 
+.gc-icon-client-group
+  display inline-block
+  background-image url('../../images/prototypes/client-group-icon.png')
+  background-size contain
+  height 25px
+  width 30px
+  {backgroundCenter}
+
 .gc-btn-group > .btn:first-child
   border-top-left-radius 50px
   border-bottom-left-radius 50px
@@ -801,3 +920,39 @@ a.gc-text-link:hover
 @-o-keyframes rotateHourHand
   100%
     transform rotate(360deg)
+
+.gc-content-nav
+  border-bottom 1px solid #eaeaea
+
+.gc-alert-icon.gc-demo span
+  background #39ca74
+  border-radius 100%
+  position relative
+  height 26px
+  width 26px
+  display block
+  color #fff
+
+.gc-alert-icon.gc-demo.success span
+  background #39ca74
+
+.gc-alert-icon.gc-demo.danger span
+  background #e54d42
+
+.gc-alert-icon.gc-demo.primary span
+  background #3A99D8
+
+.gc-alert-icon.gc-demo.warning span
+  background #ff9702
+
+.gc-alert-icon.gc-demo.info span
+  background #E557FF
+
+.gc-demo-list
+  margin 0
+  padding 0
+  list-style-type none
+
+.gc-demo-list li
+  margin-right 10px
+  display inline-block
