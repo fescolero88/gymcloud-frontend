@@ -37,14 +37,13 @@ class ExercisesItemView extends Marionette.ItemView
       @saveOrder()
       event.preventDefault()
 
-  saveOrder: (event) ->
+saveOrder: (event) ->
     event.currentTarget.removeAttribute 'contenteditable'
     data =
       id: @model.get 'workout_id'
       workout_exercise_id: @model.get 'id'
       position: 1
       order_name: 1
-    console.log @model.toJSON()
 
     @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises/#{data.workout_exercise_id}"
     @workoutExerciseModel.set data
