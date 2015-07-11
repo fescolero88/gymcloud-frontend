@@ -1,8 +1,8 @@
-Marionette = require 'backbone.marionette'
-
-UiView = require 'views/prototype/ui-view'
-
-module.exports =
+define [
+  'views/prototype/ui-view'
+], (
+  UiView
+) ->
 
   ui: ->
     view = new UiView
