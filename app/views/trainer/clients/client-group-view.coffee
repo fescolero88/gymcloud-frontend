@@ -36,7 +36,6 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
     itemsLinks: '.gc-exercises-link-exercises, .gc-exercises-link-workouts, .gc-exercises-link-programs'
 
   initialize: (data) ->
-    console.log 'init data', data
     @isDroppable = true
     @itemId = data.itemId
     if parseInt(@itemId) is 0

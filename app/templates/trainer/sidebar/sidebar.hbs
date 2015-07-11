@@ -15,60 +15,11 @@
           </span>
         </a>
       </div>
-      <div class="gc-sidebar-cat" data-category="exercises">
-        <a href="#tr/global/exercises" class="row toggle-menu">
-          <span class="col-xs-2">
-            <span class="gc-sidebar-cat-icon fix-bg-img-icon-exercises"></span>
-          </span>
-          <span class="col-xs-8 gc-sidebar-cat-name">
-            Exercises
-          </span>
-          <span class="col-xs-2 toggle-it">
-            <span class="fa fa-chevron-down toggle-it"></span>
-          </span>
-        </a>
-        <div class="gc-sidebar-sub">
-          {{#each exercises}}
-            {{> sidebar_item type="exercises"}}
-          {{/each}}
-        </div>
-      </div>
-      <div class="gc-sidebar-cat" data-category="workouts">
-        <a href="#tr/global/workouts" class="row toggle-menu">
-          <span class="col-xs-2">
-            <span class="gc-sidebar-cat-icon fix-bg-img-icon-workouts"></span>
-          </span>
-          <span class="col-xs-8 gc-sidebar-cat-name">
-            Workouts
-          </span>
-          <span class="col-xs-2 toggle-it">
-            <span class="fa fa-chevron-down toggle-it"></span>
-          </span>
-        </a>
-        <div class="gc-sidebar-sub">
-          {{#each workouts}}
-            {{> sidebar_item type="workouts"}}
-          {{/each}}
-        </div>
-      </div>
-      <div class="gc-sidebar-cat" data-category="programs">
-        <a href="#tr/global/programs" class="row toggle-menu">
-          <span class="col-xs-2">
-            <span class="gc-sidebar-cat-icon fix-bg-img-icon-programs"></span>
-          </span>
-          <span class="col-xs-8 gc-sidebar-cat-name">
-            Programs
-          </span>
-          <span class="col-xs-2 toggle-it">
-            <span class="fa fa-chevron-down toggle-it"></span>
-          </span>
-        </a>
-        <div class="gc-sidebar-sub">
-          {{#each programs}}
-            {{> sidebar_item type="programs"}}
-          {{/each}}
-        </div>
-      </div>
+      <region data-name="exercises"></region>
+      <region data-name="workouts"></region>
+      <region data-name="programs"></region>
+      
+      
       <div class="gc-sidebar-cat">
         <a href="#tr/clients" class="row toggle-menu">
           <span class="col-xs-2">
@@ -104,6 +55,7 @@
           </div>
         </div>
       </div>
+
       <div class="gc-sidebar-cat">
         <a href="#tr/properties/" class="row toggle-menu">
           <span class="col-xs-2">
