@@ -11,8 +11,7 @@ module.exports = (config) ->
 
     frameworks: [
       'mocha'
-      'chai'
-      'chai-sinon'
+      'sinon-chai'
     ]
 
     files: [
@@ -56,7 +55,7 @@ module.exports = (config) ->
     plugins: [
       require('karma-mocha')
       require('karma-chai')
-      require('karma-chai-sinon')
+      require('karma-sinon-chai')
       require('karma-spec-reporter')
       require('karma-chrome-launcher')
       require('karma-firefox-launcher')

@@ -32,7 +32,7 @@
     "gulp-clean": "^0.3.1",
     "stylus-loader": "^1.2.1",
     "karma-script-launcher": "^0.1.0",
-    "karma-chai-sinon": "^0.1.5",
+    "karma-sinon-chai": "^1.0.0",
     "karma-firefox-launcher": "^0.1.6",
     "sinon-chai": "^2.8.0",
     "karma-mocha": "^0.2.0",
