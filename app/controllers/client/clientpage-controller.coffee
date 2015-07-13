@@ -3,6 +3,12 @@ Backbone = require 'backbone'
 
 ClientEWPView = require 'views/client/clientpage-ewp-view'
 
+ExerciseGlobalView = require 'views/client/exercises/exercise_clientpage_view'
+GlobalExerciseModel = require 'models/trainer/global-exercise-model'
+
+WorkoutGlobalView = require 'views/client/workouts/workout-clientpage-view'
+GlobalWorkoutModel = require 'models/trainer/global_workout_model'
+
 CalendarDayView = require 'views/client/clientpage-calendar-day-view'
 CalendarWeekView = require 'views/client/clientpage-calendar-week-view'
 CalendarMonthView = require 'views/client/clientpage-calendar-month-view'
@@ -39,6 +45,20 @@ module.exports = class ClientPageController extends Marionette.Controller
       if childModel.get('isFolder') or not key
         exercisesGlobalView = new ClientEWPView(collection: new Backbone.Collection(items), dataType: dataType)
         @userPageView.content.show exercisesGlobalView
+      else
+        switch dataType
+          when 'exercises'
+            model = new GlobalExerciseModel
+            model.url = model.urlRoot + key
+            model.fetch().then =>
+              exerciseGlobalView = new ExerciseGlobalView(exercise: model, breadcrumbs: breadcrumbs)
+              @userPageView.content.show exerciseGlobalView
+          when 'workouts'
+            model = new GlobalWorkoutModel
+            model.url = model.urlRoot + key
+            model.fetch().then =>
+              workoutGlobalView = new WorkoutGlobalView(workout: model, breadcrumbs: breadcrumbs)
+              @userPageView.content.show workoutGlobalView
     else
       @queueMethod = 'clientPageAssigments'
       @queueArgs = arguments

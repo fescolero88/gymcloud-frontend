@@ -140,6 +140,10 @@ body > region[data-name="app"] > .container-fluid {
   height:100%;
   overflow: auto;
 }
+.gc-main-workspace.row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
 .gc-main-workspace > div {
   padding: 0;
 }
