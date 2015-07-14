@@ -267,7 +267,8 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
 
   notifySidebarChanges: (model) ->
     folderId = model.workout_folder_id || model.exercise_folder_id || model.program_folder_id
-    if folderId and folderId isnt 0 and folderId isnt 1
+    rootId = App.request "data:#{@typeName}:root"
+    if folderId and folderId isnt 0 and folderId isnt rootId
       App.vent.trigger "#{@typeName}:folder:#{folderId}:model:added", new Backbone.Model model
     else
       App.vent.trigger "#{@typeName}:model:added", new Backbone.Model model
