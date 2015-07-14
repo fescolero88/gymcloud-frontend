@@ -8,8 +8,10 @@
     {{title}}
   </a>
 </div>
-<div class="col-xs-6 text-right">
-  <a href="#" class="btn btn-link gc-exercises-assign-btn">Schedule</a>
-  <a href="#" class="btn btn-link gc-exercises-assign-btn">Enter results</a>
-</div>
+{{#isExercises dataType}}
+  <div class="col-xs-6 text-right">
+    <a href="#" class="btn btn-link gc-exercises-assign-btn">Schedule</a>
+    <a href="#" class="btn btn-link gc-exercises-assign-btn">Enter results</a>
+  </div>
+{{/isExercises}}
 

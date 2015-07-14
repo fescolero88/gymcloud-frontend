@@ -22,6 +22,11 @@ class ClientEWPItemView extends Marionette.ItemView
 
   templateHelpers: =>
     dataType: @dataType
+    isExercises: (type, options) ->
+      if type == 'exercises'
+        options.fn @
+      else
+        options.inverse @
 
 module.exports = class ClientEWPView extends Marionette.CompositeView
 
