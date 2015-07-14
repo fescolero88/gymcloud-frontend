@@ -23,17 +23,10 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
   initialize: (data) =>
     @breadcrumbs = data.breadcrumbs
     @breadcrumbsView = new BreadcrumbsView(collection: new BreadcrumbsCollection(@breadcrumbs))
-    @exerciseModel = data.exercise
-
-  templateHelpers: ->
-    source: @exerciseModel.get('source_item_id')
-    author: @exerciseModel.get('user_id')
-    public: @exerciseModel.get('is_public')
-    inLibrary: @exerciseModel.get('is_in_my_library')
 
   onShow: =>
-    @overviewView = new ExerciseGlobalOverviewView model: @exerciseModel
-    @manageRegion.show @overviewView
+    overviewView = new ExerciseGlobalOverviewView model: @model
+    @manageRegion.show overviewView
     @breadcrumbsRegion.show @breadcrumbsView
 
   goBack: (ev) ->

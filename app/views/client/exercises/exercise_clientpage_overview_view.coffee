@@ -8,7 +8,10 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
   className: 'gc-exercises-exercise-view'
 
   templateHelpers: =>
+    video_url: @videoUrlHelper()
     hasDescription: !!@model.get 'description'
+
+  videoUrlHelper: =>
     videoUrl = @model.get('video_url') || ''
     videoUrlSplitted = videoUrl.split 'v='
     if videoUrlSplitted.length > 1
@@ -16,8 +19,6 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
       ampIndex = videoId.indexOf '&'
       if ampIndex != -1
         videoId = video_id.substring 0, ampIndex
-      videoUrl = "https://youtube.com/v/#{videoId}"
-
-    return {
-      video_url: videoUrl
-    }
+      "https://youtube.com/v/#{videoId}"
+    else
+      false

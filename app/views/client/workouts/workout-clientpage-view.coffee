@@ -3,9 +3,6 @@ Backbone = require 'backbone'
 
 WorkoutGlobalOverviewView = require 'views/client/workouts/workout_clientpage_overview_view'
 WorkoutGlobalVideoView = require 'views/trainer/workouts/workout_global_video_view'
-
-WorkoutExerciseModel = require 'models/trainer/workout-exercise-model'
-
 module.exports = class WorkoutGlobalView extends Marionette.LayoutView
 
   template: require('templates/client/workouts/workout_clientpage')
@@ -27,21 +24,7 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
   events:
     'click @ui.navBack': 'navigateBack'
     'click @ui.innerNavLinks': 'changeOverviewActiveTab'
-    'click @ui.addToLibraryButton': 'showAddToLibrary'
     'click @ui.contentNavLinks': 'changeActiveTab'
-
-  templateHelpers: =>
-    workout: @workoutModel.attributes
-
-  initialize: (data) =>
-    @workoutModel = data.workout
-
-    @workoutExerciseModel = new WorkoutExerciseModel
-    @listenTo(@workoutExerciseModel, 'sync', @onExerciseAdded)
-
-  onDestroy: =>
-    App.vent.off 'drag:complete', @assignExercise
-    App.vent.off 'workout:add:exercise', @assignExercise
 
   onShow: =>
     @changeView 'description'
@@ -67,14 +50,10 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
   changeView: (navView) =>
     switch navView
       when 'description', 'program'
-        @overviewView = new WorkoutGlobalOverviewView model: @workoutModel
+        @overviewView = new WorkoutGlobalOverviewView model: @model
         @manageRegion.show @overviewView
         @ui.innerNav.show()
       when 'video'
-        @videoView = new WorkoutGlobalVideoView model: @workoutModel
+        @videoView = new WorkoutGlobalVideoView model: @model
         @manageRegion.show @videoView
         @ui.innerNav.show()
-
-  showAddToLibrary: (ev) =>
-    ev.preventDefault()
-    App.request 'base:addToLibraryModal', type: 'workouts', model: @workoutModel

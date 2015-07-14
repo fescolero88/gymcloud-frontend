@@ -51,13 +51,13 @@ module.exports = class ClientPageController extends Marionette.Controller
             model = new GlobalExerciseModel
             model.url = model.urlRoot + key
             model.fetch().then =>
-              exerciseGlobalView = new ExerciseGlobalView(exercise: model, breadcrumbs: breadcrumbs)
+              exerciseGlobalView = new ExerciseGlobalView(model: model, breadcrumbs: breadcrumbs)
               @userPageView.content.show exerciseGlobalView
           when 'workouts'
             model = new GlobalWorkoutModel
             model.url = model.urlRoot + key
             model.fetch().then =>
-              workoutGlobalView = new WorkoutGlobalView(workout: model, breadcrumbs: breadcrumbs)
+              workoutGlobalView = new WorkoutGlobalView(model: model, breadcrumbs: breadcrumbs)
               @userPageView.content.show workoutGlobalView
     else
       @queueMethod = 'clientPageAssigments'

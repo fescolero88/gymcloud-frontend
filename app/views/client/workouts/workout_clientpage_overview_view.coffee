@@ -14,17 +14,16 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
     exercisesListRegion: '#gc-exercises-list-region'
 
   templateHelpers: =>
-    workout: @model.attributes
     hasNote: !!@model.get 'notes'
     hasDescription: !!@model.get 'description'
 
   initialize: (data) ->
-    @exercisesCollection = new WorkoutExercisesCollection
-    @exercisesCollection.set @model.get('exercises')
+    @collection = new WorkoutExercisesCollection
+    @collection.set @model.get('exercises')
 
     @exercisesView = new WorkoutGlobalExercisesView
-      collection: @exercisesCollection,
-      workout: @model
+      collection: @collection,
+      model: @model
 
     App.vent.on 'workout:notes:add', @showAddNote, @
 
