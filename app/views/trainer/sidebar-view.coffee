@@ -1,7 +1,10 @@
 Marionette = require 'backbone.marionette'
+Backbone = require 'backbone'
 DraggableMenuItemModel = require 'models/trainer/draggable-menuitem-model'
+SidebarEntity = require 'views/trainer/sidebar-entity-composite-view'
+SidebarItemsCollection = require 'models/general/sidebar-items-collection'
 
-module.exports = class SideBarView extends Marionette.ItemView
+module.exports = class SideBarView extends Marionette.LayoutView
 
   template: require('templates/trainer/sidebar/sidebar')
 
@@ -19,16 +22,16 @@ module.exports = class SideBarView extends Marionette.ItemView
     mainArea: '.gc-main'
     catchList: '.gc-assign-catch'
     item: '.gc-sidebar-item > a'
-    workoutsWrapper: '[data-category="workouts"]'
-    exercisesWrapper: '[data-category="exercises"]'
-    programsWrapper: '[data-category="programs"]'
+    exercisesRegion: 'region[data-name="exercises"]'
+    workoutsRegion: 'region[data-name="workouts"]'
+    programsRegion: 'region[data-name="programs"]'
+
+  regions:
+    exercises: '@ui.exercisesRegion'
+    workouts: '@ui.workoutsRegion'
+    programs: '@ui.programsRegion'
 
   initialize: =>
-    @exercises = []
-    @workouts = []
-    @programs = []
-    @clients = []
-    @groups = []
     App.vent.on 'profile:ready', @getData
     App.vent.on 'ewp:model:updated', @updateEWPName
 
@@ -36,17 +39,25 @@ module.exports = class SideBarView extends Marionette.ItemView
     App.vent.off 'ewp:model:updated', @updateEWPName
     App.vent.off 'profile:ready', @getData
 
-  onShow: ->
-    @getData()
-
   onRender: ->
     @$el.find('.nano').nanoScroller()
 
-  templateHelpers: =>
-    exercises: => App.request 'data:exercises'
-    workouts: => App.request 'data:workouts'
-    programs: => App.request 'data:programs'
+    exercisesView = new SidebarEntity
+      type: 'exercises'
+      collection: new SidebarItemsCollection App.request('data:exercises')
 
+    workoutsView = new SidebarEntity
+      type: 'workouts'
+      collection: new SidebarItemsCollection App.request('data:workouts')
+
+    programsView = new SidebarEntity
+      type: 'programs'
+      collection: new SidebarItemsCollection App.request('data:programs')
+
+    @getRegion('exercises').show(exercisesView)
+    @getRegion('workouts').show(workoutsView)
+    @getRegion('programs').show(programsView)
+  
   toggleMenu: (ev) ->
     if $(ev.target).hasClass('toggle-it') or $(ev.currentTarget).hasClass('toggle-it')
       ev.preventDefault()

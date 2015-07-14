@@ -196,6 +196,10 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
       @listView.collection.trigger 'highlight', model
       href = "#tr/global/#{@typeName}/id/#{model['key']}"
       App.vent.trigger 'spinner:global:stop'
+
+      # notify sidebar changes
+      @notifySidebarChanges model
+
       App.request 'messenger:show',
         hideAfter: 5
         message: "New item added"
@@ -219,6 +223,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
       @listView.collection.trigger 'highlight', model
       href = "#tr/global/#{@typeName}/id/#{model['key']}"
       App.vent.trigger 'spinner:global:stop'
+      @notifySidebarChanges model
       App.request 'messenger:show',
         hideAfter: 5
         message: "New folder added"
@@ -259,3 +264,10 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     if @ui.listWrapper.hasClass 'hidden'
       @ui.listWrapper.removeClass 'hidden'
       @ui.listSplash.addClass 'hidden'
+
+  notifySidebarChanges: (model) ->
+    folderId = model.workout_folder_id || model.exercise_folder_id || model.program_folder_id
+    if folderId and folderId isnt 0 and folderId isnt 1
+      App.vent.trigger "#{@typeName}:folder:#{folderId}:model:added", new Backbone.Model model
+    else
+      App.vent.trigger "#{@typeName}:model:added", new Backbone.Model model
