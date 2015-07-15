@@ -1,0 +1,16 @@
+<div class="gc-clientpage-nav-trainer-action-wrapper">
+  <p>
+    <span>
+      Trainer:
+    </span>
+    {{first_name}} {{last_name}}
+  </p>
+  <button class="btn btn-link">Message trainer</button>
+</div>
+<div class="gc-clientpage-nav-trainer-avatar-block">
+  <div class="gc-clientpage-nav-trainer-avatar-wrapper">
+    {{#withProfile}}
+    <img src="{{avatar_url}}" alt="">
+    {{/withProfile}}
+  </div>
+</div>
