@@ -191,7 +191,6 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
       model.set 'position', i+1
 
   onSavePosition: (data) =>
-    console.log data
     @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{@workout.get 'id'}/workout_exercises/resort"
     @workoutExerciseModel.method = 'patch'
     @workoutExerciseModel.save data, patch: true
