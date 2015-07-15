@@ -266,7 +266,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
       @ui.listSplash.addClass 'hidden'
 
   notifySidebarChanges: (model) ->
-    folderId = model.workout_folder_id || model.exercise_folder_id || model.program_folder_id
+    folderId = model.workout_folder_id || model.exercise_folder_id || model.program_folder_id || model.parent_id
     rootId = App.request "data:#{@typeName}:root"
     if folderId and folderId isnt 0 and folderId isnt rootId
       App.vent.trigger "#{@typeName}:folder:#{folderId}:model:added", new Backbone.Model model
