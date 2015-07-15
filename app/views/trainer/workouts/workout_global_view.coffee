@@ -116,7 +116,7 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
 
       @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises"
       @workoutExerciseModel.set data
-      @workoutExerciseModel.addExercise = true
+      @workoutExerciseModel.method = 'create'
       @workoutExerciseModel.save()
 
   onExerciseAdded: () =>

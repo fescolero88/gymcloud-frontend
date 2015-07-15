@@ -174,19 +174,27 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
     draggable = $item.find 'span.gc-workout-exercise-sort'
     _super $item, container
 
-    position = 1
-    while( ($item = $item.prev()).length != 0 )
-      position++
+    model = @collection.get id: draggable.data 'workout-id'
+    prevPos = model.get 'position'
+    currPos = $item.index()
+    currPos += 1
+    @collection.remove model
+    @collection.add model, at:currPos-1
+    @fixExercisesPositions()
 
+    exerciseIds = @collection.pluck 'id'
     @onSavePosition
-      id: @workout.get 'id'
-      workout_exercise_id: draggable.data 'workout-id'
-      position: position
+      exercises_ordered_ids: exerciseIds
+
+  fixExercisesPositions: ->
+    @collection.each (model, i) =>
+      model.set 'position', i+1
 
   onSavePosition: (data) =>
-    @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises/#{data.workout_exercise_id}"
-    @workoutExerciseModel.set data
-    @workoutExerciseModel.save()
+    console.log data
+    @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{@workout.get 'id'}/workout_exercises/resort"
+    @workoutExerciseModel.method = 'patch'
+    @workoutExerciseModel.save data, patch: true
 
   onSavedOrder: ->
     App.request 'messenger:show',
