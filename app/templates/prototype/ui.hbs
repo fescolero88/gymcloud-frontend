@@ -55,12 +55,12 @@
 
 <div class="gc-component">
   <div class="gc-component-name">Iconic Buttons</div>
-  <a href="#" class="gc-text-link">
+  <a href="#" class="gc-text-link gc-capitalize">
     <span class="gc-icon-link gc-icon-exercises-add"></span>
     Add Exercise
   </a>
   <br/>
-  <a href="#" class="gc-text-link">
+  <a href="#" class="gc-text-link gc-capitalize">
     <span class="gc-icon-link gc-icon-add-property"></span>
     Add New Property
   </a>
@@ -94,7 +94,7 @@
   </div>
   <div class="form-group gc-form-alert" data-error="Empty Field">
     <label>Alert</label>
-    <input type="text" class="form-control gc-alert" placeholder="Alert">
+    <input type="text" class="form-control gc-alert">
   </div>
   <div class="form-group gc-form-active">
     <label>Active</label>
@@ -114,8 +114,8 @@
       <input type="text" class="form-control" placeholder="mm/dd/yyyy hh:mm">
       <span class="input-group-btn">
         <button class="btn btn-default" type="button">
-          <span class="fa fa-calendar"></span>
-          <span class="fa fa-clock-o"></span>
+          <span class="gc-datetime-calendar-icon"></span>
+          <span class="gc-datetime-clock-icon"></span>
         </button>
       </span>
     </div>
@@ -217,18 +217,21 @@
 <div class="gc-component">
   <div class="gc-component-name">Checkboxes</div>
   <div class="checkbox">
-    <label>
+    <label class="gc-checkbox">
       <input type="checkbox"> Unchecked
+      <span class="gc-checkbox-clone"></span>
     </label>
   </div>
   <div class="checkbox" checked>
-    <label>
+    <label class="gc-checkbox">
       <input type="checkbox"> Checked
+      <span class="gc-checkbox-clone"></span>
     </label>
   </div>
   <div class="checkbox">
-    <label>
+    <label class="gc-checkbox">
       <input type="checkbox" disabled="" > Disabled
+      <span class="gc-checkbox-clone"></span>
     </label>
   </div>
 </div>
@@ -236,21 +239,24 @@
 <div class="gc-component">
   <div class="gc-component-name">Radio-buttons</div>
   <div class="radio">
-    <label>
+    <label class="gc-radio">
       <input type="radio" id="optionsRadios1" value="option3" checked>
       Checked
+      <span class="gc-radio-clone"></span>
     </label>
   </div>
   <div class="radio">
-    <label>
+    <label class="gc-radio">
       <input type="radio" id="optionsRadios1" value="option2">
       Unchecked
+      <span class="gc-radio-clone"></span>
     </label>
   </div>
    <div class="radio">
-    <label>
+    <label class="gc-radio">
       <input type="radio" id="optionsRadios1" value="option1" checked disabled="">
       Disabled
+      <span class="gc-radio-clone"></span>
     </label>
   </div>
 </div>
@@ -473,19 +479,19 @@
       <tr>
         <td>Date</td>
         <td>Desription</td>
-        <td>Status</td>
+        <td class="center">Status</td>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>21 Feb 2015</td>
         <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-        <td>active</td>
+        <td class="center"><i class="gc-status-icon"></i></td>
       </tr>
       <tr>
         <td>21 Feb 2015</td>
         <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-        <td>active</td>
+        <td class="center"><i class="gc-status-icon gc-status-cancel"></i></td>
       </tr>
     </tbody>
   </table>
@@ -495,24 +501,24 @@
       <span>latest entries</span>
     </div>
     <div class="gc-table-container">
-      <table class="gc-table">
+      <table class="gc-table gc-demo">
         <thead>
           <tr>
             <td>Date</td>
-            <td>Desription</td>
-            <td>Status</td>
+            <td>Weight</td>
+            <td></td>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>21 Feb 2015</td>
-            <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-            <td>active</td>
+            <td>255 lbs</td>
+            <td><span class="gc-label-success">+ 1 <i class="fa fa-long-arrow-up"></i></span></td>
           </tr>
           <tr>
-            <td>21 Feb 2015</td>
-            <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-            <td>active</td>
+            <td>19 Feb 2015</td>
+            <td>252 lbs</td>
+            <td><span class="gc-label-danger">- 1 <i class="fa fa-long-arrow-down"></i></span></td>
           </tr>
         </tbody>
       </table>

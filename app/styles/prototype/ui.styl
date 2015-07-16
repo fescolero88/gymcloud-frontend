@@ -37,6 +37,18 @@ faIcon =
   transform translate(0, 0)
 
 /*ui styles*/
+.gc-label-danger
+  color red
+
+.gc-label-success
+  color green
+
+.gc-label-warning
+  color orange
+
+.gc-label-primary
+  color blue
+
 input.form-control,
 textarea.form-control
   color black!important
@@ -160,6 +172,65 @@ input.form-control-moz-placeholder
 input.form-control-webkit-input-placeholder
    color gray
 
+select.form-control
+  -webkit-appearance none
+  -moz-appearance none
+  appearance none
+  outline none
+  background-image url('../../images/prototypes/sort-icon.png')
+  background-repeat no-repeat
+  background-position-x: calc(100% - 10px);
+  background-position-y: 50%;
+
+.gc-checkbox
+.gc-radio
+  position relative
+
+.gc-checkbox input[type="checkbox"] + .gc-checkbox-clone
+  height 14px
+  width 14px
+  display inline-block
+  border 1px solid #ccc
+  position absolute
+  left -1px
+  top 3px
+  border-radius 3px
+  background #fff
+  outline none
+
+.gc-checkbox input[type="checkbox"]:checked + .gc-checkbox-clone
+  background-image url('../../images/prototypes/checkbox-icon.png')
+  background-position center
+  background-repeat no-repeat
+
+.gc-radio input[type="radio"]:disabled + .gc-radio-clone
+.gc-checkbox input[type="checkbox"]:disabled + .gc-checkbox-clone
+.gc-radio input[type="radio"]:disabled + .gc-radio-clone:after
+  background-color #efefef!important
+
+.gc-radio input[type="radio"] + .gc-radio-clone
+  height 14px
+  width 14px
+  display inline-block
+  border 1px solid #ccc
+  position absolute
+  left -1px
+  top 3px
+  border-radius 100%
+  background #fff
+  outline none
+
+.gc-radio input[type="radio"]:checked + .gc-radio-clone
+  padding 2px
+
+.gc-radio input[type="radio"]:checked + .gc-radio-clone:after
+  display block
+  height 100%
+  width 100%
+  background blue
+  content ''
+  border-radius 100%
+
 .gc-dropdown.gc-sample-active
   display block
   position inherit
@@ -174,13 +245,15 @@ input.form-control-webkit-input-placeholder
 
 a.gc-text-link
   color #3398db
-  text-transform uppercase
   font-size 14px
   line-height 30px
   margin 0
   display inline-block
   outline none
   text-decoration none
+
+.gc-capitalize
+  text-transform uppercase
 
 a.gc-text-link.gc-danger
   color red
@@ -234,10 +307,7 @@ a.gc-text-link:hover
   color blue
 
 .input-group.gc-datetime .btn:hover
-  transition(all, 0.20s, linear)
-  border-color blue
-  background-color blue
-  color white
+  background-color white
 
 .input-group.gc-datetime .btn > .fa:first-child
   margin-right 5px
@@ -251,6 +321,21 @@ a.gc-text-link:hover
 .input-group.gc-datetime > :first-child > .btn
   border-top-left-radius 6px
   border-bottom-left-radius 6px
+
+.input-group.gc-datetime .btn .gc-datetime-calendar-icon
+  background-image: url('../../images/prototypes/calendar-icon-blue-md.png')
+  height 21px
+  width 21px
+  display inline-block
+  margin 7px 5px
+
+.input-group.gc-datetime .btn .gc-datetime-clock-icon
+  background-image: url('../../images/prototypes/clock-icon-blue-md.png')
+  height 21px
+  width 21px
+  display inline-block
+  margin 7px 5px
+
 
 .btn-group.gc-tabs
   display block
@@ -614,6 +699,9 @@ a.gc-text-link:hover
 .gc-table.gc-demo tbody tr > td:first-child
   width 100px
 
+.gc-table.gc-demo tbody tr > td:last-child
+  width 50px
+
 .gc-table thead,
 .gc-table tbody,
 .gc-table tr
@@ -638,6 +726,8 @@ a.gc-text-link:hover
   font-size 15px
   padding 25px 0
 
+.gc-table td.center
+  text-align center
 
 .gc-heading-1,
 .gc-heading-2,
@@ -956,3 +1046,13 @@ a.gc-text-link:hover
 .gc-demo-list li
   margin-right 10px
   display inline-block
+
+.gc-status-icon
+  height 17px
+  width 17px
+  display inline-block
+  background-image url('../../images/prototypes/status-icons.png')
+  background-repeat no-repeat
+
+.gc-status-icon.gc-status-cancel
+  background-position -17px 0
