@@ -58,22 +58,30 @@ module.exports = class EWPGlobalListView extends Marionette.CompositeView
       $row.addClass 'active'
       $('html, body').animate({
         scrollTop: $row.offset().top
-      }, 1000);
+      }, 1000)
       setTimeout =>
           $row.removeClass 'active'
         , 3000
 
-  deleteItems: (ids) =>
+  deleteItems: (ids, rootId) =>
     for key in ids
       model = @collection.where({key: key})[0]
       type = if model.get('isFolder') then "folders" else @typeName
-      model.url = "/api/mobile/#{type}/#{model.get 'key'}"
-      $.ajax
-        method: 'DELETE'
-        url: model.url
+      model.urlRoot = "/api/mobile/#{type}"
+      model.idAttribute = "key"
+      @notifySidebarChanges model, rootId
       model.destroy()
-    App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then ->
+      App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then ->
       App.request 'messenger:show',
         hideAfter: 5
         message: "Item(s) was deleted"
         type: 'info'
+
+  notifySidebarChanges: (model, rootId) ->
+    folderId = rootId
+    rootId = App.request "data:#{@typeName}:root"
+    if folderId and folderId isnt 0 and folderId isnt rootId
+      App.vent.trigger "#{@typeName}:folder:#{folderId}:model:removed", model
+    else
+      App.vent.trigger "#{@typeName}:model:removed", model
+

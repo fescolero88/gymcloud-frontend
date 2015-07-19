@@ -136,8 +136,10 @@ module.exports = class SideBarView extends Marionette.LayoutView
       drag: false
       group: 'assignEx'
 
-  updateEWPName: (type, key, newValue) => # todo implement for exercises and programs
+  updateEWPName: (type, key, newValue) => # todo implement for programs
     selector = "span[data-key=\"#{key}\"]"
     switch type
       when 'workouts'
-        @ui.workoutsWrapper.find(selector).html(newValue)
+        @ui.workoutsRegion.find(selector).html(newValue)
+      when 'exercises'
+        @ui.exercisesRegion.find(selector).html(newValue)

@@ -81,7 +81,8 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
     @model.set 'name', @ui.exerciseTitle.text()
 
     if @model.hasChanged()
-      @model.save()
+      @model.save().then =>
+        App.vent.trigger 'ewp:model:updated', 'exercises', @model.get('id'), @model.get('name')
       @updatedAttribute = 'title'
 
   saveDescription: ->

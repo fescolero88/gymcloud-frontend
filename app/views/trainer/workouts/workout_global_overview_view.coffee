@@ -63,7 +63,6 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
     if workoutNote.scrollHeight > workoutNote.clientHeight
       workoutNote.style.height = "#{workoutNote.scrollHeight}px"
 
-
   workoutExerciseAdd: (e) ->
     e.preventDefault()
 

@@ -69,8 +69,9 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
       @ui.backButton.addClass 'hidden'
 
   loadItemById: (key) =>
+    @collection = new EWPSortableCollection(@exercisesList)
     @listView = new EWPGlobalListView
-      collection: new EWPSortableCollection(@exercisesList)
+      collection: @collection
       type: @typeName
     @exercises.show @listView
 
@@ -140,10 +141,9 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
         for check in @ui.itemsRegion.find('input[type=checkbox]')
           if $(check).is ':checked'
             ids.push $(check).data('id')
-        @listView.trigger 'items:delete', ids
+        @listView.trigger 'items:delete', ids, @item_id
         App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
-          @exercisesList = App.request 'data:workouts'
-
+          @exercisesList = App.request "data:#{@typeName}"
 
   loadItem: (key) =>
     Backbone.history.navigate("#tr/global/#{@typeName}/id/#{key}/", { trigger: true, replace: true })
@@ -214,7 +214,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
       @ui.actionModal.modal 'hide'
       # retrieve new data
-      @exercisesList = App.request 'data:workouts'
+      @exercisesList = App.request "data:#{@typeName}"
       @listView.collection.push model
       @listView.collection.comparator = (model) =>
         return [not model.get('isFolder'), model.get('title').toUpperCase()]
@@ -247,7 +247,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
         message: "No #{typeSingle} was selected"
         type: 'error'
 
-  onDuplicate: ->
+  onDuplicate: (response) ->
     App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
       @ui.actionModal.modal 'hide'
       App.vent.trigger 'spinner:global:stop'
@@ -256,6 +256,14 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
         message: "Item(s) duplicated"
         type: 'success'
 
+    ## notify sidebar of duplicated items
+    response.target_folders.forEach (item) =>
+      folderId = item.target_folder_id
+      item["#{@typeName}"].forEach (entity) =>
+        entityId = entity.exercise_id || entity.workout_id || entity.program_id
+        model = @collection.where({key: entityId})
+        App.vent.trigger "#{@typeName}:folder:#{folderId}:model:added", model
+      
   goBack: (ev) ->
     ev.preventDefault()
     window.history.back()
