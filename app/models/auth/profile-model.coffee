@@ -4,6 +4,10 @@ module.exports = class ProfileModel extends Backbone.Model
 
   url: '/api/mobile/me'
 
+  parse: (data) =>
+    @.clear()
+    data
+
   validation:
 
     first_name:

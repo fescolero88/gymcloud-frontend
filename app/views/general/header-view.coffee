@@ -8,7 +8,7 @@ module.exports = class HeaderView extends Marionette.LayoutView
 
   ui:
     searchRegion: 'region[data-name="search-bar"]'
-  
+
   regions:
     searchControl: "@ui.searchRegion"
 
