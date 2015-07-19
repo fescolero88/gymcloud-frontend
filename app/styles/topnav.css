@@ -149,8 +149,23 @@
 .gc-topbar-dropdown-icon-trainigs {
     background-image: url('../images/icon-trainings.png');
 }
+.gc-topbar-dropdown-icon-measurements {
+    background-image: url('../images/measurements-icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.gc-topbar-dropdown-icon-payment {
+    background-image: url('../images/payment-icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 .gc-topbar-dropdown-icon-signout {
-    background-image: url('../images/icon-signout.png');
+    background-image: url('../images/signout-icon.png');
+    background-size: 14px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .gc-topbar-avatar .dropdown-menu {
     border: none;
