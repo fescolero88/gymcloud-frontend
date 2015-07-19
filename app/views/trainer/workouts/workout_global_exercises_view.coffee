@@ -37,7 +37,7 @@ class ExercisesItemView extends Marionette.ItemView
       @saveOrder()
       event.preventDefault()
 
-saveOrder: (event) ->
+  saveOrder: (event) ->
     event.currentTarget.removeAttribute 'contenteditable'
     data =
       id: @model.get 'workout_id'
@@ -96,6 +96,10 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
     @workoutExerciseModel = new WorkoutExerciseModel
     @listenTo @workoutExerciseModel, 'sync', @onSavedOrder
 
+  onRender: ->
+    @initSearchSelect()
+    @addSortable()
+
   getWorkoutData: ->
     @workout.fetch()
 
@@ -149,9 +153,6 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
               previous.addClass('first')
 
           previousLetter = letter
-
-    @initSearchSelect()
-    @addSortable()
 
   addSortable: ->
     @exerciseList = @$el.find '.gc-workout-exercises-list'
