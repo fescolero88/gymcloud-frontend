@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 class SidebarEntityItem extends Marionette.CompositeView
-  
+
   template: require('templates/trainer/sidebar/sidebar_item')
 
   childView: SidebarEntityItem
