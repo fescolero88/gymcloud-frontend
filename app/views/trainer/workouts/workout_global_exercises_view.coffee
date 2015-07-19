@@ -1,6 +1,7 @@
 _ = require 'lodash'
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
+WorkoutPropertyConstructor = require 'views/trainer/workouts/workout_property_constructor_view'
 
 WorkoutExerciseModel = require 'models/trainer/workout-exercise-model'
 
@@ -94,6 +95,7 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
     circles: '.gc-workout-exercise-circle'
     liveSearch: '.live-search'
     searchContainer: '.gc-exercises-assign-input-wrapper'
+    propertyConstructorWrapper: 'region[data-name="workout-property-constructor"]'
 
   templateHelpers: =>
     workout: @workout.attributes
@@ -111,6 +113,9 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
     App.vent.off 'workout:reload:exercises', @getWorkoutData
 
   onRender: ->
+    workoutPropertyConstructor = new WorkoutPropertyConstructor()
+    @ui.propertyConstructorWrapper.html workoutPropertyConstructor.render().el
+
     @initSearchSelect()
     @addSortable()
 
