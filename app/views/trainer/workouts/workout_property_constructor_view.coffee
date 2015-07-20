@@ -1,5 +1,6 @@
 Marionette = require 'backbone.marionette'
 WorkoutPropertyModel = require 'models/trainer/workout-property-model'
+PropertyCollection = require 'models/trainer/property-collection'
 
 class WorkoutPropertyItem extends Marionette.ItemView
 
@@ -7,6 +8,22 @@ class WorkoutPropertyItem extends Marionette.ItemView
 
   tagName: 'li'
 
+  collectionEvents:
+    sync: 'render'
+
+  initialize: ->
+    @collection = new PropertyCollection()
+    @collection.fetch().then =>
+      @render()
+
+  templateHelpers: ->
+    properties = @collection.toJSON()
+
+    properties: properties
+    defaultProperty: properties[0]?.name
+
+  onRender: ->
+    console.log @collection.at 0
   ui:
     removeButton: '.gc-remove'
 
@@ -36,4 +53,3 @@ module.exports = class WorkoutPropertyConstructor extends Marionette.CompositeVi
 
   addProperty: ->
     @collection.add new WorkoutPropertyModel()
-    console.log @collection
