@@ -5,12 +5,13 @@
   </button>
   <div class="btn-group" role="group">
     <button type="button" class="btn btn-sm btn-primary gc-custom dropdown-toggle" data-toggle="dropdown">
-      <span>Reps</span>&nbsp;
+      <span>{{defaultProperty}}</span>&nbsp;
       <i class="fa fa-sort"></i>
     </button>
     <ul class="dropdown-menu gc-dropdown">
-      <li><a href="#">Dropdown link</a></li>
-      <li><a href="#">Dropdown link</a></li>
+      {{#each properties}}
+        <li><a href="#" data-default-value="{{defaultvalue}}">{{name}}</a></li>
+      {{/each}}
     </ul>
   </div>
   <button type="button" class="btn btn-sm btn-primary gc-custom gc-remove">
