@@ -23,8 +23,10 @@ module.exports = class ClientPageNavView extends Marionette.LayoutView
 
   onRender: ->
     if @profileModel.get 'id'
-      @model.urlRoot = "#{@model.urlRoot}/#{@profileModel.get 'id'}/trainer"
-      @model.fetch()
+      accountType = @profileModel.get 'account_type'
+      if accountType == 'client'
+        @model.urlRoot = "#{@model.urlRoot}/#{@profileModel.get 'id'}/trainer"
+        @model.fetch()
 
   onModelSync: ->
     clientTrainerActionsView = new ClientTrainerActionsView model: @model

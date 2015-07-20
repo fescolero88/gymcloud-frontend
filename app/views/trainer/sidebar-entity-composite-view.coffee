@@ -3,7 +3,7 @@ Backbone = require 'backbone'
 SidebarChildItemsCollection = require 'models/general/sidebar-child-items-collection'
 
 class SidebarEntityItem extends Marionette.CompositeView
-  
+
   template: require('templates/trainer/sidebar/sidebar_item')
 
   childView: SidebarEntityItem

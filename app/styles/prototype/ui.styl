@@ -179,12 +179,15 @@ select.form-control
   outline none
   background-image url('../../images/prototypes/sort-icon.png')
   background-repeat no-repeat
-  background-position-x: calc(100% - 10px);
-  background-position-y: 50%;
+  background-position right 10px center
 
 .gc-checkbox
 .gc-radio
   position relative
+
+.gc-checkbox input[type="checkbox"]
+.gc-radio input[type="radio"]
+  visibility hidden
 
 .gc-checkbox input[type="checkbox"] + .gc-checkbox-clone
   height 14px
@@ -203,6 +206,18 @@ select.form-control
   background-position center
   background-repeat no-repeat
 
+.gc-checkbox input[type="checkbox"]:not(:checked):not(:disabled):hover + .gc-checkbox-clone:after
+  margin-top 1px
+  margin-left 1px
+  height 10px
+  width 10px
+  content ''
+  display block
+  background-image url('../../images/prototypes/checkbox-icon.png')
+  background-position center
+  background-repeat no-repeat
+  opacity 0.5
+
 .gc-radio input[type="radio"]:disabled + .gc-radio-clone
 .gc-checkbox input[type="checkbox"]:disabled + .gc-checkbox-clone
 .gc-radio input[type="radio"]:disabled + .gc-radio-clone:after
@@ -219,6 +234,17 @@ select.form-control
   border-radius 100%
   background #fff
   outline none
+
+.gc-radio input[type="radio"]:not(:checked):not(:disabled):hover + .gc-radio-clone:after
+  margin-top 2px
+  margin-left 2px
+  height 8px
+  width 8px
+  content ''
+  display block
+  opacity 0.5
+  background blue
+  border-radius 100%
 
 .gc-radio input[type="radio"]:checked + .gc-radio-clone
   padding 2px

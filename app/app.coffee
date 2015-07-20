@@ -241,7 +241,7 @@ define [
           window.localStorage.removeItem 'accessToken'
 
         # --- Data handlers -----
-        
+
         # --- Base layout -----
         @baseView = new BaseView()
         @baseView.render()
