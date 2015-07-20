@@ -2,6 +2,7 @@ _ = require 'lodash'
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 WorkoutPropertyConstructor = require 'views/trainer/workouts/workout_property_constructor_view'
+WorkoutPropertyCollection = require 'models/trainer/workout-property-collection'
 
 WorkoutExerciseModel = require 'models/trainer/workout-exercise-model'
 
@@ -99,7 +100,9 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
     @listenTo @workoutExerciseModel, 'sync', @onSavedOrder
 
   onRender: ->
-    workoutPropertyConstructor = new WorkoutPropertyConstructor()
+    workoutPropertyConstructor = new WorkoutPropertyConstructor
+      collection: new WorkoutPropertyCollection()
+
     @ui.propertyConstructorWrapper.html workoutPropertyConstructor.render().el
 
     @initSearchSelect()

@@ -100,7 +100,7 @@ textarea.gc-workout-description-editor:focus, .gc-workout-note-editor.focus-stat
   border-top: 1px solid #ededed;
   background: #fafafa;
   border-radius: 0 0 10px 10px;
-  min-height: 44px;
+  min-height: 62px;
   padding: 6px;
 }
 .gc-exercises-list-actions .btn {
@@ -111,7 +111,7 @@ textarea.gc-workout-description-editor:focus, .gc-workout-note-editor.focus-stat
   font-size: 12px;
 
 }
-.gc-exercises-list-actions .btn span {
+/*.gc-exercises-list-actions .btn span {
   text-align: center;
   border: 1px solid #599ae3;
   font-size: 9px;
@@ -120,7 +120,8 @@ textarea.gc-workout-description-editor:focus, .gc-workout-note-editor.focus-stat
   height: 13px;
   display: inline-block;
   margin: -1px 3px 0 0;
-}
+}*/
+
 .gc-exercises-list-actions .btn:hover,
 .gc-exercises-list-actions .btn:active,
 .gc-exercises-list-actions .btn:focus {
@@ -339,6 +340,7 @@ ul.gc-workout-exercises-list .dragged {
   color: #3a99d8;
   background: #fff;
 }
+
 .gc-btn-group .btn.active:hover {
   border-color: #3a99d8;
   background-color: #3a99d8;
