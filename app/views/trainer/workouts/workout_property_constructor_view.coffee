@@ -12,27 +12,36 @@ class WorkoutPropertyItem extends Marionette.ItemView
     sync: 'render'
 
   initialize: ->
+    # stores the selected property id from dropdown
+    @selectedProperty = ''
     @collection = new PropertyCollection()
-    @collection.fetch().then =>
-      @render()
+    @collection.fetch()
 
   templateHelpers: ->
     properties = @collection.toJSON()
 
     properties: properties
     defaultProperty: properties[0]?.name
+    defaultPropertyValue: properties[0]?.defaultvalue
 
-  onRender: ->
-    console.log @collection.at 0
   ui:
     removeButton: '.gc-remove'
+    propertyItem: '.gc-property-item'
+    selectedPropertyLabel: '.gc-selected-property'
+    selectedPropertyValue: '.gc-property-value'
 
   events:
     'click @ui.removeButton': 'removeProperty'
+    'click @ui.propertyItem': 'selectProperty'
 
   removeProperty: ->
     @model.trigger 'destroy', @model
 
+  selectProperty: (ev) ->
+    ev.preventDefault()
+    @selectedProperty = ev.target.dataset.id
+    @ui.selectedPropertyLabel.html(ev.target.innerHTML)
+    @ui.selectedPropertyValue.html(ev.target.dataset.defaultValue)
 
 module.exports = class WorkoutPropertyConstructor extends Marionette.CompositeView
 
