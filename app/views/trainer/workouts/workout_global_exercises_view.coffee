@@ -26,6 +26,7 @@ class ExercisesItemView extends Marionette.ItemView
     'click @ui.orderTag': 'addEditable'
     'blur @ui.orderTag': 'saveOrder'
     'keydown @ui.orderTag': 'saveOnEnter'
+    'keyup @ui.orderTag': 'saveOnEnter'
     'click @ui.deleteBtn': 'deleteExercise'
 
   addEditable: (event) ->
@@ -33,17 +34,27 @@ class ExercisesItemView extends Marionette.ItemView
     el.setAttribute 'contenteditable', true
 
   saveOnEnter: (event) =>
+    label = event.currentTarget.innerHTML.replace /<[^>]*>/g, ''
     if event.keyCode == 13
-      @saveOrder()
-      event.preventDefault()
+      event.currentTarget.blur()
+      false
+    else
+      if event.keyCode != 8 and label.trim().length > 2
+        event.preventDefault()
+
+  trimLabel: (target) ->
+    label = target.innerHTML.replace /[^a-zA-Z0-9]+/g, ''
+    target.innerHTML = label
 
   saveOrder: (event) ->
+    @trimLabel(event.currentTarget)
+
     event.currentTarget.removeAttribute 'contenteditable'
+    label = event.currentTarget.innerHTML.replace /<[^>]*>/g, ''
     data =
       id: @model.get 'workout_id'
       workout_exercise_id: @model.get 'id'
-      position: 1
-      order_name: 1
+      label: label
 
     @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises/#{data.workout_exercise_id}"
     @workoutExerciseModel.set data
@@ -90,18 +101,26 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
   initialize: (data) =>
     @workout = data.workout
     @on 'render:collection', @showConnectionLines
-    App.vent.on 'workout:reload:exercises', =>
-      @workout.fetch()
+    App.vent.on 'workout:reload:exercises', @getWorkoutData
 
     @workoutExerciseModel = new WorkoutExerciseModel
     @listenTo @workoutExerciseModel, 'sync', @onSavedOrder
+    @listenTo @workout, 'sync', @resetExercises
+
+  onDestroy: ->
+    App.vent.off 'workout:reload:exercises', @getWorkoutData
 
   onRender: ->
     @initSearchSelect()
     @addSortable()
 
-  getWorkoutData: ->
+  getWorkoutData: =>
     @workout.fetch()
+
+  resetExercises: ->
+    @collection.reset()
+    @collection.set @workout.get('exercises')
+    @render()
 
   searchItems: (items, category) =>
     result = []
@@ -139,20 +158,44 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
 
   showConnectionLines: =>
     circles = @$el.find(".gc-workout-exercise-circle[data-letter]")
+    colors = [
+      '#38cb73'
+      '#389adb'
+      '#fed929'
+      '#e54d40'
+      '#e459fe'
+    ]
+    groupColors = {}
+    colorIndex = 0
     previous = null
+
     $.each circles, (index, item) =>
         $item = $ item
-        letter = $item.data 'letter'
+        letter = $item.data('letter').toLowerCase()
+        $item[0].className = 'gc-workout-exercise-circle'
 
-        if letter
-          if previous and previous.data 'letter' == letter
+        if previous
+
+          if previous.data('letter').toLowerCase() == letter and letter != ''
             $item.addClass 'last'
+
             if previous.hasClass 'last'
               previous.removeClass('last').addClass('middle')
             else
               previous.addClass('first')
 
-          previousLetter = letter
+          else
+            $item.removeClass('last')
+            previous.removeClass('middle').removeClass('first')
+
+        if groupColors.hasOwnProperty(letter)
+          $item.css 'background-color', groupColors[letter]
+        else
+          groupColors[letter] = colors[colorIndex]
+          $item.css 'background-color', groupColors[letter]
+          colorIndex++
+
+        previous = $item
 
   addSortable: ->
     @exerciseList = @$el.find '.gc-workout-exercises-list'
@@ -201,6 +244,8 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
       hideAfter: 5
       message: "Order Position Saved."
       type: 'success'
+
+    @showConnectionLines()
 
   addExercise: (value, $item) =>
     data =

@@ -205,15 +205,17 @@ ul.gc-workout-exercises-list .dragged {
 }
 .gc-workout-exercise-circle[contenteditable=true]:active,
 .gc-workout-exercise-circle[contenteditable=true]:focus {
-  border: 1px solid #757575;
-  -webkit-box-shadow: 0px 2px 12px 1px rgba(0,0,0,.2);
-  box-shadow: 0px 2px 12px 1px rgba(0,0,0,.2);
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  -o-box-shadow: 0 0 10px rgba(0,0,0,0.6);
 }
 .gc-workout-exercise-circle {
   float: left;
   background-color: #f47b22;
-  border-radius: 50%;
-  width: 24px;
+  border-radius: 24px;
+  min-width: 24px;
+  max-width: 60px;
   height: 24px;
   color: #fff;
   font: 400 10px / 21px 'Source Sans Pro';
@@ -221,6 +223,7 @@ ul.gc-workout-exercises-list .dragged {
   position: relative;
   line-height: 24px;
   text-transform: uppercase;
+  padding: 0 5px;
 }
 .gc-workout-exercise-circle.first::after,
 .gc-workout-exercise-circle.middle::after {
@@ -231,7 +234,7 @@ ul.gc-workout-exercises-list .dragged {
   bottom: -16px;
   height: 16px;
   background: inherit;
-  left: 9px;
+  left: 10px;
 }
 .gc-workout-exercise-circle.last::before,
 .gc-workout-exercise-circle.middle::before {
@@ -242,7 +245,7 @@ ul.gc-workout-exercises-list .dragged {
   top: -16px;
   height: 16px;
   background: inherit;
-  left: 9px;
+  left: 10px;
 }
 .gc-workout-exercise-name {
   float: left;

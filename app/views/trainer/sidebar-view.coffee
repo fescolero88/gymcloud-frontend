@@ -57,7 +57,7 @@ module.exports = class SideBarView extends Marionette.LayoutView
     @getRegion('exercises').show(exercisesView)
     @getRegion('workouts').show(workoutsView)
     @getRegion('programs').show(programsView)
-  
+
   toggleMenu: (ev) ->
     if $(ev.target).hasClass('toggle-it') or $(ev.currentTarget).hasClass('toggle-it')
       ev.preventDefault()
@@ -99,7 +99,8 @@ module.exports = class SideBarView extends Marionette.LayoutView
           @initDragAndDrop()
 
   initDragAndDrop: () =>
-    @ui.subs.sortable
+    subs = @$el.find '.gc-sidebar-folder > .gc-sidebar-sub, .gc-sidebar-cat > .gc-sidebar-sub'
+    subs.sortable
       group: 'assignEx'
       drop: false
       handle: '.draggable-handle'
@@ -124,7 +125,7 @@ module.exports = class SideBarView extends Marionette.LayoutView
         App.vent.trigger 'drag:start'
       onDrop: ($item, container, _super, e) =>
         $item.removeClass('dragged').removeAttr('style')
-        @ui.subs.removeAttr('style')
+        subs.removeAttr('style')
         $('body').removeClass('dragging')
         draggable = new DraggableMenuItemModel
           id: $item.find('[data-key]').data('key')

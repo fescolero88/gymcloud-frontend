@@ -1,3 +1,3 @@
-module.exports = (number) ->
-  alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-  alphabet[parseInt(number) - 1]
+module.exports = (orderName) ->
+  if orderName
+    orderName.replace(/[^a-zA-Z]+/g, '');
