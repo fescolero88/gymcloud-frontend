@@ -120,6 +120,10 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
       @workoutExerciseModel.save()
 
   onExerciseAdded: () =>
+    App.request 'messenger:show',
+      hideAfter: 5
+      message: "Exercise Added."
+      type: 'success'
     @workoutModel.fetch()
 
   triggerAddNote: ->
