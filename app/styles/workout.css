@@ -1,9 +1,11 @@
 .gc-workouts-workout-view {
   padding: 5px 15px;
 }
+
 .gc-workout-title {
   display: inline-block;
 }
+
 .gc-workout-title span {
   line-height: 1em;
   border: 1px dashed transparent;
@@ -11,6 +13,7 @@
   -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
+
 .gc-workout-title span:hover {
   border-bottom-color: #3598dc;
   cursor: pointer;
@@ -308,10 +311,19 @@ ul.gc-workout-exercises-list .dragged {
   opacity: 0.7;
   visibility: hidden;
 }
-.gc-workout-exercises-list .gc-delete-exercise:hover {
+.gc-workout-exercises-list .gc-add-single-property-button {
+  opacity: 0.7;
+  visibility: hidden;
+  margin-right: 6px;
+  cursor: pointer;
+}
+
+.gc-workout-exercises-list .gc-delete-exercise:hover,
+.gc-workout-exercises-list .gc-add-single-property-button:hover {
   opacity: 1;
 }
-.gc-workout-exercises-list li:hover .gc-delete-exercise {
+.gc-workout-exercises-list li:hover .gc-delete-exercise,
+.gc-workout-exercises-list li:hover .gc-add-single-property-button {
   visibility: visible;
 }
 

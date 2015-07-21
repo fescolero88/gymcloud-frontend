@@ -3,22 +3,46 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 WorkoutPropertyConstructor = require 'views/trainer/workouts/workout_property_constructor_view'
 WorkoutPropertyCollection = require 'models/trainer/workout-property-collection'
+PropertyCollection = require 'models/trainer/property-collection'
 
 WorkoutExerciseModel = require 'models/trainer/workout-exercise-model'
 
 class EmptyView extends Marionette.ItemView
   template: require('templates/trainer/workouts/workout_global_exercises_empty')
 
-class ExercisesItemView extends Marionette.ItemView
+# EXERCISE PROPERTIES VIEW
+class WorkoutGlobalExercisePropertyView extends Marionette.ItemView
+
+  template: require 'templates/trainer/workouts/workout_global_exercise_property'
+
+  templateHelpers: ->
+    editMode: @state is 'edit'
+
+  collectionEvents:
+    sync: 'render'
+
+  initialize: (options) ->
+    @state = @model.get 'state' || 'view'
+    if @state is 'edit'
+      @collection = new PropertyCollection()
+      @collection.fetch()
+
+# EXECISES ITEM VIEW
+class ExercisesItemView extends Marionette.CompositeView
   template: require('templates/trainer/workouts/workout_global_exercise_item')
 
   tagName: 'li'
+
+  childView: WorkoutGlobalExercisePropertyView
+
+  childViewContainer: 'region[data-name="workout-exercise-properties"]'
 
   ui:
     orderTag: '.gc-workout-exercise-circle'
     deleteBtn: '.gc-delete-exercise'
 
   initialize: ->
+    @collection = new WorkoutPropertyCollection @model.get 'properties'
     @workoutExerciseModel = new WorkoutExerciseModel
     @listenTo @workoutExerciseModel, 'sync', @refreshExercises
 

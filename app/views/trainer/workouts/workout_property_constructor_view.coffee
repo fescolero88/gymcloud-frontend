@@ -41,8 +41,8 @@ class WorkoutPropertyItem extends Marionette.ItemView
     ev.preventDefault()
     @model.set 'property_id', ev.target.dataset.id
     @ui.selectedPropertyLabel.html(ev.target.innerHTML)
-    @ui.selectedPropertyValue.html(ev.target.dataset.defaultvalue)
-    @model.set 'property_value', ev.target.dataset.defaultvalue
+    @ui.selectedPropertyValue.html(ev.target.dataset.defaultValue)
+    @model.set 'property_value', ev.target.dataset.defaultValue
 
 module.exports = class WorkoutPropertyConstructor extends Marionette.CompositeView
 
