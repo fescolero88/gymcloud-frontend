@@ -39,7 +39,6 @@ class ExercisesItemView extends Marionette.ItemView
       event.currentTarget.blur()
       false
     else
-      console.log event.keyCode
       if event.keyCode != 8 and label.trim().length > 2
         event.preventDefault()
 
@@ -107,6 +106,9 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
     @workoutExerciseModel = new WorkoutExerciseModel
     @listenTo @workoutExerciseModel, 'sync', @onSavedOrder
     @listenTo @workout, 'sync', @resetExercises
+
+  onDestroy: ->
+    App.vent.off 'workout:reload:exercises', @getWorkoutData
 
   onRender: ->
     @initSearchSelect()
@@ -178,7 +180,6 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
             $item.addClass 'last'
 
             if previous.hasClass 'last'
-              console.log 'add middle'
               previous.removeClass('last').addClass('middle')
             else
               previous.addClass('first')
