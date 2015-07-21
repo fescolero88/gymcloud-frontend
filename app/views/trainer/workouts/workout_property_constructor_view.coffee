@@ -39,9 +39,10 @@ class WorkoutPropertyItem extends Marionette.ItemView
 
   selectProperty: (ev) ->
     ev.preventDefault()
-    @selectedProperty = ev.target.dataset.id
+    @model.set 'property_id', ev.target.dataset.id
     @ui.selectedPropertyLabel.html(ev.target.innerHTML)
-    @ui.selectedPropertyValue.html(ev.target.dataset.defaultValue)
+    @ui.selectedPropertyValue.html(ev.target.dataset.defaultvalue)
+    @model.set 'property_value', ev.target.dataset.defaultvalue
 
 module.exports = class WorkoutPropertyConstructor extends Marionette.CompositeView
 
@@ -51,14 +52,19 @@ module.exports = class WorkoutPropertyConstructor extends Marionette.CompositeVi
 
   childViewContainer: 'ul.gc-workout-property-list'
 
-  initialize: ->
-    console.log 'property constructor', @collection
+  collectionEvents:
+    remove: 'onModelRemoved'
 
   ui:
     addPropertyButton: 'a.gc-add-property-button'
+    assignPropertyButton: '.gc-assign-property'
 
   events:
     'click @ui.addPropertyButton': 'addProperty'
 
   addProperty: ->
     @collection.add new WorkoutPropertyModel()
+    @ui.assignPropertyButton.removeClass('hidden')
+
+  onModelRemoved: ->
+    @ui.assignPropertyButton.addClass('hidden') if @collection.length is 0

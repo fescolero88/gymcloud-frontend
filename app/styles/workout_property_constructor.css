@@ -4,6 +4,11 @@
   cursor: pointer;
 }
 
+.gc-workout-property-constructor .gc-assign-property {
+  margin-top:8px;
+  margin-right: 10px;
+}
+
 .gc-workout-property-list {
   padding: 8px!important;
   padding-right: 10px;
