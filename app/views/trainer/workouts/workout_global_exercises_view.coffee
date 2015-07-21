@@ -7,11 +7,9 @@ WorkoutPropertyCollection = require 'models/trainer/workout-property-collection'
 WorkoutExerciseModel = require 'models/trainer/workout-exercise-model'
 
 class EmptyView extends Marionette.ItemView
-
   template: require('templates/trainer/workouts/workout_global_exercises_empty')
 
 class ExercisesItemView extends Marionette.ItemView
-
   template: require('templates/trainer/workouts/workout_global_exercise_item')
 
   tagName: 'li'
