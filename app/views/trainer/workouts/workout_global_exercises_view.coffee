@@ -3,6 +3,7 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 WorkoutPropertyConstructor = require 'views/trainer/workouts/workout_property_constructor_view'
 WorkoutPropertyCollection = require 'models/trainer/workout-property-collection'
+WorkoutPropertyModel = require 'models/trainer/workout-property-model'
 PropertyCollection = require 'models/trainer/property-collection'
 
 WorkoutExerciseModel = require 'models/trainer/workout-exercise-model'
@@ -15,8 +16,27 @@ class WorkoutGlobalExercisePropertyView extends Marionette.ItemView
 
   template: require 'templates/trainer/workouts/workout_global_exercise_property'
 
+  tagName: 'li'
+  className: 'gc-property-item'
+
   templateHelpers: ->
+    properties = @collection.toJSON()
+
     editMode: @state is 'edit'
+    properties: properties
+    defaultProperty: properties[0]?.name
+    defaultPropertyValue: properties[0]?.defaultvalue
+
+  ui:
+    removePropertyButton: '.gc-remove'
+    propertyItem: '.gc-property-item'
+    selectedPropertyLabel: '.gc-selected-property'
+    selectedPropertyValue: '.gc-property-value'
+
+  events:
+    'click @ui.removePropertyButton': 'removeProperty'
+    'click @ui.propertyItem': 'selectProperty'
+    'blur @ui.selectedPropertyValue': 'saveProperty'
 
   collectionEvents:
     sync: 'render'
@@ -27,19 +47,35 @@ class WorkoutGlobalExercisePropertyView extends Marionette.ItemView
       @collection = new PropertyCollection()
       @collection.fetch()
 
+  removeProperty: ->
+    @model.trigger 'destroy', @model
+
+  selectProperty: (ev) ->
+    ev.preventDefault()
+    @model.set 'property_id', ev.target.dataset.id
+    @ui.selectedPropertyLabel.html(ev.target.innerHTML)
+    @ui.selectedPropertyValue.html(ev.target.dataset.defaultValue)
+    @model.set 'property_value', ev.target.dataset.defaultValue
+
+  saveProperty: ->
+    alert 'saving property'
+
 # EXECISES ITEM VIEW
 class ExercisesItemView extends Marionette.CompositeView
   template: require('templates/trainer/workouts/workout_global_exercise_item')
 
   tagName: 'li'
 
+  className: 'gc-workout-exercise-item'
+
   childView: WorkoutGlobalExercisePropertyView
 
-  childViewContainer: 'region[data-name="workout-exercise-properties"]'
+  childViewContainer: 'ul.workout-exercise-properties'
 
   ui:
     orderTag: '.gc-workout-exercise-circle'
     deleteBtn: '.gc-delete-exercise'
+    addSingleProperty: '.gc-add-single-property-button'
 
   initialize: ->
     @collection = new WorkoutPropertyCollection @model.get 'properties'
@@ -52,6 +88,7 @@ class ExercisesItemView extends Marionette.CompositeView
     'keydown @ui.orderTag': 'saveOnEnter'
     'keyup @ui.orderTag': 'saveOnEnter'
     'click @ui.deleteBtn': 'deleteExercise'
+    'click @ui.addSingleProperty': 'addProperty'
 
   addEditable: (event) ->
     el = event.currentTarget
@@ -97,6 +134,13 @@ class ExercisesItemView extends Marionette.CompositeView
     App.request 'messenger:show',
       message: "Exercise Updated."
     App.vent.trigger 'workout:reload:exercises'
+
+  addProperty: ->
+    workoutProperty = new WorkoutPropertyModel
+      state: 'edit'
+    @collection.add workoutProperty
+    
+    console.log @collection.toJSON()
 
 module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeView
 

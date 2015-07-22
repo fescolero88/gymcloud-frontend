@@ -1,6 +1,6 @@
 
 {{#if editMode}}
-  <div class="btn-group clearfix gc-property editable">
+  <div class="btn-group clearfix pull-right gc-property editable">
     <button type="button" class="btn btn-sm btn-primary gc-custom">
       <i class="gc-icon-bars"></i>
       &nbsp;<span contenteditable="true" class="gc-property-value">{{defaultPropertyValue}}</span>
@@ -12,7 +12,7 @@
       </button>
       <ul class="dropdown-menu gc-dropdown">
         {{#each properties}}
-        <li><a href="#" class="gc-property-item" data-id="{{id}}"  data-default-value="{{defaultvalue}}">{{name}}</a></li>
+          <li><a href="#" class="gc-property-item" data-id="{{id}}"  data-default-value="{{defaultvalue}}">{{name}}</a></li>
         {{/each}}
       </ul>
     </div>
