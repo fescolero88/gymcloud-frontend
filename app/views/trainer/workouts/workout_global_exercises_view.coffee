@@ -31,11 +31,16 @@ class WorkoutGlobalExercisePropertyView extends Marionette.ItemView
     propertyItem: '.gc-property-item'
     selectedPropertyLabel: '.gc-selected-property'
     selectedPropertyValue: '.gc-property-value'
+    propertyValueNameLabel: '.gc-property-value-name-label'
+    editPropertyControl: '.gc-property-edit'
+    viewPropertyControl: '.gc-property-view'
+    toggleEditMode: '.gc-toggle-edit-mode'
 
   events:
     'click @ui.removePropertyButton': 'removeProperty'
     'click @ui.propertyItem': 'selectProperty'
     'blur @ui.selectedPropertyValue': 'saveProperty'
+    'click @ui.toggleEditMode': 'toggleEditMode'
 
   collectionEvents:
     sync: 'render'
@@ -44,28 +49,41 @@ class WorkoutGlobalExercisePropertyView extends Marionette.ItemView
     sync: 'onSync'
 
   initialize: (options) ->
-    console.log 'STATE', @model.get 'state'
     @properties = []
     @selectedPropertyId = ''
+    @collection = new PropertyCollection()
+    @collection.fetch()
+    @model.set 'property_value', @model.get('value')
+    @model.set 'property_name', @model.get('name')
     @state = @model.get('state') || 'view'
-    if @state is 'edit'
-      @collection = new PropertyCollection()
-      @collection.fetch()
 
   onRender: ->
     #set default property id
-    @model.set 'property_id', @properties[0]?.id
-    @model.set 'property_value', @properties[0]?.defaultvalue
+    if @model.isNew()
+      @model.set 'property_id', @properties[0]?.id
+      @model.set 'property_value', @properties[0]?.defaultvalue
+      @model.set 'property_name', @properties[0]?.name
 
   removeProperty: ->
     @model.trigger 'destroy', @model
 
   selectProperty: (ev) ->
     ev.preventDefault()
-    @ui.selectedPropertyLabel.html(ev.target.innerHTML)
-    @ui.selectedPropertyValue.html(ev.target.dataset.defaultValue)
+    console.log ev.target
+    @ui.selectedPropertyLabel.html(ev.currentTarget.innerHTML)
+    @ui.selectedPropertyValue.html(ev.currentTarget.dataset.defaultValue)
     @model.set 'property_value', ev.target.dataset.defaultValue
+    @model.set 'property_name', ev.target.innerHTML
     @model.set 'property_id', ev.target.dataset.id
+
+  toggleEditMode: (e) ->
+    console.log 'model', @model
+    e.preventDefault()
+    @model.get('state', 'edit')
+    @ui.selectedPropertyLabel.html @model.get('property_name')
+    @ui.selectedPropertyValue.html @model.get('property_value')
+    @ui.editPropertyControl.removeClass 'hidden'
+    @ui.viewPropertyControl.addClass 'hidden'
 
   saveProperty: (e) ->
     @model.set 'property_value', e.target.innerHTML
@@ -73,8 +91,9 @@ class WorkoutGlobalExercisePropertyView extends Marionette.ItemView
     @model.set 'state', 'view'
 
   onSync: =>
-    @model.set 'state', 'view'
-    @render()
+    @ui.propertyValueNameLabel.html "#{@model.get 'property_value'} #{@model.get 'property_name'}"
+    @ui.editPropertyControl.addClass 'hidden'
+    @ui.viewPropertyControl.removeClass 'hidden'
 
 # EXECISES ITEM VIEW
 class ExercisesItemView extends Marionette.CompositeView
@@ -91,7 +110,7 @@ class ExercisesItemView extends Marionette.CompositeView
   childViewOptions: (model) ->
     model.set 'workout_id', @model.get('workout_id')
     model.set 'workout_exercise_id', @model.get('id')
-
+    
     model
 
   ui:
