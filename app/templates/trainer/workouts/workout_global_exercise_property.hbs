@@ -1,4 +1,4 @@
-<div class="{{#unless editMode}}hidden{{/unless}} btn-group clearfix pull-right gc-property editable">
+<div class="{{#unless editMode}}hidden{{/unless}} gc-property-edit btn-group clearfix pull-right gc-property editable">
   <button type="button" class="btn btn-sm btn-primary gc-custom">
     <i class="gc-icon-bars"></i>
     &nbsp;<span contenteditable="true" class="gc-property-value">{{defaultPropertyValue}}</span>
@@ -19,6 +19,9 @@
   </button>
 </div>
 
-<div class="{{#if editMode}}hidden{{/if}} gc-workout-exercise-prop">
-  <i class="fa fa-align-left"></i>{{value}} {{name}}
+<div class="{{#if editMode}}hidden{{/if}} gc-property-view gc-workout-exercise-prop">
+  <a href="#" class="gc-toggle-edit-mode">
+    <i class="fa fa-align-left"></i>
+    <span class="gc-property-value-name-label">{{value}} {{name}} </span>
+  </a>
 </div>
