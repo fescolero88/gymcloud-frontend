@@ -195,12 +195,26 @@ ul.gc-workout-exercises-list {
   overflow: hidden;
 }
 
-ul.gc-workout-exercises-list li {
+ul.gc-workout-exercises-list li.gc-workout-exercise-item {
   float: left;
   display: block;
   width: 100%;
   padding: 16px 0;
 }
+
+ul.gc-workout-exercises-list li.gc-workout-exercise-item ul.workout-exercise-properties li.gc-property-item {
+  margin-right: 20px;
+  float:right;
+}
+
+ul.gc-workout-exercises-list li li.gc-property-item {
+  display: block;
+}
+
+ul.gc-workout-exercises-list li .gc-property {
+  margin: 0!important;
+}
+
 ul.gc-workout-exercises-list .dragged {
   position: absolute;
 }

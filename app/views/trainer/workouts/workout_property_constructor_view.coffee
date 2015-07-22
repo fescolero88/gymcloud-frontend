@@ -13,7 +13,6 @@ class WorkoutPropertyItem extends Marionette.ItemView
 
   initialize: ->
     # stores the selected property id from dropdown
-    @selectedProperty = ''
     @collection = new PropertyCollection()
     @collection.fetch()
 
@@ -61,10 +60,17 @@ module.exports = class WorkoutPropertyConstructor extends Marionette.CompositeVi
 
   events:
     'click @ui.addPropertyButton': 'addProperty'
+    'click @ui.assignPropertyButton': 'assignProperties'
 
   addProperty: ->
     @collection.add new WorkoutPropertyModel()
     @ui.assignPropertyButton.removeClass('hidden')
+    # notify exercises that a property is being created
+    App.vent.trigger 'exercise_property:select:enable'
 
   onModelRemoved: ->
-    @ui.assignPropertyButton.addClass('hidden') if @collection.length is 0
+    if @collection.length is 0
+      @ui.assignPropertyButton.addClass('hidden')
+      App.vent.trigger 'exercise_property:select:disable'
+
+  assignProperties: ->
