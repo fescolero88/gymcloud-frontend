@@ -1,27 +1,24 @@
+<div class="{{#unless editMode}}hidden{{/unless}} btn-group clearfix pull-right gc-property editable">
+  <button type="button" class="btn btn-sm btn-primary gc-custom">
+    <i class="gc-icon-bars"></i>
+    &nbsp;<span contenteditable="true" class="gc-property-value">{{defaultPropertyValue}}</span>
+  </button>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-sm btn-primary gc-custom dropdown-toggle" data-toggle="dropdown">
+      <span class="gc-selected-property">{{defaultProperty}}</span>&nbsp;
+      <i class="fa fa-sort"></i>
+    </button>
+    <ul class="dropdown-menu gc-dropdown">
+      {{#each properties}}
+        <li><a href="#" class="gc-property-item" data-id="{{id}}"  data-default-value="{{defaultvalue}}">{{name}}</a></li>
+      {{/each}}
+    </ul>
+  </div>
+  <button type="button" class="btn btn-sm btn-primary gc-custom gc-remove">
+    &times;
+  </button>
+</div>
 
-{{#if editMode}}
-  <div class="btn-group clearfix pull-right gc-property editable">
-    <button type="button" class="btn btn-sm btn-primary gc-custom">
-      <i class="gc-icon-bars"></i>
-      &nbsp;<span contenteditable="true" class="gc-property-value">{{defaultPropertyValue}}</span>
-    </button>
-    <div class="btn-group" role="group">
-      <button type="button" class="btn btn-sm btn-primary gc-custom dropdown-toggle" data-toggle="dropdown">
-        <span class="gc-selected-property">{{defaultProperty}}</span>&nbsp;
-        <i class="fa fa-sort"></i>
-      </button>
-      <ul class="dropdown-menu gc-dropdown">
-        {{#each properties}}
-          <li><a href="#" class="gc-property-item" data-id="{{id}}"  data-default-value="{{defaultvalue}}">{{name}}</a></li>
-        {{/each}}
-      </ul>
-    </div>
-    <button type="button" class="btn btn-sm btn-primary gc-custom gc-remove">
-      &times;
-    </button>
-  </div>
-{{else}}
-  <div class="gc-workout-exercise-prop">
-    <i class="fa fa-align-left"></i>{{value}} {{name}}
-  </div>
-{{/if}}
+<div class="{{#if editMode}}hidden{{/if}} gc-workout-exercise-prop">
+  <i class="fa fa-align-left"></i>{{value}} {{name}}
+</div>

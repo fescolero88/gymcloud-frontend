@@ -20,12 +20,11 @@ class WorkoutGlobalExercisePropertyView extends Marionette.ItemView
   className: 'gc-property-item'
 
   templateHelpers: ->
-    properties = @collection.toJSON()
-
+    @properties = @collection.toJSON()
     editMode: @state is 'edit'
-    properties: properties
-    defaultProperty: properties[0]?.name
-    defaultPropertyValue: properties[0]?.defaultvalue
+    properties: @properties
+    defaultProperty: @properties[0]?.name
+    defaultPropertyValue: @properties[0]?.defaultvalue
 
   ui:
     removePropertyButton: '.gc-remove'
@@ -41,24 +40,41 @@ class WorkoutGlobalExercisePropertyView extends Marionette.ItemView
   collectionEvents:
     sync: 'render'
 
+  modelEvents:
+    sync: 'onSync'
+
   initialize: (options) ->
-    @state = @model.get 'state' || 'view'
+    console.log 'STATE', @model.get 'state'
+    @properties = []
+    @selectedPropertyId = ''
+    @state = @model.get('state') || 'view'
     if @state is 'edit'
       @collection = new PropertyCollection()
       @collection.fetch()
+
+  onRender: ->
+    #set default property id
+    @model.set 'property_id', @properties[0]?.id
+    @model.set 'property_value', @properties[0]?.defaultvalue
 
   removeProperty: ->
     @model.trigger 'destroy', @model
 
   selectProperty: (ev) ->
     ev.preventDefault()
-    @model.set 'property_id', ev.target.dataset.id
     @ui.selectedPropertyLabel.html(ev.target.innerHTML)
     @ui.selectedPropertyValue.html(ev.target.dataset.defaultValue)
     @model.set 'property_value', ev.target.dataset.defaultValue
+    @model.set 'property_id', ev.target.dataset.id
 
-  saveProperty: ->
-    alert 'saving property'
+  saveProperty: (e) ->
+    @model.set 'property_value', e.target.innerHTML
+    @model.save()
+    @model.set 'state', 'view'
+
+  onSync: =>
+    @model.set 'state', 'view'
+    @render()
 
 # EXECISES ITEM VIEW
 class ExercisesItemView extends Marionette.CompositeView
@@ -71,6 +87,12 @@ class ExercisesItemView extends Marionette.CompositeView
   childView: WorkoutGlobalExercisePropertyView
 
   childViewContainer: 'ul.workout-exercise-properties'
+
+  childViewOptions: (model) ->
+    model.set 'workout_id', @model.get('workout_id')
+    model.set 'workout_exercise_id', @model.get('id')
+
+    model
 
   ui:
     orderTag: '.gc-workout-exercise-circle'
@@ -125,11 +147,9 @@ class ExercisesItemView extends Marionette.CompositeView
     App.vent.trigger 'workout:reload:exercises'
 
   addProperty: ->
-    workoutProperty = new WorkoutPropertyModel
-      state: 'edit'
+    workoutProperty = new WorkoutPropertyModel()
+    workoutProperty.set 'state', 'edit'
     @collection.add workoutProperty
-    
-    console.log @collection.toJSON()
 
 module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeView
 
