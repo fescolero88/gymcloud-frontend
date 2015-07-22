@@ -257,6 +257,29 @@ select.form-control
   content ''
   border-radius 100%
 
+label.gc-alt-checkbox
+  height 36px
+  line-height 36px
+  padding-left 35px
+
+.gc-alt-checkbox input[type="checkbox"] +.gc-checkbox-clone
+  height 30px
+  width 30px
+  border-color blue
+  border-radius 100%
+
+.gc-alt-checkbox input[type="checkbox"]:checked +.gc-checkbox-clone
+  background-image url('../../images/prototypes/check-icon.png')
+
+.gc-alt-checkbox input[type="checkbox"]:not(:checked):not(:disabled):hover +.gc-checkbox-clone:after
+  width 30px
+  height 30px
+  background-image url('../../images/prototypes/check-icon.png')
+  background-position center
+  background-repeat no-repeat
+  margin-top -1px
+  margin-left -1px
+
 .gc-dropdown.gc-sample-active
   display block
   position inherit
