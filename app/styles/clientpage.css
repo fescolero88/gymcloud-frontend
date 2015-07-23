@@ -8,9 +8,12 @@
 }
 #clientpage-content-region {
   background: #fff;
-  height: 100%;
   min-height: 100%;
   margin: 0 -15px;
+}
+#clientpage-content-region .gc-main-workspace.row {
+  margin-left: 0px;
+  margin-right: 0px;
 }
 .gc-clientpage-sidebar{
   position: relative;

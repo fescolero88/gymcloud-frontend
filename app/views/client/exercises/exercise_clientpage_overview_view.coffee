@@ -21,4 +21,4 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
         videoId = video_id.substring 0, ampIndex
       "https://youtube.com/v/#{videoId}"
     else
-      false
+      videoUrl

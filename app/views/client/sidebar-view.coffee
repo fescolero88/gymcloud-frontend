@@ -1,6 +1,7 @@
 Marionette = require 'backbone.marionette'
 
-SidebarItemsCollection = require 'models/client/client_sidebar_model'
+SidebarItemsCollection = require 'models/client/client_sidebar_collection'
+SidebarEntityView = require 'views/client/sidebar-entity-view'
 
 module.exports = class ClientSidebarView extends Marionette.LayoutView
 
@@ -12,17 +13,17 @@ module.exports = class ClientSidebarView extends Marionette.LayoutView
     item: '.gc-sidebar-item > a'
     menu: '.toggle-menu'
 
+  templateHelpers: ->
+    exercises: => App.request 'data:exercises'
+    workouts: => App.request 'data:workouts'
+    programs: => App.request 'data:programs'
+
   initialize: ->
-    @exercises = []
-    @workouts = []
-    @programs = []
-    App.vent.on 'profile:ready', @onProfile
+    @exercisesCollection = new SidebarItemsCollection()
+    @workoutsCollection = new SidebarItemsCollection()
+    @programsCollection = new SidebarItemsCollection()
 
-  onDestroy: ->
-    App.vent.off 'profile:ready', @onProfile
-
-  onProfile: =>
-    @getData()
+  onShow: =>
     @getSidebarItems()
 
   events:
@@ -41,31 +42,18 @@ module.exports = class ClientSidebarView extends Marionette.LayoutView
 
     ev.currentTarget.classList.add 'active'
 
-  getData: =>
-    if !App.request 'data:exercises'
-      $.ajax
-        url: '/api/mobile/library/'
-        type: 'GET'
-        dataType: 'json'
-        success: (data) =>
-          for item in data
-            switch item.title
-              when 'Exercises'
-                App.request 'data:exercises:reset', item.items
-                App.request 'data:exercises:root:reset', item.key
-              when 'Workouts'
-                App.request 'data:workouts:reset', item.items
-                App.request 'data:workouts:root:reset', item.key
-              when 'Programs'
-                App.request 'data:programs:reset', item.items
-                App.request 'data:programs:root:reset', item.key
-          window.App.vent.trigger 'assignments:loaded'
-          console.log App.request 'data:exercises'
-
   getSidebarItems: =>
-    profileModel = App.request 'data:profile'
-    console.log profileModel
-    clientId = profileModel.get 'id'
-    exercisesCollection = new SidebarItemsCollection()
-    exercisesCollection.url = "#{exercisesCollection.url}/#{clientId}/programs"
-    exercisesCollection.fetch( id: clientId )
+    @exercisesCollection.setUrl 'exercises'
+    @workoutsCollection.setUrl 'workouts'
+    @programsCollection.setUrl 'programs'
+
+    $.when(
+      @exercisesCollection.fetch(),
+      @workoutsCollection.fetch(),
+      @programsCollection.fetch()
+    ).then =>
+      App.request 'data:exercises:reset', @exercisesCollection.toJSON()
+      App.request 'data:workouts:reset', @workoutsCollection.toJSON()
+      App.request 'data:programs:reset', @programsCollection.toJSON()
+      @render()
+      window.App.vent.trigger 'assignments:loaded'
