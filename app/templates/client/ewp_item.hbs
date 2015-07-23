@@ -1,11 +1,7 @@
 <div class="col-xs-6">
-  <a class="gc-exercises-link" href="#my/{{dataType}}/{{key}}/">
-    {{#if isFolder}}
-      <i class="fa fa-folder-o gc-client-folder-icon"></i>
-    {{else}}
-      <span class="gc-client-item-icon gc-client-item-icon-{{dataType}}"></span>
-    {{/if}}
-    {{title}}
+  <a class="gc-exercises-link" href="#my/{{dataType}}/{{id}}/">
+    <span class="gc-client-item-icon gc-client-item-icon-{{dataType}}"></span>
+    {{name}}
   </a>
 </div>
 {{#isExercises dataType}}

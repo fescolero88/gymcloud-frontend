@@ -1,5 +1,9 @@
 Marionette = require 'backbone.marionette'
 
+SidebarExercisesCollection = require 'models/client/client_exercises_collection'
+SidebarWorkoutsCollection = require 'models/client/client_workouts_collection'
+SidebarProgramsCollection = require 'models/client/client_programs_collection'
+
 module.exports = class ClientSidebarView extends Marionette.LayoutView
 
   template: require('templates/client/sidebar')
@@ -10,17 +14,18 @@ module.exports = class ClientSidebarView extends Marionette.LayoutView
     item: '.gc-sidebar-item > a'
     menu: '.toggle-menu'
 
-  templateHelpers: =>
+  templateHelpers: ->
     exercises: => App.request 'data:exercises'
     workouts: => App.request 'data:workouts'
     programs: => App.request 'data:programs'
 
   initialize: ->
-    @exercises = []
-    @workouts = []
-    @programs = []
-    App.vent.on 'profile:ready', =>
-      @getData()
+    @exercisesCollection = new SidebarExercisesCollection()
+    @workoutsCollection = new SidebarWorkoutsCollection()
+    @programsCollection = new SidebarProgramsCollection()
+
+  onShow: =>
+    @getSidebarItems()
 
   events:
     'click @ui.menu': 'toggleMenu'
@@ -38,22 +43,14 @@ module.exports = class ClientSidebarView extends Marionette.LayoutView
 
     ev.currentTarget.classList.add 'active'
 
-  getData: =>
-    $.ajax
-      url: '/api/mobile/library/'
-      type: 'GET'
-      dataType: 'json'
-      success: (data) =>
-        for item in data
-          switch item.title
-            when 'Exercises'
-              App.request 'data:exercises:reset', item.items
-              App.request 'data:exercises:root:reset', item.key
-            when 'Workouts'
-              App.request 'data:workouts:reset', item.items
-              App.request 'data:workouts:root:reset', item.key
-            when 'Programs'
-              App.request 'data:programs:reset', item.items
-              App.request 'data:programs:root:reset', item.key
-        window.App.vent.trigger 'assignments:loaded'
-        @render()
+  getSidebarItems: =>
+    $.when(
+      @exercisesCollection.fetch(),
+      @workoutsCollection.fetch(),
+      @programsCollection.fetch()
+    ).then =>
+      App.request 'data:exercises:reset', @exercisesCollection.toJSON()
+      App.request 'data:workouts:reset', @workoutsCollection.toJSON()
+      App.request 'data:programs:reset', @programsCollection.toJSON()
+      @render()
+      window.App.vent.trigger 'assignments:loaded'

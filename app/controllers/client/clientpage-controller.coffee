@@ -39,10 +39,11 @@ module.exports = class ClientPageController extends Marionette.Controller
       if key
         searchResults = @searchInLibrary(new Backbone.Collection(items), key, breadcrumbs)
         childModel = searchResults.model
-        items = childModel.get('items')
+        #items = childModel.get('items')
       else
         childModel = new Backbone.Model
-      if childModel.get('isFolder') or not key
+
+      if (childModel and childModel.get('isFolder')) or not key
         exercisesGlobalView = new ClientEWPView(collection: new Backbone.Collection(items), dataType: dataType)
         @userPageView.content.show exercisesGlobalView
       else

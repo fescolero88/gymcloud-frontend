@@ -17,6 +17,9 @@
           </span>
         </a>
       </div>
+      <!-- <region data-name="exercises"></region>
+      <region data-name="workouts"></region>
+      <region data-name="programs"></region> -->
       <div class="gc-sidebar-cat" data-category="exercises">
         <a href="#my/exercises/" class="row toggle-menu">
           <span class="col-xs-2">
@@ -31,7 +34,7 @@
         </a>
         <div class="gc-sidebar-sub">
           {{#each exercises}}
-            {{> sidebar_item type="exercises"}}
+            {{> client_sidebar_item type="exercises"}}
           {{/each}}
         </div>
       </div>
@@ -49,7 +52,7 @@
         </a>
         <div class="gc-sidebar-sub">
           {{#each workouts}}
-            {{> sidebar_item type="workouts"}}
+            {{> client_sidebar_item type="workouts"}}
           {{/each}}
         </div>
       </div>
@@ -67,7 +70,7 @@
         </a>
         <div class="gc-sidebar-sub">
           {{#each programs}}
-            {{> sidebar_item type="programs"}}
+            {{> client_sidebar_item type="programs"}}
           {{/each}}
         </div>
       </div>
