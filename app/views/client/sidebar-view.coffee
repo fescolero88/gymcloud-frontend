@@ -1,7 +1,8 @@
 Marionette = require 'backbone.marionette'
 
-SidebarItemsCollection = require 'models/client/client_sidebar_collection'
-SidebarEntityView = require 'views/client/sidebar-entity-view'
+SidebarExercisesCollection = require 'models/client/client_exercises_collection'
+SidebarWorkoutsCollection = require 'models/client/client_workouts_collection'
+SidebarProgramsCollection = require 'models/client/client_programs_collection'
 
 module.exports = class ClientSidebarView extends Marionette.LayoutView
 
@@ -19,9 +20,9 @@ module.exports = class ClientSidebarView extends Marionette.LayoutView
     programs: => App.request 'data:programs'
 
   initialize: ->
-    @exercisesCollection = new SidebarItemsCollection()
-    @workoutsCollection = new SidebarItemsCollection()
-    @programsCollection = new SidebarItemsCollection()
+    @exercisesCollection = new SidebarExercisesCollection()
+    @workoutsCollection = new SidebarWorkoutsCollection()
+    @programsCollection = new SidebarProgramsCollection()
 
   onShow: =>
     @getSidebarItems()
@@ -43,10 +44,6 @@ module.exports = class ClientSidebarView extends Marionette.LayoutView
     ev.currentTarget.classList.add 'active'
 
   getSidebarItems: =>
-    @exercisesCollection.setUrl 'exercises'
-    @workoutsCollection.setUrl 'workouts'
-    @programsCollection.setUrl 'programs'
-
     $.when(
       @exercisesCollection.fetch(),
       @workoutsCollection.fetch(),
