@@ -160,6 +160,16 @@ define [
         @reqres.setHandler 'data:programs:root:reset', (key) ->
           App.data.programsRoot = key
 
+        @reqres.setHandler 'data:exercises:clear', ->
+          delete App.data.exercises
+
+        @reqres.setHandler 'data:workouts:clear', ->
+          delete App.data.workouts
+
+        @reqres.setHandler 'data:programs:clear', ->
+          delete App.data.programs
+
+
         @reqres.setHandler 'data:reload', (category, rootId) ->
           $.ajax
             url: "/api/mobile/library/#{rootId}"

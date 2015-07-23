@@ -57,7 +57,7 @@ module.exports = class SideBarView extends Marionette.LayoutView
     @getRegion('exercises').show(exercisesView)
     @getRegion('workouts').show(workoutsView)
     @getRegion('programs').show(programsView)
-  
+
   toggleMenu: (ev) ->
     if $(ev.target).hasClass('toggle-it') or $(ev.currentTarget).hasClass('toggle-it')
       ev.preventDefault()

@@ -34,6 +34,9 @@ module.exports = class AuthController extends Marionette.Controller
   logout: =>
     #window.localStorage.removeItem 'accessToken'
     App.request 'accessToken:remove'
+    App.request 'data:exercises:clear'
+    App.request 'data:workouts:clear'
+    App.request 'data:programs:clear'
     window.location.replace '#login'
 
   forgotPassword: ->
