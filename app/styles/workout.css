@@ -200,6 +200,7 @@ ul.gc-workout-exercises-list li.gc-workout-exercise-item {
   display: block;
   width: 100%;
   padding: 16px 0;
+  min-height: 60px;
 }
 
 ul.gc-workout-exercises-list li.gc-workout-exercise-item ul.workout-exercise-properties li.gc-property-item {
@@ -209,6 +210,10 @@ ul.gc-workout-exercises-list li.gc-workout-exercise-item ul.workout-exercise-pro
 
 ul.gc-workout-exercises-list li li.gc-property-item {
   display: block;
+}
+
+ul.gc-workout-exercises-list li.gc-workout-exercise-item label.gc-alt-checkbox {
+  height: 0!important;
 }
 
 ul.gc-workout-exercises-list li .gc-property {
@@ -339,8 +344,8 @@ ul.gc-workout-exercises-list .dragged {
 .gc-workout-exercises-list .gc-add-single-property-button:hover {
   opacity: 1;
 }
-.gc-workout-exercises-list li:hover .gc-delete-exercise,
-.gc-workout-exercises-list li:hover .gc-add-single-property-button {
+.gc-workout-exercises-list li.hover-enabled:hover .gc-delete-exercise,
+.gc-workout-exercises-list li.hover-enabled:hover .gc-add-single-property-button {
   visibility: visible;
 }
 

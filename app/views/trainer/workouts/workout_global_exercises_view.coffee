@@ -65,7 +65,7 @@ class WorkoutGlobalExercisePropertyView extends Marionette.ItemView
       @model.set 'property_name', @properties[0]?.name
 
   removeProperty: ->
-    @model.trigger 'destroy', @model
+    @model.destroy()
 
   selectProperty: (ev) ->
     ev.preventDefault()
@@ -101,7 +101,7 @@ class ExercisesItemView extends Marionette.CompositeView
 
   tagName: 'li'
 
-  className: 'gc-workout-exercise-item'
+  className: 'gc-workout-exercise-item hover-enabled'
 
   childView: WorkoutGlobalExercisePropertyView
 
@@ -117,11 +117,20 @@ class ExercisesItemView extends Marionette.CompositeView
     orderTag: '.gc-workout-exercise-circle'
     deleteBtn: '.gc-delete-exercise'
     addSingleProperty: '.gc-add-single-property-button'
+    setPropertyCheckboxWrapper: '.gc-set-property-checkbox-wrapper'
+    setPropertyCheckbox: '.gc-set-property-checkbox'
 
   initialize: ->
     @collection = new WorkoutPropertyCollection @model.get 'properties'
     @workoutExerciseModel = new WorkoutExerciseModel
     @listenTo @workoutExerciseModel, 'sync', @refreshExercises
+
+    App.vent.on 'exercise_property:select:enable', @enableCheckbox
+    App.vent.on 'exercise_property:select:disable', @disableCheckbox
+
+  onDestroy: ->
+    App.vent.off 'exercise_property:select:enable', @enableCheckbox
+    App.vent.off 'exercise_property:select:disable', @disableCheckbox
 
   events:
     'click @ui.orderTag': 'addEditable'
@@ -161,6 +170,16 @@ class ExercisesItemView extends Marionette.CompositeView
     @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises/#{data.workout_exercise_id}"
     @workoutExerciseModel.set data
     @workoutExerciseModel.save()
+
+  enableCheckbox: =>
+    @ui.setPropertyCheckboxWrapper.removeClass 'hidden'
+    #disable hover
+    @$el.removeClass 'hover-enabled'
+
+  disableCheckbox: =>
+    @ui.setPropertyCheckboxWrapper.addClass 'hidden'
+    #enable hover
+    @$el.addClass 'hover-enabled'
 
   deleteExercise: (event) ->
     event.preventDefault()
