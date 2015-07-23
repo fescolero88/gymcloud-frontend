@@ -127,10 +127,12 @@ class ExercisesItemView extends Marionette.CompositeView
 
     App.vent.on 'exercise_property:select:enable', @enableCheckbox
     App.vent.on 'exercise_property:select:disable', @disableCheckbox
+    App.vent.on 'exercise_property:assign', @processProperties
 
   onDestroy: ->
     App.vent.off 'exercise_property:select:enable', @enableCheckbox
     App.vent.off 'exercise_property:select:disable', @disableCheckbox
+    App.vent.off 'exercise_property:assign', @processProperties
 
   events:
     'click @ui.orderTag': 'addEditable'
@@ -199,6 +201,25 @@ class ExercisesItemView extends Marionette.CompositeView
     workoutProperty = new WorkoutPropertyModel()
     workoutProperty.set 'state', 'edit'
     @collection.add workoutProperty
+
+  processProperties: (models) =>
+    if @ui.setPropertyCheckbox.is(':checked')
+      console.log 'props processing', models
+      deferreds = []
+      models.forEach (property) =>
+        model = new WorkoutPropertyModel(property)
+        model.set 'workout_id', @model.get('workout_id')
+        model.set 'workout_exercise_id', @model.get('id')
+        console.log 'model is being pushed', model
+        deferreds.push model
+
+      $.when.apply($, deferreds).then =>
+        @collection.add deferreds
+
+      # save models
+      deferreds.forEach (property) =>
+        console.log 'saving', property
+        property.save()
 
 module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeView
 

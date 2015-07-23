@@ -74,4 +74,5 @@ module.exports = class WorkoutPropertyConstructor extends Marionette.CompositeVi
       App.vent.trigger 'exercise_property:select:disable'
 
   assignProperties: ->
-    App.vent.trigger 'exercise_property:assign', @collection
+    console.log 'triggered assign button'
+    App.vent.trigger 'exercise_property:assign', @collection.toJSON()
