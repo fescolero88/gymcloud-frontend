@@ -32,12 +32,13 @@ module.exports = class SideBarView extends Marionette.LayoutView
     programs: '@ui.programsRegion'
 
   initialize: =>
-    App.vent.on 'profile:ready', @getData
     App.vent.on 'ewp:model:updated', @updateEWPName
 
   onDestroy: ->
     App.vent.off 'ewp:model:updated', @updateEWPName
-    App.vent.off 'profile:ready', @getData
+
+  onShow: ->
+    @getData()
 
   onRender: ->
     @$el.find('.nano').nanoScroller()
