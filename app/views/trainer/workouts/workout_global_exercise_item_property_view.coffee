@@ -1,7 +1,6 @@
 Marionette = require 'backbone.marionette'
 PropertyCollection = require 'models/trainer/property-collection'
 
-
 # EXERCISE PROPERTIES VIEW
 module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.ItemView
 
@@ -83,5 +82,3 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
     @ui.propertyValueNameLabel.html "#{@model.get 'property_value'} #{@model.get 'property_name'}"
     @ui.editPropertyControl.addClass 'hidden'
     @ui.viewPropertyControl.removeClass 'hidden'
-
-
