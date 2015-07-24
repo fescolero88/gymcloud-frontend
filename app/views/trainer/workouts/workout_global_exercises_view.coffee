@@ -69,7 +69,6 @@ class WorkoutGlobalExercisePropertyView extends Marionette.ItemView
 
   selectProperty: (ev) ->
     ev.preventDefault()
-    console.log ev.target
     @ui.selectedPropertyLabel.html(ev.currentTarget.innerHTML)
     @ui.selectedPropertyValue.html(ev.currentTarget.dataset.defaultValue)
     @model.set 'property_value', ev.target.dataset.defaultValue
@@ -77,7 +76,6 @@ class WorkoutGlobalExercisePropertyView extends Marionette.ItemView
     @model.set 'property_id', ev.target.dataset.id
 
   toggleEditMode: (e) ->
-    console.log 'model', @model
     e.preventDefault()
     @model.get('state', 'edit')
     @ui.selectedPropertyLabel.html @model.get('property_name')
@@ -204,22 +202,17 @@ class ExercisesItemView extends Marionette.CompositeView
 
   processProperties: (models) =>
     if @ui.setPropertyCheckbox.is(':checked')
-      console.log 'props processing', models
-      deferreds = []
+
       models.forEach (property) =>
-        model = new WorkoutPropertyModel(property)
+        model = new WorkoutPropertyModel()
+        model.set 'property_value', property.get 'property_value' || 0
+        model.set 'property_id', property.get 'property_id' || 0
         model.set 'workout_id', @model.get('workout_id')
         model.set 'workout_exercise_id', @model.get('id')
-        console.log 'model is being pushed', model
-        deferreds.push model
+        model.save(). then =>
+          @collection.add model
 
-      $.when.apply($, deferreds).then =>
-        @collection.add deferreds
 
-      # save models
-      deferreds.forEach (property) =>
-        console.log 'saving', property
-        property.save()
 
 module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeView
 

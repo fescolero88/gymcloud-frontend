@@ -16,6 +16,16 @@ class WorkoutPropertyItem extends Marionette.ItemView
     @collection = new PropertyCollection()
     @collection.fetch()
 
+  onRender: ->
+    # set defaults
+    #set default property id
+    @properties = @collection.toJSON()
+    if @model.isNew()
+      @model.set 'property_id', @properties[0]?.id
+      @model.set 'property_value', @properties[0]?.defaultvalue
+      @model.set 'property_name', @properties[0]?.name
+
+
   templateHelpers: ->
     properties = @collection.toJSON()
 
@@ -32,6 +42,7 @@ class WorkoutPropertyItem extends Marionette.ItemView
   events:
     'click @ui.removeButton': 'removeProperty'
     'click @ui.propertyItem': 'selectProperty'
+    'keyup @ui.selectedPropertyValue': 'setPropertyValue'
 
   removeProperty: ->
     @model.trigger 'destroy', @model
@@ -42,6 +53,9 @@ class WorkoutPropertyItem extends Marionette.ItemView
     @ui.selectedPropertyLabel.html(ev.target.innerHTML)
     @ui.selectedPropertyValue.html(ev.target.dataset.defaultValue)
     @model.set 'property_value', ev.target.dataset.defaultValue
+
+  setPropertyValue: (ev) ->
+    @model.set 'property_value', ev.target.innerHTML
 
 module.exports = class WorkoutPropertyConstructor extends Marionette.CompositeView
 
@@ -74,5 +88,4 @@ module.exports = class WorkoutPropertyConstructor extends Marionette.CompositeVi
       App.vent.trigger 'exercise_property:select:disable'
 
   assignProperties: ->
-    console.log 'triggered assign button'
-    App.vent.trigger 'exercise_property:assign', @collection.toJSON()
+    App.vent.trigger 'exercise_property:assign', @collection.models

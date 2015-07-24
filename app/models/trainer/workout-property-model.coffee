@@ -12,3 +12,8 @@ module.exports = class WorkoutPropertyModel extends Backbone.Model
     property_value: ''
     property_name: ''
     state: 'view'
+
+  toJSON: ->
+    property_value: @get 'property_value'
+    property_id: @get 'property_id'
+    property_name: @get 'property_name'
