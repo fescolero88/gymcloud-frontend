@@ -1,6 +1,6 @@
 Backbone = require 'backbone'
 
-module.exports = class WorkoutPropertyModel extends Backbone.Model
+module.exports = class WorkoutExercisePropertyModel extends Backbone.Model
 
   urlRoot: ->
     "/api/mobile/workouts/#{@get 'workout_id'}/workout_exercises/#{@get 'workout_exercise_id'}/properties"

@@ -1,6 +1,6 @@
 Marionette = require 'backbone.marionette'
-WorkoutPropertyCollection = require 'models/trainer/workout-property-collection'
-WorkoutPropertyModel = require 'models/trainer/workout-property-model'
+WorkoutExercisesPropertyCollection = require 'models/trainer/workout-exercise-property-collection'
+WorkoutExercisesPropertyModel = require 'models/trainer/workout-exercise-property-model'
 WorkoutExerciseModel = require 'models/trainer/workout-exercise-model'
 WorkoutGlobalExercisePropertyView = require 'views/trainer/workouts/workout_global_exercise_item_property_view'
 
@@ -29,7 +29,7 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
     setPropertyCheckbox: '.gc-set-property-checkbox'
 
   initialize: ->
-    @collection = new WorkoutPropertyCollection @model.get 'properties'
+    @collection = new WorkoutExercisesPropertyCollection @model.get 'properties'
     @workoutExerciseModel = new WorkoutExerciseModel
     @listenTo @workoutExerciseModel, 'sync', @refreshExercises
 
@@ -106,20 +106,18 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
     App.vent.trigger 'workout:reload:exercises'
 
   addProperty: ->
-    workoutProperty = new WorkoutPropertyModel()
-    workoutProperty.set 'state', 'edit'
-    @collection.add workoutProperty
+    workoutExerciseProperty = new WorkoutExercisesPropertyModel()
+    workoutExerciseProperty.set 'state', 'edit'
+    @collection.add workoutExerciseProperty
 
   processProperties: (models) =>
     if @ui.setPropertyCheckbox.is(':checked')
 
       models.forEach (property) =>
-        model = new WorkoutPropertyModel()
+        model = new WorkoutExercisesPropertyModel()
         model.set 'property_value', property.get 'property_value' || 0
         model.set 'property_id', property.get 'property_id' || 0
         model.set 'workout_id', @model.get('workout_id')
         model.set 'workout_exercise_id', @model.get('id')
         model.save(). then =>
           @collection.add model
-
-

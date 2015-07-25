@@ -1,8 +1,8 @@
 Marionette = require 'backbone.marionette'
-WorkoutPropertyModel = require 'models/trainer/workout-property-model'
+WorkoutExercisePropertyModel = require 'models/trainer/workout-exercise-property-model'
 PropertyCollection = require 'models/trainer/property-collection'
 
-class WorkoutPropertyItem extends Marionette.ItemView
+class WorkoutExercisePropertyItem extends Marionette.ItemView
 
   template: require 'templates/trainer/workouts/workout_property_item'
 
@@ -57,7 +57,7 @@ class WorkoutPropertyItem extends Marionette.ItemView
   setPropertyValue: (ev) ->
     @model.set 'property_value', ev.target.innerHTML
 
-module.exports = class WorkoutPropertyConstructor extends Marionette.CompositeView
+module.exports = class WorkoutExercisePropertyConstructor extends Marionette.CompositeView
 
   template: require('templates/trainer/workouts/workout_property_constructor')
 
@@ -77,7 +77,7 @@ module.exports = class WorkoutPropertyConstructor extends Marionette.CompositeVi
     'click @ui.assignPropertyButton': 'assignProperties'
 
   addProperty: ->
-    @collection.add new WorkoutPropertyModel()
+    @collection.add new WorkoutExercisePropertyModel()
     @ui.assignPropertyButton.removeClass('hidden')
     # notify exercises that a property is being created
     App.vent.trigger 'exercise_property:select:enable'
