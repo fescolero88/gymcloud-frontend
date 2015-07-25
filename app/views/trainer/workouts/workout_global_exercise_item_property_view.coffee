@@ -30,6 +30,7 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
     'click @ui.removePropertyButton': 'removeProperty'
     'click @ui.propertyItem': 'selectProperty'
     'blur @ui.selectedPropertyValue': 'saveProperty'
+    'keypress @ui.selectedPropertyValue': 'saveOnEnter'
     'click @ui.toggleEditMode': 'toggleEditMode'
 
   collectionEvents:
@@ -72,6 +73,11 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
     @ui.selectedPropertyValue.html @model.get('property_value')
     @ui.editPropertyControl.removeClass 'hidden'
     @ui.viewPropertyControl.addClass 'hidden'
+
+  saveOnEnter: (e) ->
+    if e.which is 13
+      e.preventDefault()
+      @saveProperty(e)
 
   saveProperty: (e) ->
     @model.set 'property_value', e.target.innerHTML

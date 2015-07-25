@@ -285,7 +285,7 @@ ul.gc-workout-exercises-list .dragged {
 }
 .gc-workout-exercise-prop {
   height: 21px;
-  width: 101px;
+  /*width: 101px;*/
   color: #99a6ac;
   font: 400 14px / 21px 'Source Sans Pro';
   text-align: right;
