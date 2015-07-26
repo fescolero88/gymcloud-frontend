@@ -1,0 +1,29 @@
+<div class="{{#unless editMode}}hidden{{/unless}} gc-property-edit btn-group clearfix pull-right gc-property editable">
+  <button type="button" class="btn btn-sm btn-primary gc-custom">
+    <i class="gc-icon-bars"></i>
+    &nbsp;<span contenteditable="true" class="gc-property-value">{{defaultPropertyValue}}</span>
+  </button>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-sm btn-primary gc-custom dropdown-toggle" data-toggle="dropdown">
+      <span class="gc-selected-property">{{defaultProperty}}</span>&nbsp;
+      <i class="fa fa-sort"></i>
+    </button>
+    <ul class="dropdown-menu gc-dropdown">
+      {{#each properties}}
+        <li><a href="#" class="gc-property-item" data-id="{{id}}"  data-default-value="{{defaultvalue}}">{{name}}</a></li>
+      {{/each}}
+    </ul>
+  </div>
+  <button type="button" class="btn btn-sm btn-primary gc-custom gc-remove">
+    &times;
+  </button>
+</div>
+
+<div class="{{#if editMode}}hidden{{/if}} gc-property-view gc-workout-exercise-prop">
+  <a href="#" class="gc-toggle-edit-mode">
+    <span class="gc-tag gc-property ">
+      <i class="gc-icon-bars"></i>
+      <span class="gc-property-value-name-label">{{property_value}} {{property_name}}</span>
+    </span>
+  </a>
+</div>

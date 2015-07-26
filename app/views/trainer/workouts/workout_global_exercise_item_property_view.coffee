@@ -1,0 +1,90 @@
+Marionette = require 'backbone.marionette'
+PropertyCollection = require 'models/trainer/property-collection'
+
+# EXERCISE PROPERTIES VIEW
+module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.ItemView
+
+  template: require 'templates/trainer/workouts/workout_global_exercise_property'
+
+  tagName: 'li'
+  className: 'gc-property-item'
+
+  templateHelpers: ->
+    @properties = @collection.toJSON()
+    editMode: @state is 'edit'
+    properties: @properties
+    defaultProperty: @properties[0]?.name
+    defaultPropertyValue: @properties[0]?.defaultvalue
+
+  ui:
+    removePropertyButton: '.gc-remove'
+    propertyItem: '.gc-property-item'
+    selectedPropertyLabel: '.gc-selected-property'
+    selectedPropertyValue: '.gc-property-value'
+    propertyValueNameLabel: '.gc-property-value-name-label'
+    editPropertyControl: '.gc-property-edit'
+    viewPropertyControl: '.gc-property-view'
+    toggleEditMode: '.gc-toggle-edit-mode'
+
+  events:
+    'click @ui.removePropertyButton': 'removeProperty'
+    'click @ui.propertyItem': 'selectProperty'
+    'blur @ui.selectedPropertyValue': 'saveProperty'
+    'keypress @ui.selectedPropertyValue': 'saveOnEnter'
+    'click @ui.toggleEditMode': 'toggleEditMode'
+
+  collectionEvents:
+    sync: 'render'
+
+  modelEvents:
+    sync: 'onSync'
+
+  initialize: (options) ->
+    @properties = []
+    @selectedPropertyId = ''
+    @collection = new PropertyCollection()
+    @collection.fetch()
+    @model.set 'property_value', @model.get('value')
+    @model.set 'property_name', @model.get('name')
+    @state = @model.get('state') || 'view'
+
+  onRender: ->
+    #set default property id
+    if @model.isNew()
+      @model.set 'property_id', @properties[0]?.id
+      @model.set 'property_value', @properties[0]?.defaultvalue
+      @model.set 'property_name', @properties[0]?.name
+
+  removeProperty: ->
+    @model.destroy()
+
+  selectProperty: (ev) ->
+    ev.preventDefault()
+    @ui.selectedPropertyLabel.html(ev.currentTarget.innerHTML)
+    @ui.selectedPropertyValue.html(ev.currentTarget.dataset.defaultValue)
+    @model.set 'property_value', ev.target.dataset.defaultValue
+    @model.set 'property_name', ev.target.innerHTML
+    @model.set 'property_id', ev.target.dataset.id
+
+  toggleEditMode: (e) ->
+    e.preventDefault()
+    @model.get('state', 'edit')
+    @ui.selectedPropertyLabel.html @model.get('property_name')
+    @ui.selectedPropertyValue.html @model.get('property_value')
+    @ui.editPropertyControl.removeClass 'hidden'
+    @ui.viewPropertyControl.addClass 'hidden'
+
+  saveOnEnter: (e) ->
+    if e.which is 13
+      e.preventDefault()
+      @saveProperty(e)
+
+  saveProperty: (e) ->
+    @model.set 'property_value', e.target.innerHTML
+    @model.save()
+    @model.set 'state', 'view'
+
+  onSync: =>
+    @ui.propertyValueNameLabel.html "#{@model.get 'property_value'} #{@model.get 'property_name'}"
+    @ui.editPropertyControl.addClass 'hidden'
+    @ui.viewPropertyControl.removeClass 'hidden'

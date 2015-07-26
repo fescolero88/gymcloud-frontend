@@ -1,78 +1,12 @@
 _ = require 'lodash'
 Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
+WorkoutExercisePropertyConstructor = require 'views/trainer/workouts/workout_exercise_property_constructor_view'
+WorkoutExercisePropertyCollection = require 'models/trainer/workout-exercise-property-collection'
+ExercisesItemView = require 'views/trainer/workouts/workout_global_exercises_item_view'
 WorkoutExerciseModel = require 'models/trainer/workout-exercise-model'
 
 class EmptyView extends Marionette.ItemView
-
   template: require('templates/trainer/workouts/workout_global_exercises_empty')
-
-class ExercisesItemView extends Marionette.ItemView
-
-  template: require('templates/trainer/workouts/workout_global_exercise_item')
-
-  tagName: 'li'
-
-  ui:
-    orderTag: '.gc-workout-exercise-circle'
-    deleteBtn: '.gc-delete-exercise'
-
-  initialize: ->
-    @workoutExerciseModel = new WorkoutExerciseModel
-    @listenTo @workoutExerciseModel, 'sync', @refreshExercises
-
-  events:
-    'click @ui.orderTag': 'addEditable'
-    'blur @ui.orderTag': 'saveOrder'
-    'keydown @ui.orderTag': 'saveOnEnter'
-    'keyup @ui.orderTag': 'saveOnEnter'
-    'click @ui.deleteBtn': 'deleteExercise'
-
-  addEditable: (event) ->
-    el = event.currentTarget
-    el.setAttribute 'contenteditable', true
-
-  saveOnEnter: (event) =>
-    label = event.currentTarget.innerHTML.replace /<[^>]*>/g, ''
-    if event.keyCode == 13
-      event.currentTarget.blur()
-      false
-    else
-      if event.keyCode != 8 and label.trim().length > 2
-        event.preventDefault()
-
-  trimLabel: (target) ->
-    label = target.innerHTML.replace /[^a-zA-Z0-9]+/g, ''
-    target.innerHTML = label
-
-  saveOrder: (event) ->
-    @trimLabel(event.currentTarget)
-
-    event.currentTarget.removeAttribute 'contenteditable'
-    label = event.currentTarget.innerHTML.replace /<[^>]*>/g, ''
-    data =
-      id: @model.get 'workout_id'
-      workout_exercise_id: @model.get 'id'
-      label: label
-
-    @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises/#{data.workout_exercise_id}"
-    @workoutExerciseModel.set data
-    @workoutExerciseModel.save()
-
-  deleteExercise: (event) ->
-    event.preventDefault()
-    data =
-      id: @model.get 'workout_id'
-      workout_exercise_id: @model.get 'id'
-    @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises/#{data.workout_exercise_id}"
-    @workoutExerciseModel.set data
-    @workoutExerciseModel.destroy()
-
-  refreshExercises: ->
-    App.request 'messenger:show',
-      message: "Exercise Updated."
-    App.vent.trigger 'workout:reload:exercises'
 
 module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeView
 
@@ -94,6 +28,7 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
     circles: '.gc-workout-exercise-circle'
     liveSearch: '.live-search'
     searchContainer: '.gc-exercises-assign-input-wrapper'
+    workoutExercisePropertyConstructorWrapper: 'region[data-name="workout-property-constructor"]'
 
   templateHelpers: =>
     workout: @workout.attributes
@@ -111,6 +46,11 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
     App.vent.off 'workout:reload:exercises', @getWorkoutData
 
   onRender: ->
+    workoutExercisePropertyConstructor = new WorkoutExercisePropertyConstructor
+      collection: new WorkoutExercisePropertyCollection()
+
+    @ui.workoutExercisePropertyConstructorWrapper.html workoutExercisePropertyConstructor.render().el
+
     @initSearchSelect()
     @addSortable()
 
