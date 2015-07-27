@@ -190,9 +190,13 @@ textarea.gc-workout-description-editor:focus, .gc-workout-note-editor.focus-stat
   width: 290px;
 }
 
+.gc-workout-exercises-list-wrapper {
+  padding: 0 10px;
+}
+
 ul.gc-workout-exercises-list {
   padding: 2px 22px;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 ul.gc-workout-exercises-list li.gc-workout-exercise-item {
