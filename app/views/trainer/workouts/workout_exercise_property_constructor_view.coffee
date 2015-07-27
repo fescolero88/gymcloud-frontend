@@ -17,6 +17,7 @@ class WorkoutExercisePropertyItem extends Marionette.ItemView
     @collection.fetch()
 
   onRender: ->
+    console.log 'render', @collection
     # set defaults
     #set default property id
     @properties = @collection.toJSON()
