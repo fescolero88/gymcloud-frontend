@@ -18,7 +18,7 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
   childViewOptions: (model) ->
     model.set 'workout_id', @model.get('workout_id')
     model.set 'workout_exercise_id', @model.get('id')
-    
+
     model
 
   ui:
@@ -27,6 +27,7 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
     addSingleProperty: '.gc-add-single-property-button'
     setPropertyCheckboxWrapper: '.gc-set-property-checkbox-wrapper'
     setPropertyCheckbox: '.gc-set-property-checkbox'
+    note: '.gc-workout-exercise-note'
 
   initialize: ->
     @collection = new WorkoutExercisesPropertyCollection @model.get 'properties'
@@ -49,6 +50,7 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
     'keyup @ui.orderTag': 'saveOnEnter'
     'click @ui.deleteBtn': 'deleteExercise'
     'click @ui.addSingleProperty': 'addProperty'
+    'blur @ui.note': 'onSaveNote'
 
   addEditable: (event) ->
     el = event.currentTarget
@@ -121,3 +123,13 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
         model.set 'workout_exercise_id', @model.get('id')
         model.save(). then =>
           @collection.add model
+
+  onSaveNote: ->
+    data =
+      id: @model.get 'workout_id'
+      workout_exercise_id: @model.get 'id'
+      notes: @ui.note.val()
+
+    @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises/#{data.workout_exercise_id}"
+    @workoutExerciseModel.set data
+    @workoutExerciseModel.save()

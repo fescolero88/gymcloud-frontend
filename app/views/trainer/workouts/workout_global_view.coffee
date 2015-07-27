@@ -108,11 +108,14 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
     if item instanceof Backbone.Model
       item = item.toJSON()
 
+    count = @workoutModel.get('exercises').length
+
     category = item.category
     if category == 'exercises'
       data =
         'id': @workoutModel.get 'id'
         'exercise_id': item.id
+        'label': count+1
 
       @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises"
       @workoutExerciseModel.set data
