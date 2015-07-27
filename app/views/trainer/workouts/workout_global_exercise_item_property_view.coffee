@@ -33,8 +33,10 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
     'keypress @ui.selectedPropertyValue': 'saveOnEnter'
     'click @ui.toggleEditMode': 'toggleEditMode'
 
+  ###
   collectionEvents:
     sync: 'render'
+  ###
 
   modelEvents:
     sync: 'onSync'
@@ -42,11 +44,12 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
   initialize: (options) ->
     @properties = []
     @selectedPropertyId = ''
-    @collection = new PropertyCollection()
-    @collection.fetch()
     @model.set 'property_value', @model.get('value')
     @model.set 'property_name', @model.get('name')
     @state = @model.get('state') || 'view'
+    @collection = new PropertyCollection()
+    @collection.fetch().then =>
+      @render()
 
   onRender: ->
     #set default property id
