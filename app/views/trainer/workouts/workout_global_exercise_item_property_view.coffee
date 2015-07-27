@@ -29,7 +29,7 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
   events:
     'click @ui.removePropertyButton': 'removeProperty'
     'click @ui.propertyItem': 'selectProperty'
-    'blur @ui.selectedPropertyValue': 'saveProperty'
+    #'blur @ui.selectedPropertyValue': 'saveProperty'
     'keypress @ui.selectedPropertyValue': 'saveOnEnter'
     'click @ui.toggleEditMode': 'toggleEditMode'
 
@@ -50,7 +50,8 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
     #set default property id
     if @model.isNew()
       @model.set 'property_id', @properties[0]?.id
-      @model.set 'property_value', @properties[0]?.defaultvalue
+      #@model.set 'property_value', @properties[0]?.defaultvalue
+      @ui.selectedPropertyValue.focus()
       @model.set 'property_name', @properties[0]?.name
 
   removeProperty: ->
@@ -59,10 +60,9 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
   selectProperty: (ev) ->
     ev.preventDefault()
     @ui.selectedPropertyLabel.html(ev.currentTarget.innerHTML)
-    @ui.selectedPropertyValue.html(ev.currentTarget.dataset.defaultValue)
-    @model.set 'property_value', ev.target.dataset.defaultValue
     @model.set 'property_name', ev.target.innerHTML
     @model.set 'property_id', ev.target.dataset.id
+    @ui.selectedPropertyValue.focus()
 
   toggleEditMode: (e) ->
     e.preventDefault()
@@ -71,6 +71,7 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
     @ui.selectedPropertyValue.html @model.get('property_value')
     @ui.editPropertyControl.removeClass 'hidden'
     @ui.viewPropertyControl.addClass 'hidden'
+    @ui.selectedPropertyValue.focus()
 
   saveOnEnter: (e) ->
     if e.which is 13

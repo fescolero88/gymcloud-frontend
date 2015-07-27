@@ -20,7 +20,8 @@ class WorkoutExercisePropertyItem extends Marionette.ItemView
     @properties = @collection.toJSON()
     if @model.isNew()
       @model.set 'property_id', @properties[0]?.id
-      @model.set 'property_value', @properties[0]?.defaultvalue
+      #@model.set 'property_value', @properties[0]?.defaultvalue
+      @ui.selectedPropertyValue.focus()
       @model.set 'property_name', @properties[0]?.name
 
 
@@ -49,8 +50,7 @@ class WorkoutExercisePropertyItem extends Marionette.ItemView
     ev.preventDefault()
     @model.set 'property_id', ev.target.dataset.id
     @ui.selectedPropertyLabel.html(ev.target.innerHTML)
-    @ui.selectedPropertyValue.html(ev.target.dataset.defaultValue)
-    @model.set 'property_value', ev.target.dataset.defaultValue
+    @ui.selectedPropertyValue.focus()
 
   setPropertyValue: (ev) ->
     @model.set 'property_value', ev.target.innerHTML
