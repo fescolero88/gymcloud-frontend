@@ -8,11 +8,6 @@ class WorkoutExercisePropertyItem extends Marionette.ItemView
 
   tagName: 'li'
 
-  ###
-  collectionEvents:
-    sync: 'render'
-  ###
-
   initialize: ->
     # stores the selected property id from dropdown
     @collection = new PropertyCollection()
@@ -20,7 +15,6 @@ class WorkoutExercisePropertyItem extends Marionette.ItemView
       @render()
 
   onRender: ->
-    console.log 'render', @collection
     # set defaults
     #set default property id
     @properties = @collection.toJSON()

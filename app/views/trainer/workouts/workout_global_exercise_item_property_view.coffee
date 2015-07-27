@@ -33,11 +33,6 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
     'keypress @ui.selectedPropertyValue': 'saveOnEnter'
     'click @ui.toggleEditMode': 'toggleEditMode'
 
-  ###
-  collectionEvents:
-    sync: 'render'
-  ###
-
   modelEvents:
     sync: 'onSync'
 
