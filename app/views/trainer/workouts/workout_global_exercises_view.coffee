@@ -17,6 +17,7 @@ class ExercisesItemView extends Marionette.ItemView
   ui:
     orderTag: '.gc-workout-exercise-circle'
     deleteBtn: '.gc-delete-exercise'
+    note: '.gc-workout-exercise-note'
 
   initialize: ->
     @workoutExerciseModel = new WorkoutExerciseModel
@@ -28,6 +29,7 @@ class ExercisesItemView extends Marionette.ItemView
     'keydown @ui.orderTag': 'saveOnEnter'
     'keyup @ui.orderTag': 'saveOnEnter'
     'click @ui.deleteBtn': 'deleteExercise'
+    'blur @ui.note': 'onSaveNote'
 
   addEditable: (event) ->
     el = event.currentTarget
@@ -73,6 +75,16 @@ class ExercisesItemView extends Marionette.ItemView
     App.request 'messenger:show',
       message: "Exercise Updated."
     App.vent.trigger 'workout:reload:exercises'
+
+  onSaveNote: ->
+    data =
+      id: @model.get 'workout_id'
+      workout_exercise_id: @model.get 'id'
+      notes: @ui.note.val()
+
+    @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises/#{data.workout_exercise_id}"
+    @workoutExerciseModel.set data
+    @workoutExerciseModel.save()
 
 module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeView
 

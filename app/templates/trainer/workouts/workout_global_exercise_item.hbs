@@ -1,9 +1,22 @@
-<span class="pull-left gc-workout-exercise-sort" data-id="{{exercise_id}}" data-position="{{position}}" data-workout-id="{{id}}" maxlength="3"></span>
-<div class="gc-workout-exercise-circle" data-letter="{{letterByNumber label}}">
-  {{validateOrderName label}}
+<div class="gc-exercises-cell">
+  <span class="gc-workout-exercise-sort" data-id="{{exercise_id}}" data-position="{{position}}" data-workout-id="{{id}}" maxlength="3"></span>
 </div>
-<a href="#tr/global/exercises/id/{{id}}"class="gc-workout-exercise-name">{{name}}</a>
+<div class="gc-exercises-cell">
+  <div class="gc-workout-exercise-circle" data-letter="{{letterByNumber label}}">
+    {{validateOrderName label}}
+  </div>
+</div>
+<div class="gc-exercises-cell gc-exercise-details">
+  <div class="gc-exercise-item-detail">
+    <a href="#tr/global/exercises/id/{{exercise_id}}"class="gc-workout-exercise-name">{{name}}</a>
+    <input type="text" class="gc-workout-exercise-note" placeholder="Add Note" value="{{notes}}" />
+  </div>
+</div>
+<div class="gc-exercises-cell gc-cell-property">
 {{#each properties}}
-<div class="gc-workout-exercise-prop"><i class="fa fa-align-left"></i>{{value}} {{name}}</div>
+  <div class="gc-workout-exercise-prop"><i class="fa fa-align-left"></i>{{value}} {{name}}</div>
 {{/each}}
-<a href="#"class="pull-right gc-delete-exercise"><i class="fa fa-trash-o"></i></a>
+</div>
+<div class="gc-exercises-cell">
+  <a href="#"class="gc-delete-exercise"><i class="fa fa-trash-o"></i></a>
+</div>
