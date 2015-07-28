@@ -19,6 +19,11 @@
   padding-right: 9px;
 }
 
+span.gc-property-value {
+  min-width: 16px;
+  display: inline-block;
+}
+
 .gc-workout-exercise-property-list li .gc-property {
   margin: 0!important;
 }
