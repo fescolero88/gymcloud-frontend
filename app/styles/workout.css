@@ -74,6 +74,7 @@ textarea.gc-workout-description-editor, textarea.gc-workout-note-editor {
   resize: vertical;
   height: 2.5em;
   max-height: 15em;
+  resize: none;
 }
 textarea.gc-workout-description-editor:hover {
   border-color: #3598dc;
@@ -196,19 +197,28 @@ textarea.gc-workout-description-editor:focus, .gc-workout-note-editor.focus-stat
 
 ul.gc-workout-exercises-list {
   padding: 2px 22px;
-  /*overflow: hidden;*/
+  list-style-type: none;
+}
+ul.gc-workout-exercises-list:after {
+  content: '';
+  clear: both;
+  display: block;
 }
 
 ul.gc-workout-exercises-list li.gc-workout-exercise-item {
   float: left;
-  display: block;
+  display: table;
   width: 100%;
   padding: 16px 0;
   min-height: 60px;
 }
+ul.gc-workout-exercises-list li.gc-workout-exercise-item ul.workout-exercise-properties:after {
+  display: block;
+  clear: both;
+  content: '';
+}
 
 ul.gc-workout-exercises-list li.gc-workout-exercise-item ul.workout-exercise-properties li.gc-property-item {
-  margin-right: 20px;
   float:right;
 }
 
@@ -217,7 +227,31 @@ ul.gc-workout-exercises-list li li.gc-property-item {
 }
 
 ul.gc-workout-exercises-list li.gc-workout-exercise-item label.gc-alt-checkbox {
-  height: 0!important;
+  width: 0;
+  position: relative;
+  padding-left: 29px;
+  cursor: pointer;
+}
+ul.gc-workout-exercises-list li .gc-exercises-cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+ul.gc-workout-exercises-list li > .gc-exercises-cell:first-child {
+  width: 10px;
+}
+ul.gc-workout-exercises-list li > .gc-exercises-cell.gc-cell-trash {
+  width: 30px;
+  text-align: right;
+}
+ul.gc-workout-exercises-list li > .gc-exercises-cell.gc-cell-add {
+  width: 40px;
+  text-align: right;
+}
+ul.gc-workout-exercises-list li > .gc-exercises-cell:nth-child(2) {
+  width: 20px;
+}
+ul.gc-workout-exercises-list li .gc-cell-property {
+  text-align: right;
 }
 
 ul.gc-workout-exercises-list li .gc-property {
@@ -238,11 +272,11 @@ ul.gc-workout-exercises-list .dragged {
   -o-box-shadow: 0 0 10px rgba(0,0,0,0.6);
 }
 .gc-workout-exercise-circle {
-  float: left;
   background-color: #f47b22;
   border-radius: 24px;
   min-width: 24px;
   max-width: 60px;
+  display: inline-block;
   height: 24px;
   color: #fff;
   font: 400 10px / 21px 'Source Sans Pro';
@@ -258,10 +292,10 @@ ul.gc-workout-exercises-list .dragged {
   display: block;
   width: 3px;
   position: absolute;
-  bottom: -16px;
-  height: 16px;
+  bottom: -100%;
   background: inherit;
   left: 10px;
+  top: 100%;
 }
 .gc-workout-exercise-circle.last::before,
 .gc-workout-exercise-circle.middle::before {
@@ -269,18 +303,29 @@ ul.gc-workout-exercises-list .dragged {
   display: block;
   width: 3px;
   position: absolute;
-  top: -16px;
-  height: 16px;
+  top: -100%;
+  bottom: 100%;
   background: inherit;
   left: 10px;
 }
 .gc-workout-exercise-name {
-  float: left;
   text-transform: uppercase;
   color: #3a99d8;
   font: 400 14px / 21px 'Source Sans Pro';
   margin-left: 15px;
-  line-height: 24px;
+  line-height: 12px;
+}
+.gc-workout-exercise-note {
+  margin-left: 15px;
+  margin-bottom: 0px;
+  line-height: 15px;
+  height: 15px;
+  cursor: pointer;
+  font-size: 12px;
+  border: none;
+  outline: none;
+  display: block;
+  width: 100%;
 }
 .gc-workout-exercise-name:hover,
 .gc-workout-exercise-name:active,
@@ -288,12 +333,11 @@ ul.gc-workout-exercises-list .dragged {
   text-decoration: none;
 }
 .gc-workout-exercise-prop {
-  height: 21px;
-  /*width: 101px;*/
   color: #99a6ac;
   font: 400 14px / 21px 'Source Sans Pro';
   text-align: right;
-  float: right;
+  display: inline-block;
+  padding: 0 5px;
 }
 
 .gc-workout-exercise-prop i.fa {
@@ -321,11 +365,11 @@ ul.gc-workout-exercises-list .dragged {
   background-size: contain;
   background-repeat: no-repeat;
   margin-right: 12px;
-  margin-top: 5px;
   width: 6px;
   height: 13px;
   cursor: move;
   opacity: 0.6;
+  display: block;
 }
 .gc-workout-exercise-sort:hover {
   opacity: 1;
@@ -351,6 +395,12 @@ ul.gc-workout-exercises-list .dragged {
 .gc-workout-exercises-list li.hover-enabled:hover .gc-delete-exercise,
 .gc-workout-exercises-list li.hover-enabled:hover .gc-add-single-property-button {
   visibility: visible;
+}
+.gc-workout-exercises-list li .gc-hover-hidden {
+  display: none!important;
+}
+.gc-workout-exercises-list li.hover-enabled .gc-hover-hidden {
+  display: table-cell!important;
 }
 
 .gc-btn-group {

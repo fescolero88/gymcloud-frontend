@@ -1,19 +1,29 @@
-<span class="pull-left gc-workout-exercise-sort" data-id="{{exercise_id}}" data-position="{{position}}" data-workout-id="{{id}}" maxlength="3"></span>
-<div class="gc-workout-exercise-circle" data-letter="{{letterByNumber label}}">
-  {{validateOrderName label}}
+<div class="gc-exercises-cell">
+  <span class="gc-workout-exercise-sort" data-id="{{exercise_id}}" data-position="{{position}}" data-workout-id="{{id}}" maxlength="3"></span>
 </div>
-<a href="#tr/global/exercises/id/{{id}}"class="gc-workout-exercise-name">{{name}}</a>
-<!--{{#each properties}}
-<div class="gc-workout-exercise-prop"><i class="fa fa-align-left"></i>{{value}} {{name}}</div>
-{{/each}}-->
-
-<!-- ALT CHECKBOX -->
-<label class="gc-checkbox gc-set-property-checkbox-wrapper pull-right gc-alt-checkbox hidden">
-  <input type="checkbox" class="gc-set-property-checkbox">
-  <span class="gc-checkbox-clone"></span>
-</label>
-<!-- / ALT CHECKBOX -->
-
-<a href="#"class="pull-right gc-delete-exercise"><i class="fa fa-trash-o"></i></a>
-<a class="gc-btn-round gc-btn-plus gc-add-single-property-button pull-right"></a>
-<ul class="workout-exercise-properties"></ul>
+<div class="gc-exercises-cell">
+  <div class="gc-workout-exercise-circle" data-letter="{{letterByNumber label}}">
+    {{validateOrderName label}}
+  </div>
+</div>
+<div class="gc-exercises-cell gc-exercise-details">
+  <div class="gc-exercise-item-detail">
+    <a href="#tr/global/exercises/id/{{exercise_id}}"class="gc-workout-exercise-name">{{name}}</a>
+    <input type="text" class="gc-workout-exercise-note" placeholder="Add Note" value="{{notes}}" />
+  </div>
+</div>
+<div class="gc-exercises-cell gc-cell-property">
+  <ul class="workout-exercise-properties"></ul>
+</div>
+<div class="gc-exercises-cell gc-cell-trash gc-hover-hidden">
+  <a href="#"class="gc-delete-exercise"><i class="fa fa-trash-o"></i></a>
+</div>
+<div class="gc-exercises-cell gc-cell-add gc-hover-hidden">
+  <a class="gc-btn-round gc-btn-plus gc-add-single-property-button"></a>
+</div>
+<div class="gc-exercises-cell hidden gc-set-property-checkbox-wrapper gc-cell-add">
+  <label class="gc-checkbox gc-alt-checkbox">
+    <input type="checkbox" class="gc-set-property-checkbox">
+    <span class="gc-checkbox-clone"></span>
+  </label>
+</div>
