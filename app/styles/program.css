@@ -1,0 +1,69 @@
+.gc-remove-margin.row {
+  margin: 0;
+}
+.gc-program-description-container {
+  padding: 15px 0;
+}
+.gc-program-empty-placeholder {
+  min-height: 400px;
+  width: 100%;
+  padding: 5px;
+}
+.gc-program-options {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.gc-program-empty-icon {
+  height: 38px;
+  width: 40px;
+  color: #3697dc;
+  margin: 110px auto 15px auto;
+  background-image: url(../images/workouts-single.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  opacity: 0.8;
+}
+.gc-program-empty-placeholder p {
+  color: #c1c1c1;
+  font-size: 14px;
+  line-height: 16px;
+  margin-bottom: 17px;
+}
+.gc-program-empty-placeholder .btn {
+  border-radius: 50px;
+  font-size: 12px;
+  color: #3398db;
+  text-transform: uppercase;
+  background: transparent;
+  border-color: #3398db;
+  border-radius: 50px;
+  text-align: center;
+  line-height: 16px;
+  margin-top: -5px;
+}
+.gc-program-empty-placeholder .btn:hover,
+.gc-program-empty-placeholder .btn:active,
+.gc-program-empty-placeholder .btn:focus {
+  text-decoration: none;
+  outline: none;
+}
+.gc-program-delete-button {
+  border-radius: 50px;
+  font-size: 12px;
+  color: #ee6d5d;
+  text-transform: uppercase;
+  background: #fff;
+  border-color: #ee6d5d;
+  border-radius: 50px;
+  text-align: center;
+  line-height: 16px;
+}
+.gc-program-delete-button:hover,
+.gc-program-delete-button:active,
+.gc-program-delete-button:focus {
+  text-decoration: none;
+  outline: none;
+  border-color: #ee6d5d;
+  background-color: #ee6d5d;
+}

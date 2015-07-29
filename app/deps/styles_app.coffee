@@ -19,6 +19,7 @@ define [
   'styles/topnav.css'
   'styles/trainer.css'
   'styles/usercards.css'
+  'styles/program.css'
   'styles/workout.css'
   'styles/fix_images'
   'styles/prototype/ui.styl'

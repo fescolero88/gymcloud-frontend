@@ -1,0 +1,34 @@
+{{#withProfile}}
+<div class="gc-main-workspace row">
+  <div class="col-xs-12 gc-content-both">
+    <div class="gc-clients-nav-wrapper row">
+      <div class="col-xs-7 gc-clients-nav-left">
+          <a class="gc-content-nav-back">
+            <span class="fa fa-chevron-left"></span>
+          </a>
+          <div class="gc-workout-title">
+            <h2>{{../program.name}}</h2>
+          </div>
+        </div>
+        <div class="col-xs-5 gc-exercises-nav-right text-right">
+          {{#ifEqual id ../author}}
+            <ul class="gc-content-nav" >
+              <li class="active" data-view="program">
+                <a href="#">Program</a>
+              </li>
+              <li class="" data-view="assign">
+                <a href="#">Assign</a>
+              </li>
+            </ul>
+          {{else}}
+            <button class="btn brn-primary gc-add-to-library-button">Add to library</button>
+          {{/ifEqual}}
+        </div>
+      </div>
+    </div>
+
+     <div id="program-manage"></div>
+
+  </div>
+</div>
+{{/withProfile}}
