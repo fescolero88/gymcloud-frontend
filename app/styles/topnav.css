@@ -39,7 +39,7 @@
 .gc-topbar-search input[type=text].active {
     box-shadow: none;
     background: #23292b;
-    color: #fff;
+    color: #fff!important;
 }
 .gc-topbar-search .input-group-btn .btn {
     border: none;
