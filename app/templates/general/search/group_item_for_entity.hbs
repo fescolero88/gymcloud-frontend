@@ -25,9 +25,9 @@
     {{/ifNot}}
   {{/withProfile}}
 </div>
-<div class="gc-search-entity-field col-xs-2 {{#if is_in_my_library}} gc-not-in-library {{/if}} ">
+<div class="gc-search-entity-field col-xs-2 {{#unless is_in_my_library}} gc-not-in-library {{/unless}} ">
   <span class="gc-entity-download-count">93</span>
-  <button class="btn gc-btn gc-add-to-library-button hidden">Add to library</button>
+  <button class="btn gc-btn gc-add-to-library-button hidden" type="button">Add to library</button>
 </div>
 <!--<div class="gc-search-entity-field col-xs-2 text-right">
   TODO: Display Rating

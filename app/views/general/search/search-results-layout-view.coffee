@@ -28,7 +28,8 @@ module.exports = class SearchResultsLayoutView extends Marionette.LayoutView
       { name: 'Exercises', isSelected: entityType == 'exercises', href: "#search/#{q}/exercises" }
       { name: 'Workouts', isSelected: entityType == 'workouts', href: "#search/#{q}/workouts" }
       { name: 'Programs', isSelected: entityType == 'programs', href: "#search/#{q}/programs" }
-      { name: 'Clients & Groups', isSelected: entityType == 'clients_n_groups', href: "#search/#{q}/clients_n_groups" }
+      { name: 'Clients', isSelected: entityType == 'clients', href: "#search/#{q}/clients" },
+      { name: 'Client Groups', isSelected: entityType == 'client_groups', href: "#search/#{q}/client_groups" }
     ]
 
   regions:
