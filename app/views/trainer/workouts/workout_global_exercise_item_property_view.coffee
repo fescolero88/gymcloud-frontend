@@ -1,7 +1,7 @@
 Marionette = require 'backbone.marionette'
 PropertyCollection = require 'models/trainer/property-collection'
+_ = require 'underscore'
 
-# EXERCISE PROPERTIES VIEW
 module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.ItemView
 
   template: require 'templates/trainer/workouts/workout_global_exercise_property'
@@ -26,9 +26,10 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
     viewPropertyControl: '.gc-property-view'
     toggleEditMode: '.gc-toggle-edit-mode'
 
-  events:
+  events: ->
     'click @ui.removePropertyButton': 'removeProperty'
     'click @ui.propertyItem': 'selectProperty'
+    'focusout @ui.editPropertyControl':  _.debounce(@saveOnBlur, 200)
     #'blur @ui.selectedPropertyValue': 'saveProperty'
     'keypress @ui.selectedPropertyValue': 'saveOnEnter'
     'click @ui.toggleEditMode': 'toggleEditMode'
@@ -39,6 +40,7 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
   initialize: (options) ->
     @properties = []
     @selectedPropertyId = ''
+    @sameControl = false
     @model.set 'property_value', @model.get('value')
     @model.set 'property_name', @model.get('name')
     @state = @model.get('state') || 'view'
@@ -82,6 +84,12 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
     @model.set 'property_value', e.target.innerHTML
     @model.save()
     @model.set 'state', 'view'
+
+  saveOnBlur: (ev) ->
+    if $(':focus').parent(@ui.editPropertyControl).length is 0
+      @model.set 'property_value', @ui.selectedPropertyValue.text()
+      @model.save().then =>
+        @model.set 'state', 'view'
 
   onSync: =>
     @ui.propertyValueNameLabel.html "#{@model.get 'property_value'} #{@model.get 'property_name'}"
