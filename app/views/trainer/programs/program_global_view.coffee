@@ -7,9 +7,6 @@ module.exports = class ProgramGlobalView extends Marionette.LayoutView
 
   template: require('templates/trainer/programs/program_global')
 
-  templateHelpers: ->
-    program: @model.attributes
-
   regions:
     manageRegion: '#program-manage'
 

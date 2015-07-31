@@ -13,9 +13,6 @@ module.exports = class ProgramGlobalOverviewView extends Marionette.LayoutView
   modelEvents:
     update: 'modelSaved'
 
-  templateHelpers: ->
-    program: @model.attributes
-
   events:
     'change @ui.privacyRadios': 'togglePrivacy'
     'click @ui.deleteProgram': 'deleteProgram'
