@@ -51,6 +51,7 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
     'click @ui.deleteBtn': 'deleteExercise'
     'click @ui.addSingleProperty': 'addProperty'
     'blur @ui.note': 'onSaveNote'
+    'change @ui.setPropertyCheckbox': 'updateConstructorListener'
 
   addEditable: (event) ->
     el = event.currentTarget
@@ -90,8 +91,15 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
 
   disableCheckbox: =>
     @ui.setPropertyCheckboxWrapper.addClass 'hidden'
+    @ui.setPropertyCheckbox.attr 'checked', false
     #enable hover
     @$el.addClass 'hover-enabled'
+
+  updateConstructorListener: (ev) ->
+    if $(ev.target).is(':checked')
+      App.commands.execute 'property_constructor:update_listeners_count', 1
+    else
+      App.commands.execute 'property_constructor:update_listeners_count', -1
 
   deleteExercise: (event) ->
     event.preventDefault()
@@ -125,8 +133,9 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
         promises.push promise
         return model
 
-    $.when.apply($, promises).done () =>
-      @collection.add(models)
+      $.when.apply($, promises).done () =>
+        @collection.add models
+        App.commands.execute 'property_constructor:synced:add'
 
   onSaveNote: ->
     data =
