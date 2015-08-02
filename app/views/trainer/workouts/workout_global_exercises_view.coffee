@@ -42,9 +42,13 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
     @listenTo @workoutExerciseModel, 'sync', @onSavedOrder
     @listenTo @workout, 'sync', @resetExercises
 
+    # sends the collection count
+    App.reqres.setHandler 'workout_exercises:has_exercise?', @hasExercise
+
   onDestroy: ->
     @off 'render:collection', @showConnectionLines
     App.vent.off 'workout:reload:exercises', @getWorkoutData
+    App.reqres.removeHandler 'workout_exercises:collection:count', @getExercicesCount
 
   onRender: ->
     workoutExercisePropertyConstructor = new WorkoutExercisePropertyConstructor
@@ -197,3 +201,6 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
   removeSearchValues: ->
     selectiveIput = @$el.find '.selectize-input'
     selectiveIput.find('div').remove()
+
+  hasExercise: =>
+    @collection.length > 0

@@ -75,10 +75,12 @@ module.exports = class WorkoutExercisePropertyConstructor extends Marionette.Com
     'click @ui.assignPropertyButton': 'assignProperties'
 
   addProperty: ->
-    @collection.add new WorkoutExercisePropertyModel()
-    @ui.assignPropertyButton.removeClass('hidden')
-    # notify exercises that a property is being created
-    App.vent.trigger 'exercise_property:select:enable'
+
+    if App.request 'workout_exercises:has_exercise?'
+      @collection.add new WorkoutExercisePropertyModel()
+      @ui.assignPropertyButton.removeClass('hidden')
+      # notify exercises that a property is being created
+      App.vent.trigger 'exercise_property:select:enable'
 
   onModelRemoved: ->
     if @collection.length is 0
