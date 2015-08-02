@@ -39,8 +39,6 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
 
   initialize: (options) ->
     @properties = []
-    @selectedPropertyId = ''
-    @sameControl = false
     @model.set 'property_value', @model.get('value')
     @model.set 'property_name', @model.get('name')
     @state = @model.get('state') || 'view'
@@ -52,7 +50,6 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
     #set default property id
     if @model.isNew()
       @model.set 'property_id', @properties[0]?.id
-      #@model.set 'property_value', @properties[0]?.defaultvalue
       @ui.selectedPropertyValue.focus()
       @model.set 'property_name', @properties[0]?.name
 
@@ -88,12 +85,6 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
   saveOnBlur: (ev) ->
     if $(':focus').parent(@ui.editPropertyControl).length is 0
       @saveProperty()
-
-      ###
-      @model.set 'property_value', @ui.selectedPropertyValue.text()
-      @model.save().then =>
-        @model.set 'state', 'view'
-      ###
 
   onSync: =>
     @ui.propertyValueNameLabel.html "#{@model.get 'property_value'} #{@model.get 'property_name'}"
