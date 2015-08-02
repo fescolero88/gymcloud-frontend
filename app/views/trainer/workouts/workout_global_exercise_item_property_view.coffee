@@ -78,18 +78,22 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
   saveOnEnter: (e) ->
     if e.which is 13
       e.preventDefault()
-      @saveProperty(e)
+      @saveProperty()
 
-  saveProperty: (e) ->
-    @model.set 'property_value', e.target.innerHTML
-    @model.save()
-    @model.set 'state', 'view'
+  saveProperty: ->
+    @model.set 'property_value',@ui.selectedPropertyValue.text()
+    @model.save().then =>
+      @model.set 'state', 'view'
 
   saveOnBlur: (ev) ->
     if $(':focus').parent(@ui.editPropertyControl).length is 0
+      @saveProperty()
+
+      ###
       @model.set 'property_value', @ui.selectedPropertyValue.text()
       @model.save().then =>
         @model.set 'state', 'view'
+      ###
 
   onSync: =>
     @ui.propertyValueNameLabel.html "#{@model.get 'property_value'} #{@model.get 'property_name'}"

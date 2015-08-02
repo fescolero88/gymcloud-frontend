@@ -4,7 +4,3 @@ WorkoutExercisePropertyModel = require 'models/trainer/workout-exercise-property
 module.exports = class WorkoutExercisePropertyCollection extends Backbone.Collection
 
   model: WorkoutExercisePropertyModel
-
-  comparator: (model) ->
-    model.get('property_name')
-  

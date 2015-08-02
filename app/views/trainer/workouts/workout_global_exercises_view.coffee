@@ -43,6 +43,7 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
     @listenTo @workout, 'sync', @resetExercises
 
   onDestroy: ->
+    @off 'render:collection', @showConnectionLines
     App.vent.off 'workout:reload:exercises', @getWorkoutData
 
   onRender: ->

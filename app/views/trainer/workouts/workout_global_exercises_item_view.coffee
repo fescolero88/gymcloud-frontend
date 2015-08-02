@@ -113,16 +113,20 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
     @collection.add workoutExerciseProperty
 
   processProperties: (models) =>
+    promises = []
     if @ui.setPropertyCheckbox.is(':checked')
-
-      models.forEach (property) =>
+      models = models.map (property) =>
         model = new WorkoutExercisesPropertyModel()
         model.set 'property_value', property.get 'property_value' || 0
         model.set 'property_id', property.get 'property_id' || 0
         model.set 'workout_id', @model.get('workout_id')
         model.set 'workout_exercise_id', @model.get('id')
-        model.save(). then =>
-          @collection.add model
+        promise = model.save()
+        promises.push promise
+        return model
+
+    $.when.apply($, promises).done () =>
+      @collection.add(models)
 
   onSaveNote: ->
     data =
