@@ -27,10 +27,10 @@
   padding: 6px;
   text-align: center;
 }
-.gc-workout-actions-list {
+.gc-workout-actions-list, .gc-program-actions-list {
   padding: 5px 15px;
 }
-.gc-workout-actions-list a:hover {
+.gc-workout-actions-list a:hover, .gc-program-actions-list a:hover {
   cursor: pointer;
 }
 .dropdown-menu > li > a.text-danger {
@@ -65,7 +65,10 @@
   color: #3a99d8;
   text-decoration: none;
 }
-textarea.gc-workout-description-editor, textarea.gc-workout-note-editor {
+textarea.gc-workout-description-editor,
+textarea.gc-workout-note-editor,
+textarea.gc-program-description-editor,
+textarea.gc-program-note-editor {
   overflow: hidden;
   border: 1px dashed transparent;
   box-shadow: none;
@@ -76,21 +79,28 @@ textarea.gc-workout-description-editor, textarea.gc-workout-note-editor {
   max-height: 15em;
   resize: none;
 }
+
+textarea.gc-program-description-editor:hover, 
 textarea.gc-workout-description-editor:hover {
   border-color: #3598dc;
   cursor: pointer;
 }
-textarea.gc-workout-description-editor:focus, .gc-workout-note-editor.focus-state {
+
+textarea.gc-workout-description-editor:focus, 
+.gc-workout-note-editor.focus-state,
+textarea.gc-program-description-editor:focus, 
+.gc-program-note-editor.focus-state {
+
   box-shadow: none;
   outline: none;
   border-color: #3598dc;
   -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
 }
-.gc-workout-description-editor::-webkit-input-placeholder {color: #999;}
-.gc-workout-description-editor:-moz-placeholder {color: #999; opacity: 1;}
-.gc-workout-description-editor::-moz-placeholder {color: #999; opacity: 1;}
-.gc-workout-description-editor:-ms-input-placeholder {color: #999;}
+.gc-program-description-editor::-webkit-input-placeholder, .gc-workout-description-editor::-webkit-input-placeholder {color: #999;}
+.gc-program-description-editor:-moz-placeholder, .gc-workout-description-editor:-moz-placeholder {color: #999; opacity: 1;}
+.gc-program-description-editor::-moz-placeholder, .gc-workout-description-editor::-moz-placeholder {color: #999; opacity: 1;}
+.gc-workout-description-editor:-ms-input-placeholder, .gc-workout-description-editor:-ms-input-placeholder {color: #999;}
 .gc-workouts-exercises-view {
   border: 1px solid #ededed;
   border-radius: 10px;

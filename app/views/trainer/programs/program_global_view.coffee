@@ -15,6 +15,8 @@ module.exports = class ProgramGlobalView extends Marionette.LayoutView
     innerNav: '.gc-inner-nav'
     contentNavItems: '.gc-content-nav li'
     contentNavLinks: '.gc-content-nav li a'
+    programName: '.gc-program-name'
+    addNoteButton: '.gc-program-add-note'
 
   onShow: ->
     @changeView 'program'
@@ -22,6 +24,9 @@ module.exports = class ProgramGlobalView extends Marionette.LayoutView
   events:
     'click @ui.navBack': 'navigateBack'
     'click @ui.contentNavLinks': 'changeActiveTab'
+    'blur @ui.programName': 'updateTitleOnBlur'
+    'keypress @ui.programName': 'updateName'
+    'click @ui.addNoteButton': 'triggerAddNote'
 
   navigateBack: =>
     window.history.back()
@@ -42,3 +47,14 @@ module.exports = class ProgramGlobalView extends Marionette.LayoutView
       when 'program'
         @overviewView = new ProgramGlobalOverviewView model: @model
         @manageRegion.show @overviewView
+
+  updateTitleOnBlur: (e) ->
+    App.commands.execute 'program:title:update', @ui.programName.text()
+      
+  updateName: (e) ->
+    if e.which is 13
+      e.preventDefault()
+      @ui.programName.blur()
+
+  triggerAddNote: ->
+    App.commands.execute 'program:note_editor:toggle'

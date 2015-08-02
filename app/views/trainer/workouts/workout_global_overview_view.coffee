@@ -110,12 +110,14 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
     @ui.workoutNoteEditor.focus()
 
   workoutNoteSave: ->
-    @model.set 'notes', @ui.workoutNoteEditor.val()
-    @model.save().success =>
-      @ui.workoutNoteEditor.removeClass 'focus-state'
-      if @model.get('notes') is '' #hide notes ui
-        @ui.workoutNotesContainer.addClass 'hidden'
+    note = @ui.workoutNoteEditor.val()
+    if @model.get('notes') != note
+      @model.set 'notes', note
+      @model.save().success =>
+        @ui.workoutNoteEditor.removeClass 'focus-state'
+        if @model.get('notes') is '' #hide notes ui
+          @ui.workoutNotesContainer.addClass 'hidden'
 
-      App.request 'messenger:snow',
-        message: "Workout's note saved."
+        App.request 'messenger:snow',
+          message: "Workout's note saved."
 
