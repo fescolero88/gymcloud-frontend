@@ -21,6 +21,9 @@ GlobalExerciseModel = require 'models/trainer/global-exercise-model'
 WorkoutGlobalView = require 'views/trainer/workouts/workout_global_view'
 GlobalWorkoutModel = require 'models/trainer/global_workout_model'
 
+ProgramGlobalView = require 'views/trainer/programs/program_global_view'
+GlobalProgramModel = require 'models/trainer/global_program_model'
+
 PropertiesView = require 'views/trainer/properties/properties-view'
 PropertyListView = require 'views/trainer/properties/property-list-view'
 PropertyModalView = require 'views/trainer/properties/property-modal-view'
@@ -166,6 +169,12 @@ module.exports = class TrainerController extends Marionette.Controller
             model.fetch().then =>
               workoutGlobalView = new WorkoutGlobalView(workout: model, breadcrumbs: breadcrumbs)
               @mainView.content.show workoutGlobalView
+          when 'programs'
+            model = new GlobalProgramModel
+            model.url = model.urlRoot + key
+            model.fetch().then =>
+              programGlobalView = new ProgramGlobalView(model: model, breadcrumbs: breadcrumbs)
+              @mainView.content.show programGlobalView
     else
       @queueMethod = 'globalView'
       @queueArgs = arguments
