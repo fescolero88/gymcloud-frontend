@@ -195,7 +195,7 @@
   position: relative;
 }
 .gc-new-item-name-input {
-  height: 52px;
+  height: 52px!important;
   border: none;
   border-bottom: 1px solid #cbd5d7;
   box-shadow: none;
