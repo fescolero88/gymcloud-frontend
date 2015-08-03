@@ -4,7 +4,7 @@
       <div class="form-group">
 
         {{#ifEqual id ../workout.author.id}}
-          <textarea class="gc-workout-description-editor form-control" type="text" placeholder="Start typing a description here...">{{../../description}}</textarea>
+          <textarea class="gc-workout-description-editor gc-description-editor form-control" type="text" placeholder="Start typing a description here...">{{../../description}}</textarea>
         {{else}}
           <div class="gc-workout-description" type="text" placeholder="Start typing a description here...">{{../../description}}</div>
         {{/ifEqual}}
@@ -15,7 +15,7 @@
       <div class="form-group gc-workout-note-container {{#unless ../hasNote}}hidden{{/unless}}">
         <label class="gc-workout-notes-label">Workout Notes</label>
         {{#ifEqual id ../workout.author.id}}
-          <textarea class="gc-workout-note-editor form-control" type="text" placeholder="Start typing a description here...">{{../../notes}}</textarea>
+          <textarea class="gc-workout-note-editor gc-note-editor form-control" type="text" placeholder="Start typing a description here...">{{../../notes}}</textarea>
         {{else}}
           <div class="gc-workout-description" type="text" placeholder="Start typing a description here...">{{../../notes}}</div>
         {{/ifEqual}}
