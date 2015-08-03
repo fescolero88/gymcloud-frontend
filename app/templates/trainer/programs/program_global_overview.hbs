@@ -3,11 +3,21 @@
   <div class="col-xs-12">
     <div class="form-group gc-program-description-container">
         {{#ifEqual id ../author.id}}
-          <textarea class="gc-workout-description-editor form-control" type="text" placeholder="Start typing a description here...">{{../../description}}</textarea>
+          <textarea class="gc-program-description-editor gc-description-editor form-control" type="text" placeholder="Start typing a description here...">{{../../description}}</textarea>
         {{else}}
-          <div class="gc-workout-description" type="text" placeholder="Start typing a description here...">{{../../description}}</div>
+          <div class="gc-program-description" type="text" placeholder="Start typing a description here...">{{../../description}}</div>
         {{/ifEqual}}
     </div>
+    <!-- Note Fields -->
+    <div class="form-group gc-program-note-container {{#unless ../hasNote}}hidden{{/unless}}">
+      <label class="gc-notes-label">Program Notes</label>
+      {{#ifEqual id ../author.id}}
+        <textarea class="gc-program-note-editor gc-note-editor  form-control" type="text" placeholder="Start typing your description here...">{{../../notes}}</textarea>
+      {{else}}
+        <div class="gc-program-description" type="text" placeholder="Start typing your note here...">{{../../notes}}</div>
+      {{/ifEqual}}
+    </div>
+    <!-- / Note Fields  -->
   </div>
 </div>
 

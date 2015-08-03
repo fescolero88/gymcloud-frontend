@@ -9,13 +9,18 @@ module.exports = class ProgramGlobalOverviewView extends Marionette.LayoutView
     privacyButtons: '.privacy-buttons > .btn'
     privacyRadios: '[name="privacy"]'
     deleteProgram: '.gc-program-delete-button'
+    programDescriptionEditor: '.gc-program-description-editor'
+    programNotesContainer: '.gc-program-note-container'
+    programNoteEditor: '.gc-program-note-editor'
 
   modelEvents:
-    update: 'modelSaved'
+    sync: 'modelSaved'
 
   events:
     'change @ui.privacyRadios': 'togglePrivacy'
     'click @ui.deleteProgram': 'deleteProgram'
+    'blur @ui.programDescriptionEditor': 'updateDescription'
+    'blur @ui.programNoteEditor': 'saveProgramNote'
 
   togglePrivacy: (ev) ->
     @ui.privacyButtons.removeClass 'active'
@@ -23,6 +28,17 @@ module.exports = class ProgramGlobalOverviewView extends Marionette.LayoutView
     isPublic = ev.currentTarget.value == 'true'
     @model.set 'is_public', isPublic
     @model.save()
+
+  templateHelpers: ->
+    hasNote: !!@model.get 'notes'
+
+  initialize: ->
+    App.commands.setHandler 'program:title:update', @updateName
+    App.commands.setHandler 'program:note_editor:toggle', @triggerNoteEditor
+
+  onDestroy: ->
+    App.commands.removeHandler 'program:title:update', @updateName
+    App.commands.removeHandler 'program:note_editor:toggle', @triggerNoteEditor
 
   modelSaved: ->
     App.request 'messenger:show',
@@ -43,3 +59,34 @@ module.exports = class ProgramGlobalOverviewView extends Marionette.LayoutView
           hideAfter: 5
           message: "Program #{name} deleted."
           type: 'success'
+
+  updateName: (name, cb) =>
+    if @model.get('name') != name
+      @model.set 'name', name
+      @model.save()
+
+  updateDescription: ->
+    if @model.get('description') != @ui.programDescriptionEditor.val()
+      @model.set 'description', @ui.programDescriptionEditor.val()
+      @model.save()
+
+  triggerNoteEditor: =>
+    hasNote = !!@model.get('notes')
+    if hasNote
+      @ui.programNoteEditor.addClass 'focus-state'
+    else
+      @ui.programNotesContainer.removeClass 'hidden'
+      @ui.programNoteEditor.removeClass 'focus-state'
+    @ui.programNoteEditor.focus()
+
+  saveProgramNote: ->
+    note = @ui.programNoteEditor.val()
+    if @model.get('notes') != note
+      @model.set 'notes', note
+      @model.save().success =>
+        @ui.programNoteEditor.removeClass 'focus-state'
+        if @model.get('notes') is '' #hide notes ui
+          @ui.programNotesContainer.addClass 'hidden'
+
+        App.request 'messenger:snow',
+          message: "Workout's note saved."
