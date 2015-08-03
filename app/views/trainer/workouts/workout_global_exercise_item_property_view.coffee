@@ -1,7 +1,7 @@
 Marionette = require 'backbone.marionette'
 PropertyCollection = require 'models/trainer/property-collection'
+_ = require 'underscore'
 
-# EXERCISE PROPERTIES VIEW
 module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.ItemView
 
   template: require 'templates/trainer/workouts/workout_global_exercise_property'
@@ -26,9 +26,10 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
     viewPropertyControl: '.gc-property-view'
     toggleEditMode: '.gc-toggle-edit-mode'
 
-  events:
+  events: ->
     'click @ui.removePropertyButton': 'removeProperty'
     'click @ui.propertyItem': 'selectProperty'
+    'focusout @ui.editPropertyControl':  _.debounce(@saveOnBlur, 200)
     #'blur @ui.selectedPropertyValue': 'saveProperty'
     'keypress @ui.selectedPropertyValue': 'saveOnEnter'
     'click @ui.toggleEditMode': 'toggleEditMode'
@@ -38,7 +39,6 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
 
   initialize: (options) ->
     @properties = []
-    @selectedPropertyId = ''
     @model.set 'property_value', @model.get('value')
     @model.set 'property_name', @model.get('name')
     @state = @model.get('state') || 'view'
@@ -50,7 +50,6 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
     #set default property id
     if @model.isNew()
       @model.set 'property_id', @properties[0]?.id
-      #@model.set 'property_value', @properties[0]?.defaultvalue
       @ui.selectedPropertyValue.focus()
       @model.set 'property_name', @properties[0]?.name
 
@@ -76,12 +75,16 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
   saveOnEnter: (e) ->
     if e.which is 13
       e.preventDefault()
-      @saveProperty(e)
+      @saveProperty()
 
-  saveProperty: (e) ->
-    @model.set 'property_value', e.target.innerHTML
-    @model.save()
-    @model.set 'state', 'view'
+  saveProperty: ->
+    @model.set 'property_value',@ui.selectedPropertyValue.text()
+    @model.save().then =>
+      @model.set 'state', 'view'
+
+  saveOnBlur: (ev) ->
+    if $(':focus').parent(@ui.editPropertyControl).length is 0
+      @saveProperty()
 
   onSync: =>
     @ui.propertyValueNameLabel.html "#{@model.get 'property_value'} #{@model.get 'property_name'}"

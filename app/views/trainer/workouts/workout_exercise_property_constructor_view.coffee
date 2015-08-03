@@ -66,6 +66,15 @@ module.exports = class WorkoutExercisePropertyConstructor extends Marionette.Com
   collectionEvents:
     remove: 'onModelRemoved'
 
+  initialize: ->
+    @listenerCount = 0
+    @syncedExercises = 0
+    App.commands.setHandler 'property_constructor:update_listeners_count', @updateListenerCount
+    App.commands.setHandler 'property_constructor:synced:add', @addSyncedCount
+
+  onDestroy: ->
+    App.commands.removeListener 'property_constructor:update_listeners_count', @updateListenerCount
+
   ui:
     addPropertyButton: 'a.gc-add-property-button'
     assignPropertyButton: '.gc-assign-property'
@@ -75,10 +84,12 @@ module.exports = class WorkoutExercisePropertyConstructor extends Marionette.Com
     'click @ui.assignPropertyButton': 'assignProperties'
 
   addProperty: ->
-    @collection.add new WorkoutExercisePropertyModel()
-    @ui.assignPropertyButton.removeClass('hidden')
-    # notify exercises that a property is being created
-    App.vent.trigger 'exercise_property:select:enable'
+
+    if App.request 'workout_exercises:has_exercise?'
+      @collection.add new WorkoutExercisePropertyModel()
+      @ui.assignPropertyButton.removeClass('hidden')
+      # notify exercises that a property is being created
+      App.vent.trigger 'exercise_property:select:enable'
 
   onModelRemoved: ->
     if @collection.length is 0
@@ -87,3 +98,17 @@ module.exports = class WorkoutExercisePropertyConstructor extends Marionette.Com
 
   assignProperties: ->
     App.vent.trigger 'exercise_property:assign', @collection.models
+
+  updateListenerCount: (val) =>
+    @listenerCount += val
+
+  addSyncedCount: =>
+    @syncedExercises += 1
+    if @syncedExercises is @listenerCount
+      @collection.reset null
+      @syncedExercises = 0
+      @listenerCount = 0
+      @ui.assignPropertyButton.addClass('hidden')
+      App.vent.trigger 'exercise_property:select:disable'
+      App.request 'messenger:show',
+        message: 'Properties Saved'
