@@ -67,3 +67,7 @@
   border-color: #ee6d5d;
   background-color: #ee6d5d;
 }
+
+.gc-program-actions {
+  display: inline;
+}

@@ -1,5 +1,6 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
+ProgramGlobalActionsView = require 'views/trainer/programs/program_global_actions_view'
 
 ProgramGlobalOverviewView = require 'views/trainer/programs/program_global_overview_view'
 
@@ -9,6 +10,7 @@ module.exports = class ProgramGlobalView extends Marionette.LayoutView
 
   regions:
     manageRegion: '#program-manage'
+    programActionsRegion: 'region[data-name="program-actions"]'
 
   ui:
     navBack: '.gc-content-nav-back'
@@ -16,9 +18,10 @@ module.exports = class ProgramGlobalView extends Marionette.LayoutView
     contentNavItems: '.gc-content-nav li'
     contentNavLinks: '.gc-content-nav li a'
     programName: '.gc-program-name'
-    addNoteButton: '.gc-program-add-note'
-
+   
   onShow: ->
+    programActionsView = new ProgramGlobalActionsView()
+    @getRegion('programActionsRegion').show programActionsView
     @changeView 'program'
 
   events:
@@ -26,8 +29,7 @@ module.exports = class ProgramGlobalView extends Marionette.LayoutView
     'click @ui.contentNavLinks': 'changeActiveTab'
     'blur @ui.programName': 'updateTitleOnBlur'
     'keypress @ui.programName': 'updateName'
-    'click @ui.addNoteButton': 'triggerAddNote'
-
+    
   navigateBack: =>
     window.history.back()
 
@@ -55,6 +57,3 @@ module.exports = class ProgramGlobalView extends Marionette.LayoutView
     if e.which is 13
       e.preventDefault()
       @ui.programName.blur()
-
-  triggerAddNote: ->
-    App.commands.execute 'program:note_editor:toggle'
