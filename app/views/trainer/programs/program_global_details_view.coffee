@@ -28,7 +28,8 @@ module.exports = class ProgramGlobalDetailsView extends Marionette.LayoutView
   updateName: (name, cb) =>
     if @model.get('name') != name
       @model.set 'name', name
-      @model.save()
+      @model.save().then =>
+        App.vent.trigger 'ewp:model:updated', 'programs', @model.get('id'), @model.get('name')
 
   updateDescription: ->
     if @model.get('description') != @ui.programDescriptionEditor.val()
