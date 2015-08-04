@@ -1,0 +1,21 @@
+{{#withProfile}}
+<div class="row gc-remove-margin">
+  <div class="col-xs-12">
+    <div class="form-group gc-program-description-container">
+        {{#ifEqual id ../author.id}}
+          <textarea class="gc-program-description-editor gc-description-editor form-control" type="text" placeholder="Start typing a description here...">{{../../description}}</textarea>
+        {{else}}
+          <div class="gc-program-description" type="text" placeholder="Start typing a description here...">{{../../description}}</div>
+        {{/ifEqual}}
+    </div>
+    <div class="form-group gc-program-note-container {{#unless ../hasNote}}hidden{{/unless}}">
+      <label class="gc-notes-label">Program Notes</label>
+      {{#ifEqual id ../author.id}}
+        <textarea class="gc-program-note-editor gc-note-editor  form-control" type="text" placeholder="Start typing your description here...">{{../../notes}}</textarea>
+      {{else}}
+        <div class="gc-program-description" type="text" placeholder="Start typing your note here...">{{../../notes}}</div>
+      {{/ifEqual}}
+    </div>
+  </div>
+</div>
+{{/withProfile}}

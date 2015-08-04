@@ -1,25 +1,4 @@
-{{#withProfile}}
-<div class="row gc-remove-margin">
-  <div class="col-xs-12">
-    <div class="form-group gc-program-description-container">
-        {{#ifEqual id ../author.id}}
-          <textarea class="gc-program-description-editor gc-description-editor form-control" type="text" placeholder="Start typing a description here...">{{../../description}}</textarea>
-        {{else}}
-          <div class="gc-program-description" type="text" placeholder="Start typing a description here...">{{../../description}}</div>
-        {{/ifEqual}}
-    </div>
-    <!-- Note Fields -->
-    <div class="form-group gc-program-note-container {{#unless ../hasNote}}hidden{{/unless}}">
-      <label class="gc-notes-label">Program Notes</label>
-      {{#ifEqual id ../author.id}}
-        <textarea class="gc-program-note-editor gc-note-editor  form-control" type="text" placeholder="Start typing your description here...">{{../../notes}}</textarea>
-      {{else}}
-        <div class="gc-program-description" type="text" placeholder="Start typing your note here...">{{../../notes}}</div>
-      {{/ifEqual}}
-    </div>
-    <!-- / Note Fields  -->
-  </div>
-</div>
+<div class="gc-program-detail-region"></div>
 
 <div class="gc-program-empty-placeholder text-center">
   <div class="gc-program-empty-icon">
@@ -33,25 +12,4 @@
   <button class="btn btn-primary">Add new week</button>
 </div>
 
-{{#ifEqual id ../author.id}}
-<div class="row gc-remove-margin">
-  <div class="col-xs-6 gc-program-options">
-  </div>
-  <div class="col-xs-6 text-right gc-program-options">
-
-    <!-- privacy controls -->
-    <div class="btn-group gc-btn-group privacy-buttons" data-toggle="buttons">
-      <label class="btn btn-primary {{#if ../../is_public}}active{{/if}}">
-        <input type="radio" name="privacy" {{#if ../../is_public}}checked{{/if}} value="true" /> Public
-      </label>
-      <label class="btn btn-primary {{#unless ../../is_public}}active{{/unless}}">
-        <input type="radio" name="privacy" value="false" {{#unless ../../is_public}}checked{{/unless}} /> Private
-      </label>
-    </div>
-    <!-- / privacy controls -->
-
-    <button class="btn btn-primary gc-program-delete-button">Delete Program</button>
-  </div>
-</div>
-{{/ifEqual}}
-{{/withProfile}}
+<div class="gc-programs-privacy-region"></div>
