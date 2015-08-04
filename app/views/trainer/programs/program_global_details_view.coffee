@@ -44,3 +44,15 @@ module.exports = class ProgramGlobalDetailsView extends Marionette.LayoutView
       @ui.programNotesContainer.removeClass 'hidden'
       @ui.programNoteEditor.removeClass 'focus-state'
     @ui.programNoteEditor.focus()
+
+  saveProgramNote: ->
+    note = @ui.programNoteEditor.val()
+    if @model.get('notes') != note
+      @model.set 'notes', note
+      @model.save().success =>
+        @ui.programNoteEditor.removeClass 'focus-state'
+        if @model.get('notes') is '' #hide notes ui
+          @ui.programNotesContainer.addClass 'hidden'
+
+        App.request 'messenger:snow',
+          message: "Workout's note saved."
