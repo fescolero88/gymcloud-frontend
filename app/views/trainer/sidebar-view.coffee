@@ -144,3 +144,5 @@ module.exports = class SideBarView extends Marionette.LayoutView
         @ui.workoutsRegion.find(selector).html(newValue)
       when 'exercises'
         @ui.exercisesRegion.find(selector).html(newValue)
+      when 'programs'
+        @ui.programsRegion.find(selector).html(newValue)
