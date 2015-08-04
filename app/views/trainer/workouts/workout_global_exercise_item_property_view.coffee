@@ -80,6 +80,9 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
   saveProperty: ->
     @model.set 'property_value',@ui.selectedPropertyValue.text()
     @model.save().then =>
+      App.request 'messenger:show',
+        type: 'success'
+        message: 'exercise updated'
       @model.set 'state', 'view'
 
   saveOnBlur: (ev) ->
