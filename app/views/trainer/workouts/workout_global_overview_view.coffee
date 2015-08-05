@@ -49,6 +49,7 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
   onShow: ->
     @exercisesListRegion.show @exercisesView
     @workoutDescriptionAutoHeight()
+    @workoutNoteAutoHeight()
 
   onDestroy: ->
     App.vent.off 'workout:notes:add', @showAddNote
@@ -113,11 +114,10 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
     note = @ui.workoutNoteEditor.val()
     if @model.get('notes') != note
       @model.set 'notes', note
-      @model.save().success =>
+      @model.save().then =>
         @ui.workoutNoteEditor.removeClass 'focus-state'
         if @model.get('notes') is '' #hide notes ui
           @ui.workoutNotesContainer.addClass 'hidden'
-
-        App.request 'messenger:snow',
+        App.request 'messenger:show',
           message: "Workout's note saved."
-
+          type: 'success'
