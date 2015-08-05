@@ -134,7 +134,7 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
         return model
 
       $.when.apply($, promises).done () =>
-        @collection.add models
+        @collection.add models, sort: false
         App.commands.execute 'property_constructor:synced:add'
 
   onSaveNote: ->
