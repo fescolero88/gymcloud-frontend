@@ -29,11 +29,11 @@ module.exports = class ProgramGlobalOverviewView extends Marionette.LayoutView
     @getRegion('weeksRegion').show programWeeksView
 
   privacyChanged: ->
-    @privacyChanged = true
+    @isPrivacyChanged = true
 
   modelSaved: ->
-    if @privacyChanged
-      @privacyChanged = false
+    if @isPrivacyChanged
+      @isPrivacyChanged = false
       App.request 'messenger:show',
         message: "Privacy Settings changed."
         type: 'info'
