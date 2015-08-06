@@ -27,3 +27,9 @@ span.gc-property-value {
 .gc-workout-exercise-property-list li .gc-property {
   margin: 0!important;
 }
+
+.gc-constructor-empty-state {
+  color: #ccc;
+  size: 14px;
+  margin-top: 13px;
+}

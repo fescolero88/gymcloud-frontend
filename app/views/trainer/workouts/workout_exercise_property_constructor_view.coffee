@@ -15,15 +15,12 @@ class WorkoutExercisePropertyItem extends Marionette.ItemView
       @render()
 
   onRender: ->
-    # set defaults
     #set default property id
     @properties = @collection.toJSON()
     if @model.isNew()
       @model.set 'property_id', @properties[0]?.id
-      #@model.set 'property_value', @properties[0]?.defaultvalue
       @ui.selectedPropertyValue.focus()
       @model.set 'property_name', @properties[0]?.name
-
 
   templateHelpers: ->
     properties = @collection.toJSON()
@@ -71,20 +68,29 @@ module.exports = class WorkoutExercisePropertyConstructor extends Marionette.Com
     @syncedExercises = 0
     App.commands.setHandler 'property_constructor:update_listeners_count', @updateListenerCount
     App.commands.setHandler 'property_constructor:synced:add', @addSyncedCount
+    App.commands.setHandler 'workout_exercises:property:added', @hideEmptyState
+
+  onRender: ->
+    if not App.request 'workout_exercises:has_exercise_properties?'
+      @ui.emptyState.removeClass 'hidden'
 
   onDestroy: ->
     App.commands.removeListener 'property_constructor:update_listeners_count', @updateListenerCount
+    App.commands.removeListener 'property_constructor:synced:add', @addSyncedCount
+    App.commands.removeListener 'workout_exercises:property:added', @hideEmptyState
 
   ui:
     addPropertyButton: 'a.gc-add-property-button'
     assignPropertyButton: '.gc-assign-property'
+    emptyState: '.gc-constructor-empty-state'
 
   events:
     'click @ui.addPropertyButton': 'addProperty'
     'click @ui.assignPropertyButton': 'assignProperties'
 
   addProperty: ->
-
+    # hide empty state p if shown
+    @hideEmptyState()
     if App.request 'workout_exercises:has_exercise?'
       @collection.add new WorkoutExercisePropertyModel()
       @ui.assignPropertyButton.removeClass('hidden')
@@ -112,3 +118,7 @@ module.exports = class WorkoutExercisePropertyConstructor extends Marionette.Com
       App.vent.trigger 'exercise_property:select:disable'
       App.request 'messenger:show',
         message: 'Properties Saved'
+
+  hideEmptyState: =>
+    if not @ui.emptyState.hasClass('hidden')
+      @ui.emptyState.addClass('hidden')
