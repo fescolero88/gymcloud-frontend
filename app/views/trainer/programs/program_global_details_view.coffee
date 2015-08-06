@@ -7,15 +7,19 @@ module.exports = class ProgramGlobalDetailsView extends Marionette.LayoutView
 
   templateHelpers: ->
     hasNote: !!@model.get 'notes'
+    weeksCount: @collection.length
 
   ui:
     programDescriptionEditor: '.gc-program-description-editor'
     programNotesContainer: '.gc-program-note-container'
     programNoteEditor: '.gc-program-note-editor'
+    programWeeksCount: '.gc-program-weeks-count'
 
   initialize: ->
     App.commands.setHandler 'program:title:update', @updateName
     App.commands.setHandler 'program:note_editor:toggle', @triggerNoteEditor
+
+    @listenTo @collection, 'update', @weeksUpdated
 
   onDestroy: ->
     App.commands.removeHandler 'program:title:update', @updateName
@@ -43,3 +47,6 @@ module.exports = class ProgramGlobalDetailsView extends Marionette.LayoutView
       @ui.programNotesContainer.removeClass 'hidden'
       @ui.programNoteEditor.removeClass 'focus-state'
     @ui.programNoteEditor.focus()
+
+  weeksUpdated: ->
+    @ui.programWeeksCount.html @collection.length

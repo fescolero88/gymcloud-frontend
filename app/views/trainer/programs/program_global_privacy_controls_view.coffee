@@ -9,10 +9,12 @@ module.exports = class ProgramGlobalPrivacyControlsView extends Marionette.Layou
     privacyButtons: '.privacy-buttons > .btn'
     privacyRadios: '[name="privacy"]'
     deleteProgram: '.gc-program-delete-button'
+    addWeek: '.gc-program-add-week'
 
   events:
     'change @ui.privacyRadios': 'togglePrivacy'
     'click @ui.deleteProgram': 'deleteProgram'
+    'click @ui.addWeek': 'addProgramWeek'
 
   modelEvents:
     destroy: 'programDeleted'
@@ -41,3 +43,12 @@ module.exports = class ProgramGlobalPrivacyControlsView extends Marionette.Layou
       hideAfter: 5
       message: "Program #{name} deleted."
       type: 'info'
+
+  addProgramWeek: ->
+    data =
+      id: @collection.length + 1
+      name: "Week #{@collection.length + 1}"
+    @collection.add(data)
+    App.request 'messenger:show',
+      message: "Program week added."
+      type: 'success'
