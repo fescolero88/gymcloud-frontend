@@ -44,11 +44,14 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
 
     # sends the collection count
     App.reqres.setHandler 'workout_exercises:has_exercise?', @hasExercise
+    App.reqres.setHandler 'workout_exercises:has_exercise_properties?', @hasExerciseProperties
+
 
   onDestroy: ->
     @off 'render:collection', @showConnectionLines
     App.vent.off 'workout:reload:exercises', @getWorkoutData
-    App.reqres.removeHandler 'workout_exercises:collection:count', @getExercicesCount
+    App.reqres.removeHandler 'workout_exercises:has_exercise?', @hasExercise
+    App.reqres.removeHandler 'workout_exercises:has_exercise_properties?', @hasExerciseProperties
 
   onRender: ->
     workoutExercisePropertyConstructor = new WorkoutExercisePropertyConstructor
@@ -204,3 +207,12 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
 
   hasExercise: =>
     @collection.length > 0
+
+  hasExerciseProperties: =>
+    exercises = @collection.toJSON()
+    length = 0
+
+    exercises.forEach (exercise) =>
+      length = length + exercise.properties.length
+
+    return length > 0

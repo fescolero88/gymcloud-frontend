@@ -84,6 +84,7 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
         type: 'success'
         message: 'exercise updated'
       @model.set 'state', 'view'
+      App.commands.execute 'workout_exercises:property:added'
 
   saveOnBlur: (ev) ->
     if $(':focus').parent(@ui.editPropertyControl).length is 0
