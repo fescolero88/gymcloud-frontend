@@ -38,6 +38,15 @@ module.exports = class ProgramGlobalPrivacyControlsView extends Marionette.Layou
     id = @model.get 'id'
     name = @model.get 'name'
     App.request 'data:delete', 'programs', id
+
+    rootId = App.request "data:programs:root"
+    folderId = @model.get 'folder_id'
+    @model.set 'key', @model.get('id')
+    if folderId and folderId isnt 0 and folderId isnt rootId
+      App.vent.trigger "programs:folder:#{folderId}:model:removed", @model
+    else
+      App.vent.trigger "programs:model:removed", @model
+
     window.history.back()
     App.request 'messenger:show',
       hideAfter: 5
