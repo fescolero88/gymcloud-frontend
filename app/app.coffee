@@ -211,8 +211,10 @@ define [
           confirmView = new ModalConfirmView data
           region = @baseView.baseModalRegion
           region.show(confirmView)
+          region.$el.modal('show')
 
           @listenToOnce confirmView, "modal:closed", =>
+            region.$el.modal('hide')
             region.destroy()
 
 

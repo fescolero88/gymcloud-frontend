@@ -1,7 +1,7 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
-ProgramGlobalActionsView = require 'views/trainer/programs/program_global_actions_view'
 
+ProgramGlobalActionsView = require 'views/trainer/programs/program_global_actions_view'
 ProgramGlobalOverviewView = require 'views/trainer/programs/program_global_overview_view'
 
 module.exports = class ProgramGlobalView extends Marionette.LayoutView
@@ -18,7 +18,7 @@ module.exports = class ProgramGlobalView extends Marionette.LayoutView
     contentNavItems: '.gc-content-nav li'
     contentNavLinks: '.gc-content-nav li a'
     programName: '.gc-program-name'
-   
+
   onShow: ->
     programActionsView = new ProgramGlobalActionsView()
     @getRegion('programActionsRegion').show programActionsView
@@ -29,7 +29,7 @@ module.exports = class ProgramGlobalView extends Marionette.LayoutView
     'click @ui.contentNavLinks': 'changeActiveTab'
     'blur @ui.programName': 'updateTitleOnBlur'
     'keypress @ui.programName': 'updateName'
-    
+
   navigateBack: =>
     window.history.back()
 
@@ -52,7 +52,7 @@ module.exports = class ProgramGlobalView extends Marionette.LayoutView
 
   updateTitleOnBlur: (e) ->
     App.commands.execute 'program:title:update', @ui.programName.text()
-      
+
   updateName: (e) ->
     if e.which is 13
       e.preventDefault()

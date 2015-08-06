@@ -71,3 +71,66 @@
 .gc-program-actions {
   display: inline;
 }
+
+.gc-programs-weeks-list-container {
+  padding: 10px;
+}
+.gc-programs-weeks-list-container .gc-program-week-item {
+  border: 1px solid rgba(40,45,48,0.1);
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #F9F9F9;
+  margin-bottom: 20px;
+}
+.gc-program-week-item .gc-program-week-title {
+  font-size: 18px;
+  color: #9ea0a1;
+  line-height: 22px;
+  font-weight: bold;
+  margin: 5px 0 10px;
+  color: #757575;
+}
+.gc-program-week-item .gc-program-weeks-workouts-container {
+  border: 1px dashed rgba(40,45,48,0.1);
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #F9F9F9;
+  padding: 20px 10px;
+}
+.gc-week-workouts-empty {
+  text-align: center;
+}
+.gc-program-week-item .gc-program-week-actions {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+}
+.gc-program-week-actions {
+  display: none;
+}
+.gc-program-week-actions li {
+  padding: 0;
+  display: inline-block;
+  font-size: 20px;
+  color: #BDBDBD;
+  vertical-align: middle;
+}
+.gc-program-week-actions li button {
+  outline: none;
+  background-color: transparent;
+  border: none;
+  padding: 0 2px;
+  cursor: pointer;
+}
+.gc-program-week-item:hover .gc-program-week-actions {
+  display: block;
+}
+.gc-program-week-actions li.gc-week-remove-container {
+  margin-top: -2px;
+}
+.gc-program-counter {
+  display: inline-block;
+  margin: 15px;
+  float: right;
+}
