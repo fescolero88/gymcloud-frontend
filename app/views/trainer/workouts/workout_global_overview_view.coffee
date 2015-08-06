@@ -77,6 +77,15 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
       confirmCallBack: =>
         @model.destroy().success =>
           App.request 'data:delete', 'workouts', workoutId
+
+          rootId = App.request "data:workouts:root"
+          folderId = @model.get 'folder_id'
+          @model.set 'key', @model.get('id')
+          if folderId and folderId isnt 0 and folderId isnt rootId
+            App.vent.trigger "workouts:folder:#{folderId}:model:removed", @model
+          else
+            App.vent.trigger "workouts:model:removed", @model
+
           window.history.back()
           App.request 'messenger:show',
             hideAfter: 5
