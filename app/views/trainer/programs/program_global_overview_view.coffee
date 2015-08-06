@@ -14,6 +14,7 @@ module.exports = class ProgramGlobalOverviewView extends Marionette.LayoutView
 
   modelEvents:
     sync: 'modelSaved'
+    'change:is_public': 'privacyChanged'
 
   onShow: ->
     programDetailsView = new ProgramGlobalDetailsView model: @model
@@ -21,7 +22,16 @@ module.exports = class ProgramGlobalOverviewView extends Marionette.LayoutView
     programPrivacyControlsView = new ProgramGlobalPrivacyControlsView model: @model
     @getRegion('programPrivacyControls').show programPrivacyControlsView
 
+  privacyChanged: ->
+   @privacyChanged = true
+
   modelSaved: ->
-    App.request 'messenger:show',
-      message: "Program Updated Successfully"
-      type: 'success'
+    if @privacyChanged
+      @privacyChanged = false
+      App.request 'messenger:show',
+        message: "Privacy Settings changed."
+        type: 'info'
+    else
+      App.request 'messenger:show',
+        message: "Program Updated Successfully"
+        type: 'success'

@@ -14,6 +14,9 @@ module.exports = class ProgramGlobalPrivacyControlsView extends Marionette.Layou
     'change @ui.privacyRadios': 'togglePrivacy'
     'click @ui.deleteProgram': 'deleteProgram'
 
+  modelEvents:
+    destroy: 'programDeleted'
+
   togglePrivacy: (ev) ->
     @ui.privacyButtons.removeClass 'active'
     $(ev.currentTarget).parent().addClass 'active'
@@ -27,11 +30,14 @@ module.exports = class ProgramGlobalPrivacyControlsView extends Marionette.Layou
       content: "Are you sure you want to delete this program?"
       confirmBtn: "Remove"
       confirmCallBack: =>
-        id = @model.get 'id'
-        name = @model.get 'name'
-        App.request 'data:delete', 'programs', id
-        window.history.back()
-        App.request 'messenger:show',
-          hideAfter: 5
-          message: "Program #{name} deleted."
-          type: 'success'
+        @model.destroy()
+
+  programDeleted: ->
+    id = @model.get 'id'
+    name = @model.get 'name'
+    App.request 'data:delete', 'programs', id
+    window.history.back()
+    App.request 'messenger:show',
+      hideAfter: 5
+      message: "Program #{name} deleted."
+      type: 'info'
