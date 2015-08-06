@@ -16,15 +16,13 @@ module.exports = class ModalConfirmView extends Marionette.ItemView
     "hidden.bs.modal @ui.modal": "closeModal"
 
   initialize: (data)->
+    console.log 'init'
     @confirmData = data
 
   templateHelpers: ->
     title: @confirmData.title
     content: @confirmData.content
     confirmBtn: @confirmData.confirmBtn
-
-  onShow: ->
-    @ui.modal.modal()
 
   confirmEvent: (ev) ->
     ev.preventDefault()
