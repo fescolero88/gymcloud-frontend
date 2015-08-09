@@ -160,6 +160,15 @@ define [
         @reqres.setHandler 'data:programs:root:reset', (key) ->
           App.data.programsRoot = key
 
+        @reqres.setHandler 'data:properties:reset', (properties) ->
+          App.data.properties = properties
+
+        @reqres.setHandler 'data:properties', ->
+          App.data.properties
+
+        @reqres.setHandler 'data:properties:clear', ->
+          delete App.data.properties
+
         @reqres.setHandler 'data:exercises:clear', ->
           delete App.data.exercises
 

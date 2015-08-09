@@ -76,6 +76,15 @@
   padding: 0;
   margin: 0;
 }
+
+ul.workout-exercise-properties {
+  float: right;
+}
+
+ul.workout-exercise-properties li.gc-property-item {
+  float: left;
+}
+
 .gc-exercises-list-actions {
   border-top: 1px solid #ededed;
   background: #fafafa;
@@ -194,7 +203,7 @@ ul.gc-workout-exercises-list li.gc-workout-exercise-item ul.workout-exercise-pro
   content: '';
 }
 
-ul.gc-workout-exercises-list li.gc-workout-exercise-item ul.workout-exercise-properties li.gc-property-item {
+ul.gc-workout-exercises-list li.gc-workout-exercise-item {
   float:right;
 }
 
@@ -373,7 +382,7 @@ ul.gc-workout-exercises-list .dragged {
   visibility: visible;
 }
 .gc-workout-exercises-list li .gc-hover-hidden {
-  display: none!important;
+  visibility: hidden!important;
 }
 .gc-workout-exercises-list li.hover-enabled .gc-hover-hidden {
   display: table-cell!important;

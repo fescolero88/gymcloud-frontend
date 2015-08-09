@@ -33,7 +33,7 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
     @collection = new WorkoutExercisesPropertyCollection @model.get 'properties'
     @workoutExerciseModel = new WorkoutExerciseModel
     @listenTo @workoutExerciseModel, 'sync', @refreshExercises
-
+    @listenTo @collection, 'change:state', @toggleHover
     App.vent.on 'exercise_property:select:enable', @enableCheckbox
     App.vent.on 'exercise_property:select:disable', @disableCheckbox
     App.vent.on 'exercise_property:assign', @processProperties
@@ -56,6 +56,9 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
   addEditable: (event) ->
     el = event.currentTarget
     el.setAttribute 'contenteditable', true
+
+  toggleHover: ->
+    @el.removeClass 'hover-enabled'
 
   saveOnEnter: (event) =>
     label = event.currentTarget.innerHTML.replace /<[^>]*>/g, ''
@@ -117,8 +120,9 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
 
   addProperty: ->
     workoutExerciseProperty = new WorkoutExercisesPropertyModel()
+    # set default prop here
     workoutExerciseProperty.set 'state', 'edit'
-    @collection.add workoutExerciseProperty
+    @collection.add workoutExerciseProperty, sort: false
 
   processProperties: (models) =>
     promises = []
@@ -146,3 +150,10 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
     @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises/#{data.workout_exercise_id}"
     @workoutExerciseModel.set data
     @workoutExerciseModel.save()
+
+  toggleHover: (model, value) ->
+    if value is 'edit'
+      @$el.removeClass 'hover-enabled'
+    else
+      @$el.addClass 'hover-enabled' 
+
