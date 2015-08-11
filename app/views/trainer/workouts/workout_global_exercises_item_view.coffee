@@ -57,9 +57,6 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
     el = event.currentTarget
     el.setAttribute 'contenteditable', true
 
-  toggleHover: ->
-    @el.removeClass 'hover-enabled'
-
   saveOnEnter: (event) =>
     label = event.currentTarget.innerHTML.replace /<[^>]*>/g, ''
     if event.keyCode == 13
@@ -155,5 +152,5 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
     if value is 'edit'
       @$el.removeClass 'hover-enabled'
     else
-      @$el.addClass 'hover-enabled' 
+      @$el.addClass 'hover-enabled'
 
