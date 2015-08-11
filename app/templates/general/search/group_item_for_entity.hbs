@@ -3,12 +3,14 @@
   {{#if is_in_my_library}}
     <span class="gc-check-icon"></span>
   {{else}}
-    <span class="gc-exercises-item-icon"></span>
+  <span class="gc-exercises-item-icon gc-exercises-item-icon-{{type}}"></span>
   {{/if}}
   <a href="{{entity_link}}" class="gc-clients-list-client-link">
     {{name}}
   </a>
-  <span class="gc-exercises-item-play-icon"></span>
+  {{#if video_url}}
+    <span class="gc-exercises-item-play-icon"></span>
+  {{/if}}
 </div>
 <div class="gc-avatar-wrapper gc-search-entity-field col-xs-3">
   <region data-name="avatar-wrapper"></region>
@@ -26,7 +28,7 @@
   {{/withProfile}}
 </div>
 <div class="gc-search-entity-field col-xs-2 {{#unless is_in_my_library}} gc-not-in-library {{/unless}} ">
-  <span class="gc-entity-download-count">93</span>
+  <span class="gc-entity-download-count">0</span>
   <button class="btn gc-btn gc-add-to-library-button hidden" type="button">Add to library</button>
 </div>
 <!--<div class="gc-search-entity-field col-xs-2 text-right">

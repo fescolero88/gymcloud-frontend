@@ -29,6 +29,8 @@ module.exports = class ResultsEntityItemView extends Marionette.LayoutView
 
     #TODO: works only for clients of current trainer. need to work for trainer's item and other users
     entity_context = @options.entity_context
+
+    type: entity_context
     profile_link: '#/tr/me'
     author_full_name: "#{@model.get('author').first_name} #{@model.get('author').last_name}"
     author_link: "#/tr/clients/id/#{@model.get('author').id}/#{entity_context}/"
