@@ -8,6 +8,8 @@ class WorkoutExercisePropertyItem extends Marionette.ItemView
 
   tagName: 'li'
 
+  className: 'pull-left'
+
   initialize: ->
     # stores the selected property id from dropdown
     @collection = new PropertyCollection()
@@ -92,7 +94,7 @@ module.exports = class WorkoutExercisePropertyConstructor extends Marionette.Com
     # hide empty state p if shown
     @hideEmptyState()
     if App.request 'workout_exercises:has_exercise?'
-      @collection.add new WorkoutExercisePropertyModel()
+      @collection.add new WorkoutExercisePropertyModel(), sort: false
       @ui.assignPropertyButton.removeClass('hidden')
       # notify exercises that a property is being created
       App.vent.trigger 'exercise_property:select:enable'

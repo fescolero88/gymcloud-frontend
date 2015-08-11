@@ -78,7 +78,7 @@ module.exports = class SideBarView extends Marionette.LayoutView
     , 600
 
   getData: =>
-    $.ajax
+    library = $.ajax
       url: '/api/mobile/library/'
       type: 'GET'
       dataType: 'json'
@@ -95,8 +95,13 @@ module.exports = class SideBarView extends Marionette.LayoutView
               App.request 'data:programs:reset', item.items
               App.request 'data:programs:root:reset', item.key
         window.App.vent.trigger 'assignments:loaded'
-        @render()
-        @initDragAndDrop()
+
+    properties = $.get('/api/mobile/properties').then (data) ->
+      App.request 'data:properties:reset', data
+      
+    $.when.apply($,[library, properties]).done () =>
+      @render()
+      @initDragAndDrop()
 
   initDragAndDrop: () =>
     subs = @$el.find '.gc-sidebar-folder > .gc-sidebar-sub, .gc-sidebar-cat > .gc-sidebar-sub'

@@ -1,4 +1,5 @@
 Marionette = require 'backbone.marionette'
+Backbone = require 'backbone'
 PropertyCollection = require 'models/trainer/property-collection'
 _ = require 'underscore'
 
@@ -16,7 +17,7 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
     defaultProperty: @properties[0]?.name
     defaultPropertyValue: @properties[0]?.defaultvalue
 
-  ui:
+  ui: ->
     removePropertyButton: '.gc-remove'
     propertyItem: '.gc-property-item'
     selectedPropertyLabel: '.gc-selected-property'
@@ -30,7 +31,6 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
     'click @ui.removePropertyButton': 'removeProperty'
     'click @ui.propertyItem': 'selectProperty'
     'focusout @ui.editPropertyControl':  _.debounce(@saveOnBlur, 200)
-    #'blur @ui.selectedPropertyValue': 'saveProperty'
     'keypress @ui.selectedPropertyValue': 'saveOnEnter'
     'click @ui.toggleEditMode': 'toggleEditMode'
 
@@ -42,16 +42,15 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
     @model.set 'property_value', @model.get('value')
     @model.set 'property_name', @model.get('name')
     @state = @model.get('state') || 'view'
-    @collection = new PropertyCollection()
-    @collection.fetch().then =>
-      @render()
-
+    @collection = new Backbone.Collection(App.request('data:properties'))
+  
   onRender: ->
-    #set default property id
     if @model.isNew()
       @model.set 'property_id', @properties[0]?.id
-      @ui.selectedPropertyValue.focus()
       @model.set 'property_name', @properties[0]?.name
+      setTimeout =>
+        @ui.selectedPropertyValue.focus()
+      , 200
 
   removeProperty: ->
     @model.destroy()
@@ -65,7 +64,7 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
 
   toggleEditMode: (e) ->
     e.preventDefault()
-    @model.get('state', 'edit')
+    @model.set('state', 'edit')
     @ui.selectedPropertyLabel.html @model.get('property_name')
     @ui.selectedPropertyValue.html @model.get('property_value')
     @ui.editPropertyControl.removeClass 'hidden'
@@ -87,8 +86,10 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
       App.commands.execute 'workout_exercises:property:added'
 
   saveOnBlur: (ev) ->
-    if $(':focus').parent(@ui.editPropertyControl).length is 0
+    activeEl = $(':focus')
+    if @ui.editPropertyControl.find(activeEl).length is 0
       @saveProperty()
+
 
   onSync: =>
     @ui.propertyValueNameLabel.html "#{@model.get 'property_value'} #{@model.get 'property_name'}"
