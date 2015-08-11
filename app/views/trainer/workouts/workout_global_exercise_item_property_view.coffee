@@ -90,8 +90,8 @@ module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.Item
     if @ui.editPropertyControl.find(activeEl).length is 0
       @saveProperty()
 
-
   onSync: =>
     @ui.propertyValueNameLabel.html "#{@model.get 'property_value'} #{@model.get 'property_name'}"
     @ui.editPropertyControl.addClass 'hidden'
     @ui.viewPropertyControl.removeClass 'hidden'
+

@@ -34,6 +34,7 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
     @workoutExerciseModel = new WorkoutExerciseModel
     @listenTo @workoutExerciseModel, 'sync', @refreshExercises
     @listenTo @collection, 'change:state', @toggleHover
+    @listenTo @collection, 'remove', @toggleHover
     App.vent.on 'exercise_property:select:enable', @enableCheckbox
     App.vent.on 'exercise_property:select:disable', @disableCheckbox
     App.vent.on 'exercise_property:assign', @processProperties
