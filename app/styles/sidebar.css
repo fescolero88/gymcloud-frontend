@@ -183,7 +183,14 @@
   text-decoration: none;
 }
 .gc-sidebar-item > a.gc-client-sidebar-item {
-  padding-left: 20px;
+  padding-left: 15px;
+}
+.gc-sidebar-item > a.gc-client-sidebar-item .gc-sidebar-cat-icon {
+  margin-right: 7px;
+}
+.gc-sidebar-item > a.gc-client-sidebar-item:hover .gc-sidebar-cat-icon,
+.gc-sidebar-item > a.gc-client-sidebar-item.active .gc-sidebar-cat-icon {
+  background-position: right top;
 }
 .gc-sidebar-item > a .glyphicon-th,
 .gc-sidebar-item > a .fa-arrows {
