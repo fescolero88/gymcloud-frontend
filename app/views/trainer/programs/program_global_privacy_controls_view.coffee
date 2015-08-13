@@ -10,11 +10,19 @@ module.exports = class ProgramGlobalPrivacyControlsView extends Marionette.Layou
     privacyRadios: '[name="privacy"]'
     deleteProgram: '.gc-program-delete-button'
     addWeek: '.gc-program-add-week'
+    createWorkout: '.gc-program-create-workout'
+    addWorkout: '.gc-program-add-workout'
+    addWorkoutControls: '.gc-add-workout-controls'
+    defaultControls: '.gc-default-controls'
+    cancelAddWorkout: '.gc-cancel-add-workout'
 
   events:
     'change @ui.privacyRadios': 'togglePrivacy'
     'click @ui.deleteProgram': 'deleteProgram'
     'click @ui.addWeek': 'addProgramWeek'
+    'click @ui.createWorkout': 'addProgramWorkout'
+    'click @ui.addWorkout': 'toggleControlsView'
+    'click @ui.cancelAddWorkout': 'toggleControlsView'
 
   togglePrivacy: (ev) ->
     @ui.privacyButtons.removeClass 'active'
@@ -39,3 +47,10 @@ module.exports = class ProgramGlobalPrivacyControlsView extends Marionette.Layou
     App.request 'messenger:show',
       message: "Program week added."
       type: 'success'
+
+  addProgramWorkout: ->
+    App.commands.execute 'program_workout:model:add'
+
+  toggleControlsView: ->
+    @ui.defaultControls.toggleClass 'hidden'
+    @ui.addWorkoutControls.toggleClass 'hidden'
