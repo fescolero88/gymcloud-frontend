@@ -1,6 +1,11 @@
 .gc-usercard-large {
-  background: #3398db;
   max-height: 185px;
+}
+.gc-trainer-card {
+  background: #5a2c6c;
+}
+.gc-client-card {
+  background: #3398db;
 }
 .gc-usercard-large > .col-xs-10 {
   padding: 0 5px;
@@ -245,7 +250,7 @@
   .gc-usercard-large .gc-usercard-avatar-wrapper  {
     min-height: 146px;
     min-width: 146px;
-    margin: 19px 35px 0 5px;
+    margin: 19px 35px 19px 5px;
   }
   .gc-usercard-large .gc-usercard-avatar {
     max-width: 140px;
