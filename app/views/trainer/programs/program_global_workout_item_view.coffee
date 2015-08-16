@@ -48,7 +48,6 @@ module.exports = class ProgramGlobalWorkoutItemView extends Marionette.ItemView
       message: "Workout Deleted"
       type: 'success'
 
-
   saveOnEnter: (ev) ->
     if ev.which is 13
       ev.preventDefault()
@@ -57,4 +56,3 @@ module.exports = class ProgramGlobalWorkoutItemView extends Marionette.ItemView
   saveOnBlur: (ev) ->
     @model.set 'name', @ui.workoutTitle.text()
     @model.save()
-

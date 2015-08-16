@@ -5,9 +5,6 @@ module.exports = class ProgramWeeksView extends Marionette.CompositeView
 
   template: require('templates/trainer/programs/program_weeks')
 
-  templateHelpers: ->
-    #isEmpty: @collection.length == 0
-
   ui:
     addWeek: '.gc-program-add-week'
 

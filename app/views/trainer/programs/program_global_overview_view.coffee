@@ -87,4 +87,3 @@ module.exports = class ProgramGlobalOverviewView extends Marionette.LayoutView
       @ui.emptyState.removeClass 'hidden'
       @ui.weeksRegion.addClass 'hidden'
       @ui.programWorkoutListRegion.addClass 'hidden'
-

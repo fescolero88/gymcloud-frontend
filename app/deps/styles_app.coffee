@@ -24,4 +24,5 @@ define [
   'styles/fix_images'
   'styles/prototype/ui.styl'
   'styles/workout_exercise_property_constructor'
+  'styles/program_workouts.css'
 ], ->
