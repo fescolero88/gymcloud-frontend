@@ -8,18 +8,22 @@ module.exports = class ProgramGlobalDetailsView extends Marionette.LayoutView
   templateHelpers: ->
     hasNote: !!@model.get 'notes'
     weeksCount: @collection.length
+    workoutCount: @workoutsCollection.length
 
   ui:
     programDescriptionEditor: '.gc-program-description-editor'
     programNotesContainer: '.gc-program-note-container'
     programNoteEditor: '.gc-program-note-editor'
     programWeeksCount: '.gc-program-weeks-count'
+    programWorkoutCount: '.gc-program-workout-count'
 
-  initialize: ->
+  initialize: (options) ->
+    @workoutsCollection = options.workoutsCollection
     App.commands.setHandler 'program:title:update', @updateName
     App.commands.setHandler 'program:note_editor:toggle', @triggerNoteEditor
 
     @listenTo @collection, 'update', @weeksUpdated
+    @listenTo @workoutsCollection, 'update', @workoutsUpdated
 
   onDestroy: ->
     App.commands.removeHandler 'program:title:update', @updateName
@@ -63,3 +67,6 @@ module.exports = class ProgramGlobalDetailsView extends Marionette.LayoutView
 
   weeksUpdated: ->
     @ui.programWeeksCount.html @collection.length
+
+  workoutsUpdated: ->
+    @ui.programWorkoutCount.html @workoutsCollection.length

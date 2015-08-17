@@ -15,8 +15,8 @@ module.exports = class ProgramGlobalView extends Marionette.LayoutView
   ui:
     navBack: '.gc-content-nav-back'
     innerNav: '.gc-inner-nav'
-    contentNavItems: '.gc-content-nav li'
-    contentNavLinks: '.gc-content-nav li a'
+    contentNavItems: '.gc-program-content-navs li'
+    contentNavLinks: '.gc-program-content-navs li a'
     programName: '.gc-program-name'
 
   modelEvents:

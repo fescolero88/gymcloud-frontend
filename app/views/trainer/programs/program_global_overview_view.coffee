@@ -5,6 +5,11 @@ ProgramGlobalDetailsView = require 'views/trainer/programs/program_global_detail
 ProgramGlobalPrivacyControlsView = require 'views/trainer/programs/program_global_privacy_controls_view'
 ProgramWeeksView = require 'views/trainer/programs/program_weeks_view'
 ProgramWeeksCollection = require 'models/trainer/program_weeks_collection'
+ProgramWorkoutsCollection = require 'models/trainer/program-workout-collection'
+ProgramWorkoutListView = require 'views/trainer/programs/program_global_workout_list_view'
+
+class WeekEmptyView extends Marionette.ItemView
+  template: require('templates/trainer/programs/program_week_empty')
 
 module.exports = class ProgramGlobalOverviewView extends Marionette.LayoutView
 
@@ -14,19 +19,50 @@ module.exports = class ProgramGlobalOverviewView extends Marionette.LayoutView
     programDetails: '.gc-program-detail-region'
     programPrivacyControls: '.gc-programs-privacy-region'
     weeksRegion: '.gc-program-weeks-list-region'
+    programWorkoutListRegion: 'region[data-name="gc-program-workout-list"]'
+    emptyState: 'region[data-name="gc-program-empty-state"]'
+
+  ui:
+    programWorkoutListRegion: 'region[data-name="gc-program-workout-list"]'
+    weeksRegion: '.gc-program-weeks-list-region'
+    emptyState: 'region[data-name="gc-program-empty-state"]'
 
   modelEvents:
     sync: 'modelSaved'
     'change:is_public': 'privacyChanged'
 
+  initialize: ->
+    @collection = new ProgramWeeksCollection
+    @workoutsCollection = new ProgramWorkoutsCollection
+
+    @listenTo @collection, 'update', @toggleEmptyState
+    @listenTo @workoutsCollection, 'update', @toggleEmptyState
+
   onShow: ->
-    @collection = new ProgramWeeksCollection []
-    programDetailsView = new ProgramGlobalDetailsView model: @model, collection: @collection
+    programDetailsView = new ProgramGlobalDetailsView
+      model: @model
+      collection: @collection
+      workoutsCollection: @workoutsCollection
+
     @getRegion('programDetails').show programDetailsView
-    programPrivacyControlsView = new ProgramGlobalPrivacyControlsView model: @model, collection: @collection
+
+    programPrivacyControlsView = new ProgramGlobalPrivacyControlsView
+      model: @model
+      collection: @collection
+      workoutsCollection: @workoutsCollection
+
     @getRegion('programPrivacyControls').show programPrivacyControlsView
+    
     programWeeksView = new ProgramWeeksView model: @model, collection: @collection
     @getRegion('weeksRegion').show programWeeksView
+
+    programWorkoutListView = new ProgramWorkoutListView collection: @workoutsCollection
+    @getRegion('programWorkoutListRegion').show programWorkoutListView
+
+    emptyStateView = new WeekEmptyView()
+    @getRegion('emptyState').show emptyStateView
+
+    @toggleEmptyState()
 
   privacyChanged: ->
     @isPrivacyChanged = true
@@ -41,3 +77,13 @@ module.exports = class ProgramGlobalOverviewView extends Marionette.LayoutView
       App.request 'messenger:show',
         message: "Program Updated Successfully"
         type: 'success'
+
+  toggleEmptyState: ->
+    if @collection.length > 0 or @workoutsCollection.length > 0
+      @ui.emptyState.addClass 'hidden'
+      @ui.weeksRegion.removeClass 'hidden'
+      @ui.programWorkoutListRegion.removeClass 'hidden'
+    else
+      @ui.emptyState.removeClass 'hidden'
+      @ui.weeksRegion.addClass 'hidden'
+      @ui.programWorkoutListRegion.addClass 'hidden'

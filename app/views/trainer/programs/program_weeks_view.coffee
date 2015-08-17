@@ -1,16 +1,9 @@
 Marionette = require 'backbone.marionette'
-
 ProgramWeekItemView = require 'views/trainer/programs/program_week_item_view'
-
-class WeekEmptyView extends Marionette.ItemView
-  template: require('templates/trainer/programs/program_week_empty')
 
 module.exports = class ProgramWeeksView extends Marionette.CompositeView
 
   template: require('templates/trainer/programs/program_weeks')
-
-  templateHelpers: ->
-    isEmpty: @collection.length == 0
 
   ui:
     addWeek: '.gc-program-add-week'
@@ -18,8 +11,6 @@ module.exports = class ProgramWeeksView extends Marionette.CompositeView
   childViewContainer: '.gc-programs-weeks-list-container'
 
   childView: ProgramWeekItemView
-
-  emptyView: WeekEmptyView
 
   initialize: ->
     App.vent.on 'program:remove:week', @removeWeek

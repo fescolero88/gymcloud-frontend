@@ -15,9 +15,11 @@ module.exports = class ResultsEntityItemView extends Marionette.LayoutView
 
   ui:
     addToLibraryButton: '.gc-add-to-library-button'
+    profileLink: '.gc-profile-link'
 
   events:
     'click @ui.addToLibraryButton': 'showAddToLibrary'
+    'click @ui.profileLink': 'preventNavigate'
 
   onRender: ->
     avatarView = new AvatarView
@@ -40,3 +42,5 @@ module.exports = class ResultsEntityItemView extends Marionette.LayoutView
   showAddToLibrary: ->
     App.request 'base:addToLibraryModal', type: @options.entity_context, model: @model
 
+  preventNavigate: (ev) -> # UAT - temporarily disable navigation to user profiles
+    ev.preventDefault()
