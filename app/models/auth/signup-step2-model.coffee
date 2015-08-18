@@ -2,7 +2,7 @@ Backbone = require 'backbone'
 
 module.exports = class SignUpStep2Model extends Backbone.Model
 
-  urlRoot: '/api/mobile/clients'
+  urlRoot: '/user_profiles'
 
   validation:
 
@@ -36,7 +36,7 @@ module.exports = class SignUpStep2Model extends Backbone.Model
 
     gender:
       required: true
-      oneOf: [0, 1]
+      oneOf: ['male', 'female']
 
     agree:
       acceptance: true

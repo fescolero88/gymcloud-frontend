@@ -6,7 +6,7 @@ module.exports = class FormValidationBehaviour extends Marionette.Behavior
   initialize: =>
     @listenTo @view, 'switchError', @switchError
 
-  switchError: (error_msg, $inputGroup) =>
+  switchError: (error_msg, $inputGroup) ->
     if error_msg
       $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
       $inputGroup.find('.gc-valid-icon').addClass('hide')

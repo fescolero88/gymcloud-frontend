@@ -2,7 +2,10 @@ Backbone = require 'backbone'
 
 module.exports = class SignUpStep1Model extends Backbone.Model
 
-  urlRoot: '/api/mobile/clients'
+  urlRoot: '/users.json'
+
+  toJSON: ->
+    user: _.clone(this.attributes)
 
   validation:
 
@@ -21,7 +24,7 @@ module.exports = class SignUpStep1Model extends Backbone.Model
 
     password_confirmation: [
       equalTo: 'password'
-      msg: 'The passwords do not match'
+      msg: 'The passwords does not match'
     ,
       required: true
       minLength: 6
