@@ -11,6 +11,16 @@ ProgramWorkoutListView = require 'views/trainer/programs/program_global_workout_
 class WeekEmptyView extends Marionette.ItemView
   template: require('templates/trainer/programs/program_week_empty')
 
+  ui:
+    addWorkout: '.gc-add-workout'
+    addWeek: '.gc-add-week'
+
+  events:
+    'click @ui.addWorkout': 'addWorkout'
+
+  addWorkout: ->
+    App.commands.execute 'program_workouts:add:toggle'
+
 module.exports = class ProgramGlobalOverviewView extends Marionette.LayoutView
 
   template: require('templates/trainer/programs/program_global_overview')

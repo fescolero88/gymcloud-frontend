@@ -24,6 +24,18 @@ module.exports = class ProgramGlobalPrivacyControlsView extends Marionette.Layou
     'click @ui.addWorkout': 'toggleControlsView'
     'click @ui.cancelAddWorkout': 'toggleControlsView'
 
+  initialize: (options) ->
+    @workoutsCollection = options.workoutsCollection
+    App.commands.setHandler 'program_workouts:add:toggle', @toggleControlsView
+    @listenTo @collection, 'update', @toggleAddWorkoutButton
+    @listenTo @workoutsCollection, 'update', @toggleAddWorkoutButton
+
+  onDestroy: ->
+    App.commands.removeHandler 'program_workouts:add:toggle', @toggleControlsView
+
+  onRender: ->
+    @toggleAddWorkoutButton()
+    
   togglePrivacy: (ev) ->
     @ui.privacyButtons.removeClass 'active'
     $(ev.currentTarget).parent().addClass 'active'
@@ -51,6 +63,12 @@ module.exports = class ProgramGlobalPrivacyControlsView extends Marionette.Layou
   addProgramWorkout: ->
     App.commands.execute 'program_workout:model:add'
 
-  toggleControlsView: ->
+  toggleControlsView: =>
     @ui.defaultControls.toggleClass 'hidden'
     @ui.addWorkoutControls.toggleClass 'hidden'
+
+  toggleAddWorkoutButton: ->
+    if @collection.length > 0 or @workoutsCollection.length > 0
+      @ui.addWorkout.removeClass 'hidden'
+    else
+      @ui.addWorkout.addClass 'hidden'
