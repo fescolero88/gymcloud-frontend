@@ -27,16 +27,16 @@ class ForgotPasswordFormView extends Marionette.ItemView
     ev.preventDefault()
     formData = @ui.form.serializeObject()
     @model.set formData
-    if @model.isValid true
-      @model.save null,
-        success: (model, data) =>
-          if data.errors
-            $input = @ui.emailField
-            $inputGroup = $input.closest('.form-group')
-            @trigger 'switchError', data.error, $inputGroup
-        statusCode:
-          201: (data) =>
-            @trigger 'next'
+    @model.save null,
+      success: (model, data) =>
+        @trigger 'next'
+      error: (model, xhr, error) =>
+        errors = xhr.responseJSON.error
+        for key, value of errors
+          message = value.join(', ')
+          input = @ui.form.find("input[name='#{key}']")
+          uiGroup = input.parents('.form-group')
+          @trigger 'switchError', message , uiGroup
 
 class ForgotPasswordSuccessView extends Marionette.ItemView
 

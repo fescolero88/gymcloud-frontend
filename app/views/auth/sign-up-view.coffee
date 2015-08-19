@@ -54,7 +54,7 @@ class SignUpStep1 extends Marionette.ItemView
           @trigger 'next', @model
         loginModel.login()
       error: (model, xhr, error) =>
-        errors = xhr.responseJSON.errors
+        errors = xhr.responseJSON.error
         for key, value of errors
           message = value.join(', ')
           input = @ui.form.find("input[name='#{key}']")
@@ -121,7 +121,7 @@ class SignUpStep2 extends Marionette.ItemView
       success: (data) =>
         @trigger 'final', @model
       error: (model, xhr, error) =>
-        errors = xhr.responseJSON.errors
+        errors = xhr.responseJSON.error
         for key, value of errors
           message = value.join(', ')
           input = @ui.form.find("input[name='#{key}']")

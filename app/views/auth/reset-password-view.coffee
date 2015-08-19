@@ -1,10 +1,16 @@
 config = require 'config'
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
+_ = require 'underscore'
+FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
 module.exports = class ResetPasswordView extends Marionette.LayoutView
 
   template: require('templates/auth/reset_password')
+
+  behaviors:
+    FormValidationBehaviour:
+      behaviorClass: FormValidationBehaviour
 
   ui:
     form: '.gc-reset-password-form'
@@ -14,48 +20,32 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
 
   initialize: (data) =>
     @token = data.token
-    Backbone.Validation.bind @
+    Backbone.Validation.bind(this)
 
   submit: (ev) =>
     ev.preventDefault()
-    data = @ui.form.serializeObject()
-    @model.set data
-    if @model.isValid true
-      newData = {}
-      ###
-      url = "#{@model.urlRoot}?user[reset_password_token]=#{@token}"
-      for key, value of data
-        newKey = "user[#{key}]"
-        url += "&#{newKey}=#{value}"
-      ###
-      data =
-        user:
-          reset_password_token: @token
-          password: @model.get 'password'
-          password_confirmation: @model.get 'password_confirmation'
+    data = _.extend @ui.form.serializeObject(),
+      reset_password_token: @token
+      id: 1 # model is not NEW now
 
-      $.ajax
-        method: 'PUT'
-        url: @model.urlRoot
-        dataType: 'json'
-        contentType: 'application/json'
-        data: JSON.stringify data
-        statusCode:
-          204: (data) =>
-            App.request 'messenger:show',
-              hideAfter: 5
-              message: "Password was successfully changed"
-              type: 'success'
-            window.location.replace '#login'
-          422: (data) =>
-            App.request 'messenger:show',
-              hideAfter: 5
-              message: "Reset password token is invalid"
-              type: 'error'
-      .fail (xhr, textStatus, errorThrown) =>
-        unless errorThrown
+    @model.set data
+    @model.save null,
+      patch: true
+      success: (model, data) ->
+        App.request 'messenger:show',
+          hideAfter: 5
+          message: "Password was successfully changed"
+          type: 'success'
+        window.location.replace '#login'
+      error: (model, xhr, error) =>
+        errors = xhr.responseJSON.error
+        for key, value of errors
+          message = value.join(', ')
+          input = @ui.form.find("input[name='#{key}']")
+          uiGroup = input.parents('.form-group')
+          @trigger 'switchError', message , uiGroup
+        if errors.reset_password_token
           App.request 'messenger:show',
             hideAfter: 5
-            message: "Password was successfully changed"
-            type: 'success'
-          window.location.replace '#login'
+            message: "Reset password token is invalid"
+            type: 'error'
