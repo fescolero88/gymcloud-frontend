@@ -5,7 +5,7 @@ module.exports = class ForgotPasswordModel extends Backbone.Model
   url: '/users/password.json'
 
   toJSON: ->
-    user: _.clone(this.attributes)
+    user: super
 
   validation:
 

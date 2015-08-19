@@ -48,7 +48,7 @@ class SignUpStep1 extends Marionette.ItemView
         loginModel = new LoginModel
           username: @model.get('email')
           password: @model.get('password')
-        loginModel.on 'model:login:success', (response) =>
+        loginModel.once 'model:login:success', (response) =>
           App.request 'accessToken:set', response.access_token
           App.request('data:profile').fetch()
           @trigger 'next', @model
@@ -88,10 +88,9 @@ class SignUpStep2 extends Marionette.ItemView
     if @model.isValid true
       currentUser = App.request('data:profile')
       profile = currentUser.get('user_profile')
-      profile_id = profile && profile.id
-      if profile_id
+      if profile_id = profile?.id
         @model.set 'id', profile_id
-        this.saveProfile()
+        @saveProfile()
       else
         currentUser.fetch().then (model) =>
           profile_id = model.get('user_profile').id

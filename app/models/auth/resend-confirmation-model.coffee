@@ -2,7 +2,10 @@ Backbone = require 'backbone'
 
 module.exports = class ResendConfirmationModel extends Backbone.Model
 
-  url: '/api/mobile/users/confirmation/send_instructions.json'
+  url: '/users/confirmation.json'
+
+  toJSON: ->
+    user: super
 
   validation:
     email:

@@ -18,7 +18,7 @@ module.exports = class AuthView extends Marionette.ItemView
 
   initialize: (data) ->
     @signUp = data.signUp
-    Backbone.Validation.bind @
+    Backbone.Validation.bind(this)
 
   onShow: ->
     if @signUp
