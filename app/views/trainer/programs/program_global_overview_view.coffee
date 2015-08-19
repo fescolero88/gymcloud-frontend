@@ -14,12 +14,23 @@ class WeekEmptyView extends Marionette.ItemView
   ui:
     addWorkout: '.gc-add-workout'
     addWeek: '.gc-add-week'
+    emptyState: '.gc-program-empty-state'
+    addWorkoutControls: '.gc-add-workout-controls'
+    createWorkout: '.gc-program-create-workout'
+    cancelAddWorkout: '.gc-cancel-add-workout'
 
   events:
-    'click @ui.addWorkout': 'addWorkout'
+    'click @ui.addWorkout': 'toggleViews'
+    'click @ui.cancelAddWorkout': 'toggleViews'
+    'click @ui.createWorkout': 'createProgramWorkout'
 
-  addWorkout: ->
-    App.commands.execute 'program_workouts:add:toggle'
+  createProgramWorkout: ->
+    App.commands.execute 'program_workout:model:add'
+    @toggleViews()
+
+  toggleViews: ->
+    @ui.emptyState.toggleClass 'hidden'
+    @ui.addWorkoutControls.toggleClass 'hidden'
 
 module.exports = class ProgramGlobalOverviewView extends Marionette.LayoutView
 

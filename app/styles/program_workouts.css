@@ -121,3 +121,8 @@
   top: 8px;
   outline: none;
 }
+
+.gc-program-empty-placeholder .gc-add-workout-controls {
+  margin: 17% auto 0;
+  width: 75%;
+}
