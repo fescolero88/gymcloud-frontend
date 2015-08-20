@@ -16,7 +16,7 @@ module.exports = class SideBarView extends Marionette.LayoutView
     'click .nano': 'onClickSidebar'
 
   ui:
-    subs: '.gc-sidebar-folder > .gc-sidebar-sub, .gc-sidebar-cat > .gc-sidebar-sub'
+    subs: '.gc-sidebar-folder>.gc-sidebar-sub, .gc-sidebar-cat>.gc-sidebar-sub'
     sidebar: '.gc-sidebar-menu-list'
     dndArea: '.gc-dnd-area'
     mainArea: '.gc-main'
@@ -43,31 +43,22 @@ module.exports = class SideBarView extends Marionette.LayoutView
   onRender: ->
     @$el.find('.nano').nanoScroller()
 
-    exercisesView = new SidebarEntity
-      type: 'exercises'
-      collection: new SidebarItemsCollection App.request('data:exercises')
-
-    workoutsView = new SidebarEntity
-      type: 'workouts'
-      collection: new SidebarItemsCollection App.request('data:workouts')
-
-    programsView = new SidebarEntity
-      type: 'programs'
-      collection: new SidebarItemsCollection App.request('data:programs')
-
-    @getRegion('exercises').show(exercisesView)
-    @getRegion('workouts').show(workoutsView)
-    @getRegion('programs').show(programsView)
+    _.each ['exercises', 'workouts', 'programs'], (item) ->
+      view = new SidebarEntity
+        type: item
+        collection: new SidebarItemsCollection App.request("data:#{item}")
+      @getRegion(item).show(view)
 
   toggleMenu: (ev) ->
-    if $(ev.target).hasClass('toggle-it') or $(ev.currentTarget).hasClass('toggle-it')
+    target = $(ev.target)
+    currentTarget = $(ev.currentTarget)
+    if target.hasClass('toggle-it') or currentTarget.hasClass('toggle-it')
       ev.preventDefault()
-      $(ev.currentTarget).toggleClass('active')
+      currentTarget.toggleClass('active')
 
   toggleItem: (ev) ->
-    activeItem = @el.querySelector '.gc-sidebar-item > a.active'
-    if activeItem
-      activeItem.classList.remove 'active'
+    activeItem = @el.querySelector('.gc-sidebar-item > a.active')
+    activeItem.classList.remove('active') if activeItem
 
     ev.currentTarget.classList.add 'active'
 
@@ -82,30 +73,22 @@ module.exports = class SideBarView extends Marionette.LayoutView
       url: '/api/mobile/library/'
       type: 'GET'
       dataType: 'json'
-      success: (data) =>
+      success: (data) ->
         for item in data
-          switch item.title
-            when 'Exercises'
-              App.request 'data:exercises:reset', item.items
-              App.request 'data:exercises:root:reset', item.key
-            when 'Workouts'
-              App.request 'data:workouts:reset', item.items
-              App.request 'data:workouts:root:reset', item.key
-            when 'Programs'
-              App.request 'data:programs:reset', item.items
-              App.request 'data:programs:root:reset', item.key
-        window.App.vent.trigger 'assignments:loaded'
+          entity = item.title.toLocaleLowerCase()
+          App.request("data:#{entity}:reset", item.items)
+          App.request("data:#{entity}:root:reset", item.key)
+        App.vent.trigger('assignments:loaded')
 
     properties = $.get('/api/mobile/properties').then (data) ->
-      App.request 'data:properties:reset', data
-      
+      App.request('data:properties:reset', data)
+
     $.when.apply($,[library, properties]).done () =>
       @render()
       @initDragAndDrop()
 
-  initDragAndDrop: () =>
-    subs = @$el.find '.gc-sidebar-folder > .gc-sidebar-sub, .gc-sidebar-cat > .gc-sidebar-sub'
-    subs.sortable
+  initDragAndDrop: () ->
+    @ui.subs.sortable
       group: 'assignEx'
       drop: false
       handle: '.draggable-handle'
@@ -128,7 +111,7 @@ module.exports = class SideBarView extends Marionette.LayoutView
             .removeAttr('style')
         _super $item, container
         App.vent.trigger 'drag:start'
-      onDrop: ($item, container, _super, e) =>
+      onDrop: ($item, container, _super, e) ->
         $item.removeClass('dragged').removeAttr('style')
         subs.removeAttr('style')
         $('body').removeClass('dragging')
@@ -142,12 +125,6 @@ module.exports = class SideBarView extends Marionette.LayoutView
       drag: false
       group: 'assignEx'
 
-  updateEWPName: (type, key, newValue) => # todo implement for programs
+  updateEWPName: (type, key, newValue) -> # todo implement for programs
     selector = "span[data-key=\"#{key}\"]"
-    switch type
-      when 'workouts'
-        @ui.workoutsRegion.find(selector).html(newValue)
-      when 'exercises'
-        @ui.exercisesRegion.find(selector).html(newValue)
-      when 'programs'
-        @ui.programsRegion.find(selector).html(newValue)
+    @ui["#{type}Region"].find(selector).html(newValue)
