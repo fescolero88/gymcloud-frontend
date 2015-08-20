@@ -5,7 +5,7 @@ module.exports = class SignUpStep1Model extends Backbone.Model
   urlRoot: '/users.json'
 
   toJSON: ->
-    user: _.clone(this.attributes)
+    user: super
 
   validation:
 

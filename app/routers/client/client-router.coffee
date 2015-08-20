@@ -3,7 +3,7 @@ CustomRouter  = require 'routers/general/custom-router'
 module.exports = class ClientRouter extends CustomRouter
 
   appRoutes:
-    
+
     '': 'clientPageAssigments'
     '(/)': 'clientPageAssigments'
     'my/:dataType(/)': 'clientPageAssigments'
@@ -15,5 +15,5 @@ module.exports = class ClientRouter extends CustomRouter
     'calendar/month/:month(/)': 'clientPageCalendarMonth'
 
   before: (methodName) =>
-    App.request 'auth:isAuthorized', 'client'
+    App.request 'auth:isAuthorizedAs', 'client'
     App.vent.trigger 'module:main-client:beforeAction'

@@ -16,13 +16,11 @@ module.exports = class BaseView extends Marionette.LayoutView
 
   initialize: ->
     App.vent.on 'body:change-class', @changeClass
-    @on 'showBody', @show
 
   onDestroy: ->
     App.vent.off 'body:change-class', @changeClass
 
   show: ->
-    @ui.appRegion.removeClass('hide')
 
   changeClass: (className) =>
     @$el.removeClass().addClass className

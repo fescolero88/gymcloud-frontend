@@ -1,7 +1,9 @@
 define [
   'config'
   'backbone.marionette'
-  'spinner'
+  'handlers/spinner'
+  'handlers/ajax_setup'
+  'handlers/user_authorization'
 
   'deps/scripts'
   'deps/fonts'
@@ -10,7 +12,9 @@ define [
 ], (
   config
   Marionette
-  Spinner
+  spinnerHandler
+  ajaxSetupHandler
+  userAuthorizationHandler
 ) ->
 
   FormValidatorHelper = require 'views/helpers/form-validator-helper'
@@ -30,9 +34,20 @@ define [
   ModalConfirmView = require 'views/general/modal-confirm-view'
   ModalAddToLibraryView = require 'views/general/modal_add_to_library_view'
 
-  class App extends Marionette.Application
+  class Application extends Marionette.Application
 
     initialize: ->
+      @addInitializer ->
+        App.data = {}
+        App.data.profileModel = new ProfileModel
+      @addInitializer ->
+        spinnerHandler(this)
+        userAuthorizationHandler(this)
+        ajaxSetupHandler(this, config)
+      @addInitializer ->
+        if @request('accessToken:get')
+          @data.profileModel.fetch().then =>
+            @vent.trigger 'profile:ready'
 
       @on 'start', ->
 
@@ -42,81 +57,7 @@ define [
         new MessengerHelper().initialize()
         # --- Helpers -----
 
-        # --- Globar spinner -----
-        spinner = new Spinner
-        @vent.on 'spinner:global:start', ->
-          spinner.spin(document.getElementById('center-spin'))
 
-        @vent.on 'spinner:global:stop', ->
-          spinner.stop()
-        # --- Globar spinner -----
-
-        # --- Ajax handlers -----
-        @loadingCount = 0
-        $(document).ajaxStart () =>
-          @vent.trigger 'spinner:global:start'  if ++@loadingCount is 1
-
-        $(document).ajaxComplete () =>
-          if @loadingCount > 0
-            @vent.trigger 'spinner:global:stop'  if --@loadingCount is 0
-
-        $(document).ajaxError (event, jqxhr, settings, thrownError) =>
-          if jqxhr.status is 401
-            window.location.replace '#/logout'
-
-          if jqxhr.status is 403
-            if jqxhr.responseJSON.message?['generic']
-              message = jqxhr.responseJSON.message['generic'].replace( /\s+(\[.+\])/, "")
-              @request 'messenger:show',
-                hideAfter: 5
-                message: message
-                type: 'error'
-            else
-              for name, error_msg of jqxhr.responseJSON.message
-                @request 'messenger:show',
-                  hideAfter: 5
-                  message: "#{name}: #{error_msg[0]}"
-                  type: 'error'
-            spinner.stop()
-
-        $.ajaxSetup
-          headers: {'X-Requested-With': 'XMLHttpRequest'}
-          contentType: 'application/json'
-
-        $.ajaxPrefilter ( options, originalOptions, jqXHR ) =>
-          options.url = config.api.url + options.url
-          accessToken = @request 'accessToken:get'
-          if accessToken
-            if options.url.indexOf('?') > 0
-              options.url += "&access_token=#{accessToken}"
-            else
-              options.url += "?access_token=#{accessToken}"
-          options
-        # --- Ajax handlers -----
-
-        # --- Data handlers -----
-        App.data = {}
-        App.data.profileModel = new ProfileModel()
-
-        @reqres.setHandler 'auth:isAuthorized', (permission) =>
-          if @request 'accessToken:get'
-            if permission?
-              accountType = App.data.profileModel.get('account_type')
-              if accountType?
-                if permission != accountType
-                  if accountType is 'trainer'
-                    window.location.replace '#tr'
-                  else
-                    window.location.replace '#'
-                else
-                  true
-              else
-                @checkPermission =  permission
-            else
-              true
-          else
-            window.location.replace '#login'
-            false
 
         @reqres.setHandler 'data:profile', ->
           App.data.profileModel
@@ -252,15 +193,6 @@ define [
             contentType: params.contentType || 'application/json'
             data: params.data || {}
 
-        @reqres.setHandler 'accessToken:set', (token) ->
-          window.localStorage.setItem 'accessToken', token
-
-        @reqres.setHandler 'accessToken:get', ->
-          window.localStorage.getItem 'accessToken'
-
-        @reqres.setHandler 'accessToken:remove', ->
-          window.localStorage.removeItem 'accessToken'
-
         # --- Data handlers -----
 
         # --- Base layout -----
@@ -280,31 +212,6 @@ define [
           Backbone.history.start()
         # --- Add modules -----
 
-        # --- Get profile -----
-        if @request 'accessToken:get'
-          profileModel = @request 'data:profile'
-          profileModel.fetch().then =>
-            @vent.trigger 'profile:ready'
-            accountType = profileModel.get 'account_type'
-            if @checkPermission?
-              # a workaround - treat a coach as a trainer, treat athlete as a client
-              if accountType is 'coach'
-                profileModel.set('account_type', 'trainer')
-                accountType = 'trainer'
-              else if accountType is 'athlete'
-                profileModel.set('account_type', 'client')
-                accountType = 'client'
-
-              if @checkPermission != accountType
-                if accountType is 'trainer'
-                  window.location.replace '#tr'
-                else
-                  window.location.replace '#'
-            @baseView.trigger('showBody')
-        else
-          @baseView.trigger('showBody')
-        # --- Get profile -----
-
   $ ->
-    window.App = new App()
+    window.App = new Application
     window.App.start()

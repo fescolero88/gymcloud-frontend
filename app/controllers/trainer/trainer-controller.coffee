@@ -35,7 +35,7 @@ module.exports = class TrainerController extends Marionette.Controller
 
   queue: =>
     if @queueMethod
-      if App.request('auth:isAuthorized', 'trainer')
+      if App.request('auth:isAuthorizedAs', 'trainer')
         @[@queueMethod].apply(null, @queueArgs)
         @queueMethod = false
         @queueArgs = null

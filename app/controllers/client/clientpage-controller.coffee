@@ -20,7 +20,7 @@ module.exports = class ClientPageController extends Marionette.Controller
 
   queue: =>
     if @queueMethod
-      if App.request('auth:isAuthorized', 'client')
+      if App.request('auth:isAuthorizedAs', 'client')
         @[@queueMethod].apply(null, @queueArgs)
         @queueMethod = false
         @queueArgs = null
@@ -47,19 +47,22 @@ module.exports = class ClientPageController extends Marionette.Controller
         exercisesGlobalView = new ClientEWPView(collection: new Backbone.Collection(items), dataType: dataType)
         @userPageView.content.show exercisesGlobalView
       else
-        switch dataType
-          when 'exercises'
-            model = new GlobalExerciseModel
-            model.url = model.urlRoot + key
-            model.fetch().then =>
-              exerciseGlobalView = new ExerciseGlobalView(model: model, breadcrumbs: breadcrumbs)
-              @userPageView.content.show exerciseGlobalView
-          when 'workouts'
-            model = new GlobalWorkoutModel
-            model.url = model.urlRoot + key
-            model.fetch().then =>
-              workoutGlobalView = new WorkoutGlobalView(model: model, breadcrumbs: breadcrumbs)
-              @userPageView.content.show workoutGlobalView
+        klasses = {
+          exercises:
+            model: GlobalExerciseModel,
+            view: ExerciseGlobalView
+          workouts:
+            model: GlobalWorkoutModel,
+            view: WorkoutGlobalView
+        }[dataType]
+
+        model = new klasses.model
+        model.url = model.urlRoot + key
+        model.fetch().then =>
+          view = new klasses.view
+            model: model
+            breadcrumbs: breadcrumbs
+          @userPageView.content.show view
     else
       @queueMethod = 'clientPageAssigments'
       @queueArgs = arguments
