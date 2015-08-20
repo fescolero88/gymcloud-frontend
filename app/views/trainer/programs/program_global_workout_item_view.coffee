@@ -4,6 +4,10 @@ module.exports = class ProgramGlobalWorkoutItemView extends Marionette.ItemView
 
   template: require 'templates/trainer/programs/program_global_workout_item'
 
+  className: 'gc-workout-draggable'
+
+  tagName: 'li'
+
   ui:
     workoutItemTabs: '.gc-workout-body-nav a'
     workoutTabs: '.gc-workout-tab-content'
