@@ -41,6 +41,7 @@ module.exports =
       '.js'
       '.json'
       '.coffee'
+      '.jade'
       '.hbs'
       '.scss'
       '.styl'
@@ -65,6 +66,10 @@ module.exports =
           helperDirs: [
             __dirname + '/app/handlers/handlebars'
           ]
+      }
+      {
+        test: /\.jade/
+        loader: 'jade'
       }
       {
         test: /\.css$/

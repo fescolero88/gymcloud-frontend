@@ -44,7 +44,8 @@
     "karma-phantomjs-launcher": "^0.2.0",
     "sinon": "^1.15.4",
     "mocha": "^2.2.5",
-    "karma": "^0.12.37"
+    "karma": "^0.12.37",
+    "jade-loader": "^0.7.1"
   },
   "dependencies": {
     "backbone": "^1.1.2",
