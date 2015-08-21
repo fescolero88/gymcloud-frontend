@@ -12,6 +12,8 @@ MessagesRouter = require 'routers/general/messages/messages-router'
 
 MainView = require 'views/general/main-view'
 SideBarView = require 'views/client/sidebar-view'
+# TODO: DELETE
+SideBarView = require 'views/sidebar/sidebar_view'
 HeaderView = require 'views/general/header-view'
 ClientPageView = require 'views/client/clientpage-view'
 ClientPageNavView = require 'views/client/clientpage-nav-view'

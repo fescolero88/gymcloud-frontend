@@ -16,4 +16,5 @@ module.exports = class ClientRouter extends CustomRouter
 
   before: (methodName) =>
     App.request 'auth:isAuthorizedAs', 'client'
-    App.vent.trigger 'module:main-client:beforeAction'
+    App.vent.on 'profile:ready', ->
+      App.vent.trigger 'module:main-client:beforeAction'

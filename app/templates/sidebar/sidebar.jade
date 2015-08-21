@@ -45,18 +45,9 @@ a.gc-sidebar-logo(href='#')
                 | Properties
           //- PRO Section!!!!
           hr
-          each type in ['exercises', 'workouts', 'programs']
-            .gc-sidebar-cat(data-category="#{type}")
-              a.row.toggle-menu(href="#my/#{type}/")
-                span.col-xs-2
-                  span.gc-sidebar-cat-icon.fix-bg-img-icon-exercises
-                span.col-xs-8.gc-sidebar-cat-name
-                  = _.capitalize(type)
-                span.col-xs-2.toggle-it
-                  span.fa.fa-chevron-down.toggle-it
-              .gc-sidebar-sub
-                each item in data[type]
-                  include sidebar_item
+          //- Personal Section
+          region(data-name='personal_workouts')
+          region(data-name='personal_programs')
                   
           .gc-sidebar-cat
             a.row.toggle-menu(href='#calendar/')
