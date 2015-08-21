@@ -3,6 +3,7 @@ define [
   'expose?_!lodash'
   'expose?Backbone!backbone'
   'underscore.string'
+  'underscore.inflections'
   'backbone-validation'
   'backbone.marionette'
   'expose?Handlebars!handlebars'
@@ -16,5 +17,7 @@ define [
   _
   Backbone
   Strings
+  Inflections
 )->
+  _.mixin Inflections
   _.mixin Strings.exports()
