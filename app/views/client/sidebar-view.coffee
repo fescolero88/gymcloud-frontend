@@ -6,7 +6,7 @@ SidebarProgramsCollection = require 'models/client/client_programs_collection'
 
 module.exports = class ClientSidebarView extends Marionette.LayoutView
 
-  template: require('templates/client/sidebar')
+  template: require('templates/sidebar/sidebar')
 
   className: 'gc-scrollable-area'
 
@@ -15,9 +15,10 @@ module.exports = class ClientSidebarView extends Marionette.LayoutView
     menu: '.toggle-menu'
 
   templateHelpers: ->
-    exercises: => App.request 'data:exercises'
-    workouts: => App.request 'data:workouts'
-    programs: => App.request 'data:programs'
+    data:
+      exercises: -> App.request 'data:exercises'
+      workouts: -> App.request 'data:workouts'
+      programs: -> App.request 'data:programs'
 
   initialize: ->
     @exercisesCollection = new SidebarExercisesCollection()

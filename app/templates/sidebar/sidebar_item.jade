@@ -1,0 +1,14 @@
+mixin content
+  a.row(href="#tr/global/#{item.type}/id/#{item.key}", class="#{ item.isFolder ? 'toggle-menu toggle-it' : '' }")
+    span.col-xs-2
+      span.fa-folder-o.fa-arrows(class="#{ item.isFolder ? 'fa' : 'fa draggable-handle' }")
+    span.col-xs-10.gc-sidebar-folder-name(data-key='#{item.key}')
+      =item.title
+  .gc-sidebar-sub
+
+if (item.isFolder)
+  .gc-sidebar-folder
+    mixin content
+else
+  .gc-sidebar-item(data-category="#{item.type}")
+    mixin content

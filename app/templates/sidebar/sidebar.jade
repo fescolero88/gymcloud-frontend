@@ -1,0 +1,66 @@
+a.gc-sidebar-logo(href='#')
+      img(src='app/images/gymcloud-logo.png', alt='')
+    .nano
+      .nano-content.gc-sidebar-content
+        .gc-assign-catch(style='min-height: 50px;')
+        .gc-sidebar-menu-list
+          .gc-sidebar-cat
+            a.row.toggle-menu(href='#')
+              span.col-xs-2
+                span.gc-sidebar-cat-icon.fix-bg-img-icon-dashboard
+              span.col-xs-10.gc-sidebar-cat-name
+                | Dashboard
+          
+          hr
+          //- PRO Section!!!!
+          region(data-name='exercises')
+          region(data-name='workouts')
+          region(data-name='programs')
+          .gc-sidebar-cat
+            a.row.toggle-menu(href='#tr/clients')
+              span.col-xs-2
+                span.gc-sidebar-cat-icon.fix-bg-img-icon-clients
+              span.col-xs-8.gc-sidebar-cat-name
+                | Clients
+              span.col-xs-2.toggle-it
+                span.fa.fa-chevron-down.toggle-it
+            .gc-sidebar-sub
+              .gc-sidebar-cat
+                a.row.toggle-menu(href='#tr/clients/individuals')
+                  span.col-xs-2
+                    span.gc-sidebar-cat-icon.fix-bg-img-icon-individuals
+                  span.col-xs-10.gc-sidebar-cat-name
+                    | Individuals
+              .gc-sidebar-cat
+                a.row.toggle-menu(href='#tr/clients/groups')
+                  span.col-xs-2
+                    span.gc-sidebar-cat-icon.fix-bg-img-icon-groups
+                  span.col-xs-10.gc-sidebar-cat-name
+                    | Groups
+          .gc-sidebar-cat
+            a.row.toggle-menu(href='#tr/properties/')
+              span.col-xs-2
+                span.gc-sidebar-cat-icon.fix-bg-img-icon-properties
+              span.col-xs-10.gc-sidebar-cat-name
+                | Properties
+          //- PRO Section!!!!
+          hr
+          each type in ['exercises', 'workouts', 'programs']
+            .gc-sidebar-cat(data-category="#{type}")
+              a.row.toggle-menu(href="#my/#{type}/")
+                span.col-xs-2
+                  span.gc-sidebar-cat-icon.fix-bg-img-icon-exercises
+                span.col-xs-8.gc-sidebar-cat-name
+                  = _.capitalize(type)
+                span.col-xs-2.toggle-it
+                  span.fa.fa-chevron-down.toggle-it
+              .gc-sidebar-sub
+                each item in data[type]
+                  include sidebar_item
+                  
+          .gc-sidebar-cat
+            a.row.toggle-menu(href='#calendar/')
+              span.col-xs-2
+                span.gc-sidebar-cat-icon.fix-bg-img-icon-calendar
+              span.col-xs-10.gc-sidebar-cat-name
+                | Calendar
