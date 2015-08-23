@@ -12,6 +12,8 @@ class ExercisesItemView extends Marionette.ItemView
 
   tagName: 'li'
 
+  className: 'gc-workout-exercise-item'
+
 module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeView
 
   template: require('templates/client/workouts/workout_clientpage_exercises')
