@@ -1,6 +1,7 @@
 Marionette = require 'backbone.marionette'
 ProgramGlobalWorkoutItemView = require 'views/trainer/programs/program_global_workout_item_view'
 ProgramWorkoutModel = require 'models/trainer/program-workout-model'
+Dragula = require 'dragula'
 
 module.exports = class ProgramGlobalWorkoutListView extends Marionette.CompositeView
 
@@ -15,7 +16,6 @@ module.exports = class ProgramGlobalWorkoutListView extends Marionette.Composite
 
   initialize: ->
     App.commands.setHandler 'program_workout:model:add', @addProgramWorkout
-
     @listenTo @collection, 'add', @workoutAdded
 
   onDestroy: ->
@@ -26,21 +26,16 @@ module.exports = class ProgramGlobalWorkoutListView extends Marionette.Composite
     @collection.add model
 
   workoutAdded: ->
-    @addSortable()
+    @addSortable() if @collection.length is 1
+
 
   addSortable: ->
-    @workoutList = @$el.find '.gc-program-workouts-list'
-    @workoutList.sortable
-      handle: '.gc-workout-header'
-      onDrop: @onSortWorkout
-      onDragStart: @onDragStart
+    sortableContainers = []
+    sortableContainers.push @el.querySelector 'ul.gc-program-workouts-list'
 
-  onDragStart: ($item, container, _super) =>
-    console.log 'test drag: ', container.options.drop, $item
-    if not container.options.drop
-      $item.clone().insertAfter($item)
-    _super $item, container
+    dragOptions =
+      revertOnSpill: true
+      moves: (el, container, handle) =>
+        return (handle.className is 'gc-program-workout-sort')
 
-  onSortWorkout: ($item, container, _super) =>
-    console.log 'test sort'
-    _super $item, container
+    Dragula sortableContainers, dragOptions

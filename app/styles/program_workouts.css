@@ -1,9 +1,16 @@
 .gc-program-workouts-list {
   padding: 20px;
   list-style-type: none;
+  position: relative;
+}
+.gc-program-workouts-list .gc-workout-draggable {
+  display: block;
 }
 .gc-program-workout-item {
   margin-bottom: 20px;
+}
+.gc-workout-draggable.dragged .gc-program-workout-item {
+  cursor: move;
 }
 .gc-program-workout-item .gc-workout-header {
   position: relative;
