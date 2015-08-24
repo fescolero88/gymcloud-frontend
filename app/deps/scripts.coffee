@@ -6,6 +6,7 @@ define [
   'underscore.inflections'
   'backbone-validation'
   'backbone.marionette'
+  'backbone.stickit'
   'expose?Handlebars!handlebars'
   'bootstrap'
   'selectize'
