@@ -1,7 +1,15 @@
-<div class="gc-workout-exercise-circle" data-letter="{{letterByNumber order_name}}" style="background: {{colorByLetterNumber order_name}}">
-  {{letterByNumber order_name}}{{position}}
+<div class="gc-clientpage-exercises-cell">
+  <div class="gc-workout-exercise-circle" data-letter="{{letterByNumber order_name}}" style="background: {{colorByLetterNumber order_name}}">
+    {{letterByNumber order_name}}{{position}}
+  </div>
 </div>
-<a href="#tr/global/exercises/id/{{id}}"class="gc-workout-exercise-name">{{name}}</a>
-{{#each properties}}
-<div class="gc-workout-exercise-prop"><i class="fa fa-align-left"></i>{{value}} {{name}}</div>
-{{/each}}
+<div class="gc-clientpage-exercises-cell">
+  <a href="#my/exercises/{{exercise_id}}"class="gc-workout-exercise-name">{{name}}</a>
+</div>
+<div class="gc-clientpage-exercises-cell gc-cell-property">
+  <ul class="workout-exercise-properties">
+    {{#each properties}}
+      <li class="gc-workout-exercise-prop"><i class="fa fa-align-left"></i>{{value}} {{name}}</li>
+    {{/each}}
+  </ul>
+</div>

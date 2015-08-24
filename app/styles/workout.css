@@ -191,7 +191,6 @@ ul.gc-workout-exercises-list:after {
 }
 
 ul.gc-workout-exercises-list li.gc-workout-exercise-item {
-  float: left;
   display: table;
   width: 100%;
   padding: 16px 0;
@@ -217,7 +216,8 @@ ul.gc-workout-exercises-list li.gc-workout-exercise-item label.gc-alt-checkbox {
   padding-left: 29px;
   cursor: pointer;
 }
-ul.gc-workout-exercises-list li .gc-exercises-cell {
+ul.gc-workout-exercises-list li .gc-exercises-cell,
+ul.gc-workout-exercises-list li .gc-clientpage-exercises-cell {
   display: table-cell;
   vertical-align: middle;
 }
@@ -232,17 +232,16 @@ ul.gc-workout-exercises-list li > .gc-exercises-cell.gc-cell-add {
   width: 40px;
   text-align: right;
 }
+ul.gc-workout-exercises-list li > .gc-clientpage-exercises-cell:first-child,
 ul.gc-workout-exercises-list li > .gc-exercises-cell:nth-child(2) {
   width: 20px;
 }
 ul.gc-workout-exercises-list li .gc-cell-property {
   text-align: right;
 }
-
 ul.gc-workout-exercises-list li .gc-property {
   margin: 0!important;
 }
-
 ul.gc-workout-exercises-list .dragged {
   position: absolute;
 }
