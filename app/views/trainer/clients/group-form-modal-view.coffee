@@ -54,11 +54,11 @@ module.exports = class GroupFormModalView extends Marionette.ItemView
         delete formData[key]
     @model.set formData
     if @model.isValid true
-      App.vent.trigger('spinner:global:start')
+      App.vent.trigger('spinner:start')
       @model.save()
 
   onSync: ->
-    App.vent.trigger 'spinner:global:stop'
+    App.vent.trigger ''
     @trigger 'closeModal'
     @trigger 'addToGroupsCollection', @model
     if @avatar[0].files[0]

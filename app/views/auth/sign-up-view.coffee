@@ -159,5 +159,5 @@ module.exports = class SignUpView extends Marionette.LayoutView
     @signUp.show @step2
 
   final: (dataStep2) =>
-    App.vent.trigger 'spinner:global:stop'
+    App.vent.trigger ''
     @trigger 'signup:complete'

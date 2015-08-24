@@ -66,9 +66,9 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
       App.request 'messenger:show',
         message: "Privacy settings was changed"
     else
-      App.vent.trigger 'spinner:global:start'
+      App.vent.trigger 'spinner:start'
       App.request('data:reload', 'exercises', App.request 'data:exercises:root').then =>
-        App.vent.trigger 'spinner:global:stop'
+        App.vent.trigger ''
         App.request 'messenger:show',
         hideAfter: 5
         message: "Exercise Updated."

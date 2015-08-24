@@ -60,7 +60,7 @@ module.exports = class ModalAddToLibraryView extends Marionette.LayoutView
         dataType: 'json'
         data: JSON.stringify @model.attributes
         success: (model) =>
-          App.request 'spinner:global:start'
+          App.request 'spinner:start'
           importedModel = new GlobalExerciseModel(model)
           importedModel.set 'name', @name
           importedModel.set 'exercise_folder_id', @parent_id
@@ -69,7 +69,7 @@ module.exports = class ModalAddToLibraryView extends Marionette.LayoutView
             success: (model, data) =>
               App.request('data:reload', @type, App.request "data:#{@type}:root").then =>
                 @closeModal()
-                App.request 'spinner:global:stop'
+                App.request ''
                 App.request 'messenger:show',
                   message: "Item added to your library"
                 window.location.replace "#tr/global/exercises/id/#{data.id}"

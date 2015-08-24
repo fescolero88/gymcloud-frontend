@@ -1,7 +1,5 @@
 config = require 'config'
 Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-_ = require 'underscore'
 FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
 module.exports = class ResetPasswordView extends Marionette.LayoutView

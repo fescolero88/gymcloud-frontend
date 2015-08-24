@@ -16,7 +16,7 @@ module.exports = class SideBarView extends Marionette.LayoutView
     'click .nano': 'onClickSidebar'
 
   ui:
-    subs: '.gc-sidebar-folder>.gc-sidebar-sub, .gc-sidebar-cat>.gc-sidebar-sub'
+    subs: '.gc-sidebar-folder > .gc-sidebar-sub, .gc-sidebar-cat > .gc-sidebar-sub'
     sidebar: '.gc-sidebar-menu-list'
     dndArea: '.gc-dnd-area'
     mainArea: '.gc-main'

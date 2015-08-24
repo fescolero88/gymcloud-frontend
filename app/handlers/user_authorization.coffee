@@ -12,7 +12,6 @@ define ->
         permission is 'trainer' and isPro ||
         permission is 'client' and !isPro
 
-
       'accessToken:set': (token) ->
         window.localStorage.setItem 'accessToken', token
 

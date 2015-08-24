@@ -15,7 +15,7 @@ define [
   PersonalCollectionView
   template
 )->
-  Marionette.LayoutView.extend
+  class SidebarView extends Marionette.LayoutView
 
     template: template
 
@@ -116,6 +116,8 @@ define [
         drag: false
         group: 'assignEx'
 
-    updateEWPName: (type, key, newValue) -> # todo implement for programs
+    # TODO: implement for programs
+    # TODO: review and delete
+    updateEWPName: (type, key, newValue) ->
       selector = "span[data-key=\"#{key}\"]"
       @ui["#{type}Region"].find(selector).html(newValue)

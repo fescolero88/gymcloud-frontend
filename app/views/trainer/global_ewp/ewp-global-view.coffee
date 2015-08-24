@@ -195,7 +195,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
       @listView.render()
       @listView.collection.trigger 'highlight', model
       href = "#tr/global/#{@typeName}/id/#{model['key']}"
-      App.vent.trigger 'spinner:global:stop'
+      App.vent.trigger ''
 
       # notify sidebar changes
       @notifySidebarChanges model
@@ -222,7 +222,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
       @listView.render()
       @listView.collection.trigger 'highlight', model
       href = "#tr/global/#{@typeName}/id/#{model['key']}"
-      App.vent.trigger 'spinner:global:stop'
+      App.vent.trigger ''
       @notifySidebarChanges model
       App.request 'messenger:show',
         hideAfter: 5
@@ -250,7 +250,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
   onDuplicate: (response) ->
     App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
       @ui.actionModal.modal 'hide'
-      App.vent.trigger 'spinner:global:stop'
+      App.vent.trigger ''
       App.request 'messenger:show',
         hideAfter: 5
         message: "Item(s) duplicated"

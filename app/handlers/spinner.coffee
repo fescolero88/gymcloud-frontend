@@ -3,8 +3,8 @@ define ['spinner'], (Spinner)->
     spinner = new Spinner
     spinEl = document.getElementById('center-spin')
 
-    App.vent.on 'spinner:global:start', ->
+    App.vent.on 'spinner:start', ->
       spinner.spin(spinEl)
 
-    App.vent.on 'spinner:global:stop', ->
+    App.vent.on 'spinner:stop', ->
       spinner.stop()

@@ -1,12 +1,14 @@
-module.exports = Backbone.Collection.extend
+define ->
+  class UserCollection extends Backbone.Collection
 
-  initialize: (models, options) ->
-    @userId = options.user?.id || App.request("data:profile").id
-    @type = options.type
+    initialize: (models, options) ->
+      @userId = options.user?.id || App.request("data:profile").id
+      @type = options.type
 
-  url: ->
-    "/users/#{@userId}/collections/#{@type}"
+    url: ->
+      "/users/#{@userId}/collections/#{@type}"
 
-  # model: ->
-  #   modelName = _.singularize(@type)
-  #   require("models/#{modelName}")
+    # TODO: implement all models for user collections
+    # model: ->
+    #   modelName = _.singularize(@type)
+    #   require("models/#{modelName}")

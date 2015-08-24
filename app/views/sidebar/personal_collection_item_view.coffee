@@ -5,7 +5,7 @@ define [
   Marionette
   template
 )->
-  Marionette.ItemView.extend
+  class PersonalCollectionItemView extends Marionette.ItemView
 
     template: template
 
