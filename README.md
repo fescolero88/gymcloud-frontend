@@ -16,7 +16,8 @@ $ npm install
 
 Copy sample config and change api url if it needed:
 ```sh
-$ cp app/config_sample.coffee app/config.coffee
+$ cp .env.sample .env
+$ cp config/base.sample.coffee config/base.coffee
 ```
 
 Run gulp watcher:

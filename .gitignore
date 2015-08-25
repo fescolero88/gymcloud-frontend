@@ -3,7 +3,8 @@ static/
 node_modules/
 bower_components/
 .DS_Store
-config.coffee
+.env
+config/base.coffee
 .idea/
 *.iml
 .nvmrc
