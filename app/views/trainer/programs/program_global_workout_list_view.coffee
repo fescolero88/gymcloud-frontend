@@ -12,11 +12,10 @@ module.exports = class ProgramGlobalWorkoutListView extends Marionette.Composite
   childView: ProgramGlobalWorkoutItemView
 
   ui:
-    workoutList: '.gc-program-workouts-list'
+    workoutsList: '.gc-program-workouts-list'
 
   initialize: ->
     App.commands.setHandler 'program_workout:model:add', @addProgramWorkout
-    @listenTo @collection, 'add', @workoutAdded
 
   onDestroy: ->
     App.commands.removeHandler 'program_workout:model:add', @addProgramWorkout
@@ -25,17 +24,16 @@ module.exports = class ProgramGlobalWorkoutListView extends Marionette.Composite
     model = new ProgramWorkoutModel()
     @collection.add model
 
-  workoutAdded: ->
-    @addSortable() if @collection.length is 1
-
+  onShow: ->
+    @addSortable()
 
   addSortable: ->
     sortableContainers = []
-    sortableContainers.push @el.querySelector 'ul.gc-program-workouts-list'
+    sortableContainers.push @ui.workoutsList[0]
 
     dragOptions =
       revertOnSpill: true
-      moves: (el, container, handle) =>
-        return (handle.className is 'gc-program-workout-sort')
+      moves: (el, container, handle) ->
+        (handle.className is 'gc-program-workout-sort')
 
     Dragula sortableContainers, dragOptions
