@@ -1,6 +1,8 @@
 path = require('path')
 webpack = require('webpack')
 
+require('dotenv').load()
+
 module.exports =
 
   cache: true
@@ -27,6 +29,7 @@ module.exports =
     ]
 
     alias:
+      'config': path.join(__dirname, 'config', process.env.NODE_ENV || 'test')
       'selectize': 'bower_components/selectize/dist/js/selectize'
       'spinner': 'bower_components/spin.js/spin.js'
       'jquery-sortable': 'bower_components/jquery-sortable/source/js/jquery-sortable.js'
