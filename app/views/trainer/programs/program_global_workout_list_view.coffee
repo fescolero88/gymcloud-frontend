@@ -1,6 +1,7 @@
 Marionette = require 'backbone.marionette'
 ProgramGlobalWorkoutItemView = require 'views/trainer/programs/program_global_workout_item_view'
 ProgramWorkoutModel = require 'models/trainer/program-workout-model'
+Dragula = require 'dragula'
 
 module.exports = class ProgramGlobalWorkoutListView extends Marionette.CompositeView
 
@@ -9,6 +10,9 @@ module.exports = class ProgramGlobalWorkoutListView extends Marionette.Composite
   childViewContainer: '.gc-program-workouts-list'
 
   childView: ProgramGlobalWorkoutItemView
+
+  ui:
+    workoutsList: '.gc-program-workouts-list'
 
   initialize: ->
     App.commands.setHandler 'program_workout:model:add', @addProgramWorkout
@@ -19,3 +23,17 @@ module.exports = class ProgramGlobalWorkoutListView extends Marionette.Composite
   addProgramWorkout: =>
     model = new ProgramWorkoutModel()
     @collection.add model
+
+  onShow: ->
+    @addSortable()
+
+  addSortable: ->
+    sortableContainers = []
+    sortableContainers.push @ui.workoutsList[0]
+
+    dragOptions =
+      revertOnSpill: true
+      moves: (el, container, handle) ->
+        (handle.className is 'gc-program-workout-sort')
+
+    Dragula sortableContainers, dragOptions

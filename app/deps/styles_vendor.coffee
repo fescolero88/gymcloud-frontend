@@ -5,4 +5,5 @@ define [
   'bower_components/messenger/build/css/messenger.css'
   'bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
   'bower_components/nanoscroller/bin/css/nanoscroller.css'
+  'node_modules/dragula/dist/dragula.min.css'
 ], ->
