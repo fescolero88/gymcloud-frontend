@@ -65,3 +65,38 @@ define ->
 
       'data:programs:clear': ->
         delete App.data.programs
+
+      'client:properties': (id) ->
+        App.data['client:properties']?[id]
+
+      'client:properties:set': (id, properties) ->
+        App.data['client:properties'] ?= {}
+        App.data['client:properties'][id] = properties
+
+      'my:properties': =>
+        profile = @request 'data:profile'
+        App.data['client:properties']?[profile.get('id')]
+
+      'my:properties:set': (properties) =>
+        profile = @request 'data:profile'
+        App.data['client:properties'] ?= {}
+        App.data['client:properties'][profile.get('id')] = properties
+
+      'lastHash:get': ->
+        App.data.lastHash
+
+      'lastHash:set': (params) ->
+        App.data.lastHash =
+          hash: params.hash
+          action: params.name
+
+      'data:delete': (category, key) ->
+        items = App.data[category]
+        deleteFromTree = (items, key) =>
+          for item, index in items
+            if item.isFolder
+              deleteFromTree item.items, key
+            else if item.key is key
+              items.splice index, 1
+              return
+        deleteFromTree items, key

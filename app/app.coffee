@@ -70,35 +70,6 @@ define [
             success: (data) =>
               App.data[category] = data.items
 
-        @reqres.setHandler 'data:delete', (category, key) ->
-          items = App.data[category]
-          deleteFromTree = (items, key) =>
-            for item, index in items
-              if item.isFolder
-                deleteFromTree item.items, key
-              else if item.key is key
-                items.splice index, 1
-                return
-          deleteFromTree items, key
-
-        @reqres.setHandler 'client:properties', (id) ->
-          App.cache?['client:properties']?[id]
-
-        @reqres.setHandler 'client:properties:set', (id, properties) ->
-          App.cache ?= {}
-          App.cache['client:properties'] ?= {}
-          App.cache['client:properties'][id] = properties
-
-        @reqres.setHandler 'my:properties', () =>
-          profile = @request 'data:profile'
-          App.cache?['client:properties']?[profile.get('id')]
-
-        @reqres.setHandler 'my:properties:set', (properties) =>
-          profile = @request 'data:profile'
-          App.cache ?= {}
-          App.cache['client:properties'] ?= {}
-          App.cache['client:properties'][profile.get('id')] = properties
-
         @reqres.setHandler 'base:confirmationalModal', (data) =>
           confirmView = new ModalConfirmView data
           region = @baseView.baseModalRegion
@@ -109,7 +80,6 @@ define [
             region.$el.modal('hide')
             region.destroy()
 
-
         @reqres.setHandler 'base:addToLibraryModal', (data) =>
           addToLibraryView = new ModalAddToLibraryView data
           region = @baseView.baseModalRegion
@@ -119,14 +89,6 @@ define [
           @listenToOnce addToLibraryView, "modal:closed", =>
             region.$el.modal('hide')
             region.destroy()
-
-        @reqres.setHandler 'lastHash:get', ->
-          App.data.lastHash
-
-        @reqres.setHandler 'lastHash:set', (params) ->
-          App.data.lastHash =
-            hash: params.hash
-            action: params.name
 
         @reqres.setHandler 'ajax:options:create', (params) ->
           options =
