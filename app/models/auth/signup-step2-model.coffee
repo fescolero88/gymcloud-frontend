@@ -1,42 +1,46 @@
-Backbone = require 'backbone'
+define [
+  'backbone'
+], (
+  Backbone
+) ->
 
-module.exports = class SignUpStep2Model extends Backbone.Model
+  class SignUpStep2Model extends Backbone.Model
 
-  urlRoot: '/user_profiles'
+    urlRoot: '/user_profiles'
 
-  validation:
+    validation:
 
-    first_name:
-      required: true
+      first_name:
+        required: true
 
-    last_name:
-      required: true
+      last_name:
+        required: true
 
-    address:
-      required: true
+      address:
+        required: true
 
-    city:
-      required: true
+      city:
+        required: true
 
-    state:
-      required: true
+      state:
+        required: true
 
-    zip:
-      required: true
-      pattern: 'digits'
+      zip:
+        required: true
+        pattern: 'digits'
 
-    birth_day:
-      required: true
+      birth_day:
+        required: true
 
-    birth_month:
-      required: true
+      birth_month:
+        required: true
 
-    birth_year:
-      required: true
+      birth_year:
+        required: true
 
-    gender:
-      required: true
-      oneOf: ['male', 'female']
+      gender:
+        required: true
+        oneOf: ['male', 'female']
 
-    agree:
-      acceptance: true
+      agree:
+        acceptance: true
