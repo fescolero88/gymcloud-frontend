@@ -15,9 +15,9 @@ define [
 
     getChildView: (item) ->
       if typeof item.attributes.folder_id isnt 'undefined'
-        return TemplateCollectionItemView
+        TemplateCollectionItemView
       else
-        return TemplateCollectionView
+        TemplateCollectionView
 
     childViewOptions: (model, index) ->
       attributes:
