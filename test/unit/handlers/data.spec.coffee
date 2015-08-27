@@ -6,7 +6,7 @@ define [
   dataHandler
 ) ->
 
-  describe.only 'handlers: data', ->
+  describe 'handlers: data', ->
 
     before ->
       App = new Marionette.Application
