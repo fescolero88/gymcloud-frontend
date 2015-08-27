@@ -1,7 +1,7 @@
 Marionette = require 'backbone.marionette'
-WorkoutExercisesPropertyCollection = require 'models/trainer/workout-exercise-property-collection'
-WorkoutExercisesPropertyModel = require 'models/trainer/workout-exercise-property-model'
-WorkoutExerciseModel = require 'models/trainer/workout-exercise-model'
+WorkoutExercisesProperties = require 'collections/workout_exercise_properties'
+WorkoutExercisesProperty = require 'models/workout_exercise_property'
+WorkoutExercise = require 'models/workout_exercise'
 WorkoutGlobalExercisePropertyView = require 'views/trainer/workouts/workout_global_exercise_item_property_view'
 
 module.exports = class ExercisesItemView extends Marionette.CompositeView
@@ -30,8 +30,8 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
     note: '.gc-workout-exercise-note'
 
   initialize: ->
-    @collection = new WorkoutExercisesPropertyCollection @model.get 'properties'
-    @workoutExerciseModel = new WorkoutExerciseModel
+    @collection = new WorkoutExercisesProperties @model.get 'properties'
+    @workoutExerciseModel = new WorkoutExercise
     @listenTo @workoutExerciseModel, 'sync', @refreshExercises
     @listenTo @collection, 'change:state', @toggleHover
     @listenTo @collection, 'remove', @toggleHover
@@ -117,7 +117,7 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
     App.vent.trigger 'workout:reload:exercises'
 
   addProperty: ->
-    workoutExerciseProperty = new WorkoutExercisesPropertyModel()
+    workoutExerciseProperty = new WorkoutExercisesProperty
     # set default prop here
     workoutExerciseProperty.set 'state', 'edit'
     @collection.add workoutExerciseProperty, sort: false
@@ -126,7 +126,7 @@ module.exports = class ExercisesItemView extends Marionette.CompositeView
     promises = []
     if @ui.setPropertyCheckbox.is(':checked')
       models = models.map (property) =>
-        model = new WorkoutExercisesPropertyModel()
+        model = new WorkoutExercisesProperty
         model.set 'property_value', property.get 'property_value' || 0
         model.set 'property_id', property.get 'property_id' || 0
         model.set 'workout_id', @model.get('workout_id')

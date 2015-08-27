@@ -8,10 +8,10 @@ AddGlobalFolderModalView = require 'views/trainer/global_ewp/add-global-folder-m
 DuplicateGlobalEWPModalView = require 'views/trainer/global_ewp/duplicate-global-ewp-modal'
 
 BreadcrumbsView = require 'views/general/breadcrumbs/breadcrumbs-view'
-BreadcrumbsCollection = require 'models/general/breadcrumbs'
-EWPSortableCollection = require 'models/trainer/ewp_sortable_collection'
+Breadcrumbs = require 'collections/breadcrumbs'
+EWPSortableCollection = require 'collections/ewp_sortable'
 
-GlobalEWPModel = require 'models/trainer/global-ewp-model'
+GlobalEWPModel = require 'models/global_ewp_model'
 
 module.exports = class EWPGlobalView extends Marionette.LayoutView
 
@@ -51,7 +51,7 @@ module.exports = class EWPGlobalView extends Marionette.LayoutView
     @exercisesList = data.items
     @typeName = data.type
     @breadcrumbsView = new BreadcrumbsView
-      collection: new BreadcrumbsCollection data.breadcrumbs
+      collection: new Breadcrumbs data.breadcrumbs
 
     @ewpGlobalModel = new GlobalEWPModel type: @typeName
     @listenTo @ewpGlobalModel, 'model:duplicate:success', @onDuplicate

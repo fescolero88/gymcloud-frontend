@@ -1,6 +1,6 @@
 Marionette = require 'backbone.marionette'
 
-ClientCollection = require 'models/trainer/client-collection'
+Clients = require 'collections/clients'
 
 class MembersItemView extends Marionette.ItemView
 
@@ -97,7 +97,7 @@ module.exports = class MembersView extends Marionette.CompositeView
           @collection.fetch()
 
   initSearchSelect: =>
-    clientCollection = new ClientCollection
+    clientCollection = new Clients
     clientCollection.fetch().then =>
       options = @searchItems clientCollection.models
       this_ = @

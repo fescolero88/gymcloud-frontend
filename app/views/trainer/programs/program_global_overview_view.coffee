@@ -4,8 +4,8 @@ Backbone = require 'backbone'
 ProgramGlobalDetailsView = require 'views/trainer/programs/program_global_details_view'
 ProgramGlobalPrivacyControlsView = require 'views/trainer/programs/program_global_privacy_controls_view'
 ProgramWeeksView = require 'views/trainer/programs/program_weeks_view'
-ProgramWeeksCollection = require 'models/trainer/program_weeks_collection'
-ProgramWorkoutsCollection = require 'models/trainer/program-workout-collection'
+ProgramWeeks = require 'collections/program_weeks'
+ProgramWorkouts = require 'collections/program_workouts'
 ProgramWorkoutListView = require 'views/trainer/programs/program_global_workout_list_view'
 
 class WeekEmptyView extends Marionette.ItemView
@@ -53,8 +53,8 @@ module.exports = class ProgramGlobalOverviewView extends Marionette.LayoutView
     'change:is_public': 'privacyChanged'
 
   initialize: ->
-    @collection = new ProgramWeeksCollection
-    @workoutsCollection = new ProgramWorkoutsCollection
+    @collection = new ProgramWeeks
+    @workoutsCollection = new ProgramWorkouts
 
     @listenTo @collection, 'update', @toggleEmptyState
     @listenTo @workoutsCollection, 'update', @toggleEmptyState

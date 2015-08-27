@@ -1,10 +1,11 @@
 define [
   'backbone.marionette'
-  'models/trainer/draggable-menuitem-model'
+  'models/draggable_menu_item'
   'views/trainer/sidebar-entity-composite-view'
-  'models/general/sidebar-items-collection'
+  'collections/sidebar_items'
   'collections/user_collection'
   'views/sidebar/personal_collection_view'
+  'views/sidebar/sidebar_pro_view'
   'templates/sidebar/sidebar'
 ], (
   Marionette
@@ -13,6 +14,7 @@ define [
   SidebarItemsCollection
   UserCollection
   PersonalCollectionView
+  SidebarProView
   template
 )->
   class SidebarView extends Marionette.LayoutView
@@ -33,16 +35,12 @@ define [
       mainArea: '.gc-main'
       catchList: '.gc-assign-catch'
       item: '.gc-sidebar-item > a'
-      exercisesRegion: 'region[data-name="exercises"]'
-      workoutsRegion: 'region[data-name="workouts"]'
-      programsRegion: 'region[data-name="programs"]'
+      proRegion: 'pro-section'
       personalWorkoutsRegion: 'region[data-name="personal_workouts"]'
       personalProgramsRegion: 'region[data-name="personal_programs"]'
 
     regions:
-      exercises: '@ui.exercisesRegion'
-      workouts: '@ui.workoutsRegion'
-      programs: '@ui.programsRegion'
+      pro: '@ui.proRegion'
       personalWorkouts: '@ui.personalWorkoutsRegion'
       personalPrograms: '@ui.personalProgramsRegion'
 
@@ -50,13 +48,16 @@ define [
       _.each ['workouts', 'programs'], (item) =>
         collection = new UserCollection([], type: "personal_#{item}")
         collection.fetch().then =>
+          App.request "data:#{item}:reset", collection.toJSON()
           view = new PersonalCollectionView
             collection: collection
             type: item
+
           regionName = "personal#{_.capitalize(item)}"
           @getRegion(regionName).show(view)
 
     onRender: ->
+      @getRegion('pro').show(new SidebarProView)
 
 
     toggleMenu: (ev) ->

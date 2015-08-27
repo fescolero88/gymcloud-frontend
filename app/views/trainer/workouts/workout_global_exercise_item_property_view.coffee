@@ -1,6 +1,5 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
-PropertyCollection = require 'models/trainer/property-collection'
 _ = require 'underscore'
 
 module.exports = class WorkoutGlobalExercisePropertyView extends Marionette.ItemView

@@ -1,6 +1,6 @@
 Marionette = require 'backbone.marionette'
 ProgramGlobalWorkoutItemView = require 'views/trainer/programs/program_global_workout_item_view'
-ProgramWorkoutModel = require 'models/trainer/program-workout-model'
+ProgramWorkout = require 'models/program_workout'
 Dragula = require 'dragula'
 
 module.exports = class ProgramGlobalWorkoutListView extends Marionette.CompositeView
@@ -21,7 +21,7 @@ module.exports = class ProgramGlobalWorkoutListView extends Marionette.Composite
     App.commands.removeHandler 'program_workout:model:add', @addProgramWorkout
 
   addProgramWorkout: =>
-    model = new ProgramWorkoutModel()
+    model = new ProgramWorkout
     @collection.add model
 
   onShow: ->

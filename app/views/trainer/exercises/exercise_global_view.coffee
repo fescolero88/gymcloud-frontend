@@ -7,7 +7,7 @@ ExerciseGlobalAssignView = require 'views/trainer/exercises/exercise_global_assi
 ExerciseEditView = require 'views/trainer/exercises/exercise_edit_view'
 
 BreadcrumbsView = require 'views/general/breadcrumbs/breadcrumbs-view'
-BreadcrumbsCollection = require 'models/general/breadcrumbs'
+Breadcrumbs = require 'collections/breadcrumbs'
 
 module.exports = class ExerciseGlobalView extends Marionette.LayoutView
 
@@ -36,7 +36,7 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
 
   initialize: (data) =>
     @breadcrumbs = data.breadcrumbs
-    @breadcrumbsView = new BreadcrumbsView(collection: new BreadcrumbsCollection(@breadcrumbs))
+    @breadcrumbsView = new BreadcrumbsView(collection: new Breadcrumbs(@breadcrumbs))
     @exerciseModel = data.exercise
 
     @listenTo(@exerciseModel, 'sync', @onExerciseModelSync)

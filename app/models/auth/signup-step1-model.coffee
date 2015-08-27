@@ -1,32 +1,36 @@
-Backbone = require 'backbone'
+define [
+  'backbone'
+], (
+  Backbone
+) ->
 
-module.exports = class SignUpStep1Model extends Backbone.Model
+  class SignUpStep1Model extends Backbone.Model
 
-  urlRoot: '/users.json'
+    urlRoot: '/users.json'
 
-  toJSON: ->
-    user: super
+    toJSON: ->
+      user: super
 
-  validation:
+    validation:
 
-    account_type:
-      required: false
-      pattern: 'digits'
+      account_type:
+        required: false
+        pattern: 'digits'
 
-    email:
-      required: true
-      pattern: 'email'
+      email:
+        required: true
+        pattern: 'email'
 
-    password:
-      required: true
-      minLength: 6
-      msg: 'Password must be 6 characters'
+      password:
+        required: true
+        minLength: 6
+        msg: 'Password must be 6 characters'
 
-    password_confirmation: [
-      equalTo: 'password'
-      msg: 'The passwords do not match'
-    ,
-      required: true
-      minLength: 6
-      msg: 'Password must be 6 characters'
-    ]
+      password_confirmation: [
+        equalTo: 'password'
+        msg: 'The passwords do not match'
+      ,
+        required: true
+        minLength: 6
+        msg: 'Password must be 6 characters'
+      ]

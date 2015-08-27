@@ -1,6 +1,6 @@
 Marionette = require 'backbone.marionette'
 
-ClientTrainerModel = require 'models/client/client_trainer'
+ClientTrainer = require 'models/client_trainer'
 ClientTrainerActionsView = require 'views/client/client-trainer-actions-view'
 
 module.exports = class ClientPageNavView extends Marionette.LayoutView
@@ -11,7 +11,7 @@ module.exports = class ClientPageNavView extends Marionette.LayoutView
     trainerActions: ".gc-client-trainer-actions"
 
   initialize: ->
-    @model = new ClientTrainerModel()
+    @model = new ClientTrainer
     @profileModel = App.request 'data:profile'
 
     App.vent.on 'profile:ready', @render

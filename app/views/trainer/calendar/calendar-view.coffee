@@ -5,7 +5,7 @@ CalendarDayView = require 'views/trainer/calendar/calendar-day-view'
 CalendarWeekView = require 'views/trainer/calendar/calendar-week-view'
 CalendarMonthView = require 'views/trainer/calendar/calendar-month-view'
 
-CalendarEventCollection = require 'models/trainer/calendar-event-collection'
+CalendarEvents = require 'collections/calendar_events'
 
 module.exports = class CalendarView extends Marionette.LayoutView
 
@@ -30,7 +30,7 @@ module.exports = class CalendarView extends Marionette.LayoutView
 
   initialize: ->
     @currentDate = moment()
-    @calendarEventCollection = new CalendarEventCollection
+    @calendarEventCollection = new CalendarEvents
     @calendar_url = @calendarEventCollection.url
 
     year = @currentDate.year()

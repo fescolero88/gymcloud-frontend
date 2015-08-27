@@ -1,6 +1,6 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
-SidebarChildItemsCollection = require 'models/general/sidebar-child-items-collection'
+SidebarChildItems = require 'collections/sidebar_child_items'
 
 class SidebarEntityItem extends Marionette.CompositeView
 
@@ -19,7 +19,7 @@ class SidebarEntityItem extends Marionette.CompositeView
   initialize: (options) ->
     @type = options.type
     if @model.get 'isFolder'
-      @collection = new SidebarChildItemsCollection(@model.get('items') || {})
+      @collection = new SidebarChildItems(@model.get('items') || {})
 
       key = @model.get 'key'
       # create listener specific to this folder

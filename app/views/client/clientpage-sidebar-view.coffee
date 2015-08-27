@@ -1,10 +1,9 @@
 Marionette = require 'backbone.marionette'
 
-ClientActivityCollection = require 'models/trainer/activity-collection'
+Activities = require 'collections/activities'
 ClientProfileView = require 'views/client/clientpage-profile-view'
 ClientPageActivityView = require 'views/client/clientpage-activity-view'
 ClientFormModalView = require 'views/trainer/clients/client-form-modal-view'
-ClientModel = require 'models/trainer/client-model'
 
 module.exports = class ClientPageSidebarView extends Marionette.LayoutView
 
@@ -33,7 +32,7 @@ module.exports = class ClientPageSidebarView extends Marionette.LayoutView
     App.vent.off 'profile:ready', @updateProfile
 
   onShow: =>
-    clientRecentActivity = new ClientActivityCollection
+    clientRecentActivity = new Activities
     clientRecentActivity.url = '/api/mobile/notifications'
     clientRecentActivity.fetch()
 

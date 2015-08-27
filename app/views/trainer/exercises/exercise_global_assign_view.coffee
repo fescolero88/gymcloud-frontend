@@ -1,10 +1,10 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
-ClientCollection = require 'models/trainer/client-collection'
-GroupCollection = require 'models/trainer/group-collection'
+Clients = require 'collections/clients'
+ClientGroups = require 'collections/client_groups'
 
-AssigneesList = require 'models/trainer/global_exercise_assignees'
+AssigneesList = require 'models/global_exercise_assignees'
 
 class ExerciseGlobalAssignClientsItemView extends Marionette.ItemView
 
@@ -90,7 +90,7 @@ module.exports = class ExerciseGlobalAssignView extends Marionette.LayoutView
     @item_id = data.model.get 'id'
 
   onShow: =>
-    clientsCollection = new ClientCollection
+    clientsCollection = new Clients
     clientsCollection.fetch()
     clientsList = new ExerciseGlobalAssignClientsListView
       collection: clientsCollection
@@ -98,7 +98,7 @@ module.exports = class ExerciseGlobalAssignView extends Marionette.LayoutView
     @clients.show clientsList
     @listenTo clientsList, 'client:assign:toggle', @toggleAssign
 
-    groupCollection = new GroupCollection
+    groupCollection = new ClientGroups
     groupCollection.fetch()
     groupsList = new ExerciseGlobalAssignClientsListView
       collection: groupCollection

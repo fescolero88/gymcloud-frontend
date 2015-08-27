@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
-EWPGlobalModel = require 'models/trainer/global-ewp-model'
+EWPGlobalModel = require 'models/global_ewp_model'
 
 module.exports = class AddGlobalEWPModalView extends Marionette.ItemView
 

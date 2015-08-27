@@ -4,7 +4,7 @@ Backbone = require 'backbone'
 ExerciseGlobalOverviewView = require 'views/client/exercises/exercise_clientpage_overview_view'
 
 BreadcrumbsView = require 'views/general/breadcrumbs/breadcrumbs-view'
-BreadcrumbsCollection = require 'models/general/breadcrumbs'
+Breadcrumbs = require 'collections/breadcrumbs'
 
 module.exports = class ExerciseGlobalView extends Marionette.LayoutView
 
@@ -22,7 +22,7 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
 
   initialize: (data) =>
     @breadcrumbs = data.breadcrumbs
-    @breadcrumbsView = new BreadcrumbsView(collection: new BreadcrumbsCollection(@breadcrumbs))
+    @breadcrumbsView = new BreadcrumbsView(collection: new Breadcrumbs(@breadcrumbs))
 
   onShow: =>
     overviewView = new ExerciseGlobalOverviewView model: @model
