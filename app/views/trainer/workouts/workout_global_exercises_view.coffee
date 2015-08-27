@@ -1,9 +1,9 @@
 _ = require 'lodash'
 Marionette = require 'backbone.marionette'
 WorkoutExercisePropertyConstructor = require 'views/trainer/workouts/workout_exercise_property_constructor_view'
-WorkoutExercisePropertyCollection = require 'models/trainer/workout-exercise-property-collection'
+WorkoutExerciseProperties = require 'collections/workout_exercise_properties'
 ExercisesItemView = require 'views/trainer/workouts/workout_global_exercises_item_view'
-WorkoutExerciseModel = require 'models/trainer/workout-exercise-model'
+WorkoutExercise = require 'models/workout_exercise'
 
 class EmptyView extends Marionette.ItemView
   template: require('templates/trainer/workouts/workout_global_exercises_empty')
@@ -38,7 +38,7 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
     @on 'render:collection', @showConnectionLines
     App.vent.on 'workout:reload:exercises', @getWorkoutData
 
-    @workoutExerciseModel = new WorkoutExerciseModel
+    @workoutExerciseModel = new WorkoutExercise
     @listenTo @workoutExerciseModel, 'sync', @onSavedOrder
     @listenTo @workout, 'sync', @resetExercises
 
@@ -55,7 +55,7 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
 
   onRender: ->
     workoutExercisePropertyConstructor = new WorkoutExercisePropertyConstructor
-      collection: new WorkoutExercisePropertyCollection()
+      collection: new WorkoutExerciseProperties()
 
     @ui.workoutExercisePropertyConstructorWrapper.html workoutExercisePropertyConstructor.render().el
 

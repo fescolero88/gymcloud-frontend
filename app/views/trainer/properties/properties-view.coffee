@@ -1,5 +1,5 @@
 Marionette = require 'backbone.marionette'
-PropertyModel = require 'models/trainer/property-model'
+Property = require 'models/property'
 
 module.exports = class PropertiesView extends Marionette.LayoutView
 
@@ -29,7 +29,7 @@ module.exports = class PropertiesView extends Marionette.LayoutView
 
   propertyModalShow: (ev) ->
     ev.preventDefault()
-    model = new PropertyModel
+    model = new Property
     @propertyModalView.currentView.trigger 'showModal', {model: model, is_edit: false}
 
   editProperty: (ev) ->

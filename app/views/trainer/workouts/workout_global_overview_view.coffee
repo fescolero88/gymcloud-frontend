@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 WorkoutGlobalExercisesView = require 'views/trainer/workouts/workout_global_exercises_view'
-WorkoutExercisesCollection = require 'models/trainer/workout_exercises_collection'
+WorkoutExercises = require 'collections/workout_exercises'
 
 module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
 
@@ -35,7 +35,7 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
     hasNote: !!@model.get 'notes'
 
   initialize: (data) ->
-    @exercisesCollection = new WorkoutExercisesCollection
+    @exercisesCollection = new WorkoutExercises
     @exercisesCollection.set @model.get('exercises')
 
     @exercisesView = new WorkoutGlobalExercisesView

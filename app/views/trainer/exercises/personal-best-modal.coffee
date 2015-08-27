@@ -1,6 +1,6 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
-ClientsPropertyCollection = require 'models/trainer/clients-property-collection'
+ClientsProperties = require 'collections/clients_properties'
 
 class PersonalBestResultModel extends Backbone.Model
 
@@ -70,9 +70,9 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
         date: 'fa fa-calendar'
       format: 'YYYY-MM-DD'
     if @myProfile
-      @properties = App.request('my:properties') || new ClientsPropertyCollection
+      @properties = App.request('my:properties') || new ClientsProperties
     else
-      @properties = App.request('client:properties', @id) || new ClientsPropertyCollection
+      @properties = App.request('client:properties', @id) || new ClientsProperties
     if @properties.length
       @fillProperties()
     else

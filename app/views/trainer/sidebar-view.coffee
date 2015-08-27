@@ -1,8 +1,8 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
-DraggableMenuItemModel = require 'models/trainer/draggable-menuitem-model'
+DraggableMenuItem = require 'models/draggable_menu_item'
 SidebarEntity = require 'views/trainer/sidebar-entity-composite-view'
-SidebarItemsCollection = require 'models/general/sidebar-items-collection'
+SidebarItems = require 'collections/sidebar_items'
 
 module.exports = class SideBarView extends Marionette.LayoutView
 
@@ -46,7 +46,7 @@ module.exports = class SideBarView extends Marionette.LayoutView
     _.each ['exercises', 'workouts', 'programs'], (item) ->
       view = new SidebarEntity
         type: item
-        collection: new SidebarItemsCollection App.request("data:#{item}")
+        collection: new SidebarItems App.request("data:#{item}")
       @getRegion(item).show(view)
 
   toggleMenu: (ev) ->
@@ -115,7 +115,7 @@ module.exports = class SideBarView extends Marionette.LayoutView
         $item.removeClass('dragged').removeAttr('style')
         subs.removeAttr('style')
         $('body').removeClass('dragging')
-        draggable = new DraggableMenuItemModel
+        draggable = new DraggableMenuItem
           id: $item.find('[data-key]').data('key')
           name: $item.find('[data-key]').text()
           category: $item.data 'category'

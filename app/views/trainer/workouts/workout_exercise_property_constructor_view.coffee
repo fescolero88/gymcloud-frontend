@@ -1,6 +1,6 @@
 Marionette = require 'backbone.marionette'
-WorkoutExercisePropertyModel = require 'models/trainer/workout-exercise-property-model'
-PropertyCollection = require 'models/trainer/property-collection'
+WorkoutExerciseProperty = require 'models/workout_exercise_property'
+Properties = require 'collections/properties'
 
 class WorkoutExercisePropertyItem extends Marionette.ItemView
 
@@ -12,7 +12,7 @@ class WorkoutExercisePropertyItem extends Marionette.ItemView
 
   initialize: ->
     # stores the selected property id from dropdown
-    @collection = new PropertyCollection()
+    @collection = new Properties
     @collection.fetch().then =>
       @render()
 
@@ -94,7 +94,7 @@ module.exports = class WorkoutExercisePropertyConstructor extends Marionette.Com
     # hide empty state p if shown
     @hideEmptyState()
     if App.request 'workout_exercises:has_exercise?'
-      @collection.add new WorkoutExercisePropertyModel(), sort: false
+      @collection.add new WorkoutExerciseProperty, sort: false
       @ui.assignPropertyButton.removeClass('hidden')
       # notify exercises that a property is being created
       App.vent.trigger 'exercise_property:select:enable'

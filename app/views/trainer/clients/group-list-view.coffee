@@ -1,8 +1,6 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
-GroupModel = require 'models/trainer/group-model'
-
 module.exports = class GroupItemView extends Marionette.ItemView
 
   template: require('templates/trainer/clients/group-item')
