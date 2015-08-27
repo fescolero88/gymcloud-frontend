@@ -4,99 +4,97 @@ define ->
 
     App.data = {}
 
-    App.reqres.setHandlers
+    App.reqres.setHandler 'data:profile', ->
+      App.data.profileModel
 
-      'data:profile': ->
-        App.data.profileModel
+    App.reqres.setHandler 'data:exercises', ->
+      App.data.exercises
 
-      'data:exercises': ->
-        App.data.exercises
+    App.reqres.setHandler 'data:exercises:root', ->
+      App.data.exercisesRoot
 
-      'data:exercises:root': ->
-        App.data.exercisesRoot
+    App.reqres.setHandler 'data:exercises:reset', (data) ->
+      App.data.exercises = data
+      true
 
-      'data:exercises:reset', (data) ->
-        App.data.exercises = data
-        true
+    App.reqres.setHandler 'data:exercises:root:reset', (key) ->
+      App.data.exercisesRoot = key
 
-      'data:exercises:root:reset', (key) ->
-        App.data.exercisesRoot = key
+    App.reqres.setHandler 'data:workouts', ->
+      App.data.workouts
 
-      'data:workouts': ->
-        App.data.workouts
+    App.reqres.setHandler 'data:workouts:root', ->
+      App.data.workoutsRoot
 
-      'data:workouts:root': ->
-        App.data.workoutsRoot
+    App.reqres.setHandler 'data:workouts:reset', (data) ->
+      App.data.workouts = data
+      true
 
-      'data:workouts:reset', (data) ->
-        App.data.workouts = data
-        true
+    App.reqres.setHandler 'data:workouts:root:reset', (key) ->
+      App.data.workoutsRoot = key
 
-      'data:workouts:root:reset', (key) ->
-        App.data.workoutsRoot = key
+    App.reqres.setHandler 'data:programs', ->
+      App.data.programs
 
-      'data:programs': ->
-        App.data.programs
+    App.reqres.setHandler 'data:programs:root', ->
+      App.data.programsRoot
 
-      'data:programs:root': ->
-        App.data.programsRoot
+    App.reqres.setHandler 'data:programs:reset', (data) ->
+      App.data.programs = data
+      true
 
-      'data:programs:reset', (data) ->
-        App.data.programs = data
-        true
+    App.reqres.setHandler 'data:programs:root:reset', (key) ->
+      App.data.programsRoot = key
 
-      'data:programs:root:reset', (key) ->
-        App.data.programsRoot = key
+    App.reqres.setHandler 'data:properties:reset', (properties) ->
+      App.data.properties = properties
 
-      'data:properties:reset', (properties) ->
-        App.data.properties = properties
+    App.reqres.setHandler 'data:properties', ->
+      App.data.properties
 
-      'data:properties': ->
-        App.data.properties
+    App.reqres.setHandler 'data:properties:clear', ->
+      delete App.data.properties
 
-      'data:properties:clear': ->
-        delete App.data.properties
+    App.reqres.setHandler 'data:exercises:clear', ->
+      delete App.data.exercises
 
-      'data:exercises:clear': ->
-        delete App.data.exercises
+    App.reqres.setHandler 'data:workouts:clear', ->
+      delete App.data.workouts
 
-      'data:workouts:clear': ->
-        delete App.data.workouts
+    App.reqres.setHandler 'data:programs:clear', ->
+      delete App.data.programs
 
-      'data:programs:clear': ->
-        delete App.data.programs
+    App.reqres.setHandler 'client:properties', (id) ->
+      App.data['client:properties']?[id]
 
-      'client:properties': (id) ->
-        App.data['client:properties']?[id]
+    App.reqres.setHandler 'client:properties:set', (id, properties) ->
+      App.data['client:properties'] ?= {}
+      App.data['client:properties'][id] = properties
 
-      'client:properties:set': (id, properties) ->
-        App.data['client:properties'] ?= {}
-        App.data['client:properties'][id] = properties
+    App.reqres.setHandler 'my:properties', =>
+      profile = App.request 'data:profile'
+      App.data['client:properties']?[profile.get('id')]
 
-      'my:properties': =>
-        profile = @request 'data:profile'
-        App.data['client:properties']?[profile.get('id')]
+    App.reqres.setHandler 'my:properties:set', (properties) =>
+      profile = App.request 'data:profile'
+      App.data['client:properties'] ?= {}
+      App.data['client:properties'][profile.get('id')] = properties
 
-      'my:properties:set': (properties) =>
-        profile = @request 'data:profile'
-        App.data['client:properties'] ?= {}
-        App.data['client:properties'][profile.get('id')] = properties
+    App.reqres.setHandler 'lastHash:get', ->
+      App.data.lastHash
 
-      'lastHash:get': ->
-        App.data.lastHash
+    App.reqres.setHandler 'lastHash:set', (params) ->
+      App.data.lastHash =
+        hash: params.hash
+        action: params.name
 
-      'lastHash:set': (params) ->
-        App.data.lastHash =
-          hash: params.hash
-          action: params.name
-
-      'data:delete': (category, key) ->
-        items = App.data[category]
-        deleteFromTree = (items, key) =>
-          for item, index in items
-            if item.isFolder
-              deleteFromTree item.items, key
-            else if item.key is key
-              items.splice index, 1
-              return
-        deleteFromTree items, key
+    App.reqres.setHandler 'data:delete', (category, key) ->
+      items = App.data[category]
+      deleteFromTree = (items, key) =>
+        for item, index in items
+          if item.isFolder
+            deleteFromTree item.items, key
+          else if item.key is key
+            items.splice index, 1
+            return
+      deleteFromTree items, key

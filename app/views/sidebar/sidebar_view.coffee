@@ -50,9 +50,11 @@ define [
       _.each ['workouts', 'programs'], (item) =>
         collection = new UserCollection([], type: "personal_#{item}")
         collection.fetch().then =>
+          App.request "data:#{item}:reset", collection.toJSON()
           view = new PersonalCollectionView
             collection: collection
             type: item
+
           regionName = "personal#{_.capitalize(item)}"
           @getRegion(regionName).show(view)
 
