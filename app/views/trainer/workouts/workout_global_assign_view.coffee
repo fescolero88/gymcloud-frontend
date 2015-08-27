@@ -1,9 +1,9 @@
 Marionette = require 'backbone.marionette'
 WorkoutGlobalAssignClientsListView = require 'views/trainer/workouts/workout_global_assign_clients_list'
 WorkoutGlobalAssignGroupsListView = require 'views/trainer/workouts/workout_global_assign_groups_list'
-ClientsCollection = require 'models/trainer/client-collection'
-GroupsCollection = require 'models/trainer/group-collection'
-WorkoutClientAssigneesCollection = require 'models/trainer/workouts-client-assignees-collection'
+Clients = require 'collections/clients'
+ClientGroups = require 'collections/client_groups'
+WorkoutClientAssignees = require 'collections/workouts_client_assignees'
 
 module.exports = class WorkoutGlobalAssignView extends Marionette.LayoutView
 
@@ -14,9 +14,9 @@ module.exports = class WorkoutGlobalAssignView extends Marionette.LayoutView
     groups: 'region[data-name="workout-groups"]'
 
   initialize: ->
-    @clientsCollection = new ClientsCollection()
-    @groupsCollection = new GroupsCollection()
-    @clientAssigneesCollection = new WorkoutClientAssigneesCollection()
+    @clientsCollection = new Clients
+    @groupsCollection = new ClientGroups
+    @clientAssigneesCollection = new WorkoutClientAssignees
 
     @listenTo @clientAssigneesCollection, 'sync', @loadAssignmentScreen
 

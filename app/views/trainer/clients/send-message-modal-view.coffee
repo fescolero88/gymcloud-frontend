@@ -1,8 +1,8 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
-ClientCollection = require 'models/trainer/client-collection'
-MessageModel = require 'models/trainer/message-model'
+Clients = require 'collections/clients'
+Message = require 'models/message'
 
 module.exports = class SendMessageModalView extends Marionette.ItemView
 
@@ -11,7 +11,7 @@ module.exports = class SendMessageModalView extends Marionette.ItemView
   className: 'modal-dialog'
 
   initialize: (data) ->
-    @model = new MessageModel
+    @model = new Message
     Backbone.Validation.bind @
     @selectedItems = data.selectedItems
 
@@ -43,7 +43,7 @@ module.exports = class SendMessageModalView extends Marionette.ItemView
     listItems
 
   initSearchSelect: =>
-    clientCollection = new ClientCollection
+    clientCollection = new Clients
     clientCollection.fetch().then =>
       options = @searchItems clientCollection.models
       this_ = @

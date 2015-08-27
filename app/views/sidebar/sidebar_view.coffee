@@ -1,8 +1,8 @@
 define [
   'backbone.marionette'
-  'models/trainer/draggable-menuitem-model'
+  'models/draggable_menu_item'
   'views/trainer/sidebar-entity-composite-view'
-  'models/general/sidebar-items-collection'
+  'collections/sidebar_items'
   'collections/user_collection'
   'views/sidebar/personal_collection_view'
   'templates/sidebar/sidebar'

@@ -1,6 +1,6 @@
 define [
   'backbone'
-  'models/trainer/personal-best-model'
+  'models/personal_best'
 ], (
   Backbone
   PersonalBestModel

@@ -2,7 +2,7 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 ModalAddToLibraryLibraryView = require 'views/general/modal_add_to_library_library_view'
-GlobalExerciseModel = require 'models/trainer/global-exercise-model'
+GlobalExercise = require 'models/global_exercise'
 
 FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
@@ -61,7 +61,7 @@ module.exports = class ModalAddToLibraryView extends Marionette.LayoutView
         data: JSON.stringify @model.attributes
         success: (model) =>
           App.request 'spinner:start'
-          importedModel = new GlobalExerciseModel(model)
+          importedModel = new GlobalExercise(model)
           importedModel.set 'name', @name
           importedModel.set 'exercise_folder_id', @parent_id
           importedModel.url = importedModel.urlRoot + importedModel.get('id')

@@ -4,10 +4,10 @@ Backbone = require 'backbone'
 MoveToGroupView = require 'views/trainer/clients/move-to-group-view'
 
 ClientFormModalView = require 'views/trainer/clients/client-form-modal-view'
-ClientModel = require 'models/trainer/client-model'
+Client = require 'models/client'
 
 GroupFormModalView = require 'views/trainer/clients/group-form-modal-view'
-GroupModel = require 'models/trainer/group-model'
+ClientGroup = require 'models/client_group'
 
 module.exports = class ClientsView extends Marionette.LayoutView
 
@@ -107,7 +107,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
 
   showClientAddModal: (ev) ->
     ev.preventDefault()
-    clientModel = new ClientModel
+    clientModel = new Client
     clientFormModal = new ClientFormModalView model: clientModel
 
     @listenTo clientFormModal, 'closeModal', =>
@@ -123,7 +123,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
 
   showGroupAddModal: (ev) ->
     ev.preventDefault()
-    groupModel = new GroupModel
+    groupModel = new ClientGroup
     groupFormModal = new GroupFormModalView model: groupModel
 
     @listenTo groupFormModal, 'closeModal', =>

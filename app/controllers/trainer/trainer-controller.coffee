@@ -5,30 +5,30 @@ ClientsView = require 'views/trainer/clients/clients-view'
 ClientListView = require 'views/trainer/clients/client-list-view'
 GroupListView = require 'views/trainer/clients/group-list-view'
 
-ClientModel = require 'models/trainer/client-model'
-ClientCollection = require 'models/trainer/client-collection'
-ActivityCollection = require 'models/trainer/activity-collection'
-GroupModel = require 'models/trainer/group-model'
-GroupCollection = require 'models/trainer/group-collection'
+Client = require 'models/client'
+Clients = require 'collections/clients'
+Activities = require 'collections/activities'
+ClientGroup = require 'models/client_group'
+ClientGroups = require 'collections/client_groups'
 
 ClientGroupView = require 'views/trainer/clients/client-group-view'
 
 EWPGlobalView = require 'views/trainer/global_ewp/ewp-global-view'
 
 ExerciseGlobalView = require 'views/trainer/exercises/exercise_global_view'
-GlobalExerciseModel = require 'models/trainer/global-exercise-model'
+GlobalExercise = require 'models/global_exercise'
 
 WorkoutGlobalView = require 'views/trainer/workouts/workout_global_view'
-GlobalWorkoutModel = require 'models/trainer/global_workout_model'
+GlobalWorkout = require 'models/global_workout'
 
 ProgramGlobalView = require 'views/trainer/programs/program_global_view'
-GlobalProgramModel = require 'models/trainer/global_program_model'
+GlobalProgram = require 'models/global_program'
 
 PropertiesView = require 'views/trainer/properties/properties-view'
 PropertyListView = require 'views/trainer/properties/property-list-view'
 PropertyModalView = require 'views/trainer/properties/property-modal-view'
-PropertyModel = require 'models/trainer/property-model'
-PropertyCollection = require 'models/trainer/property-collection'
+Property = require 'models/property'
+Properties = require 'collections/properties'
 
 module.exports = class TrainerController extends Marionette.Controller
   queueMethod: false
@@ -51,8 +51,8 @@ module.exports = class TrainerController extends Marionette.Controller
     clientsPageView = new ClientsView viewType: viewType
     @mainView.content.show clientsPageView
 
-    clientCollection = new ClientCollection
-    groupCollection = new GroupCollection
+    clientCollection = new Clients
+    groupCollection = new ClientGroups
     clientsView = new ClientListView collection: clientCollection
     groupsView = new GroupListView collection: groupCollection
 
@@ -84,17 +84,17 @@ module.exports = class TrainerController extends Marionette.Controller
     else
       if id > 0
         if type is 'clients'
-          itemModel = new ClientModel
+          itemModel = new Client
           itemModel.url = "/api/mobile/clients/#{id}"
         else
-          itemModel = new GroupModel
+          itemModel = new ClientGroup
           itemModel.url = "/api/mobile/client_groups/#{id}"
       else
-        itemModel = new ClientModel
+        itemModel = new Client
         itemModel.url = "/api/mobile/me"
       itemModel.fetch()
 
-      recentActivity = new ActivityCollection
+      recentActivity = new Activities
       if id > 0
         if type is 'clients'
           recentActivity.url = "/api/mobile/clients/#{id}/notifications"
@@ -124,7 +124,7 @@ module.exports = class TrainerController extends Marionette.Controller
     @clientOrGroup 'clients', 0, assign, key
 
   properties: =>
-    propertyCollection = new PropertyCollection
+    propertyCollection = new Properties
     propertyCollection.fetch()
     propertyListView = new PropertyListView collection: propertyCollection
 
@@ -133,7 +133,7 @@ module.exports = class TrainerController extends Marionette.Controller
       listView: propertyListView
     @mainView.content.show propertiesPageView
 
-    propertyModel = new PropertyModel
+    propertyModel = new Property
     propertyModalView = new PropertyModalView model: propertyModel
     propertiesPageView.propertyModalView.show propertyModalView
 
@@ -158,19 +158,19 @@ module.exports = class TrainerController extends Marionette.Controller
       else
         switch type
           when 'exercises'
-            model = new GlobalExerciseModel
+            model = new GlobalExercise
             model.url = model.urlRoot + key
             model.fetch().then =>
               exerciseGlobalView = new ExerciseGlobalView(exercise: model, breadcrumbs: breadcrumbs)
               @mainView.content.show exerciseGlobalView
           when 'workouts'
-            model = new GlobalWorkoutModel
+            model = new GlobalWorkout
             model.url = model.urlRoot + key
             model.fetch().then =>
               workoutGlobalView = new WorkoutGlobalView(workout: model, breadcrumbs: breadcrumbs)
               @mainView.content.show workoutGlobalView
           when 'programs'
-            model = new GlobalProgramModel
+            model = new GlobalProgram
             model.url = model.urlRoot + key
             model.fetch().then =>
               programGlobalView = new ProgramGlobalView(model: model, breadcrumbs: breadcrumbs)
