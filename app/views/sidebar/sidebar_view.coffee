@@ -5,6 +5,7 @@ define [
   'models/general/sidebar-items-collection'
   'collections/user_collection'
   'views/sidebar/personal_collection_view'
+  'views/sidebar/sidebar_pro_view'
   'templates/sidebar/sidebar'
 ], (
   Marionette
@@ -13,6 +14,7 @@ define [
   SidebarItemsCollection
   UserCollection
   PersonalCollectionView
+  SidebarProView
   template
 )->
   class SidebarView extends Marionette.LayoutView
@@ -33,16 +35,12 @@ define [
       mainArea: '.gc-main'
       catchList: '.gc-assign-catch'
       item: '.gc-sidebar-item > a'
-      exercisesRegion: 'region[data-name="exercises"]'
-      workoutsRegion: 'region[data-name="workouts"]'
-      programsRegion: 'region[data-name="programs"]'
+      proRegion: 'pro-section'
       personalWorkoutsRegion: 'region[data-name="personal_workouts"]'
       personalProgramsRegion: 'region[data-name="personal_programs"]'
 
     regions:
-      exercises: '@ui.exercisesRegion'
-      workouts: '@ui.workoutsRegion'
-      programs: '@ui.programsRegion'
+      pro: '@ui.proRegion'
       personalWorkouts: '@ui.personalWorkoutsRegion'
       personalPrograms: '@ui.personalProgramsRegion'
 
@@ -59,6 +57,7 @@ define [
           @getRegion(regionName).show(view)
 
     onRender: ->
+      @getRegion('pro').show(new SidebarProView)
 
 
     toggleMenu: (ev) ->
