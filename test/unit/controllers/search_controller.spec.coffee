@@ -1,5 +1,5 @@
 define [
-  'app/controllers/general/search-controller'
+  'app/features/search/controller'
   'backbone.marionette'
 ], (
   SearchController
