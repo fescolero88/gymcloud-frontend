@@ -1,10 +1,10 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
-MembersCollection = require 'models/trainer/members-collection'
-ExercisesCollection = require 'models/trainer/exercises-collection'
-WorkoutsCollection = require 'models/trainer/workouts-collection'
-ProgramsCollection = require 'models/trainer/programs-collection'
+ClientGroupMembers = require 'collections/client_group_members'
+Exercises = require 'collections/exercises'
+Workouts = require 'collections/workouts'
+Programs = require 'collections/programs'
 
 ClientGroupHeaderView = require 'views/trainer/clients/client-group-header-view'
 ClientGroupNavView = require 'views/trainer/clients/client-group-nav-view'
@@ -15,7 +15,7 @@ CalendarView = require 'views/trainer/calendar/calendar-view'
 
 MembersView = require 'views/trainer/groups/members-view'
 ExerciseView = require 'views/trainer/exercises/exercise-view'
-ClientExerciseModel = require 'models/trainer/client-exercise'
+ClientExercise = require 'models/client_exercise'
 PersonalBestView = require 'views/trainer/exercises/personal-best-view'
 
 
@@ -80,7 +80,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
 
   loadCenterView: (navView) =>
     if @key
-      exercise = new ClientExerciseModel
+      exercise = new ClientExercise
       if @myProfile
         exercise.url = "#{exercise.urlRoot}/me/#{@assign}/#{@key}"
       else
@@ -102,7 +102,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
         link = 'me'
       switch navView
         when 'members'
-          @collection = new MembersCollection
+          @collection = new ClientGroupMembers
           @collection.url = "#{@collection.urlRoot}/#{@itemId}/members"
           @collection.fetch()
           @centerView = new MembersView
@@ -110,7 +110,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
             collection: @collection
           @showCenterView()
         when 'exercises'
-          @collection = new ExercisesCollection
+          @collection = new Exercises
           @collection.url = "/api/mobile/#{link}/exercises"
           @collection.fetch().then =>
             @showCenterView()
@@ -120,7 +120,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
             viewType: @viewType
             assignName: navView
         when 'workouts'
-          @collection = new WorkoutsCollection
+          @collection = new Workouts
           @collection.url = "/api/mobile/#{link}/workouts"
           @collection.fetch().then =>
             @showCenterView()
@@ -130,7 +130,7 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
             viewType: @viewType
             assignName: navView
         when 'programs'
-          @collection = new ProgramsCollection
+          @collection = new Programs
           @collection.url = "/api/mobile/#{link}/programs"
           @collection.fetch().then =>
             @showCenterView()

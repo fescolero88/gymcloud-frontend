@@ -1,6 +1,6 @@
 Marionette = require 'backbone.marionette'
-PersonalBestModel = require 'models/trainer/personal-best-model'
-PersonalBestCollection = require 'models/trainer/personal-best-collection'
+PersonalBestModel = require 'models/personal_best'
+PersonalBestCollection = require 'collections/personal_best_collection'
 PersonalBestModalView = require 'views/trainer/exercises/personal-best-modal'
 
 class EmptyView extends Marionette.ItemView

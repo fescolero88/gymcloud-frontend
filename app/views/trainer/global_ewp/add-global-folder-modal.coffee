@@ -1,7 +1,7 @@
 Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
-GlobalFolderModel = require 'models/trainer/global-folder-model'
+GlobalFolder = require 'models/global_folder'
 
 FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
@@ -28,7 +28,7 @@ module.exports = class AddGlobalFolderModalView extends Marionette.ItemView
     @initializeModel()
 
   initializeModel: ->
-    @model = new GlobalFolderModel()
+    @model = new GlobalFolder
     @listenTo @model, 'sync', @onSync
     @listenTo @model, 'error', @onSyncFail
 

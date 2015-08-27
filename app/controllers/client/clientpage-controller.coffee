@@ -4,10 +4,10 @@ Backbone = require 'backbone'
 ClientEWPView = require 'views/client/clientpage-ewp-view'
 
 ExerciseGlobalView = require 'views/client/exercises/exercise_clientpage_view'
-GlobalExerciseModel = require 'models/trainer/global-exercise-model'
+GlobalExercise = require 'models/global_exercise'
 
 WorkoutGlobalView = require 'views/client/workouts/workout-clientpage-view'
-GlobalWorkoutModel = require 'models/trainer/global_workout_model'
+GlobalWorkout = require 'models/global_workout'
 
 CalendarDayView = require 'views/client/clientpage-calendar-day-view'
 CalendarWeekView = require 'views/client/clientpage-calendar-week-view'
@@ -49,10 +49,10 @@ module.exports = class ClientPageController extends Marionette.Controller
       else
         klasses = {
           exercises:
-            model: GlobalExerciseModel,
+            model: GlobalExercise,
             view: ExerciseGlobalView
           workouts:
-            model: GlobalWorkoutModel,
+            model: GlobalWorkout,
             view: WorkoutGlobalView
         }[dataType]
 
