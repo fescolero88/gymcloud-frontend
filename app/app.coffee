@@ -4,6 +4,7 @@ define [
   'handlers/spinner'
   'handlers/ajax_setup'
   'handlers/user_authorization'
+  'handlers/data'
 
   'deps/scripts'
   'deps/fonts'
@@ -15,6 +16,7 @@ define [
   spinnerHandler
   ajaxSetupHandler
   userAuthorizationHandler
+  dataHandler
 ) ->
 
   FormValidatorHelper = require 'views/helpers/form-validator-helper'
@@ -37,13 +39,16 @@ define [
   class Application extends Marionette.Application
 
     initialize: ->
+
       @addInitializer ->
-        App.data = {}
-        App.data.profileModel = new ProfileModel
+        dataHandler(this)
+        @data.profileModel = new ProfileModel
+
       @addInitializer ->
         spinnerHandler(this)
         userAuthorizationHandler(this)
         ajaxSetupHandler(this, config)
+
       @addInitializer ->
         if @request('accessToken:get')
           @data.profileModel.fetch().then =>
@@ -56,69 +61,6 @@ define [
         new FormValidatorHelper().initialize()
         new MessengerHelper().initialize()
         # --- Helpers -----
-
-
-
-        @reqres.setHandler 'data:profile', ->
-          App.data.profileModel
-
-        @reqres.setHandler 'data:exercises', ->
-          App.data.exercises
-
-        @reqres.setHandler 'data:exercises:root', ->
-          App.data.exercisesRoot
-
-        @reqres.setHandler 'data:exercises:reset', (data) ->
-          App.data.exercises = data
-          true
-
-        @reqres.setHandler 'data:exercises:root:reset', (key) ->
-          App.data.exercisesRoot = key
-
-        @reqres.setHandler 'data:workouts', ->
-          App.data.workouts
-
-        @reqres.setHandler 'data:workouts:root', ->
-          App.data.workoutsRoot
-
-        @reqres.setHandler 'data:workouts:reset', (data) ->
-          App.data.workouts = data
-          true
-
-        @reqres.setHandler 'data:workouts:root:reset', (key) ->
-          App.data.workoutsRoot = key
-
-        @reqres.setHandler 'data:programs', ->
-          App.data.programs
-
-        @reqres.setHandler 'data:programs:root', ->
-          App.data.programsRoot
-
-        @reqres.setHandler 'data:programs:reset', (data) ->
-          App.data.programs = data
-          true
-
-        @reqres.setHandler 'data:programs:root:reset', (key) ->
-          App.data.programsRoot = key
-
-        @reqres.setHandler 'data:properties:reset', (properties) ->
-          App.data.properties = properties
-
-        @reqres.setHandler 'data:properties', ->
-          App.data.properties
-
-        @reqres.setHandler 'data:properties:clear', ->
-          delete App.data.properties
-
-        @reqres.setHandler 'data:exercises:clear', ->
-          delete App.data.exercises
-
-        @reqres.setHandler 'data:workouts:clear', ->
-          delete App.data.workouts
-
-        @reqres.setHandler 'data:programs:clear', ->
-          delete App.data.programs
-
 
         @reqres.setHandler 'data:reload', (category, rootId) ->
           $.ajax
