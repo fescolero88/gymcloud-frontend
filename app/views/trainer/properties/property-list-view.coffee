@@ -47,20 +47,15 @@ define [
     templateHelpers: =>
       collection: @collection
 
-    initialize: ->
-      App.vent.on 'properties:addModel', @addProperty
-
     isEmpty: (collection) ->
       return !collection.length
 
-    addProperty: (model) =>
-      @collection.unshift model
-
+    # TODO: rename to switcher
     rmProperty: (ev) ->
       ev.preventDefault()
       model_id = $(ev.currentTarget).data('id')
       model = @collection.get model_id
-      model.destroy()
+      model.save(is_visible: !model.get('is_visible'))
 
     onShow: ->
       @$el.find('.gc-properties-list').sortable

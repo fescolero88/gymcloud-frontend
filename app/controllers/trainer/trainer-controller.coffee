@@ -119,21 +119,7 @@ module.exports = class TrainerController extends Marionette.Controller
     assign = assign || 'exercises'
     @clientOrGroup 'clients', 0, assign, key
 
-  properties: =>
-    propertyCollection = new Properties
-    propertyCollection.fetch()
-    propertyListView = new PropertyListView collection: propertyCollection
-
-    propertiesPageView = new PropertiesView
-      collection: propertyCollection
-      listView: propertyListView
-    @mainView.content.show propertiesPageView
-
-    propertyModel = new Property
-    propertyModalView = new PropertyModalView model: propertyModel
-    propertiesPageView.propertyModalView.show propertyModalView
-
-  propertiesView: =>
+  properties: ->
     propertiesPageView = new PropertiesView
     @mainView.content.show(propertiesPageView)
 
