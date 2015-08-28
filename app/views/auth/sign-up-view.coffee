@@ -116,7 +116,6 @@ class SignUpStep2 extends Marionette.ItemView
   saveProfile: ->
     @model.save @model.attributes,
       wait: true
-      patch: true
       success: (data) =>
         @trigger 'final', @model
       error: (model, xhr, error) =>

@@ -26,9 +26,7 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
       reset_password_token: @token
       id: 1 # model is not NEW now
 
-    @model.set data
-    @model.save null,
-      patch: true
+    @model.save data,
       success: (model, data) ->
         App.request 'messenger:show',
           hideAfter: 5

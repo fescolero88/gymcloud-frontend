@@ -25,10 +25,6 @@ ProgramGlobalView = require 'views/trainer/programs/program_global_view'
 GlobalProgram = require 'models/global_program'
 
 PropertiesView = require 'views/trainer/properties/properties-view'
-PropertyListView = require 'views/trainer/properties/property-list-view'
-PropertyModalView = require 'views/trainer/properties/property-modal-view'
-Property = require 'models/property'
-Properties = require 'collections/properties'
 
 module.exports = class TrainerController extends Marionette.Controller
   queueMethod: false
@@ -123,19 +119,9 @@ module.exports = class TrainerController extends Marionette.Controller
     assign = assign || 'exercises'
     @clientOrGroup 'clients', 0, assign, key
 
-  properties: =>
-    propertyCollection = new Properties
-    propertyCollection.fetch()
-    propertyListView = new PropertyListView collection: propertyCollection
-
+  properties: ->
     propertiesPageView = new PropertiesView
-      collection: propertyCollection
-      listView: propertyListView
-    @mainView.content.show propertiesPageView
-
-    propertyModel = new Property
-    propertyModalView = new PropertyModalView model: propertyModel
-    propertiesPageView.propertyModalView.show propertyModalView
+    @mainView.content.show(propertiesPageView)
 
   globalView: (type, key) =>
     items = App.request("data:#{type}")

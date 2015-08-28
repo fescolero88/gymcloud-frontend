@@ -1,39 +1,55 @@
-Marionette = require 'backbone.marionette'
-Property = require 'models/property'
+define [
+  'backbone.marionette'
+  'collections/user_collection'
+  'models/personal_property'
+  'views/trainer/properties/property-list-view'
+  'views/trainer/properties/property-modal-view'
+  'templates/trainer/properties/properties'
+], (
+  Marionette
+  UserCollection
+  Property
+  PropertyListView
+  PropertyModalView
+  template
+) ->
+  class PropertiesView extends Marionette.LayoutView
 
-module.exports = class PropertiesView extends Marionette.LayoutView
+    template: template
 
-  template: require('templates/trainer/properties/properties')
+    regions:
+      'propertyModal': '#property-modal'
+      'propertyList': '#property-list'
 
-  collectionEvents:
-    sync: 'showCollection'
+    events:
+      'click @ui.editProperty': 'editProperty'
 
-  regions:
-    'propertyModalView': '#property-modal'
-    'propertyList': '#property-list'
+    ui:
+      editProperty: '.gc-properties-property-edit'
 
-  events:
-    'click @ui.propertyModalBtn': 'propertyModalShow'
-    'click @ui.editProperty': 'editProperty'
+    initialize: ->
+      @propertyModalView = new PropertyModalView(model: new Property)
+      @collection = new UserCollection [],
+        type: 'personal_properties'
+        model: Property
+      @collectionView = new PropertyListView(collection: @collection)
+      @collection.fetch()
 
-  ui:
-    propertyModalBtn: '.add-property-btn'
-    editProperty: '.gc-properties-property-edit'
+    onShow: ->
+      @propertyModal.show(@propertyModalView)
+      @propertyList.show(@collectionView)
 
-  initialize: (data) ->
-    @collection = data.collection
-    @collectionView = data.listView
+    propertyModalShow: (ev) ->
+      ev.preventDefault()
+      model = new Property
+      @propertyModalView.trigger 'showModal',
+        model: model
+        is_edit: false
 
-  showCollection: ->
-    @propertyList.show @collectionView
-
-  propertyModalShow: (ev) ->
-    ev.preventDefault()
-    model = new Property
-    @propertyModalView.currentView.trigger 'showModal', {model: model, is_edit: false}
-
-  editProperty: (ev) ->
-    ev.preventDefault()
-    model_id = $(ev.currentTarget).data('id')
-    model = @collection.get model_id
-    @propertyModalView.currentView.trigger 'showModal', {model: model, is_edit: true}
+    editProperty: (ev) ->
+      ev.preventDefault()
+      model_id = $(ev.currentTarget).data('id')
+      model = @collection.get model_id
+      @propertyModalView.trigger 'showModal',
+        model: model
+        is_edit: true

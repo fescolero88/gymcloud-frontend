@@ -1,65 +1,71 @@
-Marionette = require 'backbone.marionette'
+define [
+  'backbone.marionette'
+  'templates/trainer/properties/properties_empty'
+  'templates/trainer/properties/properties_item'
+  'templates/trainer/properties/property-list'
+], (
+  Marionette
+  emptyViewTpl
+  itemViewTpl
+  listViewTpl
+) ->
+  class EmptyView extends Marionette.ItemView
 
-class EmptyView extends Marionette.ItemView
+    template: emptyViewTpl
 
-  template: require('templates/trainer/properties/properties_empty')
+  class PropertiesItemView extends Marionette.ItemView
 
-class PropertiesItemView extends Marionette.ItemView
+    template: itemViewTpl
 
-  template: require('templates/trainer/properties/properties_item')
+    tagName: 'li'
 
-  tagName: 'li'
+    className: 'row'
 
-  modelEvents:
-    sync: 'render'
+    modelEvents:
+      sync: 'render'
 
-  render: ->
-    super
-    @$el.data('id', @model.id)
+  class PropertyListView extends Marionette.CompositeView
 
-module.exports = class PropertyListView extends Marionette.CompositeView
+    template: listViewTpl
 
-  template: require('templates/trainer/properties/property-list')
+    childView: PropertiesItemView
 
-  childView: PropertiesItemView
+    childViewOptions: (model, index) ->
+      attributes:
+        'data-id': model.id
 
-  childViewContainer: 'ul'
+    childViewContainer: 'ul'
 
-  emptyView: EmptyView
+    emptyView: EmptyView
 
-  events:
-    'click @ui.rmProperty': 'rmProperty'
+    events:
+      'click @ui.rmProperty': 'rmProperty'
 
-  ui:
-    rmProperty: '.gc-properties-property-delete'
+    ui:
+      rmProperty: '.gc-properties-property-delete'
 
-  templateHelpers: =>
-    collection: @collection
+    templateHelpers: =>
+      collection: @collection
 
-  initialize: ->
-    App.vent.on 'properties:addModel', @addProperty
+    isEmpty: (collection) ->
+      return !collection.length
 
-  isEmpty: (collection) ->
-    return !collection.length
+    # TODO: rename to switcher
+    rmProperty: (ev) ->
+      ev.preventDefault()
+      model_id = $(ev.currentTarget).data('id')
+      model = @collection.get model_id
+      model.save(is_visible: !model.get('is_visible'))
 
-  addProperty: (model) =>
-    @collection.unshift model
-
-  rmProperty: (ev) ->
-    ev.preventDefault()
-    model_id = $(ev.currentTarget).data('id')
-    model = @collection.get model_id
-    model.destroy()
-
-  onShow: ->
-    @$el.find('.gc-properties-list').sortable
-      handle: '.draggable-handle'
-      placeholder: '<li class="placeholder sortable-placeholder"/>'
-      onDrop: ($item) =>
-        model_id = $item.data('id')
-        model = @collection.get model_id
-        $item.removeClass('dragged').removeAttr('style')
-        $('body').removeClass('dragging')
-        new_position = $('.gc-properties-list li').index($item)+1
-        model.set 'position', new_position
-        model.save()
+    onShow: ->
+      @$el.find('.gc-properties-list').sortable
+        handle: '.draggable-handle'
+        placeholder: '<li class="placeholder sortable-placeholder"/>'
+        onDrop: ($item) =>
+          model_id = $item.data('id')
+          model = @collection.get model_id
+          $item.removeClass('dragged').removeAttr('style')
+          $('body').removeClass('dragging')
+          new_position = $('.gc-properties-list li').index($item)+1
+          model.set 'position', new_position
+          model.save()

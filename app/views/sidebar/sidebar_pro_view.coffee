@@ -20,9 +20,6 @@ define [
 
     ui:
       subs: '.gc-sidebar-folder>.gc-sidebar-sub, .gc-sidebar-cat>.gc-sidebar-sub'
-      sidebar: '.gc-sidebar-menu-list'
-      dndArea: '.gc-dnd-area'
-      mainArea: '.gc-main'
       catchList: '.gc-assign-catch'
       item: '.gc-sidebar-item > a'
       exercisesRegion: 'region[data-name="exercises"]'
