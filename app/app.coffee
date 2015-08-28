@@ -69,9 +69,11 @@ define [
         new MessengerHelper().initialize()
         # --- Helpers -----
 
-        @reqres.setHandler 'data:reload', (category, rootId) ->
+        @reqres.setHandler 'data:reload', (category, rootId) =>
+          userId = @request('data:profile').get('id')
+          rootId = rootId || ""
           $.ajax
-            url: "/api/mobile/library/#{rootId}"
+            url: "/users/#{userId}/collections/library/#{rootId}"
             type: 'GET'
             dataType: 'json'
             success: (data) ->

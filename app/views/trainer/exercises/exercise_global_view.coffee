@@ -36,15 +36,17 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
 
   initialize: (data) =>
     @breadcrumbs = data.breadcrumbs
-    @breadcrumbsView = new BreadcrumbsView(collection: new Breadcrumbs(@breadcrumbs))
-    @exerciseModel = data.exercise
+    @breadcrumbsView = new BreadcrumbsView
+      collection: new Breadcrumbs(@breadcrumbs)
+    @model = data.exercise
 
-    @listenTo(@exerciseModel, 'sync', @onExerciseModelSync)
+    @listenTo(@model, 'sync', @onExerciseModelSync)
 
   templateHelpers: ->
-    source: @exerciseModel.get('source_item_id')
-    author: @exerciseModel.get('user_id')
-    public: @exerciseModel.get('is_public')
+    source: @model.get('source_item_id')
+    authorId: @model.get('author').id
+    public: @model.get('is_public')
+    userId: App.request('data:profile').get('id')
 
   onShow: =>
     @changeView 'overview'
@@ -70,18 +72,18 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
   changeView: (navView) =>
     switch navView
       when 'overview'
-        @overviewView = new ExerciseGlobalOverviewView model: @exerciseModel
+        @overviewView = new ExerciseGlobalOverviewView model: @model
         @listenTo @overviewView, 'privacy:changed', @changePrivacyMarker
         @listenTo @overviewView, 'exercise:edit', @enableExerciseEditView
         @manageRegion.show @overviewView
       when 'video'
         true
       when 'assign'
-        @assignView = new ExerciseGlobalAssignView model: @exerciseModel
+        @assignView = new ExerciseGlobalAssignView model: @model
         @manageRegion.show @assignView
 
   enableExerciseEditView: =>
-    @exerciseEditView = new ExerciseEditView model: @exerciseModel
+    @exerciseEditView = new ExerciseEditView model: @model
     @listenToOnce @exerciseEditView, 'exercise:back', =>
       @changeView 'overview'
     @manageRegion.show @exerciseEditView
@@ -92,7 +94,7 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
 
   showAddToLibrary: (ev) =>
     ev.preventDefault()
-    App.request 'base:addToLibraryModal', type: 'exercises', model: @exerciseModel
+    App.request 'base:addToLibraryModal', type: 'exercises', model: @model
 
   removeFromLibrary: (ev) =>
     ev.preventDefault()
@@ -112,5 +114,5 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
 
   onExerciseModelSync: ->
     lastIndex = @breadcrumbs.length - 1
-    @breadcrumbs[lastIndex].title = @exerciseModel.get 'name'
+    @breadcrumbs[lastIndex].title = @model.get 'name'
     App.vent.trigger 'breadcrumbs:reload', @breadcrumbs

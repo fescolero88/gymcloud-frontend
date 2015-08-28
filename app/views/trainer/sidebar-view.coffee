@@ -33,17 +33,18 @@ module.exports = class SideBarView extends Marionette.LayoutView
 
   initialize: =>
     App.vent.on 'ewp:model:updated', @updateEWPName
+    App.vent.on 'profile:ready', @getData
 
   onDestroy: ->
     App.vent.off 'ewp:model:updated', @updateEWPName
 
   onShow: ->
-    @getData()
+    #@getData()
 
   onRender: ->
     @$el.find('.nano').nanoScroller()
 
-    _.each ['exercises', 'workouts', 'programs'], (item) ->
+    _.each ['exercises', 'workouts', 'programs'], (item) =>
       view = new SidebarEntity
         type: item
         collection: new SidebarItems App.request("data:#{item}")
@@ -69,18 +70,19 @@ module.exports = class SideBarView extends Marionette.LayoutView
     , 600
 
   getData: =>
+    userId = App.request('data:profile').get('id')
     library = $.ajax
-      url: '/api/mobile/library/'
+      url: "/users/#{userId}/collections/library"
       type: 'GET'
       dataType: 'json'
       success: (data) ->
-        for item in data
-          entity = item.title.toLocaleLowerCase()
+        for item in data[0].items
+          entity = item.name.toLocaleLowerCase()
           App.request("data:#{entity}:reset", item.items)
           App.request("data:#{entity}:root:reset", item.key)
         App.vent.trigger('assignments:loaded')
 
-    properties = $.get('/api/mobile/properties').then (data) ->
+    properties = $.get("/users/#{userId}/collections/personal_properties").then (data) ->
       App.request('data:properties:reset', data)
 
     $.when.apply($,[library, properties]).done () =>

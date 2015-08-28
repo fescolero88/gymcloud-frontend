@@ -60,7 +60,6 @@ define [
       @renderPersonalEntities()
       @getRegion('pro').show(new SidebarProView) if @currentUser.get('is_pro')
 
-
     toggleMenu: (ev) ->
       target = $(ev.target)
       currentTarget = $(ev.currentTarget)

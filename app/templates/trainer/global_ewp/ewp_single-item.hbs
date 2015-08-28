@@ -1,6 +1,6 @@
 <div class="col-xs-8">
   <label class="gc-exercises-chb">
-    <input type="checkbox" data-id="{{key}}">
+    <input type="checkbox" data-id="{{id}}">
   </label>
   {{#if isFolder}}
     <i class="fa fa-folder-o gc-exercises-folder-icon"></i>
@@ -8,9 +8,9 @@
     <span class="gc-exercises-item-icon gc-exercises-item-icon-{{type}}"></span>
   {{/if}}
   <a
-    href="#tr/global/{{type}}/id/{{key}}/"
+    href="#tr/global/{{type}}/id/{{id}}/"
     data-key="{{key}}"
-    class="gc-exercises-link">{{title}}</a>
+    class="gc-exercises-link">{{name}}</a>
 </div>
 <div class="col-xs-4 text-right">
   <span class="gc-exercises-update-time">{{prettifyDate updated_at}}</span>
