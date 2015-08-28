@@ -6,6 +6,7 @@ module.exports = class ClientRouter extends CustomRouter
 
     '': 'clientPageAssigments'
     '(/)': 'clientPageAssigments'
+    'personal_workouts(/)': 'personalWorkout'
     'my/:dataType(/)': 'clientPageAssigments'
     'my/:dataType/:key(/)': 'clientPageAssigments'
 
@@ -14,7 +15,9 @@ module.exports = class ClientRouter extends CustomRouter
     'calendar/week/:week(/)': 'clientPageCalendarWeek'
     'calendar/month/:month(/)': 'clientPageCalendarMonth'
 
-  before: (methodName) =>
+  before: (methodName) ->
     App.request 'auth:isAuthorizedAs', 'client'
     App.vent.on 'profile:ready', ->
-      App.vent.trigger 'module:main-client:beforeAction'
+      App.vent.trigger('module:main-client:beforeAction')
+    if App.request('data:profile')?.id
+      App.vent.trigger('module:main-client:beforeAction' )

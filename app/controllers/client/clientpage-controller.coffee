@@ -2,6 +2,7 @@ Marionette = require 'backbone.marionette'
 Backbone = require 'backbone'
 
 ClientEWPView = require 'views/client/clientpage-ewp-view'
+UserCollection = require 'collections/user_collection'
 
 ExerciseGlobalView = require 'views/client/exercises/exercise_clientpage_view'
 GlobalExercise = require 'models/global_exercise'
@@ -28,6 +29,12 @@ module.exports = class ClientPageController extends Marionette.Controller
   initialize: (options) =>
     App.vent.on 'assignments:loaded', =>
       @queue()
+
+  personalWorkout: ->
+    view = new ClientEWPView
+      collection: new UserCollection([], type: 'personal_workouts')
+      dataType: 'workouts'
+    @userPageView.content.show(view)
 
   clientPageAssigments: (dataType, key) =>
     dataType = dataType || 'exercises'

@@ -17,6 +17,9 @@ define [
 
     childViewContainer: '.gc-sidebar-sub'
 
+    childViewOptions: ->
+      type: @type
+
     templateHelpers: ->
       type: @type
 
