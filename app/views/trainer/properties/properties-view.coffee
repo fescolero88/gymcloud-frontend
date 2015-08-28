@@ -1,7 +1,7 @@
 define [
   'backbone.marionette'
   'collections/user_collection'
-  'models/property'
+  'models/personal_property'
   'views/trainer/properties/property-list-view'
   'views/trainer/properties/property-modal-view'
   'templates/trainer/properties/properties'
@@ -31,7 +31,9 @@ define [
 
     initialize: ->
       @propertyModalView = new PropertyModalView(model: new Property)
-      @collection = new UserCollection([], type: 'personal_properties')
+      @collection = new UserCollection [],
+        type: 'personal_properties'
+        model: Property
       @collectionView = new PropertyListView(collection: @collection)
       @collection.fetch()
 

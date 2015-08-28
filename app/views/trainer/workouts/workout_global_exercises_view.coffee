@@ -185,7 +185,7 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
   onSavePosition: (data) =>
     @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{@workout.get 'id'}/workout_exercises/resort"
     @workoutExerciseModel.method = 'patch'
-    @workoutExerciseModel.save data, patch: true
+    @workoutExerciseModel.save(data)
 
   onSavedOrder: ->
     App.request 'messenger:show',
