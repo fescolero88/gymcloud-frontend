@@ -22,11 +22,9 @@ define [
       'propertyList': '#property-list'
 
     events:
-      'click @ui.propertyModalBtn': 'propertyModalShow'
       'click @ui.editProperty': 'editProperty'
 
     ui:
-      propertyModalBtn: '.add-property-btn'
       editProperty: '.gc-properties-property-edit'
 
     initialize: ->
