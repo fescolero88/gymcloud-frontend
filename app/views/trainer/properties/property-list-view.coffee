@@ -10,18 +10,20 @@ class PropertiesItemView extends Marionette.ItemView
 
   tagName: 'li'
 
+  className: 'row'
+
   modelEvents:
     sync: 'render'
-
-  render: ->
-    super
-    @$el.data('id', @model.id)
 
 module.exports = class PropertyListView extends Marionette.CompositeView
 
   template: require('templates/trainer/properties/property-list')
 
   childView: PropertiesItemView
+
+  childViewOptions: (model, index) ->
+    attributes:
+      'data-id': model.id
 
   childViewContainer: 'ul'
 

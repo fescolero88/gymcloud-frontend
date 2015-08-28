@@ -15,6 +15,7 @@ module.exports = class TrainerRouter extends CustomRouter
     'tr/me/:assign/:key(/)': 'me'
 
     'tr/properties(/)': 'properties'
+    'properties(/)': 'propertiesView'
 
     'tr/global/:assign(/)': 'globalView'
     'tr/global/:assign/id/:id(/)': 'globalView'

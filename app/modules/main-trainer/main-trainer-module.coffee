@@ -10,7 +10,7 @@ MessagesController = require 'controllers/general/messages/messages-controller'
 MessagesRouter = require 'routers/general/messages/messages-router'
 
 MainView = require 'views/general/main-view'
-SideBarView = require 'views/trainer/sidebar-view'
+SideBarView = require 'views/sidebar/sidebar_view'
 HeaderView = require 'views/general/header-view'
 ModalView = require 'views/general/modal-view'
 
@@ -22,7 +22,7 @@ module.exports = class MainTrainerModule extends Marionette.Module
       @trainerRouter = new TrainerRouter { controller: @trainerController }
       @searchController = new SearchController
       @searchRouter = new SearchRouter { controller: @searchController }
-    
+
     App.vent.on 'module:main-trainer:beforeAction', =>
       @refresh()
 
