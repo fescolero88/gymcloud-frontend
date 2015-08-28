@@ -31,9 +31,11 @@ module.exports = class ClientPageController extends Marionette.Controller
       @queue()
 
   personalWorkout: ->
+    type = 'personal_workouts'
     view = new ClientEWPView
-      collection: new UserCollection([], type: 'personal_workouts')
+      collection: new UserCollection([], type: type)
       dataType: 'workouts'
+      type: type
     @userPageView.content.show(view)
 
   clientPageAssigments: (dataType, key) =>

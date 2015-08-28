@@ -29,9 +29,11 @@ define [
 
     initialize: (options) =>
       @dataType = options.dataType
+      @type = options.type
 
     templateHelpers: =>
       dataType: @dataType
+      type: @type
       isExercises: (type, options) ->
         if type == 'exercises'
           options.fn(this)
@@ -51,12 +53,15 @@ define [
 
     childViewOptions: ->
       dataType: @dataType
+      type: @type
 
     emptyViewOptions: ->
       dataType: @dataType
+      type: @type
 
     initialize: (data) ->
       @dataType = data.dataType
+      @type = data.type
       @collection.fetch()
 
     templateHelpers: ->
