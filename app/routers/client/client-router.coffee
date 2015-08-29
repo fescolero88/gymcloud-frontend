@@ -6,7 +6,12 @@ module.exports = class ClientRouter extends CustomRouter
 
     '': 'clientPageAssigments'
     '(/)': 'clientPageAssigments'
-    'personal_workouts(/)': 'personalWorkout'
+
+    'personal_workouts(/)': 'personalWorkoutList'
+    'personal_workouts/:id(/)': 'personalWorkout'
+
+    'personal_programs(/)': 'personalProgramList'
+
     'my/:dataType(/)': 'clientPageAssigments'
     'my/:dataType/:key(/)': 'clientPageAssigments'
 

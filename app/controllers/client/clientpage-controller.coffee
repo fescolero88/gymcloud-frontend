@@ -9,6 +9,8 @@ GlobalExercise = require 'models/global_exercise'
 
 WorkoutGlobalView = require 'views/client/workouts/workout-clientpage-view'
 GlobalWorkout = require 'models/global_workout'
+PersonalWorkout = require 'models/personal_workout'
+PersonalProgram = require 'models/personal_program'
 
 CalendarDayView = require 'views/client/clientpage-calendar-day-view'
 CalendarWeekView = require 'views/client/clientpage-calendar-week-view'
@@ -30,13 +32,46 @@ module.exports = class ClientPageController extends Marionette.Controller
     App.vent.on 'assignments:loaded', =>
       @queue()
 
-  personalWorkout: ->
-    type = 'personal_workouts'
+  personalWorkoutList: ->
+    @_assignedEntityList('workouts')
+
+  personalWorkout: (id) ->
+    @_assignedEntityShow('workouts', id)
+
+  personalProgramList: ->
+    @_assignedEntityList('programs')
+
+  _assignedEntityList: (dataType) ->
+    eventName = 'clientpage:nav-click'
+    elementId = "#gc-clientpage-nav-tab-#{dataType}"
+    App.vent.trigger(eventName, elementId)
+    type = "personal_#{dataType}"
     view = new ClientEWPView
       collection: new UserCollection([], type: type)
-      dataType: 'workouts'
+      dataType: dataType
       type: type
     @userPageView.content.show(view)
+
+  _assignedEntityShow: (dataType, id) ->
+    eventName = 'clientpage:nav-click'
+    elementId = "#gc-clientpage-nav-tab-#{dataType}"
+    App.vent.trigger(eventName, elementId)
+
+    klasses = {
+      workouts:
+        model: PersonalWorkout,
+        view: WorkoutGlobalView
+      programs:
+        model: PersonalProgram,
+        view: WorkoutGlobalView
+    }[dataType]
+
+    model = new klasses.model(id: id)
+    model.fetch().then =>
+      view = new klasses.view
+        model: model
+        breadcrumbs: [{title: dataType}]
+      @userPageView.content.show(view)
 
   clientPageAssigments: (dataType, key) =>
     dataType = dataType || 'exercises'
