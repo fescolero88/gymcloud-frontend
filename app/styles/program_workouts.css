@@ -12,6 +12,13 @@
 .gc-workout-draggable.dragged .gc-program-workout-item {
   cursor: move;
 }
+.gc-workout-draggable.gu-mirror {
+  list-style-type: none;
+  background-color: #fff;
+}
+.main.gu-unselectable {
+  height: auto!important;
+}
 .gc-program-workout-item .gc-workout-header {
   position: relative;
   background: #3A99D8;
