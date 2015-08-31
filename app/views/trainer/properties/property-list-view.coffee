@@ -21,8 +21,12 @@ define [
 
     className: 'row'
 
-    modelEvents:
-      sync: 'render'
+    events:
+      'change .switch input': 'switchProperty'
+
+    switchProperty: (ev) ->
+      state = ev.currentTarget.checked
+      @model.save(is_visible: state)
 
   class PropertyListView extends Marionette.CompositeView
 
@@ -38,34 +42,21 @@ define [
 
     emptyView: EmptyView
 
-    events:
-      'click @ui.rmProperty': 'rmProperty'
-
-    ui:
-      rmProperty: '.gc-properties-property-delete'
-
     templateHelpers: =>
       collection: @collection
 
     isEmpty: (collection) ->
       return !collection.length
 
-    # TODO: rename to switcher
-    rmProperty: (ev) ->
-      ev.preventDefault()
-      model_id = $(ev.currentTarget).data('id')
-      model = @collection.get model_id
-      model.save(is_visible: !model.get('is_visible'))
-
     onShow: ->
       @$el.find('.gc-properties-list').sortable
         handle: '.draggable-handle'
         placeholder: '<li class="placeholder sortable-placeholder"/>'
         onDrop: ($item) =>
-          model_id = $item.data('id')
-          model = @collection.get model_id
           $item.removeClass('dragged').removeAttr('style')
           $('body').removeClass('dragging')
-          new_position = $('.gc-properties-list li').index($item)+1
-          model.set 'position', new_position
-          model.save()
+          @$(@childViewContainer).children().each (index, item) =>
+            id = $(item).data('id')
+            model = @collection.get(id)
+            model.set(position: index)
+            model.save() unless _.isEmpty(model.changed)

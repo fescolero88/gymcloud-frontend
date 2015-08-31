@@ -3,7 +3,7 @@
   span(data-weight="#{global_property.symbol}")= global_property.name
 .col-xs-4= global_property.unit
 .col-xs-2.gc-properties-property-actions
-  //- a.btn.btn-primary.gc-properties-property-edit(href='#', data-id="#{id}")
-  //-   | Edit
-  a.btn.btn-link.gc-properties-property-delete(href='#', data-id="#{id}")
-    i.fa.fa-trash
+  .switch
+    label
+      input(type='checkbox', data-id="#{id}", checked=is_visible)
+      span.lever
