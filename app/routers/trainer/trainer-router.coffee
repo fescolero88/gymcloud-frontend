@@ -10,7 +10,7 @@ module.exports = class TrainerRouter extends CustomRouter
     'tr/groups/id/:id/:assign(/)': 'group'
     'tr/groups/id/:id/:assign/:key(/)': 'group'
 
-    'tr/me(/)': 'me'
+    'tr/me(/)': 'profile'
     'tr/me/:assign(/)': 'me'
     'tr/me/:assign/:key(/)': 'me'
 

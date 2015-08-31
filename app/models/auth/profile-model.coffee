@@ -1,15 +1,17 @@
 define [
-  'backbone'
+  'models/user_profile'
 ], (
-  Backbone
+  UserProfile
 ) ->
 
-  class ProfileModel extends Backbone.Model
+  class CurrentUserModel extends Backbone.Model
 
     url: '/users/me'
 
     parse: (data) =>
       @.clear()
+      @profile = new UserProfile(data.user_profile)
+      data.user_profile = @profile.attributes
       data
 
     validation:

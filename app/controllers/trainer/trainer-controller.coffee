@@ -12,6 +12,7 @@ ClientGroup = require 'models/client_group'
 ClientGroups = require 'collections/client_groups'
 
 ClientGroupView = require 'views/trainer/clients/client-group-view'
+ProfileView = require 'views/profile/layout'
 
 EWPGlobalView = require 'views/trainer/global_ewp/ewp-global-view'
 
@@ -42,6 +43,10 @@ module.exports = class TrainerController extends Marionette.Controller
       if @globalViewMethod
         @[@globalViewMethod](@globalType, @globalKey)
         @globalViewMethod = false
+
+  profile: (assign, key) =>
+    view = new ProfileView
+    @mainView.content.show(view)
 
   clients: (viewType) =>
     clientsPageView = new ClientsView viewType: viewType

@@ -1,0 +1,56 @@
+.gc-usercard-large.row.account_type(class="#{ is_pro ? 'gc-trainer-card' : 'gc-client-card' }")
+  .col-xs-10
+    .gc-usercard-avatar-wrapper.text-center(class="#{ avatar_url && 'gc-usercard-avatar-exist'}")
+      img.gc-usercard-avatar(src="#{avatar_url}")
+    .gc-usercard-info
+      h1.gc-usercard-name
+        span(data-bind="first_name")=user_profile.first_name
+        span=" "
+        span(data-bind="last_name")=user_profile.last_name
+      p.gc-usercard-address
+        span(data-bind="location")=user_profile.location
+        span=" "
+        span(data-bind="zip")=user_profile.zip
+      input.gc-usercard-link(type='text', value='http://gymcloud.com/clients/john-doe', readonly='readonly')
+      .btn-group.gc-usercard-actions(role='group')
+        button.btn.btn-default.show-message-form(type='button') New message
+        button.btn.btn-default(type='button', data-toggle='modal', data-target='#gc-invite-client-modal') Invite client
+        button.btn.btn-default.show-client-form(type='button') Edit profile
+  .col-xs-2.gc-usercard-params.text-right
+    dl
+      dt Height
+      dd(data-bind="height")=user_profile.height
+      dt Weight
+      dd(data-bind="weight")=user_profile.weight
+      dt Bodyfat
+      dd(data-bind="bodyfat")=user_profile.bodyfat
+      dt Age
+      dd(data-bind="birthday")=user_profile.birthday
+      dt Gender
+      dd(data-bind="gender")=user_profile.gender
+#gc-invite-client-modal.modal.fade.gc-modal
+  .modal-dialog.modal-md
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal')
+          span Close
+        h4.modal-title
+          span
+            img(src='app/images/icon-individuals.png', alt='')
+          | Invite client
+      form.form.invite-client-form(role='form')
+        .modal-body
+          .row
+            .col-xs-12
+              .row
+                .col-xs-12
+                  .form-group
+                    label Client's email
+                    label.gc-error-message
+                    input.form-control(name='email', type='text')
+        .modal-footer
+          .row
+            .col-xs-12.text-right
+              button.btn.btn-primary(type='submit') Invite
+#gc-send-message-modal.modal.fade.gc-modal
+#gc-edit-client-modal.modal.fade.gc-modal
