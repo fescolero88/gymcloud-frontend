@@ -1,52 +1,68 @@
-Marionette = require 'backbone.marionette'
+define [
+  'backbone.marionette'
+  'templates/client/assigments-empty'
+  'templates/client/ewp_item'
+  'templates/client/ewp_list'
+], (
+  Marionette
+  emptyViewTpl
+  itemViewTpl
+  collectionViewTpl
+) ->
 
-class EmptyView extends Marionette.ItemView
+  class EmptyView extends Marionette.ItemView
 
-  template: require('templates/client/assigments-empty')
+    template: emptyViewTpl
 
-  initialize: (data) =>
-    @dataType = data.dataType
+    initialize: (data) =>
+      @dataType = data.dataType
 
-  templateHelpers: =>
-    dataType: @dataType
+    templateHelpers: =>
+      dataType: @dataType
 
-class ClientEWPItemView extends Marionette.ItemView
+  class ClientEWPItemView extends Marionette.ItemView
 
-  template: require('templates/client/ewp_item')
+    template: itemViewTpl
 
-  tagName: 'li'
-  className: 'row'
+    tagName: 'li'
+    className: 'row'
 
-  initialize: (options) =>
-    @dataType = options.dataType
+    initialize: (options) =>
+      @dataType = options.dataType
+      @type = options.type
 
-  templateHelpers: =>
-    dataType: @dataType
-    isExercises: (type, options) ->
-      if type == 'exercises'
-        options.fn @
-      else
-        options.inverse @
+    templateHelpers: =>
+      dataType: @dataType
+      type: @type
+      isExercises: (type, options) ->
+        if type == 'exercises'
+          options.fn(this)
+        else
+          options.inverse(this)
 
-module.exports = class ClientEWPView extends Marionette.CompositeView
+  class ClientEWPView extends Marionette.CompositeView
 
-  template: require('templates/client/ewp_list')
+    template: collectionViewTpl
 
-  childView: ClientEWPItemView
-  childViewContainer: 'ul'
-  emptyView: EmptyView
+    childView: ClientEWPItemView
+    childViewContainer: 'ul'
+    emptyView: EmptyView
 
-  collectionEvents:
-    sync: 'render'
+    collectionEvents:
+      sync: 'render'
 
-  childViewOptions: =>
-    dataType: @dataType
+    childViewOptions: ->
+      dataType: @dataType
+      type: @type
 
-  emptyViewOptions: =>
-    dataType: @dataType
+    emptyViewOptions: ->
+      dataType: @dataType
+      type: @type
 
-  initialize: (data) =>
-    @dataType = data.dataType
+    initialize: (data) ->
+      @dataType = data.dataType
+      @type = data.type
+      @collection.fetch()
 
-  templateHelpers: =>
-    dataType: @dataType
+    templateHelpers: ->
+      dataType: @dataType
