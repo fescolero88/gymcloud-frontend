@@ -26,6 +26,8 @@
   border: 1px dashed #fff;
 }
 .gc-properties-list > li.dragged {
+  left: 15px!important;
+  right: 0!important;
   position: absolute;
   z-index: 2000;
   background: #fff;
@@ -39,6 +41,9 @@
 }
 .gc-properties-list .row {
   border-bottom: 1px solid #ededed;
+}
+.gc-properties-list .row .switch {
+  margin-top: 10px;
 }
 .gc-properties-list .row > div {
   font-size: 14px;
