@@ -45,19 +45,20 @@ define [
       personalPrograms: '@ui.personalProgramsRegion'
 
     initialize: ->
-      _.each ['workouts', 'programs'], (item) =>
-        collection = new UserCollection([], type: "personal_#{item}")
-        collection.fetch().then =>
-          App.request "data:#{item}:reset", collection.toJSON()
-          view = new PersonalCollectionView
-            collection: collection
-            type: item
+      @currentUser = App.request('data:profile')
 
-          regionName = "personal#{_.capitalize(item)}"
-          @getRegion(regionName).show(view)
+    renderPersonalEntities: ->
+      _.each ['workouts', 'programs'], (item) =>
+        view = new PersonalCollectionView
+          collection: @currentUser["personal_#{item}"]
+          type: item
+
+        regionName = "personal#{_.capitalize(item)}"
+        @getRegion(regionName).show(view)
 
     onRender: ->
-      @getRegion('pro').show(new SidebarProView)
+      @renderPersonalEntities()
+      @getRegion('pro').show(new SidebarProView) if @currentUser.get('is_pro')
 
 
     toggleMenu: (ev) ->

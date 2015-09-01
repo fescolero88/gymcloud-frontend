@@ -4,6 +4,7 @@ define [
   'handlers/spinner'
   'handlers/ajax_setup'
   'handlers/user_authorization'
+  'handlers/user_collections_preload'
   'handlers/data'
 
   'deps/scripts'
@@ -16,6 +17,7 @@ define [
   spinnerHandler
   ajaxSetupHandler
   userAuthorizationHandler
+  userCollectionsPreload
   dataHandler
 ) ->
 
@@ -52,6 +54,7 @@ define [
       @addInitializer ->
         if @request('accessToken:get')
           @data.profileModel.fetch().then =>
+            userCollectionsPreload(@data.profileModel)
             @vent.trigger 'profile:ready'
 
       @on 'start', ->
@@ -112,8 +115,11 @@ define [
         @module 'LibraryPreset', LibraryPresetModule
         @module 'Prototype', PrototypeModule
 
-        if Backbone.history
-          Backbone.history.start()
+        startHistory = -> Backbone.history.start() if Backbone.history
+        if @request('accessToken:get') && @request('data:profile').isEmpty()
+          App.vent.on('profile:ready', startHistory)
+        else
+          startHistory()
         # --- Add modules -----
 
   $ ->
