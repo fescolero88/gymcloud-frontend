@@ -8,7 +8,7 @@ MessagesController = require 'controllers/general/messages/messages-controller'
 MessagesRouter = require 'routers/general/messages/messages-router'
 
 MainView = require 'views/general/main-view'
-SideBarView = require 'views/trainer/sidebar-view'
+SideBarView = require 'views/sidebar/sidebar_view'
 ModalView = require 'views/general/modal-view'
 
 module.exports = class MainTrainerModule extends Marionette.Module
