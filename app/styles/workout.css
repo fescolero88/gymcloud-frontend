@@ -427,3 +427,18 @@ ul.gc-workout-exercises-list .dragged {
   padding-left: 11px;
   padding-bottom: 10px;
 }
+
+.gc-workout-schedule label.gc-checkbox {
+  height: 20px;
+  line-height: 20px;
+}
+.gc-workout-schedule .modal-body {
+  padding-bottom: 10px;
+}
+.gc-workout-schedule .btn-group > .btn {
+  width: 25%;
+}
+
+.gc-workout-repeat-wrapper label {
+  padding: 10px;
+}

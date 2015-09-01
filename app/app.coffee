@@ -39,6 +39,8 @@ define [
 
   ModalConfirmView = require 'views/general/modal-confirm-view'
   ModalAddToLibraryView = require 'views/general/modal_add_to_library_view'
+  WorkoutScheduleView = require 'views/trainer/workouts/workout_schedule_modal_view'
+  WorkoutSchedule = require 'models/workout_schedule'
 
   class Application extends Marionette.Application
 
@@ -94,6 +96,19 @@ define [
           @listenToOnce addToLibraryView, "modal:closed", =>
             region.$el.modal('hide')
             region.destroy()
+
+        @reqres.setHandler 'base:workoutSchedule', (data) =>
+          workoutScheduleView = new WorkoutScheduleView
+            model: new WorkoutSchedule
+
+          region = @baseView.baseModalRegion
+          region.show(workoutScheduleView)
+          region.$el.modal('show')
+
+          @listenToOnce workoutScheduleView, "modal:closed", =>
+            region.$el.modal('hide')
+            region.destroy()
+
 
         @reqres.setHandler 'ajax:options:create', (params) ->
           options =
