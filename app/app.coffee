@@ -115,8 +115,11 @@ define [
         @module 'LibraryPreset', LibraryPresetModule
         @module 'Prototype', PrototypeModule
 
-        if Backbone.history
-          Backbone.history.start()
+        startHistory = -> Backbone.history.start() if Backbone.history
+        if @request('accessToken:get') && @request('data:profile').isEmpty()
+          App.vent.on('profile:ready', startHistory)
+        else
+          startHistory()
         # --- Add modules -----
 
   $ ->
