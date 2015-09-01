@@ -1,0 +1,13 @@
+.gc-main-workspace.row
+  .col-xs-12.gc-content-both
+    .gc-clients-nav-wrapper.row
+      .col-xs-8
+        region(data-name='search-filters')
+      .col-xs-4
+        ul.gc-content-nav.pull-right
+          li
+            #search-result-scope
+              region.gc-author-scope(data-name='public-scopes')
+
+  .gc-clients-list-wrapper.row
+    region#search-result-groups.col-xs-12(data-name='search-results')

@@ -1,0 +1,86 @@
+<region data-name="search-bar"></region>
+
+<div class="gc-topbar-item">
+  <a href="#" class="btn btn-default" type="button">
+    <i class="fa fa-question"></i>
+  </a>
+</div>
+{{!-- <div class="gc-topbar-item">
+  <a href="#messages" class="btn btn-default" type="button">
+    <i class="fa fa-envelope-o"></i>
+    <span class="gc-topbar-notifications success">12</span>
+  </a>
+</div>
+<div class="gc-topbar-item">
+  <a href="#" class="btn btn-default" type="button">
+    <i class="fa fa-bell-o"></i>
+    <span class="gc-topbar-notifications danger">3</span>
+  </a>
+</div> --}}
+{{#withProfile}}
+{{#ifNot account_type 'client'}}
+<div class="gc-topbar-item gc-topbar-avatar dropdown">
+  <a href="#" class="{{#if avatar_url}}gc-topbar-avatar-exist{{/if}}" id="gc-user-topbar-avatar" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+    <img src="{{avatar_url}}" alt="">
+  </a>
+  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="gc-user-topbar-avatar">
+    <li>
+      <a class="row" href="#tr/me/">
+        <span class="col-xs-3">
+          <span class="gc-topbar-dropdown-icon gc-topbar-dropdown-icon-profile"></span>
+        </span>
+        <span class="col-xs-9">Profile</span>
+      </a>
+    </li>
+    <li>
+      <a class="row" href="#tr/clients">
+      <span class="col-xs-3">
+        <span class="gc-topbar-dropdown-icon gc-topbar-dropdown-icon-clients"></span>
+      </span>
+      <span class="col-xs-9">Clients</span>
+      </a>
+    </li>
+    <li>
+      <a class="row" href="#tr/me/">
+        <span class="col-xs-3">
+          <span class="gc-topbar-dropdown-icon gc-topbar-dropdown-icon-trainigs"></span>
+        </span>
+        <span class="col-xs-9">Trainings</span>
+      </a>
+    </li>
+    <li>
+      <a class="row" href="#logout" id="logout-btn">
+        <span class="col-xs-3">
+          <span class="gc-topbar-dropdown-icon gc-topbar-dropdown-icon-signout"></span>
+        </span>
+        <span class="col-xs-9">Sign out</span>
+      </a>
+    </li>
+  </ul>
+</div>
+{{else}}
+<div class="gc-topbar-item gc-topbar-avatar dropdown">
+  <a href="#" class="{{#if avatar_url}}gc-topbar-avatar-exist{{/if}}" id="gc-user-topbar-avatar" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+    <img src="{{avatar_url}}" alt="">
+  </a>
+  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="gc-user-topbar-avatar">
+    <li>
+      <a class="row" href="#tr/me/">
+        <span class="col-xs-3">
+          <span class="gc-topbar-dropdown-icon gc-topbar-dropdown-icon-profile"></span>
+        </span>
+        <span class="col-xs-9">Profile</span>
+      </a>
+    </li>
+    <li>
+      <a class="row" href="#logout" id="logout-btn">
+        <span class="col-xs-3">
+          <span class="gc-topbar-dropdown-icon gc-topbar-dropdown-icon-signout"></span>
+        </span>
+        <span class="col-xs-9">Sign out</span>
+      </a>
+    </li>
+  </ul>
+</div>
+{{/ifNot}}
+{{/withProfile}}

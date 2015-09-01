@@ -4,6 +4,9 @@ define ->
 
     App.data = {}
 
+    App.reqres.setHandler 'current_user_id', ->
+      App.request('data:profile').get('id')
+
     App.reqres.setHandler 'data:profile', ->
       App.data.profileModel
 

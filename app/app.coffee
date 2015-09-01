@@ -27,6 +27,7 @@ define [
 
   BaseView = require 'views/general/base-view'
 
+  HeaderModule = require 'features/header/module'
   AuthModule = require 'modules/auth/auth-module'
   ProfileModel = require 'models/auth/profile-model'
 
@@ -34,6 +35,7 @@ define [
   MainClientModule = require 'modules/main-client/main-client-module'
   LibraryPresetModule = require 'modules/general/library-preset-module'
   PrototypeModule = require 'modules/prototype/prototype-module'
+  SearchModule = require 'features/search/module'
 
   ModalConfirmView = require 'views/general/modal-confirm-view'
   ModalAddToLibraryView = require 'views/general/modal_add_to_library_view'
@@ -70,7 +72,7 @@ define [
             url: "/api/mobile/library/#{rootId}"
             type: 'GET'
             dataType: 'json'
-            success: (data) =>
+            success: (data) ->
               App.data[category] = data.items
 
         @reqres.setHandler 'base:confirmationalModal', (data) =>
@@ -103,17 +105,21 @@ define [
         # --- Data handlers -----
 
         # --- Base layout -----
-        @baseView = new BaseView()
+        @baseView = new BaseView
+        @reqres.setHandler 'app:views:base', =>
+          @baseView
         @baseView.render()
         @appRegion = @baseView.appRegion
         # --- Base layout -----
 
         # --- Add modules -----
+        @module 'Header', HeaderModule
         @module 'Auth', AuthModule
         @module 'MainTrainer', MainTrainerModule
         @module 'MainClient', MainClientModule
         @module 'LibraryPreset', LibraryPresetModule
         @module 'Prototype', PrototypeModule
+        @module 'Search', SearchModule
 
         startHistory = -> Backbone.history.start() if Backbone.history
         if @request('accessToken:get') && @request('data:profile').isEmpty()
