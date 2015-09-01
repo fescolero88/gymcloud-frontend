@@ -6,7 +6,7 @@ define [
   'collections/programs'
   './header/view'
   'views/trainer/clients/client-group-nav-view'
-  'views/trainer/clients/activity-view'
+  './activity/view'
   'views/trainer/assignments/assignments-view'
   'views/trainer/calendar/calendar-view'
   'views/trainer/groups/members-view'
@@ -54,15 +54,17 @@ define [
       assign = if @viewType is 'clients' then 'exercises' else 'members'
       @assign = data.assign || assign
       @key = data.key
-      @recentActivityCollection = data.recentActivity
+
+      currentUser = App.request('data:profile')
 
       @headerView = new HeaderView
-        model: App.request('data:profile')
+        model: currentUser
         viewType: @viewType
       @navView = new ClientGroupNavView
         itemId: @itemId
         viewType: @viewType
-      @showActivity(false)
+      @activityView = new ActivityView
+        collection: currentUser.notifications
 
       @listenTo @navView, 'navView', @loadCenterView
 
@@ -74,17 +76,11 @@ define [
       App.vent.off 'drag:complete', @assignDragged
 
     onShow: ->
-      @header.show @headerView
-      @nav.show @navView
-      @rightside.show @activityView
+      @header.show(@headerView)
+      @nav.show(@navView)
+      @rightside.show(@activityView)
 
       @navView.navigate @assign
-
-    showActivity: (isShow) ->
-      if !@activityView? or @activityView.isDestroyed
-        @activityView = new ActivityView collection: @recentActivityCollection
-        if isShow
-          @rightside.show @activityView
 
     loadView: (assign, key) =>
       @key = key
@@ -158,11 +154,7 @@ define [
             @showCenterView()
 
     showCenterView: ->
-      if !@key
-        @showActivity(true)
       @leftside.show @centerView
-      @listenTo @centerView, 'activityRefresh', ->
-        @activityView.refresh()
 
     assignDragged: (item) =>
       if @centerView.assignName isnt item.get 'category'

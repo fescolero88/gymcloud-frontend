@@ -90,7 +90,7 @@ define ->
 
     App.reqres.setHandler 'data:delete', (category, key) ->
       items = App.data[category]
-      deleteFromTree = (items, key) =>
+      deleteFromTree = (items, key) ->
         for item, index in items
           if item.isFolder
             deleteFromTree item.items, key
