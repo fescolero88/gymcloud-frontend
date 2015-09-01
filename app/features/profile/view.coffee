@@ -4,7 +4,7 @@ define [
   'collections/exercises'
   'collections/workouts'
   'collections/programs'
-  'views/profile/header_view'
+  './header/view'
   'views/trainer/clients/client-group-nav-view'
   'views/trainer/clients/activity-view'
   'views/trainer/assignments/assignments-view'
@@ -32,7 +32,7 @@ define [
   template
 ) ->
 
-  class ProfileView extends Marionette.LayoutView
+  class ProfileLayoutView extends Marionette.LayoutView
 
     template: template
 
@@ -44,9 +44,6 @@ define [
       nav: '#client-content-nav-region'
       leftside: '#client-left-region'
       rightside: '#client-right-region'
-
-    ui:
-      itemsLinks: '.gc-exercises-link-exercises, .gc-exercises-link-workouts, .gc-exercises-link-programs'
 
     initialize: (data) ->
       @isDroppable = true

@@ -12,7 +12,7 @@ ClientGroup = require 'models/client_group'
 ClientGroups = require 'collections/client_groups'
 
 ClientGroupView = require 'views/trainer/clients/client-group-view'
-ProfileView = require 'views/profile/layout'
+ProfileView = require 'features/profile/view'
 
 EWPGlobalView = require 'views/trainer/global_ewp/ewp-global-view'
 

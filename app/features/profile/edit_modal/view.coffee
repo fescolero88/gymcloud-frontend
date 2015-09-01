@@ -1,7 +1,7 @@
 define [
   'backbone.marionette'
   'views/helpers/form-validation-behaviour'
-  'templates/profile/profile_edit_modal.jade'
+  './template'
 ], (
   Marionette
   FormValidationBehaviour
