@@ -1,4 +1,8 @@
-define ->
+define [
+  'backbone'
+], (
+  Backbone
+) ->
 
   class WorkoutSchedule extends Backbone.Model
 

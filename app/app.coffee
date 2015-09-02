@@ -98,14 +98,14 @@ define [
             region.destroy()
 
         @reqres.setHandler 'base:workoutSchedule', (data) =>
-          workoutScheduleView = new WorkoutScheduleView
+          view = new WorkoutScheduleView
             model: new WorkoutSchedule
 
           region = @baseView.baseModalRegion
-          region.show(workoutScheduleView)
+          region.show(view)
           region.$el.modal('show')
 
-          @listenToOnce workoutScheduleView, "modal:closed", =>
+          @listenToOnce view, "modal:closed", =>
             region.$el.modal('hide')
             region.destroy()
 

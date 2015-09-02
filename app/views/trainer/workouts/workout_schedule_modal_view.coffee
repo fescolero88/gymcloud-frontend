@@ -3,12 +3,12 @@ define [
   'templates/trainer/workouts/workout_schedule_modal'
 ], (
   Marionette
-  workoutScheduleTpl
+  template
 ) ->
 
   class WorkoutScheduleModal extends Marionette.ItemView
     
-    template: workoutScheduleTpl
+    template: template
 
     ui:
       hasEndDate: '.gc-has-end-date'
@@ -16,7 +16,7 @@ define [
 
     bindings:
       '.gc-workout-id': 'workoutId'
-      '[name="gc-workout-repeat"]': 'repeat'
+      '.gc-workout-repeat': 'repeat'
       '.gc-start-date': 'startDate'
       '.gc-end-date': 'endDate'
 

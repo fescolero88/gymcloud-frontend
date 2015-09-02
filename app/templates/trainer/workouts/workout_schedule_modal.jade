@@ -5,7 +5,7 @@
       h4.modal-title
         span
           img(src="app/images/add-to-library-icon.png", alt="")
-        = "Schedule New Workout"
+        | Schedule New Workout
     .modal-body
       form
         .form-group
@@ -16,17 +16,17 @@
           label Repeat
           .btn-group.clearfix.gc-workout-repeat-wrapper.gc-tabs(data-toggle="buttons")
             label.btn.btn-default
-              input(type="radio", name="gc-workout-repeat", class="btn btn-default", value="1") 
-              = "Daily"
+              input(type="radio", name="gc-workout-repeat", class="btn btn-default gc-workout-repeat", value="1") 
+              | Daily
             label.btn.btn-default
-              input(type="radio", name="gc-workout-repeat", class="btn btn-default active", value="2") 
-              = "Weekly"
+              input(type="radio", name="gc-workout-repeat", class="btn btn-default active gc-workout-repeat", value="2") 
+              | Weekly
             label.btn.btn-default
-              input(type="radio", name="gc-workout-repeat", class="btn btn-default", value="3") 
-              = "Monthly"
+              input(type="radio", name="gc-workout-repeat", class="btn btn-default gc-workout-repeat", value="3") 
+              | Monthly
             label.btn.btn-default
-              input(type="radio", name="gc-workout-repeat", class="btn btn-default", value="4") 
-              = "Never"
+              input(type="radio", name="gc-workout-repeat", class="btn btn-default gc-workout-repeat", value="4") 
+              | Never
         .form-group
           label Start
           .input-group.gc-datetime
@@ -51,6 +51,6 @@
             label.gc-checkbox
               input.gc-has-end-date(type="checkbox")
               span.gc-checkbox-clone 
-              = "End Date"
+              | End Date
         .col-xs-6
           a(href="#", class="btn btn-primary gc-custom") Add Schedule
