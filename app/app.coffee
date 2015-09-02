@@ -70,7 +70,7 @@ define [
         # --- Helpers -----
 
         @reqres.setHandler 'data:reload', (category, rootId) =>
-          userId = @request('data:profile').get('id')
+          userId = @request('current_user_id')
           rootId = rootId || ""
           $.ajax
             url: "/users/#{userId}/collections/library/#{rootId}"

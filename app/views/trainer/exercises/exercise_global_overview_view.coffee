@@ -49,7 +49,7 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
 
     return {
       video_url: videoUrl
-      userId: App.request('data:profile').get('id')
+      userId: App.request('current_user_id')
       authorId: @model.get('author').id
     }
 
