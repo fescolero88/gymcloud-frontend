@@ -1,0 +1,19 @@
+.gc-property-edit.btn-group.clearfix.pull-right.gc-property.editable(class=editMode ? '' : 'hidden')
+  button.btn.btn-sm.btn-primary.gc-custom(type='button')
+    i.gc-icon-bars
+    span.gc-property-value(contenteditable='true')
+  .btn-group(role='group')
+    button.btn.btn-sm.btn-primary.gc-custom.dropdown-toggle(type='button', data-toggle='dropdown')
+      span.gc-selected-property=defaultProperty
+      i.fa.fa-sort
+    ul.dropdown-menu.gc-dropdown
+      each property in properties
+        li
+          a.gc-property-item(href='#', data-id=property.id)=property.get('name')
+  button.btn.btn-sm.btn-primary.gc-custom.gc-remove(type='button')
+    | ×
+.gc-property-view.gc-workout-exercise-prop(class=editMode ? 'hidden' : '')
+  a.gc-toggle-edit-mode(href='#')
+    span.gc-tag.gc-property
+      i.gc-icon-bars
+      span.gc-property-value-name-label  #{personal_property.name}: #{value} #{personal_property.global_property.unit}

@@ -1,0 +1,33 @@
+.row
+  .col-xs-12
+    .form-group
+      if currentUserId == author_id
+        textarea.gc-workout-description-editor.gc-description-editor.form-control(type='text', placeholder='Start typing a description here...', data-bind='description')
+      else
+        .gc-workout-description(type='text', placeholder='Start typing a description here...', data-bind='description')
+    // Note Fields
+    .form-group.gc-workout-note-container(class='{{#unless ../hasNote}}hidden{{/unless}}')
+      label.gc-workout-notes-label Workout Notes
+      if currentUserId == author_id
+        textarea.gc-workout-note-editor.gc-note-editor.form-control(type='text', placeholder='Start typing a description here...', data-bind='note')
+      else
+        .gc-workout-description(type='text', placeholder='Start typing a description here...', data-bind='note')
+    // / Note Fields
+#gc-exercises-list-region
+if currentUserId == author_id
+  .row
+    .col-xs-6
+    .col-xs-6.text-right
+      // privacy controls
+      .btn-group.gc-btn-group(data-toggle='buttons')
+        label.btn.btn-primary(class=is_public ? 'active' : '')
+          input(type='radio', name='privacy', value='true', checked=is_public, data-bind='is_public')
+          |  Public
+        label.btn.btn-primary(class=!is_public ? 'active' : '')
+          input(type='radio', name='privacy', value='false', checked=!is_public, data-bind='is_public')
+          |  Private
+      // / privacy controls
+      button.btn.btn-primary.gc-workout-delete-button Delete workout
+.row
+  .col-xs-12
+    .form-group

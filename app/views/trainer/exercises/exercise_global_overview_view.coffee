@@ -31,7 +31,7 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
     @privacyButtonsView = new PrivacyButtonsView
       isPublic: @model.get('is_public')
     @listenTo @privacyButtonsView, 'privacy:changed', @setPrivacy
-    profile = App.request 'data:profile'
+    profile = App.request 'current_user'
     if profile.get('id') is @model.get('author').id
       @myItem = true
 

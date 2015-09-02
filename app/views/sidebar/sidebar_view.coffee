@@ -45,7 +45,7 @@ define [
       personalPrograms: '@ui.personalProgramsRegion'
 
     initialize: ->
-      @currentUser = App.request('data:profile')
+      @currentUser = App.request('current_user')
 
     renderPersonalEntities: ->
       _.each ['workouts', 'programs'], (item) =>
