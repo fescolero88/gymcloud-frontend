@@ -32,12 +32,6 @@ define [
       program_templates: '@ui.programsRegion'
 
     initialize: ->
-      App.vent.on 'profile:ready', @initializeProSidebar
-
-    onDestroy: ->
-      App.vent.off 'profile:ready', @initializeProSidebar
-
-    initializeProSidebar: =>
       typeByName = (name) ->
         {
           Exercises: 'exercises'
@@ -58,9 +52,6 @@ define [
             name: folder.name
           @getRegion(type).show(view)
           # @initDragAndDrop()
-
-    onRender: ->
-
 
     toggleItem: (ev) ->
       activeItem = @el.querySelector('.gc-sidebar-item > a.active')

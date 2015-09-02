@@ -6,4 +6,4 @@ define [
 
   class GlobalFolder extends Backbone.Model
 
-    url: '/api/mobile/folders'
+    url: '/folders'
