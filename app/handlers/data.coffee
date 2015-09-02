@@ -5,10 +5,13 @@ define ->
     App.data = {}
 
     App.reqres.setHandler 'current_user_id', ->
-      App.request('data:profile').get('id')
+      App.request('current_user').get('id')
+
+    App.reqres.setHandler 'current_user', ->
+      App.data.current_user
 
     App.reqres.setHandler 'data:profile', ->
-      App.data.profileModel
+      App.request('current_user')
 
     App.reqres.setHandler 'data:exercises', ->
       App.data.exercises
@@ -75,13 +78,13 @@ define ->
       App.data['client:properties'][id] = properties
 
     App.reqres.setHandler 'my:properties', =>
-      profile = App.request 'data:profile'
-      App.data['client:properties']?[profile.get('id')]
+      uid = App.request('current_user_id')
+      App.data['client:properties']?[uid]
 
     App.reqres.setHandler 'my:properties:set', (properties) =>
-      profile = App.request 'data:profile'
+      uid = App.request('current_user_id')
       App.data['client:properties'] ?= {}
-      App.data['client:properties'][profile.get('id')] = properties
+      App.data['client:properties'][uid] = properties
 
     App.reqres.setHandler 'lastHash:get', ->
       App.data.lastHash

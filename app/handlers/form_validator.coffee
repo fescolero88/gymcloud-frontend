@@ -1,9 +1,12 @@
-Backbone = require 'backbone'
-_ = require 'lodash'
+define [
+  'lodash'
+  'backbone'
+], (
+  _
+  Backbone
+) ->
 
-module.exports = class FormValidatorHelper
-
-  initialize: ->
+  ->
 
     occurrences = (string, subString, allowOverlapping) ->
       string += ''
