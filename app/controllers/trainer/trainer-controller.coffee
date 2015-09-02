@@ -7,6 +7,7 @@ define [
   'models/client'
   'collections/clients'
   'collections/activities'
+  'features/profile/view'
   'models/client_group'
   'collections/client_groups'
   'views/trainer/clients/client-group-view'
@@ -28,6 +29,7 @@ define [
   Client
   Clients
   Activities
+  ProfileView
   ClientGroup
   ClientGroups
   ClientGroupView
