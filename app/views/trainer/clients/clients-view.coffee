@@ -188,8 +188,8 @@ module.exports = class ClientsView extends Marionette.LayoutView
       content: "Are you sure you want to delete selected items?"
       confirmBtn: "Delete"
       confirmCallBack: =>
-        @clients.currentView?.trigger 'rm-client'
-        @groups.currentView?.trigger 'rm-group'
+        App.vent.trigger 'rm-client'
+        App.vent.trigger 'rm-group'
         clientLength = @clients.currentView?.collection.length
         groupLength = @groups.currentView?.collection.length
         if @clients.currentView? and @groups.currentView?

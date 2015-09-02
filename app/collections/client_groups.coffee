@@ -43,4 +43,4 @@ define [
   class ClientGroups extends Backbone.Collection
 
     model: ClientGroupModel
-    url: '/api/mobile/client_groups'
+    url: '/users'

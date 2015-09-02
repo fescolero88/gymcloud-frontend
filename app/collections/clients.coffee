@@ -10,4 +10,4 @@ define [
 
     model: Client
 
-    url: '/api/mobile/clients'
+    url: '/users'
