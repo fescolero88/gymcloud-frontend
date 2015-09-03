@@ -142,6 +142,8 @@ define [
           .fail(defer.reject)
       else
         defer.reject()
+      defer.fail =>
+        @request('accessToken:remove')
       defer.promise()
 
     _initCollections: ->
