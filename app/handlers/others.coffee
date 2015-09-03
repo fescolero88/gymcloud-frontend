@@ -3,11 +3,13 @@ define [
   'views/general/modal_add_to_library_view'
   'views/trainer/workouts/workout_schedule_modal_view'
   'models/workout_schedule'
+  'views/trainer/account-type-modal-view'
 ], (
   ModalConfirmView
   ModalAddToLibraryView
   WorkoutScheduleView
   WorkoutSchedule
+  AccountTypeModalView
 ) ->
 
   (App) ->
@@ -44,6 +46,17 @@ define [
     App.reqres.setHandler 'base:workoutSchedule', (data) =>
       view = new WorkoutScheduleView
         model: new WorkoutSchedule
+
+      region = App.baseView.baseModalRegion
+      region.show(view)
+      region.$el.modal('show')
+
+      App.listenToOnce view, "modal:closed", ->
+        region.$el.modal('hide')
+        region.destroy()
+
+    App.reqres.setHandler 'base:accountTypes', (data) =>
+      view = new AccountTypeModalView
 
       region = App.baseView.baseModalRegion
       region.show(view)
