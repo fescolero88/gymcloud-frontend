@@ -6,7 +6,7 @@ define [
 
   class Property extends Backbone.Model
 
-    urlRoot: '/api/mobile/properties'
+    urlRoot: '/properties/'
 
     validation:
 

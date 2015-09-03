@@ -7,7 +7,7 @@ define [
   class GlobalEWPModel extends Backbone.Model
 
     initialize: (options) ->
-      @url = "/api/mobile/#{options.type}"
+      @url = "/#{options.type}"
 
     duplicate: (data) ->
 

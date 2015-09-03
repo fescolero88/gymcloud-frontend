@@ -9,5 +9,4 @@ define [
   class Clients extends Backbone.Collection
 
     model: Client
-
     url: '/users'

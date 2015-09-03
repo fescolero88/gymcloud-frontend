@@ -38,11 +38,13 @@ define [
           Workouts: 'workout_templates'
           Programs: 'program_templates'
         }[name]
+
       library = new UserCollection([], type: 'library')
       library.fetch().then =>
         root = library.models[0]
         _.each root.get('items'), (folder) =>
           type = typeByName(folder.name)
+          App.request("data:#{type}:reset", folder.items)
           collection = new UserCollection(folder.items, type)
           view = new TemplateCollectionView
             collection: collection
@@ -50,9 +52,6 @@ define [
             name: folder.name
           @getRegion(type).show(view)
           # @initDragAndDrop()
-
-    onRender: ->
-
 
     toggleItem: (ev) ->
       activeItem = @el.querySelector('.gc-sidebar-item > a.active')

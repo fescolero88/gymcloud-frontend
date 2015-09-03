@@ -6,7 +6,7 @@ define [
 
   class GlobalExercise extends Backbone.Model
 
-    urlRoot: '/api/mobile/exercises/'
+    urlRoot: '/exercises/'
 
     validation:
 
