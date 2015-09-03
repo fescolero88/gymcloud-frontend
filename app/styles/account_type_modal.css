@@ -1,0 +1,65 @@
+.account-type-list-region ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.account-type-list-region .gc-account-type-item {
+  padding: 5px;
+  border: 1px solid #ededed;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.account-type-list-region .gc-account-type-item.active {
+  border-color: #3398db;
+  -moz-box-shadow: inset 0 0 4px #3398db;
+  -webkit-box-shadow: inset 0 0 4px #3398db;
+  box-shadow: inset 0 0 4px #3398db;
+}
+.gc-account-type-item .gc-account-selected {
+  margin: 4px 0;
+  display: none;
+}
+.gc-account-type-item .gc-account-selected i {
+  margin: 5px 3px 5px;
+}
+.gc-account-type-item .gc-account-selected.assigned {
+  display: block;
+}
+.gc-account-type-item .gc-account-type-image {
+  width: 36px;
+  height: 33px;
+  display: inline-block;
+}
+.gc-account-type-item .gc-account-title {
+  padding: 0;
+}
+.gc-enveloper-icon {
+  background-image: url('../images/enveloper-icon.png');
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  background-repeat: no-repeat;
+  background-position: center;
+  float:left;
+}
+.gc-acc-personal-trainer {
+  background-image: url('../images/personal-trainer.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.gc-acc-str-conditioning {
+  background-image: url('../images/strength-conditioning.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.gc-acc-athletic-trainer {
+  background-image: url('../images/athletic-trainer.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.gc-acc-physical-therapist {
+  background-image: url('../images/physical-therapy.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}

@@ -25,4 +25,5 @@ define [
   'styles/prototype/ui.styl'
   'styles/workout_exercise_property_constructor'
   'styles/program_workouts.css'
+  'styles/account_type_modal.css'
 ], ->
