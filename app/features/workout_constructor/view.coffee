@@ -2,7 +2,7 @@ define [
   'backbone.marionette'
   './workout_overview/view'
   'views/trainer/workouts/workout_global_video_view'
-  'views/trainer/workouts/workout_global_assign_view'
+  './assignment/view'
   'models/workout_exercise'
   './template'
 ], (
