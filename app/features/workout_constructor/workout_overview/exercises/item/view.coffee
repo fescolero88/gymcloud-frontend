@@ -136,18 +136,10 @@ define [
           App.commands.execute('property_constructor:synced:add')
 
     onSaveNote: ->
-      data =
-        id: @model.get 'workout_id'
-        workout_exercise_id: @model.get 'id'
-        notes: @ui.note.val()
-
-      @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises/#{data.workout_exercise_id}"
-      @workoutExerciseModel.set data
-      @workoutExerciseModel.save()
+      @model.save(note: @ui.note.val())
 
     toggleHover: (model, value) ->
       if value is 'edit'
         @$el.removeClass 'hover-enabled'
       else
         @$el.addClass 'hover-enabled'
-

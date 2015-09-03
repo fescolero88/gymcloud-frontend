@@ -113,19 +113,12 @@ define [
       if item instanceof Backbone.Model
         item = item.toJSON()
 
-      count = @model.get('exercises').length
-
-      category = item.category
-      if category == 'exercises'
-        data =
-          'id': @model.get 'id'
-          'exercise_id': item.id
-          'label': count+1
-
-        @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises"
-        @workoutExerciseModel.set data
-        @workoutExerciseModel.method = 'create'
-        @workoutExerciseModel.save()
+      if item.category == 'exercises'
+        workout_exercise = new WorkoutExercise
+          exercise_id: item.id
+          workout_id: @model.id
+        workout_exercise.save().then =>
+          @model.exercises.add(workout_exercise)
 
     onExerciseAdded: () =>
       App.request 'messenger:show',

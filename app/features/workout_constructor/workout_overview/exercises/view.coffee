@@ -71,7 +71,7 @@ define [
 
       @ui.workoutExercisePropertyConstructorWrapper.html(el)
 
-      # @initSearchSelect()
+      @initSearchSelect()
       @addSortable()
 
     getWorkoutData: =>
@@ -87,13 +87,15 @@ define [
           result = result.concat @searchItems(item.items, category)
         else
           result.push
-            key: item.key
-            title: item.title
+            key: item.key || item.id
+            title: item.title || item.name
             label: category
       return result
 
     initSearchSelect: ->
-      searchOptions = @searchItems App.request("data:exercises"), 'exercises'
+      user = App.request("current_user")
+      exercises = user.exercises.toJSON()
+      searchOptions = @searchItems(exercises, 'exercises')
       this_ = @
       @ui.liveSearch.selectize
         hideSelected: true
@@ -202,7 +204,7 @@ define [
 
       @showConnectionLines()
 
-    addExercise: (value, $item) =>
+    addExercise: (value, $item) ->
       data =
         category: 'exercises'
         id: value
