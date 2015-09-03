@@ -1,16 +1,14 @@
 define [
-  'lodash'
   'backbone.marionette'
-  'views/trainer/workouts/workout_exercise_property_constructor_view'
+  './property_constructor/view'
   'collections/workout_exercise_properties'
   './item/view'
   'models/workout_exercise'
   './empty/view'
   './template'
 ], (
-  _
   Marionette
-  WorkoutExercisePropertyConstructor
+  PropertyConstructor
   WorkoutExerciseProperties
   ExercisesItemView
   WorkoutExercise
@@ -30,6 +28,7 @@ define [
 
     childViewOptions: (model) ->
       collection: model.properties
+      visibleProperties: @visibleProperties
 
     childViewContainer: 'ul'
 
@@ -44,6 +43,7 @@ define [
       workout: @workout.attributes
 
     initialize: (data) =>
+      @visibleProperties = @_getVisibleProperties()
       @workout = data.workout
       @on 'render:collection', @showConnectionLines
       App.vent.on 'workout:reload:exercises', @getWorkoutData
@@ -52,20 +52,24 @@ define [
       @listenTo @workoutExerciseModel, 'sync', @onSavedOrder
 
       # sends the collection count
-      App.reqres.setHandler 'workout_exercises:has_exercise?', @hasExercise
-      App.reqres.setHandler 'workout_exercises:has_exercise_properties?', @hasExerciseProperties
+      App.reqres.setHandler 'workout_exercises:has_exercise?', @_hasExercise
+      App.reqres.setHandler 'workout_exercises:has_exercise_properties?', @_hasExerciseProperties
 
     onDestroy: ->
       @off 'render:collection', @showConnectionLines
       App.vent.off 'workout:reload:exercises', @getWorkoutData
-      App.reqres.removeHandler 'workout_exercises:has_exercise?', @hasExercise
-      App.reqres.removeHandler 'workout_exercises:has_exercise_properties?', @hasExerciseProperties
+      App.reqres.removeHandler 'workout_exercises:has_exercise?', @_hasExercise
+      App.reqres.removeHandler 'workout_exercises:has_exercise_properties?', @_hasExerciseProperties
+      @propertyConstructorView.destroy()
 
     onRender: ->
-      workoutExercisePropertyConstructor = new WorkoutExercisePropertyConstructor
-        collection: new WorkoutExerciseProperties()
+      @propertyConstructorView = new PropertyConstructor
+        collection: new Backbone.Collection()
+        visibleProperties: @visibleProperties
+      @propertyConstructorView.render()
+      el = @propertyConstructorView.el
 
-      # @ui.workoutExercisePropertyConstructorWrapper.html workoutExercisePropertyConstructor.render().el
+      @ui.workoutExercisePropertyConstructorWrapper.html(el)
 
       # @initSearchSelect()
       @addSortable()
@@ -182,7 +186,7 @@ define [
         exercises_ordered_ids: exerciseIds
 
     fixExercisesPositions: ->
-      @collection.each (model, i) =>
+      @collection.each (model, i) ->
         model.set 'position', i+1
 
     onSavePosition: (data) =>
@@ -208,14 +212,17 @@ define [
       selectiveIput = @$el.find '.selectize-input'
       selectiveIput.find('div').remove()
 
-    hasExercise: =>
+    _hasExercise: =>
       @collection.length > 0
 
-    hasExerciseProperties: =>
-      exercises = @collection.toJSON()
+    _hasExerciseProperties: =>
       length = 0
-
-      exercises.forEach (exercise) =>
-        length = length + exercise.properties.length
+      @collection.models.forEach (exercise) ->
+        length += exercise.properties.length
 
       return length > 0
+
+    _getVisibleProperties: ->
+      currentUser = App.request('current_user')
+      collection = currentUser.personal_properties
+      properties = collection.where(is_visible: true)

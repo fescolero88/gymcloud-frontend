@@ -47,8 +47,8 @@ define [
       'blur @ui.note': 'onSaveNote'
       'change @ui.setPropertyCheckbox': 'updateConstructorListener'
 
-    initialize: ->
-      @visibleProperties = @_getVisibleProperties()
+    initialize: (options) ->
+      @visibleProperties = options.visibleProperties
       @workoutExerciseModel = new WorkoutExercise
       @listenTo @workoutExerciseModel, 'sync', @refreshExercises
       @listenTo @collection, 'change:state', @toggleHover
@@ -56,11 +56,6 @@ define [
       App.vent.on 'exercise_property:select:enable', @enableCheckbox
       App.vent.on 'exercise_property:select:disable', @disableCheckbox
       App.vent.on 'exercise_property:assign', @processProperties
-
-    _getVisibleProperties: ->
-      currentUser = App.request('current_user')
-      collection = currentUser.personal_properties
-      properties = collection.where(is_visible: true)
 
     onDestroy: ->
       App.vent.off 'exercise_property:select:enable', @enableCheckbox
@@ -80,23 +75,16 @@ define [
         if event.keyCode != 8 and label.trim().length > 2
           event.preventDefault()
 
-    trimLabel: (target) ->
-      label = target.innerHTML.replace /[^a-zA-Z0-9]+/g, ''
-      target.innerHTML = label
+    trimLabel: (string) ->
+      string
+        .replace /[^a-zA-Z0-9]+/g, ''
+        .replace /<[^>]*>/g, ''
 
     saveOrder: (event) ->
-      @trimLabel(event.currentTarget)
-
-      event.currentTarget.removeAttribute 'contenteditable'
-      label = event.currentTarget.innerHTML.replace /<[^>]*>/g, ''
-      data =
-        id: @model.get 'workout_id'
-        workout_exercise_id: @model.get 'id'
-        label: label
-
-      @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises/#{data.workout_exercise_id}"
-      @workoutExerciseModel.set data
-      @workoutExerciseModel.save()
+      target = event.currentTarget
+      label = target.innerHTML = @trimLabel(target.innerHTML)
+      target.removeAttribute 'contenteditable'
+      @model.save(note: label)
 
     enableCheckbox: =>
       @ui.setPropertyCheckboxWrapper.removeClass 'hidden'
@@ -117,12 +105,7 @@ define [
 
     deleteExercise: (event) ->
       event.preventDefault()
-      data =
-        id: @model.get 'workout_id'
-        workout_exercise_id: @model.get 'id'
-      @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{data.id}/workout_exercises/#{data.workout_exercise_id}"
-      @workoutExerciseModel.set data
-      @workoutExerciseModel.destroy()
+      @model.destroy()
 
     refreshExercises: ->
       App.request 'messenger:show',
@@ -144,18 +127,13 @@ define [
       promises = []
       if @ui.setPropertyCheckbox.is(':checked')
         models = models.map (property) =>
-          model = new ExercisesProperty
-          model.set 'property_value', property.get 'property_value' || 0
-          model.set 'property_id', property.get 'property_id' || 0
-          model.set 'workout_id', @model.get('workout_id')
-          model.set 'workout_exercise_id', @model.get('id')
-          promise = model.save()
+          promise = property.save(workout_exercise_id: @model.get('id'))
           promises.push promise
-          return model
+          property
 
         $.when.apply($, promises).done () =>
-          @collection.add models, sort: false
-          App.commands.execute 'property_constructor:synced:add'
+          @collection.add(models, sort: false)
+          App.commands.execute('property_constructor:synced:add')
 
     onSaveNote: ->
       data =

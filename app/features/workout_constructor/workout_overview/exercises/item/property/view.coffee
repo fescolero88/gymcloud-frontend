@@ -87,7 +87,7 @@ define [
 
     saveOnBlur: (ev) ->
       activeEl = $(':focus')
-      if @ui.editPropertyControl.find(activeEl).length is 0
+      if @ui.editPropertyControl?.find(activeEl).length is 0
         @saveProperty()
 
     onSync: =>
