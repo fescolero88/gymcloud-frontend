@@ -1,11 +1,28 @@
 define [
   'config'
+  'backbone'
   'backbone.marionette'
+
+  'handlers/jquery'
   'handlers/spinner'
   'handlers/ajax_setup'
   'handlers/user_authorization'
   'handlers/user_collections_preload'
   'handlers/data'
+  'handlers/form_validator'
+  'handlers/others'
+
+  'models/auth/profile-model'
+  'views/general/base-view'
+  'views/helpers/messenger-helper'
+
+  'features/header/module'
+  'modules/auth/auth-module'
+  'modules/main-trainer/main-trainer-module'
+  'modules/main-client/main-client-module'
+  'modules/general/library-preset-module'
+  'modules/prototype/prototype-module'
+  'features/search/module'
 
   'deps/scripts'
   'deps/fonts'
@@ -13,137 +30,132 @@ define [
   'deps/styles_app'
 ], (
   config
+  Backbone
   Marionette
+
+  jqueryHandler
   spinnerHandler
   ajaxSetupHandler
   userAuthorizationHandler
   userCollectionsPreload
   dataHandler
+  formValidatorHandler
+  othersHandler
+
+  CurrentUser
+  BaseView
+  MessengerHelper
+
+  HeaderModule
+  AuthModule
+  MainTrainerModule
+  MainClientModule
+  LibraryPresetModule
+  PrototypeModule
+  SearchModule
+
 ) ->
-
-  FormValidatorHelper = require 'views/helpers/form-validator-helper'
-  JqueryHelper = require 'views/helpers/jquery-helper'
-  MessengerHelper = require 'views/helpers/messenger-helper'
-
-  BaseView = require 'views/general/base-view'
-
-  HeaderModule = require 'features/header/module'
-  AuthModule = require 'modules/auth/auth-module'
-  ProfileModel = require 'models/auth/profile-model'
-
-  MainTrainerModule = require 'modules/main-trainer/main-trainer-module'
-  MainClientModule = require 'modules/main-client/main-client-module'
-  LibraryPresetModule = require 'modules/general/library-preset-module'
-  PrototypeModule = require 'modules/prototype/prototype-module'
-  SearchModule = require 'features/search/module'
-
-  ModalConfirmView = require 'views/general/modal-confirm-view'
-  ModalAddToLibraryView = require 'views/general/modal_add_to_library_view'
-  WorkoutScheduleView = require 'views/trainer/workouts/workout_schedule_modal_view'
-  WorkoutSchedule = require 'models/workout_schedule'
 
   class Application extends Marionette.Application
 
     initialize: ->
 
-      @addInitializer ->
-        dataHandler(this)
-        @data.profileModel = new ProfileModel
+      @on 'start', ->
+        defer = new $.Deferred
+        @_initPromises()
+        @_initModules()
+          .done(@promises.modules.resolve)
+        @_initLayout()
+          .done(@promises.layout.resolve)
+        @_initUser()
+          .then( =>
+            @_initCollections()
+              .always(@promises.collections.resolve)
+              # @vent.trigger('profile:ready')
+          )
+          .fail(@promises.collections.resolve)
+          .always(@promises.user.resolve)
+
+        dfds = _.values(@promises)
+        $.when(dfds...).done =>
+          @_initHistory()
+          defer.resolve()
+
+        defer.promise()
 
       @addInitializer ->
+        dataHandler(this)
+        @data.current_user = new CurrentUser
+
+      @addInitializer ->
+        jqueryHandler()
         spinnerHandler(this)
         userAuthorizationHandler(this)
         ajaxSetupHandler(this, config)
+        formValidatorHandler()
 
       @addInitializer ->
-        if @request('accessToken:get')
-          @data.profileModel.fetch().then =>
-            userCollectionsPreload(@data.profileModel)
-            @vent.trigger 'profile:ready'
-
-      @on 'start', ->
-
-        # --- Helpers -----
-        new JqueryHelper().initialize()
-        new FormValidatorHelper().initialize()
         new MessengerHelper().initialize()
-        # --- Helpers -----
 
-        @reqres.setHandler 'data:reload', (category, rootId) =>
-          userId = @request('current_user_id')
-          rootId = rootId || ""
-          $.ajax
-            url: "/users/#{userId}/collections/library/#{rootId}"
-            type: 'GET'
-            dataType: 'json'
-            success: (data) ->
-              App.data[category] = data.items
+      @addInitializer ->
+        othersHandler(this)
 
-        @reqres.setHandler 'base:confirmationalModal', (data) =>
-          confirmView = new ModalConfirmView data
-          region = @baseView.baseModalRegion
-          region.show(confirmView)
-          region.$el.modal('show')
+    _initPromises: ->
+      names = [
+        'modules'
+        'layout'
+        'user'
+        'collections'
+      ]
+      @promises = _.reduce names, (memo, name) ->
+        memo[name] = new $.Deferred
+        memo
+      , {}
 
-          @listenToOnce confirmView, "modal:closed", =>
-            region.$el.modal('hide')
-            region.destroy()
+    _initModules: ->
+      defer = new $.Deferred
+      @module 'Header', HeaderModule
+      @module 'Auth', AuthModule
+      @module 'MainTrainer', MainTrainerModule
+      @module 'MainClient', MainClientModule
+      @module 'LibraryPreset', LibraryPresetModule
+      @module 'Prototype', PrototypeModule
+      @module 'Search', SearchModule
+      defer.resolve()
+      defer.promise()
 
-        @reqres.setHandler 'base:addToLibraryModal', (data) =>
-          addToLibraryView = new ModalAddToLibraryView data
-          region = @baseView.baseModalRegion
-          region.show(addToLibraryView)
-          region.$el.modal('show')
+    _initLayout: ->
+      defer = new $.Deferred
+      @baseView = new BaseView
+      @reqres.setHandler 'app:views:base', =>
+        @baseView
+      @baseView.once('render', defer.resolve)
+      @baseView.render()
+      @appRegion = @baseView.appRegion
+      defer.promise()
 
-          @listenToOnce addToLibraryView, "modal:closed", =>
-            region.$el.modal('hide')
-            region.destroy()
+    _initUser: ->
+      defer = new $.Deferred
+      if @request('accessToken:get')
+        @request('current_user').fetch()
+          .success(defer.resolve)
+          .fail(defer.reject)
+      else
+        defer.reject()
+      defer.promise()
 
-        @reqres.setHandler 'base:workoutSchedule', (data) =>
-          view = new WorkoutScheduleView
-            model: new WorkoutSchedule
+    _initCollections: ->
+      defer = new $.Deferred
+      dfds = userCollectionsPreload(App.request('current_user'))
+      $.when(dfds...).then(defer.resolve)
+      defer.promise()
 
-          region = @baseView.baseModalRegion
-          region.show(view)
-          region.$el.modal('show')
+    _initHistory: ->
+      unless @request('current_user_id')
+        window.location.hash = 'login'
+      @_startHistory()
 
-          @listenToOnce view, "modal:closed", =>
-            region.$el.modal('hide')
-            region.destroy()
-
-
-        @reqres.setHandler 'ajax:options:create', (params) ->
-          options =
-            url: params.url
-            type: params.type || 'POST' # set default to post since this is commonly used for not restful requests
-            contentType: params.contentType || 'application/json'
-            data: params.data || {}
-
-        # --- Data handlers -----
-
-        # --- Base layout -----
-        @baseView = new BaseView
-        @reqres.setHandler 'app:views:base', =>
-          @baseView
-        @baseView.render()
-        @appRegion = @baseView.appRegion
-        # --- Base layout -----
-
-        # --- Add modules -----
-        @module 'Header', HeaderModule
-        @module 'Auth', AuthModule
-        @module 'MainTrainer', MainTrainerModule
-        @module 'MainClient', MainClientModule
-        @module 'LibraryPreset', LibraryPresetModule
-        @module 'Prototype', PrototypeModule
-        @module 'Search', SearchModule
-
-        startHistory = -> Backbone.history.start() if Backbone.history
-        if @request('accessToken:get') && @request('data:profile').isEmpty()
-          App.vent.on('profile:ready', startHistory)
-        else
-          startHistory()
-        # --- Add modules -----
+    _startHistory: -> Backbone.history?.start()
 
   $ ->
     window.App = new Application

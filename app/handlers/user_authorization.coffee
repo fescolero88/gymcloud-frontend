@@ -1,5 +1,7 @@
 define ->
+
   (App) ->
+
     App.reqres.setHandlers
 
       'auth:isAuthorized': ->
@@ -7,7 +9,8 @@ define ->
 
       'auth:isAuthorizedAs': (permission) ->
         return false unless App.request('auth:isAuthorized')
-        isPro = App.data.profileModel.get('is_pro')
+        user = App.request('current_user')
+        isPro = user.get('is_pro')
 
         permission is 'trainer' and isPro ||
         permission is 'client' and !isPro
