@@ -6,7 +6,7 @@
           span.fa.fa-chevron-left
         .gc-workout-title
           h2
-            span(contenteditable='true')=workout.name
+            span(contenteditable='true')=name
       .col-xs-5.gc-exercises-nav-right.text-right
         // workout tabs
         ul.gc-content-nav
@@ -15,7 +15,7 @@
           li(data-view='assign')
             a(href='#') Assign
         // /workout tabs
-        if currentUserId == author_id
+        if isAuthor
           a#gc-workout-actions-dropdown.gc-workout-actions-button.btn.btn-primary(data-toggle='dropdown', aria-haspopup='true', role='button', aria-expanded='false')
             i.fa.fa-chevron-down
           ul.dropdown-menu.pull-right.gc-workout-actions-list(role='menu', aria-labelledby='gc-workout-actions-dropdown')
@@ -41,15 +41,16 @@
           li(data-view='video')
             a Video
       .col-xs-6
-        if currentUserId != author_id
+        if !isAuthor
           .gc-workout-author-block.pull-right
             .gc-exercise-author-info
               a.gc-exercise-author-avatar.gc-exercise-author-avatar-exist(href='#/tr/clients/id/{{this.id}}/exercises/')
-                img(src='{{this.avatar_url}}', onerror="this.src='app/images/avatar-placeholder.png';")
+                img(src='{{author.avatar_url}}', onerror="this.src='app/images/avatar-placeholder.png';")
               p.gc-exercise-author-name
                 | Trainer
                 br
-                a(href='#/tr/clients/id/{{this.id}}/exercises/') {{this.first_name}} {{this.last_name}}
+                a(href='#/tr/clients/id/{{this.id}}/exercises/')
+                  | {{author.user_profile.first_name}} {{author.user_profile.last_name}}
             .gc-rating
               div
                 span.gc-rating-count 25

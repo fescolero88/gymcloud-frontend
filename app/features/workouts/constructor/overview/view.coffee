@@ -41,9 +41,9 @@ define [
       '[data-bind="is_public"]': 'is_public'
 
     templateHelpers: =>
-      currentUserId: App.request('current_user_id')
-      workout: @model.attributes
-      hasNote: !!@model.get 'notes'
+      isAuthor: do =>
+        App.request('current_user_id') == @model.get('id')
+      hasNote: !!@model.get('note')
 
     initialize: (data) ->
       @exercisesView = new WorkoutExercisesView

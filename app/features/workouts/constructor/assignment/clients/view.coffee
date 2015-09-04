@@ -26,13 +26,12 @@ define [
       workout: @workout
       clientAssignees: @clientAssignees
 
+    childEvents:
+      'assignees:changed': @_flushCache
+
     initialize: (options) ->
       @clientAssignees = options.clientAssignees
       @workout = options.workout
-      App.vent.on('workout:assignees:changed', @_flushCache)
-
-    onDestroy: ->
-      App.vent.off('workout:assignees:changed', @_flushCache)
 
     _flushCache: =>
       # flush memoize cache of _getAssigmentBy function

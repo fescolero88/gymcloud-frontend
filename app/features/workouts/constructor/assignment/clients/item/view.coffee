@@ -45,7 +45,7 @@ define [
     toggleAssign: (ev) =>
       ev.preventDefault()
       if @isAssigned then @_unassign() else @_assign()
-      App.vent.trigger('workout:assignees:changed')
+      @triggerMethod('assignees:changed')
 
     _unassign: ->
       @assignment.destroy().then =>

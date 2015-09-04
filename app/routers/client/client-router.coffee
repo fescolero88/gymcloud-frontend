@@ -24,5 +24,5 @@ module.exports = class ClientRouter extends CustomRouter
     App.request 'auth:isAuthorizedAs', 'client'
     App.vent.on 'profile:ready', ->
       App.vent.trigger('module:main-client:beforeAction')
-    if App.request('current_user')?.id
+    if App.request('current_user_id')
       App.vent.trigger('module:main-client:beforeAction' )

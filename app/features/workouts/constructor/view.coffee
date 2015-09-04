@@ -1,6 +1,6 @@
 define [
   'backbone.marionette'
-  './workout_overview/view'
+  './overview/view'
   'views/trainer/workouts/workout_global_video_view'
   './assignment/view'
   'models/workout_exercise'
@@ -44,8 +44,8 @@ define [
       '.gc-workout-title span': 'name'
 
     templateHelpers: =>
-      currentUserId: App.request('current_user_id')
-      workout: @model.attributes
+      isAuthor: do =>
+        App.request('current_user_id') == @model.get('id')
 
     initialize: (data) =>
       @isDroppable = true

@@ -19,7 +19,7 @@ define [
   'views/trainer/programs/program_global_view'
   'models/global_program'
   'views/trainer/properties/properties-view'
-  'features/workout_constructor/view'
+  'features/workouts/constructor/view'
 ],
 (
   Marionette
