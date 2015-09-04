@@ -1,0 +1,19 @@
+.col-xs-12.gc-content-both
+  .gc-clients-nav-wrapper.row
+    .col-xs-7.gc-clients-nav-left
+      a.gc-content-nav-back
+        span.fa.fa-chevron-left
+      .gc-workout-title
+        h2.gc-program-name(contenteditable='true')=name
+    .col-xs-5.gc-exercises-nav-right.text-right
+      if isAuthor
+        ul.gc-content-nav.gc-program-content-navs
+          li.active(data-view='program')
+            a(href='#') Program
+          li(data-view='assign')
+            a(href='#') Assign
+      else
+        button.btn.brn-primary.gc-add-to-library-button
+          | Add to library
+      region(data-name='program-actions')
+#program-manage

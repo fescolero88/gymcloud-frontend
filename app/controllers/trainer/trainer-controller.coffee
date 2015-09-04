@@ -20,6 +20,7 @@ define [
   'models/global_program'
   'views/trainer/properties/properties-view'
   'features/workouts/constructor/view'
+  'features/programs/constructor/view'
 ],
 (
   Marionette
@@ -43,6 +44,7 @@ define [
   GlobalProgram
   PropertiesView
   WorkoutConstructorView
+  ProgramConstructorView
 ) ->
 
   class TrainerController extends Marionette.Controller
@@ -162,15 +164,23 @@ define [
       @mainView.content.show(propertiesPageView)
 
     workoutConstructor: (id) ->
+      @_entityConstructor('workout', id)
+
+    programConstructor: (id) ->
+      @_entityConstructor('program', id)
+
+    _entityConstructor: (type, id) ->
       currentUser = App.request('current_user')
-      collection = currentUser.workout_templates
-
+      collection = currentUser["#{type}_templates"]
       model = collection.get(id)
-      breadcrumbs = [{title:"workout"}]
+      breadcrumbs = [{title: type}]
 
-      view = new WorkoutConstructorView
-        model: model
-        breadcrumbs: breadcrumbs
+      View = {
+        workout: WorkoutConstructorView
+        program: ProgramConstructorView
+      }[type]
+
+      view = new View(model: model, breadcrumbs: breadcrumbs)
       @mainView.content.show(view)
 
     globalView: (type, key) ->
