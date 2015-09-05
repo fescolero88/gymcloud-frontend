@@ -6,7 +6,7 @@ define [
   './weeks/empty/view'
   'collections/program_weeks'
   'collections/program_workouts'
-  'views/trainer/programs/program_global_workout_list_view'
+  './workouts/view'
   './template'
 ], (
   Marionette
@@ -62,10 +62,15 @@ define [
 
       @getRegion('programPrivacyControls').show programPrivacyControlsView
 
-      programWeeksView = new WeeksView(model: @model, collection: @collection)
+      programWeeksView = new WeeksView
+        model: @model
+        collection: @collection
+        workoutsCollection: @workoutsCollection
+
       @getRegion('weeksRegion').show programWeeksView
 
-      programWorkoutListView = new ProgramWorkoutListView collection: @workoutsCollection
+      programWorkoutListView = new ProgramWorkoutListView
+        collection: @workoutsCollection
       @getRegion('programWorkoutListRegion').show programWorkoutListView
 
       emptyStateView = new WeekEmptyView()
@@ -93,6 +98,6 @@ define [
         @ui.weeksRegion.removeClass 'hidden'
         @ui.programWorkoutListRegion.removeClass 'hidden'
       else
-        @ui.emptyState.removeClass 'hidden'
-        @ui.weeksRegion.addClass 'hidden'
+        # @ui.emptyState.removeClass 'hidden'
+        # @ui.weeksRegion.addClass 'hidden'
         @ui.programWorkoutListRegion.addClass 'hidden'

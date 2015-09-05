@@ -22,7 +22,7 @@ module.exports = class TrainerRouter extends CustomRouter
     'tr/global/:assign(/)': 'globalView'
     'tr/global/:assign/id/:id(/)': 'globalView'
 
-  before: (methodName) =>
+  before: (methodName) ->
     App.request 'auth:isAuthorizedAs', 'trainer'
     App.vent.trigger 'module:main-trainer:beforeAction'
     $('html, body').animate { scrollTop: 0 }, 'fast'

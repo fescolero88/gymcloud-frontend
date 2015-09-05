@@ -1,6 +1,6 @@
 define [
   'backbone.marionette'
-  'views/trainer/programs/program_week_item_view'
+  './item/view'
   './empty/view'
 ], (
   Marionette
@@ -8,7 +8,7 @@ define [
   EmptyView
 ) ->
 
-  class ProgramWeeksView extends Marionette.CollectionView
+  class WeeksView extends Marionette.CollectionView
 
     className: 'gc-programs-weeks-list-container'
 
@@ -17,9 +17,13 @@ define [
 
     childView: ProgramWeekItemView
 
+    childViewOptions: =>
+      workoutsCollection: @workoutsCollection
+
     emptyView: EmptyView
 
-    initialize: ->
+    initialize: (options) ->
+      @workoutsCollection = options.workoutsCollection
       App.vent.on 'program:remove:week', @removeWeek
 
     onDestroy: ->
@@ -39,6 +43,7 @@ define [
 
     removeWeek: (model) =>
       @collection.remove model
+      # TODO: delete workouts inside
       App.request 'messenger:show',
         message: "Program #{model.get('name')} has been removed."
         type: 'info'
