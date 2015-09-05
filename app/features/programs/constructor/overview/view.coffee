@@ -1,7 +1,7 @@
 define [
   'backbone.marionette'
   './details/view'
-  'views/trainer/programs/program_global_privacy_controls_view'
+  './privacy/view'
   './weeks/view'
   './weeks/empty/view'
   'collections/program_weeks'
@@ -11,7 +11,7 @@ define [
 ], (
   Marionette
   DetailsView
-  ProgramGlobalPrivacyControlsView
+  PrivacyControlsView
   WeeksView
   WeekEmptyView
   ProgramWeeks
@@ -55,12 +55,13 @@ define [
 
       @getRegion('programDetails').show programDetailsView
 
-      programPrivacyControlsView = new ProgramGlobalPrivacyControlsView
-        model: @model
-        collection: @collection
-        workoutsCollection: @workoutsCollection
+      if App.request('current_user_id') is @model.get('author_id')
+        programPrivacyControlsView = new PrivacyControlsView
+          model: @model
+          collection: @collection
+          workoutsCollection: @workoutsCollection
 
-      @getRegion('programPrivacyControls').show programPrivacyControlsView
+        @getRegion('programPrivacyControls').show programPrivacyControlsView
 
       programWeeksView = new WeeksView
         model: @model

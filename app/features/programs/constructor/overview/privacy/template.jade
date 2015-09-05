@@ -1,0 +1,22 @@
+.col-xs-12.gc-program-options.gc-add-workout-controls.hidden
+  // <button class="btn btn-primary btn-sm gc-custom gc-program-add-week">add new week</button>
+  .gc-add-create-workout-wrapper
+    div
+      input.form-control
+      button.gc-clear-quick-add.gc-cancel-add-workout(type='button') cancel
+    div
+      | or
+    div
+      button.btn.btn-primary.btn-sm.gc-custom.gc-program-create-workout Create new workout
+.col-xs-12.text-right.gc-program-options.gc-default-controls
+  button.pull-left.btn.btn-primary.btn-sm.gc-custom.gc-program-add-workout(type='button') add new workout
+  // privacy controls
+  .btn-group.gc-btn-group.privacy-buttons(data-toggle='buttons')
+    label.btn.btn-primary(class='{{#if ../../is_public}}active{{/if}}')
+      input(type='radio', name='privacy', {{#if='', ..='', is_public}}checked{{='', if}}='', value='true')
+      |  Public
+    label.btn.btn-primary(class='{{#unless ../../is_public}}active{{/unless}}')
+      input(type='radio', name='privacy', value='false', {{#unless='', ..='', is_public}}checked{{='', unless}}='')
+      |  Private
+  // / privacy controls
+  button.btn.btn-primary.gc-program-delete-button Delete Program
