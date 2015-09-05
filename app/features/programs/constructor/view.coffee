@@ -1,12 +1,12 @@
 define [
   'backbone.marionette'
-  'views/trainer/programs/program_global_actions_view'
-  'views/trainer/programs/program_global_overview_view'
+  './actions/view'
+  './overview/view'
   './template'
 ], (
   Marionette
-  ProgramGlobalActionsView
-  ProgramGlobalOverviewView
+  ActionsView
+  OverviewView
   template
 ) ->
 
@@ -33,28 +33,38 @@ define [
     events:
       'click @ui.navBack': 'navigateBack'
       'click @ui.contentNavLinks': 'changeActiveTab'
-      'blur @ui.programName': 'updateTitleOnBlur'
+      'blur @ui.programName': 'saveName'
       'keypress @ui.programName': 'updateName'
 
+    bindings:
+      '[data-bind="name"]':
+        observe: 'name'
+        events: ['change']
+
     templateHelpers: =>
-      isAuthor: do =>
-        App.request('current_user_id') is @model.get('author_id')
-      hasNote: !!@model.get('note')
+      isAuthor: @_isAuthor()
 
     onShow: ->
-      if @model.get('author_id') is App.request('current_user_id')
-        programActionsView = new ProgramGlobalActionsView(model: @model)
-        @getRegion('programActionsRegion').show programActionsView
+      @stickit()
+      if @_isAuthor()
+        programActionsView = new ActionsView(model: @model)
+        @getRegion('programActionsRegion').show(programActionsView)
 
       @changeView 'program'
+
+    onDestroy: ->
+      @unstickit()
+
+    _isAuthor: =>
+      App.request('current_user_id') is @model.get('author_id')
 
     navigateBack: ->
       window.history.back()
 
     changeActiveTab: (ev) ->
-      @changeViewEvent(ev, @ui.contentNavItems)
+      @_changeViewEvent(ev, @ui.contentNavItems)
 
-    changeViewEvent: (ev, ui) =>
+    _changeViewEvent: (ev, ui) ->
       ev.preventDefault()
       navItem = $(ev.currentTarget).parent()
       if not $(navItem).hasClass 'active'
@@ -65,11 +75,11 @@ define [
     changeView: (navView) =>
       switch navView
         when 'program'
-          @overviewView = new ProgramGlobalOverviewView model: @model
+          @overviewView = new OverviewView(model: @model)
           @manageRegion.show @overviewView
 
-    updateTitleOnBlur: (e) ->
-      App.commands.execute 'program:title:update', @ui.programName.text()
+    saveName: ->
+      @model.save() if @model.hasChanged('name')
 
     updateName: (e) ->
       if e.which is 13
