@@ -12,7 +12,7 @@ module.exports = class ClientPageNavView extends Marionette.LayoutView
 
   initialize: ->
     @model = new ClientTrainer
-    @profileModel = App.request 'data:profile'
+    @profileModel = App.request 'current_user'
 
     App.vent.on 'profile:ready', @render
     App.vent.on 'clientpage:nav-click', (navId) =>

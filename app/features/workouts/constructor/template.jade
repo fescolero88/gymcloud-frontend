@@ -1,0 +1,72 @@
+.gc-main-workspace.row
+  .col-xs-12.gc-content-both
+    .gc-clients-nav-wrapper.row
+      .col-xs-7.gc-clients-nav-left
+        a.gc-content-nav-back
+          span.fa.fa-chevron-left
+        .gc-workout-title
+          h2
+            span(contenteditable='true')=name
+      .col-xs-5.gc-exercises-nav-right.text-right
+        // workout tabs
+        ul.gc-content-nav
+          li.active(data-view='program')
+            a(href='#') Overview
+          li(data-view='assign')
+            a(href='#') Assign
+        // /workout tabs
+        if isAuthor
+          a#gc-workout-actions-dropdown.gc-workout-actions-button.btn.btn-primary(data-toggle='dropdown', aria-haspopup='true', role='button', aria-expanded='false')
+            i.fa.fa-chevron-down
+          ul.dropdown-menu.pull-right.gc-workout-actions-list(role='menu', aria-labelledby='gc-workout-actions-dropdown')
+            li.row
+              a.col-xs-12.gc-workout-add-note
+                | Add Note
+            li.row
+              a.col-xs-12.gc-workout-edit-description
+                | Edit Description
+            li.row
+              a.col-xs-12
+                | Add Video
+            li.row
+              a.col-xs-12.text-danger
+                | Delete
+        else
+          button.btn.brn-primary Add to library
+    .row.gc-inner-nav-wrapper
+      .col-xs-6
+        ul.gc-inner-nav
+          li.active(data-view='description')
+            a Description
+          li(data-view='video')
+            a Video
+      .col-xs-6
+        if !isAuthor
+          .gc-workout-author-block.pull-right
+            .gc-exercise-author-info
+              a.gc-exercise-author-avatar.gc-exercise-author-avatar-exist(href='#/tr/clients/id/{{this.id}}/exercises/')
+                img(src='{{author.avatar_url}}', onerror="this.src='app/images/avatar-placeholder.png';")
+              p.gc-exercise-author-name
+                | Trainer
+                br
+                a(href='#/tr/clients/id/{{this.id}}/exercises/')
+                  | {{author.user_profile.first_name}} {{author.user_profile.last_name}}
+            .gc-rating
+              div
+                span.gc-rating-count 25
+                ul.gc-rating-stars
+                  li
+                    i.fa.fa-star
+                  li
+                    i.fa.fa-star
+                  li
+                    i.fa.fa-star
+                  li
+                    i.fa.fa-star
+                  li
+                    i.fa.fa-star-o
+              p.gc-rating-used.pull-right.text-right
+                | Used by 
+                i.glyphicon.glyphicon-user
+                |  250
+    #workout-manage

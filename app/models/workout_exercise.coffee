@@ -1,23 +1,30 @@
 define [
   'backbone'
+  './exercise_property'
 ], (
   Backbone
+  ExerciseProperty
 ) ->
+  ExerciseProperties = Backbone.Collection.extend(model: ExerciseProperty)
 
   class WorkoutsExercise extends Backbone.Model
 
-    urlRoot: '/api/mobile/workouts'
+    urlRoot: '/workout_exercises'
 
     validation:
 
-      id:
+      name:
         required: true
 
-      workout_exercise_id:
-        required: false
+      workout_id:
+        required: true
 
-    sync: (method, model, options) ->
-      if @method
-        Backbone.sync(@method, model, options)
-      else
-        Backbone.sync(method, model, options)
+      exercise_id:
+        required: true
+
+    parse: (data) ->
+      @properties ||= new ExerciseProperties
+      if @properties.length is 0
+        @properties.add(data.exercise_properties, parse: true)
+      delete data.exercise_properties
+      data

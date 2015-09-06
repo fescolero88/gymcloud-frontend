@@ -1,4 +1,8 @@
-define ->
+define [
+  'backbone'
+], (
+  Backbone
+)->
 
   class UserCollection extends Backbone.Collection
 

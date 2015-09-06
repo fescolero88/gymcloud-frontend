@@ -4,6 +4,6 @@ define [
   Backbone
 ) ->
 
-  class Property extends Backbone.Model
+  class PersonalProperty extends Backbone.Model
 
     urlRoot: '/personal_properties'

@@ -23,7 +23,7 @@ module.exports = class ProgramGlobalView extends Marionette.LayoutView
     destroy: 'programDeleted'
 
   onShow: ->
-    if @model.get('author').id is App.request('data:profile').get('id')
+    if @model.get('author').id is App.request('current_user_id')
       programActionsView = new ProgramGlobalActionsView model: @model
       @getRegion('programActionsRegion').show programActionsView
 

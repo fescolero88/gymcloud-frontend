@@ -46,7 +46,7 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
     source: @model.get('source_item_id')
     authorId: @model.get('author').id
     public: @model.get('is_public')
-    userId: App.request('data:profile').get('id')
+    userId: App.request('current_user_id')
 
   onShow: =>
     @changeView 'overview'

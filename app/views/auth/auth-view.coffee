@@ -31,7 +31,7 @@ module.exports = class AuthView extends Marionette.ItemView
     @model.login()
 
   getProfile: ->
-    profileModel = App.request 'data:profile'
+    profileModel = App.request 'current_user'
     profileModel.fetch().then =>
       accountType = profileModel.get('account_type')
       # a workaround - treat a coach as a trainer, treat athlete as a client

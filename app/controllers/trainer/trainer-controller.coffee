@@ -19,6 +19,7 @@ define [
   'views/trainer/programs/program_global_view'
   'models/global_program'
   'views/trainer/properties/properties-view'
+  'features/workouts/constructor/view'
 ],
 (
   Marionette
@@ -41,6 +42,7 @@ define [
   ProgramGlobalView
   GlobalProgram
   PropertiesView
+  WorkoutConstructorView
 ) ->
 
   class TrainerController extends Marionette.Controller
@@ -66,7 +68,7 @@ define [
       @mainView.content.show(view)
 
     clients: (viewType) ->
-      profileModel = App.request 'data:profile'
+      profileModel = App.request 'current_user'
       uid = App.request('current_user_id')
       if uid
         @renderClientList(uid)
@@ -158,6 +160,18 @@ define [
     properties: ->
       propertiesPageView = new PropertiesView
       @mainView.content.show(propertiesPageView)
+
+    workoutConstructor: (id) ->
+      currentUser = App.request('current_user')
+      collection = currentUser.workout_templates
+
+      model = collection.get(id)
+      breadcrumbs = [{title:"workout"}]
+
+      view = new WorkoutConstructorView
+        model: model
+        breadcrumbs: breadcrumbs
+      @mainView.content.show(view)
 
     globalView: (type, key) ->
       items = App.request("data:#{type}")

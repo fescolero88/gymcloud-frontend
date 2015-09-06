@@ -1,16 +1,38 @@
 define [
+  'backbone'
+  'lodash'
   'collections/user_collection'
+  'models/workout_template'
+  'models/personal_program'
+  'models/personal_property'
+  'models/personal_workout'
 ], (
+  Backbone
+  _
   UserCollection
+  WorkoutTemplate
+  PersonalProgram
+  PersonalProperty
+  PersonalWorkout
 )->
   (user) ->
-    collections = [
-      'pros', 'clients', 'client_groups', 'exercises', 'workout_templates',
-      'program_templates', 'personal_workouts', 'personal_programs',
-      'personal_properties', 'workout_events', 'folders', 'notifications'
-    ]
-    _.map collections, (item) ->
+    collections =
+      pros: Backbone.Model
+      clients: Backbone.Model
+      client_groups: Backbone.Model
+      exercises: Backbone.Model
+      workout_templates: WorkoutTemplate
+      program_templates: Backbone.Model
+      personal_programs: PersonalProgram
+      personal_properties: PersonalProperty
+      personal_workouts: PersonalWorkout
+      workout_events: Backbone.Model
+      folders: Backbone.Model
+      notifications: Backbone.Model
+
+    _.map collections, (model, item) ->
       collection = new UserCollection [],
+        model: model
         user: user
         type: item
       user.__defineGetter__(item, -> collection)

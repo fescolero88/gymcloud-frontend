@@ -34,7 +34,7 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
 
   initialize: (data) ->
     @viewType = data.viewType
-    @profile = App.request 'data:profile'
+    @profile = App.request 'current_user'
     if @model.get('id') is @profile.get('id')
       @myProfile = true
 

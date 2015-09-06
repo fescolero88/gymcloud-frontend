@@ -60,7 +60,7 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
     @collection = new Backbone.Collection
     if parseInt(@id) is 0
       @myProfile = true
-    @profile = App.request('data:profile')
+    @profile = App.request('current_user')
 
 
   onShow: =>
