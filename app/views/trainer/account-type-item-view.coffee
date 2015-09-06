@@ -16,8 +16,16 @@ define [
     modelEvents:
       'change:assigned': 'setStatus'
 
-    events:
-      'click': 'changeAssignment'
+    #events:
+      #'click': 'changeAssignment'
+
+    bindings:
+      ':el':
+        observe: 'assigned'
+        isAssigned: =>
+          @model.get 'assigned'
+        isAssignedFn: =>
+          console.log 'test'
 
     initialize: ->
       App.vent.on 'account:changed', @unAssignAccount
@@ -29,8 +37,11 @@ define [
       if @model.get 'assigned'
         @model.set 'assigned', false
 
-    onShow: ->
-      @setStatus()
+    onRender: ->
+      @stickit()
+
+    #onShow: ->
+      #@setStatus()
 
     changeAssignment: ->
       App.vent.trigger 'account:changed'
