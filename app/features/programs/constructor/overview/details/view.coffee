@@ -42,6 +42,7 @@ define [
     initialize: (options) ->
       window.model = @model
       @workoutsCollection = options.workoutsCollection
+      @weekWorkoutCollection = options.weekWorkoutCollection
       App.commands.setHandler 'program:note_editor:toggle', @triggerNoteEditor
 
       @listenTo @collection, 'update', @weeksUpdated
@@ -71,4 +72,5 @@ define [
       @ui.programWeeksCount.html @collection.length
 
     workoutsUpdated: ->
-      @ui.programWorkoutCount.html @workoutsCollection.length
+      count = @weekWorkoutCollection.length + @workoutsCollection.length
+      @ui.programWorkoutCount.html count

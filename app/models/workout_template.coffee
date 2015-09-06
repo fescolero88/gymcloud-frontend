@@ -13,8 +13,10 @@ define [
 
     urlRoot: '/workout_templates/'
 
-    validation:
+    defaults:
+      is_visible: true
 
+    validation:
       name:
         required: true
 

@@ -42,7 +42,8 @@ define [
 
     initialize: ->
       @collection = new ProgramWeeks
-      @workoutsCollection = new ProgramWorkouts
+      @weekWorkoutCollection = new Backbone.Collection
+      @workoutsCollection = @model.program_workouts
 
       @listenTo @collection, 'update', @toggleEmptyState
       @listenTo @workoutsCollection, 'update', @toggleEmptyState
@@ -52,6 +53,7 @@ define [
         model: @model
         collection: @collection
         workoutsCollection: @workoutsCollection
+        weekWorkoutCollection: @weekWorkoutCollection
 
       @getRegion('programDetails').show programDetailsView
 
@@ -66,16 +68,18 @@ define [
       programWeeksView = new WeeksView
         model: @model
         collection: @collection
-        workoutsCollection: @workoutsCollection
+        workoutsCollection: @weekWorkoutCollection
 
       @getRegion('weeksRegion').show programWeeksView
 
       programWorkoutListView = new ProgramWorkoutListView
+        model: @model
         collection: @workoutsCollection
       @getRegion('programWorkoutListRegion').show programWorkoutListView
 
-      emptyStateView = new WeekEmptyView()
-      @getRegion('emptyState').show emptyStateView
+      # emptyStateView = new WeekEmptyView()
+      # @getRegion('emptyState').show emptyStateView
+      @ui.emptyState.addClass 'hidden'
 
       @toggleEmptyState()
 
@@ -94,11 +98,16 @@ define [
           type: 'success'
 
     toggleEmptyState: ->
-      if @collection.length > 0 or @workoutsCollection.length > 0
-        @ui.emptyState.addClass 'hidden'
-        @ui.weeksRegion.removeClass 'hidden'
+      if @collection.length > 0 or
+         @workoutsCollection.length > 0 or
+         @weekWorkoutCollection > 0
         @ui.programWorkoutListRegion.removeClass 'hidden'
       else
         # @ui.emptyState.removeClass 'hidden'
         # @ui.weeksRegion.addClass 'hidden'
         @ui.programWorkoutListRegion.addClass 'hidden'
+
+      if @workoutsCollection.length > 0 && @collection.length == 0
+        @ui.weeksRegion.addClass 'hidden'
+      else
+        @ui.weeksRegion.removeClass 'hidden'

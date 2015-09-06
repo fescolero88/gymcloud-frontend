@@ -17,6 +17,9 @@ define [
 
     childView: ProgramGlobalWorkoutItemView
 
+    childViewOptions:
+      program_template: @model
+
     ui:
       workoutsList: 'li'
 
@@ -28,7 +31,11 @@ define [
 
     addProgramWorkout: =>
       model = new ProgramWorkout
-      @collection.add model
+        name: "Workout #{@collection.length + 1}"
+        program_template_id: @model.id
+        is_visible: false
+      model.save().then =>
+        @collection.add(model)
 
     onShow: ->
       @addSortable()
@@ -43,4 +50,4 @@ define [
         moves: (el, container, handle) ->
           (handle.className is 'gc-program-workout-sort')
 
-      Dragula sortableContainers, dragOptions
+      Dragula @ui.workoutsList, dragOptions

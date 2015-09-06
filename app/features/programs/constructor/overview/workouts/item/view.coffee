@@ -9,9 +9,9 @@ define [
 
     template: template
 
-    className: 'gc-workout-draggable'
-
     tagName: 'li'
+
+    className: 'gc-workout-draggable'
 
     ui:
       workoutItemTabs: '.gc-workout-body-nav a'
@@ -22,46 +22,58 @@ define [
       workoutTitle: '.gc-workout-title > span'
 
     events:
-      'click @ui.workoutItemTabs': 'toggleTabs'
-      'click @ui.bookmark': 'toggleBookmark'
-      'click @ui.deleteWorkout': 'removeProgramWorkout'
-      'keypress @ui.workoutTitle': 'saveOnEnter'
-      'blur @ui.workoutTitle': 'saveOnBlur'
+      'click @ui.workoutItemTabs': '_toggleTabs'
+      'click @ui.deleteWorkout': '_removeProgramWorkout'
+      'keypress @ui.workoutTitle': '_saveOnEnter'
+      'change input[data-bind="is_visible"]': '_saveVisibility'
 
-    toggleTabs: (event) ->
+    bindings:
+      '[data-bind="name"]':
+        observe: 'name'
+        events: ['blur']
+      '[data-bind="description"]':
+        observe: 'description'
+        events: ['change']
+
+    modelEvents:
+      'change:name': '_saveOnChange'
+      'change:description': '_saveOnChange'
+
+    initialize: (options) ->
+      @program_template = options.program_template
+
+    onShow: ->
+      @stickit()
+
+    onDestroy: ->
+      @unstickit()
+
+    changeContent: (content) ->
+      @ui.workoutTabPanes.removeClass 'active'
+      @ui.workoutTabs.find("[data-pane=#{content}]").addClass 'active'
+
+    _toggleTabs: (event) ->
       target = $(event.currentTarget)
       content = target.attr 'data-content'
       @ui.workoutItemTabs.removeClass 'active'
       target.addClass 'active'
       @changeContent content
 
-    initialize: ->
-      @model.set 'name', "Workout #{@model.collection.indexOf(@model) + 1}"
-
-    changeContent: (content) ->
-      @ui.workoutTabPanes.removeClass 'active'
-      @ui.workoutTabs.find("[data-pane=#{content}]").addClass 'active'
-
-    toggleBookmark: (event) ->
-      target = $(event.currentTarget)
-      if target.hasClass 'active'
-        target.removeClass 'active'
-      else
-        target.addClass 'active'
-
-    removeProgramWorkout: (ev) ->
+    _removeProgramWorkout: (ev) ->
       ev.preventDefault()
-      @model.destroy()
-      # move to .then method when api is ready
-      App.request 'messenger:show',
-        message: "Workout Deleted"
-        type: 'success'
+      @model.destroy().then ->
+        App.request 'messenger:show',
+          message: "Workout Deleted"
+          type: 'success'
 
-    saveOnEnter: (ev) ->
+    _saveOnEnter: (ev) ->
       if ev.which is 13
         ev.preventDefault()
         @ui.workoutTitle.blur()
 
-    saveOnBlur: (ev) ->
-      @model.set 'name', @ui.workoutTitle.text()
+    _saveOnChange: (_model, _value) ->
       @model.save()
+
+    _saveVisibility: (ev) ->
+      isVisible = ev.currentTarget.checked
+      @model.workout.save(is_visible: isVisible)

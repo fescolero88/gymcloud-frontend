@@ -1,9 +1,9 @@
 define [
   'backbone'
-  './workout_template'
+  'collections/program_workouts'
 ], (
   Backbone
-  WorkoutTemplate
+  ProgramWorkouts
 ) ->
 
   class ProgramTemplate extends Backbone.Model
@@ -11,6 +11,13 @@ define [
     urlRoot: '/program_templates/'
 
     validation:
-
       name:
         required: true
+
+    parse: (data) ->
+      @_parseProgramWorkouts(data.workouts) && delete data.workouts
+      data
+
+    _parseProgramWorkouts: (exercises) ->
+      @program_workouts ||= new ProgramWorkouts
+      @program_workouts.add(exercises, parse: true, merge: true)

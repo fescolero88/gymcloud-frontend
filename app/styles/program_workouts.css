@@ -32,6 +32,10 @@
   left: 20px;
   cursor: pointer;
 }
+.gc-program-workout-item .gc-workout-bookmark.active,
+.gc-program-workout-item input[type=checkbox]:checked + .gc-workout-bookmark {
+  background-image: url(../images/workout-bookmark-active-icon.png);
+}
 .gc-program-workout-item .gc-program-workout-sort {
   background-image: url("../images/sort-icon-white.png");
   background-size: contain;
@@ -43,9 +47,6 @@
   display: inline-block;
   left: 8px;
   top: 23px;
-}
-.gc-program-workout-item .gc-workout-bookmark.active {
-  background-image: url(../images/workout-bookmark-active-icon.png);
 }
 .gc-program-workout-item .gc-workout-body {
   padding: 10px 20px;
