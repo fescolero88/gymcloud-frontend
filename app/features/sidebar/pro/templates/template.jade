@@ -1,6 +1,9 @@
-a.row(href="#tr/global/#{type}/id/#{id}", class="#{ isFolder ? 'toggle-menu toggle-it' : '' }")
+- url = isFolder ? "#"+type+"/" : "#"+type+"/"+id
+- className = isFolder ? 'toggle-menu toggle-it' : ''
+a.row(href=url, class=className)
   span.col-xs-2
-    span.fa.fa-arrows(class="#{ isFolder ? 'fa-folder-o' : 'draggable-handle' }")
-  span.col-xs-10.gc-sidebar-folder-name(data-key='#{id}')
+    - className = isFolder ? 'fa-folder-o' : 'draggable-handle'
+    span.fa.fa-arrows(class=className)
+  span.col-xs-10.gc-sidebar-folder-name(data-key=id)
     = name
 .gc-sidebar-sub

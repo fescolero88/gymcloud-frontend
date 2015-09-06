@@ -11,8 +11,17 @@ define [
 
     className: 'gc-sidebar-item'
 
+    bindings:
+      '[data-bind="name"]': 'names'
+
     templateHelpers: ->
       type: @type
 
     initialize: (options)->
       @type = options.type
+
+    onRender: ->
+      @stickit()
+
+    onDestroy: ->
+      @unstickit()
