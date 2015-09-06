@@ -1,7 +1,7 @@
 define [
   'backbone.marionette'
-  'views/sidebar/template_collection_item_view'
-  'templates/sidebar/sidebar_item'
+  './item_view'
+  './template'
 ], (
   Marionette
   TemplateCollectionItemView

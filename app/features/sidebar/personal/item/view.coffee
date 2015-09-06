@@ -1,6 +1,6 @@
 define [
   'backbone.marionette'
-  'templates/sidebar/user_collection_item'
+  './template'
 ], (
   Marionette
   template

@@ -8,9 +8,7 @@ MessagesController = require 'controllers/general/messages/messages-controller'
 MessagesRouter = require 'routers/general/messages/messages-router'
 
 MainView = require 'views/general/main-view'
-SideBarView = require 'views/client/sidebar-view'
-# TODO: DELETE
-SideBarView = require 'views/sidebar/sidebar_view'
+SideBarView = require 'features/sidebar/view'
 ClientPageView = require 'views/client/clientpage-view'
 ClientPageNavView = require 'views/client/clientpage-nav-view'
 

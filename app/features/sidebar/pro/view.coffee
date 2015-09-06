@@ -1,8 +1,8 @@
 define [
   'backbone.marionette'
   'collections/user_collection'
-  'views/sidebar/template_collection_view'
-  'templates/sidebar/sidebar_pro_section'
+  './templates/view'
+  './template'
 ], (
   Marionette
   UserCollection
