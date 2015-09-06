@@ -7,8 +7,6 @@ define [
 ) ->
   class AccountTypeListView extends Marionette.CollectionView
 
-    template: false
-
     tagName: 'ul'
 
     childView: AccountTypeItemView
