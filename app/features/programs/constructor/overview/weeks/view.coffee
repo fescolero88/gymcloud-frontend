@@ -19,6 +19,7 @@ define [
 
     childViewOptions: =>
       workoutsCollection: @workoutsCollection
+      program: @model
 
     emptyView: EmptyView
 

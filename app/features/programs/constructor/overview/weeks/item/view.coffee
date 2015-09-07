@@ -1,12 +1,12 @@
 define [
   'backbone.marionette'
   '../../workouts/view'
-  'models/workout_template'
+  'models/program_workout'
   './template'
 ], (
   Marionette
   WorkoutListView
-  WorkoutTemplate
+  ProgramWorkout
   template
 ) ->
   class WeekItemView extends Marionette.LayoutView
@@ -32,12 +32,15 @@ define [
         events: ['change']
 
     initialize: (options) ->
+      @program = options.program
       @workoutsCollection = options.workoutsCollection
 
     onRender: ->
       @stickit()
       @workoutCollection = new Backbone.Collection
-      workoutList = new WorkoutListView(collection: @workoutCollection)
+      workoutList = new WorkoutListView
+        collection: @workoutCollection
+        model: @program
       @getRegion('workout').show(workoutList)
 
     onDestroy: ->
@@ -45,10 +48,14 @@ define [
 
     addWorkout: (ev) ->
       ev.preventDefault()
-      name = "Workout ##{@workoutCollection.length}"
-      model = new WorkoutTemplate(name: name)
-      @workoutsCollection.add(model)
-      @workoutCollection.add(model)
+      name = "Workout ##{@workoutCollection.length + 1}"
+      model = new ProgramWorkout
+        name: name
+        program_template_id: @program.id
+        is_visible: false
+      model.save().then =>
+        @workoutsCollection.add(model)
+        @workoutCollection.add(model)
 
     removeProgramWeek: ->
       App.vent.trigger 'program:remove:week', @model

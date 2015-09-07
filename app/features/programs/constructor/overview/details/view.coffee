@@ -1,8 +1,10 @@
 define [
   'backbone.marionette'
+  './counters/view'
   './template'
 ], (
   Marionette
+  CountersView
   template
 ) ->
 
@@ -17,8 +19,9 @@ define [
       programDescriptionEditor: '.gc-program-description-editor'
       programNotesContainer: '.gc-program-note-container'
       programNoteEditor: '.gc-program-note-editor'
-      programWeeksCount: '.gc-program-weeks-count'
-      programWorkoutCount: '.gc-program-workout-count'
+
+    regions:
+      counters: '.col-xs-4'
 
     bindings:
       '[data-bind="description"]':
@@ -37,18 +40,21 @@ define [
       weeksCount: @collection.length
       workoutCount: @workoutsCollection.length
       isAuthor: do =>
-        App.request('current_user_id') is @model.get('author_id')
+        @model.get('author_id') is App.request('current_user_id')
 
     initialize: (options) ->
       @workoutsCollection = options.workoutsCollection
-      @weekWorkoutCollection = options.weekWorkoutCollection
+      @weekWorkoutsCollection = options.weekWorkoutCollection
+      @counters = new CountersView
+        weekCollection: @collection
+        workoutsCollection: @workoutsCollection
+        weekWorkoutsCollection: @weekWorkoutsCollection
 
       @listenTo(@model, 'note:toggle_editor', @triggerNoteEditor)
-      @listenTo(@collection, 'update', @weeksUpdated)
-      @listenTo(@workoutsCollection, 'update', @workoutsUpdated)
 
     onRender: ->
       @stickit()
+      @getRegion('counters').show(@counters)
 
     onDestroy: ->
       @unstickit()
@@ -60,13 +66,6 @@ define [
         @ui.programNotesContainer.removeClass 'hidden'
         @ui.programNoteEditor.removeClass 'focus-state'
       @ui.programNoteEditor.focus()
-
-    weeksUpdated: ->
-      @ui.programWeeksCount.html(@collection.length)
-
-    workoutsUpdated: ->
-      count = @weekWorkoutCollection.length + @workoutsCollection.length
-      @ui.programWorkoutCount.html(count)
 
     _saveOnChange: (_model, _value) ->
       @model.save()
