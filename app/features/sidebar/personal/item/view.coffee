@@ -12,7 +12,7 @@ define [
     className: 'gc-sidebar-item'
 
     bindings:
-      '[data-bind="name"]': 'names'
+      '[data-bind="name"]': 'name'
 
     templateHelpers: ->
       type: @type
