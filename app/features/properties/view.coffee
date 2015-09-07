@@ -31,7 +31,6 @@ define [
       @propertyModalView = new PropertyModalView(model: new PersonalProperty)
       @collection = App.request('current_user').personal_properties
       @collectionView = new PropertyListView(collection: @collection)
-      @collection.fetch()
 
     onShow: ->
       @propertyModal.show(@propertyModalView)
@@ -40,7 +39,7 @@ define [
     editProperty: (ev) ->
       ev.preventDefault()
       model_id = $(ev.currentTarget).data('id')
-      model = @collection.get model_id
+      model = @collection.get(model_id)
       @propertyModalView.trigger 'showModal',
         model: model
         is_edit: true
