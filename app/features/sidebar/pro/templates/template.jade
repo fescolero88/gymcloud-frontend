@@ -1,0 +1,9 @@
+- url = isFolder ? "#"+type+"/" : "#"+type+"/"+id
+- className = isFolder ? 'toggle-menu toggle-it' : ''
+a.row(href=url, class=className)
+  span.col-xs-2
+    - className = isFolder ? 'fa-folder-o' : 'draggable-handle'
+    span.fa.fa-arrows(class=className)
+  span.col-xs-10.gc-sidebar-folder-name(data-key=id)
+    = name
+.gc-sidebar-sub

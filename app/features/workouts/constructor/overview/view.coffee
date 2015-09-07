@@ -115,8 +115,8 @@ define [
       @ui.workoutNoteEditor.focus()
 
     _textAreaAutoHeight: (area) ->
-      el = @ui[area].get 0
-      if el.scrollHeight > el.clientHeight
+      el = @ui[area]?.get(0)
+      if el?.scrollHeight > el?.clientHeight
         el.style.height = "#{el.scrollHeight}px"
 
     _saveAttribute: (attribute, message) ->

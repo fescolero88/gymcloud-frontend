@@ -3,16 +3,14 @@ define [
   'models/draggable_menu_item'
   'views/trainer/sidebar-entity-composite-view'
   'collections/sidebar_items'
-  'collections/user_collection'
-  'views/sidebar/personal_collection_view'
-  'views/sidebar/sidebar_pro_view'
-  'templates/sidebar/sidebar'
+  './personal/view'
+  './pro/view'
+  './template'
 ], (
   Marionette
   DraggableMenuItemModel
   SidebarEntity
   SidebarItemsCollection
-  UserCollection
   PersonalCollectionView
   SidebarProView
   template

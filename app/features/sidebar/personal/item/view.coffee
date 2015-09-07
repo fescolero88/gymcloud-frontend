@@ -1,6 +1,6 @@
 define [
   'backbone.marionette'
-  'templates/sidebar/user_collection_item'
+  './template'
 ], (
   Marionette
   template
@@ -11,8 +11,17 @@ define [
 
     className: 'gc-sidebar-item'
 
+    bindings:
+      '[data-bind="name"]': 'name'
+
     templateHelpers: ->
       type: @type
 
     initialize: (options)->
       @type = options.type
+
+    onRender: ->
+      @stickit()
+
+    onDestroy: ->
+      @unstickit()
