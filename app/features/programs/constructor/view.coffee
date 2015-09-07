@@ -49,6 +49,7 @@ define [
       if @_isAuthor()
         programActionsView = new ActionsView(model: @model)
         @getRegion('programActionsRegion').show(programActionsView)
+        'add:note'
 
       @changeView 'program'
 
@@ -56,7 +57,7 @@ define [
       @unstickit()
 
     _isAuthor: =>
-      App.request('current_user_id') is @model.get('author_id')
+      @model.get('author_id') is App.request('current_user_id')
 
     navigateBack: ->
       window.history.back()
@@ -67,16 +68,16 @@ define [
     _changeViewEvent: (ev, ui) ->
       ev.preventDefault()
       navItem = $(ev.currentTarget).parent()
-      if not $(navItem).hasClass 'active'
-        ui.removeClass 'active'
-        $(navItem).addClass 'active'
-        navItemView = $(navItem).data 'view'
+      if not $(navItem).hasClass('active')
+        ui.removeClass('active')
+        $(navItem).addClass('active')
+        navItemView = $(navItem).data('view')
 
     changeView: (navView) =>
       switch navView
         when 'program'
-          @overviewView = new OverviewView(model: @model)
-          @manageRegion.show @overviewView
+          view = new OverviewView(model: @model)
+          @manageRegion.show(view)
 
     saveName: ->
       @model.save() if @model.hasChanged('name')
@@ -92,7 +93,7 @@ define [
       App.request 'data:delete', 'programs', id
 
       rootId = App.request "data:programs:root"
-      folderId = @model.get 'folder_id'
+      folderId = @model.get('folder_id')
       @model.set 'key', @model.get('id')
       if folderId and folderId isnt 0 and folderId isnt rootId
         App.vent.trigger "programs:folder:#{folderId}:model:removed", @model

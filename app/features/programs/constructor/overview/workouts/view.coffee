@@ -48,6 +48,6 @@ define [
       dragOptions =
         revertOnSpill: true
         moves: (el, container, handle) ->
-          (handle.className is 'gc-program-workout-sort')
+          handle.className is 'gc-program-workout-sort'
 
       Dragula @ui.workoutsList, dragOptions

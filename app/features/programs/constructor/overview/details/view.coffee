@@ -20,10 +20,6 @@ define [
       programWeeksCount: '.gc-program-weeks-count'
       programWorkoutCount: '.gc-program-workout-count'
 
-    events:
-      'blur @ui.programDescriptionEditor': 'saveModel'
-      'blur @ui.programNoteEditor': 'saveModel'
-
     bindings:
       '[data-bind="description"]':
         observe: 'description'
@@ -31,6 +27,10 @@ define [
       '[data-bind="note"]':
         observe: 'note'
         events: ['change']
+
+    modelEvents:
+      'change:name': '_saveOnChange'
+      'change:description': '_saveOnChange'
 
     templateHelpers: =>
       hasNote: !!@model.get('note')
@@ -40,25 +40,18 @@ define [
         App.request('current_user_id') is @model.get('author_id')
 
     initialize: (options) ->
-      window.model = @model
       @workoutsCollection = options.workoutsCollection
       @weekWorkoutCollection = options.weekWorkoutCollection
-      App.commands.setHandler 'program:note_editor:toggle', @triggerNoteEditor
 
-      @listenTo @collection, 'update', @weeksUpdated
-      @listenTo @workoutsCollection, 'update', @workoutsUpdated
+      @listenTo(@model, 'note:toggle_editor', @triggerNoteEditor)
+      @listenTo(@collection, 'update', @weeksUpdated)
+      @listenTo(@workoutsCollection, 'update', @workoutsUpdated)
 
     onRender: ->
       @stickit()
 
     onDestroy: ->
       @unstickit()
-      App.commands.removeHandler 'program:note_editor:toggle', @triggerNoteEditor
-
-    saveModel: ->
-      keys = _.keys(@model.changed)
-      if _.includes(keys, "description") or _.includes(keys, "note")
-        @model.save()
 
     triggerNoteEditor: =>
       if !!@model.get('note')
@@ -69,8 +62,11 @@ define [
       @ui.programNoteEditor.focus()
 
     weeksUpdated: ->
-      @ui.programWeeksCount.html @collection.length
+      @ui.programWeeksCount.html(@collection.length)
 
     workoutsUpdated: ->
       count = @weekWorkoutCollection.length + @workoutsCollection.length
-      @ui.programWorkoutCount.html count
+      @ui.programWorkoutCount.html(count)
+
+    _saveOnChange: (_model, _value) ->
+      @model.save()

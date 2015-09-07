@@ -49,33 +49,33 @@ define [
       @listenTo @workoutsCollection, 'update', @toggleEmptyState
 
     onShow: ->
-      programDetailsView = new DetailsView
+      details = new DetailsView
         model: @model
         collection: @collection
         workoutsCollection: @workoutsCollection
         weekWorkoutCollection: @weekWorkoutCollection
 
-      @getRegion('programDetails').show programDetailsView
+      @getRegion('programDetails').show(details)
 
       if App.request('current_user_id') is @model.get('author_id')
-        programPrivacyControlsView = new PrivacyControlsView
+        privacy = new PrivacyControlsView
           model: @model
           collection: @collection
           workoutsCollection: @workoutsCollection
 
-        @getRegion('programPrivacyControls').show programPrivacyControlsView
+        @getRegion('programPrivacyControls').show(privacy)
 
-      programWeeksView = new WeeksView
+      weeks = new WeeksView
         model: @model
         collection: @collection
         workoutsCollection: @weekWorkoutCollection
 
-      @getRegion('weeksRegion').show programWeeksView
+      @getRegion('weeksRegion').show(weeks)
 
-      programWorkoutListView = new ProgramWorkoutListView
+      workouts = new ProgramWorkoutListView
         model: @model
         collection: @workoutsCollection
-      @getRegion('programWorkoutListRegion').show programWorkoutListView
+      @getRegion('programWorkoutListRegion').show(workouts)
 
       # emptyStateView = new WeekEmptyView()
       # @getRegion('emptyState').show emptyStateView
@@ -98,16 +98,19 @@ define [
           type: 'success'
 
     toggleEmptyState: ->
-      if @collection.length > 0 or
-         @workoutsCollection.length > 0 or
-         @weekWorkoutCollection > 0
-        @ui.programWorkoutListRegion.removeClass 'hidden'
-      else
+      if _.some [
+        @collection.isEmpty()
+        @workoutsCollection.isEmpty()
+        @weekWorkoutCollection.isEmpty()
+      ]
         # @ui.emptyState.removeClass 'hidden'
         # @ui.weeksRegion.addClass 'hidden'
         @ui.programWorkoutListRegion.addClass 'hidden'
+      else
+        @ui.programWorkoutListRegion.removeClass 'hidden'
 
-      if @workoutsCollection.length > 0 && @collection.length == 0
+      if !@workoutsCollection.isEmpty() and @collection.isEmpty()
         @ui.weeksRegion.addClass 'hidden'
+        @ui.programWorkoutListRegion.removeClass 'hidden'
       else
         @ui.weeksRegion.removeClass 'hidden'

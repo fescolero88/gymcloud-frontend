@@ -33,10 +33,7 @@ define [
       'click @ui.addWeek': 'addNewWeek'
 
     addNewWeek: ->
-      data =
-        id: @collection.length + 1
-        name: "Week #{@collection.length + 1}"
-      @collection.add(data)
+      @collection.add(name: "Week #{@collection.length + 1}")
       App.request 'messenger:show',
         message: "Program week added."
         type: 'success'

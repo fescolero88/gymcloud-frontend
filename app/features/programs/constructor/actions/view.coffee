@@ -21,7 +21,7 @@ define [
       'click @ui.deleteProgram': 'deleteProgram'
 
     triggerAddNote: ->
-      App.commands.execute 'program:note_editor:toggle'
+      @model.trigger('note:toggle_editor')
 
     deleteProgram: ->
       App.request 'base:confirmationalModal',
