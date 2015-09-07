@@ -1,17 +1,19 @@
 define [
   'backbone.marionette'
-  './item_view'
+  './item/view'
+  'collections/user_collection'
   './template'
 ], (
   Marionette
   TemplateCollectionItemView
+  UserCollection
   template
 )->
   class TemplateCollectionView extends Marionette.CompositeView
 
     template: template
 
-    className: 'gc-sidebar-folder'
+    className: 'gc-sidebar-cat'
 
     getChildView: (item) ->
       if typeof item.attributes.folder_id isnt 'undefined'
@@ -23,6 +25,10 @@ define [
       attributes:
         'data-category': @name.toLowerCase()
       type: @type
+      name: model.get('name')
+      collection: do ->
+        if model.items
+          new UserCollection(model.get('items'), type)
 
     childViewContainer: '.gc-sidebar-sub'
 

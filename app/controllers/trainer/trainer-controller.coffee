@@ -173,6 +173,9 @@ define [
         breadcrumbs: breadcrumbs
       @mainView.content.show(view)
 
+    exercisesView: (key) ->
+      @globalView('exercises', key)
+
     globalView: (type, key) ->
       items = App.request("data:#{type}")
       if items?
