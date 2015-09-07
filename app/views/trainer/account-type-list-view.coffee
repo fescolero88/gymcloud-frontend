@@ -10,3 +10,10 @@ define [
     tagName: 'ul'
 
     childView: AccountTypeItemView
+
+    childEvents:
+      'assignment:changed': 'assignmentChanged'
+
+    assignmentChanged: =>
+      assigned = @collection.findWhere 'assigned': true
+      assigned.set 'assigned', false

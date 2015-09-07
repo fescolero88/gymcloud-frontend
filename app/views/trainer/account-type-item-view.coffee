@@ -13,44 +13,21 @@ define [
 
     template: template
 
-    modelEvents:
-      'change:assigned': 'setStatus'
-
-    #events:
-      #'click': 'changeAssignment'
+    events:
+      'click': 'changeAssignment'
 
     bindings:
       ':el':
         observe: 'assigned'
-        isAssigned: =>
-          @model.get 'assigned'
-        isAssignedFn: =>
-          console.log 'test'
-
-    initialize: ->
-      App.vent.on 'account:changed', @unAssignAccount
-
-    onDestroy: ->
-      App.vent.off 'account:changed', @unAssignAccount
-
-    unAssignAccount: =>
-      if @model.get 'assigned'
-        @model.set 'assigned', false
+        update: ($el, val, model, options) =>
+          if model.get 'assigned'
+            $el.addClass 'active'
+          else
+            $el.removeClass 'active'
 
     onRender: ->
       @stickit()
 
-    #onShow: ->
-      #@setStatus()
-
     changeAssignment: ->
-      App.vent.trigger 'account:changed'
+      @triggerMethod 'assignment:changed', 'test'
       @model.set 'assigned', !@model.get('assigned')
-
-    setStatus: ->
-      if @model.get 'assigned'
-        @$el.addClass 'active'
-        #update model here
-      else
-        @$el.removeClass 'active'
-

@@ -29,6 +29,7 @@
 .gc-account-type-item .gc-account-type-image {
   width: 36px;
   height: 33px;
+  display: inline-block;
 }
 .gc-account-type-item .gc-account-title {
   padding: 0;
@@ -41,4 +42,24 @@
   background-repeat: no-repeat;
   background-position: center;
   float:left;
+}
+.gc-acc-personal-trainer {
+  background-image: url('../images/personal-trainer.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.gc-acc-str-conditioning {
+  background-image: url('../images/strength-conditioning.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.gc-acc-athletic-trainer {
+  background-image: url('../images/athletic-trainer.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.gc-acc-physical-therapist {
+  background-image: url('../images/physical-therapy.png');
+  background-size: cover;
+  background-repeat: no-repeat;
 }

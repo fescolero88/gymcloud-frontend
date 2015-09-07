@@ -22,19 +22,23 @@ define [
 
     initialize: ->
       @collection = new AccountTypes [
-        image: 'app/images/personal-trainer.png'
+        id: 1
+        image: 'gc-acc-personal-trainer'
         title: 'Personal Trainer'
         assigned: true
       ,
-        image: 'app/images/strength-conditioning.png'
+        id: 2
+        image: 'gc-acc-str-conditioning'
         title: 'Strength and Conditional Coach'
         assigned: false
       ,
-        image: 'app/images/athletic-trainer.png'
+        id: 3
+        image: 'gc-acc-athletic-trainer'
         title: 'Athlethic Coach'
         assigned: false
       ,
-        image: 'app/images/physical-therapy.png'
+        id: 4
+        image: 'gc-acc-physical-therapist'
         title: 'Physical Therapist'
         assigned: false
       ]
@@ -43,8 +47,8 @@ define [
       'click @ui.changeType': 'accountTypeChanged'
 
     onRender: ->
-      accountTypeListView = new AccountTypeListView collection: @collection
-      @getRegion('accountTypeRegion').show accountTypeListView
+      view = new AccountTypeListView collection: @collection
+      @getRegion('accountTypeRegion').show view
 
     accountTypeChanged: ->
       App.request 'messenger:show',
