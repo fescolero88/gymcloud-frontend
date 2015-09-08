@@ -1,7 +1,9 @@
 .col-xs-3.draggable-handle
   i.fa.fa-arrows-v
-  span(data-weight="#{global_property.symbol}")= global_property.name
-.col-xs-4= global_property.unit
+  span(data-weight="#{global_property.symbol}")
+    = global_property.name
+.col-xs-4
+  = global_property.unit
 .col-xs-2.gc-properties-property-actions
   .switch
     label

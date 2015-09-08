@@ -7,7 +7,7 @@ define [
 ) ->
 
   class WorkoutScheduleModal extends Marionette.ItemView
-    
+
     template: template
 
     ui:
@@ -24,7 +24,11 @@ define [
       'change @ui.hasEndDate': 'toggleEndDate'
 
     onRender: ->
+      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit()
+
+    onDestroy: ->
+      @unstickit()
 
     toggleEndDate: ->
       @ui.workoutEndDateWrapper.toggleClass 'hidden'

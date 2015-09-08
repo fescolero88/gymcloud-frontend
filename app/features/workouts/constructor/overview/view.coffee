@@ -53,6 +53,7 @@ define [
       App.vent.on 'workout:notes:add', @showAddNote, @
 
     onShow: ->
+      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit(@model)
       @exercisesListRegion.show @exercisesView
       @workoutDescriptionAutoHeight()
@@ -115,8 +116,8 @@ define [
       @ui.workoutNoteEditor.focus()
 
     _textAreaAutoHeight: (area) ->
-      el = @ui[area].get 0
-      if el.scrollHeight > el.clientHeight
+      el = @ui[area]?.get(0)
+      if el?.scrollHeight > el?.clientHeight
         el.style.height = "#{el.scrollHeight}px"
 
     _saveAttribute: (attribute, message) ->

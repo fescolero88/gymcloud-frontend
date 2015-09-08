@@ -1,83 +1,63 @@
 define [
   'backbone.marionette'
-  'models/draggable_menu_item'
-  'views/trainer/sidebar-entity-composite-view'
-  'collections/sidebar_items'
   'collections/user_collection'
-  'views/sidebar/personal_collection_view'
-  'views/sidebar/sidebar_pro_view'
-  'templates/sidebar/sidebar'
+  './root_folders/view'
+  './template'
 ], (
   Marionette
-  DraggableMenuItemModel
-  SidebarEntity
-  SidebarItemsCollection
   UserCollection
-  PersonalCollectionView
-  SidebarProView
+  RootFolderView
   template
 )->
-  class SidebarView extends Marionette.LayoutView
+  class SidebarProView extends Marionette.LayoutView
 
     template: template
 
     className: 'gc-scrollable-area'
 
     events:
-      'click .toggle-menu': 'toggleMenu'
       'click @ui.item': 'toggleItem'
-      'click .nano': 'onClickSidebar'
 
     ui:
       subs: '.gc-sidebar-folder>.gc-sidebar-sub, .gc-sidebar-cat>.gc-sidebar-sub'
-      sidebar: '.gc-sidebar-menu-list'
-      dndArea: '.gc-dnd-area'
-      mainArea: '.gc-main'
       catchList: '.gc-assign-catch'
       item: '.gc-sidebar-item > a'
-      proRegion: 'pro-section'
-      personalWorkoutsRegion: 'region[data-name="personal_workouts"]'
-      personalProgramsRegion: 'region[data-name="personal_programs"]'
+      exercisesRegion: 'region[data-name="exercises"]'
+      workoutsRegion: 'region[data-name="workout_templates"]'
+      programsRegion: 'region[data-name="program_templates"]'
 
     regions:
-      pro: '@ui.proRegion'
-      personalWorkouts: '@ui.personalWorkoutsRegion'
-      personalPrograms: '@ui.personalProgramsRegion'
+      exercises: '@ui.exercisesRegion'
+      workout_templates: '@ui.workoutsRegion'
+      program_templates: '@ui.programsRegion'
 
     initialize: ->
-      @currentUser = App.request('current_user')
+      typeByName = (name) ->
+        {
+          Exercises: 'exercises'
+          Workouts: 'workout_templates'
+          Programs: 'program_templates'
+        }[name]
 
-    renderPersonalEntities: ->
-      _.each ['workouts', 'programs'], (item) =>
-        view = new PersonalCollectionView
-          collection: @currentUser["personal_#{item}"]
-          type: item
-
-        regionName = "personal#{_.capitalize(item)}"
-        @getRegion(regionName).show(view)
-
-    onRender: ->
-      @renderPersonalEntities()
-      @getRegion('pro').show(new SidebarProView) if @currentUser.get('is_pro')
-
-    toggleMenu: (ev) ->
-      target = $(ev.target)
-      currentTarget = $(ev.currentTarget)
-      if target.hasClass('toggle-it') or currentTarget.hasClass('toggle-it')
-        ev.preventDefault()
-        currentTarget.toggleClass('active')
+      library = new UserCollection([], type: 'library')
+      library.fetch().then =>
+        root = library.models[0]
+        _.each root.get('items'), (folder) =>
+          type = typeByName(folder.name)
+          App.request("data:#{type}:reset", folder.items)
+          collection = new UserCollection(folder.items, type)
+          view = new RootFolderView
+            collection: collection
+            type: type
+            name: folder.name
+          @getRegion(type).show(view)
+          # @initDragAndDrop()
 
     toggleItem: (ev) ->
       activeItem = @el.querySelector('.gc-sidebar-item > a.active')
       activeItem.classList.remove('active') if activeItem
 
       ev.currentTarget.classList.add 'active'
-
-    onClickSidebar: (ev) ->
-      #for catching of menu slide transition time 0.5s
-      setTimeout =>
-        @$el.find('.nano').nanoScroller()
-      , 600
 
     initDragAndDrop: () ->
       @ui.subs.sortable
@@ -116,9 +96,3 @@ define [
       $('.gc-assign-catch').sortable
         drag: false
         group: 'assignEx'
-
-    # TODO: implement for programs
-    # TODO: review and delete
-    updateEWPName: (type, key, newValue) ->
-      selector = "span[data-key=\"#{key}\"]"
-      @ui["#{type}Region"].find(selector).html(newValue)

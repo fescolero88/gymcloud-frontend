@@ -16,7 +16,10 @@ module.exports = class TrainerRouter extends CustomRouter
 
     'properties(/)': 'properties'
 
+    'exercises(/)': 'exercisesView'
+    'exercises/:id(/)': 'exercisesView'
     'workout_templates/:id(/)': 'workoutConstructor'
+
     'tr/global/:assign(/)': 'globalView'
     'tr/global/:assign/id/:id(/)': 'globalView'
 
