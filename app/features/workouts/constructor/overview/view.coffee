@@ -53,6 +53,7 @@ define [
       App.vent.on 'workout:notes:add', @showAddNote, @
 
     onShow: ->
+      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit(@model)
       @exercisesListRegion.show @exercisesView
       @workoutDescriptionAutoHeight()
