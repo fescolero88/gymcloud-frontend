@@ -23,7 +23,7 @@
 .gc-account-type-item .gc-account-selected i {
   margin: 5px 3px 5px;
 }
-.gc-account-type-item.active .gc-account-selected {
+.gc-account-type-item .gc-account-selected.assigned {
   display: block;
 }
 .gc-account-type-item .gc-account-type-image {
