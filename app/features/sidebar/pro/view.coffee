@@ -1,12 +1,12 @@
 define [
   'backbone.marionette'
   'collections/user_collection'
-  './templates/view'
+  './root_folders/view'
   './template'
 ], (
   Marionette
   UserCollection
-  TemplateCollectionView
+  RootFolderView
   template
 )->
   class SidebarProView extends Marionette.LayoutView
@@ -46,7 +46,7 @@ define [
           type = typeByName(folder.name)
           App.request("data:#{type}:reset", folder.items)
           collection = new UserCollection(folder.items, type)
-          view = new TemplateCollectionView
+          view = new RootFolderView
             collection: collection
             type: type
             name: folder.name

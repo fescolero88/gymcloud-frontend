@@ -18,7 +18,7 @@ define [
   'models/global_workout'
   'views/trainer/programs/program_global_view'
   'models/global_program'
-  'views/trainer/properties/properties-view'
+  'features/properties/view'
   'features/workouts/constructor/view'
   'features/programs/constructor/view'
 ],
@@ -182,6 +182,9 @@ define [
 
       view = new View(model: model, breadcrumbs: breadcrumbs)
       @mainView.content.show(view)
+
+    exercisesView: (key) ->
+      @globalView('exercises', key)
 
     globalView: (type, key) ->
       items = App.request("data:#{type}")
