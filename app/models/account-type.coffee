@@ -10,3 +10,4 @@ define [
       image: undefined
       title: undefined
       assigned: undefined
+      selected: false
