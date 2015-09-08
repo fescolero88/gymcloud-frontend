@@ -1,0 +1,22 @@
+.gc-program-empty-state
+  .gc-program-empty-icon
+  p
+    | Looks like you don't have any
+    br
+    | weeks or workout created
+  button.btn.btn-primary.gc-add-workout(type='button')
+    | Add new workout
+  button.btn.btn-primary.gc-program-add-week.gc-add-week(type='button')
+    | Add new week
+.gc-program-options.gc-add-workout-controls.hidden
+  // button.btn.btn-primary.btn-sm.gc-custom.gc-program-add-week add new week
+  .gc-add-create-workout-wrapper
+    div
+      input.form-control
+      button.gc-clear-quick-add.gc-cancel-add-workout(type='button')
+        | cancel
+    div
+      | or
+    div
+      button.btn.btn-primary.btn-sm.gc-custom.gc-program-create-workout
+        | Create new workout
