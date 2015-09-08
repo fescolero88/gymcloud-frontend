@@ -43,6 +43,7 @@ define [
       @program_template = options.program_template
 
     onShow: ->
+      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit()
 
     onDestroy: ->

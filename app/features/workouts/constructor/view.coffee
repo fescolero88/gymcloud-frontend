@@ -62,6 +62,7 @@ define [
       App.vent.off 'workout:add:exercise', @assignExercise
 
     onShow: ->
+      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit()
       @changeView 'description'
 

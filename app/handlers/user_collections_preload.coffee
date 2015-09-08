@@ -28,9 +28,9 @@ define [
       personal_programs: PersonalProgram
       personal_properties: PersonalProperty
       personal_workouts: PersonalWorkout
-      workout_events: Backbone.Model
       folders: Backbone.Model
       notifications: Backbone.Model
+      # workout_events: Backbone.Model
 
     _.map collections, (model, item) ->
       collection = new UserCollection [],

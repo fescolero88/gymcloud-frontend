@@ -36,6 +36,7 @@ define [
       @workoutsCollection = options.workoutsCollection
 
     onRender: ->
+      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit()
       @workoutCollection = new Backbone.Collection
       workoutList = new WorkoutListView

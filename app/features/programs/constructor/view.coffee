@@ -45,6 +45,7 @@ define [
       isAuthor: @_isAuthor()
 
     onShow: ->
+      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit()
       if @_isAuthor()
         programActionsView = new ActionsView(model: @model)

@@ -21,6 +21,7 @@ define [
       @type = options.type
 
     onRender: ->
+      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit()
 
     onDestroy: ->
