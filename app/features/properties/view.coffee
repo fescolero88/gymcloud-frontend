@@ -2,13 +2,13 @@ define [
   'backbone.marionette'
   'collections/user_collection'
   'models/personal_property'
-  'views/trainer/properties/property-list-view'
+  './list/view'
   'views/trainer/properties/property-modal-view'
-  'templates/trainer/properties/properties'
+  './template'
 ], (
   Marionette
   UserCollection
-  Property
+  PersonalProperty
   PropertyListView
   PropertyModalView
   template
@@ -28,28 +28,18 @@ define [
       editProperty: '.gc-properties-property-edit'
 
     initialize: ->
-      @propertyModalView = new PropertyModalView(model: new Property)
-      @collection = new UserCollection [],
-        type: 'personal_properties'
-        model: Property
+      @propertyModalView = new PropertyModalView(model: new PersonalProperty)
+      @collection = App.request('current_user').personal_properties
       @collectionView = new PropertyListView(collection: @collection)
-      @collection.fetch()
 
     onShow: ->
       @propertyModal.show(@propertyModalView)
       @propertyList.show(@collectionView)
 
-    propertyModalShow: (ev) ->
-      ev.preventDefault()
-      model = new Property
-      @propertyModalView.trigger 'showModal',
-        model: model
-        is_edit: false
-
     editProperty: (ev) ->
       ev.preventDefault()
       model_id = $(ev.currentTarget).data('id')
-      model = @collection.get model_id
+      model = @collection.get(model_id)
       @propertyModalView.trigger 'showModal',
         model: model
         is_edit: true

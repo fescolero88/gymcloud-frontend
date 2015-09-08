@@ -18,7 +18,7 @@ define [
   'models/global_workout'
   'views/trainer/programs/program_global_view'
   'models/global_program'
-  'views/trainer/properties/properties-view'
+  'features/properties/view'
   'features/workouts/constructor/view'
 ],
 (
