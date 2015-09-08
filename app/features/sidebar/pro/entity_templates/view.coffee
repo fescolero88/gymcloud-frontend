@@ -26,9 +26,7 @@ define [
         'data-category': @name.toLowerCase()
       type: @type
       name: model.get('name')
-      collection: do ->
-        if model.items
-          new UserCollection(model.get('items'), type)
+      collection: model.items
 
     childViewContainer: '.gc-sidebar-sub'
 

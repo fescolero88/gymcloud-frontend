@@ -43,7 +43,7 @@ define [
     _collectionViewOptions: (model) ->
       type: @type
       name: model.get('name')
-      collection: new UserCollection(model.get('items'), @type)
+      collection: model.items
 
     _itemViewOptions: (model) ->
       attributes:

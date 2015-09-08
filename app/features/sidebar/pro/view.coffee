@@ -31,7 +31,7 @@ define [
       workout_templates: '@ui.workoutsRegion'
       program_templates: '@ui.programsRegion'
 
-    initialize: ->
+    onRender: ->
       typeByName = (name) ->
         {
           Exercises: 'exercises'
@@ -39,19 +39,19 @@ define [
           Programs: 'program_templates'
         }[name]
 
-      library = new UserCollection([], type: 'library')
-      library.fetch().then =>
-        root = library.models[0]
-        _.each root.get('items'), (folder) =>
-          type = typeByName(folder.name)
-          App.request("data:#{type}:reset", folder.items)
-          collection = new UserCollection(folder.items, type)
-          view = new RootFolderView
-            collection: collection
-            type: type
-            name: folder.name
-          @getRegion(type).show(view)
-          # @initDragAndDrop()
+      user = App.request('current_user')
+      library = user.library
+
+      root = library.models[0]
+      root.items.each (folder) =>
+        type = typeByName(folder.get('name'))
+        # App.request("data:#{type}:reset", folder.items)
+        view = new RootFolderView
+          collection: folder.items
+          type: type
+          name: folder.get('name')
+        @getRegion(type).show(view)
+        # @initDragAndDrop()
 
     toggleItem: (ev) ->
       activeItem = @el.querySelector('.gc-sidebar-item > a.active')
