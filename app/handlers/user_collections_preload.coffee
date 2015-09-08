@@ -32,6 +32,10 @@ define [
       notifications: Backbone.Model
       # workout_events: Backbone.Model
 
+    user.workout_events = new UserCollection [],
+      user: user
+      type: 'workout_events'
+
     _.map collections, (model, item) ->
       collection = new UserCollection [],
         model: model
