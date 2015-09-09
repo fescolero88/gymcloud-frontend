@@ -1,10 +1,8 @@
 define [
-  'backbone.marionette'
   './item/view'
   'collections/user_collection'
   './template'
 ], (
-  Marionette
   TemplateCollectionItemView
   UserCollection
   template

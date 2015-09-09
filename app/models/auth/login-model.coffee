@@ -1,8 +1,6 @@
 define [
-  'backbone'
   'config'
 ], (
-  Backbone
   config
 ) ->
 

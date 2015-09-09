@@ -1,8 +1,4 @@
-define [
-  'backbone'
-], (
-  Backbone
-) ->
+define ->
 
   class GlobalExercise extends Backbone.Model
 

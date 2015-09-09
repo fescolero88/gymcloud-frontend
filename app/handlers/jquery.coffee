@@ -1,8 +1,4 @@
-define [
-  'jquery'
-], (
-  $
-) ->
+define ->
 
   ->
 

@@ -1,10 +1,8 @@
 define [
-  'backbone.marionette'
   'templates/trainer/account-type-modal'
   'views/trainer/account-type-list-view'
   'collections/account-types'
 ], (
-  Marionette
   template
   AccountTypeListView
   AccountTypes

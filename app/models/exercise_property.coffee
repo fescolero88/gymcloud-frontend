@@ -1,8 +1,6 @@
 define [
-  'backbone'
   './personal_property'
 ], (
-  Backbone
   PersonalProperty
 ) ->
 

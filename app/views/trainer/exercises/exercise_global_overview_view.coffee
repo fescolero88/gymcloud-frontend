@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 PrivacyButtonsView = require 'views/general/privacy-buttons-view'
 
 module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView

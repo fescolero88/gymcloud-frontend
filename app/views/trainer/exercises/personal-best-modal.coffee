@@ -1,5 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
 ClientsProperties = require 'collections/clients_properties'
 
 class PersonalBestResultModel extends Backbone.Model

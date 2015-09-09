@@ -1,5 +1,3 @@
-Marionette = require 'backbone.marionette'
-
 module.exports = class ProgramWeekItemView extends Marionette.ItemView
 
   template: require 'templates/trainer/programs/program_week_item'

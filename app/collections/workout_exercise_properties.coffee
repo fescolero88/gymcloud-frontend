@@ -1,8 +1,6 @@
 define [
-  'backbone'
   'models/workout_exercise_property'
 ], (
-  Backbone
   WorkoutExerciseProperty
 ) ->
 

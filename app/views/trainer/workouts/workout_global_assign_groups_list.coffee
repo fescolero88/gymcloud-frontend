@@ -1,5 +1,3 @@
-Marionette = require 'backbone.marionette'
-
 class WorkoutGlobalGroupView extends Marionette.ItemView
   tagName:'li'
 

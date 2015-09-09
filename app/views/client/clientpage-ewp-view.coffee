@@ -1,10 +1,8 @@
 define [
-  'backbone.marionette'
   'templates/client/assigments-empty'
   'templates/client/ewp_item'
   'templates/client/ewp_list'
 ], (
-  Marionette
   emptyViewTpl
   itemViewTpl
   collectionViewTpl

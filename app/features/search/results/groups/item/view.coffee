@@ -1,14 +1,10 @@
 define [
-  'backbone'
-  'backbone.marionette'
   './templates/entity'
   './templates/clients'
   '../../entities/item'
   '../../entities/client'
   '../../entities/client_group'
 ], (
-  Backbone
-  Marionette
   templateEntity
   templateClients
   ResultEntityItemView

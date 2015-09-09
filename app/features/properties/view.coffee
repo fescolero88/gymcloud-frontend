@@ -1,12 +1,10 @@
 define [
-  'backbone.marionette'
   'collections/user_collection'
   'models/personal_property'
   './list/view'
   'views/trainer/properties/property-modal-view'
   './template'
 ], (
-  Marionette
   UserCollection
   PersonalProperty
   PropertyListView

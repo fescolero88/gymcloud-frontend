@@ -1,10 +1,6 @@
 define [
-  'backbone'
-  'backbone.marionette'
   './template'
 ], (
-  Backbone
-  Marionette
   template
 ) ->
 

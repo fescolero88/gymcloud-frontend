@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 class EWPGlobalItemView extends Marionette.ItemView
 
   template: require('templates/trainer/global_ewp/ewp_single-item')

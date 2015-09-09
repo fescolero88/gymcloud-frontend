@@ -1,5 +1,4 @@
 define [
-  'backbone.marionette'
   './clients/view'
   'views/trainer/workouts/workout_global_assign_groups_list'
   'collections/clients'
@@ -7,7 +6,6 @@ define [
   'collections/workouts_client_assignees'
   './template'
 ], (
-  Marionette
   WorkoutGlobalAssignClientsListView
   WorkoutGlobalAssignGroupsListView
   Clients

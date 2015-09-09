@@ -1,8 +1,4 @@
-define [
-  'backbone'
-], (
-  Backbone
-) ->
+define ->
 
   class ClientGroup extends Backbone.Model
 

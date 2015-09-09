@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 module.exports = class LibraryPresetModalView extends Marionette.ItemView
 
   template: require('templates/general/library-preset-modal')

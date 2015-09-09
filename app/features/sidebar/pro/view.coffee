@@ -1,10 +1,8 @@
 define [
-  'backbone.marionette'
   'collections/user_collection'
   './root_folders/view'
   './template'
 ], (
-  Marionette
   UserCollection
   RootFolderView
   template

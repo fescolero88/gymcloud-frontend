@@ -1,8 +1,4 @@
-define [
-  'backbone'
-], (
-  Backbone
-) ->
+define ->
 
   class ResetPasswordModel extends Backbone.Model
 

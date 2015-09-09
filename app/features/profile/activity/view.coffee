@@ -1,10 +1,8 @@
 define [
-  'backbone.marionette'
   './empty/view'
   './item/view'
   './template'
 ], (
-  Marionette
   EmptyView
   ItemView
   template

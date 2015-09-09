@@ -1,7 +1,5 @@
 define [
   'config'
-  'backbone'
-  'backbone.marionette'
 
   'handlers/jquery'
   'handlers/spinner'
@@ -30,8 +28,6 @@ define [
   'deps/styles_app'
 ], (
   config
-  Backbone
-  Marionette
 
   jqueryHandler
   spinnerHandler

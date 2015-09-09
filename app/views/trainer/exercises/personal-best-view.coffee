@@ -1,4 +1,3 @@
-Marionette = require 'backbone.marionette'
 PersonalBestModel = require 'models/personal_best'
 PersonalBestCollection = require 'collections/personal_best_collection'
 PersonalBestModalView = require 'views/trainer/exercises/personal-best-modal'

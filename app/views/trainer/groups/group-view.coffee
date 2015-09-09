@@ -3,7 +3,6 @@
 # garguelles: confirm if this view is still used 
 #
 ###
-Marionette = require 'backbone.marionette'
 
 module.exports = class GroupView extends Marionette.LayoutView
 

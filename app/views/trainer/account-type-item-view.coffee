@@ -1,8 +1,6 @@
 define [
-  'backbone.marionette'
   'templates/trainer/account-type-item'
 ], (
-  Marionette
   template
 ) ->
   class AccountTypeItemView extends Marionette.ItemView

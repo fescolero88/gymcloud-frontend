@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 ClientGroupMembers = require 'collections/client_group_members'
 Exercises = require 'collections/exercises'
 Workouts = require 'collections/workouts'

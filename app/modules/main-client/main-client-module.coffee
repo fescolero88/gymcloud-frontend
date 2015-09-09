@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 ClientController = require 'controllers/client/clientpage-controller'
 ClientRouter = require 'routers/client/client-router'
 

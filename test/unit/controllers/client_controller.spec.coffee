@@ -1,9 +1,7 @@
 define [
   'app/controllers/client/clientpage-controller'
-  'backbone.marionette'
 ], (
   ClientController
-  Marionette
 ) ->
 
   describe 'ClientController', ->

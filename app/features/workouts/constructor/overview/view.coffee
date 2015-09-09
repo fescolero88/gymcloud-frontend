@@ -1,10 +1,8 @@
 define [
-  'backbone.marionette'
   './exercises/view'
   'collections/workout_exercises'
   './template'
 ], (
-  Marionette
   WorkoutExercisesView
   WorkoutExercises
   template

@@ -1,7 +1,3 @@
-_ = require 'lodash'
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 class EmptyView extends Marionette.ItemView
 
   template: require('templates/client/workouts/workout_clientpage_exercises_empty')

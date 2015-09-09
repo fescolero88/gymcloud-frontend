@@ -1,5 +1,3 @@
-Marionette = require 'backbone.marionette'
-
 class WorkoutExerciseProperty extends Marionette.ItemView
   
   tagName: 'li'

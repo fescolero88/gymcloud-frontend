@@ -1,5 +1,3 @@
-Marionette = require 'backbone.marionette'
-
 module.exports = class ClientPageView extends Marionette.LayoutView
 
   template: require('templates/client/clientpage')

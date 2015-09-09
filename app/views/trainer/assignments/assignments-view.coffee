@@ -1,5 +1,3 @@
-Marionette = require 'backbone.marionette'
-
 class EmptyView extends Marionette.ItemView
 
   template: require('templates/trainer/assignments/assignment_empty')

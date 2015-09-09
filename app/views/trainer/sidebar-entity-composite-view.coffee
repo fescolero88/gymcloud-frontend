@@ -1,5 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
 SidebarChildItems = require 'collections/sidebar_child_items'
 
 class SidebarEntityItem extends Marionette.CompositeView

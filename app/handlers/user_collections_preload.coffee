@@ -1,6 +1,4 @@
 define [
-  'backbone'
-  'lodash'
   'collections/user_collection'
   'models/workout_template'
   'models/program_template'
@@ -8,8 +6,6 @@ define [
   'models/personal_property'
   'models/personal_workout'
 ], (
-  Backbone
-  _
   UserCollection
   WorkoutTemplate
   ProgramTemplate

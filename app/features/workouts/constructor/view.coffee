@@ -1,12 +1,10 @@
 define [
-  'backbone.marionette'
   './overview/view'
   'views/trainer/workouts/workout_global_video_view'
   './assignment/view'
   'models/workout_exercise'
   './template'
 ], (
-  Marionette
   WorkoutGlobalOverviewView
   WorkoutGlobalVideoView
   WorkoutGlobalAssignView

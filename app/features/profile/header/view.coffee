@@ -1,11 +1,9 @@
 define [
-  'backbone.marionette'
   'views/trainer/clients/send-message-modal-view'
   '../edit_modal/view'
   'moment'
   './template'
 ], (
-  Marionette
   SendMessageModalView
   ProfileEditModalView
   moment

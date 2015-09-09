@@ -1,12 +1,10 @@
 define [
-  'backbone.marionette'
   './request/collection'
   './request/model'
   './router'
   './controller'
   './bar/view'
 ], (
-  Marionette
   RequestCollection
   RequestModel
   Router

@@ -1,8 +1,6 @@
 define [
-  'backbone'
   'models/property'
 ], (
-  Backbone
   Property
 ) ->
 

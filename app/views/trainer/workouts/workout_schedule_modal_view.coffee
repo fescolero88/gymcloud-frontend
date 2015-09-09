@@ -1,8 +1,6 @@
 define [
-  'backbone.marionette'
   'templates/trainer/workouts/workout_schedule_modal'
 ], (
-  Marionette
   template
 ) ->
 

@@ -1,10 +1,6 @@
 define [
-  'backbone'
-  'backbone.marionette'
   './results/view'
 ], (
-  Backbone
-  Marionette
   SearchResultsView
 ) ->
 
