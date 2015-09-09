@@ -1,10 +1,10 @@
 define [
-  'jquery_original'
-  'imports?jQuery=jquery_original!selectize'
-  'imports?jQuery=jquery_original!datetimepicker'
-  'imports?jQuery=jquery_original!nanoscroller'
+  'expose?jQueryOriginal!jquery_original'
+  'selectize'
+  'imports?jQuery=jquery_original!bootstrap'
+  'imports?jQuery=jquery_original!jQuery.serializeObject'
   'imports?jQuery=jquery_original!jquery-sortable'
-  #'imports?$=jquery_original!bootstrap'
+  'imports?exports=>undefined&define=>undefined&jQuery=jquery_original!nanoscroller'
 ], (
   $
 )->

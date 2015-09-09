@@ -1,7 +1,6 @@
 define [
   'config'
 
-  'handlers/jquery'
   'handlers/spinner'
   'handlers/ajax_setup'
   'handlers/user_authorization'
@@ -29,7 +28,6 @@ define [
 ], (
   config
 
-  jqueryHandler
   spinnerHandler
   ajaxSetupHandler
   userAuthorizationHandler
@@ -84,7 +82,6 @@ define [
         @data.current_user = new CurrentUser
 
       @addInitializer ->
-        jqueryHandler()
         spinnerHandler(this)
         userAuthorizationHandler(this)
         ajaxSetupHandler(this, config)

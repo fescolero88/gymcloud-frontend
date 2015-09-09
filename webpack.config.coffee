@@ -30,12 +30,13 @@ module.exports =
 
     alias:
       'config': path.join(__dirname, 'config', process.env.NODE_ENV || 'test')
-      'selectize': 'bower_components/selectize/dist/js/selectize'
+      'selectize': 'app/deps/vendor/selectize.js'
       'spinner': 'bower_components/spin.js/spin.js'
       'jquery-sortable': 'bower_components/jquery-sortable/source/js/jquery-sortable.js'
       'datetimepicker': 'bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker'
       'nanoscroller': 'bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js'
       'messenger': 'bower_components/messenger/build/js/messenger.js'
+      'bootstrap': 'bower_components/bootstrap/dist/js/bootstrap.js'
       'backbone_original': 'node_modules/backbone/backbone.js'
       'marionette_original': 'node_modules/backbone.marionette/lib/core/backbone.marionette.js'
       'jquery_original': 'node_modules/jquery/dist/jquery.js'
