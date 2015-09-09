@@ -36,6 +36,12 @@ module.exports =
       'datetimepicker': 'bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker'
       'nanoscroller': 'bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js'
       'messenger': 'bower_components/messenger/build/js/messenger.js'
+      'backbone_original': 'node_modules/backbone/backbone.js'
+      'marionette_original': 'node_modules/backbone.marionette/lib/core/backbone.marionette.js'
+      'jquery_original': 'node_modules/jquery/dist/jquery.js'
+      #'underscore': 'app/deps/bundles/underscore'
+      #'backbone': 'app/deps/bundles/backbone'
+      #'backbone.marionette': 'app/deps/bundles/marionette'
 
     extensions: [
       ''
@@ -126,11 +132,12 @@ module.exports =
 
   plugins: [
       new webpack.ProvidePlugin(
-        jQuery: 'jquery'
-        $: 'jquery'
-        'window.jQuery': 'jquery'
-        _: 'lodash'
-        Backbone: 'backbone'
+        $: 'deps/bundles/jquery'
+        jQuery: 'deps/bundles/jquery'
+        'window.jQuery': 'deps/bundles/jquery'
+        _: 'deps/bundles/underscore'
+        Backbone: 'deps/bundles/backbone'
+        Marionette: 'deps/bundles/marionette'
       )
     ,
       new webpack.ResolverPlugin(
