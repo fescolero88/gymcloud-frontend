@@ -7,3 +7,5 @@ define [
 )->
 
   Marionette
+  _.extend(Marionette.View.prototype, Backbone.Stickit.ViewMixin)
+  Marionette
