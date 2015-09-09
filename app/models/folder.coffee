@@ -15,6 +15,10 @@ define [
 
     urlRoot: "/folders"
 
+    validation:
+      name:
+        required: true
+
     parse: (data, options) ->
       if data.items
         if data.parent_id == null

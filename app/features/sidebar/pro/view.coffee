@@ -47,6 +47,7 @@ define [
         type = typeByName(folder.get('name'))
         # App.request("data:#{type}:reset", folder.items)
         view = new RootFolderView
+          model: folder
           collection: folder.items
           type: type
           name: folder.get('name')

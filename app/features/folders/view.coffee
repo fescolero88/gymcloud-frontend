@@ -2,8 +2,8 @@ define [
   'backbone.marionette' #Marionette
   './breadcrumbs/view'
   'views/trainer/global_ewp/ewp-global-list-view' #EWPGlobalListView
-  'views/trainer/global_ewp/add-global-ewp-modal' #AddGlobalEWPModalView
-  'views/trainer/global_ewp/add-global-folder-modal' #AddGlobalFolderModalView
+  './add_entity_modal/view' #AddEntityModalView
+  './add_folder_modal/view' #AddFolderModalView
   'views/trainer/global_ewp/duplicate-global-ewp-modal' #DuplicateGlobalEWPModalView
   'views/general/breadcrumbs/breadcrumbs-view' #BreadcrumbsView
   'collections/ewp_sortable' #EWPSortableCollection
@@ -13,8 +13,8 @@ define [
   Marionette
   Breadcrumbs
   EWPGlobalListView
-  AddGlobalEWPModalView
-  AddGlobalFolderModalView
+  AddEntityModalView
+  AddFolderModalView
   DuplicateGlobalEWPModalView
   BreadcrumbsView
   EWPSortableCollection
@@ -49,8 +49,8 @@ define [
 
     events:
       'click @ui.mainCheckbox': 'toggleCheck'
-      'click @ui.addExerciseButton': 'showaddGlobalEWPModal'
-      'click @ui.addExerciseFolderButton': 'showaddGlobalFolderModal'
+      'click @ui.addExerciseButton': 'showAddEntityModal'
+      'click @ui.addExerciseFolderButton': 'showAddFolderModal'
       'click @ui.duplicateButton': 'showDuplicateEWPModal'
       'click @ui.deleteButton': 'rmAssign'
       'click @ui.backButton': 'goBack'
@@ -66,7 +66,7 @@ define [
 
     templateHelpers: ->
       type: @typeName
-      typeSingle: @typeName.substring(0, @typeName.length - 1)
+      singularName: _.humanize(_.singularize(@typeName))
 
     onShow: =>
       # @initSearchSelect()
@@ -156,26 +156,23 @@ define [
     loadItem: (key) =>
       Backbone.history.navigate("#tr/global/#{@typeName}/id/#{key}/", { trigger: true, replace: true })
 
-    showaddGlobalEWPModal: (ev) =>
+    showAddEntityModal: (ev) ->
       ev.preventDefault()
-      @addGlobalEWPModal = new AddGlobalEWPModalView
-        folderId: @item_id
+      view = new AddEntityModalView
+        folder: @model
         type: @typeName
-        modalEntity: $("#gc-modal-region")
-      @listenTo @addGlobalEWPModal, 'item:added', @exerciseAdded
 
-      @modalRegion.show @addGlobalEWPModal
-      @ui.actionModal.modal 'show'
+      @getRegion('modalRegion').show(view)
+      @ui.actionModal.modal('show')
 
-    showaddGlobalFolderModal: (ev) =>
+    showAddFolderModal: (ev) ->
       ev.preventDefault()
-      @addGlobalFolderModal = new AddGlobalFolderModalView
-        folderId: @item_id
+      view = new AddFolderModalView
+        parent: @model
         type: @typeName
-      @listenTo @addGlobalFolderModal, 'folder:added', @folderAdded
 
-      @modalRegion.show @addGlobalFolderModal
-      @ui.actionModal.modal 'show'
+      @getRegion('modalRegion').show(view)
+      @ui.actionModal.modal('show')
 
     showDuplicateEWPModal: (ev) =>
       ev.preventDefault()
@@ -188,54 +185,50 @@ define [
       @modalRegion.show @duplicateGlobalEWPModal
       @ui.actionModal.modal 'show'
 
-    exerciseAdded: (model) =>
-      model['key'] = model['id']
-      model['title'] = model['name']
-      model['items'] = []
-      model['isFolder'] = false
-      @showListIfHidden()
-      App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
-        @ui.actionModal.modal 'hide'
-        @listView.collection.push model
-        @listView.collection.comparator = (model) =>
-          return [not model.get('isFolder'), model.get('title').toUpperCase()]
-        @listView.collection.sort()
-        @listView.render()
-        @listView.collection.trigger 'highlight', model
-        href = "#tr/global/#{@typeName}/id/#{model['key']}"
-        App.vent.trigger ''
+    # exerciseAdded: (model) =>
+    #   model['key'] = model['id']
+    #   model['title'] = model['name']
+    #   model['items'] = []
+    #   model['isFolder'] = false
+    #   @showListIfHidden()
+    #   App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
+    #     @ui.actionModal.modal 'hide'
+    #     @listView.collection.push model
+    #     @listView.collection.comparator = (model) =>
+    #       return [not model.get('isFolder'), model.get('title').toUpperCase()]
+    #     @listView.collection.sort()
+    #     @listView.render()
+    #     @listView.collection.trigger 'highlight', model
+    #     href = "#tr/global/#{@typeName}/id/#{model['key']}"
+    #     App.vent.trigger ''
+    #
+    #     # notify sidebar changes
+    #     @notifySidebarChanges model
+    #
+    #     App.request 'messenger:show',
+    #       hideAfter: 5
+    #       message: "New item added"
+    #       type: 'success'
 
-        # notify sidebar changes
-        @notifySidebarChanges model
-
-        App.request 'messenger:show',
-          hideAfter: 5
-          message: "New item added"
-          type: 'success'
-
-    folderAdded: (model) =>
-      model['key'] = model['id']
-      model['title'] = model['name']
-      model['items'] = []
-      model['isFolder'] = true
-      @showListIfHidden()
-      App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
-        @ui.actionModal.modal 'hide'
-        # retrieve new data
-        @exercisesList = App.request "data:#{@typeName}"
-        @listView.collection.push model
-        @listView.collection.comparator = (model) =>
-          return [not model.get('isFolder'), model.get('title').toUpperCase()]
-        @listView.collection.sort()
-        @listView.render()
-        @listView.collection.trigger 'highlight', model
-        href = "#tr/global/#{@typeName}/id/#{model['key']}"
-        App.vent.trigger ''
-        @notifySidebarChanges model
-        App.request 'messenger:show',
-          hideAfter: 5
-          message: "New folder added"
-          type: 'success'
+    # folderAdded: (model) =>
+    #   model['key'] = model['id']
+    #   model['title'] = model['name']
+    #   model['items'] = []
+    #   model['isFolder'] = true
+    #   @showListIfHidden()
+    #   App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
+    #     @ui.actionModal.modal 'hide'
+    #     # retrieve new data
+    #     @exercisesList = App.request "data:#{@typeName}"
+    #     @listView.collection.push model
+    #     @listView.collection.comparator = (model) =>
+    #       return [not model.get('isFolder'), model.get('title').toUpperCase()]
+    #     @listView.collection.sort()
+    #     @listView.render()
+    #     @listView.collection.trigger 'highlight', model
+    #     href = "#tr/global/#{@typeName}/id/#{model['key']}"
+    #     App.vent.trigger ''
+    #     @notifySidebarChanges model
 
     duplicateEWP: (foldersIds) =>
       ids = []

@@ -11,6 +11,3 @@ define [
     template: template
 
     tagName: 'span'
-
-    initialize: ->
-      debugger
