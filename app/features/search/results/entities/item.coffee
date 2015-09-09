@@ -22,7 +22,7 @@ define [
       entity_context = @options.entity_context
 
       type: entity_context
-      profile_link: '#/tr/me'
+      profile_link: '#users/me'
       entity_link: "#tr/global/#{entity_context}/id/#{@model.id}"
 
     bindings:

@@ -53,16 +53,14 @@ define [
       @assign = data.assign || assign
       @key = data.key
 
-      user = App.request('current_user')
-
       @headerView = new HeaderView
-        model: user
+        model: @model
         viewType: @viewType
       @navView = new ClientGroupNavView
         itemId: @itemId
         viewType: @viewType
       @activityView = new ActivityView
-        collection: user.notifications
+        collection: @model.notifications
 
       @listenTo @navView, 'navView', @loadCenterView
 

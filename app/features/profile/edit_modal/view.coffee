@@ -42,6 +42,7 @@ define [
 
     initialize: ->
       Backbone.Validation.bind(this)
+      @previousAttributes = @model.toJSON()
 
     onRender: ->
       @stickit()
@@ -74,9 +75,10 @@ define [
       @model.save()
 
     onSync: (model, response, options) ->
+      @previousAttributes = @model.toJSON()
       @trigger 'modal:close'
       @trigger 'addToClientsCollection', model
-      if @avatar[0].files[0]
+      if @avatar?[0].files[0]
         data = new FormData()
         data.append('avatar', @avatar[0].files[0])
         @model.updateAvatar(data)

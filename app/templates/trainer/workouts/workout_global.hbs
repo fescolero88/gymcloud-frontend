@@ -66,13 +66,13 @@
           {{#ifNot id ../workout.author.id}}
           <div class="gc-workout-author-block pull-right">
             <div class="gc-exercise-author-info">
-              <a  href="#/tr/clients/id/{{this.id}}/exercises/" class="gc-exercise-author-avatar gc-exercise-author-avatar-exist">
+              <a  href="#users/{{this.id}}" class="gc-exercise-author-avatar gc-exercise-author-avatar-exist">
                 <img src="{{this.avatar_url}}"  onerror="this.src='app/images/avatar-placeholder.png';">
               </a>
               <p class="gc-exercise-author-name">
                 Trainer
                 <br>
-                <a href="#/tr/clients/id/{{this.id}}/exercises/">{{this.first_name}} {{this.last_name}}</a>
+                <a href="#users/{{this.id}}">{{this.first_name}} {{this.last_name}}</a>
               </p>
             </div>
             <div class="gc-rating">
