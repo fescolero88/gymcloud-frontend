@@ -14,13 +14,20 @@ define [
     template: template
 
     events:
-      'click': 'changeAssignment'
+      'click': 'changeSelected'
 
     bindings:
-      ':el':
+      '.gc-account-selected':
         observe: 'assigned'
         update: ($el, val, model, options) =>
           if model.get 'assigned'
+            $el.addClass 'assigned'
+          else
+            $el.removeClass 'assigned'
+      ':el':
+        observe: 'selected'
+        update: ($el, val, model, options) =>
+          if model.get 'selected'
             $el.addClass 'active'
           else
             $el.removeClass 'active'
@@ -32,6 +39,6 @@ define [
     onDestroy: ->
       @unstickit()
 
-    changeAssignment: ->
-      @triggerMethod 'assignment:changed', 'test'
-      @model.set 'assigned', !@model.get('assigned')
+    changeSelected: ->
+      @triggerMethod 'selected:changed'
+      @model.set 'selected', true

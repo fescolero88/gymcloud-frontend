@@ -12,8 +12,12 @@ define [
     childView: AccountTypeItemView
 
     childEvents:
-      'assignment:changed': 'assignmentChanged'
+      'selected:changed': 'selectedChanged'
 
-    assignmentChanged: =>
-      assigned = @collection.findWhere 'assigned': true
-      assigned.set 'assigned', false
+    childViewOptions:
+      'selected': false
+
+    selectedChanged: =>
+      selected = @collection.findWhere 'selected': true
+      if selected
+        selected.set 'selected', false
