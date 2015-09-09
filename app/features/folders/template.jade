@@ -1,0 +1,38 @@
+.gc-main-workspace.row
+  .col-xs-12.gc-content-both
+    .gc-clients-nav-wrapper.row
+      .col-xs-7.gc-clients-nav-left
+        label.gc-content-nav-checkall
+          input(type='checkbox')
+        a.gc-content-nav-back
+          span.fa.fa-chevron-left
+        #breadcrumbs
+        a.btn.btn-link.gc-show-add-exercise-modal
+          span.fa.fa-plus
+          | Add {{typeSingle}}
+      .col-xs-5.gc-exercises-nav-right.text-right
+        a.btn.btn-link.gc-show-add-exercise-folder-modal
+          span.fa.fa-plus
+          | Add folder
+        a.btn.btn-link.gc-show-duplicate-modal
+          | Duplicate
+        a#rm-event.btn.btn-danger(href='#')
+          span.fa.fa-trash
+    .gc-clients-list-wrapper.row
+      .gc-exercises-assign
+        .gc-exercises-assign-input-wrapper
+          input.gc-exercises-assign-input.form-control.live-search(type='text', placeholder='Search Exercises')
+      #exercises-region.col-xs-12
+    .gc-global-list-splash.hidden
+      .gc-splash-control
+        .gc-splash-description
+          img(src='app/images/icon-folder.png')
+          p
+            | You dont have 
+            br
+            | anything inside this folder.
+        .gc-splash-btn-container
+          a.btn.btn-link.gc-show-add-exercise-modal
+            span.fa.fa-plus
+            | Add #{typeSingle}
+#gc-modal-region.modal.fade.gc-modal

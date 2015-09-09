@@ -11,6 +11,7 @@ define [
   class Folder extends Backbone.Model
 
     initialize: (options) ->
+      @_defineParent()
 
     urlRoot: "/folders"
 
@@ -78,3 +79,9 @@ define [
           collectionName: 'program_templates'
           modelClass: ProgramTemplate
       }[folder_name]
+
+    _defineParent: ->
+      @__defineGetter__ 'parent', ->
+        user = App.request('current_user')
+        collection = user.folders
+        collection.get(@get('parent_id'))
