@@ -19,7 +19,7 @@
 
 (function(root, factory) {
 	if (typeof define === 'function' && define.amd) {
-		define(['jquery','sifter','microplugin'], factory);
+		define(['jquery_original','sifter','microplugin'], factory);
 	} else if (typeof exports === 'object') {
 		module.exports = factory(require('jquery'), require('sifter'), require('microplugin'));
 	} else {
