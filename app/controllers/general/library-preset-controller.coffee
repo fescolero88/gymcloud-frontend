@@ -1,5 +1,3 @@
-Marionette = require 'backbone.marionette'
-
 LibraryPresetModal = require 'views/general/modal-library-preset-view'
 
 module.exports =

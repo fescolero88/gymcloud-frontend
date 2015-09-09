@@ -1,8 +1,4 @@
-define [
-  'backbone'
-], (
-  Backbone
-) ->
+define ->
 
   class ConfirmRegistrationModel extends Backbone.Model
 

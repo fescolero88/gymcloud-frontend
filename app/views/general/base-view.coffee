@@ -1,5 +1,3 @@
-Marionette = require 'backbone.marionette'
-
 module.exports = class BaseView extends Marionette.LayoutView
 
   template: require('templates/general/base')

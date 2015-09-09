@@ -1,5 +1,4 @@
 define [
-  'backbone.marionette'
   './property_constructor/view'
   'collections/workout_exercise_properties'
   './item/view'
@@ -7,7 +6,6 @@ define [
   './empty/view'
   './template'
 ], (
-  Marionette
   PropertyConstructor
   WorkoutExerciseProperties
   ExercisesItemView

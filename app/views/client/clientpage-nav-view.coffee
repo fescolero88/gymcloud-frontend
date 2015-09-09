@@ -1,5 +1,3 @@
-Marionette = require 'backbone.marionette'
-
 ClientTrainer = require 'models/client_trainer'
 ClientTrainerActionsView = require 'views/client/client-trainer-actions-view'
 

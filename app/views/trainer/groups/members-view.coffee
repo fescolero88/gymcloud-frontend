@@ -1,5 +1,3 @@
-Marionette = require 'backbone.marionette'
-
 Clients = require 'collections/clients'
 
 class MembersItemView extends Marionette.ItemView

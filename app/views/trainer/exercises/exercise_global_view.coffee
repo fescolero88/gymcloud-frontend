@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 ExerciseGlobalOverviewView = require 'views/trainer/exercises/exercise_global_overview_view'
 ExerciseGlobalAssignView = require 'views/trainer/exercises/exercise_global_assign_view'
 

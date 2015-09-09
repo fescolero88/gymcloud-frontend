@@ -1,14 +1,10 @@
 define [
-  'backbone.marionette'
-  'lodash'
   'collections/workout_exercise_properties'
   'models/exercise_property'
   'models/workout_exercise'
   './property/view'
   './template'
 ], (
-  Marionette
-  _
   WorkoutExercisesProperties
   ExercisesProperty
   WorkoutExercise

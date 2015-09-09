@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 ModalAddToLibraryLibraryView = require 'views/general/modal_add_to_library_library_view'
 GlobalExercise = require 'models/global_exercise'
 

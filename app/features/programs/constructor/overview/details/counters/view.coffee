@@ -30,7 +30,6 @@ define [
       @listenTo(@weekWorkoutCollection, 'update', @_update_workouts_count)
 
     onRender: ->
-      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit()
 
     onDestroy: ->

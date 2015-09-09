@@ -1,9 +1,7 @@
 define [
-  'backbone.marionette'
   'models/personal_workout'
   './template'
 ], (
-  Marionette
   PersonalWorkout
   template
 ) ->

@@ -1,6 +1,4 @@
 config = require 'config'
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
 
 ForgotPasswordModel = require 'models/auth/forgot-password-model'
 FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'

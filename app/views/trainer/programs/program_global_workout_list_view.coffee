@@ -1,4 +1,3 @@
-Marionette = require 'backbone.marionette'
 ProgramGlobalWorkoutItemView = require 'views/trainer/programs/program_global_workout_item_view'
 ProgramWorkout = require 'models/program_workout'
 Dragula = require 'dragula'

@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 module.exports = class ProgramGlobalPrivacyControlsView extends Marionette.LayoutView
 
   template: require('templates/trainer/programs/program_global_privacy_controls')

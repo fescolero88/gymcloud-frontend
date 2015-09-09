@@ -1,6 +1,4 @@
 define [
-  'backbone'
-  'backbone.marionette'
   './template'
   './groups/view'
   './public_scopes/collection'
@@ -8,8 +6,6 @@ define [
   './filters/collection'
   './filters/view'
 ], (
-  Backbone
-  Marionette
   template
   GroupsView
   SearchScopes

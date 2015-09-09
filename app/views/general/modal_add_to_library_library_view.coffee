@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 module.exports = class ModalAddToLibraryLibraryView extends Marionette.CompositeView
 
   template: require('templates/general/modal_add_to_library_library')

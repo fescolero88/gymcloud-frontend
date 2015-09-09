@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 AuthController = require 'controllers/auth/auth-controller'
 AuthRouter = require 'routers/auth/auth-router'
 

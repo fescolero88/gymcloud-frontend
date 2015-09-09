@@ -1,4 +1,3 @@
-Marionette = require 'backbone.marionette'
 WorkoutGlobalAssignClientsListView = require 'views/trainer/workouts/workout_global_assign_clients_list'
 WorkoutGlobalAssignGroupsListView = require 'views/trainer/workouts/workout_global_assign_groups_list'
 Clients = require 'collections/clients'

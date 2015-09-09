@@ -1,9 +1,7 @@
 define [
-  'backbone'
   './workout_template'
   './personal_workout'
 ], (
-  Backbone
   WorkoutTemplate
   PersonalWorkout
 ) ->

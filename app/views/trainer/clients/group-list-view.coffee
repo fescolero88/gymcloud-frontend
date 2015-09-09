@@ -1,10 +1,8 @@
 define [
-  'backbone.marionette'
   'views/trainer/clients/group-item-view'
   'templates/trainer/clients/group-list'
 ],
 (
-  Marionette
   GroupItemView
   template
 ) ->

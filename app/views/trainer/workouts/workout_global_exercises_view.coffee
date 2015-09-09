@@ -1,5 +1,3 @@
-_ = require 'lodash'
-Marionette = require 'backbone.marionette'
 WorkoutExercisePropertyConstructor = require 'views/trainer/workouts/workout_exercise_property_constructor_view'
 WorkoutExerciseProperties = require 'collections/workout_exercise_properties'
 ExercisesItemView = require 'views/trainer/workouts/workout_global_exercises_item_view'

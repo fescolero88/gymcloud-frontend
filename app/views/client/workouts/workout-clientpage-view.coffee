@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 WorkoutGlobalOverviewView = require 'views/client/workouts/workout_clientpage_overview_view'
 WorkoutGlobalVideoView = require 'views/trainer/workouts/workout_global_video_view'
 module.exports = class WorkoutGlobalView extends Marionette.LayoutView

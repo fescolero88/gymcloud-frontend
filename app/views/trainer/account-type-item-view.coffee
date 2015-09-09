@@ -1,8 +1,6 @@
 define [
-  'backbone.marionette'
   'templates/trainer/account-type-item'
 ], (
-  Marionette
   template
 ) ->
   class AccountTypeItemView extends Marionette.ItemView
@@ -33,7 +31,6 @@ define [
             $el.removeClass 'active'
 
     onRender: ->
-      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit()
 
     onDestroy: ->

@@ -1,5 +1,3 @@
-Marionette = require 'backbone.marionette'
-
 Activities = require 'collections/activities'
 ClientProfileView = require 'views/client/clientpage-profile-view'
 ClientPageActivityView = require 'views/client/clientpage-activity-view'

@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 ProgramGlobalDetailsView = require 'views/trainer/programs/program_global_details_view'
 ProgramGlobalPrivacyControlsView = require 'views/trainer/programs/program_global_privacy_controls_view'
 ProgramWeeksView = require 'views/trainer/programs/program_weeks_view'

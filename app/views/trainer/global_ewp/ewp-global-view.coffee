@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 EWPGlobalListView = require 'views/trainer/global_ewp/ewp-global-list-view'
 
 AddGlobalEWPModalView = require 'views/trainer/global_ewp/add-global-ewp-modal'

@@ -1,10 +1,4 @@
-define [
-  'lodash'
-  'backbone'
-], (
-  _
-  Backbone
-) ->
+define ->
 
   ->
 

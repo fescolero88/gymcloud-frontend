@@ -1,10 +1,6 @@
 define [
-  'backbone'
-  'backbone.marionette'
   './template'
 ], (
-  Backbone
-  Marionette
   template
 ) ->
 
@@ -26,7 +22,6 @@ define [
       'span': 'name'
 
     onRender: ->
-      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit()
       @_markAsActive()
 

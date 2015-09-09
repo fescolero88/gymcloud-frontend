@@ -1,8 +1,6 @@
 define [
-  'backbone'
   'models/account-type'
 ], (
-  Backbone
   AccountTypeModel
 ) ->
 

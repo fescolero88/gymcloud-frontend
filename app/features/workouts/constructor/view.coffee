@@ -1,12 +1,10 @@
 define [
-  'backbone.marionette'
   './overview/view'
   'views/trainer/workouts/workout_global_video_view'
   './assignment/view'
   'models/workout_exercise'
   './template'
 ], (
-  Marionette
   WorkoutGlobalOverviewView
   WorkoutGlobalVideoView
   WorkoutGlobalAssignView
@@ -62,7 +60,6 @@ define [
       App.vent.off 'workout:add:exercise', @assignExercise
 
     onShow: ->
-      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit()
       @changeView 'description'
 

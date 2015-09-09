@@ -1,9 +1,7 @@
 define [
   'app/controllers/trainer/trainer-controller'
-  'backbone.marionette'
 ], (
   TrainerController
-  Marionette
 ) ->
 
   describe 'TrainerController', ->

@@ -1,9 +1,7 @@
 define [
   'app/controllers/auth/auth-controller'
-  'backbone.marionette'
 ], (
   AuthController
-  Marionette
 ) ->
 
   describe 'AuthController', ->

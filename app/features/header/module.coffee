@@ -1,8 +1,6 @@
 define [
-  'backbone.marionette'
   './view'
 ], (
-  Marionette
   HeaderView
 ) ->
 

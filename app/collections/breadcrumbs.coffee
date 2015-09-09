@@ -1,7 +1,3 @@
-define [
-  'backbone'
-], (
-  Backbone
-) ->
+define ->
 
   class BreadcrumbsCollection extends Backbone.Collection

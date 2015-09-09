@@ -1,7 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-_ = require 'lodash'
-
 module.exports = class CustomRouter extends Marionette.AppRouter
   route: (route, name, callback) ->
     route = @_routeToRegExp(route)  unless _.isRegExp(route)

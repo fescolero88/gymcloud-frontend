@@ -1,6 +1,4 @@
 define [
-  'backbone.marionette'
-  'backbone'
   'views/trainer/clients/clients-view'
   'views/trainer/clients/client-list-view'
   'views/trainer/clients/group-list-view'
@@ -23,8 +21,6 @@ define [
   'features/programs/constructor/view'
 ],
 (
-  Marionette
-  Backbone
   ClientsView
   ClientListView
   GroupListView

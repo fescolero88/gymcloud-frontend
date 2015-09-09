@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 GlobalFolder = require 'models/global_folder'
 
 FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'

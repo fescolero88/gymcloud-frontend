@@ -1,8 +1,6 @@
 define [
-  'backbone'
   'models/personal_best'
 ], (
-  Backbone
   PersonalBestModel
 ) ->
 

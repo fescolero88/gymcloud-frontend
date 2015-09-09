@@ -1,11 +1,9 @@
 define [
-  'backbone.marionette'
   'models/exercise_property'
   'collections/properties'
   './item/view'
   './template'
 ], (
-  Marionette
   ExerciseProperty
   Properties
   WorkoutExercisePropertyItem

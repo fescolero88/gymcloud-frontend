@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 EWPGlobalModel = require 'models/global_ewp_model'
 

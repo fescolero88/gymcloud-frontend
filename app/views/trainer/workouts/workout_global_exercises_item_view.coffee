@@ -1,4 +1,3 @@
-Marionette = require 'backbone.marionette'
 WorkoutExercisesProperties = require 'collections/workout_exercise_properties'
 WorkoutExercisesProperty = require 'models/workout_exercise_property'
 WorkoutExercise = require 'models/workout_exercise'

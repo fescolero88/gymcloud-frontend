@@ -1,9 +1,7 @@
 define [
-  'backbone.marionette'
   'moment'
   './template'
 ], (
-  Marionette
   moment
   template
 ) ->
