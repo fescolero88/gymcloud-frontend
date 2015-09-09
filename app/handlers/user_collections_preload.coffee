@@ -3,6 +3,7 @@ define [
   'lodash'
   'collections/user_collection'
   'collections/library'
+  'models/exercise'
   'models/workout_template'
   'models/program_template'
   'models/personal_program'
@@ -14,6 +15,7 @@ define [
   _
   UserCollection
   Library
+  Exercise
   WorkoutTemplate
   ProgramTemplate
   PersonalProgram
@@ -26,7 +28,7 @@ define [
       pros: Backbone.Model
       clients: Backbone.Model
       client_groups: Backbone.Model
-      exercises: Backbone.Model
+      exercises: Exercise
       workout_templates: WorkoutTemplate
       program_templates: ProgramTemplate
       personal_programs: PersonalProgram

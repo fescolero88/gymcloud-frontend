@@ -1,7 +1,7 @@
 define [
   'backbone.marionette' #Marionette
   './breadcrumbs/view'
-  'views/trainer/global_ewp/ewp-global-list-view' #EWPGlobalListView
+  './entity_list/view' #EntityListView
   './add_entity_modal/view' #AddEntityModalView
   './add_folder_modal/view' #AddFolderModalView
   'views/trainer/global_ewp/duplicate-global-ewp-modal' #DuplicateGlobalEWPModalView
@@ -12,7 +12,7 @@ define [
 ], (
   Marionette
   Breadcrumbs
-  EWPGlobalListView
+  EntityListView
   AddEntityModalView
   AddFolderModalView
   DuplicateGlobalEWPModalView
@@ -56,8 +56,8 @@ define [
       'click @ui.backButton': 'goBack'
 
     initialize: (data) =>
-      @item_id = data.model?.get 'key'
       @exercisesList = data.items
+      @collection = data.items
       @typeName = data.type
       @breadcrumbs = new Breadcrumbs(model: @model)
 
@@ -69,19 +69,15 @@ define [
       singularName: _.humanize(_.singularize(@typeName))
 
     onShow: =>
-      # @initSearchSelect()
-      @loadItemById @item_id
+      @initSearchSelect()
+      @loadItemById @model.get('id')
       @getRegion('breadcrumbsRegion').show(@breadcrumbs)
 
-      # unless @breadcrumbs.collection.length > 1
-      #   @ui.backButton.addClass 'hidden'
-
     loadItemById: (key) =>
-      @collection = new EWPSortableCollection(@exercisesList)
-      @listView = new EWPGlobalListView
+      @listView = new EntityListView
         collection: @collection
         type: @typeName
-      @exercises.show @listView
+      @exercises.show(@listView)
 
       @listenTo @listView, 'item:clicked', @updateSelectedItems
 
@@ -120,23 +116,30 @@ define [
             label: category
       return result
 
+    _searchItems: (collection) ->
+      collection.map (item) ->
+        id: item.get('id')
+        title: item.get('name')
+        label: item.folder.get('name')
     initSearchSelect: =>
-      searchOptions = @searchItems App.request("data:#{@typeName}"), @typeName
+      # searchOptions = @searchItems App.request("data:#{@typeName}"), @typeName
+      user = App.request('current_user')
+      collection = user[@typeName]
       this_ = @
       @ui.liveSearch.selectize
         hideSelected: true
-        valueField: 'key'
+        valueField: 'id'
         labelField: 'title'
         searchField: ['title']
-        options: searchOptions
-        onItemAdd: (value, $item) ->
-          this_.loadItem value
+        options: @_searchItems(collection)
+        onItemAdd: (id, $item) =>
+          Backbone.history.navigate("##{@typeName}/#{id}", trigger: true)
         render:
           item: (item, escape) ->
-              return '<div>' + escape(item.title) + '</div>'
+            "<div>#{escape(item.title)}</div>"
           option: (item, escape) ->
-              return '<div><span class="label">' + escape(item.label) +
-                '</span> ' + escape(item.title) + '</div>'
+            label = "<span class=\"label\">#{escape(item.label)}</span> "
+            "<div>#{label}#{escape(item.title)}</div>"
 
     rmAssign: (ev) =>
       ev.preventDefault()
@@ -149,12 +152,9 @@ define [
           for check in @ui.itemsRegion.find('input[type=checkbox]')
             if $(check).is ':checked'
               ids.push $(check).data('id')
-          @listView.trigger 'items:delete', ids, @item_id
+          @listView.trigger 'items:delete', ids, @model.get('id')
           App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
             @exercisesList = App.request "data:#{@typeName}"
-
-    loadItem: (key) =>
-      Backbone.history.navigate("#tr/global/#{@typeName}/id/#{key}/", { trigger: true, replace: true })
 
     showAddEntityModal: (ev) ->
       ev.preventDefault()
