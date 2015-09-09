@@ -1,9 +1,7 @@
 define [
-  'backbone.marionette'
   'views/trainer/clients/client-item-view'
   'templates/trainer/clients/client-list'
 ], (
-  Marionette
   ClientItemView
   template
 ) ->

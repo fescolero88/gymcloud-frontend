@@ -1,5 +1,4 @@
 moment = require 'moment'
-Marionette = require 'backbone.marionette'
 
 CalendarDayView = require 'views/trainer/calendar/calendar-day-view'
 CalendarWeekView = require 'views/trainer/calendar/calendar-week-view'

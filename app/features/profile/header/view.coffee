@@ -1,11 +1,9 @@
 define [
-  'backbone.marionette'
   'views/trainer/clients/send-message-modal-view'
   '../edit_modal/view'
   'moment'
   './template'
 ], (
-  Marionette
   SendMessageModalView
   ProfileEditModalView
   moment
@@ -60,7 +58,6 @@ define [
         @myProfile = true
 
     onRender: ->
-      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit(@model.profile)
 
     onDestroy: ->

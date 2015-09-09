@@ -1,5 +1,3 @@
-Marionette = require 'backbone.marionette'
-
 SendMessageModalView = require 'views/trainer/clients/send-message-modal-view'
 ClientFormModalView = require 'views/trainer/clients/client-form-modal-view'
 GroupFormModalView = require 'views/trainer/clients/group-form-modal-view'

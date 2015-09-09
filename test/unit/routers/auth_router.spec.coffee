@@ -1,9 +1,7 @@
 define [
   'app/routers/auth/auth-router'
-  'backbone.marionette'
 ], (
   AuthRouter
-  Marionette
 ) ->
 
   describe 'AuthRouter', ->

@@ -1,7 +1,3 @@
-
-Marionette = require 'backbone.marionette'
-
-
 module.exports = class FormValidationBehaviour extends Marionette.Behavior
   initialize: =>
     @listenTo @view, 'switchError', @switchError

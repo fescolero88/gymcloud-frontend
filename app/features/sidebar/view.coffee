@@ -1,5 +1,4 @@
 define [
-  'backbone.marionette'
   'models/draggable_menu_item'
   'views/trainer/sidebar-entity-composite-view'
   'collections/sidebar_items'
@@ -7,7 +6,6 @@ define [
   './pro/view'
   './template'
 ], (
-  Marionette
   DraggableMenuItemModel
   SidebarEntity
   SidebarItemsCollection

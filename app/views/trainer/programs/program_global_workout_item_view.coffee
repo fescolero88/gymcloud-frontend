@@ -1,5 +1,3 @@
-Marionette = require 'backbone.marionette'
-
 module.exports = class ProgramGlobalWorkoutItemView extends Marionette.ItemView
 
   template: require 'templates/trainer/programs/program_global_workout_item'

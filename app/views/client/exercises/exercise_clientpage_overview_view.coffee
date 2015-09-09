@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
 
   template: require('templates/client/exercises/exercise_clientpage_overview')

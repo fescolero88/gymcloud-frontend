@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 TrainerController = require 'controllers/trainer/trainer-controller'
 TrainerRouter = require 'routers/trainer/trainer-router'
 

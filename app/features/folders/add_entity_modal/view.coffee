@@ -36,7 +36,7 @@ define [
       '[data-bind="name"]': 'name'
 
     templateHelpers: ->
-      singularName: _.humanize(_.singularize(@type))
+      singularName: _.chain(@type).humanize().singularize().value()
 
     initialize: (data) =>
       @type = data.type

@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 ClientEWPView = require 'views/client/clientpage-ewp-view'
 UserCollection = require 'collections/user_collection'
 

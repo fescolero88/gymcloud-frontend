@@ -1,8 +1,6 @@
 define [
-  'backbone'
   './exercise_property'
 ], (
-  Backbone
   ExerciseProperty
 ) ->
   ExerciseProperties = Backbone.Collection.extend(model: ExerciseProperty)

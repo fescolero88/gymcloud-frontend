@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 AuthLayoutView = require 'views/auth/auth_layout_view'
 AuthView = require 'views/auth/auth-view'
 ForgotPasswordView = require 'views/auth/forgot-password-view'

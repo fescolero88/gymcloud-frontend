@@ -1,8 +1,6 @@
 define [
-  'backbone.marionette'
   'templates/trainer/workouts/workout_schedule_modal'
 ], (
-  Marionette
   template
 ) ->
 
@@ -24,7 +22,6 @@ define [
       'change @ui.hasEndDate': 'toggleEndDate'
 
     onRender: ->
-      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit()
 
     onDestroy: ->

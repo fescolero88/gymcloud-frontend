@@ -1,5 +1,4 @@
 define [
-  'backbone.marionette'
   'collections/client_group_members'
   'collections/exercises'
   'collections/workouts'
@@ -15,7 +14,6 @@ define [
   'views/trainer/exercises/personal-best-view'
   'templates/trainer/clients/client'
 ], (
-  Marionette
   ClientGroupMembers
   Exercises
   Workouts

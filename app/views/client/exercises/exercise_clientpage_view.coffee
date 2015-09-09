@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 ExerciseGlobalOverviewView = require 'views/client/exercises/exercise_clientpage_overview_view'
 
 BreadcrumbsView = require 'views/general/breadcrumbs/breadcrumbs-view'

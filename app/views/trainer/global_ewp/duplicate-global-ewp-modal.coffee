@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 class AddExerciseFolderModalItemView extends Marionette.ItemView
 
   template: require('templates/trainer/exercises/duplicate_exercise_modal_item')

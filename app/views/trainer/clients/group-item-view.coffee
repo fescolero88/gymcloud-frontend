@@ -1,9 +1,7 @@
 define [
-  'backbone.marionette'
   'templates/trainer/clients/group-item'
 ],
 (
-  Marionette
   template
 ) ->
   class GroupItemView extends Marionette.ItemView

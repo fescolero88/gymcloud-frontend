@@ -1,6 +1,4 @@
 config = require 'config'
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
 moment = require 'moment'
 
 SignUpStep1Model = require 'models/auth/signup-step1-model'

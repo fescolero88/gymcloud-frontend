@@ -1,8 +1,6 @@
 define [
-  'backbone.marionette'
   'app/handlers/data'
 ], (
-  Marionette
   dataHandler
 ) ->
 

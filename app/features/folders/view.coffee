@@ -66,7 +66,7 @@ define [
 
     templateHelpers: ->
       type: @typeName
-      singularName: _.humanize(_.singularize(@typeName))
+      singularName: _.chain(@typeName).humanize().singularize().value()
 
     onShow: =>
       @initSearchSelect()
@@ -101,28 +101,13 @@ define [
       if needToggle
         @ui.mainCheckbox.prop 'checked', true
 
-    searchItems: (items, category) =>
-      result = []
-      $.each items, (index, item) =>
-        if not item
-          return true
-        if item.items
-          category = item.title
-          result = result.concat @searchItems(item.items, category)
-        else
-          result.push
-            key: item.key
-            title: item.title
-            label: category
-      return result
-
     _searchItems: (collection) ->
       collection.map (item) ->
         id: item.get('id')
         title: item.get('name')
         label: item.folder.get('name')
+
     initSearchSelect: =>
-      # searchOptions = @searchItems App.request("data:#{@typeName}"), @typeName
       user = App.request('current_user')
       collection = user[@typeName]
       this_ = @

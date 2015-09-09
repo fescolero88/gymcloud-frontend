@@ -1,5 +1,3 @@
-Marionette = require 'backbone.marionette'
-
 class BreadcrumbsItemView extends Marionette.ItemView
 
   template: require('templates/general/breadcrumbs/breadcrumbs_item')

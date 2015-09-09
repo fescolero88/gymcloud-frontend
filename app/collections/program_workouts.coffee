@@ -1,8 +1,6 @@
 define [
-  'backbone'
   'models/program_workout'
 ], (
-  Backbone
   ProgramWorkout
 ) ->
 

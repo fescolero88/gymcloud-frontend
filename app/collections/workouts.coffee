@@ -1,7 +1,3 @@
-define [
-  'backbone'
-], (
-  Backbone
-) ->
+define ->
 
   class Workouts extends Backbone.Collection

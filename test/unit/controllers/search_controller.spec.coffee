@@ -1,9 +1,7 @@
 define [
   'app/features/search/controller'
-  'backbone.marionette'
 ], (
   SearchController
-  Marionette
 ) ->
 
   describe 'SearchController', ->

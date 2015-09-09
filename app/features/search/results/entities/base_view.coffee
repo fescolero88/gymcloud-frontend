@@ -1,10 +1,6 @@
 define [
-  'backbone'
-  'backbone.marionette'
   './avatar/view'
 ], (
-  Backbone
-  Marionette
   AvatarView
 ) ->
 

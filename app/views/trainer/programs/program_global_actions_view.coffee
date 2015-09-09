@@ -1,5 +1,3 @@
-Marionette = require 'backbone.marionette'
-
 module.exports = class ProgramGlobalActionsView extends Marionette.ItemView
 
   className: 'gc-program-actions'

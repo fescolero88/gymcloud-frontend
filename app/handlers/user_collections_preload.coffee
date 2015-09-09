@@ -1,8 +1,5 @@
 define [
-  'backbone'
-  'lodash'
   'collections/user_collection'
-  'collections/library'
   'models/exercise'
   'models/workout_template'
   'models/program_template'
@@ -11,10 +8,7 @@ define [
   'models/personal_workout'
   'models/folder'
 ], (
-  Backbone
-  _
   UserCollection
-  Library
   Exercise
   WorkoutTemplate
   ProgramTemplate
@@ -39,14 +33,10 @@ define [
       library: Folder
       # workout_events: Backbone.Model
 
-    user.library = new Library
-    promises = _.map collections, (model, item) ->
+    _.map collections, (model, item) ->
       collection = new UserCollection [],
         model: model
         user: user
         type: item
       user.__defineGetter__(item, -> collection)
       collection.fetch()
-    promises.push(user.library.fetch())
-
-    promises

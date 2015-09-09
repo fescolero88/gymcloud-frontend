@@ -1,10 +1,8 @@
 define [
-  'backbone.marionette'
   './item/view'
   'collections/user_collection'
   './template'
 ], (
-  Marionette
   TemplateCollectionItemView
   UserCollection
   template
@@ -13,7 +11,7 @@ define [
 
     template: template
 
-    className: 'gc-sidebar-cat'
+    className: 'gc-sidebar-folder'
 
     getChildView: (item) ->
       if typeof item.attributes.folder_id isnt 'undefined'

@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 WorkoutGlobalExercisesView = require 'views/client/workouts/workout_clientpage_exercises_view'
 WorkoutExercises = require 'collections/workout_exercises'
 

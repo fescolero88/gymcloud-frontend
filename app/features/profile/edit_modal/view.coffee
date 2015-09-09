@@ -1,9 +1,7 @@
 define [
-  'backbone.marionette'
   'views/helpers/form-validation-behaviour'
   './template'
 ], (
-  Marionette
   FormValidationBehaviour
   template
 ) ->
@@ -46,7 +44,6 @@ define [
       Backbone.Validation.bind(this)
 
     onRender: ->
-      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit()
 
     onDestroy: ->

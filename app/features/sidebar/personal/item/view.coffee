@@ -1,8 +1,6 @@
 define [
-  'backbone.marionette'
   './template'
 ], (
-  Marionette
   template
 )->
   class PersonalCollectionItemView extends Marionette.ItemView
@@ -21,7 +19,6 @@ define [
       @type = options.type
 
     onRender: ->
-      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit()
 
     onDestroy: ->

@@ -1,8 +1,4 @@
-define [
-  'backbone'
-], (
-  Backbone
-) ->
+define ->
 
   class AccountTypeModel extends Backbone.Model
 
@@ -10,3 +6,4 @@ define [
       image: undefined
       title: undefined
       assigned: undefined
+      selected: false

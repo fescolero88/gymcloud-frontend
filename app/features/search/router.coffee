@@ -1,8 +1,6 @@
 define [
-  'backbone'
   'routers/general/custom-router'
 ], (
-  Backbone
   CustomRouter
 ) ->
 

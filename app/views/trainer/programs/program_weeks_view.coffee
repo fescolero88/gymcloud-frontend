@@ -1,4 +1,3 @@
-Marionette = require 'backbone.marionette'
 ProgramWeekItemView = require 'views/trainer/programs/program_week_item_view'
 
 module.exports = class ProgramWeeksView extends Marionette.CompositeView

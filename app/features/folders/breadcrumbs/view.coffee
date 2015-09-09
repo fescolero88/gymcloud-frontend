@@ -1,20 +1,18 @@
 define [
   'backbone.marionette'
   './item/view'
-  './template'
 ], (
   Marionette
   BreadcrumbsItemView
-  template
 ) ->
 
-  class BreadcrumbsView extends Marionette.CompositeView
+  class BreadcrumbsView extends Marionette.CollectionView
 
-    template: template
+    tagName: 'h2'
+
+    className: 'gc-breadcrumbs-title'
 
     childView: BreadcrumbsItemView
-
-    childViewContainer: 'h2'
 
     initialize: (options) ->
       @collection = new Backbone.Collection
@@ -24,4 +22,4 @@ define [
       name = model.get('name')
       @collection.unshift(title: name)
       parent = model.parent
-      @_getBreadcrumbs(parent) if parent
+      @_getBreadcrumbs(parent) if parent?.get('parent_id') != null

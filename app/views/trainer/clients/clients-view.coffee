@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 MoveToGroupView = require 'views/trainer/clients/move-to-group-view'
 
 ClientFormModalView = require 'views/trainer/clients/client-form-modal-view'

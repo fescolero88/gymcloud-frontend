@@ -1,9 +1,6 @@
 define [
   'config'
-  'backbone'
-  'backbone.marionette'
 
-  'handlers/jquery'
   'handlers/spinner'
   'handlers/ajax_setup'
   'handlers/user_authorization'
@@ -30,10 +27,7 @@ define [
   'deps/styles_app'
 ], (
   config
-  Backbone
-  Marionette
 
-  jqueryHandler
   spinnerHandler
   ajaxSetupHandler
   userAuthorizationHandler
@@ -88,7 +82,6 @@ define [
         @data.current_user = new CurrentUser
 
       @addInitializer ->
-        jqueryHandler()
         spinnerHandler(this)
         userAuthorizationHandler(this)
         ajaxSetupHandler(this, config)

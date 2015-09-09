@@ -1,10 +1,8 @@
 define [
-  'backbone.marionette'
   'templates/trainer/account-type-modal'
   'views/trainer/account-type-list-view'
   'collections/account-types'
 ], (
-  Marionette
   template
   AccountTypeListView
   AccountTypes
@@ -44,11 +42,19 @@ define [
       ]
 
     events:
-      'click @ui.changeType': 'accountTypeChanged'
+      'click @ui.changeType': 'changeAccountType'
 
     onRender: ->
       view = new AccountTypeListView collection: @collection
       @getRegion('accountTypeRegion').show view
+
+    changeAccountType: =>
+      assigned = @collection.findWhere 'assigned': true
+      selected = @collection.findWhere 'selected': true
+      if assigned isnt selected
+        assigned.set 'assigned', false
+        selected.set 'assigned', true
+        @accountTypeChanged()
 
     accountTypeChanged: ->
       App.request 'messenger:show',
