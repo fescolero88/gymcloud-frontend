@@ -1,26 +1,31 @@
 define [
-  'views/trainer/clients/clients-view'
-  'views/trainer/clients/client-list-view'
-  'views/trainer/clients/group-list-view'
-  'models/client'
-  'collections/clients'
-  'collections/activities'
-  'features/profile/view'
-  'models/client_group'
-  'collections/client_groups'
-  'views/trainer/clients/client-group-view'
-  'views/trainer/global_ewp/ewp-global-view'
-  'views/trainer/exercises/exercise_global_view'
-  'models/global_exercise'
-  'views/trainer/workouts/workout_global_view'
-  'models/global_workout'
-  'views/trainer/programs/program_global_view'
-  'models/global_program'
-  'features/properties/view'
-  'features/workouts/constructor/view'
-  'features/programs/constructor/view'
+  'backbone.marionette' #Marionette
+  'backbone' #Backbone
+  'views/trainer/clients/clients-view' #ClientsView
+  'views/trainer/clients/client-list-view' #ClientListView
+  'views/trainer/clients/group-list-view' #GroupListView
+  'models/client' #Client
+  'collections/clients' #Clients
+  'collections/activities' #Activities
+  'features/profile/view' #ProfileView
+  'models/client_group' #ClientGroup
+  'collections/client_groups' #ClientGroups
+  'views/trainer/clients/client-group-view' #ClientGroupView
+  'views/trainer/global_ewp/ewp-global-view' #EWPGlobalView
+  'views/trainer/exercises/exercise_global_view' #ExerciseGlobalView
+  'models/global_exercise' #GlobalExercise
+  'views/trainer/workouts/workout_global_view' #WorkoutGlobalView
+  'models/global_workout' #GlobalWorkout
+  'views/trainer/programs/program_global_view' #ProgramGlobalView
+  'models/global_program' #GlobalProgram
+  'features/properties/view' #PropertiesView
+  'features/workouts/constructor/view' #WorkoutConstructorView
+  'features/programs/constructor/view' #ProgramConstructorView
+  'features/folders/view' #FoldersView
 ],
 (
+  Marionette
+  Backbone
   ClientsView
   ClientListView
   GroupListView
@@ -41,6 +46,7 @@ define [
   PropertiesView
   WorkoutConstructorView
   ProgramConstructorView
+  FoldersView
 ) ->
 
   class TrainerController extends Marionette.Controller
@@ -177,6 +183,27 @@ define [
       }[type]
 
       view = new View(model: model, breadcrumbs: breadcrumbs)
+      @mainView.content.show(view)
+
+    exercisesFolderView: (folder_id) ->
+      @_entityFolderView('exercises', folder_id)
+
+    workoutTemplatesFolderView: (folder_id) ->
+      @_entityFolderView('workout_templates', folder_id)
+
+    programTemplatesFolderView: (folder_id) ->
+      @_entityFolderView('program_templates', folder_id)
+
+    _entityFolderView: (type, folder_id) ->
+      user = App.request('current_user')
+      folder_id ||= user.library.first().id
+      folders = user.folders
+      folder = folders.get(folder_id)
+
+      view = new FoldersView
+        model: folder
+        items: folder.items
+        type: type
       @mainView.content.show(view)
 
     exercisesView: (key) ->

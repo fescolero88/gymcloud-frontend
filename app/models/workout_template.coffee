@@ -18,10 +18,19 @@ define [
       name:
         required: true
 
+    initialize: (_options) ->
+      @__defineGetter__ 'parent', @_getFolder
+      @__defineGetter__ 'folder', @_getFolder
+
     parse: (data) ->
       @_parseExercises(data.exercises) && delete data.exercises
       @_parseAssignees(data.assignees) && delete data.assignees
       data
+
+    _getFolder: ->
+      user = App.request('current_user')
+      collection = user.folders
+      collection.get(@get('folder_id'))
 
     _parseExercises: (exercises) ->
       @exercises ||= new Exercises

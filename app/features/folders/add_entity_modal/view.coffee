@@ -1,0 +1,84 @@
+define [
+  'backbone.marionette'
+  'backbone'
+  'views/helpers/form-validation-behaviour'
+  'models/exercise'
+  'models/workout_template'
+  'models/program_template'
+  './template'
+], (
+  Marionette
+  Backbone
+  FormValidationBehaviour
+  Exercise
+  WorkoutTemplate
+  ProgramTemplate
+  template
+) ->
+  class AddEntityModalView extends Marionette.ItemView
+
+    template: template
+
+    className: 'modal-dialog modal-md'
+
+    behaviors:
+      FormValidationBehaviour:
+        behaviorClass: FormValidationBehaviour
+
+    ui:
+      form: 'form'
+      nameInput: '.form-control'
+
+    events:
+      'submit @ui.form': 'submitForm'
+
+    bindings:
+      '[data-bind="name"]': 'name'
+
+    templateHelpers: ->
+      singularName: _.chain(@type).humanize().singularize().value()
+
+    initialize: (data) =>
+      @type = data.type
+      @folder = data.folder
+      Klass = @_getModelClass(data.type)
+      @model = new Klass(folder_id: @folder.get('id'))
+      @listenTo @model, 'error', @_onSyncFail
+
+    onRender: =>
+      @stickit()
+      setTimeout ( =>
+        @ui.nameInput.focus()
+      ), 400
+
+    onDestroy: ->
+      @unstickit()
+
+    submitForm: (ev) =>
+      ev.preventDefault()
+      @model.save().then =>
+        user = App.request('current_user')
+        collection = user[@type]
+        collection.add(@model)
+        @folder.items.add(@model)
+        @$el.parent().modal('hide')
+        @_showSuccessMessage()
+
+    _showSuccessMessage: ->
+      App.request 'messenger:show',
+        hideAfter: 5
+        message: "New item added"
+        type: 'success'
+
+    _onSyncFail: (model, data) ->
+      for name, error_msg of data.error
+        $input = @$el.find("input[name=#{name}]")
+        $inputGroup = $input.closest('.form-group')
+        @trigger 'switchError', error_msg[0], $inputGroup
+
+    _getModelClass: (type) ->
+      {
+        exercises: Exercise
+        workout_templates: WorkoutTemplate
+        program_templates: ProgramTemplate
+      }[type]

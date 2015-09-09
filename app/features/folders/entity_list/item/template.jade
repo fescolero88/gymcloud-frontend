@@ -1,0 +1,10 @@
+.col-xs-8
+  label.gc-exercises-chb
+    input(type='checkbox', data-id=id)
+  if isFolder
+    i.fa.fa-folder-o.gc-exercises-folder-icon
+  else
+    span.gc-exercises-item-icon(class="gc-exercises-item-icon-#{type}")
+  a.gc-exercises-link(href=url, data-key=id, data-bind="name")
+.col-xs-4.text-right
+  span.gc-exercises-update-time(data-bind="updated_at")

@@ -2,8 +2,8 @@ define [
   'jquery_original'
   './base'
 ], (
-  base
   $
+  base
 ) ->
 
   config = $.extend(true, {}, base)
