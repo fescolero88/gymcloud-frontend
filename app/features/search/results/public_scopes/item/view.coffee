@@ -22,7 +22,6 @@ define [
       'span': 'name'
 
     onRender: ->
-      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit()
       @_markAsActive()
 

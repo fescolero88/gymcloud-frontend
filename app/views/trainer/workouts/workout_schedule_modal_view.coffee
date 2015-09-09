@@ -22,7 +22,6 @@ define [
       'change @ui.hasEndDate': 'toggleEndDate'
 
     onRender: ->
-      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit()
 
     onDestroy: ->

@@ -58,7 +58,6 @@ define [
         @myProfile = true
 
     onRender: ->
-      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit(@model.profile)
 
     onDestroy: ->

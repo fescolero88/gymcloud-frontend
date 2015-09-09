@@ -31,7 +31,6 @@ define [
             $el.removeClass 'active'
 
     onRender: ->
-      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit()
 
     onDestroy: ->

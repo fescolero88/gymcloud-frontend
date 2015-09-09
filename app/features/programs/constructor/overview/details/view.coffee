@@ -53,7 +53,6 @@ define [
       @listenTo(@model, 'note:toggle_editor', @triggerNoteEditor)
 
     onRender: ->
-      _.extend(this.constructor.prototype, Backbone.Stickit.ViewMixin)
       @stickit()
       @getRegion('counters').show(@counters)
 
