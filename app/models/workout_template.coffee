@@ -21,6 +21,7 @@ define [
     initialize: (_options) ->
       @__defineGetter__ 'parent', @_getFolder
       @__defineGetter__ 'folder', @_getFolder
+      @__defineGetter__ 'author', @_getAuthor
 
     parse: (data) ->
       @_parseExercises(data.exercises) && delete data.exercises
@@ -47,3 +48,13 @@ define [
           personalWorkout = new PersonalWorkout(item)
         personalWorkout
       @assignees = new Backbone.Collection(items)
+
+    _getAuthor: ->
+      author_id = @get('author_id')
+      user = App.request('current_user')
+      author = user.clients.get(author_id) || user.pros.get(author_id)
+      unless author
+        author = new User(id: author_id)
+        author.fetch()
+      author
+

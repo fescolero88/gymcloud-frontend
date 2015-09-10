@@ -42,8 +42,9 @@ define [
       '.gc-workout-title span': 'name'
 
     templateHelpers: =>
+      author: @model.author.toJSON()
       isAuthor: do =>
-        App.request('current_user_id') == @model.get('id')
+        App.request('current_user_id') == @model.get('author_id')
 
     initialize: (data) =>
       @isDroppable = true

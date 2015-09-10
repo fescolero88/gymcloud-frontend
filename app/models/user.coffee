@@ -8,6 +8,9 @@ define [
 
     urlRoot: '/users/me'
 
+    defaults:
+      user_profile: {}
+
     parse: (data) ->
       @profile = new UserProfile(data.user_profile)
       data.user_profile = @profile.attributes
