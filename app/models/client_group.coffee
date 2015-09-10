@@ -2,7 +2,7 @@ define ->
 
   class ClientGroup extends Backbone.Model
 
-    urlRoot: '/api/mobile/client_groups'
+    urlRoot: '/client_groups'
 
     validation:
 

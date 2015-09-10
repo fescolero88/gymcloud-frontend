@@ -9,7 +9,7 @@ define [
   'features/profile/view' #ProfileView
   'models/client_group' #ClientGroup
   'collections/client_groups' #ClientGroups
-  'views/trainer/clients/client-group-view' #ClientGroupView
+  'features/client_groups/show/view' #ClientGroupView
   'views/trainer/global_ewp/ewp-global-view' #EWPGlobalView
   'views/trainer/exercises/exercise_global_view' #ExerciseGlobalView
   'models/global_exercise' #GlobalExercise
@@ -82,6 +82,16 @@ define [
     _userProfile: (user) ->
       view = new ProfileView
         model: user
+      @mainView.content.show(view)
+
+    clientGroupShow: (id) ->
+      user = App.request('current_user')
+      clientGroup = user.client_groups.get(id)
+
+      view = new ClientGroupView
+        itemModel: clientGroup
+        model: clientGroup
+        itemId: id
       @mainView.content.show(view)
 
     clients: (viewType) ->
