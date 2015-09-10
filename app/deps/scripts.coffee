@@ -1,7 +1,7 @@
 define [
-  'expose?$!deps/bundles/jquery'
-  'expose?_!deps/bundles/underscore'
-  'expose?Backbone!deps/bundles/backbone'
-  'expose?Marionette!deps/bundles/marionette'
+  'expose?jQuery!expose?$!deps/bundles/jquery/bundle'
+  'expose?_!deps/bundles/underscore/bundle'
+  'expose?Backbone!deps/bundles/backbone/bundle'
+  'expose?Marionette!deps/bundles/marionette/bundle'
   'expose?Handlebars!handlebars'
 ], ->

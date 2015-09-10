@@ -1,13 +1,13 @@
 define [
-  'lodash'
+  './original'
   'imports?underscore=lodash!underscore.string'
   'imports?underscore=lodash!underscore.inflections'
 ], (
-  _
+  o_
   Strings
   Inflections
 )->
 
-  _.mixin Inflections
-  _.mixin Strings.exports()
-  _
+  o_.mixin Inflections
+  o_.mixin Strings.exports()
+  o_

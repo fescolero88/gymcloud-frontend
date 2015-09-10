@@ -133,12 +133,15 @@ module.exports =
 
   plugins: [
       new webpack.ProvidePlugin(
-        $: 'deps/bundles/jquery'
-        jQuery: 'deps/bundles/jquery'
-        'window.jQuery': 'deps/bundles/jquery'
-        _: 'deps/bundles/underscore'
-        Backbone: 'deps/bundles/backbone'
-        Marionette: 'deps/bundles/marionette'
+        #$: 'jquery'
+        #jQuery: 'jquery'
+        #'window.jQuery': 'jquery'
+        $: 'deps/bundles/jquery/original'
+        jQuery: 'deps/bundles/jquery/original'
+        'window.jQuery': 'deps/bundles/jquery/original'
+        _: 'deps/bundles/underscore/bundle'
+        Backbone: 'deps/bundles/backbone/bundle'
+        Marionette: 'deps/bundles/marionette/bundle'
       )
     ,
       new webpack.ResolverPlugin(
