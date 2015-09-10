@@ -44,13 +44,13 @@
         if !isAuthor
           .gc-workout-author-block.pull-right
             .gc-exercise-author-info
-              a.gc-exercise-author-avatar.gc-exercise-author-avatar-exist(href='#/tr/clients/id/{{this.id}}/exercises/')
-                img(src='{{author.avatar_url}}', onerror="this.src='app/images/avatar-placeholder.png';")
+              a.gc-exercise-author-avatar.gc-exercise-author-avatar-exist(href="#users/#{author.id}")
+                img(src=author.avatar_url, onerror="this.src='app/images/avatar-placeholder.png';")
               p.gc-exercise-author-name
                 | Trainer
                 br
-                a(href='#/tr/clients/id/{{this.id}}/exercises/')
-                  | {{author.user_profile.first_name}} {{author.user_profile.last_name}}
+                a(href="#users/#{author.id}")
+                  | #{author.user_profile.first_name} #{author.user_profile.last_name}
             .gc-rating
               div
                 span.gc-rating-count 25

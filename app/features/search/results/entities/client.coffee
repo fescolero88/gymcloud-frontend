@@ -12,4 +12,4 @@ define [
 
     templateHelpers: ->
       id = @model.get('id')
-      entity_link: "#/tr/clients/id/#{id}/exercises/"
+      entity_link: "#users/#{id}"

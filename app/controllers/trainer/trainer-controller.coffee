@@ -3,6 +3,7 @@ define [
   'views/trainer/clients/client-list-view' #ClientListView
   'views/trainer/clients/group-list-view' #GroupListView
   'models/client' #Client
+  'models/user' #User
   'collections/clients' #Clients
   'collections/activities' #Activities
   'features/profile/view' #ProfileView
@@ -26,6 +27,7 @@ define [
   ClientListView
   GroupListView
   Client
+  User
   Clients
   Activities
   ProfileView
@@ -63,8 +65,23 @@ define [
           @[@globalViewMethod](@globalType, @globalKey)
           @globalViewMethod = false
 
-    profile: (assign, key) ->
+    myProfile: ->
+      currentUser = App.request('current_user')
+      @_userProfile(currentUser)
+
+    profile: (id) ->
+      currentUser = App.request('current_user')
+      user = currentUser.clients.get(id)
+      if user
+        @_userProfile(user)
+      else
+        user = new User(id: id)
+        user.fetch().then =>
+          @_userProfile(user)
+
+    _userProfile: (user) ->
       view = new ProfileView
+        model: user
       @mainView.content.show(view)
 
     clients: (viewType) ->

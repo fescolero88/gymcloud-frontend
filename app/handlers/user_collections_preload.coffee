@@ -1,5 +1,6 @@
 define [
   'collections/user_collection'
+  'models/user'
   'models/exercise'
   'models/workout_template'
   'models/program_template'
@@ -9,6 +10,7 @@ define [
   'models/folder'
 ], (
   UserCollection
+  User
   Exercise
   WorkoutTemplate
   ProgramTemplate
@@ -19,8 +21,8 @@ define [
 )->
   (user) ->
     collections =
-      pros: Backbone.Model
-      clients: Backbone.Model
+      pros: User
+      clients: User
       client_groups: Backbone.Model
       exercises: Exercise
       workout_templates: WorkoutTemplate

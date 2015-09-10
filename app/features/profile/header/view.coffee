@@ -9,6 +9,7 @@ define [
   moment
   template
 ) ->
+
   class HeaderView extends Marionette.LayoutView
 
     template: template
@@ -38,7 +39,8 @@ define [
       'dd[data-bind="birthday"]':
         observe: 'birthday'
         onGet: (value)->
-          moment(value).fromNow(true)
+          date = moment(value)
+          if date.isValid() then date.fromNow(true) else ''
 
     regions:
       clientForm: '#gc-edit-client-modal'
@@ -51,21 +53,28 @@ define [
       clientFormModal: '#gc-edit-client-modal'
       sendMessageModal: '#gc-send-message-modal'
 
-    initialize: (data) ->
-      @viewType = data.viewType
-      @profile = App.request 'current_user'
-      if @model.get('id') is @profile.get('id')
-        @myProfile = true
+    templateHelpers: ->
+      isMyProfile: @_isMyProfile()
+
+    initialize: ->
+      @modal = new ProfileEditModalView(model: @model.profile)
+
+      @listenTo @modal, 'modal:close', =>
+        @ui.clientFormModal.modal('hide')
+      @listenTo(@modal, 'avatarChange', @render)
 
     onRender: ->
+      @getRegion('clientForm').show(@modal)
+      @ui.clientFormModal.on 'hidden.bs.modal', (_ev) =>
+        @model.profile.set(@modal.previousAttributes)
       @stickit(@model.profile)
 
     onDestroy: ->
+      @ui.clientFormModal.off('hidden.bs.modal')
       @unstickit(@model.profile)
 
-    templateHelpers: =>
-      if @viewType is 'clients' then view_type = 1 else view_type = 0
-      {view_type: view_type, myProfile: @myProfile}
+    _isMyProfile: ->
+      @model.get('id') is App.request('current_user_id')
 
     fillClientEmail: ->
       @ui.inviteEmail.val @model.get('email')
@@ -74,7 +83,7 @@ define [
       #TODO validation
       ev.preventDefault()
       formData = @ui.inviteForm.serializeObject()
-      if @myProfile
+      if @_isMyProfile()
         url = "/api/mobile/me/invite"
       else
         url = "/api/mobile/clients/#{@model.get('id')}/invite"
@@ -96,19 +105,6 @@ define [
 
     showClientEditModal: (ev) ->
       ev.preventDefault()
-      model = @model.profile
-      view = new ProfileEditModalView(model: model)
-
-      @listenTo view, 'modal:close', =>
-        @ui.clientFormModal.modal('hide')
-        if model.changedAttributes()
-          oldAttributes = model.previousAttributes()
-          model.set(oldAttributes)
-
-      @listenTo view, 'avatarChange', =>
-        @render()
-
-      @clientForm.show(view)
       @ui.clientFormModal.modal('show')
 
     showSendMessageModal: (ev) ->

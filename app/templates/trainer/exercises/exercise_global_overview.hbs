@@ -5,13 +5,13 @@
   <div class="col-xs-6 text-right">
     {{#ifNot userId author.id}}
       <div class="gc-exercise-author-info">
-        <a  href="#/tr/clients/id/{{author.id}}/exercises/" class="gc-exercise-author-avatar gc-exercise-author-avatar-exist">
+        <a  href="#users/{{author.id}}" class="gc-exercise-author-avatar gc-exercise-author-avatar-exist">
           <img src="app/images/portrait.jpg">
         </a>
         <p class="gc-exercise-author-name">
           Trainer
           <br>
-          <a href="#/tr/clients/id/{{author.id}}/exercises/">{{author.first_name}} {{../../author.last_name}}</a>
+          <a href="#users/{{author.id}}">{{author.first_name}} {{../../author.last_name}}</a>
         </p>
       </div>
       <div class="gc-rating">
