@@ -1,10 +1,8 @@
 define [
-  'backbone.marionette'
   'models/folder'
   'views/helpers/form-validation-behaviour'
   './template'
 ], (
-  Marionette
   Folder
   FormValidationBehaviour
   template

@@ -1,5 +1,4 @@
 define [
-  'backbone.marionette'
   './details/view'
   './privacy/view'
   './weeks/view'
@@ -9,7 +8,6 @@ define [
   './workouts/view'
   './template'
 ], (
-  Marionette
   DetailsView
   PrivacyControlsView
   WeeksView

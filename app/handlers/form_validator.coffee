@@ -1,4 +1,8 @@
-define ->
+define [
+  'deps/bundles/backbone/bundle'
+], (
+  Backbone
+) ->
 
   ->
 

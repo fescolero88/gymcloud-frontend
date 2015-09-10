@@ -1,10 +1,8 @@
 define [
-  'backbone.marionette'
   './item/view'
   'models/program_workout'
   'dragula'
 ], (
-  Marionette
   ProgramGlobalWorkoutItemView
   ProgramWorkout
   Dragula

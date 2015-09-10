@@ -1,8 +1,6 @@
 define [
-  'backbone.marionette'
   './template'
 ], (
-  Marionette
   template
 ) ->
   class WorkoutItemView extends Marionette.ItemView

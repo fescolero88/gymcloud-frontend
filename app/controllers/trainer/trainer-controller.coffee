@@ -1,6 +1,4 @@
 define [
-  'backbone.marionette' #Marionette
-  'backbone' #Backbone
   'views/trainer/clients/clients-view' #ClientsView
   'views/trainer/clients/client-list-view' #ClientListView
   'views/trainer/clients/group-list-view' #GroupListView
@@ -24,8 +22,6 @@ define [
   'features/folders/view' #FoldersView
 ],
 (
-  Marionette
-  Backbone
   ClientsView
   ClientListView
   GroupListView

@@ -1,8 +1,6 @@
 define [
-  'backbone.marionette'
   './item/view'
 ], (
-  Marionette
   BreadcrumbsItemView
 ) ->
 

@@ -1,9 +1,7 @@
 define [
-  'backbone.marionette'
   './item/view'
   './empty/view'
 ], (
-  Marionette
   ProgramWeekItemView
   EmptyView
 ) ->

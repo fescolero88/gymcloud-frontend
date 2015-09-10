@@ -1,14 +1,10 @@
 define [
-  'backbone.marionette'
-  'backbone'
   'views/helpers/form-validation-behaviour'
   'models/exercise'
   'models/workout_template'
   'models/program_template'
   './template'
 ], (
-  Marionette
-  Backbone
   FormValidationBehaviour
   Exercise
   WorkoutTemplate

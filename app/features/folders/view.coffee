@@ -1,5 +1,4 @@
 define [
-  'backbone.marionette' #Marionette
   './breadcrumbs/view'
   './entity_list/view' #EntityListView
   './add_entity_modal/view' #AddEntityModalView
@@ -10,7 +9,6 @@ define [
   'models/global_ewp_model' #GlobalEWPModel
   './template'
 ], (
-  Marionette
   Breadcrumbs
   EntityListView
   AddEntityModalView

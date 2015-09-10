@@ -1,10 +1,8 @@
 define [
-  'backbone.marionette'
   './actions/view'
   './overview/view'
   './template'
 ], (
-  Marionette
   ActionsView
   OverviewView
   template

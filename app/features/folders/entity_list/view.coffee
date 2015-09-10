@@ -1,10 +1,6 @@
 define [
-  'backbone.marionette'
-  'backbone'
   './item/view'
 ], (
-  Marionette
-  Backbone
   EntityItemView
 ) ->
 

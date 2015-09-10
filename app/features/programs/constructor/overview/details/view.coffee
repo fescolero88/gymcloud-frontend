@@ -1,9 +1,7 @@
 define [
-  'backbone.marionette'
   './counters/view'
   './template'
 ], (
-  Marionette
   CountersView
   template
 ) ->
