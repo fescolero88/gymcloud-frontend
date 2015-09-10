@@ -12,7 +12,7 @@ define [
   'views/trainer/clients/client-group-view' #ClientGroupView
   'views/trainer/global_ewp/ewp-global-view' #EWPGlobalView
   'views/trainer/exercises/exercise_global_view' #ExerciseGlobalView
-  'models/global_exercise' #GlobalExercise
+  'models/exercise' #GlobalExercise
   'views/trainer/workouts/workout_global_view' #WorkoutGlobalView
   'models/global_workout' #GlobalWorkout
   'views/trainer/programs/program_global_view' #ProgramGlobalView
@@ -223,7 +223,7 @@ define [
       @globalView('exercises', key)
 
     globalView: (type, key) ->
-      items = App.request("data:#{type}")
+      items = App.request("current_user")[type]
       if items?
         breadcrumbs = [{title:"#{type}"}]
         if key
@@ -247,8 +247,7 @@ define [
         else
           switch type
             when 'exercises'
-              model = new GlobalExercise
-              model.url = model.urlRoot + key
+              model = new GlobalExercise(id: key)
               model.fetch().then =>
                 view = new ExerciseGlobalView
                   exercise: model
