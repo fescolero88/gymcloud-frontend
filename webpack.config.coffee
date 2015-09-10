@@ -40,6 +40,7 @@ module.exports =
       'backbone_original': 'node_modules/backbone/backbone.js'
       'marionette_original': 'node_modules/backbone.marionette/lib/core/backbone.marionette.js'
       'jquery_original': 'node_modules/jquery/dist/jquery.js'
+      'marionette': 'deps/bundles/marionette/bundle'
       #'underscore': 'app/deps/bundles/underscore'
       #'backbone': 'app/deps/bundles/backbone'
       #'backbone.marionette': 'app/deps/bundles/marionette'
@@ -140,8 +141,8 @@ module.exports =
         jQuery: 'deps/bundles/jquery/original'
         'window.jQuery': 'deps/bundles/jquery/original'
         _: 'deps/bundles/underscore/bundle'
-        Backbone: 'deps/bundles/backbone/bundle'
-        Marionette: 'deps/bundles/marionette/bundle'
+        Backbone: 'deps/bundles/backbone/original'
+        Marionette: 'deps/bundles/marionette/original'
       )
     ,
       new webpack.ResolverPlugin(
