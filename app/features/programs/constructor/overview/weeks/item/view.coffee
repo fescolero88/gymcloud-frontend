@@ -1,9 +1,11 @@
 define [
   '../../workouts/view'
+  'models/workout_template'
   'models/program_workout'
   './template'
 ], (
   WorkoutListView
+  WorkoutTemplate
   ProgramWorkout
   template
 ) ->
@@ -46,14 +48,16 @@ define [
 
     addWorkout: (ev) ->
       ev.preventDefault()
-      name = "Workout ##{@workoutCollection.length + 1}"
-      model = new ProgramWorkout
-        name: name
-        program_template_id: @program.id
+      workout = new WorkoutTemplate
+        name: "Workout #{@workoutCollection.length + 1}"
         is_visible: false
-      model.save().then =>
-        @workoutsCollection.add(model)
-        @workoutCollection.add(model)
+      workout.save().then =>
+        model = new ProgramWorkout
+          workout_template_id: workout.id
+          program_template_id: @program.id
+        model.save().then =>
+          @workoutsCollection.add(model)
+          @workoutCollection.add(model)
 
     removeProgramWeek: ->
       App.vent.trigger 'program:remove:week', @model

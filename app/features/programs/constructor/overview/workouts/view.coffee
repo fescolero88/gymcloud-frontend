@@ -1,9 +1,11 @@
 define [
   './item/view'
+  'models/workout_template'
   'models/program_workout'
   'dragula'
 ], (
   ProgramGlobalWorkoutItemView
+  WorkoutTemplate
   ProgramWorkout
   Dragula
 ) ->
@@ -28,12 +30,15 @@ define [
       App.commands.removeHandler 'program_workout:model:add', @addProgramWorkout
 
     addProgramWorkout: =>
-      model = new ProgramWorkout
+      workout = new WorkoutTemplate
         name: "Workout #{@collection.length + 1}"
-        program_template_id: @model.id
         is_visible: false
-      model.save().then =>
-        @collection.add(model)
+      workout.save().then =>
+        model = new ProgramWorkout
+          workout_template_id: workout.id
+          program_template_id: @model.id
+        model.save().then =>
+          @collection.add(model)
 
     onShow: ->
       @addSortable()
