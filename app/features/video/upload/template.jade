@@ -1,0 +1,42 @@
+.modal-dialog.modal-md.gc-upload-video-modal
+  .modal-content.gc-remove-modal
+    .modal-header
+      button.close(type="button", data-dismiss="modal")
+        | Close
+      h4.modal-title
+        span
+          img(src="app/images/upload-icon.png", alt="")
+        | Upload Video
+    .modal-body
+      .gc-video-upload
+        h5
+          | Drop your media files here or
+        button(class="btn btn-primary gc-custom gc-upload-trigger btn-sm")
+          | Upload from Computer
+        input.gc-video-upload-control.hidden(type="file", name="file")
+
+      .gc-video-item-upload.hidden
+        .row
+          .col-xs-6
+            h5.gc-video-file-name
+            .gc-progress-panel
+              label.gc-progress-text
+                | 0%
+              .gc-progress-bar
+                .gc-progress(style="width:0%;")
+          .col-xs-6.text-right
+            h5.gc-upload-options
+              img.gc-update-name.gc-upload-icon(src="app/images/icon-pencil.png")
+              img.gc-delete-video.gc-upload-icon(src="app/images/icon-trash.png")
+            .btn-group.gc-privacy.gc-btn-group(role="group", data-toggle="buttons")
+              label.btn.btn-primary.active
+                input(type="radio", name="privacy", value="true")
+                | Private
+              label.btn.btn-primary
+                input(type="radio", name="privacy", value="false")
+                | Public
+    .modal-footer
+      .row
+        .col-xs-12
+          a(href="#", class="btn btn-primary gc-custom pull-right gc-footer-btn", data-dismiss="modal")
+            | Cancel

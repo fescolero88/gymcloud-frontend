@@ -26,4 +26,5 @@ define [
   'styles/workout_exercise_property_constructor'
   'styles/program_workouts'
   'styles/account_type_modal'
+  'styles/upload'
 ], ->

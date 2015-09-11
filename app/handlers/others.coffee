@@ -4,12 +4,16 @@ define [
   'views/trainer/workouts/workout_schedule_modal_view'
   'models/workout_schedule'
   'views/trainer/account-type-modal-view'
+  'features/video/upload/view'
+  'features/video/upload/model'
 ], (
   ModalConfirmView
   ModalAddToLibraryView
   WorkoutScheduleView
   WorkoutSchedule
   AccountTypeModalView
+  VideoUploadModalView
+  VideoModel
 ) ->
 
   (App) ->
@@ -57,6 +61,19 @@ define [
 
     App.reqres.setHandler 'base:accountTypes', (data) =>
       view = new AccountTypeModalView
+
+      region = App.baseView.baseModalRegion
+      region.show(view)
+      region.$el.modal('show')
+
+      App.listenToOnce view, "modal:closed", ->
+        region.$el.modal('hide')
+        region.destroy()
+
+    App.reqres.setHandler 'base:uploadVideo', (data) ->
+      model = new VideoModel
+      view = new VideoUploadModalView
+        model: model
 
       region = App.baseView.baseModalRegion
       region.show(view)
