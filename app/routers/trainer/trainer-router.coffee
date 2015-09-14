@@ -16,6 +16,7 @@ module.exports = class TrainerRouter extends CustomRouter
 
     'users/me(/)': 'myProfile'
     'users/:id(/)': 'profile'
+    'client_groups/:id(/)': 'clientGroupShow'
     'properties(/)': 'properties'
 
     'exercises_folder(/:id)(/)': 'exercisesFolderView'
