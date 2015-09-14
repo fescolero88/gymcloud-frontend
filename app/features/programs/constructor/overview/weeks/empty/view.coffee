@@ -24,7 +24,7 @@ define [
       'click @ui.createWorkout': 'createProgramWorkout'
 
     createProgramWorkout: ->
-      App.commands.execute 'program_workout:model:add'
+      @trigger('add:program_workout')
       @toggleViews()
 
     toggleViews: ->

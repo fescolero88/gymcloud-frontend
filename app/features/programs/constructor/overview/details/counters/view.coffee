@@ -17,7 +17,6 @@ define [
     initialize: (options) ->
       @weekCollection = options.weekCollection
       @workoutsCollection = options.workoutsCollection
-      @weekWorkoutsCollection = options.weekWorkoutsCollection
 
       @model = new Backbone.Model
       @_update_week_count()
@@ -25,7 +24,6 @@ define [
 
       @listenTo(@weekCollection, 'update', @_update_week_count)
       @listenTo(@workoutsCollection, 'update', @_update_workouts_count)
-      @listenTo(@weekWorkoutCollection, 'update', @_update_workouts_count)
 
     onRender: ->
       @stickit()
@@ -38,5 +36,5 @@ define [
       @model.set(weeksCount: count)
 
     _update_workouts_count: ->
-      count = @workoutsCollection.length + @weekWorkoutsCollection.length
+      count = @workoutsCollection.length
       @model.set(workoutsCount: count)

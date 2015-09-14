@@ -13,20 +13,15 @@ define [
     ui:
       addWeek: '.gc-program-add-week'
 
+    emptyView: EmptyView
+
     childView: ProgramWeekItemView
 
     childViewOptions: =>
-      workoutsCollection: @workoutsCollection
       program: @model
 
-    emptyView: EmptyView
-
-    initialize: (options) ->
-      @workoutsCollection = options.workoutsCollection
-      App.vent.on 'program:remove:week', @removeWeek
-
-    onDestroy: ->
-      App.vent.off 'program:remove:week', @removeWeek
+    childEvents: =>
+      'add:program_workout': @addProgramWorkout
 
     events:
       'click @ui.addWeek': 'addNewWeek'
@@ -37,9 +32,5 @@ define [
         message: "Program week added."
         type: 'success'
 
-    removeWeek: (model) =>
-      @collection.remove model
-      # TODO: delete workouts inside
-      App.request 'messenger:show',
-        message: "Program #{model.get('name')} has been removed."
-        type: 'info'
+    addProgramWorkout: ->
+      @trigger('add:program_workout')

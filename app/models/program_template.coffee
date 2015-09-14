@@ -27,6 +27,6 @@ define [
       collection = user.folders
       collection.get(@get('folder_id'))
 
-    _parseProgramWorkouts: (exercises) ->
+    _parseProgramWorkouts: (workouts) ->
       @program_workouts ||= new ProgramWorkouts
-      @program_workouts.add(exercises, parse: true, merge: true)
+      @program_workouts.add(workouts, parse: true, merge: true)

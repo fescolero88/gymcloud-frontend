@@ -22,4 +22,4 @@ define [
       @workout ||= new Workout(workout, parse: true)
       if type is 'WorkoutTemplate'
         collection = App.request('current_user').workout_templates
-        collection.add(@workout)
+        collection.add(@workout, merge: true)

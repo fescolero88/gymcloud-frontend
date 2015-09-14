@@ -35,18 +35,14 @@ define [
 
     templateHelpers: =>
       hasNote: !!@model.get('note')
-      weeksCount: @collection.length
-      workoutCount: @workoutsCollection.length
       isAuthor: do =>
         @model.get('author_id') is App.request('current_user_id')
 
     initialize: (options) ->
       @workoutsCollection = options.workoutsCollection
-      @weekWorkoutsCollection = options.weekWorkoutCollection
       @counters = new CountersView
         weekCollection: @collection
-        workoutsCollection: @workoutsCollection
-        weekWorkoutsCollection: @weekWorkoutsCollection
+        workoutsCollection: @model.program_workouts
 
       @listenTo(@model, 'note:toggle_editor', @triggerNoteEditor)
 
