@@ -62,7 +62,7 @@ define [
         type: 'success'
 
     addProgramWorkout: ->
-      App.commands.execute 'program_workout:model:add'
+      @trigger('add:program_workout')
 
     toggleControlsView: =>
       @ui.defaultControls.toggleClass 'hidden'

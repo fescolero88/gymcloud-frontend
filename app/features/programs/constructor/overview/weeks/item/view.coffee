@@ -1,5 +1,5 @@
 define [
-  '../../workouts/view'
+  './workouts'
   'models/workout_template'
   'models/program_workout'
   './template'
@@ -23,7 +23,7 @@ define [
       workout: '.gc-program-weeks-workouts-container'
 
     events:
-      'click @ui.removeWeek': 'removeProgramWeek'
+      'click @ui.removeWeek': 'removeModel'
       'click @ui.addWorkoutBtn': 'addWorkout'
 
     bindings:
@@ -32,32 +32,25 @@ define [
         events: ['change']
 
     initialize: (options) ->
-      @program = options.program
-      @workoutsCollection = options.workoutsCollection
+      collection = new Backbone.Collection
+      @workoutList = new WorkoutListView
+        collection: collection
+        program: options.program
 
     onRender: ->
       @stickit()
-      @workoutCollection = new Backbone.Collection
-      workoutList = new WorkoutListView
-        collection: @workoutCollection
-        model: @program
-      @getRegion('workout').show(workoutList)
+      @getRegion('workout').show(@workoutList)
 
     onDestroy: ->
       @unstickit()
 
     addWorkout: (ev) ->
       ev.preventDefault()
-      workout = new WorkoutTemplate
-        name: "Workout #{@workoutCollection.length + 1}"
-        is_visible: false
-      workout.save().then =>
-        model = new ProgramWorkout
-          workout_template_id: workout.id
-          program_template_id: @program.id
-        model.save().then =>
-          @workoutsCollection.add(model)
-          @workoutCollection.add(model)
+      @workoutList.addProgramWorkout(true)
 
-    removeProgramWeek: ->
-      App.vent.trigger 'program:remove:week', @model
+    removeModel: ->
+      @model.destroy()
+      # TODO: delete workouts inside
+      App.request 'messenger:show',
+        message: "Program #{model.get('name')} has been removed."
+        type: 'info'

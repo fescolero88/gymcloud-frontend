@@ -17,31 +17,34 @@ define [
 
     childView: ProgramGlobalWorkoutItemView
 
-    childViewOptions:
-      program_template: @model
+    childViewOptions: =>
+      program_template: @program
+
+    addChild: (child, ChildView, index) ->
+      unless child.isInWeek
+        Marionette.CollectionView::addChild.apply this, arguments
 
     ui:
       workoutsList: 'li'
 
-    initialize: ->
-      App.commands.setHandler 'program_workout:model:add', @addProgramWorkout
+    initialize: (options) ->
+      @program = options.program
 
-    onDestroy: ->
-      App.commands.removeHandler 'program_workout:model:add', @addProgramWorkout
+    onShow: ->
+      @addSortable()
 
-    addProgramWorkout: =>
+    addProgramWorkout: (isInWeek = false) =>
       workout = new WorkoutTemplate
         name: "Workout #{@collection.length + 1}"
         is_visible: false
       workout.save().then =>
         model = new ProgramWorkout
           workout_template_id: workout.id
-          program_template_id: @model.id
+          program_template_id: @program.id
+        model.isInWeek = isInWeek
         model.save().then =>
           @collection.add(model)
-
-    onShow: ->
-      @addSortable()
+          @program.program_workouts.add(model)
 
     addSortable: ->
       sortableContainers = []
