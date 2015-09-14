@@ -21,6 +21,9 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
     'blur @ui.exerciseDescription': 'saveDescription'
     'keyup @ui.exerciseDescription': 'exerciseDescriptionAutoHeight'
 
+  bindings:
+    '.gc-exercise-description-editor': 'description'
+
   modelEvents:
     sync: 'onSync'
 
@@ -49,6 +52,12 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
       userId: App.request('current_user_id')
       authorId: @model.get('author').id
     }
+
+  onRender: ->
+    @stickit()
+
+  onDestroy: ->
+    @unstickit()
 
   onShow: =>
     if @myItem
@@ -85,10 +94,7 @@ module.exports = class ExerciseGlobalOverviewView extends Marionette.LayoutView
       @updatedAttribute = 'title'
 
   saveDescription: ->
-    @model.set 'description', @ui.exerciseDescription.val()
-
-    if @model.hasChanged()
-      @model.save()
+    @model.save()
 
   exerciseDescriptionAutoHeight: =>
     exerciseDesc = @ui.exerciseDescription.get 0
