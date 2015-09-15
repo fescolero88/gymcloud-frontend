@@ -18,9 +18,12 @@ define [
     events:
       'click @ui.checkbox': 'itemChecked'
 
-    bindings:
-      '[data-bind="name"]': 'name'
-      '[data-bind="updated_at"]': 'updated_at'
+    behaviors:
+
+      stickit:
+        bindings:
+          '[data-bind="name"]': 'name'
+          '[data-bind="updated_at"]': 'updated_at'
 
     initialize: (options) =>
       @type = options.type
@@ -33,12 +36,6 @@ define [
           "##{@type}/#{@model.get('id')}"
         else
           "##{@type}_folder/#{@model.get('id')}"
-
-    onRender: ->
-      @stickit()
-
-    onDestroy: ->
-      @unstickit()
 
     itemChecked: (ev) =>
       @trigger 'item:clicked'

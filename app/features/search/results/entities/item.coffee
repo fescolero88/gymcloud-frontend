@@ -25,24 +25,21 @@ define [
       profile_link: '#users/me'
       entity_link: "#tr/global/#{entity_context}/id/#{@model.id}"
 
-    bindings:
-      '.gc-clients-list-client-link:first': 'name'
-      '.gc-exercises-item-play-icon':
-        attributes: [
-          observe: 'video_url'
-          name: 'style'
-          onGet: (val) ->
-            if val
-              'display: inline-block;'
-            else
-              'display: none;'
-        ]
+    behaviors:
 
-    onRender: ->
-      @stickit()
-
-    onDestroy: ->
-      @unstickit()
+      stickit:
+        bindings:
+          '.gc-clients-list-client-link:first': 'name'
+          '.gc-exercises-item-play-icon':
+            attributes: [
+              observe: 'video_url'
+              name: 'style'
+              onGet: (val) ->
+                if val
+                  'display: inline-block;'
+                else
+                  'display: none;'
+            ]
 
     _showAddToLibrary: ->
       App.request 'base:addToLibraryModal',

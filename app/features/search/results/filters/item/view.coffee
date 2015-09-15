@@ -10,20 +10,18 @@ define [
 
     template: template
 
-    bindings:
-      'a':
-        observe: 'name'
-        attributes: [
-            name: 'href'
-            observe: 'href'
-        ]
+    behaviors:
+      stickit:
+        bindings:
+          'a':
+            observe: 'name'
+            attributes: [
+                name: 'href'
+                observe: 'href'
+            ]
 
     onRender: ->
-      @stickit()
       @_markAsActive()
-
-    onDestroy: ->
-      @unstickit()
 
     _markAsActive: ->
       if @model.get('isSelected')

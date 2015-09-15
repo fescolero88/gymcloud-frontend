@@ -1,13 +1,12 @@
 config = require 'config'
-FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
 module.exports = class ResetPasswordView extends Marionette.LayoutView
 
   template: require('templates/auth/reset_password')
 
   behaviors:
-    FormValidationBehaviour:
-      behaviorClass: FormValidationBehaviour
+
+    form_validation: true
 
   ui:
     form: '.gc-reset-password-form'
