@@ -1,12 +1,10 @@
-FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
-
 module.exports = class GroupFormModalView extends Marionette.ItemView
 
   template: require('templates/trainer/clients/group-form-modal')
 
   behaviors:
-    FormValidationBehaviour:
-      behaviorClass: FormValidationBehaviour
+
+    form_validation: true
 
   className: 'modal-dialog'
 

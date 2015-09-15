@@ -1,7 +1,5 @@
 GlobalFolder = require 'models/global_folder'
 
-FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
-
 module.exports = class AddGlobalFolderModalView extends Marionette.ItemView
 
   template: require('templates/trainer/global_ewp/add_global_folder_modal')
@@ -9,8 +7,8 @@ module.exports = class AddGlobalFolderModalView extends Marionette.ItemView
   className: 'modal-dialog modal-md'
 
   behaviors:
-    FormValidationBehaviour:
-      behaviorClass: FormValidationBehaviour
+
+    form_validation: true
 
   ui:
     form: 'form'

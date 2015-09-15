@@ -25,13 +25,16 @@ define [
       'keypress @ui.workoutTitle': '_saveOnEnter'
       'change input[data-bind="is_visible"]': '_saveVisibility'
 
-    bindings:
-      '[data-bind="name"]':
-        observe: 'name'
-        events: ['blur']
-      '[data-bind="description"]':
-        observe: 'description'
-        events: ['change']
+    behaviors:
+
+      stickit:
+        bindings:
+          '[data-bind="name"]':
+            observe: 'name'
+            events: ['blur']
+          '[data-bind="description"]':
+            observe: 'description'
+            events: ['change']
 
     modelEvents:
       'change:name': '_saveOnChange'
@@ -39,12 +42,6 @@ define [
 
     initialize: (options) ->
       @program_template = options.program_template
-
-    onShow: ->
-      @stickit()
-
-    onDestroy: ->
-      @unstickit()
 
     changeContent: (content) ->
       @ui.workoutTabPanes.removeClass 'active'

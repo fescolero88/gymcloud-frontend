@@ -27,20 +27,24 @@ define [
       'click .show-message-form': 'showSendMessageModal'
       'show.bs.modal @ui.inviteModal': 'fillClientEmail'
 
-    bindings:
-      'span[data-bind="location"]': 'location'
-      'span[data-bind="zip"]': 'zip'
-      'span[data-bind="first_name"]': 'first_name'
-      'span[data-bind="last_name"]': 'last_name'
-      'dd[data-bind="height"]': 'height'
-      'dd[data-bind="weight"]': 'weight'
-      'dd[data-bind="bodyfat"]': 'bodyfat'
-      'dd[data-bind="gender"]': 'gender'
-      'dd[data-bind="birthday"]':
-        observe: 'birthday'
-        onGet: (value)->
-          date = moment(value)
-          if date.isValid() then date.fromNow(true) else ''
+    behaviors: ->
+
+      stickit:
+        model: @model.profile
+        bindings:
+          'span[data-bind="location"]': 'location'
+          'span[data-bind="zip"]': 'zip'
+          'span[data-bind="first_name"]': 'first_name'
+          'span[data-bind="last_name"]': 'last_name'
+          'dd[data-bind="height"]': 'height'
+          'dd[data-bind="weight"]': 'weight'
+          'dd[data-bind="bodyfat"]': 'bodyfat'
+          'dd[data-bind="gender"]': 'gender'
+          'dd[data-bind="birthday"]':
+            observe: 'birthday'
+            onGet: (value)->
+              date = moment(value)
+              if date.isValid() then date.fromNow(true) else ''
 
     regions:
       clientForm: '#gc-edit-client-modal'
@@ -67,11 +71,9 @@ define [
       @getRegion('clientForm').show(@modal)
       @ui.clientFormModal.on 'hidden.bs.modal', (_ev) =>
         @model.profile.set(@modal.previousAttributes)
-      @stickit(@model.profile)
 
     onDestroy: ->
       @ui.clientFormModal.off('hidden.bs.modal')
-      @unstickit(@model.profile)
 
     _isMyProfile: ->
       @model.get('id') is App.request('current_user_id')

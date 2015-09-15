@@ -14,27 +14,24 @@ define [
     events:
       'click': 'changeSelected'
 
-    bindings:
-      '.gc-account-selected':
-        observe: 'assigned'
-        update: ($el, val, model, options) =>
-          if model.get 'assigned'
-            $el.addClass 'assigned'
-          else
-            $el.removeClass 'assigned'
-      ':el':
-        observe: 'selected'
-        update: ($el, val, model, options) =>
-          if model.get 'selected'
-            $el.addClass 'active'
-          else
-            $el.removeClass 'active'
+    behaviors:
 
-    onRender: ->
-      @stickit()
-
-    onDestroy: ->
-      @unstickit()
+      stickit:
+        bindings:
+          '.gc-account-selected':
+            observe: 'assigned'
+            update: ($el, val, model, options) =>
+              if model.get 'assigned'
+                $el.addClass 'assigned'
+              else
+                $el.removeClass 'assigned'
+          ':el':
+            observe: 'selected'
+            update: ($el, val, model, options) =>
+              if model.get 'selected'
+                $el.addClass 'active'
+              else
+                $el.removeClass 'active'
 
     changeSelected: ->
       @triggerMethod 'selected:changed'

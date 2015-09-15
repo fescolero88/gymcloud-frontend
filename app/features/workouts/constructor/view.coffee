@@ -38,8 +38,11 @@ define [
       'click @ui.addNoteButton': 'triggerAddNote'
       'keypress @ui.workoutTitle': 'saveTitleOnEnter'
 
-    bindings:
-      '.gc-workout-title span': 'name'
+    behaviors:
+
+      stickit:
+        bindings:
+          '.gc-workout-title span': 'name'
 
     templateHelpers: =>
       author: @model.author.toJSON()
@@ -56,12 +59,10 @@ define [
       @listenTo(@workoutExerciseModel, 'sync', @onExerciseAdded)
 
     onDestroy: ->
-      @unstickit()
       App.vent.off 'drag:complete', @assignExercise
       App.vent.off 'workout:add:exercise', @assignExercise
 
     onShow: ->
-      @stickit()
       @changeView 'description'
 
     navigateBack: ->

@@ -1,5 +1,3 @@
-FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
-
 module.exports = class ClientFormModalView extends Marionette.ItemView
 
   template: require('templates/trainer/clients/client-form-modal')
@@ -7,8 +5,8 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
   className: 'modal-dialog'
 
   behaviors:
-    FormValidationBehaviour:
-      behaviorClass: FormValidationBehaviour
+
+    form_validation: true
 
   events:
     'submit @ui.clientForm': 'submitClientForm'

@@ -10,6 +10,14 @@ define [
 
   class ConstructorLayoutView extends Marionette.LayoutView
 
+    behaviors:
+
+      stickit:
+        bindings:
+          '[data-bind="name"]':
+            observe: 'name'
+            events: ['change']
+
     className: 'gc-main-workspace row'
 
     template: template
@@ -34,25 +42,16 @@ define [
       'blur @ui.programName': 'saveName'
       'keypress @ui.programName': 'updateName'
 
-    bindings:
-      '[data-bind="name"]':
-        observe: 'name'
-        events: ['change']
-
     templateHelpers: =>
       isAuthor: @_isAuthor()
 
     onShow: ->
-      @stickit()
       if @_isAuthor()
         programActionsView = new ActionsView(model: @model)
         @getRegion('programActionsRegion').show(programActionsView)
         'add:note'
 
       @changeView 'program'
-
-    onDestroy: ->
-      @unstickit()
 
     _isAuthor: =>
       @model.get('author_id') is App.request('current_user_id')
