@@ -11,11 +11,9 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
     manageRegion: '#exercise-manage'
     breadcrumbsRegion: '#breadcrumbs'
 
-  ui:
-    backButton: '.gc-content-nav-back'
+  behaviors:
 
-  events:
-    'click @ui.backButton': 'goBack'
+    navigate_back: true
 
   initialize: (data) =>
     @breadcrumbs = data.breadcrumbs
@@ -25,7 +23,3 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
     overviewView = new ExerciseGlobalOverviewView model: @model
     @manageRegion.show overviewView
     @breadcrumbsRegion.show @breadcrumbsView
-
-  goBack: (ev) ->
-    ev.preventDefault()
-    window.history.back()

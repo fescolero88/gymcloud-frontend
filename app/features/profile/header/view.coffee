@@ -30,7 +30,7 @@ define [
     behaviors: ->
 
       stickit:
-        model: @model.profile
+        model: => @model.profile
         bindings:
           'span[data-bind="location"]': 'location'
           'span[data-bind="zip"]': 'zip'

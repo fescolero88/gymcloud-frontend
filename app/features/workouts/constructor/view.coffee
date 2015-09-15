@@ -27,12 +27,10 @@ define [
       innerNavLinks: '.gc-inner-nav li a'
       contentNavItems: '.gc-content-nav li'
       contentNavLinks: '.gc-content-nav li a'
-      navBack: '.gc-content-nav-back'
       addToLibraryButton: '.gc-add-to-library-button'
       addNoteButton: '.gc-workout-add-note'
 
     events:
-      'click @ui.navBack': 'navigateBack'
       'click @ui.innerNavLinks': 'changeOverviewActiveTab'
       'click @ui.addToLibraryButton': 'showAddToLibrary'
       'click @ui.contentNavLinks': 'changeActiveTab'
@@ -40,6 +38,14 @@ define [
 
     modelEvents:
       sync: 'modelSaved'
+
+    behaviors:
+
+      navigate_back: true
+
+      stickit:
+        bindings:
+          '.gc-workout-title span': 'name'
 
     templateHelpers: =>
       author: @model.author.toJSON()
@@ -62,9 +68,6 @@ define [
     onShow: ->
       @getRegion('breadcrumbs').show(@breadcrumbs)
       @changeView 'description'
-
-    navigateBack: ->
-      window.history.back()
 
     changeOverviewActiveTab: (ev) ->
       @changeViewEvent(ev, @ui.innerNavItems)

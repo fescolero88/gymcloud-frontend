@@ -12,13 +12,15 @@ module.exports = class CalendarView extends Marionette.LayoutView
 
   events:
     'click @ui.calendarNav': 'navLinkClick'
-    'click .gc-content-nav-back a': 'navBack'
 
   ui:
     calendarNav: '.calendar-nav'
 
   regions:
     calendar: '#calendar-content'
+
+  behaviors:
+    navigate_back: true
 
   navLinkClick: (ev) ->
     ev.preventDefault()

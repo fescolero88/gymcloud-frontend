@@ -4,7 +4,6 @@ module.exports = class ClientGroupNavView extends Marionette.ItemView
 
   events:
     'click @ui.deleteButton': 'deleteButtonClick'
-    'click .gc-content-nav-back a': 'navBack'
 
   ui:
     nav: '.gc-content-nav a'
@@ -30,9 +29,6 @@ module.exports = class ClientGroupNavView extends Marionette.ItemView
         $nav = $(element)
         $nav.parent().addClass('active')
     @trigger 'navView', navView
-
-  navBack: (ev) ->
-    window.history.back()
 
   deleteButtonClick: (ev) ->
     App.vent.trigger 'content-nav:delete'

@@ -7,7 +7,13 @@ define ->
       bindings: @view.bindings || {}
 
     onRender: ->
-      @view.stickit(@options.model, @options.bindings)
+      @view.stickit(@_stickitArgs()...)
 
     onDestroy: ->
-      @view.unstickit(@options.model, @options.bindings)
+      @view.unstickit(@_stickitArgs()...)
+
+    _stickitArgs: ->
+      [
+        _.result(@options, 'model')
+        _.result(@options, 'bindings')
+      ]
