@@ -1,6 +1,6 @@
 define [
   'styles/app.css'
-  'styles/breadcrumbs.css'
+  'styles/breadcrumbs.styl'
   'styles/calendar.css'
   'styles/client.css'
   'styles/clientpage.css'

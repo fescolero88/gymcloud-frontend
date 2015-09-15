@@ -1,8 +1,10 @@
 define [
+  '../../breadcrumbs/view'
   './actions/view'
   './overview/view'
   './template'
 ], (
+  Breadcrumbs
   ActionsView
   OverviewView
   template
@@ -16,14 +18,14 @@ define [
 
     regions:
       manageRegion: '#program-manage'
-      programActionsRegion: 'region[data-name="program-actions"]'
+      actionsRegion: 'region[data-name="program-actions"]'
+      breadcrumbs: 'breadcrumbs'
 
     ui:
       navBack: '.gc-content-nav-back'
       innerNav: '.gc-inner-nav'
       contentNavItems: '.gc-program-content-navs li'
       contentNavLinks: '.gc-program-content-navs li a'
-      programName: '.gc-program-name'
 
     modelEvents:
       destroy: 'programDeleted'
@@ -31,28 +33,18 @@ define [
     events:
       'click @ui.navBack': 'navigateBack'
       'click @ui.contentNavLinks': 'changeActiveTab'
-      'blur @ui.programName': 'saveName'
-      'keypress @ui.programName': 'updateName'
-
-    bindings:
-      '[data-bind="name"]':
-        observe: 'name'
-        events: ['change']
 
     templateHelpers: =>
       isAuthor: @_isAuthor()
 
+    initialize: ->
+      @breadcrumbs = new Breadcrumbs(model: @model)
+      @actionsView = new ActionsView(model: @model) if @_isAuthor()
+
     onShow: ->
-      @stickit()
-      if @_isAuthor()
-        programActionsView = new ActionsView(model: @model)
-        @getRegion('programActionsRegion').show(programActionsView)
-        'add:note'
-
+      @getRegion('breadcrumbs').show(@breadcrumbs)
+      @getRegion('actionsRegion').show(@actionsView) if @_isAuthor()
       @changeView 'program'
-
-    onDestroy: ->
-      @unstickit()
 
     _isAuthor: =>
       @model.get('author_id') is App.request('current_user_id')
@@ -76,14 +68,6 @@ define [
         when 'program'
           view = new OverviewView(model: @model)
           @manageRegion.show(view)
-
-    saveName: ->
-      @model.save() if @model.hasChanged('name')
-
-    updateName: (e) ->
-      if e.which is 13
-        e.preventDefault()
-        @ui.programName.blur()
 
     programDeleted: ->
       id = @model.get 'id'

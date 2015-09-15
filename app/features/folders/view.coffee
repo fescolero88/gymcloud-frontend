@@ -1,10 +1,9 @@
 define [
-  './breadcrumbs/view'
+  '../breadcrumbs/view'
   './entity_list/view' #EntityListView
   './add_entity_modal/view' #AddEntityModalView
   './add_folder_modal/view' #AddFolderModalView
   'views/trainer/global_ewp/duplicate-global-ewp-modal' #DuplicateGlobalEWPModalView
-  'views/general/breadcrumbs/breadcrumbs-view' #BreadcrumbsView
   'collections/ewp_sortable' #EWPSortableCollection
   'models/global_ewp_model' #GlobalEWPModel
   './template'
@@ -14,7 +13,6 @@ define [
   AddEntityModalView
   AddFolderModalView
   DuplicateGlobalEWPModalView
-  BreadcrumbsView
   EWPSortableCollection
   GlobalEWPModel
   template
