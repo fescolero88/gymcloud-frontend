@@ -1,12 +1,6 @@
 define ->
-  loadingCount = 0
-  (App, config) ->
-    $(document).ajaxStart () ->
-      App.vent.trigger('spinner:start') if ++loadingCount is 1
 
-    $(document).ajaxComplete () ->
-      if loadingCount > 0 && --loadingCount is 0
-        App.vent.trigger('')
+  (App, config) ->
 
     $(document).ajaxError (event, jqxhr, settings, thrownError) ->
       if jqxhr.status is 401 && '/login' != Backbone.history.fragment

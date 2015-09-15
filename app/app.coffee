@@ -1,7 +1,7 @@
 define [
   'config'
 
-  'handlers/spinner'
+  'features/spinner/handler'
   'handlers/ajax_setup'
   'handlers/user_authorization'
   'handlers/user_collections_preload'
@@ -55,6 +55,7 @@ define [
     initialize: ->
 
       @on 'start', ->
+
         defer = new $.Deferred
         @_initPromises()
         @_initModules()
@@ -74,6 +75,10 @@ define [
         $.when(dfds...).done =>
           @_initHistory()
           defer.resolve()
+
+        defer.done =>
+          @_isStarted = true
+          @trigger('started')
 
         defer.promise()
 
