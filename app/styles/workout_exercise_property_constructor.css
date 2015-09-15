@@ -32,3 +32,8 @@ span.gc-property-value {
   size: 14px;
   margin-top: 13px;
 }
+
+.gc-property-view .gc-icon-trash {
+  height: 15px;
+  width: 13px;
+}
