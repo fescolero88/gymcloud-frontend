@@ -9,13 +9,6 @@
   position: relative;
 }
 
-#center-spin {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 9999;
-}
-
 .gc-description-editor,
 .gc-note-editor {
   /*overflow: hidden;*/
