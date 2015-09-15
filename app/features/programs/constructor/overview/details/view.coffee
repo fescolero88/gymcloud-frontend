@@ -21,13 +21,16 @@ define [
     regions:
       counters: '.col-xs-4'
 
-    bindings:
-      '[data-bind="description"]':
-        observe: 'description'
-        events: ['change']
-      '[data-bind="note"]':
-        observe: 'note'
-        events: ['change']
+    behaviors:
+
+      stickit:
+        bindings:
+          '[data-bind="description"]':
+            observe: 'description'
+            events: ['change']
+          '[data-bind="note"]':
+            observe: 'note'
+            events: ['change']
 
     modelEvents:
       'change:description': '_saveOnChange'
@@ -47,11 +50,7 @@ define [
       @listenTo(@model, 'note:toggle_editor', @triggerNoteEditor)
 
     onRender: ->
-      @stickit()
       @getRegion('counters').show(@counters)
-
-    onDestroy: ->
-      @unstickit()
 
     triggerNoteEditor: =>
       if !!@model.get('note')

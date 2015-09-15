@@ -26,10 +26,12 @@ define [
       'click @ui.removeWeek': 'removeModel'
       'click @ui.addWorkoutBtn': 'addWorkout'
 
-    bindings:
-      '[data-bind="name"]':
-        observe: 'name'
-        events: ['change']
+    behaviors:
+      stickit:
+        bindings:
+          '[data-bind="name"]':
+            observe: 'name'
+            events: ['change']
 
     initialize: (options) ->
       collection = new Backbone.Collection
@@ -38,11 +40,7 @@ define [
         program: options.program
 
     onRender: ->
-      @stickit()
       @getRegion('workout').show(@workoutList)
-
-    onDestroy: ->
-      @unstickit()
 
     addWorkout: (ev) ->
       ev.preventDefault()

@@ -33,10 +33,13 @@ define [
       'blur @ui.workoutNoteEditor': 'workoutNoteSave'
       'change @ui.workoutPrivacyControls': 'setPrivacy'
 
-    bindings:
-      '[data-bind="description"]': 'description'
-      '[data-bind="note"]': 'note'
-      '[data-bind="is_public"]': 'is_public'
+    behaviors:
+
+      stickit:
+        bindings:
+          '[data-bind="description"]': 'description'
+          '[data-bind="note"]': 'note'
+          '[data-bind="is_public"]': 'is_public'
 
     templateHelpers: =>
       isAuthor: do =>
@@ -51,13 +54,11 @@ define [
       App.vent.on 'workout:notes:add', @showAddNote, @
 
     onShow: ->
-      @stickit(@model)
       @exercisesListRegion.show @exercisesView
       @workoutDescriptionAutoHeight()
       @workoutNoteAutoHeight()
 
     onDestroy: ->
-      @unstickit()
       App.vent.off 'workout:notes:add', @showAddNote
 
     workoutDescriptionAutoHeight: ->

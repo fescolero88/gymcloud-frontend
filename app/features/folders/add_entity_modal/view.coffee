@@ -1,11 +1,9 @@
 define [
-  'views/helpers/form-validation-behaviour'
   'models/exercise'
   'models/workout_template'
   'models/program_template'
   './template'
 ], (
-  FormValidationBehaviour
   Exercise
   WorkoutTemplate
   ProgramTemplate
@@ -17,10 +15,6 @@ define [
 
     className: 'modal-dialog modal-md'
 
-    behaviors:
-      FormValidationBehaviour:
-        behaviorClass: FormValidationBehaviour
-
     ui:
       form: 'form'
       nameInput: '.form-control'
@@ -28,8 +22,13 @@ define [
     events:
       'submit @ui.form': 'submitForm'
 
-    bindings:
-      '[data-bind="name"]': 'name'
+    behaviors:
+
+      form_validation: true
+
+      stickit:
+        bindings:
+          '[data-bind="name"]': 'name'
 
     templateHelpers: ->
       singularName: _.chain(@type).humanize().singularize().value()
@@ -42,13 +41,9 @@ define [
       @listenTo @model, 'error', @_onSyncFail
 
     onRender: =>
-      @stickit()
       setTimeout ( =>
         @ui.nameInput.focus()
       ), 400
-
-    onDestroy: ->
-      @unstickit()
 
     submitForm: (ev) =>
       ev.preventDefault()

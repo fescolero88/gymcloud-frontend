@@ -1,8 +1,6 @@
 define [
-  'views/helpers/form-validation-behaviour'
   './template'
 ], (
-  FormValidationBehaviour
   template
 ) ->
   class ProfileEditModalView extends Marionette.ItemView
@@ -12,25 +10,26 @@ define [
     className: 'modal-dialog'
 
     behaviors:
-      FormValidationBehaviour:
-        behaviorClass: FormValidationBehaviour
+
+      form_validation: true
+
+      stickit:
+        bindings:
+          'input[name="gender"]': 'gender'
+          'input[name="weight"]': 'weight'
+          'input[name="height"]': 'height'
+          'input[name="bodyfat"]': 'bodyfat'
+          'input[name="first_name"]': 'first_name'
+          'input[name="last_name"]': 'last_name'
+          'input[name="location"]': 'location'
+          'input[name="zip"]': 'zip'
+          'input[name="employer"]': 'employer'
+          'input[name="birthday"]': 'birthday'
 
     events:
       'submit @ui.clientForm': 'submitClientForm'
       'change .gc-edit-profile-modal-upload-input': 'showThumbnail'
       'blur form input': 'validateInput'
-
-    bindings:
-      'input[name="gender"]': 'gender'
-      'input[name="weight"]': 'weight'
-      'input[name="height"]': 'height'
-      'input[name="bodyfat"]': 'bodyfat'
-      'input[name="first_name"]': 'first_name'
-      'input[name="last_name"]': 'last_name'
-      'input[name="location"]': 'location'
-      'input[name="zip"]': 'zip'
-      'input[name="employer"]': 'employer'
-      'input[name="birthday"]': 'birthday'
 
     modelEvents:
       'sync': 'onSync'
@@ -43,12 +42,6 @@ define [
     initialize: ->
       Backbone.Validation.bind(this)
       @previousAttributes = @model.toJSON()
-
-    onRender: ->
-      @stickit()
-
-    onDestroy: ->
-      @unstickit()
 
     validateInput: (ev) ->
       $input = $(ev.target)

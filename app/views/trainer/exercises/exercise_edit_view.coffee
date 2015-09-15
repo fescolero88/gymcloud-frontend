@@ -1,12 +1,10 @@
-FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
-
 module.exports = class ExerciseEditView extends Marionette.ItemView
 
   template: require('templates/trainer/exercises/exercise_edit')
 
   behaviors:
-    FormValidationBehaviour:
-      behaviorClass: FormValidationBehaviour
+
+    form_validation: true
 
   modelEvents:
     sync: 'onSync'

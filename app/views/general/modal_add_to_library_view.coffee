@@ -1,15 +1,13 @@
 ModalAddToLibraryLibraryView = require 'views/general/modal_add_to_library_library_view'
 GlobalExercise = require 'models/global_exercise'
 
-FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
-
 module.exports = class ModalAddToLibraryView extends Marionette.LayoutView
 
   template: require('templates/general/modal_add_to_library')
 
   behaviors:
-    FormValidationBehaviour:
-      behaviorClass: FormValidationBehaviour
+
+    form_validation: true
 
   ui:
     form: 'form'

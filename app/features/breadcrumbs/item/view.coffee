@@ -13,22 +13,19 @@ define [
     events:
       'keydown': '_preventEnter'
 
-    bindings:
-      ':el':
-        observe: 'name'
-        events: ['blur']
+    behaviors: ->
+      if @options.isEditable
+        stickit:
+          bindings:
+            ':el':
+              observe: 'name'
+              events: ['blur']
 
     modelEvents:
       'change:name': '_saveName'
 
     initialize: (options) ->
       @isEditable = options.isEditable
-
-    onRender: ->
-      @stickit(@model) if @isEditable
-
-    onDestroy: ->
-      @unstickit(@model) if @isEditable
 
     _saveName: ->
       @model.save() if @model.hasChanged('name')

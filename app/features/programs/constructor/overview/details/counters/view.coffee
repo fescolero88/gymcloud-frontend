@@ -10,9 +10,12 @@ define [
 
     template: template
 
-    bindings:
-      '[data-bind="weeksCount"]': 'weeksCount'
-      '[data-bind="workoutsCount"]': 'workoutsCount'
+    behaviors:
+
+      stickit:
+        bindings:
+          '[data-bind="weeksCount"]': 'weeksCount'
+          '[data-bind="workoutsCount"]': 'workoutsCount'
 
     initialize: (options) ->
       @weekCollection = options.weekCollection
@@ -24,12 +27,6 @@ define [
 
       @listenTo(@weekCollection, 'update', @_update_week_count)
       @listenTo(@workoutsCollection, 'update', @_update_workouts_count)
-
-    onRender: ->
-      @stickit()
-
-    onDestroy: ->
-      @unstickit()
 
     _update_week_count: ->
       count = @weekCollection.length

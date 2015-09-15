@@ -1,15 +1,14 @@
 config = require 'config'
 
 ForgotPasswordModel = require 'models/auth/forgot-password-model'
-FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
 class ForgotPasswordFormView extends Marionette.ItemView
 
   template: require('templates/auth/forgot-password')
 
   behaviors:
-    FormValidationBehaviour:
-      behaviorClass: FormValidationBehaviour
+
+    form_validation: true
 
   ui:
     form: '.gc-forgot-password-form'

@@ -27,7 +27,7 @@ define [
     regions:
       exercises: '#exercises-region'
       modalRegion: '#gc-modal-region'
-      breadcrumbsRegion: '#breadcrumbs'
+      breadcrumbs: 'region[data-name="breadcrumbs"]'
 
     ui:
       title: '.gc-breadcrumbs-title'
@@ -67,7 +67,7 @@ define [
     onShow: =>
       @initSearchSelect()
       @loadItemById @model.get('id')
-      @getRegion('breadcrumbsRegion').show(@breadcrumbs)
+      @getRegion('breadcrumbs').show(@breadcrumbs)
 
     loadItemById: (key) =>
       @listView = new EntityListView

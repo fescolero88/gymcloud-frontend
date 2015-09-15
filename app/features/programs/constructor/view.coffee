@@ -19,7 +19,7 @@ define [
     regions:
       manageRegion: '#program-manage'
       actionsRegion: 'region[data-name="program-actions"]'
-      breadcrumbs: 'breadcrumbs'
+      breadcrumbs: 'region[data-name="breadcrumbs"]'
 
     ui:
       navBack: '.gc-content-nav-back'

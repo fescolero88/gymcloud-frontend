@@ -2,12 +2,14 @@ define [
   'deps/bundles/backbone/bundle'
   './original'
   './dirty_hack'
+  'deps/behaviors'
   'backbone.wreqr'
   'backbone.babysitter'
 ], (
   bBackbone
   oMarionette
   DirtyHack
+  Behaviors
 )->
 
   oMarionette
@@ -15,4 +17,5 @@ define [
   bBackbone.Marionette = oMarionette
   _.extend(oMarionette.View.prototype, bBackbone.Stickit.ViewMixin)
   DirtyHack(oMarionette)
+  oMarionette.Behaviors.behaviorsLookup = -> Behaviors
   oMarionette

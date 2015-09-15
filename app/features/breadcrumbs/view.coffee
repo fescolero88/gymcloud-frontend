@@ -23,7 +23,6 @@ define [
       @_getBreadcrumbs(@model)
 
     _getBreadcrumbs: (model) ->
-      name = model.get('name')
       @collection.unshift(model)
       parent = model.parent
       @_getBreadcrumbs(parent) if parent?.get('parent_id') != null

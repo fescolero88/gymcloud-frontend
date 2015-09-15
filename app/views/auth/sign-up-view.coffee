@@ -5,15 +5,13 @@ SignUpStep1Model = require 'models/auth/signup-step1-model'
 SignUpStep2Model = require 'models/auth/signup-step2-model'
 LoginModel = require 'models/auth/login-model'
 
-FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
-
 class SignUpStep1 extends Marionette.ItemView
 
   template: require('templates/auth/sign-up-1')
 
   behaviors:
-    FormValidationBehaviour:
-      behaviorClass: FormValidationBehaviour
+
+    form_validation: true
 
   ui:
     types: '.gc-trainer-type'
@@ -64,8 +62,8 @@ class SignUpStep2 extends Marionette.ItemView
   template: require('templates/auth/sign-up-2')
 
   behaviors:
-    FormValidationBehaviour:
-      behaviorClass: FormValidationBehaviour
+
+    form_validation: true
 
   ui:
     form: '#gc-signup-step-2'

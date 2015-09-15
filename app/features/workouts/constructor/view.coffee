@@ -19,7 +19,7 @@ define [
 
     regions:
       manageRegion: '#workout-manage'
-      breadcrumbs: 'breadcrumbs'
+      breadcrumbs: 'region[data-name="breadcrumbs"]'
 
     ui:
       innerNav: '.gc-inner-nav'
@@ -56,12 +56,10 @@ define [
       @listenTo(@workoutExerciseModel, 'sync', @onExerciseAdded)
 
     onDestroy: ->
-      @unstickit()
       App.vent.off 'drag:complete', @assignExercise
       App.vent.off 'workout:add:exercise', @assignExercise
 
     onShow: ->
-      @stickit()
       @getRegion('breadcrumbs').show(@breadcrumbs)
       @changeView 'description'
 
