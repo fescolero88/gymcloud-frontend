@@ -199,7 +199,8 @@ body > region[data-name="app"] > .container-fluid {
 .gc-content-nav li + li {
   margin-left: 3px;
 }
-.gc-content-nav li a {
+.gc-content-nav li a,
+.gc-content-nav li span {
   display: block;
   font-size: 18px;
   text-transform: uppercase;
@@ -216,7 +217,8 @@ body > region[data-name="app"] > .container-fluid {
 .gc-content-nav li a:hover {
   color: #3398db;
 }
-.gc-content-nav li.active a {
+.gc-content-nav li.active a,
+.gc-content-nav li.active span {
   padding-bottom: 1px;
   color: #3398db;
   border-bottom: 2px solid #3398db;

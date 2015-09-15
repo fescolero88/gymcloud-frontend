@@ -14,14 +14,15 @@ define [
     initialize: ->
       @modalView = new GroupFormModalView(model: @model)
 
-    onRender: ->
+    onShow: ->
       @clientForm.show(@modalView)
 
     showClientEditModal: (ev) ->
       ev.preventDefault()
 
-      @listenTo clientFormModal, 'modal:close', =>
+      @listenTo @modalView, 'closeModal', =>
+        $('.modal-backdrop.fade.in').remove()
         @ui.clientFormModal.modal('hide')
-      @listenTo(clientFormModal, 'avatarChange', @render)
+      @listenTo(@modalView, 'avatarChange', @render)
 
       @ui.clientFormModal.modal('show')

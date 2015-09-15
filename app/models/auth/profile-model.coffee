@@ -4,7 +4,7 @@ define [
   UserProfile
 ) ->
 
-  class CurrentUserModel extends Backbone.Model
+  class CurrentUserModel extends Backbone.NestedModel
 
     url: '/users/me'
 

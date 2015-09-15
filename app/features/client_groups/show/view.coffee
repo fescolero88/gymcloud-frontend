@@ -1,12 +1,14 @@
 define [
   'views/trainer/clients/client-group-view'
   './header/view'
-  'views/trainer/clients/client-group-nav-view'
+  './navigation/view'
+  './clients/view'
   './template'
 ], (
   ClientGroupView
   ClientGroupHeaderView
   ClientGroupNavView
+  MembersView
   template
 ) ->
 
@@ -23,9 +25,25 @@ define [
       @navView = new ClientGroupNavView
         itemId: @itemId
         viewType: @viewType
+      @centerView = new MembersView
+        groupId: @model.id
+        clientGroup: @model
+        collection: @model.clients
 
-      @listenTo @navView, 'navView', @loadCenterView
+      @listenTo(@navView, 'navView', @loadCenterView)
+      @listenTo(@navView, 'content-nav:delete', @_showRemoveModal)
 
       App.vent.on 'drag:complete', @assignDragged
 
-      @on 'load:view', @loadView
+      @on('load:view', @loadView)
+
+
+    onShow: ->
+      @getRegion('header').show(@headerView)
+      @getRegion('nav').show(@navView)
+      @getRegion('leftside').show(@centerView)
+      # @getRegion('rightside').show(@activityView)
+      # @navView.navigate @assign
+
+    _showRemoveModal: ->
+      @centerView.showRemoveClient()
