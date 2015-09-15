@@ -1,10 +1,12 @@
 define [
+  '../../breadcrumbs/view'
   './overview/view'
   'views/trainer/workouts/workout_global_video_view'
   './assignment/view'
   'models/workout_exercise'
   './template'
 ], (
+  Breadcrumbs
   WorkoutGlobalOverviewView
   WorkoutGlobalVideoView
   WorkoutGlobalAssignView
@@ -17,9 +19,9 @@ define [
 
     regions:
       manageRegion: '#workout-manage'
+      breadcrumbs: 'region[data-name="breadcrumbs"]'
 
     ui:
-      workoutTitle: '.gc-workout-title span'
       innerNav: '.gc-inner-nav'
       innerNavItems: '.gc-inner-nav li'
       innerNavLinks: '.gc-inner-nav li a'
@@ -32,17 +34,12 @@ define [
     events:
       'click @ui.navBack': 'navigateBack'
       'click @ui.innerNavLinks': 'changeOverviewActiveTab'
-      'blur @ui.workoutTitle': 'workoutTitleSave'
       'click @ui.addToLibraryButton': 'showAddToLibrary'
       'click @ui.contentNavLinks': 'changeActiveTab'
       'click @ui.addNoteButton': 'triggerAddNote'
-      'keypress @ui.workoutTitle': 'saveTitleOnEnter'
 
-    behaviors:
-
-      stickit:
-        bindings:
-          '.gc-workout-title span': 'name'
+    modelEvents:
+      sync: 'modelSaved'
 
     templateHelpers: =>
       author: @model.author.toJSON()
@@ -51,7 +48,7 @@ define [
 
     initialize: (data) =>
       @isDroppable = true
-
+      @breadcrumbs = new Breadcrumbs(model: @model)
       App.vent.on 'drag:complete', @assignExercise
       App.vent.on 'workout:add:exercise', @assignExercise
 
@@ -63,6 +60,7 @@ define [
       App.vent.off 'workout:add:exercise', @assignExercise
 
     onShow: ->
+      @getRegion('breadcrumbs').show(@breadcrumbs)
       @changeView 'description'
 
     navigateBack: ->
@@ -97,14 +95,6 @@ define [
       view = new Klass(model: @model)
       @getRegion('manageRegion').show(view)
 
-    workoutTitleSave: =>
-      if @model.hasChanged()
-        @model.save().success ->
-          App.request 'messenger:show',
-            hideAfter: 5
-            message: "Workout's title saved."
-            type: 'success'
-
     showAddToLibrary: (ev) =>
       ev.preventDefault()
       App.vent.trigger 'base:addToLibraryModal', type: 'workouts', model: @model
@@ -130,7 +120,7 @@ define [
     triggerAddNote: ->
       App.vent.trigger 'workout:notes:add'
 
-    saveTitleOnEnter: (ev) ->
-      if ev.which in [13, 27]
-        ev.preventDefault()
-        @ui.workoutTitle.blur()
+    modelSaved: ->
+      App.request 'messenger:show',
+        message: "Workout Updated Successfully"
+        type: 'success'

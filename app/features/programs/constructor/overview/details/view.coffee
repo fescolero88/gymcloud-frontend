@@ -33,8 +33,8 @@ define [
             events: ['change']
 
     modelEvents:
-      'change:name': '_saveOnChange'
       'change:description': '_saveOnChange'
+      'change:note': '_saveOnChange'
 
     templateHelpers: =>
       hasNote: !!@model.get('note')

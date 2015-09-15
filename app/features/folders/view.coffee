@@ -1,10 +1,9 @@
 define [
-  './breadcrumbs/view'
+  '../breadcrumbs/view'
   './entity_list/view' #EntityListView
   './add_entity_modal/view' #AddEntityModalView
   './add_folder_modal/view' #AddFolderModalView
   'views/trainer/global_ewp/duplicate-global-ewp-modal' #DuplicateGlobalEWPModalView
-  'views/general/breadcrumbs/breadcrumbs-view' #BreadcrumbsView
   'collections/ewp_sortable' #EWPSortableCollection
   'models/global_ewp_model' #GlobalEWPModel
   './template'
@@ -14,7 +13,6 @@ define [
   AddEntityModalView
   AddFolderModalView
   DuplicateGlobalEWPModalView
-  BreadcrumbsView
   EWPSortableCollection
   GlobalEWPModel
   template
@@ -29,7 +27,7 @@ define [
     regions:
       exercises: '#exercises-region'
       modalRegion: '#gc-modal-region'
-      breadcrumbsRegion: '#breadcrumbs'
+      breadcrumbs: 'region[data-name="breadcrumbs"]'
 
     ui:
       title: '.gc-breadcrumbs-title'
@@ -69,7 +67,7 @@ define [
     onShow: =>
       @initSearchSelect()
       @loadItemById @model.get('id')
-      @getRegion('breadcrumbsRegion').show(@breadcrumbs)
+      @getRegion('breadcrumbs').show(@breadcrumbs)
 
     loadItemById: (key) =>
       @listView = new EntityListView

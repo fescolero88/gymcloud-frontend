@@ -12,12 +12,17 @@ define [
 
     childView: BreadcrumbsItemView
 
+    childViewOptions: (model, index) ->
+      isEditable = !!model.get('folder_id')
+      options = { isEditable: isEditable }
+      options.attributes = { contenteditable: isEditable } if isEditable
+      options
+
     initialize: (options) ->
       @collection = new Backbone.Collection
       @_getBreadcrumbs(@model)
 
     _getBreadcrumbs: (model) ->
-      name = model.get('name')
-      @collection.unshift(title: name)
+      @collection.unshift(model)
       parent = model.parent
       @_getBreadcrumbs(parent) if parent?.get('parent_id') != null

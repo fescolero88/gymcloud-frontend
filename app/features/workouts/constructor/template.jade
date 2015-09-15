@@ -4,9 +4,7 @@
       .col-xs-7.gc-clients-nav-left
         a.gc-content-nav-back
           span.fa.fa-chevron-left
-        .gc-workout-title
-          h2
-            span(contenteditable='true')=name
+        region(data-name="breadcrumbs")
       .col-xs-5.gc-exercises-nav-right.text-right
         // workout tabs
         ul.gc-content-nav
