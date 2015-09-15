@@ -10,7 +10,6 @@ module.exports = class ProgramGlobalView extends Marionette.LayoutView
     programActionsRegion: 'region[data-name="program-actions"]'
 
   ui:
-    navBack: '.gc-content-nav-back'
     innerNav: '.gc-inner-nav'
     contentNavItems: '.gc-program-content-navs li'
     contentNavLinks: '.gc-program-content-navs li a'
@@ -18,6 +17,10 @@ module.exports = class ProgramGlobalView extends Marionette.LayoutView
 
   modelEvents:
     destroy: 'programDeleted'
+
+  behaviors:
+
+    navigate_back: true
 
   onShow: ->
     if @model.get('author').id is App.request('current_user_id')
@@ -27,13 +30,9 @@ module.exports = class ProgramGlobalView extends Marionette.LayoutView
     @changeView 'program'
 
   events:
-    'click @ui.navBack': 'navigateBack'
     'click @ui.contentNavLinks': 'changeActiveTab'
     'blur @ui.programName': 'updateTitleOnBlur'
     'keypress @ui.programName': 'updateName'
-
-  navigateBack: =>
-    window.history.back()
 
   changeActiveTab: (ev) ->
     @changeViewEvent(ev, @ui.contentNavItems)

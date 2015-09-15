@@ -20,16 +20,18 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
     privateMarker: '.gc-privacy-private'
     innerNavItems: '.gc-content-nav li'
     innerNavLinks: '.gc-content-nav li a'
-    backButton: '.gc-content-nav-back'
     addToLibraryButton: '.gc-add-to-library-button'
     removeFromLibraryButton: '.gc-remove-from-library-button'
 
   events:
     'click @ui.innerNavLinks': 'changeViewEvent'
-    'click @ui.backButton': 'goBack'
     'click @ui.innerNavLinks': 'changeViewEvent'
     'click @ui.addToLibraryButton': 'showAddToLibrary'
     'click @ui.removeFromLibraryButton': 'removeFromLibrary'
+
+  behaviors:
+
+    navigate_back: true
 
   initialize: (data) =>
     @breadcrumbs = data.breadcrumbs
@@ -84,10 +86,6 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
     @listenToOnce @exerciseEditView, 'exercise:back', =>
       @changeView 'overview'
     @manageRegion.show @exerciseEditView
-
-  goBack: (ev) ->
-    ev.preventDefault()
-    window.history.back()
 
   showAddToLibrary: (ev) =>
     ev.preventDefault()

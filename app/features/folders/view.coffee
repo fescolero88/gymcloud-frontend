@@ -33,7 +33,6 @@ define [
       title: '.gc-breadcrumbs-title'
       liveSearch: '.live-search'
       mainCheckbox: '.gc-content-nav-checkall input'
-      backButton: '.gc-content-nav-back'
       itemsRegion: '#exercises-region'
       addExerciseButton: '.gc-show-add-exercise-modal'
       addExerciseFolderButton: '.gc-show-add-exercise-folder-modal'
@@ -49,7 +48,10 @@ define [
       'click @ui.addExerciseFolderButton': 'showAddFolderModal'
       'click @ui.duplicateButton': 'showDuplicateEWPModal'
       'click @ui.deleteButton': 'rmAssign'
-      'click @ui.backButton': 'goBack'
+
+    behaviors:
+
+      navigate_back: true
 
     initialize: (data) =>
       @exercisesList = data.items
@@ -245,10 +247,6 @@ define [
           entityId = entity.exercise_id || entity.workout_id || entity.program_id
           model = @collection.where({key: entityId})
           App.vent.trigger "#{@typeName}:folder:#{folderId}:model:added", model
-
-    goBack: (ev) ->
-      ev.preventDefault()
-      window.history.back()
 
     showListIfHidden: ->
       if @ui.listWrapper.hasClass 'hidden'

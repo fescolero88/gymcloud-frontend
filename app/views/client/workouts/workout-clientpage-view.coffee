@@ -14,20 +14,19 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
     innerNavLinks: '.gc-inner-nav li a'
     contentNavItems: '.gc-content-nav li'
     contentNavLinks: '.gc-content-nav li a'
-    navBack: '.gc-content-nav-back'
     addToLibraryButton: '.gc-add-to-library-button'
     addNoteButton: '.gc-workout-add-note'
 
   events:
-    'click @ui.navBack': 'navigateBack'
     'click @ui.innerNavLinks': 'changeOverviewActiveTab'
     'click @ui.contentNavLinks': 'changeActiveTab'
 
+  behaviors:
+
+    navigate_back: true
+
   onShow: =>
     @changeView 'description'
-
-  navigateBack: =>
-    window.history.back()
 
   changeOverviewActiveTab: (ev) ->
     @changeViewEvent(ev, @ui.innerNavItems)

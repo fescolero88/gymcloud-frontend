@@ -12,7 +12,16 @@ define [
 
   class ConstructorLayoutView extends Marionette.LayoutView
 
-    className: 'gc-main-workspace row'
+    behaviors:
+
+      navigate_back: true
+
+      stickit:
+        bindings:
+          '[data-bind="name"]':
+            observe: 'name'
+            events: ['change']
+
 
     template: template
 
@@ -22,7 +31,6 @@ define [
       breadcrumbs: 'region[data-name="breadcrumbs"]'
 
     ui:
-      navBack: '.gc-content-nav-back'
       innerNav: '.gc-inner-nav'
       contentNavItems: '.gc-program-content-navs li'
       contentNavLinks: '.gc-program-content-navs li a'
@@ -31,7 +39,6 @@ define [
       destroy: 'programDeleted'
 
     events:
-      'click @ui.navBack': 'navigateBack'
       'click @ui.contentNavLinks': 'changeActiveTab'
 
     templateHelpers: =>
@@ -48,9 +55,6 @@ define [
 
     _isAuthor: =>
       @model.get('author_id') is App.request('current_user_id')
-
-    navigateBack: ->
-      window.history.back()
 
     changeActiveTab: (ev) ->
       @_changeViewEvent(ev, @ui.contentNavItems)
