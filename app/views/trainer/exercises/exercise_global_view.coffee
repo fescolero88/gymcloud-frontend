@@ -1,5 +1,6 @@
 ExerciseGlobalOverviewView = require 'views/trainer/exercises/exercise_global_overview_view'
 ExerciseGlobalAssignView = require 'views/trainer/exercises/exercise_global_assign_view'
+ExerciseGlobalAssignVideoView = require 'views/trainer/exercises/exercise_global_assign_video_view'
 
 ExerciseEditView = require 'views/trainer/exercises/exercise_edit_view'
 
@@ -76,7 +77,8 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
         @listenTo @overviewView, 'exercise:edit', @enableExerciseEditView
         @manageRegion.show @overviewView
       when 'video'
-        true
+        view = new ExerciseGlobalAssignVideoView model: @model
+        @manageRegion.show view
       when 'assign'
         @assignView = new ExerciseGlobalAssignView model: @model
         @manageRegion.show @assignView
