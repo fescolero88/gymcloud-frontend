@@ -1,10 +1,11 @@
 define [
   'models/user_profile'
+  'backbone-nested'
 ], (
   UserProfile
 ) ->
 
-  class CurrentUserModel extends Backbone.Model
+  class CurrentUserModel extends Backbone.NestedModel
 
     url: '/users/me'
 
