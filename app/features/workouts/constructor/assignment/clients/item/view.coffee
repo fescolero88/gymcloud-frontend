@@ -29,10 +29,11 @@ define [
       'clientAssignees'
     ]
 
-    templateHelpers: ->
+    templateHelpers: =>
       helpers = {}
       for option in @assignOptions
         helpers[option] = this[option]
+      helpers.isMe = @_isMe()
       helpers
 
     initialize: (options) ->
@@ -44,6 +45,9 @@ define [
       ev.preventDefault()
       if @isAssigned then @_unassign() else @_assign()
       @triggerMethod('assignees:changed')
+
+    _isMe: ->
+      @model.id == App.request('current_user_id')
 
     _unassign: ->
       @assignment.destroy().then =>

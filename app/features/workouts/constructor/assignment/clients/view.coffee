@@ -17,15 +17,25 @@ define [
     childViewContainer: 'ul.gc-clients-list'
 
     childViewOptions: (client, _index) ->
-      assignment: @_getAssigmentBy(client)
-      assignedVersion: @_assignedVersionFor(client)
-      isAssigned: @_isAssignedTo(client)
-      isOutdated: @_isOutdatedFor(client)
-      workout: @workout
-      clientAssignees: @clientAssignees
+      options =
+        assignment: @_getAssigmentBy(client)
+        assignedVersion: @_assignedVersionFor(client)
+        isAssigned: @_isAssignedTo(client)
+        isOutdated: @_isOutdatedFor(client)
+        workout: @workout
+        clientAssignees: @clientAssignees
+      if client.id == App.request('current_user_id')
+        options.attributes = style: 'background-color: #E3F2FD'
+      options
 
     childEvents:
       'assignees:changed': @_flushCache
+
+    viewComparator: (model) ->
+      if model.id == App.request('current_user_id')
+        0 # will be first
+      else
+        model.id
 
     initialize: (options) ->
       @clientAssignees = options.clientAssignees
