@@ -18,6 +18,7 @@
       button(type="button", class="btn btn-sm btn-primary gc-custom gc-property-label")
         i.gc-icon-bars
         | &nbsp;
-        span.gc-property-value-name-label #{personal_property.name}: #{value} #{personal_property.global_property.unit}
+        span.gc-property-value-name-label
+          | #{personal_property.name}: #{value} #{personal_property.global_property.unit}
       button(type="button", class="gc-remove btn btn-sm btn-primary gc-custom")
         i.gc-icon-trash
