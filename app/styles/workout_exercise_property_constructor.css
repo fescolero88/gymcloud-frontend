@@ -36,4 +36,25 @@ span.gc-property-value {
 .gc-property-view .gc-icon-trash {
   height: 15px;
   width: 13px;
+  visibility: hidden;
+}
+
+.gc-property-view .gc-remove {
+  background: none;
+}
+
+.gc-property-view .gc-property-label {
+  border-right: 0;
+}
+
+.gc-property-view .gc-property-label > span {
+  margin-right: -10px;
+}
+
+.gc-property-view:hover .gc-icon-trash {
+  visibility: visible;
+}
+
+.gc-property-view:hover .gc-property-label > span {
+  margin-right: 0;
 }
