@@ -13,6 +13,7 @@ module.exports =
 
   entry:
     main: 'app'
+    pre: 'pre'
 
   output:
     path: path.resolve('build')
