@@ -1,5 +1,6 @@
 define [
   'models/user_profile'
+  'backbone-nested'
 ], (
   UserProfile
 ) ->
