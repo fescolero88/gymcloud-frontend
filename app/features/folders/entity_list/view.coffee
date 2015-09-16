@@ -1,7 +1,9 @@
 define [
   './item/view'
+  'dragula'
 ], (
   EntityItemView
+  Dragula
 ) ->
 
   class EntityListView extends Marionette.CollectionView
@@ -23,16 +25,39 @@ define [
 
     childViewOptions: =>
       'type': @typeName
+      'dragula': @dragula
 
     childEvents:
       'item:clicked': 'itemSelected'
+      'folder:change': 'changeFolder'
 
     initialize: (data) =>
       @on 'items:delete', @deleteItems
       @typeName = data.type
+      @initDragula()
+
+    initDragula: ->
+      options =
+        revertOnSpill: true
+        accepts: (el, target, source, sibling) ->
+          target.classList.contains 'gc-folder'
+        moves: (el, source, handle) ->
+          el.classList.contains('gc-folder-item')
+
+      @dragula = Dragula [], options
+
+    onShow: ->
+      @dragula.containers.push @el
 
     itemSelected: =>
       @trigger 'item:clicked'
+
+    changeFolder: (view, id) =>
+      item = @collection.findWhere 'id': id
+      if item
+        item.save
+          'folder_id': view.model.get 'id'
+        @collection.remove item
 
     highlightNew: (model) =>
       if model

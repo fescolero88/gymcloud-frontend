@@ -27,7 +27,7 @@ textarea.gc-description-editor:hover {
   cursor: pointer;
 }
 
-textarea.gc-description-editor:focus, 
+textarea.gc-description-editor:focus,
 .gc-note-editor.focus-state {
   box-shadow: none;
   outline: none;
@@ -49,4 +49,14 @@ textarea.gc-description-editor:focus,
   -webkit-user-select: text;
   user-select: text;
 }
-   
+
+li.gu-mirror {
+  list-style-type: none;
+}
+.gc-folder .gu-transit {
+  display: none;
+}
+.gc-folder.gc-folder-droppable-state {
+  border: 1px dashed #3a99d8!important;
+  background-color: rgba(58,153,216,0.2);
+}

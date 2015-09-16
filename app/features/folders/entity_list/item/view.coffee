@@ -24,9 +24,18 @@ define [
         bindings:
           '[data-bind="name"]': 'name'
           '[data-bind="updated_at"]': 'updated_at'
+          ':el':
+            observe: ['folder_id', 'id']
+            update: ($el, val, model, options) =>
+              $el.attr 'data-id', model.get 'id'
+              if not model.get 'folder_id'
+                $el.addClass 'gc-folder'
+              else
+                $el.addClass 'gc-folder-item'
 
     initialize: (options) =>
       @type = options.type
+      @dragula = options.dragula
 
     templateHelpers: ->
       type: @type
@@ -39,3 +48,16 @@ define [
 
     itemChecked: (ev) =>
       @trigger 'item:clicked'
+
+    onShow: ->
+      if not @model.get 'folder_id'
+        @dragula.containers.push @el
+        @dragula.on 'drop', (el, container) =>
+          if container is @el
+            @triggerMethod 'folder:change', parseInt(el.getAttribute('data-id'))
+        @dragula.on 'over', (el, container) =>
+          if container and container.classList.contains 'gc-folder'
+            container.classList.add 'gc-folder-droppable-state'
+        @dragula.on 'out', (el, container) =>
+          if container and container.classList.contains 'gc-folder'
+            container.classList.remove 'gc-folder-droppable-state'
