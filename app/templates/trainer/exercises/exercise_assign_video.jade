@@ -1,0 +1,16 @@
+.gc-video-player
+  .gc-video-preview
+    img.img-responsive.gc-preview
+    a.gc-video-play(href="#")
+  .gc-video-details
+    h5.gc-video-title(data-bind="title")
+      | Lorem Ipsum Dolor Amet
+    div
+      span.gc-video-timer
+        i.gc-video-time-icon
+        span(data-bind="duration")
+      span.gc-video-type
+        i.gc-video-icon
+        span(data-bind="filter")
+    button(class="btn btn-primary gc-custom btn-block btn-sm gc-assign-video", type="button")
+      | assign this video
