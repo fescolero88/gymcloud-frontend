@@ -8,8 +8,13 @@
 </div>
 <div class="gc-clientpage-exercises-cell gc-cell-property">
   <ul class="workout-exercise-properties">
-    {{#each properties}}
-      <li class="gc-workout-exercise-prop"><i class="fa fa-align-left"></i>{{value}} {{name}}</li>
+    {{#each exercise_properties}}
+      <li class="gc-workout-exercise-prop">
+        <span class="gc-tag gc-property">
+          <i class="fa fa-align-left"></i>
+          {{value}} {{personal_property.global_property.name}}
+        </span>
+      </li>
     {{/each}}
   </ul>
 </div>
