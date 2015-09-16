@@ -10,4 +10,6 @@ define [
 
   config = $.extend(true, {}, base)
   config.env = 'staging'
+  config.mobile =
+    urls: ''
   after(config)
