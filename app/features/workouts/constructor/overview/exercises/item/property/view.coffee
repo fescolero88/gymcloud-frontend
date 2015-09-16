@@ -50,6 +50,7 @@ define [
 
     removeProperty: (ev) ->
       ev.stopImmediatePropagation()
+      ev.preventDefault();
       @model.destroy()
 
     selectProperty: (ev) ->

@@ -32,3 +32,29 @@ span.gc-property-value {
   size: 14px;
   margin-top: 13px;
 }
+
+.gc-property-view .gc-icon-trash {
+  height: 15px;
+  width: 13px;
+  visibility: hidden;
+}
+
+.gc-property-view .gc-remove {
+  background: none;
+}
+
+.gc-property-view .gc-property-label {
+  border-right: 0;
+}
+
+.gc-property-view .gc-property-label > span {
+  margin-right: -10px;
+}
+
+.gc-property-view:hover .gc-icon-trash {
+  visibility: visible;
+}
+
+.gc-property-view:hover .gc-property-label > span {
+  margin-right: 0;
+}
