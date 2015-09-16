@@ -1,12 +1,13 @@
 define [
   'jquery_original'
   './base'
+  './after'
 ], (
   $
   base
+  after
 ) ->
 
   config = $.extend(true, {}, base)
   config.env = 'staging'
-  config.api.url = config.api.urls[config.env]
-  config
+  after(config)

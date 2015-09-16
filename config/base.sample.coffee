@@ -8,3 +8,10 @@ module.exports =
       production: '//api.gymcloud.com'
       alpha_staging: '//alpha.s.gymcloud.com'
       test: ''
+  mobile:
+    url: undefined
+    urls:
+      development: '#'
+      staging: '//mobile.s.gymcloud.com'
+      production: '//mobile.gymcloud.com'
+      test: '#'
