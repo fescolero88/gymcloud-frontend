@@ -11,7 +11,7 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
     exercisesListRegion: '#gc-exercises-list-region'
 
   templateHelpers: =>
-    hasNote: !!@model.get 'notes'
+    hasNote: !!@model.get 'note'
     hasDescription: !!@model.get 'description'
 
   initialize: (data) ->

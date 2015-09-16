@@ -2,7 +2,7 @@
   span.gc-workout-exercise-sort(data-id=exercise_id, data-position=position, data-workout-id=id, maxlength='3')
 .gc-exercises-cell
   .gc-workout-exercise-circle(data-letter='A')
-    | 1
+    = order_name
 .gc-exercises-cell.gc-exercise-details
   .gc-exercise-item-detail
     a.gc-workout-exercise-name(href="#tr/global/exercises/id/#{exercise_id}")=name

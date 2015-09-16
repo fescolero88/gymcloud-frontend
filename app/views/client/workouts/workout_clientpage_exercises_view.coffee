@@ -1,14 +1,26 @@
+ExercisePropertyItem = require('features/exercise_properties/view')
+
 class EmptyView extends Marionette.ItemView
 
   template: require('templates/client/workouts/workout_clientpage_exercises_empty')
 
-class ExercisesItemView extends Marionette.ItemView
+class ExercisesItemView extends Marionette.CompositeView
 
   template: require('templates/client/workouts/workout_clientpage_exercise_item')
 
   tagName: 'li'
 
   className: 'gc-workout-exercise-item'
+
+  childViewContainer: '.workout-exercise-properties'
+
+  childView: ExercisePropertyItem
+
+  initialize: ->
+    @collection = new Backbone.Collection(@model.get('exercise_properties'))
+
+  viewComparator: (model) ->
+    model.get('personal_property').name
 
 module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeView
 

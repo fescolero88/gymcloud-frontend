@@ -25,7 +25,7 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
 
     navigate_back: true
 
-  onShow: =>
+  onShow: ->
     @changeView 'description'
 
   changeOverviewActiveTab: (ev) ->
