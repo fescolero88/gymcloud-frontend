@@ -80,7 +80,7 @@ define [
       target = event.currentTarget
       label = target.innerHTML = @trimLabel(target.innerHTML)
       target.removeAttribute 'contenteditable'
-      @model.save(note: label)
+      @model.save(order_name: label)
 
     enableCheckbox: =>
       @ui.setPropertyCheckboxWrapper.removeClass 'hidden'
