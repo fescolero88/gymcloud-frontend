@@ -22,6 +22,10 @@ define [
       @collection = new Backbone.Collection
       @_getBreadcrumbs(@model)
 
+    reinitCollection: ->
+      @collection.reset()
+      @_getBreadcrumbs(@model)
+
     _getBreadcrumbs: (model) ->
       @collection.unshift(model)
       parent = model.parent

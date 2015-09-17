@@ -25,10 +25,16 @@ define [
       'change:name': '_saveName'
 
     initialize: (options) ->
+      @oldName = @model.get('name')
       @isEditable = options.isEditable
 
     _saveName: ->
-      @model.save() if @model.hasChanged('name')
+      if @model.hasChanged('name') && @model.get('name') != @oldName
+        @model.save()
+          .then =>
+            @oldName = @model.get('name')
+          .fail (_xhr, _textStatus, _errorThrown) =>
+            @model.set(name: @oldName)
 
     _preventEnter: (ev) ->
       if ev.which in [13, 27]
