@@ -1,5 +1,6 @@
 path = require('path')
 webpack = require('webpack')
+ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 require('dotenv').load()
 
@@ -18,8 +19,8 @@ module.exports =
   output:
     path: path.resolve('build')
     publicPath: 'build/'
-    filename: 'app-[name].js'
-    chunkFilename: '[chunkhash].js'
+    filename: '[name].js'
+    chunkFilename: '[id].js'
 
   resolve:
 
@@ -85,11 +86,13 @@ module.exports =
       }
       {
         test: /\.css$/
-        loader: 'style!css'
+        # loader: 'style!css'
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader', publicPath: '')
       }
       {
         test: /\.styl$/
-        loader: 'style!css!stylus'
+        # loader: 'style!css!stylus'
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!stylus-loader', publicPath: '')
       }
       {
         test: /\.scss$/
@@ -145,6 +148,8 @@ module.exports =
         Backbone: 'deps/bundles/backbone/original'
         Marionette: 'deps/bundles/marionette/original'
       )
+    ,
+      new ExtractTextPlugin("[name].css")
     ,
       new webpack.ResolverPlugin(
         new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('bower.json', ['main'])
