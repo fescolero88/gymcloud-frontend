@@ -1,0 +1,64 @@
+.row.gc-exercise-info
+  .col-xs-6.text-right
+    if !isAuthor
+      .gc-exercise-author-info
+        a.gc-exercise-author-avatar.gc-exercise-author-avatar-exist(href="#users/#{author.id}")
+          img(src='app/images/portrait.jpg')
+        p.gc-exercise-author-name
+          | Trainer
+          br
+          a(href="#users/#{author.id}")
+            | #{author.first_name} #{author.last_name}
+      .gc-rating
+        div
+          span.gc-rating-count 25
+          ul.gc-rating-stars
+            li
+              i.fa.fa-star
+            li
+              i.fa.fa-star
+            li
+              i.fa.fa-star
+            li
+              i.fa.fa-star
+            li
+              i.fa.fa-star-o
+        p.gc-rating-used
+          | Used by 
+          i.glyphicon.glyphicon-user
+          |  250
+
+.form-group
+  textarea.gc-exercise-description-editor.form-control(type='text', placeholder='Add description here...')
+if video_url
+  .gc-exercises-exercise-video
+    iframe(width='853', height='480', src=video_url, frameborder='0', allowfullscreen='')
+  .row.gc-exercise-video-controls
+    .col-xs-6
+      a.gc-exercises-exercise-video-link(href=video_url, target='_blank')
+        = name
+        i.fa.fa-youtube-play
+        span
+          | Youtube
+    .col-xs-6.text-right
+      button.btn.btn-link.gc-exercise-video-update
+        | Update video
+      button.btn.btn-link.gc-exercise-video-delete
+        | Delete
+else
+  .gc-exercises-exercise-video-placeholder.text-center
+    .gc-exercises-exercise-video-placeholder-icon
+      i.glyphicon.glyphicon-play
+    p
+      | Seems you don't have any videos.
+      br
+      | You can either upload one or select from a list.
+    button.btn.btn-primary
+      | Add video to this exercise
+if isAuthor
+  .gc-exercise-author-controls.row
+    .col-xs-6
+    .col-xs-6.text-right
+      region#gc-privacy-button-region(data-name="privacy-buttons")
+      button.btn.btn-danger.gc-exercise-delete-button
+        | Delete
