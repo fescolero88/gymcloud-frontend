@@ -1,6 +1,6 @@
 define ->
 
-  class ExerciseVideoModel extends Backbone.Model
+  class VideosModel extends Backbone.Model
 
     defaults:
       duration: undefined

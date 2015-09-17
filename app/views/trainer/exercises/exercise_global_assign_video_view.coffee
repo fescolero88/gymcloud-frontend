@@ -1,7 +1,7 @@
 define [
   'templates/trainer/exercises/exercise_global_assign_video'
   'views/trainer/exercises/exercise_assign_videos_view'
-  'collections/exercise_videos'
+  'collections/videos_collection'
 ], (
   template
   ExerciseAssignVideosView
