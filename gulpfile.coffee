@@ -1,6 +1,7 @@
 gulp = require('gulp')
 gutil = require('gulp-util')
 clean = require('gulp-clean')
+plumber = require('gulp-plumber')
 lazypipe = require('lazypipe')
 webpack = require('webpack')
 gulpWebpack = require('gulp-webpack')
@@ -25,6 +26,7 @@ gulp.task 'webpack:build', (callback) ->
 
   # modify some webpack config options
   myConfig = Object.create(webpackConfig)
+  myConfig.bail = true
   myConfig.plugins = myConfig.plugins.concat(
     new webpack.DefinePlugin(
       'process.env':
@@ -38,6 +40,13 @@ gulp.task 'webpack:build', (callback) ->
   gulp.src([
     './app/app'
   ])
+    .pipe(
+      plumber(
+        errorHandler: (err) ->
+          gutil.log '[error]', err.toString(colors: true)
+          process.exit(1)
+      )
+    )
     .pipe(gulpWebpack(myConfig))
     .pipe(gulp.dest('build/'))
 
