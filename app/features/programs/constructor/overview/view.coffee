@@ -34,10 +34,6 @@ define [
       weeks: '.gc-program-weeks-list-region'
       emptyState: 'region[data-name="gc-program-empty-state"]'
 
-    modelEvents:
-      sync: 'modelSaved'
-      'change:is_public': 'privacyChanged'
-
     initialize: ->
       @collection = new ProgramWeeks
       @workoutsCollection = @model.program_workouts
@@ -56,20 +52,6 @@ define [
       @ui.emptyState.addClass 'hidden'
 
       @toggleEmptyState()
-
-    privacyChanged: ->
-      @isPrivacyChanged = true
-
-    modelSaved: ->
-      if @isPrivacyChanged
-        @isPrivacyChanged = false
-        App.request 'messenger:show',
-          message: "Privacy Settings changed."
-          type: 'info'
-      else
-        App.request 'messenger:show',
-          message: "Program Updated Successfully"
-          type: 'success'
 
     toggleEmptyState: ->
       if _.some [

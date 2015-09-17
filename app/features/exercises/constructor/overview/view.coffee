@@ -1,5 +1,5 @@
 define [
-  '../privacy/view'
+  'features/privacy_buttons/view'
   './template'
 ], (
   PrivacyButtonsView

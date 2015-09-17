@@ -1,6 +1,8 @@
 define [
+  'features/privacy_buttons/view'
   './template'
 ], (
+  PrivacyButtons
   template
 ) ->
   class PrivacyControlsView extends Marionette.LayoutView
@@ -8,6 +10,9 @@ define [
     className: 'row gc-remove-margin'
 
     template: template
+
+    regions:
+      privacyButtons: 'region[data-name="privacy-buttons"]'
 
     ui:
       privacyButtons: '.privacy-buttons > .btn'
@@ -21,7 +26,6 @@ define [
       cancelAddWorkout: '.gc-cancel-add-workout'
 
     events:
-      'change @ui.privacyRadios': 'togglePrivacy'
       'click @ui.deleteProgram': 'deleteProgram'
       'click @ui.addWeek': 'addProgramWeek'
       'click @ui.createWorkout': 'addProgramWorkout'
@@ -29,6 +33,7 @@ define [
       'click @ui.cancelAddWorkout': 'toggleControlsView'
 
     initialize: (options) ->
+      @privacyButtons = new PrivacyButtons(model: @model)
       @workoutsCollection = options.workoutsCollection
       App.commands.setHandler 'program_workouts:add:toggle', @toggleControlsView
       @listenTo @collection, 'update', @toggleAddWorkoutButton
@@ -38,14 +43,8 @@ define [
       App.commands.removeHandler 'program_workouts:add:toggle', @toggleControlsView
 
     onRender: ->
+      @getRegion('privacyButtons').show(@privacyButtons)
       # @toggleAddWorkoutButton()
-
-    togglePrivacy: (ev) ->
-      @ui.privacyButtons.removeClass 'active'
-      $(ev.currentTarget).parent().addClass 'active'
-      isPublic = ev.currentTarget.value == 'true'
-      @model.set 'is_public', isPublic
-      @model.save()
 
     deleteProgram: ->
       App.request 'base:confirmationalModal',

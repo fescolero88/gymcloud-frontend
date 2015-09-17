@@ -1,10 +1,12 @@
 define [
   './exercises/view'
   'collections/workout_exercises'
+  'features/privacy_buttons/view'
   './template'
 ], (
   WorkoutExercisesView
   WorkoutExercises
+  PrivacyButtons
   template
 ) ->
   class WorkoutOverviewView extends Marionette.LayoutView
@@ -14,13 +16,13 @@ define [
     className: 'gc-workouts-workout-view'
 
     regions:
-      exercisesListRegion: '#gc-exercises-list-region'
+      privacyButtons: 'region[data-name="privacy-buttons"]'
+      exercisesList: '#gc-exercises-list-region'
 
     ui:
       workoutDescription: '.gc-workout-description-editor'
       workoutExerciseAddButton: '.gc-workout-add-exercise-button'
       workoutDeleteButton: '.gc-workout-delete-button'
-      workoutPrivacyControls: 'input[name="privacy"]'
       workoutNotesContainer: '.gc-workout-note-container'
       workoutNoteEditor: '.gc-workout-note-editor'
 
@@ -31,7 +33,6 @@ define [
       'click @ui.workoutDeleteButton': 'workoutDelete'
       'blur @ui.workoutDescription': 'workoutDescriptionSave'
       'blur @ui.workoutNoteEditor': 'workoutNoteSave'
-      'change @ui.workoutPrivacyControls': 'setPrivacy'
 
     behaviors:
 
@@ -47,6 +48,7 @@ define [
       hasNote: !!@model.get('note')
 
     initialize: (data) ->
+      @privacyButtons = new PrivacyButtons(model: @model)
       @exercisesView = new WorkoutExercisesView
         collection: @model.exercises,
         workout: @model
@@ -54,7 +56,8 @@ define [
       App.vent.on 'workout:notes:add', @showAddNote, @
 
     onShow: ->
-      @exercisesListRegion.show @exercisesView
+      @getRegion('privacyButtons').show(@privacyButtons)
+      @getRegion('exercisesList').show(@exercisesView)
       @workoutDescriptionAutoHeight()
       @workoutNoteAutoHeight()
 
@@ -69,9 +72,6 @@ define [
 
     workoutDescriptionSave: ->
       @_saveAttribute('description')
-
-    setPrivacy: (e) ->
-      @_saveAttribute('is_public', 'Privacy settings changed.')
 
     workoutNoteSave: ->
       @_saveAttribute('note')
