@@ -103,7 +103,7 @@ define [
       collection.map (item) ->
         id: item.get('id')
         title: item.get('name')
-        label: item.folder.get('name')
+        label: item.folder?.get('name')
 
     initSearchSelect: =>
       user = App.request('current_user')
