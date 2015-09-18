@@ -19,22 +19,24 @@ define [
 
     assignOptions: [
       'assignment'
-      'assignedVersion'
-      'isAssigned'
-      'isOutdated'
-      'workout'
+      'entity'
+      'entityType'
       'clientAssignees'
     ]
 
     templateHelpers: =>
-      helpers = { isMe: @_isMe() }
-      for option in @assignOptions
-        helpers[option] = this[option]
-      helpers
+      isMe: @_isMe()
+      isOutdated: @isOutdated
+      isAssigned: @isAssigned
 
     initialize: (options) ->
       for option in @assignOptions
         this[option] = options[option]
+
+      @assignedVersion = @assignment?.get("#{@entityType}_template_version")
+      @isAssigned = !!@assignment
+      @isOutdated = @entity.get('version') > @assignedVersion
+
       this
 
     toggleAssign: (ev) =>
@@ -51,26 +53,19 @@ define [
         @assignedVersion = null
         @isOutdated = null
         @isAssigned = false
-        @_toggleAssignSuccess(null, 'unassign')
+        @_toggleAssignSuccess('unassign')
 
     _assign: ->
-      @assignment = new PersonalWorkout
-        person_id: @model.id
-        workout_template_id: @workout.id
-
-      @assignment.save().then =>
-        currentUser = App.request('current_user')
-        if @model.id == App.request('current_user_id')
-          currentUser.personal_workouts.add(@assignment)
-
+      @entity.assignTo(@model).then (assignment) =>
+        @assignment = assignment
         @isAssigned = true
         @isOutdated = false
-        @assignedVersion = @workout.get('version')
+        @assignedVersion = @entity.get('version')
         @clientAssignees.add(@assignment)
-        @_toggleAssignSuccess(null, 'assign')
+        @_toggleAssignSuccess('assign')
 
-    _toggleAssignSuccess: (_response, actionType) ->
-      message = "This workout was #{actionType}ed to this client"
+    _toggleAssignSuccess: (actionType) ->
+      message = "This #{@entityType} was #{actionType}ed to this client"
       App.request 'messenger:show',
         message: message
       @render()

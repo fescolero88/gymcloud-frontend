@@ -84,15 +84,15 @@ define [
     changeView: (navView) =>
       switch navView
         when 'description', 'program'
-          Klass = OverviewView
+          View = OverviewView
           @ui.innerNav.show()
         when 'video'
-          Klass = VideoView
+          View = VideoView
           @ui.innerNav.show()
         when 'assign'
-          Klass = AssignView
+          View = AssignView
           @ui.innerNav.hide()
-      view = new Klass(model: @model)
+      view = new View(model: @model)
       @getRegion('manageRegion').show(view)
 
     showAddToLibrary: (ev) =>

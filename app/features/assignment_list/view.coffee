@@ -6,24 +6,19 @@ define [
   template
 ) ->
 
-  class WorkoutGlobalAssignView extends Marionette.LayoutView
+  class AssignView extends Marionette.LayoutView
 
     template: template
 
     regions:
-      clients: 'region[data-name="workout-clients"]'
-      groups: 'region[data-name="workout-groups"]'
+      clients: 'region[data-name="clients"]'
+      groups: 'region[data-name="groups"]'
 
     initialize: ->
-      @clientsCollection = App.request('current_user').clients
+      @assignClientsView = new AssignClientsListView
+        collection: App.request('current_user').clients
+        clientAssignees: @model.assignees
+        entity: @model
 
     onShow: ->
-      @loadAssignmentScreen()
-
-    loadAssignmentScreen: ->
-      assignClientsView = new AssignClientsListView
-        collection: @clientsCollection
-        clientAssignees: @model.assignees
-        workout: @model
-
-      @getRegion('clients').show(assignClientsView)
+      @getRegion('clients').show(@assignClientsView)

@@ -2,11 +2,13 @@ define [
   '../../breadcrumbs/view'
   './actions/view'
   './overview/view'
+  'features/assignment_list/view'
   './template'
 ], (
   Breadcrumbs
   ActionsView
   OverviewView
+  AssignView
   template
 ) ->
 
@@ -39,7 +41,7 @@ define [
       destroy: 'programDeleted'
 
     events:
-      'click @ui.contentNavLinks': 'changeActiveTab'
+      'click @ui.contentNavLinks': '_changeViewEvent'
 
     templateHelpers: =>
       isAuthor: @_isAuthor()
@@ -51,27 +53,29 @@ define [
     onShow: ->
       @getRegion('breadcrumbs').show(@breadcrumbs)
       @getRegion('actionsRegion').show(@actionsView) if @_isAuthor()
-      @changeView 'program'
+      @_changeView('program')
 
     _isAuthor: =>
       @model.get('author_id') is App.request('current_user_id')
 
-    changeActiveTab: (ev) ->
-      @_changeViewEvent(ev, @ui.contentNavItems)
-
     _changeViewEvent: (ev, ui) ->
+      ui = @ui.contentNavItems
       ev.preventDefault()
       navItem = $(ev.currentTarget).parent()
       if not $(navItem).hasClass('active')
         ui.removeClass('active')
         $(navItem).addClass('active')
         navItemView = $(navItem).data('view')
+        @_changeView(navItemView)
 
-    changeView: (navView) =>
-      switch navView
-        when 'program'
-          view = new OverviewView(model: @model)
-          @manageRegion.show(view)
+    _changeView: (navView) =>
+      View = {
+        program: OverviewView
+        assign: AssignView
+      }[navView]
+
+      view = new View(model: @model)
+      @manageRegion.show(view)
 
     programDeleted: ->
       id = @model.get 'id'

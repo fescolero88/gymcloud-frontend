@@ -6,11 +6,11 @@ define [
   template
 ) ->
 
-  class WorkoutGlobalAssignClientsListView extends Marionette.CompositeView
+  class AssignClientsListView extends Marionette.CompositeView
 
     template: template
 
-    className: 'gc-clients-list-wrapper gc-workouts-assign-list'
+    className: 'gc-clients-list-wrapper gc-assign-list'
 
     childView: ClientItemView
 
@@ -19,10 +19,8 @@ define [
     childViewOptions: (client, _index) ->
       options =
         assignment: @_getAssigmentBy(client)
-        assignedVersion: @_assignedVersionFor(client)
-        isAssigned: @_isAssignedTo(client)
-        isOutdated: @_isOutdatedFor(client)
-        workout: @workout
+        entity: @entity
+        entityType: @entityType
         clientAssignees: @clientAssignees
       if client.id == App.request('current_user_id')
         options.attributes = style: 'background-color: #E3F2FD'
@@ -39,7 +37,15 @@ define [
 
     initialize: (options) ->
       @clientAssignees = options.clientAssignees
-      @workout = options.workout
+      @entity = options.entity
+      @entityType = @_getEntityType()
+
+    _getEntityType: ->
+      className = @entity.constructor.name
+      {
+        WorkoutTemplate: 'workout'
+        ProgramTemplate: 'program'
+      }[className]
 
     _flushCache: =>
       # flush memoize cache of _getAssigmentBy function
@@ -47,14 +53,3 @@ define [
 
     _getAssigmentBy: _.memoize (user) ->
       @clientAssignees.findWhere(person_id: user.id)
-
-    _assignedVersionFor: (user) ->
-      assignment = @_getAssigmentBy(user)
-      assignment?.get('workout_template_version')
-
-    _isOutdatedFor: (user) ->
-      assignment = @_getAssigmentBy(user)
-      @workout.get('version') > @_assignedVersionFor(user)
-
-    _isAssignedTo: (user) ->
-      !!@_getAssigmentBy(user)
