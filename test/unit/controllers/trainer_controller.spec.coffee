@@ -20,6 +20,5 @@ define [
         expect(@subject).to.respondTo('client')
         expect(@subject).to.respondTo('group')
         expect(@subject).to.respondTo('me')
-        expect(@subject).to.respondTo('globalView')
         expect(@subject).to.respondTo('searchInLibrary')
         expect(@subject).to.respondTo('initializeSplashListeners')

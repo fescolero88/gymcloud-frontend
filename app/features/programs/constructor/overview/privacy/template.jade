@@ -13,14 +13,6 @@
 .col-xs-12.text-right.gc-program-options.gc-default-controls
   button.pull-left.btn.btn-primary.btn-sm.gc-custom.gc-program-add-workout(type='button')
     | add new workout
-  // privacy controls
-  .btn-group.gc-btn-group.privacy-buttons(data-toggle='buttons')
-    label.btn.btn-primary(class=is_public ? 'active' : '')
-      input(type='radio', name='privacy', value='true', checked=is_public)
-      |  Public
-    label.btn.btn-primary(class=!is_public ? 'active' : '')
-      input(type='radio', name='privacy', value='false', checked=!is_public)
-      |  Private
-  // / privacy controls
+  region#gc-privacy-button-region(data-name="privacy-buttons")
   button.btn.btn-primary.gc-program-delete-button
     | Delete Program

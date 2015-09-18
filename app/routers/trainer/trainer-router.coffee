@@ -23,12 +23,9 @@ module.exports = class TrainerRouter extends CustomRouter
     'workout_templates_folder(/:id)(/)': 'workoutTemplatesFolderView'
     'program_templates_folder(/:id)(/)': 'programTemplatesFolderView'
 
-    'exercises/:id(/)': 'exercisesView'
+    'exercises/:id(/)': 'exerciseConstructor'
     'workout_templates/:id(/)': 'workoutConstructor'
     'program_templates/:id(/)': 'programConstructor'
-
-    'tr/global/:assign(/)': 'globalView'
-    'tr/global/:assign/id/:id(/)': 'globalView'
 
   before: (methodName) ->
     App.request 'auth:isAuthorizedAs', 'trainer'

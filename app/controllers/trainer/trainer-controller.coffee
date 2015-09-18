@@ -11,8 +11,8 @@ define [
   'collections/client_groups' #ClientGroups
   'features/client_groups/show/view' #ClientGroupView
   'views/trainer/global_ewp/ewp-global-view' #EWPGlobalView
-  'views/trainer/exercises/exercise_global_view' #ExerciseGlobalView
-  'models/exercise' #GlobalExercise
+  'features/exercises/constructor/view' #ExerciseConstructorView
+  'models/exercise' #Exercise
   'views/trainer/workouts/workout_global_view' #WorkoutGlobalView
   'models/global_workout' #GlobalWorkout
   'views/trainer/programs/program_global_view' #ProgramGlobalView
@@ -35,8 +35,8 @@ define [
   ClientGroups
   ClientGroupView
   EWPGlobalView
-  ExerciseGlobalView
-  GlobalExercise
+  ExerciseConstructorView
+  Exercise
   WorkoutGlobalView
   GlobalWorkout
   ProgramGlobalView
@@ -188,6 +188,16 @@ define [
       propertiesPageView = new PropertiesView
       @mainView.content.show(propertiesPageView)
 
+    exerciseConstructor: (id) ->
+      collection = App.request('current_user').exercises
+      model = collection.get(id) || new Exercise
+      view = new ExerciseConstructorView(model: model)
+      if model.isNew()
+        model.fetch(id: id).then =>
+          @mainView.content.show(view)
+      else
+        @mainView.content.show(view)
+
     workoutConstructor: (id) ->
       @_entityConstructor('workout', id)
 
@@ -228,60 +238,6 @@ define [
         items: folder.items
         type: type
       @mainView.content.show(view)
-
-    exercisesView: (key) ->
-      @globalView('exercises', key)
-
-    globalView: (type, key) ->
-      items = App.request("current_user")[type]
-      if items?
-        breadcrumbs = [{title:"#{type}"}]
-        if key
-          searchResults = @searchInLibrary(
-            new Backbone.Collection(items),
-            key,
-            breadcrumbs
-          )
-          childModel = searchResults.model
-          breadcrumbs = searchResults.path
-          items = if childModel then childModel.get('items') else []
-        else
-          childModel = new Backbone.Model
-        if childModel and childModel.get('isFolder') or not key
-          exercisesGlobalView = new EWPGlobalView
-            model: childModel
-            items: items
-            breadcrumbs: breadcrumbs
-            type: type
-          @mainView.content.show exercisesGlobalView
-        else
-          switch type
-            when 'exercises'
-              model = new GlobalExercise(id: key)
-              model.fetch().then =>
-                view = new ExerciseGlobalView
-                  exercise: model
-                  breadcrumbs: breadcrumbs
-                @mainView.content.show(view)
-            when 'workouts'
-              model = new GlobalWorkout
-              model.url = model.urlRoot + key
-              model.fetch().then =>
-                view = new WorkoutGlobalView
-                  workout: model
-                  breadcrumbs: breadcrumbs
-                @mainView.content.show(view)
-            when 'programs'
-              model = new GlobalProgram
-              model.url = model.urlRoot + key
-              model.fetch().then =>
-                view = new ProgramGlobalView
-                  model: model
-                  breadcrumbs: breadcrumbs
-                @mainView.content.show(view)
-      else
-        @queueMethod = 'globalView'
-        @queueArgs = arguments
 
     searchInLibrary: (items, key, breadcrumbs) ->
       filtered = items.where({key: parseInt(key)})

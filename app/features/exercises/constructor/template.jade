@@ -1,0 +1,27 @@
+.gc-main-workspace.row
+  .col-xs-12.gc-content-both
+    .gc-clients-nav-wrapper.row
+      .col-xs-7.gc-clients-nav-left
+        a.gc-content-nav-back
+          span.fa.fa-chevron-left
+        region(data-name="breadcrumbs")
+      .col-xs-5.gc-exercises-nav-right.text-right
+        if isAuthor
+          ul.gc-content-nav
+            li.active(data-view='overview')
+              a
+                | Exercise
+            li(data-view='video')
+              a
+                | Add video
+        else
+          if !is_public && !isAuthor
+            button.btn.brn-primary.gc-add-to-library-button
+              | Add to library
+        span.public.btn.btn-success.gc-privacy-marker.gc-privacy-public(class=!is_public && 'hide')
+          i.fa.fa-eye
+          | Public
+        span.btn.btn-warning.gc-privacy-marker.gc-privacy-private(class=is_public && 'hide')
+          i.fa.fa-lock
+          | Private
+    region(data-name="exercise-manage")

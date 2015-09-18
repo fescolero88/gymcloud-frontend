@@ -36,9 +36,6 @@ define [
       'click @ui.contentNavLinks': 'changeActiveTab'
       'click @ui.addNoteButton': 'triggerAddNote'
 
-    modelEvents:
-      sync: 'modelSaved'
-
     behaviors:
 
       navigate_back: true
@@ -122,8 +119,3 @@ define [
 
     triggerAddNote: ->
       App.vent.trigger 'workout:notes:add'
-
-    modelSaved: ->
-      App.request 'messenger:show',
-        message: "Workout Updated Successfully"
-        type: 'success'
