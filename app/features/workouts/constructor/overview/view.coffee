@@ -43,8 +43,7 @@ define [
           '[data-bind="is_public"]': 'is_public'
 
     templateHelpers: =>
-      isAuthor: do =>
-        App.request('current_user_id') == @model.get('id')
+      isAuthor: @_isAuthor()
       hasNote: !!@model.get('note')
 
     initialize: (data) ->
@@ -56,7 +55,7 @@ define [
       App.vent.on 'workout:notes:add', @showAddNote, @
 
     onShow: ->
-      @getRegion('privacyButtons').show(@privacyButtons)
+      @getRegion('privacyButtons').show(@privacyButtons) if @_isAuthor()
       @getRegion('exercisesList').show(@exercisesView)
       @workoutDescriptionAutoHeight()
       @workoutNoteAutoHeight()
@@ -112,6 +111,9 @@ define [
         @ui.workoutNotesContainer.removeClass 'hidden'
         @ui.workoutNoteEditor.addClass 'focus-state'
       @ui.workoutNoteEditor.focus()
+
+    _isAuthor: ->
+      @model.get('author_id') == App.request('current_user_id')
 
     _textAreaAutoHeight: (area) ->
       el = @ui[area]?.get(0)
