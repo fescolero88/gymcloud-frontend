@@ -1,15 +1,15 @@
 define [
-  '../../breadcrumbs/view'
+  'features/breadcrumbs/view'
   './overview/view'
   'views/trainer/workouts/workout_global_video_view'
-  './assignment/view'
+  'features/assignment_list/view'
   'models/workout_exercise'
   './template'
 ], (
   Breadcrumbs
-  WorkoutGlobalOverviewView
-  WorkoutGlobalVideoView
-  WorkoutGlobalAssignView
+  OverviewView
+  VideoView
+  AssignView
   WorkoutExercise
   template
 ) ->
@@ -84,13 +84,13 @@ define [
     changeView: (navView) =>
       switch navView
         when 'description', 'program'
-          Klass = WorkoutGlobalOverviewView
+          Klass = OverviewView
           @ui.innerNav.show()
         when 'video'
-          Klass = WorkoutGlobalVideoView
+          Klass = VideoView
           @ui.innerNav.show()
         when 'assign'
-          Klass = WorkoutGlobalAssignView
+          Klass = AssignView
           @ui.innerNav.hide()
       view = new Klass(model: @model)
       @getRegion('manageRegion').show(view)

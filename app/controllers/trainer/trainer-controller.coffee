@@ -13,7 +13,6 @@ define [
   'views/trainer/global_ewp/ewp-global-view' #EWPGlobalView
   'features/exercises/constructor/view' #ExerciseConstructorView
   'models/exercise' #Exercise
-  'views/trainer/workouts/workout_global_view' #WorkoutGlobalView
   'models/global_workout' #GlobalWorkout
   'views/trainer/programs/program_global_view' #ProgramGlobalView
   'models/global_program' #GlobalProgram
@@ -37,7 +36,6 @@ define [
   EWPGlobalView
   ExerciseConstructorView
   Exercise
-  WorkoutGlobalView
   GlobalWorkout
   ProgramGlobalView
   GlobalProgram

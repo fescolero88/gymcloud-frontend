@@ -12,9 +12,6 @@ define [
 
     template: template
 
-    modelEvents:
-      'model:toggle_assign:success': '_toggleAssignSuccess'
-
     className: 'row gc-workout-client-item'
 
     events:
@@ -30,10 +27,9 @@ define [
     ]
 
     templateHelpers: =>
-      helpers = {}
+      helpers = { isMe: @_isMe() }
       for option in @assignOptions
         helpers[option] = this[option]
-      helpers.isMe = @_isMe()
       helpers
 
     initialize: (options) ->
@@ -73,7 +69,7 @@ define [
         @clientAssignees.add(@assignment)
         @_toggleAssignSuccess(null, 'assign')
 
-    _toggleAssignSuccess: (response, actionType) ->
+    _toggleAssignSuccess: (_response, actionType) ->
       message = "This workout was #{actionType}ed to this client"
       App.request 'messenger:show',
         message: message
