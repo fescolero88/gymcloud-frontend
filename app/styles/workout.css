@@ -331,16 +331,16 @@ ul.gc-workout-exercises-list .dragged {
   padding: 5px 15px;
 }
 
-.gc-workouts-assign-list {
+.gc-assign-list {
   padding: 0 28px;
 }
 
-.gc-workouts-assign-list .gc-workout-client-item, .gc-workouts-assign-list .gc-workout-group-item {
+.gc-assign-list .gc-workout-client-item, .gc-assign-list .gc-workout-group-item {
   cursor: pointer;
 }
 
-.gc-workouts-assign-list .gc-workout-client-item i,
-.gc-workouts-assign-list .gc-workout-group-item i {
+.gc-assign-list .gc-workout-client-item i,
+.gc-assign-list .gc-workout-group-item i {
   padding: 19px 10px;
 }
 

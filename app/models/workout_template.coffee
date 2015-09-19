@@ -28,6 +28,16 @@ define [
       @_parseAssignees(data.assignees) && delete data.assignees
       data
 
+    assignTo: (user) ->
+      assignment = new PersonalWorkout
+        person_id: user.id
+        workout_template_id: @id
+
+      assignment.save().then ->
+        currentUser = App.request('current_user')
+        if user.id == App.request('current_user_id')
+          currentUser.personal_workouts.add(assignment)
+
     _getFolder: ->
       user = App.request('current_user')
       collection = user.folders

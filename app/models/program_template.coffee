@@ -1,8 +1,10 @@
 define [
   'backbone'
+  'models/personal_program'
   'collections/program_workouts'
 ], (
   Backbone
+  PersonalProgram
   ProgramWorkouts
 ) ->
 
@@ -20,7 +22,18 @@ define [
 
     parse: (data) ->
       @_parseProgramWorkouts(data.workouts) && delete data.workouts
+      @_parseAssignees(data.assignees) && delete data.assignees
       data
+
+    assignTo: (user) ->
+      assignment = new PersonalProgram
+        person_id: user.id
+        program_template_id: @id
+
+      assignment.save().then ->
+        currentUser = App.request('current_user')
+        if user.id == App.request('current_user_id')
+          currentUser.personal_programs.add(assignment)
 
     _getFolder: ->
       user = App.request('current_user')
@@ -30,3 +43,14 @@ define [
     _parseProgramWorkouts: (workouts) ->
       @program_workouts ||= new ProgramWorkouts
       @program_workouts.add(workouts, parse: true, merge: true)
+
+    _parseAssignees: (assignees) ->
+      template = this
+      items = _.map assignees, (item) ->
+        collection = App.request('current_user').personal_programs
+        personalProgram = collection.get(@id)
+        unless personalProgram
+          item.__defineGetter__('program_template_id', -> template.id)
+          personalProgram = new PersonalWorkout(item)
+        personalProgram
+      @assignees = new Backbone.Collection(items)

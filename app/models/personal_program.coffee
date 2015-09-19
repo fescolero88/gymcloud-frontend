@@ -2,4 +2,4 @@ define ->
 
   class PersonalProgram extends Backbone.Model
 
-    urlRoot: '/personal_program'
+    urlRoot: '/personal_programs'
