@@ -1,7 +1,6 @@
 define [
   'config'
 
-  'features/spinner/handler'
   'handlers/ajax_setup'
   'handlers/user_authorization'
   'handlers/user_collections_preload'
@@ -14,6 +13,7 @@ define [
   'views/helpers/messenger-helper'
 
   'features/header/module'
+  'features/spinner/module'
   'modules/auth/auth-module'
   'modules/main-trainer/main-trainer-module'
   'modules/main-client/main-client-module'
@@ -28,7 +28,6 @@ define [
 ], (
   config
 
-  spinnerHandler
   ajaxSetupHandler
   userAuthorizationHandler
   userCollectionsPreload
@@ -41,6 +40,7 @@ define [
   MessengerHelper
 
   HeaderModule
+  SpinnerModule
   AuthModule
   MainTrainerModule
   MainClientModule
@@ -54,14 +54,16 @@ define [
 
     initialize: ->
 
-      @on 'start', ->
-
-        defer = new $.Deferred
+      @on 'before:start', ->
         @_initPromises()
         @_initModules()
           .done(@promises.modules.resolve)
         @_initLayout()
           .done(@promises.layout.resolve)
+
+      @on 'start', ->
+
+        defer = new $.Deferred
         @_initUser()
           .then( =>
             @_initCollections()
@@ -87,7 +89,6 @@ define [
         @data.current_user = new CurrentUser
 
       @addInitializer ->
-        spinnerHandler(this)
         userAuthorizationHandler(this)
         ajaxSetupHandler(this, config)
         formValidatorHandler()
@@ -113,6 +114,7 @@ define [
     _initModules: ->
       defer = new $.Deferred
       @module 'Header', HeaderModule
+      @module 'Spinner', SpinnerModule
       @module 'Auth', AuthModule
       @module 'MainTrainer', MainTrainerModule
       @module 'MainClient', MainClientModule

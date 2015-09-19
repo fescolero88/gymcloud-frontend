@@ -1,2 +1,33 @@
 #spinner
   z-index: 9999
+
+.gc-spinner
+  z-index: 9999
+  position: absolute
+  top: 50%
+  left: 50%
+  height 43px
+  width 40px
+
+.gc-busy-indicator-clock
+  display inline-block
+  height 43px
+  width 40px
+  background-image url('../../images/icon-clock-body.png')
+  background-size cover
+  background-repeat no-repeat
+  position relative
+
+  .pointer
+    background-image url('../../images/icon-clock-pointer.png')
+    background-size 6px 20px
+    background-repeat no-repeat
+    background-position center 5px
+    position absolute
+    left 0
+    right 0
+    bottom 0
+    top 5px
+
+    &.busy
+      animation rotateHourHand 1s infinite linear

@@ -1,6 +1,5 @@
 define [
   'spinner'
-  './styles'
 ], (
   Spinner
 )->
