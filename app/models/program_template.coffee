@@ -1,10 +1,12 @@
 define [
   'backbone'
-  'models/personal_program'
+  './personal_program'
+  './personal_workout'
   'collections/program_workouts'
 ], (
   Backbone
   PersonalProgram
+  PersonalWorkout
   ProgramWorkouts
 ) ->
 
