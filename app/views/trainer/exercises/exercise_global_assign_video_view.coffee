@@ -1,13 +1,13 @@
 define [
   'templates/trainer/exercises/exercise_global_assign_video'
-  'views/trainer/exercises/exercise_assign_videos_view'
+  'features/assign_videos/view'
   'collections/videos_collection'
 ], (
   template
-  ExerciseAssignVideosView
+  AssignVideoView
   ExerciseVideosCollection
 ) ->
-  class ExerciseGlobalAssignVideoView extends Marionette.LayoutView
+  class VideosView extends Marionette.LayoutView
 
     template: template
 
@@ -46,5 +46,5 @@ define [
         filter: 'youtube'
         title: 'Lorem Ipsum 6'
       ]
-      view = new ExerciseAssignVideosView collection: @collection
+      view = new AssignVideoView collection: @collection
       @getRegion('exerciseVideos').show view
