@@ -1,0 +1,12 @@
+define [
+  './item/view'
+], (
+  AssignVideoView
+) ->
+  class AssignVideosView extends Marionette.CollectionView
+
+    tagName: 'div'
+
+    className: 'row'
+
+    childView: AssignVideoView

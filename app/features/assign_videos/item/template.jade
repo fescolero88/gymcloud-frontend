@@ -1,0 +1,18 @@
+.gc-video-player
+  .gc-video-preview
+    img.img-responsive.gc-preview
+    a.gc-video-play(href="#")
+  .gc-video-details
+    h5.gc-video-title
+      | #{title}
+    div
+      span.gc-video-timer
+        i.gc-video-time-icon
+        span
+          | #{duration}
+      span.gc-video-type
+        i.gc-video-icon
+        span
+          | #{filter}
+    button(class="btn btn-primary gc-custom btn-block btn-sm gc-assign-video", type="button")
+      | assign this video
