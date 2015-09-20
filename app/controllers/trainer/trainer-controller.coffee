@@ -222,7 +222,6 @@ define [
       folder_id ||= user.library.first().id
       folders = user.folders
       folder = folders.get(folder_id)
-
       view = new FoldersView
         model: folder
         items: folder.items
