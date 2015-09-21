@@ -2,10 +2,12 @@ define [
   './overview/view'
   '../../breadcrumbs/view'
   './template'
+  'views/trainer/exercises/exercise_global_assign_video_view'
 ], (
   OverviewView
   Breadcrumbs
   template
+  ExerciseGlobalAssignVideoView
 ) ->
   class ExerciseGlobalView extends Marionette.LayoutView
 
@@ -43,6 +45,7 @@ define [
     initialize: (data) ->
       @breadcrumbs = new Breadcrumbs(model: @model)
       @overview = new OverviewView(model: @model)
+      @video = new ExerciseGlobalAssignVideoView(model: @model)
 
     onRender: ->
       @getRegion('manage').show(@overview)
@@ -62,8 +65,7 @@ define [
         when 'overview'
           @getRegion('manage').show(@overview)
         else
-          App.request 'messenger:show',
-            message: 'Not emplemented yet'
+          @getRegion('manage').show(@video)
 
     showAddToLibrary: (ev) ->
       ev.preventDefault()

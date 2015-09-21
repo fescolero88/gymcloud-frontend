@@ -391,3 +391,6 @@ textarea.gc-exercise-description-editor:focus {
   border-radius: 10px;
   margin: 0 0 15px;
 }
+.gc-exercises-assign-videos {
+  padding-top: 20px;
+}
