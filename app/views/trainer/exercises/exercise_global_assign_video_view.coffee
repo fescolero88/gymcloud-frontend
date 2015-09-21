@@ -14,6 +14,8 @@ define [
     regions:
       exerciseVideos: 'region.gc-exercises-videos'
 
+    className: 'gc-exercises-assign-videos'
+
     onShow: ->
       @collection = new ExerciseVideosCollection [
         preview: 'https://placehold.it/350x220'
