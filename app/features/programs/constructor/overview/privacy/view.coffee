@@ -25,6 +25,16 @@ define [
       defaultControls: '.gc-default-controls'
       cancelAddWorkout: '.gc-cancel-add-workout'
 
+    behaviors: ->
+      auto_complete:
+        onItemAdd: =>
+          console.log('added') # implement view specific logic
+        collection: ->
+          App.request('current_user').workout_templates.map (item) ->
+            id: item.get('id')
+            name: item.get('name')
+            label: item.get('name')
+
     events:
       'click @ui.deleteProgram': 'deleteProgram'
       'click @ui.addWeek': 'addProgramWeek'

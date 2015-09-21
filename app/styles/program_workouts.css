@@ -122,11 +122,11 @@
 .gc-add-create-workout-wrapper > div {
   display: table-cell;
   vertical-align: middle;
-  text-align: center;
   position: relative;
 }
 .gc-add-create-workout-wrapper > div:nth-child(2) {
   width: 30px;
+  text-align: center;
 }
 .gc-add-create-workout-wrapper > div:last-child {
   width: 100px;

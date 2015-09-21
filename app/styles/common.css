@@ -546,3 +546,12 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
 
 .switch label input[type=checkbox][disabled] + .lever:after, .switch label input[type=checkbox][disabled]:checked + .lever:after {
   background-color: #BDBDBD; }
+
+/* Auto Complete */
+.selectize-dropdown-content > div .label {
+  color: #ccc;
+  text-transform: uppercase;
+}
+/* Auto Complete */
+
+
