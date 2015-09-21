@@ -26,12 +26,12 @@ define [
           '[data-bind="updated_at"]': 'updated_at'
           ':el':
             observe: ['folder_id', 'id']
-            update: ($el, val, model, options) =>
-              $el.attr 'data-id', model.get 'id'
-              if not model.get 'folder_id'
-                $el.addClass 'gc-folder'
+            update: ($el, _val, model, _options) ->
+              $el.attr('data-id', model.get('id'))
+              if model.get('folder_id')
+                $el.addClass('gc-folder-item')
               else
-                $el.addClass 'gc-folder-item'
+                $el.addClass('gc-folder')
 
     initialize: (options) =>
       @type = options.type
@@ -52,12 +52,12 @@ define [
     onShow: ->
       if not @model.get 'folder_id'
         @dragula.containers.push @el
-        @dragula.on 'drop', (el, container) =>
+        @dragula.on 'drop', (el, container) ->
           if container is @el
             @triggerMethod 'folder:change', parseInt(el.getAttribute('data-id'))
-        @dragula.on 'over', (el, container) =>
+        @dragula.on 'over', (el, container) ->
           if container and container.classList.contains 'gc-folder'
             container.classList.add 'gc-folder-droppable-state'
-        @dragula.on 'out', (el, container) =>
+        @dragula.on 'out', (el, container) ->
           if container and container.classList.contains 'gc-folder'
             container.classList.remove 'gc-folder-droppable-state'

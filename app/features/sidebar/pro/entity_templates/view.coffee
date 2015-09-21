@@ -13,6 +13,9 @@ define [
 
     className: 'gc-sidebar-folder'
 
+    events:
+      'click a:first': '_disableRedirect'
+
     getChildView: (item) ->
       if typeof item.attributes.folder_id isnt 'undefined'
         TemplateCollectionItemView
@@ -36,3 +39,6 @@ define [
     initialize: (options)->
       @type = options.type
       @name = options.name
+
+    _disableRedirect: (ev) ->
+      ev.preventDefault()

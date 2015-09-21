@@ -53,7 +53,7 @@ define [
 
       navigate_back: true
 
-    initialize: (data) =>
+    initialize: (data) ->
       @exercisesList = data.items
       @collection = data.items
       @typeName = data.type

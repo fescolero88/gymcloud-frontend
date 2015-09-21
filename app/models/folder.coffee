@@ -27,6 +27,8 @@ define [
           data = @_parseFolder(data, options.type)
         this.items = data.items
         delete data.items
+      else
+        this.items = new Backbone.Collection
       data
 
     _parseRootFolder: (data) ->
