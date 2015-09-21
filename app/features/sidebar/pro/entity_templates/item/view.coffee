@@ -9,6 +9,12 @@ define [
 
     className: 'gc-sidebar-item'
 
+    behaviors:
+
+      stickit:
+        bindings:
+          '.gc-sidebar-folder-name': 'name'
+
     templateHelpers: ->
       type: @type
       isFolder: false
