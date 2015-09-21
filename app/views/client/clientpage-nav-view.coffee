@@ -8,6 +8,9 @@ module.exports = class ClientPageNavView extends Marionette.LayoutView
   regions:
     trainerActions: ".gc-client-trainer-actions"
 
+  ui:
+    navTitle: '.gc-clientpage-nav-title'
+
   initialize: ->
     @model = new ClientTrainer
     @profileModel = App.request 'current_user'
@@ -19,10 +22,18 @@ module.exports = class ClientPageNavView extends Marionette.LayoutView
 
     @listenTo @model, 'sync', @onModelSync
 
+    App.vent.on 'client:nav:change', @changeType
+
+  onDestroy: ->
+    App.vent.off 'client:nav:change', @changeType
+
+  changeType: (type) =>
+    @ui.navTitle.html type
+
   onRender: ->
     if @profileModel.get 'id'
-      accountType = @profileModel.get 'account_type'
-      if accountType == 'client'
+      isPro = @profileModel.get 'is_pro'
+      unless isPro
         @model.urlRoot = "#{@model.urlRoot}/#{@profileModel.get 'id'}/trainer"
         @model.fetch()
 

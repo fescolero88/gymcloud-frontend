@@ -39,6 +39,7 @@ module.exports = class ClientPageController extends Marionette.Controller
     @_assignedEntityList('programs')
 
   _assignedEntityList: (dataType) ->
+    @changeNavTitle dataType
     eventName = 'clientpage:nav-click'
     elementId = "#gc-clientpage-nav-tab-#{dataType}"
     App.vent.trigger(eventName, elementId)
@@ -125,17 +126,20 @@ module.exports = class ClientPageController extends Marionette.Controller
   clientPageCalendarDay: (id) =>
     contentView = new CalendarDayView()
     @userPageView.content.show contentView
-
+    @changeNavTitle 'calendar'
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-c'
 
   clientPageCalendarWeek: (id) =>
     contentView = new CalendarWeekView()
     @userPageView.content.show contentView
-
+    @changeNavTitle 'calendar'
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-c'
 
   clientPageCalendarMonth: (id) =>
     contentView = new CalendarMonthView()
     @userPageView.content.show contentView
-
+    @changeNavTitle 'calendar'
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-c'
+
+  changeNavTitle: (type) ->
+    App.vent.trigger 'client:nav:change', type

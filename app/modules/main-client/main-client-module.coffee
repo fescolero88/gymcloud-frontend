@@ -17,10 +17,12 @@ module.exports = class MainClientModule extends Marionette.Module
       @clientRouter = new ClientRouter
         controller: @clientController
 
-    App.vent.on 'module:main-client:beforeAction', =>
-      @refresh()
+    App.vent.on 'module:main-client:beforeAction', @refresh
 
-  refresh: ->
+  onDestroy: ->
+    App.vent.off 'module:main-client:beforeAction', @refresh
+
+  refresh: =>
     if !@mainView? or @mainView.isDestroyed
       @mainView = new MainView()
       @app.appRegion.show @mainView
