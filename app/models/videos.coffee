@@ -1,6 +1,6 @@
 define ->
 
-  class VideosModel extends Backbone.Model
+  class VideoModel extends Backbone.Model
 
     defaults:
       preview: undefined

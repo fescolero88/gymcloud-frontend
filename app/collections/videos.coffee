@@ -1,9 +1,9 @@
 define [
-  'models/videos_model'
+  'models/videos'
 ], (
-  VideosModel
+  VideoModel
 ) ->
 
   class VideosCollection extends Backbone.Collection
 
-    model: VideosModel
+    model: VideoModel

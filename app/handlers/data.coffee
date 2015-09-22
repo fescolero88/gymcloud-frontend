@@ -104,10 +104,3 @@ define ->
             items.splice index, 1
             return
       deleteFromTree items, key
-
-    App.reqres.setHandler 'data:move:item', (model, folder_id) ->
-      folders = App.data.current_user.folders
-      folder = folders.get folder_id
-      item = App.request('current_user').exercises.get(model.get('id'))
-      folders.get(item.get('parent_id')).remove item
-      folder.items.add item
