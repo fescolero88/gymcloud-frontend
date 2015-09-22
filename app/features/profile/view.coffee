@@ -4,9 +4,8 @@ define [
   'collections/workouts'
   'collections/programs'
   './header/view'
-  'views/trainer/clients/client-group-nav-view'
+  './assignments/view'
   './activity/view'
-  'views/trainer/assignments/assignments-view'
   'views/trainer/calendar/calendar-view'
   'views/trainer/groups/members-view'
   'views/trainer/exercises/exercise-view'
@@ -19,9 +18,8 @@ define [
   Workouts
   Programs
   HeaderView
-  ClientGroupNavView
-  ActivityView
   AssignmentsView
+  ActivityView
   CalendarView
   MembersView
   ExerciseView
@@ -38,6 +36,7 @@ define [
       sync: 'showCenterView'
 
     regions:
+      assignments: '.gc-content-left'
       header: '#client-header-region'
       nav: '#client-content-nav-region'
       leftside: '#client-left-region'
@@ -56,13 +55,14 @@ define [
       @headerView = new HeaderView
         model: @model
         viewType: @viewType
-      @navView = new ClientGroupNavView
-        itemId: @itemId
-        viewType: @viewType
+      @assignmentsView = new AssignmentsView(model: @model)
+      # @navView = new ClientGroupNavView
+      #   itemId: @itemId
+      #   viewType: @viewType
       @activityView = new ActivityView
         collection: @model.notifications
 
-      @listenTo @navView, 'navView', @loadCenterView
+      # @listenTo @navView, 'navView', @loadCenterView
 
       App.vent.on 'drag:complete', @assignDragged
 
@@ -72,11 +72,12 @@ define [
       App.vent.off 'drag:complete', @assignDragged
 
     onShow: ->
-      @header.show(@headerView)
-      @nav.show(@navView)
-      @rightside.show(@activityView)
+      @getRegion('assignments').show(@assignmentsView)
+      @getRegion('header').show(@headerView)
+      # @getRegion('nav').show(@navView)
+      @getRegion('rightside').show(@activityView)
 
-      @navView.navigate @assign
+      # @navView.navigate @assign
 
     loadView: (assign, key) =>
       @key = key
@@ -109,12 +110,12 @@ define [
         switch navView
           when 'members'
             @collection = new ClientGroupMembers
-            @collection.url = "#{@collection.urlRoot}/#{@itemId}/members"
-            @collection.fetch()
-            @centerView = new MembersView
-              groupId: @itemId
-              collection: @collection
-            @showCenterView()
+            # @collection.url = "#{@collection.urlRoot}/#{@itemId}/members"
+            # @collection.fetch()
+            # @centerView = new MembersView
+            #   groupId: @itemId
+            #   collection: @collection
+            # @showCenterView()
           when 'exercises'
             @collection = new Exercises
             @collection.url = "/api/mobile/#{link}/exercises"

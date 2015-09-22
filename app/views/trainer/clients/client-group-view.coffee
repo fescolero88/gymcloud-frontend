@@ -7,7 +7,7 @@ ClientGroupHeaderView = require 'views/trainer/clients/client-group-header-view'
 ClientGroupNavView = require 'views/trainer/clients/client-group-nav-view'
 # ActivityView = require 'views/trainer/clients/activity-view'
 
-AssignmentsView = require 'views/trainer/assignments/assignments-view'
+# AssignmentsView = require 'views/trainer/assignments/assignments-view'
 CalendarView = require 'views/trainer/calendar/calendar-view'
 
 MembersView = require 'views/trainer/groups/members-view'
