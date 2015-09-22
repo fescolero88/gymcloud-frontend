@@ -126,19 +126,19 @@ module.exports = class ClientPageController extends Marionette.Controller
   clientPageCalendarDay: (id) =>
     contentView = new CalendarDayView()
     @userPageView.content.show contentView
-    @changeNavTitle 'calendar'
+    @changeNavTitle 'Calendar'
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-c'
 
   clientPageCalendarWeek: (id) =>
     contentView = new CalendarWeekView()
     @userPageView.content.show contentView
-    @changeNavTitle 'calendar'
+    @changeNavTitle 'Calendar'
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-c'
 
   clientPageCalendarMonth: (id) =>
     contentView = new CalendarMonthView()
     @userPageView.content.show contentView
-    @changeNavTitle 'calendar'
+    @changeNavTitle 'Calendar'
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-c'
 
   changeNavTitle: (type) ->
