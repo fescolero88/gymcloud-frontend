@@ -44,11 +44,10 @@ define [
 
     initialize: (data) ->
       @breadcrumbs = new Breadcrumbs(model: @model)
-      @overview = new OverviewView(model: @model)
-      @video = new ExerciseGlobalAssignVideoView(model: @model)
 
     onRender: ->
-      @getRegion('manage').show(@overview)
+      view = new OverviewView(model: @model)
+      @getRegion('manage').show(view)
       @getRegion('breadcrumbs').show(@breadcrumbs)
 
     changeViewEvent: (ev) ->
@@ -63,9 +62,14 @@ define [
     changeView: (navView) ->
       switch navView
         when 'overview'
-          @getRegion('manage').show(@overview)
-        else
-          @getRegion('manage').show(@video)
+          view = new OverviewView(model: @model)
+          @getRegion('manage').show(view)
+        when 'video'
+          view = new ExerciseGlobalAssignVideoView(model: @model)
+          @getRegion('manage').show(view)
+        when 'assign'
+          App.request 'messenger:show',
+            message: 'Not yet implemented.'
 
     showAddToLibrary: (ev) ->
       ev.preventDefault()
