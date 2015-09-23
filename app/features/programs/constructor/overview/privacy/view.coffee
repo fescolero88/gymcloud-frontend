@@ -27,8 +27,7 @@ define [
 
     behaviors: ->
       auto_complete:
-        onItemAdd: (workoutId) =>
-          @_addProgramWorkoutFromLibrary(workoutId)
+        onItemAdd: @_addProgramWorkoutFromLibrary
         collection: ->
           App.request('current_user').workout_templates.map (item) ->
             id: item.get('id')
@@ -73,7 +72,7 @@ define [
     addProgramWorkout: ->
       @trigger('add:program_workout')
 
-    _addProgramWorkoutFromLibrary: (workoutId) ->
+    _addProgramWorkoutFromLibrary: (workoutId) =>
       @trigger('add:program_workout:from_library', workoutId)
 
     toggleControlsView: =>
