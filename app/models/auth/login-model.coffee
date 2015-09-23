@@ -1,7 +1,5 @@
 define [
-  'config'
 ], (
-  config
 ) ->
 
   class LoginModel extends Backbone.Model
@@ -10,7 +8,6 @@ define [
 
     defaults:
       grant_type: 'password'
-      client_id: config.oauthClientId
 
     validation:
 

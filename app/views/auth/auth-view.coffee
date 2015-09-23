@@ -1,3 +1,5 @@
+LoginModel = require 'models/auth/login-model'
+
 module.exports = class AuthView extends Marionette.ItemView
 
   template: require('templates/auth/auth')
@@ -5,15 +7,21 @@ module.exports = class AuthView extends Marionette.ItemView
   events:
     'submit form': 'login'
 
-  modelEvents:
-    'model:login:success': 'onLoginSuccess'
-    'model:login:fail': 'onLoginFail'
-
   ui:
     form: '.gc-login-form'
     signUpModal: '#gc-signup-message'
 
+  behaviors:
+
+    stickit:
+      bindings:
+        'input[name="username"]': 'username'
+        'input[name="password"]': 'password'
+
   initialize: (data) ->
+    @model = new LoginModel
+    @listenTo(@model, 'model:login:success', @_onLoginSuccess)
+    @listenTo(@model, 'model:login:fail', @_onLoginFail)
     @signUp = data.signUp
     Backbone.Validation.bind(this)
 
@@ -23,34 +31,12 @@ module.exports = class AuthView extends Marionette.ItemView
 
   login: (event) ->
     event.preventDefault()
-    formData = @ui.form.serializeObject()
-    @model.set formData
     @model.login()
 
-  getProfile: ->
-    profileModel = App.request 'current_user'
-    profileModel.fetch().then =>
-      accountType = profileModel.get('account_type')
-      # a workaround - treat a coach as a trainer, treat athlete as a client
-      if accountType is 'coach'
-        profileModel.set('account_type', 'trainer')
-        accountType = 'trainer'
-      else if accountType is 'athlete'
-        profileModel.set('account_type', 'client')
-        accountType = 'client'
+  _onLoginSuccess: (data) ->
+    App.request('auth:onSuccess', data)
 
-      App.vent.trigger("module:main-#{accountType}:start")
-      if accountType is 'trainer'
-        window.location.replace '#/tr'
-      else
-        window.location.replace '#'
-      App.vent.trigger 'profile:ready'
-
-  onLoginSuccess: (data) ->
-    App.request 'accessToken:set', data.access_token
-    @getProfile()
-
-  onLoginFail: ->
+  _onLoginFail: ->
     App.request 'messenger:show',
       hideAfter: 10
       message: "The email or password you entered is incorrect"

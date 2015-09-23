@@ -19,7 +19,6 @@ define [
 
       it '#defaults', ->
         expect(@subject.attributes).to.have.property('grant_type', 'password')
-        expect(@subject.attributes).to.have.property('client_id')
 
       it '#validation', ->
         expect(@subject.validation).to.be.an('object')

@@ -2,16 +2,14 @@ define [
   'config'
 
   'handlers/ajax_setup'
-  'handlers/user_authorization'
-  'handlers/user_collections_preload'
   'handlers/data'
   'handlers/form_validator'
   'handlers/others'
 
-  'models/auth/profile-model'
   'views/general/base-view'
   'views/helpers/messenger-helper'
 
+  'features/current_user/module'
   'features/header/module'
   'features/spinner/module'
   'modules/auth/auth-module'
@@ -29,16 +27,14 @@ define [
   config
 
   ajaxSetupHandler
-  userAuthorizationHandler
-  userCollectionsPreload
   dataHandler
   formValidatorHandler
   othersHandler
 
-  CurrentUser
   BaseView
   MessengerHelper
 
+  CurrentUserModule
   HeaderModule
   SpinnerModule
   AuthModule
@@ -52,6 +48,13 @@ define [
 
   class Application extends Marionette.Application
 
+    request: (handler) ->
+      if @reqres.hasHandler(handler)
+        super
+      else
+        msg = "handler is not defined - #{handler}"
+        throw(Error(msg))
+
     initialize: ->
 
       @on 'before:start', ->
@@ -64,11 +67,10 @@ define [
       @on 'start', ->
 
         defer = new $.Deferred
-        @_initUser()
+        @request('current_user:init:user')
           .then( =>
-            @_initCollections()
+            @request('current_user:init:collections')
               .always(@promises.collections.resolve)
-              # @vent.trigger('profile:ready')
           )
           .fail(@promises.collections.resolve)
           .always(@promises.user.resolve)
@@ -86,10 +88,8 @@ define [
 
       @addInitializer ->
         dataHandler(this)
-        @data.current_user = new CurrentUser
 
       @addInitializer ->
-        userAuthorizationHandler(this)
         ajaxSetupHandler(this, config)
         formValidatorHandler()
 
@@ -113,6 +113,7 @@ define [
 
     _initModules: ->
       defer = new $.Deferred
+      @module 'CurrentUser', CurrentUserModule
       @module 'Header', HeaderModule
       @module 'Spinner', SpinnerModule
       @module 'Auth', AuthModule
@@ -132,24 +133,6 @@ define [
       @baseView.once('render', defer.resolve)
       @baseView.render()
       @appRegion = @baseView.appRegion
-      defer.promise()
-
-    _initUser: ->
-      defer = new $.Deferred
-      if @request('accessToken:get')
-        @request('current_user').fetch()
-          .success(defer.resolve)
-          .fail(defer.reject)
-      else
-        defer.reject()
-      defer.fail =>
-        @request('accessToken:remove')
-      defer.promise()
-
-    _initCollections: ->
-      defer = new $.Deferred
-      dfds = userCollectionsPreload(App.request('current_user'))
-      $.when(dfds...).then(defer.resolve)
       defer.promise()
 
     _initHistory: ->
