@@ -52,7 +52,7 @@ define [
     onShow: ->
       if not @model.get 'folder_id'
         @dragula.containers.push @el
-        @dragula.on 'drop', (el, container) ->
+        @dragula.on 'drop', (el, container) =>
           if container is @el
             @triggerMethod 'folder:change', parseInt(el.getAttribute('data-id'))
         @dragula.on 'over', (el, container) ->

@@ -54,10 +54,19 @@ define [
 
     changeFolder: (view, id) =>
       item = @collection.findWhere 'id': id
+
       if item
-        item.save
-          'folder_id': view.model.get 'id'
-        @collection.remove item
+        item.save('folder_id': view.model.get('id'))
+          .then =>
+            profileModel = App.request 'current_user'
+            folder = profileModel.folders.get(view.model.get('id'))
+            folder.items.add item
+            @collection.remove item
+
+            App.request 'messenger:show',
+              hideAfter: 10
+              message: "#{item.get('name')} is moved to #{folder.get('name')}."
+              type: 'success'
 
     highlightNew: (model) =>
       if model
