@@ -48,7 +48,9 @@ define [
 
       @headerView = new HeaderView(model: @model, viewType: @viewType)
       @assignmentsView = new AssignmentsView(model: @model)
-      @activityView = new ActivityView(collection: @model.notifications)
+      @activityView = new ActivityView
+        user: @model
+        collection: @model.notifications
 
       App.vent.on 'drag:complete', @assignDragged
 
