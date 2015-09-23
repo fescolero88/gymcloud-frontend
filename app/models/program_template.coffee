@@ -53,6 +53,6 @@ define [
         personalProgram = collection.get(@id)
         unless personalProgram
           item.__defineGetter__('program_template_id', -> template.id)
-          personalProgram = new PersonalWorkout(item)
+          personalProgram = new PersonalProgram(item)
         personalProgram
       @assignees = new Backbone.Collection(items)
