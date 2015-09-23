@@ -16,7 +16,41 @@ define ->
         large: url: ''
         thumb: url: ''
 
+    validation:
+
+      first_name:
+        required: true
+
+      last_name:
+        required: true
+
+      weight:
+        required: false
+        isFloat: true
+
+      height:
+        required: false
+        isFloat: true
+
+      bodyfat:
+        required: false
+        isFloat: true
+
+      address:
+        required: false
+
+      zip:
+        required: false
+        pattern: 'digits'
+
+      works_at:
+        required: false
+
     initialize: ->
+      super
+      @_initBgColor()
+
+    _initBgColor: ->
       bgColorIndex = @id % @bgColors.length
       value = @bgColors[bgColorIndex]
       @set('avatar_background_color', value, silent: true)

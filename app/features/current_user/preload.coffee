@@ -21,7 +21,9 @@ define [
   PersonalWorkout
   Folder
 )->
+
   (user) ->
+
     collections =
       pros: User
       clients: User

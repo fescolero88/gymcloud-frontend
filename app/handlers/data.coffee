@@ -1,17 +1,13 @@
-define ->
+define [
+], (
+) ->
 
   (App) ->
 
     App.data = {}
 
-    App.reqres.setHandler 'current_user_id', ->
-      App.request('current_user').get('id')
-
-    App.reqres.setHandler 'current_user', ->
-      App.data.current_user
-
-    App.reqres.setHandler 'data:profile', ->
-      App.request('current_user')
+    App.reqres.setHandler 'data:all:clear', ->
+      App.data = {}
 
     App.reqres.setHandler 'data:exercises', ->
       App.data.exercises

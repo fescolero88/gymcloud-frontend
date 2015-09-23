@@ -8,9 +8,8 @@ ResendConfirmationView = require 'views/auth/resend-confirmation-view'
 
 ConfirmRegistrationModel = require 'models/auth/confirm-registration-model'
 ResendConfirmationModel = require 'models/auth/resend-confirmation-model'
-LoginModel = require 'models/auth/login-model'
 ResetPasswordModel = require 'models/auth/reset-password-model'
-ProfileModel = require 'models/auth/profile-model'
+CurrentUser = require 'features/current_user/model'
 
 module.exports = class AuthController extends Marionette.Controller
 
@@ -19,21 +18,17 @@ module.exports = class AuthController extends Marionette.Controller
     @layoutView = options.layoutView
 
   login: (signUp) =>
-    model = new LoginModel
     view = new AuthView
       signUp: signUp
-      model: model
     if App.request 'accessToken:get'
       window.location.replace '#'
     else
       @layoutView.mainRegion.show(view)
 
   logout: =>
-    #window.localStorage.removeItem 'accessToken'
     App.request 'accessToken:remove'
-    App.request 'data:exercises:clear'
-    App.request 'data:workouts:clear'
-    App.request 'data:programs:clear'
+    App.request 'data:all:clear'
+    App.request 'current_user:reset'
     window.location.replace '#login'
 
   forgotPassword: ->
@@ -44,8 +39,7 @@ module.exports = class AuthController extends Marionette.Controller
     view = new SignUpView
     @layoutView.mainRegion.show(view)
     @listenTo view, 'signup:complete', =>
-      href = '#login'
-      Backbone.history.navigate(href, { trigger:false, replace: true })
+      Backbone.history.navigate('#login', { trigger:false, replace: true })
       @login(true)
 
   resetPassword: (token) =>
@@ -57,7 +51,7 @@ module.exports = class AuthController extends Marionette.Controller
 
   confirmRegistration: (token) =>
     confirmRegistrationModel = new ConfirmRegistrationModel
-    profileModel = new ProfileModel
+    profileModel = new CurrentUser
     view = new ConfirmRegistrationView
       token: token
       model: confirmRegistrationModel
