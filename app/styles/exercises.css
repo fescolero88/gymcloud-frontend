@@ -606,3 +606,8 @@
   color: #fff;
   text-decoration: none;
 }
+region.gc-exercises-videos .row {
+  padding: 20px 5px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
