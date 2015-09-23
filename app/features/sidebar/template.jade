@@ -11,16 +11,16 @@ a.gc-sidebar-logo(href='#')
           span.col-xs-10.gc-sidebar-cat-name
             | Dashboard
       
-      hr
       pro-section
-      hr
-      //- Personal Section
-      region(data-name='personal_workouts')
-      region(data-name='personal_programs')
-              
-      .gc-sidebar-cat
-        a.row.toggle-menu(href='#calendar/')
-          span.col-xs-2
-            span.gc-sidebar-cat-icon.fix-bg-img-icon-calendar
-          span.col-xs-10.gc-sidebar-cat-name
-            | Calendar
+
+      if !isPro
+        //- Personal Section
+        region(data-name='personal_workouts')
+        region(data-name='personal_programs')
+
+        .gc-sidebar-cat
+          a.row.toggle-menu(href='#calendar/')
+            span.col-xs-2
+              span.gc-sidebar-cat-icon.fix-bg-img-icon-calendar
+            span.col-xs-10.gc-sidebar-cat-name
+              | Calendar

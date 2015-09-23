@@ -40,6 +40,9 @@ define [
       personalWorkouts: '@ui.personalWorkoutsRegion'
       personalPrograms: '@ui.personalProgramsRegion'
 
+    templateHelpers: ->
+      isPro: @currentUser.get('is_pro')
+
     initialize: ->
       @currentUser = App.request('current_user')
 
@@ -53,8 +56,10 @@ define [
         @getRegion(regionName).show(view)
 
     onRender: ->
-      @renderPersonalEntities()
-      @getRegion('pro').show(new SidebarProView) if @currentUser.get('is_pro')
+      if @currentUser.get('is_pro')
+        @getRegion('pro').show(new SidebarProView)
+      else
+        @renderPersonalEntities()
 
     toggleMenu: (ev) ->
       target = $(ev.target)

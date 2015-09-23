@@ -30,8 +30,8 @@ define [
       workout_templates: WorkoutTemplate
       program_templates: ProgramTemplate
       personal_programs: PersonalProgram
-      personal_properties: PersonalProperty
       personal_workouts: PersonalWorkout
+      personal_properties: PersonalProperty
       folders: Folder
       notifications: Backbone.Model
       library: Folder
