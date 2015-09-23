@@ -21,17 +21,6 @@ define [
       navLink: '.gc-content-nav :not(.gc-content-nav-back) a'
       deleteButton: '.gc-content-nav-delete'
 
-    templateHelpers: =>
-      client_id: @itemId
-      view_name: @viewName
-
-    initialize: (data) ->
-      @itemId = data.itemId
-      if data.viewType is 'clients'
-        @viewName = 'clients'
-      else
-        @viewName = 'groups'
-
     getActiveTabName: ->
       tab = @ui.activeTab
       tab.find('a').data('nav-view')

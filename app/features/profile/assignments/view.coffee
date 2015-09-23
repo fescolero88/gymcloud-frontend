@@ -20,8 +20,8 @@ define [
     template: template
 
     regions:
-      navigation: '#client-content-nav-region'
-      content: '#client-left-region'
+      navigation: 'region[data-name="navigation"]'
+      content: 'region[data-name="content"]'
 
     contentViews:
       personal_workouts:

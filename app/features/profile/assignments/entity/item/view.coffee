@@ -16,14 +16,12 @@ define [
 
     initialize: (data) ->
       @viewType = data.viewType
-      @clientId = data.clientId
 
     templateHelpers: =>
-      client_id: @clientId
       assign_name: @viewType.split('_')[1]
       viewType: @viewType
 
-    _destroyModel: (ev) =>
+    _destroyModel: (ev) ->
       ev.preventDefault()
       App.request 'base:confirmationalModal',
         title: "Delete item"

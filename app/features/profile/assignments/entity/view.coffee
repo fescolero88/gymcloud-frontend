@@ -32,7 +32,6 @@ define [
     childViewContainer: 'ul'
 
     childViewOptions: ->
-      clientId: @clientId
       viewType: @viewType
 
     templateHelpers: =>
