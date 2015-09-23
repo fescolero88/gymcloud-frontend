@@ -65,7 +65,10 @@ define [
         @_toggleAssignSuccess('assign')
 
     _toggleAssignSuccess: (actionType) ->
-      message = "This #{@entityType} was #{actionType}ed to this client"
-      App.request 'messenger:show',
-        message: message
+      if actionType is 'assign'
+        message = "This #{@entityType} is assigned to client"
+      else
+        message = "This #{@entityType} is unassigned from client"
+
+      App.request('messenger:show', message: message)
       @render()
