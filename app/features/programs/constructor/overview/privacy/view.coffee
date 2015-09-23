@@ -27,8 +27,8 @@ define [
 
     behaviors: ->
       auto_complete:
-        onItemAdd: =>
-          console.log('added') # implement view specific logic
+        onItemAdd: (workoutId) =>
+          @_processWorkout(workoutId)
         collection: ->
           App.request('current_user').workout_templates.map (item) ->
             id: item.get('id')
@@ -72,6 +72,9 @@ define [
 
     addProgramWorkout: ->
       @trigger('add:program_workout')
+
+    _processWorkout: (workoutId) ->
+      @trigger('add:program_workout:from_library', workoutId)
 
     toggleControlsView: =>
       @ui.defaultControls.toggleClass 'hidden'

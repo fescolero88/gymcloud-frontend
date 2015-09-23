@@ -46,6 +46,16 @@ define [
           @collection.add(model)
           @program.program_workouts.add(model)
 
+    addProgramWorkoutFromLibrary: (workoutId, isInWeek = false) ->
+      model = new ProgramWorkout
+        workout_template_id: workoutId
+        program_template_id: @program.id
+
+      model.isInWeek = isInWeek
+      model.save().then =>
+        @collection.add(model)
+        @program.program_workouts.add(model)
+
     addSortable: ->
       sortableContainers = []
       # TODO: ?
