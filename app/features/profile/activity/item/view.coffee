@@ -20,7 +20,6 @@ define [
 
       message: do =>
         action = @model.get('key').split('.')[1]
-        owner = @model.get('owner').user_profile
-        who = "#{owner.first_name} #{owner.last_name}"
+        who = @model.get('owner_full_name')
         what = "#{@model.get('trackable_type')}##{@model.get('trackable_id')}"
         "#{who} #{action} #{what}"
