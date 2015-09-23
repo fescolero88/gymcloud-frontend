@@ -141,6 +141,7 @@
   right: 5px;
   top: 8px;
   outline: none;
+  z-index:100;
 }
 
 .gc-program-empty-placeholder .gc-add-workout-controls {

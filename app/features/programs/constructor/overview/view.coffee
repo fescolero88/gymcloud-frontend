@@ -41,6 +41,7 @@ define [
 
       @listenTo(@views.weeks, 'add:program_workout', @_addProgramWorkout)
       @listenTo(@views.privacy, 'add:program_workout', @_addProgramWorkout)
+      @listenTo(@views.privacy, 'add:program_workout:from_library', @_addProgramWorkoutFromLibrary)
       @listenTo(@collection, 'update', @toggleEmptyState)
       @listenTo(@workoutsCollection, 'update', @toggleEmptyState)
 
@@ -94,3 +95,6 @@ define [
 
     _addProgramWorkout: ->
       @views.workoutList.addProgramWorkout()
+
+    _addProgramWorkoutFromLibrary: (workoutId) ->
+      @views.workoutList.addProgramWorkoutFromLibrary(workoutId)
