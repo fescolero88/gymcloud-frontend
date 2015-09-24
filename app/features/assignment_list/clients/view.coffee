@@ -26,9 +26,6 @@ define [
         options.attributes = style: 'background-color: #E3F2FD'
       options
 
-    childEvents:
-      'assignees:changed': @_flushCache
-
     viewComparator: (model) ->
       if model.id == App.request('current_user_id')
         0 # will be first
@@ -40,9 +37,5 @@ define [
       @entity = options.entity
       @entityType = options.entityType
 
-    _flushCache: =>
-      # flush memoize cache of _getAssigmentBy function
-      @_getAssigmentBy.cache.__data__ = {}
-
-    _getAssigmentBy: _.memoize (user) ->
+    _getAssigmentBy: (user) ->
       @clientAssignees.findWhere(person_id: user.id)

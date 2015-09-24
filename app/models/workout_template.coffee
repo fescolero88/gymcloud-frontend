@@ -52,9 +52,9 @@ define [
       template = this
       items = _.map assignees, (item) ->
         collection = App.request('current_user').personal_workouts
-        personalWorkout = collection.get(@id)
+        personalWorkout = collection.get(item.id)
         unless personalWorkout
-          item.__defineGetter__('workout_template_id', -> template.id)
+          item.workout_template_id = template.id
           personalWorkout = new PersonalWorkout(item)
         personalWorkout
       @assignees = new Backbone.Collection(items)

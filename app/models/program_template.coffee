@@ -50,9 +50,9 @@ define [
       template = this
       items = _.map assignees, (item) ->
         collection = App.request('current_user').personal_programs
-        personalProgram = collection.get(@id)
+        personalProgram = collection.get(item.id)
         unless personalProgram
-          item.__defineGetter__('program_template_id', -> template.id)
+          item.program_template_id = template.id
           personalProgram = new PersonalProgram(item)
         personalProgram
       @assignees = new Backbone.Collection(items)
