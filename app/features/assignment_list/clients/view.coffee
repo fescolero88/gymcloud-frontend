@@ -38,14 +38,7 @@ define [
     initialize: (options) ->
       @clientAssignees = options.clientAssignees
       @entity = options.entity
-      @entityType = @_getEntityType()
-
-    _getEntityType: ->
-      className = @entity.constructor.name
-      {
-        WorkoutTemplate: 'workout'
-        ProgramTemplate: 'program'
-      }[className]
+      @entityType = options.entityType
 
     _flushCache: =>
       # flush memoize cache of _getAssigmentBy function

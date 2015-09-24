@@ -92,7 +92,7 @@ define [
         when 'assign'
           View = AssignView
           @ui.innerNav.hide()
-      view = new View(model: @model)
+      view = new View(model: @model, entityType: 'workout')
       @getRegion('manageRegion').show(view)
 
     showAddToLibrary: (ev) =>
