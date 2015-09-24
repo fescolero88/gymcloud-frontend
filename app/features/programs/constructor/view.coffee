@@ -74,7 +74,7 @@ define [
         assign: AssignView
       }[navView]
 
-      view = new View(model: @model)
+      view = new View(model: @model, entityType: 'program')
       @manageRegion.show(view)
 
     programDeleted: ->

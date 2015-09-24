@@ -42,7 +42,6 @@ define [
     toggleAssign: (ev) =>
       ev.preventDefault()
       if @isAssigned then @_unassign() else @_assign()
-      @triggerMethod('assignees:changed')
 
     _isMe: ->
       @model.id == App.request('current_user_id')
