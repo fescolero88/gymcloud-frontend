@@ -14,7 +14,14 @@ define [
     regions:
       exerciseVideos: 'region.gc-exercises-videos'
 
+    ui:
+      innerNavItems: '.gc-assign-video-filter li'
+      innerNavLinks: '.gc-assign-video-filter li a'
+
     className: 'gc-exercises-assign-videos'
+
+    events:
+      'click @ui.innerNavLinks': 'changeViewEvent'
 
     onShow: ->
       @collection = new ExerciseVideosCollection [
@@ -56,3 +63,10 @@ define [
       ]
       view = new AssignVideoView collection: @collection
       @getRegion('exerciseVideos').show view
+
+    changeViewEvent: (ev) ->
+      ev.preventDefault()
+      navItem = $(ev.currentTarget).parent()
+      unless $(navItem).hasClass 'active'
+        @ui.innerNavItems.removeClass 'active'
+        $(navItem).addClass 'active'

@@ -21,13 +21,12 @@ define [
       title: '.gc-breadcrumbs-title'
       publicMarker: '.gc-privacy-public'
       privateMarker: '.gc-privacy-private'
-      innerNavItems: '.gc-content-nav li'
-      innerNavLinks: '.gc-content-nav li a'
+      innerNavItems: '.gc-exercise-nav li'
+      innerNavLinks: '.gc-exercise-nav li a'
       addToLibraryButton: '.gc-add-to-library-button'
       removeFromLibraryButton: '.gc-exercise-delete-button'
 
     events:
-      'click @ui.innerNavLinks': 'changeViewEvent'
       'click @ui.innerNavLinks': 'changeViewEvent'
       'click @ui.addToLibraryButton': 'showAddToLibrary'
       'click @ui.removeFromLibraryButton': 'removeFromLibrary'
