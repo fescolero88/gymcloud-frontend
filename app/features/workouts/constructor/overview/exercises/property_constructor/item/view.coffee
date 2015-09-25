@@ -15,23 +15,6 @@ define [
 
     className: 'pull-left'
 
-    onRender: ->
-      #set default property id
-      if @model.isNew()
-        personal_property = @collection.at(0)
-        @model.set
-          personal_property_id: personal_property?.id
-          personal_property: personal_property?.attributes
-          property_name: personal_property?.name
-        @model.personal_property = personal_property
-        @ui.selectedPropertyValue.focus()
-
-    templateHelpers: ->
-      properties = @collection.toJSON()
-
-      properties: properties
-      defaultProperty: properties[0]?.name
-
     ui:
       removeButton: '.gc-remove'
       propertyItem: '.gc-property-item'
@@ -42,6 +25,23 @@ define [
       'click @ui.removeButton': 'removeProperty'
       'click @ui.propertyItem': 'selectProperty'
       'keyup @ui.selectedPropertyValue': 'setPropertyValue'
+
+    templateHelpers: ->
+      properties = @collection.toJSON()
+
+      properties: properties
+      defaultProperty: properties[0]?.name
+
+    onRender: ->
+      #set default property id
+      if @model.isNew()
+        personal_property = @collection.at(0)
+        @model.set
+          personal_property_id: personal_property?.id
+          personal_property: personal_property?.attributes
+          property_name: personal_property?.name
+        @model.personal_property = personal_property
+        @ui.selectedPropertyValue.focus()
 
     removeProperty: ->
       @model.trigger 'destroy', @model

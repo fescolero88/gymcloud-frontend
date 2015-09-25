@@ -417,13 +417,15 @@
 }
 
 
-.gc-exercises-item-icon.gc-exercises-item-icon-programs {
+.gc-exercises-item-icon.gc-exercises-item-icon-programs,
+.gc-exercises-item-icon.gc-exercises-item-icon-program_templates {
   background: transparent url('../images/icon-programs.png') -19px 1px no-repeat;
   height: 25px;
   width: 23px;
   background-size: 154%;
 }
-.gc-exercises-item-icon.gc-exercises-item-icon-workouts {
+.gc-exercises-item-icon.gc-exercises-item-icon-workouts,
+.gc-exercises-item-icon.gc-exercises-item-icon-workout_templates {
   background: transparent url('../images/icon-workouts.png') -18px 0px no-repeat;
   height: 25px;
   width: 23px;
