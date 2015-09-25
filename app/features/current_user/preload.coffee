@@ -39,6 +39,16 @@ define [
       library: Folder
       # workout_events: Backbone.Model
 
+    if not user.get('is_pro')
+      toExclude = [
+        'client_groups'
+        'folders'
+        'personal_properties'
+        'library'
+      ]
+      for key in toExclude
+        delete collections[key]
+
     _.map collections, (model, item) ->
       collection = new UserCollection [],
         model: model
