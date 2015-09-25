@@ -206,15 +206,15 @@ define [
       currentUser = App.request('current_user')
       collection = currentUser["#{type}_templates"]
       model = collection.get(id)
-      breadcrumbs = [{title: type}]
 
       View = {
         workout: WorkoutConstructorView
         program: ProgramConstructorView
       }[type]
 
-      view = new View(model: model, breadcrumbs: breadcrumbs)
-      @mainView.content.show(view)
+      model.fetch().then =>
+        view = new View(model: model)
+        @mainView.content.show(view)
 
     exercisesFolderView: (folder_id) ->
       @_entityFolderView('exercises', folder_id)

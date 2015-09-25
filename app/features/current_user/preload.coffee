@@ -29,11 +29,11 @@ define [
       clients: User
       client_groups: ClientGroup
       exercises: Exercise
+      personal_properties: PersonalProperty
+      personal_workouts: PersonalWorkout
+      personal_programs: PersonalProgram
       workout_templates: WorkoutTemplate
       program_templates: ProgramTemplate
-      personal_programs: PersonalProgram
-      personal_workouts: PersonalWorkout
-      personal_properties: PersonalProperty
       folders: Folder
       notifications: Backbone.Model
       library: Folder
