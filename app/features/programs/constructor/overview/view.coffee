@@ -4,6 +4,7 @@ define [
   './weeks/view'
   './weeks/empty/view'
   'collections/program_workouts'
+  'collections/program_weeks'
   './workouts/view'
   './template'
 ], (
@@ -12,6 +13,7 @@ define [
   WeeksView
   WeekEmptyView
   ProgramWorkouts
+  ProgramWeeks
   WorkoutListView
   template
 ) ->

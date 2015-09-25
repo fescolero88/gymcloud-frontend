@@ -10,11 +10,9 @@ define [
   'models/client_group' #ClientGroup
   'collections/client_groups' #ClientGroups
   'features/client_groups/show/view' #ClientGroupView
-  'views/trainer/global_ewp/ewp-global-view' #EWPGlobalView
   'features/exercises/constructor/view' #ExerciseConstructorView
   'models/exercise' #Exercise
   'models/global_workout' #GlobalWorkout
-  'views/trainer/programs/program_global_view' #ProgramGlobalView
   'models/global_program' #GlobalProgram
   'features/properties/view' #PropertiesView
   'features/workouts/constructor/view' #WorkoutConstructorView
@@ -33,11 +31,9 @@ define [
   ClientGroup
   ClientGroups
   ClientGroupView
-  EWPGlobalView
   ExerciseConstructorView
   Exercise
   GlobalWorkout
-  ProgramGlobalView
   GlobalProgram
   PropertiesView
   WorkoutConstructorView

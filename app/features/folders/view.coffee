@@ -3,22 +3,18 @@ define [
   './entity_list/view' #EntityListView
   './add_entity_modal/view' #AddEntityModalView
   './add_folder_modal/view' #AddFolderModalView
-  'views/trainer/global_ewp/duplicate-global-ewp-modal' #DuplicateGlobalEWPModalView
-  'collections/ewp_sortable' #EWPSortableCollection
-  'models/global_ewp_model' #GlobalEWPModel
+  './duplicate_modal/view' #DuplicateModalView
   './template'
 ], (
   Breadcrumbs
   EntityListView
   AddEntityModalView
   AddFolderModalView
-  DuplicateGlobalEWPModalView
-  EWPSortableCollection
-  GlobalEWPModel
+  DuplicateModalView
   template
 ) ->
 
-  class EWPGlobalView extends Marionette.LayoutView
+  class FolderListView extends Marionette.LayoutView
 
     template: template
 
@@ -59,7 +55,7 @@ define [
       @typeName = data.type
       @breadcrumbs = new Breadcrumbs(model: @model)
 
-      @ewpGlobalModel = new GlobalEWPModel type: @typeName
+      @ewpGlobalModel = new Backbone.Model type: @typeName
       @listenTo @ewpGlobalModel, 'model:duplicate:success', @onDuplicate
 
     templateHelpers: ->
@@ -159,7 +155,7 @@ define [
 
     showDuplicateEWPModal: (ev) =>
       ev.preventDefault()
-      @duplicateGlobalEWPModal = new DuplicateGlobalEWPModalView
+      @duplicateGlobalEWPModal = new DuplicateModalView
         items: @exercisesList
         type: @typeName
 
