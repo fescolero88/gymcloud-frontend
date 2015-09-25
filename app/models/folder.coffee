@@ -23,6 +23,10 @@ define [
       new Backbone.Collection @items.filter (model) ->
         _.isUndefined(model.get('folder_id'))
 
+    nestedEntities: ->
+      new Backbone.Collection @items.filter (model) ->
+        !_.isUndefined(model.get('folder_id'))
+
     parse: (data, options) ->
       if data.items
         if data.parent_id == null
