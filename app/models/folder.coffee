@@ -19,16 +19,20 @@ define [
       name:
         required: true
 
+    nestedFolders: ->
+      new Backbone.Collection @items.filter (model) ->
+        _.isUndefined(model.get('folder_id'))
+
     parse: (data, options) ->
       if data.items
         if data.parent_id == null
           data = @_parseRootFolder(data)
         else
           data = @_parseFolder(data, options.type)
-        this.items = data.items
+        @items = data.items
         delete data.items
       else
-        this.items = new Backbone.Collection
+        @items = new Backbone.Collection
       data
 
     _parseRootFolder: (data) ->

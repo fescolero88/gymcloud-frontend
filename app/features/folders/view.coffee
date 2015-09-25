@@ -1,9 +1,9 @@
 define [
   '../breadcrumbs/view'
-  './entity_list/view' #EntityListView
-  './add_entity_modal/view' #AddEntityModalView
-  './add_folder_modal/view' #AddFolderModalView
-  './duplicate_modal/view' #DuplicateModalView
+  './entity_list/view'
+  './add_entity_modal/view'
+  './add_folder_modal/view'
+  './duplicate_modal/view'
   './template'
 ], (
   Breadcrumbs
@@ -156,7 +156,7 @@ define [
     showDuplicateEWPModal: (ev) =>
       ev.preventDefault()
       @duplicateGlobalEWPModal = new DuplicateModalView
-        items: @exercisesList
+        collection: @model.nestedFolders()
         type: @typeName
 
       @listenTo @duplicateGlobalEWPModal, 'items:duplicate', @duplicateEWP

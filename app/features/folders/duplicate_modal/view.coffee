@@ -30,23 +30,7 @@ define [
 
     templateHelpers: ->
       type: @typeName
-      typeSingle: @typeName.substring(0, @typeName.length - 1)
-
-    onShow: =>
-      @collection = new Backbone.Collection(@searchItems @items, @typeName)
-      @render()
-
-    searchItems: (items, category) =>
-      result = []
-      $.each items, (index, item) =>
-        if item.isFolder
-          result.push
-            key: item.key
-            title: item.title
-            label: category
-          category = item.title
-          result = result.concat @searchItems(item.items, category)
-      return result
+      typeSinglular: _.chain(@typeName).singularize().humanize().value()
 
     submitForm: (ev) =>
       ev.preventDefault()
