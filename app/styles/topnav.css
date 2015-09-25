@@ -187,7 +187,7 @@
     line-height: 39px;
 }
 .gc-topbar-avatar .dropdown-menu .row:hover {
-    background: transparent;
+    background: #0875ba;
 }
 .gc-topbar-avatar .dropdown-menu .row > span:first-child {
     padding: 0;
