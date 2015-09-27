@@ -74,6 +74,8 @@ define [
 
     _addProgramWorkoutFromLibrary: (workoutId) =>
       @trigger('add:program_workout:from_library', workoutId)
+      selectiveIput = @$el.find '.selectize-input'
+      selectiveIput.find('div').remove()
 
     toggleControlsView: =>
       @ui.defaultControls.toggleClass 'hidden'
