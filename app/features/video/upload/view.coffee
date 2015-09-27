@@ -18,6 +18,7 @@ define [
       'uploadDropzone': '.gc-video-upload'
       'deleteVideo': '.gc-delete-video'
       'editName': '.gc-update-name'
+      'uploadControls': '.gc-video-controls'
 
     events:
       'click @ui.uploadTrigger': 'upload'
@@ -41,12 +42,8 @@ define [
         url: '/videos'
         dropZone: @ui.uploadDropzone
         dataType: 'json'
-        add: (_e, data) =>
-          @file = data.files[0]
-          @processFile @file
-          data.submit()
-        done: (e, data) =>
-          @model.set data.result
+        add: @_onFileAdd
+        done: @_videoUploaded
         progressall: @_showProgress
       
       .bind 'fileuploadsubmit', (e, data) =>
@@ -65,16 +62,36 @@ define [
       @ui.uploadProgress.css 'width', "#{progress}%"
       @ui.uploadProgressText.text(progress + '%')
 
+    _videoUploaded: (e, data) =>
+      @model.set data.result
+      @ui.uploadControls.removeClass 'hidden'
+
+    _onFileAdd: (_e, data) =>
+      @file = data.files[0]
+      if !(/\.(webm|mkv|flv|vob|mp4)$/i).test(@file.name)
+        App.request 'messenger:show',
+          message: 'Invalid File Type'
+          type: 'info'
+        return
+
+      @processFile @file
+      data.submit()
+
     deleteVideo: ->
       @model.destroy().then =>
         @model.clear()
         @ui.uploadDetailsPanel.addClass 'hidden'
+        @ui.uploadControls.addClass 'hidden'
+        @ui.uploadProgress.css 'width', '0'
+        App.request 'messenger:show',
+          message: 'Video Deleted'
 
     toggleEditName: ->
-      @ui.videoFileName.attr('contenteditable', true).focus()
+      @ui.videoFileName.focus()
 
     saveVideoDetails: ->
-      @model.save().then ->
-        App.request 'messenger:show',
-          type: 'success'
-          message: 'filename updated'
+      if @model.hasChanged('name')
+        @model.save().then ->
+          App.request 'messenger:show',
+            type: 'success'
+            message: 'filename updated'
