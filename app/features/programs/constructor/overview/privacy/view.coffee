@@ -53,7 +53,6 @@ define [
 
     onRender: ->
       @getRegion('privacyButtons').show(@privacyButtons)
-      # @toggleAddWorkoutButton()
 
     deleteProgram: ->
       App.request 'base:confirmationalModal',
@@ -74,8 +73,8 @@ define [
 
     _addProgramWorkoutFromLibrary: (workoutId) =>
       @trigger('add:program_workout:from_library', workoutId)
-      selectiveIput = @$el.find '.selectize-input'
-      selectiveIput.find('div').remove()
+      selectizeInput = @$el.find '.selectize-input'
+      selectizeInput.find('div').remove()
 
     toggleControlsView: =>
       @ui.defaultControls.toggleClass 'hidden'
