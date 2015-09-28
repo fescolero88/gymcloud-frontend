@@ -134,3 +134,7 @@
   margin: 15px;
   float: right;
 }
+.gc-workout-draggable.gu-mirror {
+  background-color: #fff;
+  border-radius: 6px;
+}

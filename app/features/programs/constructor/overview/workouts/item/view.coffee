@@ -42,6 +42,7 @@ define [
 
     initialize: (options) ->
       @program_template = options.program_template
+      @$el.attr 'data-id', @model.get('id')
 
     changeContent: (content) ->
       @ui.workoutTabPanes.removeClass 'active'
@@ -72,3 +73,7 @@ define [
     _saveVisibility: (ev) ->
       isVisible = ev.currentTarget.checked
       @model.workout.save(is_visible: isVisible)
+
+    _positionChanged: ->
+      @model.set 'position', @$el.index() + 1
+      @model.save()

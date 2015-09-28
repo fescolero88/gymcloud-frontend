@@ -24,8 +24,8 @@ define [
       unless child.isInWeek
         Marionette.CollectionView::addChild.apply this, arguments
 
-    ui:
-      workoutsList: 'li'
+    viewComparator: (model) ->
+      model.get 'position'
 
     initialize: (options) ->
       @program = options.program
@@ -37,6 +37,7 @@ define [
       workout = new WorkoutTemplate
         name: "Workout #{@collection.length + 1}"
         is_visible: false
+        position: @collection.length + 1
       workout.save().then =>
         model = new ProgramWorkout
           workout_template_id: workout.id
@@ -50,20 +51,20 @@ define [
       model = new ProgramWorkout
         workout_template_id: workoutId
         program_template_id: @program.id
+        position: @collection.length + 1
 
       model.isInWeek = isInWeek
       model.save().then =>
         @collection.add(model)
         @program.program_workouts.add(model)
 
-    addSortable: ->
-      sortableContainers = []
-      # TODO: ?
-      sortableContainers.push @ui.workoutsList
 
+    addSortable: ->
       dragOptions =
         revertOnSpill: true
         moves: (el, container, handle) ->
-          handle.className is 'gc-program-workout-sort'
+          handle.classList.contains('gc-program-workout-sort')
 
-      Dragula @ui.workoutsList, dragOptions
+      Dragula [@el], dragOptions
+        .on 'drop', (el, container) =>
+          @.children.call '_positionChanged'
