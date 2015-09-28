@@ -9,6 +9,7 @@ define [
   'styles/exercise'
   'styles/exercises'
   'styles/im'
+  'styles/item_actions_list'
   'styles/librarypreset'
   'styles/login'
   'styles/modals'

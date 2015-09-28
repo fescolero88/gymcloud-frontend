@@ -27,12 +27,6 @@
   padding: 6px;
   text-align: center;
 }
-.gc-workout-actions-list, .gc-program-actions-list {
-  padding: 5px 15px;
-}
-.gc-workout-actions-list a:hover, .gc-program-actions-list a:hover {
-  cursor: pointer;
-}
 .dropdown-menu > li > a.text-danger {
   color: #e74c3c;
 }
