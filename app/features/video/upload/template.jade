@@ -18,13 +18,13 @@
       .gc-video-item-upload.hidden
         .row
           .col-xs-6
-            h5.gc-video-file-name
+            h5.gc-video-file-name(contenteditable="true")
             .gc-progress-panel
               label.gc-progress-text
                 | 0%
               .gc-progress-bar
                 .gc-progress(style="width:0%;")
-          .col-xs-6.text-right
+          .col-xs-6.text-right.gc-video-controls.hidden
             h5.gc-upload-options
               img.gc-update-name.gc-upload-icon(src="app/images/icon-pencil.png")
               img.gc-delete-video.gc-upload-icon(src="app/images/icon-trash.png")
