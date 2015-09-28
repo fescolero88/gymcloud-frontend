@@ -59,12 +59,15 @@ define [
 
     _showProgress: (e, data) =>
       progress = parseInt(data.loaded / data.total * 100, 10)
-      @ui.uploadProgress.css 'width', "#{progress}%"
-      @ui.uploadProgressText.text(progress + '%')
-
+      @_updateProgress progress
+      
     _videoUploaded: (e, data) =>
       @model.set data.result
       @ui.uploadControls.removeClass 'hidden'
+
+    _updateProgress: (value) =>
+      @ui.uploadProgress.css 'width', "#{value}%"
+      @ui.uploadProgressText.text("#{value}%")
 
     _onFileAdd: (_e, data) =>
       @file = data.files[0]
@@ -82,7 +85,7 @@ define [
         @model.clear()
         @ui.uploadDetailsPanel.addClass 'hidden'
         @ui.uploadControls.addClass 'hidden'
-        @ui.uploadProgress.css 'width', '0'
+        @_updateProgress 0
         App.request 'messenger:show',
           message: 'Video Deleted'
 
