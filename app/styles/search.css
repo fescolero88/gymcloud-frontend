@@ -48,6 +48,10 @@
   background: #fbfbfb;
 }
 
+.gc-search-results-list .row.gc-search-entity-group:hover {
+  background: none;
+}
+
 .gc-search-results-list .row:hover .gc-not-in-library > .gc-entity-download-count {
   display: none!important;
 }
