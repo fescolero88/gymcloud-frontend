@@ -28,4 +28,5 @@ define [
   'styles/program_workouts'
   'styles/account_type_modal'
   'styles/upload'
+  'styles/zzz_override'
 ], ->
