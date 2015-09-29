@@ -1,13 +1,11 @@
 define [
   'models/draggable_menu_item'
-  'views/trainer/sidebar-entity-composite-view'
   'collections/sidebar_items'
   './personal/view'
   './pro/view'
   './template'
 ], (
   DraggableMenuItemModel
-  SidebarEntity
   SidebarItemsCollection
   PersonalCollectionView
   SidebarProView
