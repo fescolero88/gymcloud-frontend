@@ -18,7 +18,7 @@
   </a>
 </div> --}}
 {{#withProfile}}
-{{#ifNot account_type 'client'}}
+{{#ifNot is_pro false}}
 <div class="gc-topbar-item gc-topbar-avatar dropdown">
   <a href="#" class="{{#if avatar_url}}gc-topbar-avatar-exist{{/if}}" id="gc-user-topbar-avatar" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
     <img src="{{avatar_url}}" alt="">
