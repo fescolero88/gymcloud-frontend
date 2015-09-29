@@ -184,12 +184,9 @@ define [
 
     exerciseConstructor: (id) ->
       collection = App.request('current_user').exercises
-      model = collection.get(id) || new Exercise
-      view = new ExerciseConstructorView(model: model)
-      if model.isNew()
-        model.fetch(id: id).then =>
-          @mainView.content.show(view)
-      else
+      model = collection.get(id) || new Exercise(id: id)
+      model.fetch().then =>
+        view = new ExerciseConstructorView(model: model)
         @mainView.content.show(view)
 
     workoutConstructor: (id) ->

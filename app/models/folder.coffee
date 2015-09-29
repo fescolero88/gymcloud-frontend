@@ -2,10 +2,12 @@ define [
   'backbone'
   'models/workout_template'
   'models/program_template'
+  'collections/folder_items'
 ], (
   Backbone
   WorkoutTemplate
   ProgramTemplate
+  FolderItems
 )->
   Exercise = Backbone.Model
   class Folder extends Backbone.Model
@@ -36,7 +38,11 @@ define [
         @items = data.items
         delete data.items
       else
-        @items = new Backbone.Collection
+        itemsType = @_getItemCollectionAttributes(options.type)?.collectionName
+        if itemsType
+          @items = new FolderItems([], type: itemsType)
+        else
+          @items = new Backbone.Collection
       data
 
     _parseRootFolder: (data) ->
@@ -55,7 +61,8 @@ define [
           attrs = @_parseFolder(entity, type)
           folderModel = @_createFolderFromAttrs(attrs)
 
-      folderAttrs.items = new Backbone.Collection(items)
+      itemsType = @_getItemCollectionAttributes(type).collectionName
+      folderAttrs.items = new FolderItems(items, type: itemsType)
       folderAttrs
 
     _createFolderFromAttrs: (attrs) ->

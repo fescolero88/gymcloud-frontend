@@ -147,29 +147,20 @@ define [
 
     _duplicateEntity: (foldersIds) ->
       checked = @ui.itemsRegion.find('input[type=checkbox]:checked')
-      ids = checked.map((_index, el) -> $(el).data('id'))
+      ids = checked.map( (_index, el) -> $(el).data('id') )
 
-      if ids.length
-        selectedEntities = @model.nestedEntities().where(ids)
-        duplicates = _.map selectedEntities, (model) =>
-          _.map foldersIds, (foldersId) =>
-            model.duplicateToFolder(foldersId).then(@_onDuplicateModel)
-        duplicates = _.flatten(duplicates, true)
-        $.when(duplicates...).then(@_onDuplicate)
+      if ids.length and foldersIds.length
+        @collection.duplicate(
+          ids: ids.toArray()
+          foldersIds: foldersIds.toArray()
+        ).then(@_onDuplicate)
       else
         App.request 'messenger:show',
           hideAfter: 5
-          message: "No #{@singularName} was selected"
+          message: "No #{@singularName} or folder was selected"
           type: 'error'
 
-    _onDuplicateModel: (model) =>
-      user = App.request('current_user')
-      collection = user[@typeName]
-      folder = user.folders.get(model.get('folder_id'))
-      collection.add(model)
-      folder.items.add(model)
-
-    _onDuplicate: (response) ->
+    _onDuplicate: (response) =>
       @ui.actionModal.modal('hide')
       App.request 'messenger:show',
         hideAfter: 5

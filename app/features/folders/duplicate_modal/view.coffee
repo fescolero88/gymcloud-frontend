@@ -6,7 +6,7 @@ define [
   template
 ) ->
 
-  class DuplicateGlobalEWPModalView extends Marionette.CompositeView
+  class FolderDuplicateModalView extends Marionette.CompositeView
 
     template: template
 
@@ -17,6 +17,7 @@ define [
     childViewContainer: 'ul'
 
     ui:
+      form: 'form'
       itemsList: '.gc-duplicate-folders-list'
 
     events:
