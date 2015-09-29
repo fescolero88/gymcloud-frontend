@@ -7,11 +7,11 @@ define [
   'handlers/others'
 
   'views/general/base-view'
-  'views/helpers/messenger-helper'
 
   'features/current_user/module'
   'features/header/module'
   'features/spinner/module'
+  'features/messenger/module'
   'modules/auth/auth-module'
   'modules/main-trainer/main-trainer-module'
   'modules/main-client/main-client-module'
@@ -32,11 +32,11 @@ define [
   othersHandler
 
   BaseView
-  MessengerHelper
 
   CurrentUserModule
   HeaderModule
   SpinnerModule
+  MessengerModule
   AuthModule
   MainTrainerModule
   MainClientModule
@@ -94,9 +94,6 @@ define [
         formValidatorHandler()
 
       @addInitializer ->
-        new MessengerHelper().initialize()
-
-      @addInitializer ->
         othersHandler(this)
 
     _initPromises: ->
@@ -116,6 +113,7 @@ define [
       @module 'CurrentUser', CurrentUserModule
       @module 'Header', HeaderModule
       @module 'Spinner', SpinnerModule
+      @module 'Messenger', MessengerModule
       @module 'Auth', AuthModule
       @module 'MainTrainer', MainTrainerModule
       @module 'MainClient', MainClientModule
