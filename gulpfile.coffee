@@ -101,5 +101,6 @@ gulp.task 'dist:prepare', ['dist:clean'], ->
   gulp.src([
     'build/**'
     'index.html'
+    'favicon.ico'
   ], base: '.')
     .pipe(gulp.dest('dist/'))
