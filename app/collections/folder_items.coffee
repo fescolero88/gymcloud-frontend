@@ -6,7 +6,7 @@ define ->
       "/#{@type}"
 
     initialize: (_models, options) ->
-      @type = options.type
+      @type = options?.type
 
     duplicate: (options) ->
       options = App.request 'ajax:options:create',

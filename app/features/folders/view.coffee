@@ -137,7 +137,7 @@ define [
     _showDuplicateModal: (ev) =>
       ev.preventDefault()
       view = new DuplicateModalView
-        collection: @model.nestedFolders()
+        collection: @model.nestedFolders
         type: @typeName
 
       @listenToOnce(view, 'items:duplicate', @_duplicateEntity)

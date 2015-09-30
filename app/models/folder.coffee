@@ -12,6 +12,17 @@ define [
   Exercise = Backbone.Model
   class Folder extends Backbone.Model
 
+    constructor: (_attributes, _collectionOptions) ->
+      @items = new FolderItems
+      @nestedFolders = new Backbone.VirtualCollection @items,
+        filter: (model) ->
+          _.isUndefined(model.get('folder_id'))
+      @nestedEntities =  new Backbone.VirtualCollection @items,
+        filter: (model) ->
+          !_.isUndefined(model.get('folder_id'))
+
+      super
+
     initialize: (options) ->
       @_defineParent()
 
@@ -35,37 +46,27 @@ define [
           data = @_parseRootFolder(data)
         else
           data = @_parseFolder(data, options.type)
-        @items = data.items
+        @items.reset(data.items)
         delete data.items
-      else
-        itemsType = @_getItemCollectionAttributes(options.type)?.collectionName
-        if itemsType
-          @items = new FolderItems([], type: itemsType)
-        else
-          @items = new Backbone.Collection
       data
 
     _parseRootFolder: (data) ->
-      items = _.map data.items, (folder) =>
+      data.items = _.map data.items, (folder) =>
         attrs = @_parseFolder(folder, folder.name)
-        folderModel = @_createFolderFromAttrs(attrs)
-
-      data.items = new Backbone.Collection(items)
+        folderModel = @_createFolderFromAttrs(attrs, folder.name)
       data
 
     _parseFolder: (folderAttrs, type) ->
-      items = _.map folderAttrs.items, (entity) =>
+      folderAttrs.items = _.map folderAttrs.items, (entity) =>
         if entity.folder_id
           @_parseEntity(entity, type)
         else
           attrs = @_parseFolder(entity, type)
-          folderModel = @_createFolderFromAttrs(attrs)
+          folderModel = @_createFolderFromAttrs(attrs, type)
 
-      itemsType = @_getItemCollectionAttributes(type).collectionName
-      folderAttrs.items = new FolderItems(items, type: itemsType)
       folderAttrs
 
-    _createFolderFromAttrs: (attrs) ->
+    _createFolderFromAttrs: (attrs, type) ->
       user = App.request('current_user')
       collection = user.folders
       items = attrs.items
@@ -74,7 +75,9 @@ define [
       unless folder
         folder = new Folder(attrs, parse: true)
         collection.add(folder, merge: true)
-      folder.items = items
+      itemsType = @_getItemCollectionAttributes(type).collectionName
+      folder.items.reset(items)
+      folder.items.type = itemsType
       folder
 
     _parseEntity: (modelAttrs, type) ->
