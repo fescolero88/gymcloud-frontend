@@ -138,3 +138,7 @@
   background-color: #fff;
   border-radius: 6px;
 }
+.gc-program-add-workout,
+.gc-add-workout {
+  margin-right: 5px;
+}

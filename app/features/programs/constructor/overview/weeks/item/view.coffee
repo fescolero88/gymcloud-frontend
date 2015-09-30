@@ -33,6 +33,9 @@ define [
             observe: 'name'
             events: ['change']
 
+    modelEvents:
+      'destroy': 'weekRemoved'
+
     initialize: (options) ->
       collection = new Backbone.Collection
       @workoutList = new WorkoutListView
@@ -48,7 +51,8 @@ define [
 
     removeModel: ->
       @model.destroy()
-      # TODO: delete workouts inside
+
+    weekRemoved: ->
       App.request 'messenger:show',
-        message: "Program #{model.get('name')} has been removed."
+        message: "Program #{@model.get('name')} has been removed."
         type: 'info'

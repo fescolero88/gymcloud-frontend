@@ -32,7 +32,7 @@ module.exports = class ProgramGlobalPrivacyControlsView extends Marionette.Layou
 
   onRender: ->
     @toggleAddWorkoutButton()
-    
+
   togglePrivacy: (ev) ->
     @ui.privacyButtons.removeClass 'active'
     $(ev.currentTarget).parent().addClass 'active'

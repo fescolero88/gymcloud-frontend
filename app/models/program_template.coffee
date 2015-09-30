@@ -3,11 +3,13 @@ define [
   './personal_program'
   './personal_workout'
   'collections/program_workouts'
+  'collections/program_weeks'
 ], (
   Backbone
   PersonalProgram
   PersonalWorkout
   ProgramWorkouts
+  ProgramWeeks
 ) ->
 
   class ProgramTemplate extends Backbone.Model
@@ -22,9 +24,15 @@ define [
       @__defineGetter__ 'parent', @_getFolder
       @__defineGetter__ 'folder', @_getFolder
 
+    constructor: ->
+      @program_weeks = new ProgramWeeks
+      @program_workouts = new ProgramWorkouts
+      super
+
     parse: (data) ->
       @_parseProgramWorkouts(data.workouts) && delete data.workouts
       @_parseAssignees(data.assignees) && delete data.assignees
+      @_parseWeeks(data.weeks) && delete data.weeks
       data
 
     assignTo: (user) ->
@@ -42,9 +50,11 @@ define [
       collection = user.folders
       collection.get(@get('folder_id'))
 
+    _parseWeeks: (weeks) ->
+      @program_weeks.reset(weeks)
+
     _parseProgramWorkouts: (workouts) ->
-      @program_workouts ||= new ProgramWorkouts
-      @program_workouts.add(workouts, parse: true, merge: true)
+      @program_workouts.reset(workouts)
 
     _parseAssignees: (assignees) ->
       template = this

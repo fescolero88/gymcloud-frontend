@@ -51,6 +51,9 @@ define [
     onDestroy: ->
       App.commands.removeHandler 'program_workouts:add:toggle', @toggleControlsView
 
+    onShow: ->
+      @toggleAddWorkoutButton()
+
     onRender: ->
       @getRegion('privacyButtons').show(@privacyButtons)
 
@@ -63,10 +66,7 @@ define [
           @model.destroy()
 
     addProgramWeek: ->
-      @collection.add(name: "Week #{@collection.length + 1}")
-      App.request 'messenger:show',
-        message: "Program week added."
-        type: 'success'
+      App.vent.trigger 'add:program:week'
 
     addProgramWorkout: ->
       @trigger('add:program_workout')
@@ -83,5 +83,7 @@ define [
     toggleAddWorkoutButton: ->
       if @collection.length > 0 or @workoutsCollection.length > 0
         @ui.addWorkout.removeClass 'hidden'
+        @ui.addWeek.removeClass 'hidden'
       else
         @ui.addWorkout.addClass 'hidden'
+        @ui.addWeek.addClass 'hidden'

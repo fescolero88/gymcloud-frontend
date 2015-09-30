@@ -1,5 +1,4 @@
 .col-xs-12.gc-program-options.gc-add-workout-controls.hidden
-  // <button class="btn btn-primary btn-sm gc-custom gc-program-add-week">add new week</button>
   .gc-add-create-workout-wrapper
     div
       input.form-control.gc-auto-complete
@@ -11,8 +10,10 @@
       button.btn.btn-primary.btn-sm.gc-custom.gc-program-create-workout
         | Create new workout
 .col-xs-12.text-right.gc-program-options.gc-default-controls
-  button.pull-left.btn.btn-primary.btn-sm.gc-custom.gc-program-add-workout(type='button')
+  button.pull-left.btn.btn-primary.btn-sm.gc-custom.gc-program-add-workout.hidden(type='button')
     | add new workout
+  button.pull-left.btn.btn-primary.btn-sm.gc-custom.gc-program-add-week.hidden(type='button')
+    | add new week
   region#gc-privacy-button-region(data-name="privacy-buttons")
   button.btn.btn-primary.gc-program-delete-button
     | Delete Program

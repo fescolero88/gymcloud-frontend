@@ -3,7 +3,6 @@ define [
   './privacy/view'
   './weeks/view'
   './weeks/empty/view'
-  'collections/program_weeks'
   'collections/program_workouts'
   './workouts/view'
   './template'
@@ -12,7 +11,6 @@ define [
   PrivacyControlsView
   WeeksView
   WeekEmptyView
-  ProgramWeeks
   ProgramWorkouts
   WorkoutListView
   template
@@ -35,7 +33,7 @@ define [
       emptyState: 'region[data-name="gc-program-empty-state"]'
 
     initialize: ->
-      @collection = new ProgramWeeks
+      @collection = @model.program_weeks
       @workoutsCollection = @model.program_workouts
       @views = @_prepareViews()
 
@@ -82,6 +80,7 @@ define [
         views.privacy = new PrivacyControlsView
           model: @model
           collection: @collection
+          workoutsCollection: @workoutsCollection
 
       views.weeks = new WeeksView
         model: @model
