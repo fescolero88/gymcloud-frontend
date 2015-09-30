@@ -77,8 +77,12 @@ define [
 
       region = App.baseView.baseModalRegion
       region.show(view)
-      region.$el.modal('show')
+      region.$el.modal
+        keyboard: false
+        background: 'static'
 
+      region.$el.modal 'show'
+      
       App.listenToOnce view, "modal:closed", ->
         region.$el.modal('hide')
         region.destroy()
