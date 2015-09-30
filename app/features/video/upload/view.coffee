@@ -64,6 +64,7 @@ define [
     _videoUploaded: (e, data) =>
       @model.set data.result
       @ui.uploadControls.removeClass 'hidden'
+      @ui.videoFileName.attr 'contenteditable', true
 
     _updateProgress: (value) =>
       @ui.uploadProgress.css 'width', "#{value}%"
@@ -79,6 +80,7 @@ define [
 
       @processFile @file
       data.submit()
+      @ui.videoFileName.attr 'contenteditable', false
 
     deleteVideo: ->
       @model.destroy().then =>
