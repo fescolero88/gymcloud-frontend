@@ -1,6 +1,7 @@
 .col-xs-8
   label.gc-exercises-chb
-    input(type='checkbox', data-id=id)
+    unless isFolder
+      input(type='checkbox', data-id=id)
   if isFolder
     i.fa.fa-folder-o.gc-exercises-folder-icon
   else

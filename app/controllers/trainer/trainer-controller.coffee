@@ -10,11 +10,9 @@ define [
   'models/client_group' #ClientGroup
   'collections/client_groups' #ClientGroups
   'features/client_groups/show/view' #ClientGroupView
-  'views/trainer/global_ewp/ewp-global-view' #EWPGlobalView
   'features/exercises/constructor/view' #ExerciseConstructorView
   'models/exercise' #Exercise
   'models/global_workout' #GlobalWorkout
-  'views/trainer/programs/program_global_view' #ProgramGlobalView
   'models/global_program' #GlobalProgram
   'features/properties/view' #PropertiesView
   'features/workouts/constructor/view' #WorkoutConstructorView
@@ -33,11 +31,9 @@ define [
   ClientGroup
   ClientGroups
   ClientGroupView
-  EWPGlobalView
   ExerciseConstructorView
   Exercise
   GlobalWorkout
-  ProgramGlobalView
   GlobalProgram
   PropertiesView
   WorkoutConstructorView
@@ -188,12 +184,9 @@ define [
 
     exerciseConstructor: (id) ->
       collection = App.request('current_user').exercises
-      model = collection.get(id) || new Exercise
-      view = new ExerciseConstructorView(model: model)
-      if model.isNew()
-        model.fetch(id: id).then =>
-          @mainView.content.show(view)
-      else
+      model = collection.get(id) || new Exercise(id: id)
+      model.fetch().then =>
+        view = new ExerciseConstructorView(model: model)
         @mainView.content.show(view)
 
     workoutConstructor: (id) ->
