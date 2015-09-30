@@ -36,13 +36,13 @@ define [
 
     addNewWeek: =>
       position = @collection.length + 1
-      proramWeek = new ProgramWeek
+      programWeek = new ProgramWeek
         name: "Week #{position}"
         position: position
         program_id: @model.get('id')
 
-      proramWeek.save().then =>
-        @collection.add(proramWeek)
+      programWeek.save().then =>
+        @collection.add(programWeek)
         App.request 'messenger:show',
           message: "Program week added."
           type: 'success'

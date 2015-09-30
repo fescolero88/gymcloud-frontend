@@ -24,6 +24,11 @@ define [
       @__defineGetter__ 'parent', @_getFolder
       @__defineGetter__ 'folder', @_getFolder
 
+    constructor: ->
+      @program_weeks = new ProgramWeeks
+      @program_workouts = new ProgramWorkouts
+      super
+
     parse: (data) ->
       @_parseProgramWorkouts(data.workouts) && delete data.workouts
       @_parseAssignees(data.assignees) && delete data.assignees
@@ -46,12 +51,10 @@ define [
       collection.get(@get('folder_id'))
 
     _parseWeeks: (weeks) ->
-      @program_weeks ||= new ProgramWeeks
-      @program_weeks.add(weeks, parse: true, merge: true)
+      @program_weeks.reset(weeks)
 
     _parseProgramWorkouts: (workouts) ->
-      @program_workouts ||= new ProgramWorkouts
-      @program_workouts.add(workouts, parse: true, merge: true)
+      @program_workouts.reset(workouts)
 
     _parseAssignees: (assignees) ->
       template = this
