@@ -43,7 +43,7 @@ define [
       'click @ui.addExerciseButton': '_showAddEntityModal'
       'click @ui.addExerciseFolderButton': '_showAddFolderModal'
       'click @ui.duplicateButton': '_showDuplicateModal'
-      'click @ui.deleteButton': 'rmAssign'
+      'click @ui.deleteButton': '_destroySelected'
 
     behaviors: ->
 
@@ -101,20 +101,18 @@ define [
       if needToggle
         @ui.mainCheckbox.prop 'checked', true
 
-    rmAssign: (ev) =>
+    _destroySelected: (ev) =>
       ev.preventDefault()
       App.request 'base:confirmationalModal',
         title: "Delete item(s)"
         content: "Are you sure you want to delete selected items?"
         confirmBtn: "Delete"
-        confirmCallBack: =>
-          ids = []
-          for check in @ui.itemsRegion.find('input[type=checkbox]')
-            if $(check).is ':checked'
-              ids.push $(check).data('id')
-          @listView.trigger 'items:delete', ids, @model.get('id')
-          App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then =>
-            @exercisesList = App.request "data:#{@typeName}"
+        confirmCallBack: @_onDestroyConfirm
+
+    _onDestroyConfirm: =>
+      checked = @ui.itemsRegion.find('input[type=checkbox]:checked')
+      ids = checked.map( (_index, el) -> $(el).data('id') ).toArray()
+      @listView.trigger('items:delete', ids, @model.get('id'))
 
     _showAddEntityModal: (ev) ->
       ev.preventDefault()

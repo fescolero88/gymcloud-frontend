@@ -107,6 +107,8 @@ define [
         workout_exercise = new WorkoutExercise
           exercise_id: item.id
           workout_id: @model.id
+          order_name: @model.exercises.length
+          position: @model.exercises.length
         workout_exercise.save().then =>
           @model.exercises.add(workout_exercise)
 

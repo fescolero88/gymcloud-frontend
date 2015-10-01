@@ -115,9 +115,3 @@ define [
       $('.gc-assign-catch').sortable
         drag: false
         group: 'assignEx'
-
-    # TODO: implement for programs
-    # TODO: review and delete
-    updateEWPName: (type, key, newValue) ->
-      selector = "span[data-key=\"#{key}\"]"
-      @ui["#{type}Region"].find(selector).html(newValue)

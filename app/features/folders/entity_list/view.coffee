@@ -32,7 +32,7 @@ define [
       'folder:change': 'changeFolder'
 
     initialize: (data) =>
-      @on 'items:delete', @deleteItems
+      @on('items:delete', @_deleteItems)
       @typeName = data.type
       @initDragula()
 
@@ -79,19 +79,21 @@ define [
             $row.removeClass 'active'
           , 3000
 
-    deleteItems: (ids, rootId) =>
-      for key in ids
-        model = @collection.where({key: key})[0]
-        type = if model.get('isFolder') then "folders" else @typeName
-        model.urlRoot = "/api/mobile/#{type}"
-        model.idAttribute = "key"
-        @notifySidebarChanges model, rootId
-        model.destroy()
-        App.request('data:reload', @typeName, App.request "data:#{@typeName}:root").then ->
-        App.request 'messenger:show',
-          hideAfter: 5
-          message: "Item(s) was deleted"
-          type: 'info'
+    _deleteItems: (ids, rootId) =>
+      deletions = _.map ids, (id) =>
+        model = @collection.get(id)
+        model.destroy(wait: true)
+      $.when(deletions...)
+        .then ->
+          App.request 'messenger:show',
+            hideAfter: 5
+            message: "Item(s) was deleted"
+            type: 'info'
+        .fail ->
+          App.request 'messenger:show',
+            hideAfter: 5
+            message: "Some items were not deleted"
+            type: 'error'
 
     notifySidebarChanges: (model, rootId) ->
       folderId = rootId

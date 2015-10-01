@@ -29,7 +29,7 @@ define [
     events:
       'click @ui.innerNavLinks': 'changeViewEvent'
       'click @ui.addToLibraryButton': 'showAddToLibrary'
-      'click @ui.removeFromLibraryButton': 'removeFromLibrary'
+      'click @ui.removeFromLibraryButton': '_removeFromLibrary'
 
     behaviors:
 
@@ -74,26 +74,24 @@ define [
       ev.preventDefault()
       App.request 'base:addToLibraryModal', type: 'exercises', model: @model
 
-    removeFromLibrary: (ev) ->
+    _removeFromLibrary: (ev) ->
       ev.preventDefault()
-      id = @model.get('id')
       App.request 'base:confirmationalModal',
         title: "Remove exercise?"
         content: "Are you sure you want to remove this exercise from exercise?"
         confirmBtn: "Remove"
-        confirmCallBack: _.bind(@_removeFromLibraryCallback, this, id)
+        confirmCallBack: _.bind(@_removeFromLibraryCallback, this)
 
     _removeFromLibraryCallback: (id) ->
-      $.ajax
-        method: 'DELETE'
-        url: "/api/mobile/exercises/#{id}"
-        dataType: 'json'
-        success: (model) ->
+      @model.destroy(wait: true)
+        .then (response) ->
+          url = "#exercises_folder/#{response.folder_id}"
+          Backbone.history.navigate(url, {trigger:true, replace: true})
           App.request 'messenger:show',
             message: 'Exercise removed from library'
-        error: ->
+        .fail ->
           App.request 'messenger:show',
-            message: 'Not emplemented on api side'
+            message: 'Oops. Something went wrong'
 
     _changePrivacyMarker: ->
       if @model.get('is_public')
