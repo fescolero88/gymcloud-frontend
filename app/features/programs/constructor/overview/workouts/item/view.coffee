@@ -29,7 +29,7 @@ define [
 
       stickit:
         bindings:
-          '[data-bind="name"]':
+          '[data-bind="workout-name"]':
             observe: 'name'
             events: ['blur']
           '[data-bind="description"]':
@@ -74,6 +74,6 @@ define [
       isVisible = ev.currentTarget.checked
       @model.workout.save(is_visible: isVisible)
 
-    _positionChanged: ->
+    _positionChanged: (options) ->
       @model.set 'position', @$el.index() + 1
       @model.save()
