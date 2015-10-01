@@ -7,3 +7,8 @@ define ->
       name: undefined
       program_id: undefined
       position: undefined
+
+    setPosition: (pos) ->
+      @set 'name', "Week #{pos}"
+      @set 'position', pos
+      @save()
