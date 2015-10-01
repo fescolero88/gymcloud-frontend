@@ -20,6 +20,14 @@ define [
       exercise_id:
         required: true
 
+    orderLetter: ->
+      orderName = @get('order_name')
+      letter = orderName?.match(/[a-zA-z]+/)?[0]
+      letter || "~#{orderName}"
+
+    orderNumber: ->
+      @get('order_name')?.match(/\d+/)?[0]
+
     parse: (data) ->
       @properties ||= new ExerciseProperties
       if @properties.length is 0

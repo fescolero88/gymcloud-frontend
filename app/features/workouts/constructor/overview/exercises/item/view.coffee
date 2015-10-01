@@ -43,6 +43,9 @@ define [
       'blur @ui.note': 'onSaveNote'
       'change @ui.setPropertyCheckbox': 'updateConstructorListener'
 
+    templateHelpers: =>
+      letter: @model.orderLetter()
+
     initialize: (options) ->
       @visibleProperties = options.visibleProperties
       @workoutExerciseModel = new WorkoutExercise

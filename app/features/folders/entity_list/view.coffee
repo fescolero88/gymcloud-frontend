@@ -92,7 +92,7 @@ define [
         .fail ->
           App.request 'messenger:show',
             hideAfter: 5
-            message: "Some items was not deleted"
+            message: "Some items were not deleted"
             type: 'error'
 
     notifySidebarChanges: (model, rootId) ->

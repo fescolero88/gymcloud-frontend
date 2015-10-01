@@ -109,7 +109,6 @@ define [
         confirmBtn: "Delete"
         confirmCallBack: @_onDestroyConfirm
 
-
     _onDestroyConfirm: =>
       checked = @ui.itemsRegion.find('input[type=checkbox]:checked')
       ids = checked.map( (_index, el) -> $(el).data('id') ).toArray()

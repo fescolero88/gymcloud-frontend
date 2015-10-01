@@ -24,11 +24,29 @@ define [
 
     childView: ExercisesItemView
 
+    childViewContainer: 'ul'
+
     childViewOptions: (model) ->
       collection: model.properties
       visibleProperties: @visibleProperties
 
-    childViewContainer: 'ul'
+    viewComparator: (model) ->
+      "#{model.orderLetter()}#{model.orderNumber()}"
+
+    behaviors: ->
+
+      auto_complete:
+        onItemAdd: ((_this) ->
+          (value, $item) ->
+            this.clear()
+            _this.addExercise(value, $item)
+        )(this)
+        collection: ->
+          App.request('current_user').exercises.map (item) ->
+            folder: item.folder?.name
+            id: item.get('id')
+            name: item.get('name')
+            label: item.get('name')
 
     ui:
       circles: '.gc-workout-exercise-circle'
@@ -43,18 +61,18 @@ define [
     initialize: (data) =>
       @visibleProperties = @_getVisibleProperties()
       @workout = data.workout
-      @on 'render:collection', @showConnectionLines
+      @listenTo(@collection, 'add', @showConnectionLines)
+      @listenTo(@collection, 'remove', @showConnectionLines)
+      @listenTo(@collection, 'change', @showConnectionLines)
       App.vent.on 'workout:reload:exercises', @getWorkoutData
 
       @workoutExerciseModel = new WorkoutExercise
-      @listenTo @workoutExerciseModel, 'sync', @onSavedOrder
-
+      @listenTo(@workoutExerciseModel, 'sync', @onSavedOrder)
       # sends the collection count
       App.reqres.setHandler 'workout_exercises:has_exercise?', @_hasExercise
       App.reqres.setHandler 'workout_exercises:has_exercise_properties?', @_hasExerciseProperties
 
     onDestroy: ->
-      @off 'render:collection', @showConnectionLines
       App.vent.off 'workout:reload:exercises', @getWorkoutData
       App.reqres.removeHandler 'workout_exercises:has_exercise?', @_hasExercise
       App.reqres.removeHandler 'workout_exercises:has_exercise_properties?', @_hasExerciseProperties
@@ -69,47 +87,11 @@ define [
 
       @ui.workoutExercisePropertyConstructorWrapper.html(el)
 
-      @initSearchSelect()
       @addSortable()
+      @showConnectionLines()
 
     getWorkoutData: =>
       @workout.fetch()
-
-    searchItems: (items, category) =>
-      result = []
-      $.each items, (index, item) =>
-        if not item
-          return true
-        if item.items
-          category = item.title
-          result = result.concat @searchItems(item.items, category)
-        else
-          result.push
-            key: item.key || item.id
-            title: item.title || item.name
-            label: category
-      return result
-
-    initSearchSelect: ->
-      user = App.request("current_user")
-      exercises = user.exercises.toJSON()
-      searchOptions = @searchItems(exercises, 'exercises')
-      this_ = @
-      @ui.liveSearch.selectize
-        hideSelected: true
-        valueField: 'key'
-        labelField: 'title'
-        searchField: ['title']
-        options: searchOptions
-        onItemAdd: (value, $item) ->
-          this_.removeSearchValues()
-          this_.addExercise value, $item
-        render:
-          item: (item, escape) ->
-              return '<div>' + escape(item.title) + '</div>'
-          option: (item, escape) ->
-              return '<div><span class="label">' + escape(item.label) +
-                '</span> ' + escape(item.title) + '</div>'
 
     showConnectionLines: =>
       circles = @$el.find(".gc-workout-exercise-circle[data-letter]")
@@ -124,33 +106,33 @@ define [
       colorIndex = 0
       previous = null
 
-      $.each circles, (index, item) =>
-          $item = $ item
-          letter = $item.data('letter').toLowerCase()
-          $item[0].className = 'gc-workout-exercise-circle'
+      $.each circles, (index, item) ->
+        $item = $ item
+        letter = $item.data('letter').toLowerCase()
+        $item[0].className = 'gc-workout-exercise-circle'
 
-          if previous
+        if previous
 
-            if previous.data('letter').toLowerCase() == letter and letter != ''
-              $item.addClass 'last'
+          if previous.data('letter').toLowerCase() == letter and letter != ''
+            $item.addClass 'last'
 
-              if previous.hasClass 'last'
-                previous.removeClass('last').addClass('middle')
-              else
-                previous.addClass('first')
-
+            if previous.hasClass 'last'
+              previous.removeClass('last').addClass('middle')
             else
-              $item.removeClass('last')
-              previous.removeClass('middle').removeClass('first')
+              previous.addClass('first')
 
-          if groupColors.hasOwnProperty(letter)
-            $item.css 'background-color', groupColors[letter]
           else
-            groupColors[letter] = colors[colorIndex]
-            $item.css 'background-color', groupColors[letter]
-            colorIndex++
+            $item.removeClass('last')
+            previous.removeClass('middle').removeClass('first')
 
-          previous = $item
+        if groupColors.hasOwnProperty(letter)
+          $item.css 'background-color', groupColors[letter]
+        else
+          groupColors[letter] = colors[colorIndex]
+          $item.css 'background-color', groupColors[letter]
+          colorIndex++
+
+        previous = $item
 
     addSortable: ->
       @exerciseList = @$el.find '.gc-workout-exercises-list'
@@ -207,10 +189,6 @@ define [
         category: 'exercises'
         id: value
       App.vent.trigger 'workout:add:exercise', data
-
-    removeSearchValues: ->
-      selectiveIput = @$el.find '.selectize-input'
-      selectiveIput.find('div').remove()
 
     _hasExercise: =>
       @collection.length > 0
