@@ -8,6 +8,8 @@ define [
 
     tagName: 'li'
 
+    className: 'gc-search-filter'
+
     template: template
 
     behaviors:

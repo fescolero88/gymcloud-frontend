@@ -199,8 +199,8 @@ body > region[data-name="app"] > .container-fluid {
 .gc-content-nav li + li {
   margin-left: 3px;
 }
-.gc-content-nav li a,
-.gc-content-nav li span {
+.gc-content-nav li.gc-search-filter a,
+.gc-content-nav li.gc-search-filter span {
   display: block;
   font-size: 18px;
   text-transform: uppercase;
