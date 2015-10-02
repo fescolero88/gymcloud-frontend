@@ -5,7 +5,7 @@ define [
   PrivacyButtons
   template
 ) ->
-  class PrivacyControlsView extends Marionette.LayoutView
+  class FooterControlsView extends Marionette.LayoutView
 
     className: 'row gc-remove-margin'
 
@@ -45,8 +45,9 @@ define [
       @privacyButtons = new PrivacyButtons(model: @model)
       @workoutsCollection = options.workoutsCollection
       App.commands.setHandler 'program_workouts:add:toggle', @toggleControlsView
-      @listenTo @collection, 'update', @toggleAddWorkoutButton
-      @listenTo @workoutsCollection, 'update', @toggleAddWorkoutButton
+      @listenTo(@collection, 'update', @toggleAddWorkoutButton)
+      @listenTo(@workoutsCollection, 'update', @toggleAddWorkoutButton)
+      @
 
     onDestroy: ->
       App.commands.removeHandler 'program_workouts:add:toggle', @toggleControlsView
