@@ -29,7 +29,7 @@ define [
       'click @ui.addPropertyButton': 'addProperty'
       'click @ui.assignPropertyButton': 'assignProperties'
 
-    getHandlers: ->
+    handlers: ->
       'property_constructor:update_listeners_count': @updateListenerCount
       'property_constructor:synced:add': @addSyncedCount
       'workout_exercises:property:added': @hideEmptyState
@@ -41,18 +41,14 @@ define [
       @visibleProperties = new Backbone.Collection(options.visibleProperties)
       @listenerCount = 0
       @syncedExercises = 0
-      handlers = @getHandlers()
-      _.each handlers, (func, key) =>
-        App.commands.setHandler(key, func)
-
+      _.each(_.result(@, 'handlers'), (func, key) => App.commands.setHandler(key, func))
 
     onRender: ->
       if not App.request 'workout_exercises:has_exercise_properties?'
         @ui.emptyState.removeClass 'hidden'
 
     onDestroy: ->
-      handlers = @getHandlers()
-      _.each(handlers, (func, key) -> App.commands.removeHandler(key, func))
+      _.each(_.result(@, 'handlers'), (func, key) -> App.commands.removeHandler(key, func))
 
     addProperty: ->
       # hide empty state p if shown
