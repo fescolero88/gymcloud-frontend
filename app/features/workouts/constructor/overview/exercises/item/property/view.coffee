@@ -50,7 +50,7 @@ define [
 
     removeProperty: (ev) ->
       ev.stopImmediatePropagation()
-      ev.preventDefault();
+      ev.preventDefault()
       @model.destroy()
 
     selectProperty: (ev) ->
@@ -74,13 +74,21 @@ define [
         @saveProperty()
 
     saveProperty: ->
-      @model.set(value: @ui.selectedPropertyValue.text())
-      @model.save().then =>
-        App.request 'messenger:show',
-          type: 'success'
-          message: 'Exercise was updated'
-        @model.set 'state', 'view'
-        # App.commands.execute 'workout_exercises:property:added'
+      value = parseInt @ui.selectedPropertyValue.text()
+      if @model.get('value') != value
+        @model.save(value: value, wait: true).then ->
+          App.request 'messenger:show',
+            type: 'success'
+            message: 'Exercise was updated'
+            # App.commands.execute 'workout_exercises:property:added
+        .fail ->
+          App.request 'messenger:show',
+            type: 'error',
+            message: 'Something went wrong'
+      else
+        @_toggleViewMode()
+
+      @model.set 'state', 'view'
 
     saveOnBlur: (ev) ->
       activeEl = $(':focus')
@@ -93,5 +101,8 @@ define [
       unit = @model.get('personal_property').global_property.unit
       label = "#{name}: #{value} #{unit}"
       @ui.propertyValueNameLabel.html(label)
+      @_toggleViewMode()
+    
+    _toggleViewMode: ->
       @ui.editPropertyControl.addClass('hidden')
       @ui.viewPropertyControl.removeClass('hidden')
