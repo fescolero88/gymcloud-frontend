@@ -18,6 +18,15 @@ define [
       createWorkout: '.gc-program-create-workout'
       cancelAddWorkout: '.gc-cancel-add-workout'
 
+    behaviors: ->
+      auto_complete:
+        onItemAdd: @_addProgramWorkoutFromLibrary
+        collection: ->
+          App.request('current_user').workout_templates.map (item) ->
+            id: item.get('id')
+            name: item.get('name')
+            label: item.get('name')
+
     events:
       'click @ui.addWorkout': 'toggleViews'
       'click @ui.cancelAddWorkout': 'toggleViews'
@@ -30,3 +39,9 @@ define [
     toggleViews: ->
       @ui.emptyState.toggleClass 'hidden'
       @ui.addWorkoutControls.toggleClass 'hidden'
+
+    _addProgramWorkoutFromLibrary: (workoutId) =>
+      @trigger('add:program_workout_from_library', workoutId)
+      @toggleViews()
+      selectizeInput = @$el.find '.selectize-input'
+      selectizeInput.find('div').remove()

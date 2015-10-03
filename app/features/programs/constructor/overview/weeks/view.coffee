@@ -24,6 +24,7 @@ define [
 
     childEvents: =>
       'add:program_workout': @addProgramWorkout
+      'add:program_workout_from_library': @_addProgramWorkoutFromLibrary
 
     events:
       'click @ui.addWeek': 'addNewWeek'
@@ -49,3 +50,7 @@ define [
 
     addProgramWorkout: ->
       @trigger('add:program_workout')
+
+    _addProgramWorkoutFromLibrary: (parent, workoutId) =>
+      @trigger('add:program_workout:from_library', workoutId)
+   
