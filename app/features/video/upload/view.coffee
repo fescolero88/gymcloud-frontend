@@ -72,7 +72,7 @@ define [
 
     _onFileAdd: (_e, data) =>
       @file = data.files[0]
-      if !(/\.(webm|mkv|flv|vob|mp4)$/i).test(@file.name)
+      if !(/\.(webm|mkv|flv|vob|mp4|m4v)$/i).test(@file.name)
         App.request 'messenger:show',
           message: 'Invalid File Type'
           type: 'info'
