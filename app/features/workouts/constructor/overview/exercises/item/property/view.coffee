@@ -76,12 +76,15 @@ define [
     saveProperty: ->
       value = parseInt @ui.selectedPropertyValue.text()
       if @model.get('value') != value
-        @model.set(value: value)
-        @model.save().then =>
+        @model.save(value: value, wait: true).then ->
           App.request 'messenger:show',
             type: 'success'
             message: 'Exercise was updated'
-            # App.commands.execute 'workout_exercises:property:added'
+            # App.commands.execute 'workout_exercises:property:added
+        .fail ->
+          App.request 'messenger:show',
+            type: 'error',
+            message: 'Something went wrong'
       else
         @_toggleViewMode()
 

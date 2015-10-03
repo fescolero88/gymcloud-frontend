@@ -41,7 +41,7 @@ define [
       @visibleProperties = new Backbone.Collection(options.visibleProperties)
       @listenerCount = 0
       @syncedExercises = 0
-      _.each(_.result(@, 'handlers'), (func, key) => App.commands.setHandler(key, func))
+      _.each(_.result(@, 'handlers'), (func, key) -> App.commands.setHandler(key, func))
 
     onRender: ->
       if not App.request 'workout_exercises:has_exercise_properties?'
