@@ -16,9 +16,11 @@ define [
 
     ui:
       exerciseDescription: '.gc-exercise-description-editor'
+      addVideoButton: '.gc-add-video'
 
     events:
       'keyup @ui.exerciseDescription': '_descriptionAutoHeight'
+      'click @ui.addVideoButton': 'addVideo'
 
     behaviors:
 
@@ -70,3 +72,6 @@ define [
               type: 'success'
           .fail (_xhr, _textStatus, _errorThrown) =>
             @model.set(description: @oldDescription)
+
+    addVideo: ->
+      App.request 'base:uploadVideo'
