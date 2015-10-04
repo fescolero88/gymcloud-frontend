@@ -40,6 +40,7 @@ define [
       @views = @_prepareViews()
 
       @listenTo(@views.weeks, 'add:program_workout', @_addProgramWorkout)
+      @listenTo(@views.weeks, 'add:program_workout:from_library', @_addProgramWorkoutFromLibrary)
       @listenTo(@views.privacy, 'add:program_workout', @_addProgramWorkout)
       @listenTo(@views.privacy, 'add:program_workout:from_library', @_addProgramWorkoutFromLibrary)
       @listenTo(@collection, 'update', @toggleEmptyState)
