@@ -31,7 +31,7 @@ define [
       'click @ui.propertyItem': 'selectProperty'
       'focusout @ui.editPropertyControl':  _.debounce(@saveOnBlur, 200)
       'keypress @ui.selectedPropertyValue': 'saveOnEnter'
-      'click @ui.toggleEditMode': 'toggleEditMode'
+      'click @ui.toggleEditMode': '_toggleEditMode'
 
     modelEvents:
       sync: 'onSync'
@@ -44,6 +44,7 @@ define [
 
     onRender: ->
       if @model.isNew()
+        @toggleEditMode()
         setTimeout =>
           @ui.selectedPropertyValue.focus()
         , 200
@@ -59,8 +60,11 @@ define [
       @model.set(personal_property_id: ev.target.dataset.id)
       @ui.selectedPropertyValue.focus()
 
-    toggleEditMode: (e) ->
+    _toggleEditMode: (e) ->
       e.preventDefault()
+      @toggleEditMode()
+
+    toggleEditMode: ->
       @model.set('state', 'edit')
       @ui.selectedPropertyLabel.html(@model.get('personal_property').name)
       @ui.selectedPropertyValue.html(@model.get('value'))

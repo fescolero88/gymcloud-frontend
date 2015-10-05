@@ -1,6 +1,6 @@
 define [
   './details/view'
-  './privacy/view'
+  './footer/view'
   './weeks/view'
   './weeks/empty/view'
   'collections/program_workouts'
@@ -9,7 +9,7 @@ define [
   './template'
 ], (
   DetailsView
-  PrivacyControlsView
+  FooterControlsView
   WeeksView
   WeekEmptyView
   ProgramWorkouts
@@ -24,7 +24,7 @@ define [
 
     regions:
       programDetails: '.gc-program-detail-region'
-      privacy: '.gc-programs-privacy-region'
+      footer: '.gc-programs-footer-region'
       weeks: '.gc-program-weeks-list-region'
       workoutList: 'region[data-name="gc-program-workout-list"]'
       emptyState: 'region[data-name="gc-program-empty-state"]'
@@ -41,8 +41,8 @@ define [
 
       @listenTo(@views.weeks, 'add:program_workout', @_addProgramWorkout)
       @listenTo(@views.weeks, 'add:program_workout:from_library', @_addProgramWorkoutFromLibrary)
-      @listenTo(@views.privacy, 'add:program_workout', @_addProgramWorkout)
-      @listenTo(@views.privacy, 'add:program_workout:from_library', @_addProgramWorkoutFromLibrary)
+      @listenTo(@views.footer, 'add:program_workout', @_addProgramWorkout)
+      @listenTo(@views.footer, 'add:program_workout:from_library', @_addProgramWorkoutFromLibrary)
       @listenTo(@collection, 'update', @toggleEmptyState)
       @listenTo(@workoutsCollection, 'update', @toggleEmptyState)
 
@@ -56,12 +56,7 @@ define [
       @toggleEmptyState()
 
     toggleEmptyState: ->
-      if _.some [
-        @collection.isEmpty()
-        @workoutsCollection.isEmpty()
-      ]
-        # @ui.emptyState.removeClass 'hidden'
-        # @ui.weeks.addClass 'hidden'
+      if @collection.isEmpty() || @workoutsCollection.isEmpty()
         @ui.workoutList.addClass 'hidden'
       else
         @ui.workoutList.removeClass 'hidden'
@@ -80,7 +75,7 @@ define [
         workoutsCollection: @workoutsCollection
 
       if App.request('current_user_id') is @model.get('author_id')
-        views.privacy = new PrivacyControlsView
+        views.footer = new FooterControlsView
           model: @model
           collection: @collection
           workoutsCollection: @workoutsCollection

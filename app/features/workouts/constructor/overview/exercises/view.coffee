@@ -31,7 +31,7 @@ define [
       visibleProperties: @visibleProperties
 
     viewComparator: (model) ->
-      "#{model.orderLetter()}#{model.orderNumber()}"
+      model.get('position')
 
     behaviors: ->
 
