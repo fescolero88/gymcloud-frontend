@@ -2,14 +2,14 @@ define [
   './overview/view'
   '../../breadcrumbs/view'
   './template'
-  'views/trainer/exercises/exercise_global_assign_video_view'
+  '../../video_assignment/view'
 ], (
   OverviewView
   Breadcrumbs
   template
-  ExerciseGlobalAssignVideoView
+  VideoAssignmentView
 ) ->
-  class ExerciseGlobalView extends Marionette.LayoutView
+  class ExerciseConstructorView extends Marionette.LayoutView
 
     template: template
 
@@ -36,9 +36,10 @@ define [
       navigate_back: true
 
     modelEvents:
-      'change:is_public': '_changePrivacyMarker'
       sync: '_onSync'
       error: '_onSyncError'
+      'change:is_public': '_changePrivacyMarker'
+      'change:video_url': '_videoAssigned'
 
     templateHelpers: =>
       isAuthor: @_isAuthor()
@@ -106,6 +107,9 @@ define [
       else
         @ui.publicMarker.addClass('hide')
         @ui.privateMarker.removeClass('hide')
+
+    _videoAssigned: ->
+      @changeView('overview')
 
     _isAuthor: ->
       @model.get('author').id == App.request('current_user_id')

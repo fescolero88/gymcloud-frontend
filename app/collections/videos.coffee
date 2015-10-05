@@ -6,4 +6,6 @@ define [
 
   class VideosCollection extends Backbone.Collection
 
+    url: '/videos'
+
     model: VideoModel
