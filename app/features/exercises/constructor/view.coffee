@@ -55,18 +55,22 @@ define [
     changeViewEvent: (ev) ->
       ev.preventDefault()
       navItem = $(ev.currentTarget).parent()
-      unless $(navItem).hasClass 'active'
-        @ui.innerNavItems.removeClass 'active'
-        $(navItem).addClass 'active'
-        navItemView = $(navItem).data 'view'
-        @changeView navItemView
+      navItemView = $(navItem).data('view')
+      @_changeView(navItemView)
 
-    changeView: (navView) ->
+    _changeView: (name) ->
+      navItem = @ui.innerNavItems.filter("[data-view='#{name}']")
+
+      unless navItem.hasClass('active')
+        @ui.innerNavItems.removeClass('active')
+        navItem.addClass('active')
+        @_changeViewTo(name)
+
+    _changeViewTo: (navView) ->
       View = {
         overview: OverviewView
-        video: ExerciseGlobalAssignVideoView
+        video: VideoAssignmentView
       }[navView] || OverviewView
-
       view = new View(model: @model)
       @getRegion('manage').show(view)
 
@@ -109,7 +113,7 @@ define [
         @ui.privateMarker.removeClass('hide')
 
     _videoAssigned: ->
-      @changeView('overview')
+      @_changeView('overview')
 
     _isAuthor: ->
       @model.get('author').id == App.request('current_user_id')
