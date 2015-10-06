@@ -15,7 +15,8 @@ define [
       'assign': 'sendEvent'
 
     childViewOptions: (model, index) =>
-      isAssigned: @model.get('video_url') is model.get('embed_url')
+      isAssigned: model.get('embed_url').length &&
+        @model.get('video_url') is model.get('embed_url')
 
     sendEvent: (childView) ->
       @trigger('assignVideo', childView.model)

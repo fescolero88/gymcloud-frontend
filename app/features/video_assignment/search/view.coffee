@@ -1,27 +1,25 @@
 define [
   './template'
-  'collections/videos'
 ], (
   template
-  ExerciseVideosCollection
 ) ->
   class SearchView extends Marionette.ItemView
 
     template: template
 
+    model: new Backbone.Model
+
     events:
       'keydown input': 'getSearchQuery'
 
-    initialize: (options) ->
-      @collection = options.collection
-      @request = null
+    behaviors:
+
+      form_validation: true
+
+      stickit:
+        bindings:
+          'input': 'query'
 
     getSearchQuery: (event) ->
-      return false if event.which != 13
-      query = $(event.currentTarget).val()
-      @request?.abort()
-      @request = @collection.search(query)
-        .then (response) =>
-          @collection.reset(response)
-        .fail ->
-          # Notification ?
+      return event if event.which != 13
+      @trigger('searchStart', @model.get('query'))

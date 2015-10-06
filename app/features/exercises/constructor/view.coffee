@@ -1,8 +1,8 @@
 define [
   './overview/view'
-  '../../breadcrumbs/view'
+  'features/breadcrumbs/view'
   './template'
-  '../../video_assignment/view'
+  'features/video_assignment/view'
 ], (
   OverviewView
   Breadcrumbs
@@ -64,9 +64,9 @@ define [
       unless navItem.hasClass('active')
         @ui.innerNavItems.removeClass('active')
         navItem.addClass('active')
-        @_changeViewTo(name)
+        @_renderView(name)
 
-    _changeViewTo: (navView) ->
+    _renderView: (navView) ->
       View = {
         overview: OverviewView
         video: VideoAssignmentView
