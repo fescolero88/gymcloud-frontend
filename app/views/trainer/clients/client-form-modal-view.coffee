@@ -53,7 +53,6 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
       if not value
         delete formData[key]
     @model.set formData
-    @model.set 'account_type', 3
 
     if @model.isValid true
       @model.save()
@@ -61,10 +60,8 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
   onSync: (model, response, options) ->
     @trigger 'modal:close'
     @trigger 'addToClientsCollection', model
-    if @avatar[0].files[0]
-      data = new FormData()
-      data.append('avatar', @avatar[0].files[0])
-      @model.updateAvatar(data)
+    clients = App.request('current_user').clients
+    clients.add(@model)
 
   onAvatarUpdate: (response) ->
     @model.set 'avatar_url', data.avatar_url

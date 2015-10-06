@@ -33,10 +33,7 @@ define [
         person_id: user.id
         workout_template_id: @id
 
-      assignment.save().then ->
-        currentUser = App.request('current_user')
-        if user.id == App.request('current_user_id')
-          currentUser.personal_workouts.add(assignment)
+      assignment.save()
 
     _getFolder: ->
       user = App.request('current_user')

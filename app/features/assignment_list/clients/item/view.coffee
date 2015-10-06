@@ -55,8 +55,8 @@ define [
         @_toggleAssignSuccess('unassign')
 
     _assign: ->
-      @entity.assignTo(@model).then (assignment) =>
-        @assignment = assignment
+      @entity.assignTo(@model).then (response) =>
+        @assignment = new PersonalWorkout(response)
         @isAssigned = true
         @isOutdated = false
         @assignedVersion = @entity.get('version')
