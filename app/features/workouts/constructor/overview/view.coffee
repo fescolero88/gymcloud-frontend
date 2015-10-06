@@ -31,8 +31,8 @@ define [
       'keyup @ui.workoutNoteEditor': 'workoutNoteAutoHeight'
       'click @ui.workoutExerciseAddButton': 'workoutExerciseAdd'
       'click @ui.workoutDeleteButton': 'workoutDelete'
-      'blur @ui.workoutDescription': 'workoutDescriptionSave'
-      'blur @ui.workoutNoteEditor': 'workoutNoteSave'
+      'blur @ui.workoutDescription': '_saveAttribute'
+      'blur @ui.workoutNoteEditor': '_saveAttribute'
 
     behaviors:
 
@@ -69,39 +69,15 @@ define [
     workoutNoteAutoHeight: ->
       @_textAreaAutoHeight('workoutNoteEditor')
 
-    workoutDescriptionSave: ->
-      @_saveAttribute('description')
-
-    workoutNoteSave: ->
-      @_saveAttribute('note')
-
     workoutExerciseAdd: (e) ->
       e.preventDefault()
 
     workoutDelete: ->
-      workoutId = @model.get 'id'
-      workoutName = @model.get 'name'
       App.request 'base:confirmationalModal',
         title: 'Delete workout'
-        content: "Are you sure you want to delete #{workoutName}?"
+        content: "Are you sure you want to delete #{@model.get('name')}?"
         confirmBtn: 'Delete'
-        confirmCallBack: =>
-          @model.destroy().success =>
-            App.request 'data:delete', 'workouts', workoutId
-
-            rootId = App.request "data:workouts:root"
-            folderId = @model.get 'folder_id'
-            @model.set 'key', @model.get('id')
-            if folderId and folderId isnt 0 and folderId isnt rootId
-              App.vent.trigger "workouts:folder:#{folderId}:model:removed", @model
-            else
-              App.vent.trigger "workouts:model:removed", @model
-
-            window.history.back()
-            App.request 'messenger:show',
-              hideAfter: 5
-              message: "Workout #{workoutName} deleted."
-              type: 'success'
+        confirmCallBack: => @model.destroy()
 
     showAddNote: ->
       hasNote = !!@model.get('note')
@@ -121,9 +97,4 @@ define [
         el.style.height = "#{el.scrollHeight}px"
 
     _saveAttribute: (attribute, message) ->
-      message = message || "Workout's #{attribute} saved."
-      @model.save().success ->
-        App.request 'messenger:show',
-          hideAfter: 5
-          message: message
-          type: 'success'
+      @model.save()

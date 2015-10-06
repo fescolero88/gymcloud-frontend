@@ -54,5 +54,5 @@ define [
 
     weekRemoved: ->
       App.request 'messenger:show',
-        message: "Program #{@model.get('name')} has been removed."
+        message: "Week #{@model.get('name')} has been removed."
         type: 'info'

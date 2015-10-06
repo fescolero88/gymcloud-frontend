@@ -66,10 +66,6 @@ define [
         @model.save()
           .then =>
             @oldDescription = @model.get('description')
-            App.request 'messenger:show',
-              hideAfter: 5
-              message: "Exercise Updated."
-              type: 'success'
           .fail (_xhr, _textStatus, _errorThrown) =>
             @model.set(description: @oldDescription)
 

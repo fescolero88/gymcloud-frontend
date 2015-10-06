@@ -44,6 +44,10 @@ define [
         bindings:
           '.gc-workout-title span': 'name'
 
+    modelEvents:
+      sync: '_onSync'
+      error: '_onSyncError'
+
     templateHelpers: =>
       author: @model.author.toJSON()
       isAuthor: do =>
@@ -121,3 +125,22 @@ define [
 
     triggerAddNote: ->
       App.vent.trigger 'workout:notes:add'
+
+    _onSync: (_model, response, options) ->
+      funcName = {PATCH: '_onSyncUpdate'}[options.type] || '_onDestroy'
+
+      this[funcName](response)
+
+    _onSyncUpdate: (_response) ->
+      App.request 'messenger:show',
+        hideAfter: 5
+        message: "Workout Updated."
+        type: 'success'
+
+    _onSyncError: (_response) ->
+      App.request('messenger:show', message: 'Oops. Something went wrong')
+
+    _onDestroy: (response) ->
+      url = "#workout_templates_folder/#{response.folder_id}"
+      Backbone.history.navigate(url, {trigger:true, replace: true})
+      App.request('messenger:show', message: 'Workout removed from library')

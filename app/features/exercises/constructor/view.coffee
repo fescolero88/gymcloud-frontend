@@ -37,6 +37,8 @@ define [
 
     modelEvents:
       'change:is_public': '_changePrivacyMarker'
+      sync: '_onSync'
+      error: '_onSyncError'
 
     templateHelpers: =>
       isAuthor: @_isAuthor()
@@ -59,16 +61,13 @@ define [
         @changeView navItemView
 
     changeView: (navView) ->
-      switch navView
-        when 'overview'
-          view = new OverviewView(model: @model)
-          @getRegion('manage').show(view)
-        when 'video'
-          view = new ExerciseGlobalAssignVideoView(model: @model)
-          @getRegion('manage').show(view)
-        when 'assign'
-          App.request 'messenger:show',
-            message: 'Not yet implemented.'
+      View = {
+        overview: OverviewView
+        video: ExerciseGlobalAssignVideoView
+      }[navView] || OverviewView
+
+      view = new View(model: @model)
+      @getRegion('manage').show(view)
 
     showAddToLibrary: (ev) ->
       ev.preventDefault()
@@ -80,18 +79,25 @@ define [
         title: "Remove exercise?"
         content: "Are you sure you want to remove this exercise from exercise?"
         confirmBtn: "Remove"
-        confirmCallBack: _.bind(@_removeFromLibraryCallback, this)
+        confirmCallBack: => @model.destroy(wait: true)
 
-    _removeFromLibraryCallback: (id) ->
-      @model.destroy(wait: true)
-        .then (response) ->
-          url = "#exercises_folder/#{response.folder_id}"
-          Backbone.history.navigate(url, {trigger:true, replace: true})
-          App.request 'messenger:show',
-            message: 'Exercise removed from library'
-        .fail ->
-          App.request 'messenger:show',
-            message: 'Oops. Something went wrong'
+    _onSync: (_model, response, options) ->
+      funcName = {PATCH: '_onSyncUpdate'}[options.type] || '_onDestroy'
+      this[funcName](response)
+
+    _onSyncUpdate: (_response) ->
+      App.request 'messenger:show',
+        hideAfter: 5
+        message: "Exercise Updated."
+        type: 'success'
+
+    _onSyncError: (_response) ->
+      App.request('messenger:show', message: 'Oops. Something went wrong')
+
+    _onDestroy: (response) ->
+      url = "#exercises_folder/#{response.folder_id}"
+      Backbone.history.navigate(url, {trigger:true, replace: true})
+      App.request('messenger:show', message: 'Exercise removed from library')
 
     _changePrivacyMarker: ->
       if @model.get('is_public')

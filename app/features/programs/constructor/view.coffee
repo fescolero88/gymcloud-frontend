@@ -38,7 +38,8 @@ define [
       contentNavLinks: '.gc-program-content-navs li a'
 
     modelEvents:
-      destroy: 'programDeleted'
+      sync: '_onSync'
+      error: '_onSyncError'
 
     events:
       'click @ui.contentNavLinks': '_changeViewEvent'
@@ -72,26 +73,26 @@ define [
       View = {
         program: OverviewView
         assign: AssignView
-      }[navView]
+      }[navView] || OverviewView
 
       view = new View(model: @model, entityType: 'program')
       @manageRegion.show(view)
 
-    programDeleted: ->
-      id = @model.get 'id'
-      name = @model.get 'name'
-      App.request 'data:delete', 'programs', id
+    _onSync: (_model, response, options) ->
+      funcName = {PATCH: '_onSyncUpdate'}[options.type] || '_onDestroy'
 
-      rootId = App.request "data:programs:root"
-      folderId = @model.get('folder_id')
-      @model.set 'key', @model.get('id')
-      if folderId and folderId isnt 0 and folderId isnt rootId
-        App.vent.trigger "programs:folder:#{folderId}:model:removed", @model
-      else
-        App.vent.trigger "programs:model:removed", @model
+      this[funcName](response)
 
-      window.history.back()
+    _onSyncUpdate: (_response) ->
       App.request 'messenger:show',
         hideAfter: 5
-        message: "Program #{name} deleted."
-        type: 'info'
+        message: "Program Updated."
+        type: 'success'
+
+    _onSyncError: (_response) ->
+      App.request('messenger:show', message: 'Oops. Something went wrong')
+
+    _onDestroy: (response) ->
+      url = "#program_templates_folder/#{response.folder_id}"
+      Backbone.history.navigate(url, {trigger:true, replace: true})
+      App.request('messenger:show', message: 'Program removed from library')
