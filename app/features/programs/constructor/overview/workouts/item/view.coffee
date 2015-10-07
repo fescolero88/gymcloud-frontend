@@ -74,6 +74,6 @@ define [
       isVisible = ev.currentTarget.checked
       @model.workout.save(is_visible: isVisible)
 
-    _positionChanged: (options) ->
+    _positionChanged: ->
       @model.set 'position', @$el.index() + 1
       @model.save()

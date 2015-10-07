@@ -67,7 +67,5 @@ define [
         type: 'info'
 
     _assignWeekPosition: ->
-      position = @$el.index() + 1
-      @model.set 'name', "Week #{position}"
-      @model.set 'position', position
-      @model.save()
+      pos = @$el.index() + 1
+      @model.setPosition(pos)
