@@ -1,10 +1,9 @@
 .gc-video-player
   .gc-video-preview
-    img.img-responsive.gc-preview
     a.gc-video-play(href="#")
   .gc-video-details
     h5.gc-video-title
-      | #{title}
+      | #{name}
     span.gc-video-report
     div
       span.gc-video-timer
@@ -15,4 +14,11 @@
         i.gc-video-icon
         span
           | #{filter}
-    button(class="btn btn-primary gc-custom btn-block btn-sm gc-assign-video", type="button")
+    button.btn.btn-primary.gc-custom.btn-block.btn-sm.gc-assign-video(
+      class=(isAssigned && 'assigned'),
+      type="button"
+    )
+      if isAssigned
+        | assigned
+      else
+        | assign this video

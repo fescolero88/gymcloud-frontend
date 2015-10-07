@@ -1,6 +1,5 @@
 .row.gc-assign-video-upload
-  .col-xs-10
-    input.form-control(placeholder="Exercise Video")
+  region.video-search.col-xs-10
   .col-xs-2
     button(class="btn btn-primary gc-custom btn-block btn-sm gc-upload-video")
       i.gc-icon.upload
@@ -8,12 +7,14 @@
 
 ul.gc-content-nav.gc-assign-video-filter
   li.active
-    a all
+    a(data-scope="gymcloud") gymcloud
   li
-    a my library
+    a(data-scope="mine") my library
   li
-    a public
+    a(data-scope="public") public
   li
-    a youtube
+    a(data-scope="youtube") youtube
+  li
+    a(data-scope="vimeo") vimeo
 
 region.gc-exercises-videos
