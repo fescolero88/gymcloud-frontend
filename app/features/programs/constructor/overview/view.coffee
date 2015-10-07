@@ -61,11 +61,6 @@ define [
       @toggleEmptyState()
 
     toggleEmptyState: ->
-      if @collection.isEmpty() || @workoutsCollection.isEmpty()
-        #@ui.workoutList.addClass 'hidden'
-      else
-        #@ui.workoutList.removeClass 'hidden'
-
       if !@workoutsCollection.isEmpty() and @collection.isEmpty()
         @ui.weeks.addClass 'hidden'
         #@ui.workoutList.removeClass 'hidden'
