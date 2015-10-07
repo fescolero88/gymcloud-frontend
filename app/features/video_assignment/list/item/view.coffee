@@ -13,9 +13,13 @@ define [
 
     ui:
       assignVideo: '.gc-assign-video'
+      player: '.gc-video-preview'
 
     triggers:
       'click @ui.assignVideo': 'assign'
+
+    events:
+      'click .gc-video-play': 'renderIframe'
 
     behaviors:
 
@@ -36,6 +40,19 @@ define [
 
     initialize: (options) ->
       @isAssigned = options.isAssigned
+      @listenTo(this, 'destroyIframe', @destroyIframe)
+
+    renderIframe: (ev) ->
+      @trigger('playVideo')
+      iframe = document.createElement('iframe')
+      iframe.setAttribute('src', "#{@model.get('embed_url')}?autoplay=1")
+      iframe.setAttribute('allowfullscreen', 'allowfullscreen')
+      @ui.player.append(iframe)
+      $(ev.currentTarget).hide()
+
+    destroyIframe: ->
+      @ui.player.find('iframe').remove()
+      @ui.player.find('i').show()
 
     convertDuration: (duration) ->
       return null unless duration
