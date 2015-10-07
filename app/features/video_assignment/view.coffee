@@ -20,11 +20,13 @@ define [
     ui:
       innerNavItems: '.gc-assign-video-filter li'
       innerNavLinks: '.gc-assign-video-filter li a'
+      uploadButton: '.gc-upload-video'
 
     className: 'gc-exercises-assign-videos'
 
     events:
       'click @ui.innerNavLinks': 'changeViewEvent'
+      'click @ui.uploadButton': 'openUploadPopup'
 
     initialize: ->
       @collection = new ExerciseVideosCollection
@@ -53,9 +55,14 @@ define [
         @searchVideos(query) if query
 
     assignVideo: (videoModel) ->
-      @model.save({
+      attributes = {
         'video_url': videoModel.get('embed_url')
-      }, wait: true).then ->
+      }
+      if videoModel.get('type') is 'gymcloud'
+        attributes.video_id = videoModel.get('id')
+      else
+        attributes.video_id = null
+      @model.save(attributes, wait: true).then ->
         App.request 'messenger:show',
           message: 'Video is assigned'
 
@@ -67,3 +74,11 @@ define [
           App.request 'messenger:show',
             message: 'Videos search error'
             type: 'error'
+
+    openUploadPopup: ->
+      view = App.request('base:uploadVideo')
+      @listenToOnce(view, 'videoUploaded', @_videoUploaded)
+
+    _videoUploaded: (model) ->
+      @assignVideo(model)
+      @collection.unshift(model)

@@ -32,6 +32,13 @@ define [
 
     templateHelpers: =>
       isAssigned: @isAssigned
+      durationTime: @convertDuration(@model.get('duration'))
 
     initialize: (options) ->
       @isAssigned = options.isAssigned
+
+    convertDuration: (duration) ->
+      return null unless duration
+      minutes = Math.floor(duration / 60)
+      seconds = duration - minutes * 60
+      "#{_.lpad(minutes, 2, "0")}:#{_.lpad(seconds, 2, "0")}"

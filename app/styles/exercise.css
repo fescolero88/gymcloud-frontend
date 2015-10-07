@@ -121,7 +121,7 @@
   color: #cacaca;
 }
 .gc-exercises-exercise-video-link > i {
-  margin-left: 5px;
+  margin: 0 5px;
 }
 .gc-exercises-exercise-video-link:hover,
 .gc-exercises-exercise-video-link:active {
