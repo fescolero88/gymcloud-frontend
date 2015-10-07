@@ -36,11 +36,5 @@ define [
       value = @model.get('is_public')
       if @model.hasChanged('is_public') && value != @oldPrivacy
         @model.save()
-          .then =>
-            @oldPrivacy = @model.get('is_public')
-            App.request 'messenger:show',
-              hideAfter: 5
-              message: "Privacy settings was changed"
-              type: 'success'
-          .fail =>
-            @model.set(is_public: @oldPrivacy)
+          .then => @oldPrivacy = @model.get('is_public')
+          .fail => @model.set(is_public: @oldPrivacy)
