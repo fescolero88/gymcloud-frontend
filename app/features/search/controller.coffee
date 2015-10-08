@@ -1,7 +1,7 @@
 define [
   './results/view'
-  '../../views/general/main-view'
-  '../sidebar/view'
+  'views/general/main-view'
+  'features/sidebar/view'
 ], (
   SearchResultsView
   MainView
