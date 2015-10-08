@@ -31,6 +31,8 @@ define [
         bindings:
           '.gc-video-file-name': 'name'
 
+    extensionsRegex: /\.(webm|mkv|flv|vob|mp4|m4v|avi|mpeg|mpg|3gp)$/i
+
     initialize: ->
       @file = {}
 
@@ -45,7 +47,7 @@ define [
         add: @_onFileAdd
         done: @_videoUploaded
         progressall: @_showProgress
-      
+
       .bind 'fileuploadsubmit', (e, data) =>
         data.formData = name: @file.name
 
@@ -60,11 +62,12 @@ define [
     _showProgress: (e, data) =>
       progress = parseInt(data.loaded / data.total * 100, 10)
       @_updateProgress progress
-      
+
     _videoUploaded: (e, data) =>
       @model.set data.result
       @ui.uploadControls.removeClass 'hidden'
       @ui.videoFileName.attr 'contenteditable', true
+      @trigger('videoUploaded', @model)
 
     _updateProgress: (value) =>
       @ui.uploadProgress.css 'width', "#{value}%"
@@ -72,7 +75,7 @@ define [
 
     _onFileAdd: (_e, data) =>
       @file = data.files[0]
-      if !(/\.(webm|mkv|flv|vob|mp4|m4v)$/i).test(@file.name)
+      if !@extensionsRegex.test(@file.name)
         App.request 'messenger:show',
           message: 'Invalid File Type'
           type: 'info'

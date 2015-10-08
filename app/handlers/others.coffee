@@ -70,7 +70,7 @@ define [
         region.$el.modal('hide')
         region.destroy()
 
-    App.reqres.setHandler 'base:uploadVideo', (data) ->
+    App.reqres.setHandler 'base:uploadVideo', ->
       model = new VideoModel
       view = new VideoUploadModalView
         model: model
@@ -82,10 +82,12 @@ define [
         background: 'static'
 
       region.$el.modal 'show'
-      
+
       App.listenToOnce view, "modal:closed", ->
         region.$el.modal('hide')
         region.destroy()
+
+      view
 
     App.reqres.setHandler 'ajax:options:create', (params) ->
       options =

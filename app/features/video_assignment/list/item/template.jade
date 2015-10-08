@@ -1,19 +1,20 @@
 .gc-video-player
   .gc-video-preview
-    a.gc-video-play(href="#")
+    i.gc-video-play
   .gc-video-details
     h5.gc-video-title
-      | #{name}
+      = name
     span.gc-video-report
     div
-      span.gc-video-timer
-        i.gc-video-time-icon
-        span
-          | #{duration}
+      if durationTime
+        span.gc-video-timer
+          i.gc-video-time-icon
+          span
+            = durationTime
       span.gc-video-type
-        i.gc-video-icon
+        i.gc-video-icon(class="gc-video-#{type}-icon")
         span
-          | #{filter}
+          = _.capitalize(type)
     button.btn.btn-primary.gc-custom.btn-block.btn-sm.gc-assign-video(
       class=(isAssigned && 'assigned'),
       type="button"
