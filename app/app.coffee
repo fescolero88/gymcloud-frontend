@@ -126,10 +126,10 @@ define [
     _initLayout: ->
       defer = new $.Deferred
       @baseView = new BaseView
-      @reqres.setHandler 'app:views:base', =>
-        @baseView
       @baseView.once('render', defer.resolve)
       @baseView.render()
+      @reqres.setHandler 'app:views:base', =>
+        @baseView
       @appRegion = @baseView.appRegion
       defer.promise()
 

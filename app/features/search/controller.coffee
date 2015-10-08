@@ -1,7 +1,11 @@
 define [
   './results/view'
+  '../../views/general/main-view'
+  '../sidebar/view'
 ], (
   SearchResultsView
+  MainView
+  SideBarView
 ) ->
 
   class Controller extends Marionette.Controller
@@ -16,6 +20,20 @@ define [
       view = new SearchResultsView
         collection: collection
         model: model
-      region = App.request('app:views:base').getRegion('appRegion')
-        .currentView.getRegion('content')
+
+      appRegion = App.request('app:views:base').getRegion('appRegion')
+
+      ###
+      # initialize main view and sidebar
+      ###
+      if !appRegion.currentView
+        mainView = new MainView()
+        appRegion.show mainView
+        App.vent.trigger('app:view:main:render', mainView)
+        appRegion.currentView = mainView
+        sidebarView = new SideBarView()
+        appRegion.currentView.menu.show sidebarView
+
+
+      region = appRegion.currentView.getRegion('content')
       region.show(view)
