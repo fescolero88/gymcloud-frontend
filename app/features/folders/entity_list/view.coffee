@@ -1,8 +1,10 @@
 define [
   './item/view'
+  './empty/view'
   'dragula'
 ], (
   EntityItemView
+  EntityEmptyView
   Dragula
 ) ->
 
@@ -11,6 +13,8 @@ define [
     tagName: 'ul'
 
     className: 'gc-exercises-assign-list'
+
+    emptyView: EntityEmptyView
 
     childView: EntityItemView
 

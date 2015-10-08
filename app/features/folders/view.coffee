@@ -35,8 +35,6 @@ define [
       duplicateButton: '.gc-show-duplicate-modal'
       actionModal: '#gc-modal-region'
       deleteButton: '#rm-event'
-      listWrapper: '.gc-clients-list-wrapper'
-      listSplash: '.gc-global-list-splash'
 
     events:
       'click @ui.mainCheckbox': 'toggleCheck'
@@ -80,12 +78,6 @@ define [
       @exercises.show(@listView)
 
       @listenTo(@listView, 'item:clicked', @_updateSelectedItems)
-
-      if @exercisesList.length > 0
-        @ui.listWrapper.removeClass 'hidden'
-      else
-        @ui.listWrapper.addClass 'hidden'
-        @ui.listSplash.removeClass 'hidden'
 
     toggleCheck: (ev) =>
       checked = @ui.mainCheckbox.is(':checked')
