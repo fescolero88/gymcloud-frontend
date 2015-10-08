@@ -116,4 +116,4 @@ define [
       @_changeView('overview')
 
     _isAuthor: ->
-      @model.get('author').id == App.request('current_user_id')
+      @model.get('author_id') == App.request('current_user_id')

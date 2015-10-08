@@ -58,7 +58,7 @@ define [
         exerciseDesc.style.height = "#{exerciseDesc.scrollHeight}px"
 
     _isAuthor: ->
-      @model.get('author').id == App.request('current_user_id')
+      @model.get('author_id') == App.request('current_user_id')
 
     _saveDescription: ->
       description = @model.get('description')

@@ -1,6 +1,8 @@
 define [
+  'moment'
   './template'
 ],(
+  moment
   template
 )->
   class AssignVideoView extends Marionette.ItemView
@@ -56,6 +58,5 @@ define [
 
     convertDuration: (duration) ->
       return null unless duration
-      minutes = Math.floor(duration / 60)
-      seconds = duration - minutes * 60
-      "#{_.lpad(minutes, 2, "0")}:#{_.lpad(seconds, 2, "0")}"
+      format = if duration > 60*60 then "HH:mm:ss" else "mm:ss"
+      moment.utc(duration*1000).format(format)

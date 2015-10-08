@@ -31,6 +31,8 @@ define [
         bindings:
           '.gc-video-file-name': 'name'
 
+    extensionsRegex: /\.(webm|mkv|flv|vob|mp4|m4v|avi|mpeg|mpg|3gp)$/i
+
     initialize: ->
       @file = {}
 
@@ -73,7 +75,7 @@ define [
 
     _onFileAdd: (_e, data) =>
       @file = data.files[0]
-      if !(/\.(webm|mkv|flv|vob|mp4|m4v|avi|mpeg|mpg|3gp)$/i).test(@file.name)
+      if !@extensionsRegex.test(@file.name)
         App.request 'messenger:show',
           message: 'Invalid File Type'
           type: 'info'
