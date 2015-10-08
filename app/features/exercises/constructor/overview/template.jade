@@ -2,13 +2,13 @@
   .col-xs-6.text-right
     if !isAuthor
       .gc-exercise-author-info
-        a.gc-exercise-author-avatar.gc-exercise-author-avatar-exist(href="#users/#{author.id}")
+        a.gc-exercise-author-avatar.gc-exercise-author-avatar-exist(href="#users/#{author_id}")
           img(src='app/images/portrait.jpg')
         p.gc-exercise-author-name
           | Trainer
           br
-          a(href="#users/#{author.id}")
-            | #{author.first_name} #{author.last_name}
+          a(href="#users/#{author_id}")
+            = author_full_name
       .gc-rating
         div
           span.gc-rating-count 25
