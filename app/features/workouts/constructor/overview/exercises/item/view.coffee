@@ -142,3 +142,7 @@ define [
         @$el.removeClass 'hover-enabled'
       else
         @$el.addClass 'hover-enabled'
+
+    _positionChanged: ->
+      pos = @$el.index()
+      @model.updatePosition pos

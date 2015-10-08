@@ -34,3 +34,7 @@ define [
         @properties.add(data.exercise_properties, parse: true)
       delete data.exercise_properties
       data
+
+    updatePosition: (pos) ->
+      @set('position', pos)
+      @save()
