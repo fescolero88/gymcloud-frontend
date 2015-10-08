@@ -5,6 +5,7 @@ define [
   'models/workout_exercise'
   './empty/view'
   './template'
+  'dragula'
 ], (
   PropertyConstructor
   WorkoutExerciseProperties
@@ -12,6 +13,7 @@ define [
   WorkoutExercise
   EmptyView
   template
+  Dragula
 ) ->
 
   class WorkoutExercisesView extends Marionette.CompositeView
@@ -53,6 +55,7 @@ define [
       liveSearch: '.live-search'
       searchContainer: '.gc-exercises-assign-input-wrapper'
       workoutExercisePropertyConstructorWrapper: 'region[data-name="workout-property-constructor"]'
+      exercisesList: '.gc-workout-exercises-list'
 
     templateHelpers: =>
       currentUserId: App.request('current_user_id')
@@ -135,46 +138,25 @@ define [
         previous = $item
 
     addSortable: ->
-      @exerciseList = @$el.find '.gc-workout-exercises-list'
+      dragOptions =
+        revertOnSpill: true
+        moves: (el, container, handle) ->
+          handle.classList.contains('gc-workout-exercise-sort')
 
-      @exerciseList.sortable
-        pullPlaceholder: true
-        handle: '.gc-workout-exercise-sort'
-        onDrop: @onSortExercise
-        onDragStart: @onDragStart
+      Dragula [@ui.exercisesList[0]], dragOptions
+        .on 'drop', (el, container) =>
+          draggable = $(el).find 'span.gc-workout-exercise-sort'
+          pos = $(el).index()
 
-    onDragStart: ($item, container, _super) =>
-      if not container.options.drop
-        $item.clone().insertAfter($item)
-        $item
-        .removeClass 'dragged'
-        .removeAttr 'style'
-      _super $item, container
-
-    onSortExercise: ($item, container, _super) =>
-      draggable = $item.find 'span.gc-workout-exercise-sort'
-      _super $item, container
-
-      model = @collection.get id: draggable.data 'workout-id'
-      prevPos = model.get 'position'
-      currPos = $item.index()
-      currPos += 1
-      @collection.remove model
-      @collection.add model, at:currPos-1
-      @fixExercisesPositions()
-
-      exerciseIds = @collection.pluck 'id'
-      @onSavePosition
-        exercises_ordered_ids: exerciseIds
+          model = @collection.get id: draggable.data('workout-id')
+          @collection.remove model
+          @collection.add model, at:pos
+          @fixExercisesPositions()
+          @children.call '_positionChanged'
 
     fixExercisesPositions: ->
       @collection.each (model, i) ->
         model.set 'position', i+1
-
-    onSavePosition: (data) =>
-      @workoutExerciseModel.url = "#{@workoutExerciseModel.urlRoot}/#{@workout.get 'id'}/workout_exercises/resort"
-      @workoutExerciseModel.method = 'patch'
-      @workoutExerciseModel.save(data)
 
     onSavedOrder: ->
       App.request 'messenger:show',
