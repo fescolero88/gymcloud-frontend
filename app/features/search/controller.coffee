@@ -34,6 +34,5 @@ define [
         sidebarView = new SideBarView()
         appRegion.currentView.menu.show sidebarView
 
-
       region = appRegion.currentView.getRegion('content')
       region.show(view)
