@@ -126,9 +126,10 @@ define [
       promises = []
       if @ui.setPropertyCheckbox.is(':checked')
         models = models.map (property) =>
-          promise = property.save(workout_exercise_id: @model.get('id'))
+          exerciseProperty = new ExercisesProperty property.attributes
+          promise = exerciseProperty.save(workout_exercise_id: @model.get('id'))
           promises.push promise
-          property
+          exerciseProperty
 
         $.when.apply($, promises).done () =>
           @collection.add(models, sort: false)
