@@ -81,9 +81,9 @@ define [
     _removeFromLibrary: (ev) ->
       ev.preventDefault()
       App.request 'base:confirmationalModal',
-        title: "Remove exercise?"
-        content: "Are you sure you want to remove this exercise from exercise?"
-        confirmBtn: "Remove"
+        title: 'Remove exercise?'
+        content: 'Are you sure you want to remove this exercise from library?'
+        confirmBtn: 'Remove'
         confirmCallBack: => @model.destroy(wait: true)
 
     _onSync: (_model, response, options) ->
@@ -93,7 +93,7 @@ define [
     _onSyncUpdate: (_response) ->
       App.request 'messenger:show',
         hideAfter: 5
-        message: "Exercise Updated."
+        message: 'Exercise Updated.'
         type: 'success'
 
     _onSyncError: (_response) ->

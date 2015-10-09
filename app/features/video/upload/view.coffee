@@ -31,7 +31,7 @@ define [
         bindings:
           '.gc-video-file-name': 'name'
 
-    extensionsRegex: /\.(webm|mkv|flv|vob|mp4|m4v|avi|mpeg|mpg|3gp)$/i
+    extensionsRegex: /\.(webm|mkv|flv|vob|mp4|m4v|avi|mpeg|mpg|3gp|mov)$/i
 
     initialize: ->
       @file = {}

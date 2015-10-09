@@ -23,7 +23,9 @@ define [
 
     events:
       'keyup @ui.exerciseDescription': '_descriptionAutoHeight'
-      'click @ui.addVideoButton': 'addVideo'
+      'click @ui.addVideoButton': '_openUploadPopup'
+      'click .gc-exercise-video-update': '_openUploadPopup'
+      'click .gc-exercise-video-delete': '_deleteVideo'
 
     behaviors:
       video_assign: true
@@ -64,7 +66,7 @@ define [
           .fail (_xhr, _textStatus, _errorThrown) =>
             @model.set(description: @oldDescription)
 
-    addVideo: ->
+    _openUploadPopup: ->
       view = App.request('base:uploadVideo')
       @listenToOnce(view, 'videoUploaded', @assignVideo)
 
@@ -79,3 +81,11 @@ define [
 
     assignVideo: (model) ->
       @trigger('assignVideo', model)
+
+    _deleteVideo: ->
+      App.request 'base:confirmationalModal',
+        title: 'Remove exercise video?'
+        content: 'Are you sure you want to remove this video from exercise?'
+        confirmBtn: 'Remove'
+        confirmCallBack: =>
+          @model.save({video_url: null, video_id: null}, wait: true)
