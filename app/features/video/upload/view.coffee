@@ -26,6 +26,7 @@ define [
       'click @ui.editName': 'toggleEditName'
       'blur @ui.videoFileName': 'saveVideoDetails'
       'click .gc-cancel-video-upload': 'cancelVideoUpload'
+      'click .close': 'cancelVideoUpload'
 
     behaviors:
       stickit:
@@ -90,31 +91,26 @@ define [
     deleteVideo: ->
       @model.destroy().then =>
         @model.clear()
-        @ui.uploadDetailsPanel.addClass 'hidden'
-        @ui.uploadControls.addClass 'hidden'
-        @_updateProgress 0
-        App.request 'messenger:show',
-          message: 'Video Deleted'
+        @ui.uploadDetailsPanel.addClass('hidden')
+        @ui.uploadControls.addClass('hidden')
+        @_updateProgress(0)
+        App.request('messenger:show', message: 'Video Deleted')
 
     toggleEditName: ->
       @ui.videoFileName.focus()
 
-    saveVideoDetails: ->
-      if @model.hasChanged('name')
-        @model.save().then ->
-          App.request 'messenger:show',
-            type: 'success'
-            message: 'filename updated'
+    saveVideoDetails: (ev) ->
+      return ev unless @model.hasChanged('name')
+
+      @model.save().then ->
+        App.request 'messenger:show',
+          type: 'success'
+          message: 'filename updated'
 
     cancelVideoUpload: (ev) ->
-      if @jqXHR
-        ev.stopImmediatePropagation()
-        App.request 'base:confirmationalModal',
-          title: 'Stop video upload?'
-          content: 'Are you sure you want to stop this video upload?'
-          confirmBtn: 'Stop'
-          confirmCallBack: =>
-            @jqXHR && @jqXHR.abort?()
-            @$('.gc-upload-video-modal').modal('hide')
-      else
-        @$('.gc-upload-video-modal').modal('hide')
+      return @trigger('modal:closed') unless @jqXHR
+
+      question = 'Are you sure you want to stop this video upload?'
+      if window.confirm(question)
+        @jqXHR && @jqXHR.abort?()
+        @trigger('modal:closed')

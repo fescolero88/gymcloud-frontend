@@ -3,14 +3,16 @@ define ->
   class VideoAssign extends Marionette.Behavior
 
     initialize: ->
-      @listenTo(@view, 'assignVideo', @assignVideo)
+      @listenTo(@view, 'assignVideo', @_assignVideo)
 
-    assignVideo: (videoModel) ->
-      attributes = {
-        'video_url': videoModel.get('embed_url')
-      }
-      if videoModel.get('type') is 'gymcloud'
-        attributes.video_id = videoModel.get('id')
-      else
-        attributes.video_id = null
+    _assignVideo: (videoModel) ->
+      attributes =
+        video_url: videoModel.get('embed_url')
+        video_id: @_getVideoId(videoModel)
       @view.model.save(attributes, wait: true)
+
+    _getVideoId: (model) ->
+      if model.get('type') is 'gymcloud'
+        video_id = model.get('id')
+      else
+        video_id = null

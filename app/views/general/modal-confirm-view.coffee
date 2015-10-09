@@ -11,7 +11,6 @@ module.exports = class ModalConfirmView extends Marionette.ItemView
     'click @ui.confirmButton': 'confirmEvent'
     'click @ui.cancelButton': 'cancelEvent'
     'hidden.bs.modal @ui.modal': 'onModalClosed'
-    'hide @ui.modal': 'modalClose'
 
   initialize: (data)->
     @confirmData = data
@@ -33,6 +32,3 @@ module.exports = class ModalConfirmView extends Marionette.ItemView
 
   onModalClosed: ->
     @trigger 'modal:closed'
-
-  modalClose: ->
-    @ui.modal.modal('hide')
