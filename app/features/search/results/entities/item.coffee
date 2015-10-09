@@ -20,10 +20,11 @@ define [
 
     templateHelpers: ->
       entity_context = @options.entity_context
+      entity_context = "#{_.singularize(entity_context)}_templates" if entity_context != 'exercises'
 
       type: entity_context
       profile_link: '#users/me'
-      entity_link: "#tr/global/#{entity_context}/id/#{@model.id}"
+      entity_link: "##{entity_context}/#{@model.id}"
 
     behaviors:
 
