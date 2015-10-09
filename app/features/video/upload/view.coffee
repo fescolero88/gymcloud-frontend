@@ -25,6 +25,7 @@ define [
       'click @ui.deleteVideo': 'deleteVideo'
       'click @ui.editName': 'toggleEditName'
       'blur @ui.videoFileName': 'saveVideoDetails'
+      'click .gc-cancel-video-upload': 'cancelVideoUpload'
 
     behaviors:
       stickit:
@@ -57,7 +58,6 @@ define [
     processFile: (info) ->
       @model.set 'name', info.name
       @ui.uploadDetailsPanel.removeClass 'hidden'
-      @ui.footerButton.text 'Finish'
 
     _showProgress: (e, data) =>
       progress = parseInt(data.loaded / data.total * 100, 10)
@@ -65,9 +65,11 @@ define [
 
     _videoUploaded: (e, data) =>
       @model.set data.result
+      @ui.footerButton.text 'Finish'
       @ui.uploadControls.removeClass 'hidden'
       @ui.videoFileName.attr 'contenteditable', true
       @trigger('videoUploaded', @model)
+      @jqXHR = null
 
     _updateProgress: (value) =>
       @ui.uploadProgress.css 'width', "#{value}%"
@@ -82,7 +84,7 @@ define [
         return
 
       @processFile @file
-      data.submit()
+      @jqXHR = data.submit()
       @ui.videoFileName.attr 'contenteditable', false
 
     deleteVideo: ->
@@ -103,3 +105,16 @@ define [
           App.request 'messenger:show',
             type: 'success'
             message: 'filename updated'
+
+    cancelVideoUpload: (ev) ->
+      if @jqXHR
+        ev.stopImmediatePropagation()
+        App.request 'base:confirmationalModal',
+          title: 'Stop video upload?'
+          content: 'Are you sure you want to stop this video upload?'
+          confirmBtn: 'Stop'
+          confirmCallBack: =>
+            @jqXHR && @jqXHR.abort?()
+            @$('.gc-upload-video-modal').modal('hide')
+      else
+        @$('.gc-upload-video-modal').modal('hide')
