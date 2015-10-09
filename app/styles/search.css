@@ -116,3 +116,8 @@
 region[data-name="search-bar"] {
   width: 100%;
 }
+
+#search-result-scope span {
+  font-size: 12px;
+  line-height: 12px;
+}
