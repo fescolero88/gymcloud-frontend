@@ -28,6 +28,9 @@ define [
       'click @ui.innerNavLinks': 'changeViewEvent'
       'click @ui.uploadButton': 'openUploadPopup'
 
+    behaviors:
+      video_assign: true
+
     initialize: ->
       @collection = new ExerciseVideosCollection
       @search = new SearchView
@@ -54,18 +57,6 @@ define [
         query = _.trim(@search.model.get('query'))
         @searchVideos(query) if query
 
-    assignVideo: (videoModel) ->
-      attributes = {
-        'video_url': videoModel.get('embed_url')
-      }
-      if videoModel.get('type') is 'gymcloud'
-        attributes.video_id = videoModel.get('id')
-      else
-        attributes.video_id = null
-      @model.save(attributes, wait: true).then ->
-        App.request 'messenger:show',
-          message: 'Video is assigned'
-
     searchVideos: (query) ->
       @request = @collection.search(query, @searchScope)
         .then (response) =>
@@ -82,3 +73,6 @@ define [
     _videoUploaded: (model) ->
       @assignVideo(model)
       @collection.unshift(model)
+
+    assignVideo: (model) ->
+      @trigger('assignVideo', model)
