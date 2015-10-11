@@ -51,7 +51,7 @@ define [
       @searchScopes = new SearchScopes [
         { name: 'all', value: 'all', inScope: searchScope == 'all' }
         { name: 'gymcloud', value: 'public', inScope: searchScope == 'public' }
-        { name: 'own', value: 'own', inScope: searchScope == 'own' }
+        { name: 'mine', value: 'own', inScope: searchScope == 'own' }
       ]
 
       @searchFilters = new SearchFilters [

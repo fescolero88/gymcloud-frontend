@@ -6,7 +6,7 @@
   background: #ccc !important;
   color: #999 !important;
   border-radius: 50px 0 0 50px;
-  border-color: #ccc !important;
+  border-color: #bbb !important;
   font-size: 12px;
   text-transform: uppercase;
   text-align: center;
@@ -120,4 +120,9 @@ region[data-name="search-bar"] {
 #search-result-scope span {
   font-size: 12px;
   line-height: 12px;
+}
+
+/* temporary while clients profile is not yet implemented */
+.gc-clients-list-client-link, .gc-clients-list-avatar-wrapper {
+  cursor: default;
 }
