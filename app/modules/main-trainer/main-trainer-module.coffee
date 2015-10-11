@@ -15,16 +15,3 @@ module.exports = class MainTrainerModule extends Marionette.Module
       @trainerController = new TrainerController
       @trainerRouter = new TrainerRouter
         controller: @trainerController
-    App.vent.on 'module:main-trainer:beforeAction', =>
-      @refresh()
-
-  refresh: ->
-    if !@mainView? or @mainView.isDestroyed
-      @mainView = new MainView()
-      @app.appRegion.show @mainView
-      @trainerController.mainView = @mainView
-      App.vent.trigger('app:view:main:render', @mainView)
-
-    if !@sidebarView? or @sidebarView.isDestroyed
-      @sidebarView = new SideBarView()
-      @mainView.menu.show @sidebarView

@@ -7,11 +7,14 @@ define [
   'handlers/others'
 
   'views/general/base-view'
+  'views/general/main-view'
+  'features/sidebar/view'
 
   'features/current_user/module'
   'features/header/module'
   'features/spinner/module'
   'features/messenger/module'
+  'features/sidebar/module'
   'modules/auth/auth-module'
   'modules/main-trainer/main-trainer-module'
   'modules/main-client/main-client-module'
@@ -32,11 +35,14 @@ define [
   othersHandler
 
   BaseView
+  MainView
+  SidebarView
 
   CurrentUserModule
   HeaderModule
   SpinnerModule
   MessengerModule
+  SidebarModule
   AuthModule
   MainTrainerModule
   MainClientModule
@@ -83,6 +89,8 @@ define [
         defer.done =>
           @_isStarted = true
           @trigger('started')
+          # send signal to render sidebar and header once everything is loaded
+          @vent.trigger('app:view:main:render', @mainView)
 
         defer.promise()
 
@@ -112,6 +120,7 @@ define [
       defer = new $.Deferred
       @module 'CurrentUser', CurrentUserModule
       @module 'Header', HeaderModule
+      @module 'Sidebar', SidebarModule
       @module 'Spinner', SpinnerModule
       @module 'Messenger', MessengerModule
       @module 'Auth', AuthModule
@@ -130,8 +139,16 @@ define [
         @baseView
       @baseView.once('render', defer.resolve)
       @baseView.render()
+      @_initMainView()
       @appRegion = @baseView.appRegion
       defer.promise()
+
+    _initMainView: ->
+      @mainView = new MainView
+      @baseView.getRegion('appRegion').show @mainView
+      @baseView.currentView = @baseView
+      @reqres.setHandler 'app:views:main', =>
+        @mainView
 
     _initHistory: ->
       unless @request('current_user_id')

@@ -59,6 +59,8 @@ define [
           @[@globalViewMethod](@globalType, @globalKey)
           @globalViewMethod = false
 
+      @mainView = App.request 'app:views:main'
+
     myProfile: ->
       currentUser = App.request('current_user')
       @_userProfile(currentUser)

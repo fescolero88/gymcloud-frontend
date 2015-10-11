@@ -22,17 +22,5 @@ define [
         model: model
 
       appRegion = App.request('app:views:base').getRegion('appRegion')
-
-      ###
-      # initialize main view and sidebar
-      ###
-      if !appRegion.currentView
-        mainView = new MainView()
-        appRegion.show mainView
-        App.vent.trigger('app:view:main:render', mainView)
-        appRegion.currentView = mainView
-        sidebarView = new SideBarView()
-        appRegion.currentView.menu.show sidebarView
-
       region = appRegion.currentView.getRegion('content')
       region.show(view)
