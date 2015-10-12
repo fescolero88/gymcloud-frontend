@@ -1,8 +1,8 @@
 .btn-group.clearfix.gc-property.editable
-  button.btn.btn-sm.btn-primary.gc-custom(type='button')
+  button.btn.btn-sm.btn-primary.gc-custom.gc-property-value-container(type='button')
     i.gc-icon-bars
     span.gc-property-value(contenteditable='true')
-  .btn-group(role='group')
+  .btn-group.dropup(role='group')
     button.btn.btn-sm.btn-primary.gc-custom.dropdown-toggle(type='button', data-toggle='dropdown')
       span.gc-selected-property=defaultProperty
       i.fa.fa-sort

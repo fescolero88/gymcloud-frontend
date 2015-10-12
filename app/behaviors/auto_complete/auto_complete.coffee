@@ -18,13 +18,14 @@ define [
       searchField: ['name']
       collection: undefined
       onItemAdd: undefined
+      onLoad: undefined
       render:
         item: (item, escape) ->
           item.name = escape(item.name)
           itemTemplate(item)
         option: (item, escape) ->
           _item =
-            folder_name: escape(item.folder?.name || "workouts")
+            folder_name: escape(item.folder || "workouts")
             name: escape(item.name)
           optionTemplate(_item)
 
@@ -38,4 +39,3 @@ define [
         options: items
         onItemAdd: @options.onItemAdd
         render: @options.render
-
