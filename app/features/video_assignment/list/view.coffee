@@ -1,7 +1,7 @@
 define [
   './item/view'
 ], (
-  AssignVideoView
+  AssignVideoItemView
 ) ->
   class AssignVideosView extends Marionette.CollectionView
 
@@ -9,7 +9,7 @@ define [
 
     className: 'row gc-assign-videos'
 
-    childView: AssignVideoView
+    childView: AssignVideoItemView
 
     childEvents:
       assign: 'sendEvent'

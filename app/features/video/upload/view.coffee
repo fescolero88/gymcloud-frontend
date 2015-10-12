@@ -25,13 +25,15 @@ define [
       'click @ui.deleteVideo': 'deleteVideo'
       'click @ui.editName': 'toggleEditName'
       'blur @ui.videoFileName': 'saveVideoDetails'
+      'click .gc-cancel-video-upload': 'cancelVideoUpload'
+      'click .close': 'cancelVideoUpload'
 
     behaviors:
       stickit:
         bindings:
           '.gc-video-file-name': 'name'
 
-    extensionsRegex: /\.(webm|mkv|flv|vob|mp4|m4v|avi|mpeg|mpg|3gp)$/i
+    extensionsRegex: /\.(webm|mkv|flv|vob|mp4|m4v|avi|mpeg|mpg|3gp|mov)$/i
 
     initialize: ->
       @file = {}
@@ -57,7 +59,6 @@ define [
     processFile: (info) ->
       @model.set 'name', info.name
       @ui.uploadDetailsPanel.removeClass 'hidden'
-      @ui.footerButton.text 'Finish'
 
     _showProgress: (e, data) =>
       progress = parseInt(data.loaded / data.total * 100, 10)
@@ -65,9 +66,11 @@ define [
 
     _videoUploaded: (e, data) =>
       @model.set data.result
+      @ui.footerButton.text 'Finish'
       @ui.uploadControls.removeClass 'hidden'
       @ui.videoFileName.attr 'contenteditable', true
       @trigger('videoUploaded', @model)
+      @jqXHR = null
 
     _updateProgress: (value) =>
       @ui.uploadProgress.css 'width', "#{value}%"
@@ -82,24 +85,32 @@ define [
         return
 
       @processFile @file
-      data.submit()
+      @jqXHR = data.submit()
       @ui.videoFileName.attr 'contenteditable', false
 
     deleteVideo: ->
       @model.destroy().then =>
         @model.clear()
-        @ui.uploadDetailsPanel.addClass 'hidden'
-        @ui.uploadControls.addClass 'hidden'
-        @_updateProgress 0
-        App.request 'messenger:show',
-          message: 'Video Deleted'
+        @ui.uploadDetailsPanel.addClass('hidden')
+        @ui.uploadControls.addClass('hidden')
+        @_updateProgress(0)
+        App.request('messenger:show', message: 'Video Deleted')
 
     toggleEditName: ->
       @ui.videoFileName.focus()
 
-    saveVideoDetails: ->
-      if @model.hasChanged('name')
-        @model.save().then ->
-          App.request 'messenger:show',
-            type: 'success'
-            message: 'filename updated'
+    saveVideoDetails: (ev) ->
+      return ev unless @model.hasChanged('name')
+
+      @model.save().then ->
+        App.request 'messenger:show',
+          type: 'success'
+          message: 'filename updated'
+
+    cancelVideoUpload: (ev) ->
+      return @trigger('modal:closed') unless @jqXHR
+
+      question = 'Are you sure you want to stop this video upload?'
+      if window.confirm(question)
+        @jqXHR && @jqXHR.abort?()
+        @trigger('modal:closed')
