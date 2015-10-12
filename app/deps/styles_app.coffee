@@ -13,7 +13,6 @@ define [
   'styles/librarypreset'
   'styles/login'
   'styles/modals'
-  'styles/notifications'
   'styles/properties'
   'styles/search'
   'styles/sidebar'
