@@ -15,6 +15,9 @@ define [
 
     className: 'gc-sidebar-cat'
 
+    ui:
+      sidebarSubs: '.gc-sidebar-sub'
+
     getChildView: (item) ->
       if typeof item.attributes.folder_id isnt 'undefined'
         TemplateItemView
@@ -37,6 +40,9 @@ define [
     initialize: (options)->
       @type = options.type
       @name = options.name
+
+    onRender: ->
+      App.request 'sortables:add:container', @ui.sidebarSubs[0]
 
     _collectionViewOptions: (model) ->
       type: @type
