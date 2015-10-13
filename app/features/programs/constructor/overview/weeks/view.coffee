@@ -36,7 +36,7 @@ define [
     initialize: (options) ->
       App.vent.on 'add:program:week', @addNewWeek
       @sortable = options.sortable
-      @on 'remove:child', @onItemRemoved
+      @listenTo this, 'remove:child', @onItemRemoved
 
     onDestroy: ->
       App.vent.off 'add:program:week', @addNewWeek

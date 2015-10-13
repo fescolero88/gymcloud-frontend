@@ -47,8 +47,11 @@ define [
 
         if model and model.get('week_id') isnt newWeekId
           position = $(el).index()
-          model.set 'week_id', newWeekId
-          model.save().then =>
+          model.save(
+            'week_id': newWeekId
+          ,
+            wait: true
+          ).then =>
             @collection.remove model
             App.vent.trigger 'add:program:workout', model, position
             App.request 'messenger:show',

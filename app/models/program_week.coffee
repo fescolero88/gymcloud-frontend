@@ -9,6 +9,9 @@ define ->
       position: undefined
 
     setPosition: (pos) ->
-      @set 'name', "Week #{pos}"
-      @set 'position', pos
-      @save()
+      @save(
+        'name', "Week #{pos}"
+        'position', pos
+      ,
+        wait: true
+      )

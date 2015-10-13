@@ -59,7 +59,7 @@ define [
         content: "Are you sure you want to delete this week?"
         confirmBtn: "Remove"
         confirmCallBack: =>
-          @model.destroy()
+          @model.destroy(wait: true)
 
     weekRemoved: ->
       App.request 'messenger:show',
