@@ -17,22 +17,9 @@ module.exports = class MainClientModule extends Marionette.Module
       @clientRouter = new ClientRouter
         controller: @clientController
 
-    App.vent.on 'module:main-client:beforeAction', @refresh
-
-  onDestroy: ->
-    App.vent.off 'module:main-client:beforeAction', @refresh
-
+  # not sure what this is for. leaving this here for future reference
+  ###
   refresh: =>
-    if !@mainView? or @mainView.isDestroyed
-      @mainView = new MainView()
-      @app.appRegion.show @mainView
-      @clientController.mainView = @mainView
-      App.vent.trigger('app:view:main:render', @mainView)
-
-    if !@sidebarView? or @sidebarView.isDestroyed
-      @sidebarView = new SideBarView()
-      @mainView.menu.show @sidebarView
-
     if !@userPageView or @userPageView.isDestroyed
       @userPageView = new ClientPageView()
       @mainView.content.show @userPageView
@@ -40,3 +27,4 @@ module.exports = class MainClientModule extends Marionette.Module
 
       @navView = new ClientPageNavView()
       @userPageView.nav.show @navView
+  ###

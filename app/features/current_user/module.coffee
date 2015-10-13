@@ -48,7 +48,6 @@ define [
                   window.location.replace '#'
 
     _initUserHandlers: ->
-
       @app.reqres.setHandlers
 
         'current_user:reset': =>
