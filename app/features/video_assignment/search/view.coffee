@@ -3,17 +3,14 @@ define [
 ], (
   template
 ) ->
-  class SearchView extends Marionette.ItemView
+  class SearchInputView extends Marionette.ItemView
 
     template: template
-
-    model: new Backbone.Model
 
     events:
       'keydown input': 'getSearchQuery'
 
     behaviors:
-
       form_validation: true
 
       stickit:

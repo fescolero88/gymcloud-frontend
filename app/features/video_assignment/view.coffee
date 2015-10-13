@@ -5,8 +5,8 @@ define [
   'collections/videos'
 ], (
   template
-  AssignVideoView
-  SearchView
+  AssignVideosView
+  SearchInputView
   ExerciseVideosCollection
 ) ->
   class VideosView extends Marionette.LayoutView
@@ -33,19 +33,20 @@ define [
 
     initialize: ->
       @collection = new ExerciseVideosCollection
-      @search = new SearchView
+      @searchInput = new SearchInputView(
+        model: new Backbone.Model
+      )
       @request = null
-      @collection.fetch()
-      @view = new AssignVideoView(
+      @view = new AssignVideosView(
         collection: @collection
         model: @model
       )
       @listenTo(@view, 'assignVideo', @assignVideo)
-      @listenTo(@search, 'searchStart', @searchVideos)
+      @listenTo(@searchInput, 'searchStart', @searchVideos)
 
     onShow: ->
       @getRegion('exerciseVideos').show(@view)
-      @getRegion('search').show(@search)
+      @getRegion('search').show(@searchInput)
 
     changeViewEvent: (ev) ->
       ev.preventDefault()
@@ -54,12 +55,20 @@ define [
       unless $(navItem).hasClass 'active'
         @ui.innerNavItems.removeClass 'active'
         $(navItem).addClass 'active'
-        query = _.trim(@search.model.get('query'))
-        @searchVideos(query) if query
+        query = _.trim(@searchInput.model.get('query'))
+        if query
+          @searchVideos(query)
+        else
+          @collection.reset()
+          @view.viewState.set('state', 'search_not_started')
 
     searchVideos: (query) ->
+      unless _.trim(query)
+        @view.viewState.set('state', 'search_not_started')
+        return
       @request = @collection.search(query, @searchScope)
         .then (response) =>
+          @view.viewState.set('state', 'no_results') unless response.length
           @collection.reset(response)
         .fail ->
           App.request 'messenger:show',

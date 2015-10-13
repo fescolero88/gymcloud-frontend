@@ -5,7 +5,7 @@ define [
   moment
   template
 )->
-  class AssignVideoView extends Marionette.ItemView
+  class AssignVideoItemView extends Marionette.ItemView
 
     template: template
 
