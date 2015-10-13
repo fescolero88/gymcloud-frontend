@@ -75,11 +75,10 @@ define [
       # sends the collection count
       App.reqres.setHandler 'workout_exercises:has_exercise?', @_hasExercise
       App.reqres.setHandler 'workout_exercises:has_exercise_properties?', @_hasExerciseProperties
-      App.vent.on 'sortables:on:drop', @onDropExercise
+      @listenTo App.vent, 'sortables:on:drop', @onDropExercise
 
     onDestroy: ->
-      App.vent.off 'sortables:on:drop', @onDropExercise
-      App.request 'sortables:remove:container', @ui.exercisesListWrapper[0]
+      App.vent.trigger 'sortables:remove:container', @ui.exercisesListWrapper[0]
 
       App.vent.off 'workout:reload:exercises', @getWorkoutData
       App.reqres.removeHandler 'workout_exercises:has_exercise?', @_hasExercise

@@ -10,16 +10,16 @@ define [
       @_initGlobalSortable()
 
     _initHandlers: ->
-      @listenTo @app.vent.on 'sortables:add:container', (container) =>
+      @listenTo @app.vent, 'sortables:add:container', (container) =>
         @drake.containers.push container
 
-      @listenTo @app.vent.on 'sortables:remove:container', (cont) =>
+      @listenTo @app.vent, 'sortables:remove:container', (container) =>
         containers = @drake.containers
         _.map containers, (el, index) ->
-          if el is cont
+          if el is container
             containers.splice(index, 1)
 
-      @listenTo @app.vent.on 'sortables:get', =>
+      @listenTo @app.vent, 'sortables:get', =>
         @drake
 
     _initGlobalSortable: ->
