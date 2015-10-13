@@ -30,10 +30,7 @@ define [
       @program = options.program
       @weekId = options.weekId || ''
       @el.setAttribute 'data-week-id', @weekId
-      App.vent.on 'add:program:workout', @reorderProgramWorkouts
-
-    onDestroy: ->
-      App.vent.off 'add:program:workout', @reorderProgramWorkouts
+      @listenTo App.vent, 'add:program:workout', @reorderProgramWorkouts
 
     onShow: ->
       @addSortable()
@@ -66,9 +63,6 @@ define [
         @collection.add model,
           at: index
         @children.call '_positionChanged'
-
-        if itemWeekId isnt ''
-          App.vent.trigger 'add:week:workout:count'
 
     addProgramWorkout: (isInWeek = false) =>
       workout = new WorkoutTemplate

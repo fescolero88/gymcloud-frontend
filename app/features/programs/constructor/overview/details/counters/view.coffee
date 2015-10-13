@@ -27,10 +27,6 @@ define [
 
       @listenTo(@weekCollection, 'update', @_update_week_count)
       @listenTo(@workoutsCollection, 'update', @_update_workouts_count)
-      #App.vent.on 'add:week:workout:count', @_update_workouts_count
-
-    onDestroy: ->
-      App.vent.off 'add:week:workout:count', @_update_workouts_count
 
     _update_week_count: ->
       count = @weekCollection.length

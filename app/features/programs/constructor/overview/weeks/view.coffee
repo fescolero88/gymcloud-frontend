@@ -34,12 +34,9 @@ define [
       model.get 'position'
 
     initialize: (options) ->
-      App.vent.on 'add:program:week', @addNewWeek
+      @listenTo App.vent, 'add:program:week', @addNewWeek
       @sortable = options.sortable
       @listenTo this, 'remove:child', @onItemRemoved
-
-    onDestroy: ->
-      App.vent.off 'add:program:week', @addNewWeek
 
     addNewWeek: =>
       position = @collection.length + 1
