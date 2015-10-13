@@ -17,9 +17,8 @@ define [
   'modules/main-client/main-client-module'
   'modules/general/library-preset-module'
   'modules/prototype/prototype-module'
+  'features/sortables/module'
   'features/search/module'
-
-  'dragula'
 
   'deps/scripts'
   'deps/fonts'
@@ -44,9 +43,9 @@ define [
   MainClientModule
   LibraryPresetModule
   PrototypeModule
-  SearchModule
+  SortableModule
 
-  Dragula
+  SearchModule
 ) ->
 
   class Application extends Marionette.Application
@@ -67,7 +66,6 @@ define [
           .done(@promises.layout.resolve)
 
       @on 'start', ->
-        @_initGlobalSortable()
         defer = new $.Deferred
         @request('current_user:init:user')
           .then( =>
@@ -121,6 +119,7 @@ define [
       @module 'MainClient', MainClientModule
       @module 'LibraryPreset', LibraryPresetModule
       @module 'Prototype', PrototypeModule
+      @module 'Sortable', SortableModule
       @module 'Search', SearchModule
       defer.resolve()
       defer.promise()
@@ -141,18 +140,6 @@ define [
       @_startHistory()
 
     _startHistory: -> Backbone.history?.start()
-
-    _initGlobalSortable: ->
-      options =
-        copy: true
-        revertOnSpill: true
-        moves: (el, container, handle) ->
-          handle.classList.contains('draggable-handle')
-        accepts: (el, container) ->
-          !container.classList.contains('gc-sidebar-sub')
-
-      drake = Dragula [], options
-      App.request 'sortables:set', drake
 
   $ ->
     window.App = new Application

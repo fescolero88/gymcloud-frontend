@@ -100,7 +100,7 @@ define [
       @addSidebarDraggable()
 
     addSidebarDraggable: ->
-      App.request 'sortables:add:container', @ui.exercisesListWrapper[0]
+      App.vent.trigger 'sortables:add:container', @ui.exercisesListWrapper[0]
 
     onDropExercise: (args) ->
       if args.category is 'exercises'

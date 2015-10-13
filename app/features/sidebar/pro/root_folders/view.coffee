@@ -42,7 +42,7 @@ define [
       @name = options.name
 
     onRender: ->
-      App.request 'sortables:add:container', @ui.sidebarSubs[0]
+      App.vent.trigger 'sortables:add:container', @ui.sidebarSubs[0]
 
     _collectionViewOptions: (model) ->
       type: @type

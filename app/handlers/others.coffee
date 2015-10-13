@@ -93,25 +93,3 @@ define [
         type: params.type || 'POST'
         contentType: params.contentType || 'application/json'
         data: params.data || {}
-
-    App.reqres.setHandler 'sortables:set', (drake) ->
-      @drake = drake
-      @drake.on 'drop', (el, container) ->
-        args =
-          category: el.getAttribute('data-category')
-          id: el.querySelector('[data-key]').getAttribute('data-key')
-        container.removeChild el
-        App.vent.trigger 'sortables:on:drop', args
-
-    App.reqres.setHandler 'sortables:add:container', (container) ->
-      @drake.containers.push container
-
-    App.reqres.setHandler 'sortables:remove:container', (container) ->
-      containers = @drake.containers
-      cont = _.map containers, (el, index) ->
-        if el is container
-          console.log 'test'
-          containers.splice(index, 1)
-
-    App.reqres.setHandler 'sortables:get', ->
-      @drake
