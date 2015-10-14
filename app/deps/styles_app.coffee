@@ -1,6 +1,6 @@
 define [
+  'styles/000_vendors_override'
   'styles/app'
-  'styles/breadcrumbs'
   'styles/calendar'
   'styles/client'
   'styles/clientpage'
@@ -13,7 +13,6 @@ define [
   'styles/librarypreset'
   'styles/login'
   'styles/modals'
-  'styles/notifications'
   'styles/properties'
   'styles/search'
   'styles/sidebar'
@@ -28,5 +27,6 @@ define [
   'styles/program_workouts'
   'styles/account_type_modal'
   'styles/upload'
+  'styles/components/zzz_all'
   'styles/zzz_override'
 ], ->

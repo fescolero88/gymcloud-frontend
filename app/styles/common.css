@@ -175,11 +175,6 @@ body > region[data-name="app"] > .container-fluid {
   height: 50px;
   padding: 10px 0
 }
-.gc-content-nav-wrapper {
-  height: 50px;
-  border-bottom: 1px solid rgba(40,45,48,0.1);
-  margin: 0;
-}
 .gc-clients-nav-wrapper h2 {
   display: inline-block;
   text-transform: uppercase;
@@ -192,141 +187,13 @@ body > region[data-name="app"] > .container-fluid {
   font-weight: bold;
   color: #757575;
 }
-.gc-content-nav-wrapper > div {
-  padding: 0 5px;
-}
-.gc-content-nav {
-  padding: 0;
-  margin: 0;
-  height: 50px;
-  display: inline-block;
-}
-.gc-content-nav li {
-  display: inline-block;
-}
-.gc-content-nav li + li {
-  margin-left: 3px;
-}
-.gc-content-nav li a,
-.gc-content-nav li span {
-  display: block;
-  font-size: 18px;
-  text-transform: uppercase;
-  color: #9ea0a1;
-  line-height: 46px;
-  padding: 2px 4px;
-}
-.gc-content-nav li a:hover,
-.gc-content-nav li a:active,
-.gc-content-nav li a:focus {
-  text-decoration: none;
-  cursor: pointer;
-}
-.gc-content-nav li a:hover {
-  color: #3398db;
-}
-.gc-content-nav li.active a,
-.gc-content-nav li.active span {
-  padding-bottom: 1px;
-  color: #3398db;
-  border-bottom: 2px solid #3398db;
-  position: relative;
-  z-index: 5;
-}
-.gc-content-nav-checkall {
-  padding: 10px;
-  width: 35px;
-  height: 35px;
-  margin: 0;
-  cursor: pointer;
-}
-.gc-content-nav-checkall input {
-  margin: 0;
-  cursor: pointer;
-}
-.gc-content-nav-wrapper > .gc-content-nav-actions {
-  padding: 11px 5px 0 0;
-}
-.gc-content-nav-actions .btn:hover,
-.gc-content-nav-actions .btn:focus,
-.gc-content-nav-actions .btn:active {
-  outline: none;
-}
-.gc-content-nav-wrapper .gc-content-nav-actions .btn-group .btn,
-.gc-content-nav-wrapper .gc-content-nav-actions .btn-group .btn:first-child,
-.gc-content-nav-wrapper .gc-content-nav-actions .btn-group .btn:last-child {
-  border-radius: 50px;
-  background: transparent;
-  border-radius: 50px;
-  outline: none;
-  font-size: 16px;
-  height: 27px;
-  width: 27px;
-  line-height: 25px;
-  padding: 0;
-  text-align: center;
-}
-.gc-content-nav-actions .btn + .btn {
-  margin-left: 10px;
-}
-.gc-content-nav-actions .btn-danger {
-  color: #ee6d5d;
-  border-color: #ee6d5d;
-}
-.gc-content-nav-wrapper .gc-content-nav-actions .btn-group .btn.btn-danger:hover {
-  background: #ee6d5d;
-  color: #fff;
-}
-.gc-content-nav-actions .btn-primary {
-  color: #5b9be6;
-  border-color: #5b9be6;
-}
-.gc-content-nav-wrapper .gc-content-nav-actions .btn-group .btn.btn-primary:hover {
-  background: #5b9be6;
-  color: #fff;
-}
-.gc-content-nav-actions .btn .fa {
-  line-height: 27px;
-}
-.gc-content-nav .gc-content-nav-back {
-  margin-left: -15px;
-}
-.gc-content-nav .gc-content-nav-back a {
-  color: #3398db;
-}
-.gc-content-nav .gc-content-nav-back a:hover {
-  cursor: pointer;
-}
-.gc-clients-nav-left .gc-content-nav-back {
-  color: #3398db;
-  display: inline-block;
-  margin: -2px 0 0 10px;
-}
-.gc-clients-nav-left .gc-content-nav-back:hover{
-  cursor: pointer;
-}
 @media (min-width: 1025px) {
-  .gc-content-nav li a {
-    padding: 2px 7px;
-  }
   .gc-content-right header h3 {
     font-size: 18px;
     text-align: center;
     line-height: 50px;
     margin: 0;
     padding: 0;
-  }
-}
-@media (min-width: 992px) {
-  .gc-content-nav {
-    padding: 0 15px 0 15px;
-  }
-  .gc-content-nav-wrapper > div {
-    padding: 0 15px;
-  }
-
-  .gc-content-nav-wrapper > .gc-content-nav-actions {
-    padding: 11px 30px 0 0;
   }
 }
 .gc-clients-nav-wrapper {
@@ -494,66 +361,6 @@ body > region[data-name="app"] > .container-fluid {
   line-height: 16px;
   margin-top: -5px;
 }
-
-.switch, .switch * {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -ms-user-select: none; }
-
-.switch label {
-  cursor: pointer; }
-
-.switch label input[type=checkbox] {
-  opacity: 0;
-  width: 0;
-  height: 0; }
-
-.switch label input[type=checkbox]:checked + .lever {
-  background-color: #3a99d8; }
-
-.switch label input[type=checkbox]:checked + .lever:after {
-  background-color: #1d74ae; }
-
-.switch label .lever {
-  content: "";
-  display: inline-block;
-  position: relative;
-  width: 40px;
-  height: 15px;
-  background-color: #818181;
-  border-radius: 15px;
-  transition: background 0.3s ease;
-  vertical-align: middle;
-  margin: 0 2px; }
-
-.switch label .lever:after {
-  content: "";
-  position: absolute;
-  display: inline-block;
-  width: 21px;
-  height: 21px;
-  background-color: #F1F1F1;
-  border-radius: 21px;
-  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
-  left: -5px;
-  top: -3px;
-  transition: left 0.3s ease, background .3s ease, box-shadow 0.1s ease; }
-
-input[type=checkbox]:checked:not(:disabled) ~ .lever:active:after {
-  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4), 0 0 0 15px rgba(38, 166, 154, 0.1); }
-
-input[type=checkbox]:not(:disabled) ~ .lever:active:after {
-  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4), 0 0 0 15px rgba(0, 0, 0, 0.08); }
-
-.switch label input[type=checkbox]:checked + .lever:after {
-  left: 24px; }
-
-.switch input[type=checkbox][disabled] + .lever {
-  cursor: default; }
-
-.switch label input[type=checkbox][disabled] + .lever:after, .switch label input[type=checkbox][disabled]:checked + .lever:after {
-  background-color: #BDBDBD; }
 
 /* Auto Complete */
 .selectize-dropdown-content > div .label {
