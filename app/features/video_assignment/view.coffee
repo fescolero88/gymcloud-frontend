@@ -70,14 +70,17 @@ define [
           @view.viewState.set('state', 'search_not_started')
 
     searchVideos: (query) ->
+      @request.abort() if @request?.state() is 'pending'
       unless _.trim(query)
         @view.viewState.set('state', 'search_not_started')
         return
       @request = @collection.search(query, @searchScope)
+      @request
         .then (response) =>
           @view.viewState.set('state', 'no_results') unless response.length
           @collection.reset(response)
         .fail ->
+          return false if arguments[1] is 'abort'
           App.request 'messenger:show',
             message: 'Videos search error'
             type: 'error'

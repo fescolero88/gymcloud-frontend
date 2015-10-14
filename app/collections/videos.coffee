@@ -20,7 +20,7 @@ define [
           q: q
           scope: scope
 
-      sync = (@sync || Backbone.sync)
+      sync = Backbone.sync
       sync.call(@, null, @, options)
 
     getPreviousPage: ->
