@@ -48,7 +48,6 @@ define [
 
     onShow: ->
       for region, view of @views
-        console.log region, view
         @getRegion(region).show(view)
       # emptyStateView = new WeekEmptyView()
       # @getRegion('emptyState').show emptyStateView
@@ -75,7 +74,6 @@ define [
         collection: @collection
         workoutsCollection: @workoutsCollection
 
-      console.log App.request('current_user_id'), @model.get('author_id')
       if App.request('current_user_id') is @model.get('author_id')
         views.footer = new FooterControlsView
           model: @model
