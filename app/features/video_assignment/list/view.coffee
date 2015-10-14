@@ -7,7 +7,7 @@ define [
 
     tagName: 'div'
 
-    className: 'row gc-assign-videos'
+    className: 'gc-assign-videos'
 
     childView: AssignVideoItemView
 

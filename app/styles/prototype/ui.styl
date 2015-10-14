@@ -58,7 +58,8 @@ textarea.form-control
   padding 15px
   max-width 1100px
   margin 0 auto
-  overflow-y auto
+  overflow auto
+  height 100%
 
 .gc-prototype-title
   color blue
@@ -1109,8 +1110,41 @@ a.gc-text-link:hover
   background-position -17px 0
 
 .gc-assign-videos
-  max-width 1080px
-  margin 0 auto
+  margin 10px 15px
+
+.gc-assign-videos:before
+  display block
+  content ' '
+  clear both
+
+.gc-assign-videos > div
+  float left
+  position relative
+  min-height 1px
+  padding-right 15px
+  padding-left 15px
+
+@media only screen and (min-width: 1501px) {
+  .gc-assign-videos > .gc-video-thumb {
+    width: 20%;
+  }
+}
+
+@media only screen and (max-width: 1500px) {
+  .gc-assign-videos > .gc-video-thumb {
+    width: 25%;
+  }
+}
+@media only screen and (max-width: 1350px) {
+  .gc-assign-videos > .gc-video-thumb {
+    width: 33.33333%;
+  }
+}
+@media only screen and (max-width: 1080px) {
+  .gc-assign-videos > .gc-video-thumb {
+    width: 50%;
+  }
+}
 
 .gc-video-player
   border-radius 4px
