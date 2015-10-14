@@ -56,6 +56,7 @@ define [
       searchContainer: '.gc-exercises-assign-input-wrapper'
       workoutExercisePropertyConstructorWrapper: 'region[data-name="workout-property-constructor"]'
       exercisesList: '.gc-workout-exercises-list'
+      exercisesListWrapper: '.gc-workout-exercises-list-wrapper'
 
     templateHelpers: =>
       currentUserId: App.request('current_user_id')
@@ -74,8 +75,11 @@ define [
       # sends the collection count
       App.reqres.setHandler 'workout_exercises:has_exercise?', @_hasExercise
       App.reqres.setHandler 'workout_exercises:has_exercise_properties?', @_hasExerciseProperties
+      @listenTo App.vent, 'sortables:on:drop', @onDropExercise
 
     onDestroy: ->
+      App.vent.trigger 'sortables:remove:container', @ui.exercisesListWrapper[0]
+
       App.vent.off 'workout:reload:exercises', @getWorkoutData
       App.reqres.removeHandler 'workout_exercises:has_exercise?', @_hasExercise
       App.reqres.removeHandler 'workout_exercises:has_exercise_properties?', @_hasExerciseProperties
@@ -92,6 +96,14 @@ define [
 
       @addSortable()
       @showConnectionLines()
+      @addSidebarDraggable()
+
+    addSidebarDraggable: ->
+      App.vent.trigger 'sortables:add:container', @ui.exercisesListWrapper[0]
+
+    onDropExercise: (args) ->
+      if args.category is 'exercises'
+        App.vent.trigger 'workout:add:exercise', args
 
     getWorkoutData: =>
       @workout.fetch()

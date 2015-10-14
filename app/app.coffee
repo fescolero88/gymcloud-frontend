@@ -20,6 +20,7 @@ define [
   'modules/main-client/main-client-module'
   'modules/general/library-preset-module'
   'modules/prototype/prototype-module'
+  'features/sortables/module'
   'features/search/module'
 
   'deps/scripts'
@@ -48,8 +49,9 @@ define [
   MainClientModule
   LibraryPresetModule
   PrototypeModule
-  SearchModule
+  SortableModule
 
+  SearchModule
 ) ->
 
   class Application extends Marionette.Application
@@ -62,7 +64,6 @@ define [
         throw(Error(msg))
 
     initialize: ->
-
       @on 'before:start', ->
         @_initPromises()
         @_initModules()
@@ -71,7 +72,6 @@ define [
           .done(@promises.layout.resolve)
 
       @on 'start', ->
-
         defer = new $.Deferred
         @request('current_user:init:user')
           .then( =>
@@ -128,6 +128,7 @@ define [
       @module 'MainClient', MainClientModule
       @module 'LibraryPreset', LibraryPresetModule
       @module 'Prototype', PrototypeModule
+      @module 'Sortable', SortableModule
       @module 'Search', SearchModule
       defer.resolve()
       defer.promise()
