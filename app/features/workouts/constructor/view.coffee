@@ -108,11 +108,12 @@ define [
         item = item.toJSON()
 
       if item.category == 'exercises'
+        position = @model.exercises.length + 1
         workout_exercise = new WorkoutExercise
           exercise_id: item.id
           workout_id: @model.id
-          order_name: @model.exercises.length
-          position: @model.exercises.length
+          order_name: position
+          position: position
         workout_exercise.save().then =>
           @model.exercises.add(workout_exercise)
 
