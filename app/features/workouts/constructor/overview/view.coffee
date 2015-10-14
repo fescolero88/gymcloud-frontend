@@ -81,12 +81,7 @@ define [
         confirmCallBack: => @model.destroy()
 
     showAddNote: ->
-      hasNote = !!@model.get('note')
-      if hasNote
-        @ui.workoutNoteEditor.addClass 'focus-state'
-      else
-        @ui.workoutNotesContainer.removeClass 'hidden'
-        @ui.workoutNoteEditor.addClass 'focus-state'
+      @ui.workoutNotesContainer.removeClass('hidden') if !@model.get('notes')
       @ui.workoutNoteEditor.focus()
 
     _isAuthor: ->
