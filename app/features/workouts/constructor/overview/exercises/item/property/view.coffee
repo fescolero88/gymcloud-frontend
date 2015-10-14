@@ -25,12 +25,14 @@ define [
       editPropertyControl: '.gc-property-edit'
       viewPropertyControl: '.gc-property-view'
       toggleEditMode: '.gc-toggle-edit-mode'
+      savePropertyButton: '.gc-save'
 
     events: ->
       'click @ui.removePropertyButton': 'removeProperty'
       'click @ui.propertyItem': 'selectProperty'
       'focusout @ui.editPropertyControl':  _.debounce(@saveOnBlur, 200)
       'keypress @ui.selectedPropertyValue': 'saveOnEnter'
+      'click @ui.savePropertyButton': 'saveProperty'
       'click @ui.toggleEditMode': '_toggleEditMode'
 
     modelEvents:

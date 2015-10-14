@@ -10,6 +10,8 @@
       each property in properties
         li
           a.gc-property-item(href='#', data-id=property.id)=property.get('name')
+  button.btn.btn-sm.btn-primary.gc-custom.gc-save(type='button')
+    i.glyphicon.glyphicon-ok
   button.btn.btn-sm.btn-primary.gc-custom.gc-remove(type='button')
     | ×
 .gc-property-view.gc-workout-exercise-prop(class=editMode ? 'hidden' : '')

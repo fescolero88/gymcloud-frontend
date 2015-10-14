@@ -20,10 +20,12 @@ define [
       propertyItem: '.gc-property-item'
       selectedPropertyLabel: '.gc-selected-property'
       selectedPropertyValue: '.gc-property-value'
+      selectedPropertyValueContainer: '.gc-property-value-container'
 
     events:
       'click @ui.removeButton': 'removeProperty'
       'click @ui.propertyItem': 'selectProperty'
+      'click @ui.selectedPropertyValueContainer' : 'setFocus'
       'keyup @ui.selectedPropertyValue': 'setPropertyValue'
 
     templateHelpers: ->
@@ -41,7 +43,10 @@ define [
           personal_property: personal_property?.attributes
           property_name: personal_property?.name
         @model.personal_property = personal_property
-        @ui.selectedPropertyValue.focus()
+
+      setTimeout =>
+        @setFocus()
+      , 200
 
     removeProperty: ->
       @model.trigger 'destroy', @model
@@ -59,3 +64,6 @@ define [
 
     setPropertyValue: (ev) ->
       @model.set('value', ev.target.innerHTML)
+
+    setFocus: ->
+      @ui.selectedPropertyValue.focus()

@@ -45,7 +45,7 @@ define [
         )(this)
         collection: ->
           App.request('current_user').exercises.map (item) ->
-            folder: item.folder?.name
+            folder: 'exercises'
             id: item.get('id')
             name: item.get('name')
             label: item.get('name')
