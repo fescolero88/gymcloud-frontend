@@ -18,3 +18,8 @@ define [
 
     moveClient: =>
       @trigger 'individual:move'
+
+    initialize: (options) ->
+      MyId = App.request('current_user_id')
+      @collection = new Backbone.VirtualCollection options.collection,
+        filter: (model) -> MyId != model.get('id')
