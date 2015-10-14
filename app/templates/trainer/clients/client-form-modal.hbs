@@ -33,12 +33,12 @@
               </div>
               <div class="col-xs-2 col-padding-5">
                 <label>
-                  <input type="radio" {{#if gender }}checked{{/if}} value="1" name="gender"> <span>Male</span>
+                  <input type="radio" {{#if gender }}checked{{/if}} value="male" name="gender"> <span>Male</span>
                 </label>
               </div>
               <div class="col-xs-3 col-padding-5">
                 <label>
-                  <input type="radio" {{#unless gender }}checked{{/unless}} value="0" name="gender"> <span>Female</span>
+                  <input type="radio" {{#unless gender }}checked{{/unless}} value="female" name="gender"> <span>Female</span>
                 </label>
               </div>
             </div>
@@ -99,9 +99,9 @@
           <div class="row">
             <div class="col-xs-8">
               <div class="form-group">
-                <label for="address">Location</label>
+                <label for="location">Location</label>
                 <label class="gc-error-message"></label>
-                <input name="address" type="text" class="form-control" value="{{address}}">
+                <input name="location" type="text" class="form-control" value="{{location}}">
                 <span class="gc-valid-icon fa fa-check hide"></span>
               </div>
             </div>
@@ -117,9 +117,9 @@
           <div class="row">
             <div class="col-xs-12">
               <div class="form-group">
-                <label for="works_at">Employer</label>
+                <label for="employer">Employer</label>
                 <label class="gc-error-message"></label>
-                <input name="works_at" type="text" class="form-control" value="{{works_at}}">
+                <input name="employer" type="text" class="form-control" value="{{employer}}">
                 <span class="gc-valid-icon fa fa-check hide"></span>
               </div>
             </div>
@@ -127,8 +127,8 @@
           <div class="row">
             <div class="col-xs-6">
               <div class="form-group">
-                <label for="dob">Date of birth</label>
-                <input name="dob" type="date" class="form-control" value="{{dob}}">
+                <label for="birthday">Date of birth</label>
+                <input name="birthday" type="date" class="form-control" value="{{birthday}}">
                 <span class="gc-valid-icon fa fa-check hide"></span>
               </div>
             </div>

@@ -48,14 +48,12 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
     for key, value of formData
       if key in ['weight, height, bodyfat']
         formData[key] = value.replace(/\,/g,'.')
-      if key is 'gender'
-        formData[key] = parseInt value
       if not value
         delete formData[key]
-    @model.set formData
-
+    @model.set(formData)
     if @model.isValid true
-      @model.save()
+      @model.save().then (_response) =>
+        @model.profile.save(formData, wait: true)
 
   onSync: (model, response, options) ->
     @trigger 'modal:close'
