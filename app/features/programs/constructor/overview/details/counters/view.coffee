@@ -32,6 +32,8 @@ define [
       count = @weekCollection.length
       @model.set(weeksCount: count)
 
-    _update_workouts_count: ->
-      count = @workoutsCollection.length
+    _update_workouts_count: =>
+      count = @weekCollection.reduce((memo, model) ->
+        memo + model.get('program_workouts').length
+      , @workoutsCollection.length)
       @model.set(workoutsCount: count)

@@ -29,7 +29,7 @@ define [
 
       stickit:
         bindings:
-          '[data-bind="name"]':
+          '[data-bind="workout-name"]':
             observe: 'name'
             events: ['blur']
           '[data-bind="description"]':

@@ -2,12 +2,10 @@ define [
   './item/view'
   'models/workout_template'
   'models/program_workout'
-  'dragula'
 ], (
   ProgramGlobalWorkoutItemView
   WorkoutTemplate
   ProgramWorkout
-  Dragula
 ) ->
   class WorkoutListView extends Marionette.CollectionView
 
@@ -28,10 +26,43 @@ define [
       model.get 'position'
 
     initialize: (options) ->
+      @sortable = options.sortable
       @program = options.program
+      @weekId = options.weekId || ''
+      @el.setAttribute 'data-week-id', @weekId
+      @listenTo App.vent, 'add:program:workout', @reorderProgramWorkouts
 
     onShow: ->
       @addSortable()
+
+    addSortable: ->
+      @sortable.containers.push @el
+      @sortable.on 'drop', (el, container) =>
+        newWeekId = container.getAttribute('data-week-id')
+        model = @collection.findWhere
+          'id': parseInt(el.getAttribute('data-id'))
+
+        if model and model.get('week_id') isnt newWeekId
+          position = $(el).index()
+          model.save(
+            'week_id': newWeekId
+          ,
+            wait: true
+          ).then =>
+            @collection.remove model
+            App.vent.trigger 'add:program:workout', model, position
+            App.request 'messenger:show',
+              message: "Workout successfully moved."
+              type: 'success'
+        else if @el is container
+          @.children.call '_positionChanged'
+
+    reorderProgramWorkouts: (model, index) =>
+      itemWeekId = model.get('week_id') || ''
+      if @weekId is itemWeekId
+        @collection.add model,
+          at: index
+        @children.call '_positionChanged'
 
     addProgramWorkout: (isInWeek = false) =>
       workout = new WorkoutTemplate
@@ -57,14 +88,3 @@ define [
       model.save().then =>
         @collection.add(model)
         @program.program_workouts.add(model)
-
-
-    addSortable: ->
-      dragOptions =
-        revertOnSpill: true
-        moves: (el, container, handle) ->
-          handle.classList.contains('gc-program-workout-sort')
-
-      Dragula [@el], dragOptions
-        .on 'drop', (el, container) =>
-          @.children.call '_positionChanged'

@@ -21,6 +21,7 @@ define [
 
     childViewOptions: =>
       program: @model
+      sortable: @sortable
 
     childEvents: =>
       'add:program_workout': @addProgramWorkout
@@ -29,11 +30,13 @@ define [
     events:
       'click @ui.addWeek': 'addNewWeek'
 
-    initialize: ->
-      App.vent.on 'add:program:week', @addNewWeek
+    viewComparator: (model) ->
+      model.get 'position'
 
-    onDestroy: ->
-      App.vent.off 'add:program:week', @addNewWeek
+    initialize: (options) ->
+      @listenTo App.vent, 'add:program:week', @addNewWeek
+      @sortable = options.sortable
+      @listenTo this, 'remove:child', @onItemRemoved
 
     addNewWeek: =>
       position = @collection.length + 1
@@ -53,4 +56,6 @@ define [
 
     _addProgramWorkoutFromLibrary: (parent, workoutId) =>
       @trigger('add:program_workout:from_library', workoutId)
-   
+
+    onItemRemoved: ->
+      @.children.call '_assignWeekPosition'
