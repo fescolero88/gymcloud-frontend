@@ -65,14 +65,10 @@ define [
       el = event.currentTarget
       el.setAttribute 'contenteditable', true
 
-    saveOnEnter: (event) ->
-      label = event.currentTarget.innerHTML.replace /<[^>]*>/g, ''
-      if event.keyCode == 13
-        event.currentTarget.blur()
-        false
-      else
-        if event.keyCode != 8 and label.trim().length > 2
-          event.preventDefault()
+    saveOnEnter: (ev) ->
+      char = String.fromCharCode(ev.which)
+      ev.preventDefault() unless /[a-z0-9]/gi.test(char)
+      ev.currentTarget.blur() if event.which == 13
 
     trimLabel: (string) ->
       string
