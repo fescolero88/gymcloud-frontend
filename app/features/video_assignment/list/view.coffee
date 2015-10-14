@@ -23,7 +23,6 @@ define [
       playVideo: 'replaceIframe'
 
     initialize: =>
-      window.view = this
       @viewState = new Backbone.Model(
         state: 'search_not_started'
       )

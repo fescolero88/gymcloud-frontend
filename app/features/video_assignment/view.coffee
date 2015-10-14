@@ -3,11 +3,13 @@ define [
   './list/view'
   './search/view'
   'collections/videos'
+  'features/pagination/view'
 ], (
   template
   AssignVideosView
   SearchInputView
-  ExerciseVideosCollection
+  VideosCollection
+  PaginationView
 ) ->
   class VideosView extends Marionette.LayoutView
 
@@ -16,6 +18,7 @@ define [
     regions:
       exerciseVideos: 'region.gc-exercises-videos'
       search: 'region.video-search'
+      pagination: 'region[data-name="pagination"]'
 
     ui:
       innerNavItems: '.gc-assign-video-filter li'
@@ -32,14 +35,17 @@ define [
       video_assign: true
 
     initialize: ->
-      @collection = new ExerciseVideosCollection
+      @collection = new VideosCollection
+      @request = null
       @searchInput = new SearchInputView(
         model: new Backbone.Model
       )
-      @request = null
       @view = new AssignVideosView(
         collection: @collection
         model: @model
+      )
+      @paginationView = new PaginationView(
+        collection: @collection
       )
       @listenTo(@view, 'assignVideo', @assignVideo)
       @listenTo(@searchInput, 'searchStart', @searchVideos)
@@ -47,6 +53,7 @@ define [
     onShow: ->
       @getRegion('exerciseVideos').show(@view)
       @getRegion('search').show(@searchInput)
+      @getRegion('pagination').show(@paginationView)
 
     changeViewEvent: (ev) ->
       ev.preventDefault()

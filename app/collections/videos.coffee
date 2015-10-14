@@ -1,10 +1,11 @@
 define [
   'models/videos'
+  'backbone.paginator'
 ], (
   VideoModel
+  PageableCollection
 ) ->
-
-  class VideosCollection extends Backbone.Collection
+  class VideosCollection extends Backbone.PageableCollection
 
     url: ->
       '/videos'
@@ -21,3 +22,7 @@ define [
 
       sync = (@sync || Backbone.sync)
       sync.call(@, null, @, options)
+
+    getPreviousPage: ->
+      return false if @state.currentPage <= 1
+      super
