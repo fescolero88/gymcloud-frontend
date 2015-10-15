@@ -34,7 +34,7 @@ define [
       addExerciseFolderButton: '.gc-show-add-exercise-folder-modal'
       duplicateButton: '.gc-show-duplicate-modal'
       actionModal: '#gc-modal-region'
-      deleteButton: '#rm-event'
+      deleteButton: '[data-action="remove"]'
       itemCheckBox: '.gc-exercises-chb input'
 
     events:
@@ -43,7 +43,7 @@ define [
       'click @ui.addExerciseFolderButton': '_showAddFolderModal'
       'click @ui.duplicateButton': '_showDuplicateModal'
       'click @ui.deleteButton': '_destroySelected'
-      'click @ui.itemCheckBox': '_toggleActionBtnVisibility'
+      'click @ui.itemCheckBox': '_toggleActionsBtnVisibility'
 
     behaviors: ->
 
@@ -73,11 +73,13 @@ define [
       @_showEntityList()
       @getRegion('breadcrumbs').show(@breadcrumbs)
 
-    _toggleActionBtnVisibility: ->
+    _toggleActionsBtnVisibility: =>
       if $('.gc-exercises-chb input[type=checkbox]:checked').length > 0
-        $('.gc-show-duplicate-modal, #rm-event').show()
+        $.each [@ui.duplicateButton, @ui.deleteButton], (i, el) ->
+          el.removeClass('disp-none')
       else
-        $('.gc-show-duplicate-modal, #rm-event').hide()
+        $.each [@ui.duplicateButton, @ui.deleteButton], (i, el) ->
+          el.addClass('disp-none')
 
     _showEntityList: ->
       @listView = new EntityListView
@@ -90,7 +92,7 @@ define [
     toggleCheck: (ev) =>
       checked = @ui.mainCheckbox.is(':checked')
       @ui.itemsRegion.find('input[type=checkbox]').prop('checked', checked)
-      @_toggleActionBtnVisibility()
+      @_toggleActionsBtnVisibility()
 
     _updateSelectedItems: ->
       for check in @ui.itemsRegion.find('input[type=checkbox]')

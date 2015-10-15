@@ -368,3 +368,7 @@ body > region[data-name="app"] > .container-fluid {
   text-transform: uppercase;
 }
 /* Auto Complete */
+
+.disp-none {
+  display: none;
+}
