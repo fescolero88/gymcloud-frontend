@@ -4,6 +4,7 @@ define [
   'handlers/ajax_setup'
   'handlers/data'
   'handlers/form_validator'
+  'handlers/jquery'
   'handlers/others'
 
   'views/general/base-view'
@@ -32,6 +33,7 @@ define [
 
   ajaxSetupHandler
   dataHandler
+  jqueryHandlers
   formValidatorHandler
   othersHandler
 
@@ -99,6 +101,7 @@ define [
 
       @addInitializer ->
         ajaxSetupHandler(this, config)
+        jqueryHandlers(this)
         formValidatorHandler()
 
       @addInitializer ->
