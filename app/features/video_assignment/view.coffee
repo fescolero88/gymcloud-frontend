@@ -5,9 +5,9 @@ define [
   'collections/videos'
 ], (
   template
-  AssignVideoView
-  SearchView
-  ExerciseVideosCollection
+  AssignVideosView
+  SearchInputView
+  VideosCollection
 ) ->
   class VideosView extends Marionette.LayoutView
 
@@ -30,22 +30,27 @@ define [
 
     behaviors:
       video_assign: true
+      pagination: true
+
+    constructor: ->
+      @collection = new VideosCollection
+      super
 
     initialize: ->
-      @collection = new ExerciseVideosCollection
-      @search = new SearchView
       @request = null
-      @collection.fetch()
-      @view = new AssignVideoView(
+      @searchInput = new SearchInputView(
+        model: new Backbone.Model
+      )
+      @view = new AssignVideosView(
         collection: @collection
         model: @model
       )
       @listenTo(@view, 'assignVideo', @assignVideo)
-      @listenTo(@search, 'searchStart', @searchVideos)
+      @listenTo(@searchInput, 'searchStart', @searchVideos)
 
     onShow: ->
       @getRegion('exerciseVideos').show(@view)
-      @getRegion('search').show(@search)
+      @getRegion('search').show(@searchInput)
 
     changeViewEvent: (ev) ->
       ev.preventDefault()
@@ -54,14 +59,25 @@ define [
       unless $(navItem).hasClass 'active'
         @ui.innerNavItems.removeClass 'active'
         $(navItem).addClass 'active'
-        query = _.trim(@search.model.get('query'))
-        @searchVideos(query) if query
+        query = _.trim(@searchInput.model.get('query'))
+        if query
+          @searchVideos(query)
+        else
+          @collection.reset()
+          @view.viewState.set('state', 'search_not_started')
 
     searchVideos: (query) ->
+      @request.abort() if @request?.state() is 'pending'
+      unless _.trim(query)
+        @view.viewState.set('state', 'search_not_started')
+        return
       @request = @collection.search(query, @searchScope)
+      @request
         .then (response) =>
+          @view.viewState.set('state', 'no_results') unless response.length
           @collection.reset(response)
         .fail ->
+          return false if arguments[1] is 'abort'
           App.request 'messenger:show',
             message: 'Videos search error'
             type: 'error'

@@ -57,6 +57,7 @@
     "backbone-validation": "~0.11.5",
     "backbone.babysitter": "^0.1.10",
     "backbone.marionette": "~2.4.2",
+    "backbone.paginator": "^2.0.2",
     "backbone.stickit": "~0.9.2",
     "backbone-nested": "~2.0.4",
     "backbone-virtual-collection": "~0.6.8",

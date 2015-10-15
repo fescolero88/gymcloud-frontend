@@ -1,6 +1,6 @@
 define ->
 
-  class VideoAssign extends Marionette.Behavior
+  class VideoAssignBehavior extends Marionette.Behavior
 
     initialize: ->
       @listenTo(@view, 'assignVideo', @_assignVideo)

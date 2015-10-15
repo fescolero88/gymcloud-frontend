@@ -15,10 +15,10 @@ define ->
           message: message
           type: 'error'
 
-    originalSync = Backbone.sync
+    Backbone.originalSync = Backbone.sync
     Backbone.sync = (method, model, options) ->
       options.type = 'PATCH' if method == 'update'
-      originalSync method, model, options
+      Backbone.originalSync method, model, options
 
     $.ajaxSetup
       headers: {'X-Requested-With': 'XMLHttpRequest'}
