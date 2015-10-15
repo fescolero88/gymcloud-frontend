@@ -56,7 +56,6 @@ define [
       @changeContent content
 
     _removeProgramWorkout: (ev) ->
-      ev.preventDefault()
       @model.destroy().then ->
         App.request 'messenger:show',
           message: "Workout Deleted"

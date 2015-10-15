@@ -30,7 +30,6 @@ module.exports = class AuthView extends Marionette.ItemView
       @ui.signUpModal.modal 'show'
 
   login: (event) ->
-    event.preventDefault()
     @model.login()
 
   _onLoginSuccess: (data) ->

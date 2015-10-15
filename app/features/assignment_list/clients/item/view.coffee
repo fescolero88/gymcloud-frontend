@@ -40,7 +40,6 @@ define [
       this
 
     toggleAssign: (ev) =>
-      ev.preventDefault()
       if @isAssigned then @_unassign() else @_assign()
 
     _isMe: ->

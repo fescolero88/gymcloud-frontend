@@ -22,7 +22,6 @@ class PersonalBestResultView extends Marionette.ItemView
     'click @ui.deleteButton': 'deleteProperty'
 
   deleteProperty: (ev) =>
-    ev.preventDefault()
     @model.destroy()
 
 module.exports = class PersonalBestModalView extends Marionette.CompositeView
@@ -97,7 +96,6 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
       @ui.properties.append $option
 
   submitGroupForm: (ev) =>
-    ev.preventDefault()
     if @validateResult()
       result = new PersonalBestResultModel
         property_id: @ui.properties.val()

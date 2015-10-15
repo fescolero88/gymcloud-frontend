@@ -26,7 +26,6 @@ class PersonalBestItemView extends Marionette.ItemView
     sync: 'render'
 
   deletePersonalBest: (ev) =>
-    ev.preventDefault()
     App.request 'base:confirmationalModal',
       title: "Delete personal best"
       content: "Are you sure you want to delete this personal best?"

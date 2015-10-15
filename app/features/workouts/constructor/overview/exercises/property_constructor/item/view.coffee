@@ -52,7 +52,6 @@ define [
       @model.trigger 'destroy', @model
 
     selectProperty: (ev) ->
-      ev.preventDefault()
       id = ev.target.dataset.id
       personal_property = @collection.get(id)
       @model.set

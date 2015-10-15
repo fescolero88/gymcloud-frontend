@@ -57,13 +57,11 @@ define [
       @model.destroy()
 
     selectProperty: (ev) ->
-      ev.preventDefault()
       @ui.selectedPropertyLabel.html(ev.currentTarget.innerHTML)
       @model.set(personal_property_id: ev.target.dataset.id)
       @ui.selectedPropertyValue.focus()
 
     _toggleEditMode: (e) ->
-      e.preventDefault()
       @toggleEditMode()
 
     toggleEditMode: ->

@@ -69,7 +69,6 @@ define [
       App.vent.off 'workout:add:exercise', @assignExercise
 
     changeViewEvent: (ev, ui) =>
-      ev.preventDefault()
       navItem = $(ev.currentTarget).parent()
       navItemView = $(navItem).data('view')
       @_changeView(navItemView)
@@ -92,7 +91,6 @@ define [
       @getRegion('manage').show(view)
 
     showAddToLibrary: (ev) =>
-      ev.preventDefault()
       App.vent.trigger 'base:addToLibraryModal', type: 'workouts', model: @model
 
     assignExercise: (item) =>

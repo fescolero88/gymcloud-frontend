@@ -37,7 +37,6 @@ module.exports = class PropertyModalView extends Marionette.ItemView
       @trigger 'switchError', error_msg, $inputGroup
 
   submitForm: (ev) ->
-    ev.preventDefault()
     formData = @ui.form.serializeObject()
     @model.set formData
     if !@model.is_edit

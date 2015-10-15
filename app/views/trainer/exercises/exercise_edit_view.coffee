@@ -33,7 +33,6 @@ module.exports = class ExerciseEditView extends Marionette.ItemView
       @trigger 'switchError', error_msg, $inputGroup
 
   submitForm: (e) =>
-    e.preventDefault()
     formData = @ui.form.serializeObject()
     @model.set formData
     if @model.isValid true
@@ -53,7 +52,6 @@ module.exports = class ExerciseEditView extends Marionette.ItemView
       @trigger 'switchError', error_msg[0], $inputGroup
 
   back: (e) =>
-    e.preventDefault()
     @model.set @model.previousAttributes()
     @trigger 'exercise:back'
 

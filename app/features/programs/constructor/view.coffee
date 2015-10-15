@@ -61,7 +61,6 @@ define [
 
     _changeViewEvent: (ev, ui) ->
       ui = @ui.contentNavItems
-      ev.preventDefault()
       navItem = $(ev.currentTarget).parent()
       if not $(navItem).hasClass('active')
         ui.removeClass('active')

@@ -19,7 +19,6 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
     Backbone.Validation.bind(this)
 
   submit: (ev) =>
-    ev.preventDefault()
     data = _.extend @ui.form.serializeObject(),
       reset_password_token: @token
       id: 1 # model is not NEW now

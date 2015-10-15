@@ -41,7 +41,6 @@ module.exports = class GroupFormModalView extends Marionette.ItemView
       reader.readAsDataURL(input.files[0])
 
   submitGroupForm: (ev) =>
-    ev.preventDefault()
     @avatar = $(ev.target).find('input[type=file]')
     formData = @ui.groupForm.serializeObject()
     for key, value of formData

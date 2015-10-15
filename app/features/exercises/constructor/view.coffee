@@ -53,7 +53,6 @@ define [
       @getRegion('breadcrumbs').show(@breadcrumbs)
 
     changeViewEvent: (ev) ->
-      ev.preventDefault()
       navItem = $(ev.currentTarget).parent()
       navItemView = $(navItem).data('view')
       @_changeView(navItemView)
@@ -75,11 +74,9 @@ define [
       @getRegion('manage').show(view)
 
     showAddToLibrary: (ev) ->
-      ev.preventDefault()
       App.request 'base:addToLibraryModal', type: 'exercises', model: @model
 
     _removeFromLibrary: (ev) ->
-      ev.preventDefault()
       App.request 'base:confirmationalModal',
         title: 'Remove exercise?'
         content: 'Are you sure you want to remove this exercise from library?'

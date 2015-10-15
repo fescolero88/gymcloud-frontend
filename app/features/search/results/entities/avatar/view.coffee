@@ -15,9 +15,6 @@ define [
     attributes:
       href: '#'
 
-    events:
-      'click': '_preventNavigate'
-
     behaviors:
 
       stickit:
@@ -45,6 +42,3 @@ define [
                   else
                     ''
             ]
-
-    _preventNavigate: (ev) ->
-      ev.preventDefault()

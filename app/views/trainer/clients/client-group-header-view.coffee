@@ -45,7 +45,6 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
 
   submitClientForm: (ev) ->
     #TODO validation
-    ev.preventDefault()
     formData = @ui.inviteForm.serializeObject()
     if @myProfile
       url = "/api/mobile/me/invite"
@@ -68,7 +67,6 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
       $inputGroup.find('.gc-error-message').text(error)
 
   showClientEditModal: (ev) ->
-    ev.preventDefault()
     if @viewType is 'clients'
       clientFormModal = new ClientFormModalView model: @model
     else

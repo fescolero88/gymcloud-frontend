@@ -43,7 +43,6 @@ define [
       App.vent.trigger 'search:cancel'
 
     search: (ev) ->
-      ev.preventDefault()
       isSearchInProgress = @ui.searchButton.find('i').hasClass('glyphicon-remove')
       if isSearchInProgress
         do @cancelSearch

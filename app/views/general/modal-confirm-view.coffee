@@ -21,12 +21,10 @@ module.exports = class ModalConfirmView extends Marionette.ItemView
     confirmBtn: @confirmData.confirmBtn
 
   confirmEvent: (ev) ->
-    ev.preventDefault()
     if @confirmData.confirmCallBack?
       @confirmData.confirmCallBack()
 
   cancelEvent: (ev) ->
-    ev.preventDefault()
     if @confirmData.cancelCallBack?
       @confirmData.cancelCallBack()
 

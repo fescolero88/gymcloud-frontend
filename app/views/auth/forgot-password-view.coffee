@@ -21,7 +21,6 @@ class ForgotPasswordFormView extends Marionette.ItemView
     Backbone.Validation.bind @
 
   submitForm: (ev) =>
-    ev.preventDefault()
     formData = @ui.form.serializeObject()
     @model.set formData
     @model.save null,

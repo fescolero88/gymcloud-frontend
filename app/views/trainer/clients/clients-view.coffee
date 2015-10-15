@@ -103,7 +103,6 @@ module.exports = class ClientsView extends Marionette.LayoutView
     @updateState()
 
   showClientAddModal: (ev) ->
-    ev.preventDefault()
     clientModel = new Client
     clientFormModal = new ClientFormModalView model: clientModel
 
@@ -119,7 +118,6 @@ module.exports = class ClientsView extends Marionette.LayoutView
     @ui.modalContainer.modal('show')
 
   showGroupAddModal: (ev) ->
-    ev.preventDefault()
     groupModel = new ClientGroup
     groupFormModal = new GroupFormModalView model: groupModel
 
@@ -135,7 +133,6 @@ module.exports = class ClientsView extends Marionette.LayoutView
     @ui.modalContainer.modal('show')
 
   showMovetogroupModal: (ev) =>
-    ev?.preventDefault()
 
     # add validation for empty groups
     if _.isEmpty(@groups.currentView.collection.models)
@@ -149,7 +146,6 @@ module.exports = class ClientsView extends Marionette.LayoutView
       @ui.modalContainer.modal('show')
 
   submitMovetogroupForm: (ev) ->
-    ev.preventDefault()
     #TODO validation
     clientsId = []
     groupsId = []
@@ -179,7 +175,6 @@ module.exports = class ClientsView extends Marionette.LayoutView
     return $el.find('input[type=checkbox]:checked').length
 
   rmEvent: (ev) =>
-    ev.preventDefault()
     App.request 'base:confirmationalModal',
       title: "Delete items"
       content: "Are you sure you want to delete selected items?"

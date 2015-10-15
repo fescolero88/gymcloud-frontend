@@ -22,7 +22,6 @@ define [
       viewType: @viewType
 
     _destroyModel: (ev) ->
-      ev.preventDefault()
       App.request 'base:confirmationalModal',
         title: "Delete item"
         content: "Are you sure you want to delete selected item?"

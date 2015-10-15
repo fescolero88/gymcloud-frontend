@@ -37,7 +37,6 @@ define [
         @model.destroy()
 
     deleteSingle: (ev) =>
-      ev.preventDefault()
       App.request 'base:confirmationalModal',
         title: "Delete client"
         content: "Are you sure you want to delete #{@model.get('first_name')} #{@model.get('last_name')}?"
@@ -46,6 +45,5 @@ define [
           @model.destroy()
 
     moveSingle: (ev) =>
-      ev.preventDefault()
       $(ev.currentTarget).closest('.row').find(':checkbox').prop('checked', true)
       @trigger 'individual:move'

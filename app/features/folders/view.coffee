@@ -104,7 +104,6 @@ define [
         @ui.mainCheckbox.prop 'checked', true
 
     _showDestroySelectedModal: (ev) =>
-      ev.preventDefault()
       App.request 'base:confirmationalModal',
         title: "Delete item(s)"
         content: "Are you sure you want to delete selected items?"
@@ -117,7 +116,6 @@ define [
       @listView.trigger('items:delete', ids, @model.get('id'))
 
     _showAddEntityModal: (ev) ->
-      ev.preventDefault()
       view = new AddEntityModalView
         folder: @model
         type: @typeName
@@ -126,7 +124,6 @@ define [
       @ui.actionModal.modal('show')
 
     _showAddFolderModal: (ev) ->
-      ev.preventDefault()
       view = new AddFolderModalView
         parent: @model
         type: @typeName
@@ -135,7 +132,6 @@ define [
       @ui.actionModal.modal('show')
 
     _showDuplicateModal: (ev) =>
-      ev.preventDefault()
       view = new DuplicateModalView
         collection: @model.nestedFolders
         type: @typeName

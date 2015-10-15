@@ -32,7 +32,6 @@ class SignUpStep1 extends Marionette.ItemView
       $(ev.currentTarget).closest('.gc-trainer-type').addClass 'active'
 
   submit: (ev) =>
-    ev.preventDefault()
     formData = @ui.form.serializeObject()
     for key, value of formData
       if key is 'trainer-type'
@@ -77,7 +76,6 @@ class SignUpStep2 extends Marionette.ItemView
     @on 'signup:errors', @returnedErrors
 
   submit: (ev) =>
-    ev.preventDefault()
     formData = this.prepare_attributes @ui.form.serializeObject()
     @model.set formData
 

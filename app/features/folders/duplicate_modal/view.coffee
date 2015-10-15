@@ -31,7 +31,6 @@ define [
       typeSinglular: _.chain(@typeName).singularize().humanize().value()
 
     submitForm: (ev) ->
-      ev.preventDefault()
       checked = @ui.itemsList.find(':checked')
       ids = checked.map((_index, el) -> $(el).data('id'))
       @trigger("items:duplicate", ids)

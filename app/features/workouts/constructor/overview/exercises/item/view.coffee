@@ -99,7 +99,6 @@ define [
         App.commands.execute 'property_constructor:update_listeners_count', -1
 
     deleteExercise: (event) ->
-      event.preventDefault()
       @model.destroy()
 
     refreshExercises: ->

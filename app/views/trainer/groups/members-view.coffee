@@ -40,7 +40,6 @@ module.exports = class MembersView extends Marionette.CompositeView
     @initSearchSelect()
 
   rmAssign: (ev) =>
-    ev.preventDefault()
     assignId = $(ev.currentTarget).data 'id'
     model = @collection.get assignId
     model.destroy()
@@ -49,7 +48,6 @@ module.exports = class MembersView extends Marionette.CompositeView
     @ui.removeModal.modal 'show'
 
   submitRemoveClient: (ev) ->
-    ev.preventDefault()
     clientsId = []
     for check in @$el.find('input[type=checkbox]:checked')
       clientsId.push $(check).data('id')

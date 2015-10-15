@@ -20,11 +20,9 @@ module.exports = class LibraryPresetModalView extends Marionette.ItemView
     'click @ui.previousButton': 'onPrevious'
 
   onNext: (ev) ->
-    ev.preventDefault()
     @ui.presetSteps[@currentIndex].classList.remove 'active'
     @ui.presetSteps[++@currentIndex].classList.add 'active'
 
   onPrevious: (ev) ->
-    ev.preventDefault()
     @ui.presetSteps[@currentIndex].classList.remove 'active'
     @ui.presetSteps[--@currentIndex].classList.add 'active'

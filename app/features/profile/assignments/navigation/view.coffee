@@ -35,7 +35,6 @@ define [
       App.vent.trigger 'content-nav:delete'
 
     _changeTab: (ev) ->
-      ev.preventDefault()
       link = ev.currentTarget
       tabName = $(link).data('nav-view')
       @navigate(tabName)
