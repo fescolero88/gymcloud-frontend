@@ -30,19 +30,19 @@ define [
       liveSearch: '.live-search'
       mainCheckbox: '.gc-content-nav-checkall input'
       collectionRegion: 'region[data-name="collection"]'
-      addExerciseButton: '.gc-show-add-exercise-modal'
-      addExerciseFolderButton: '.gc-show-add-exercise-folder-modal'
-      duplicateButton: '.gc-show-duplicate-modal'
+      folderAddButton: '.gc-show-add-exercise-folder-modal'
+      itemAddButton: '.gc-show-add-exercise-modal'
+      itemDuplicateButton: '.gc-show-duplicate-modal'
+      itemDeleteButton: '[data-action="remove"]'
       actionModal: '#gc-modal-region'
-      deleteButton: '[data-action="remove"]'
       itemCheckBox: '.gc-exercises-chb input'
 
     events:
       'click @ui.mainCheckbox': 'toggleCheck'
-      'click @ui.addExerciseButton': '_showAddEntityModal'
-      'click @ui.addExerciseFolderButton': '_showAddFolderModal'
-      'click @ui.duplicateButton': '_showDuplicateModal'
-      'click @ui.deleteButton': '_destroySelected'
+      'click @ui.folderAddButton': '_showAddFolderModal'
+      'click @ui.itemAddButton': '_showAddEntityModal'
+      'click @ui.itemDuplicateButton': '_showDuplicateModal'
+      'click @ui.itemDeleteButton': '_showDestroySelectedModal'
       'click @ui.itemCheckBox': '_toggleActionsBtnVisibility'
 
     behaviors: ->
@@ -63,7 +63,6 @@ define [
       singularName: @singularName
 
     initialize: (data) ->
-      @exercisesList = data.items
       @collection = data.items
       @typeName = data.type
       @singularName = _.chain(@typeName).humanize().singularize().value()
@@ -75,10 +74,10 @@ define [
 
     _toggleActionsBtnVisibility: =>
       if $('.gc-exercises-chb input[type=checkbox]:checked').length > 0
-        $.each [@ui.duplicateButton, @ui.deleteButton], (i, el) ->
+        $.each [@ui.itemDuplicateButton, @ui.itemDeleteButton], (i, el) ->
           el.removeClass('disp-none')
       else
-        $.each [@ui.duplicateButton, @ui.deleteButton], (i, el) ->
+        $.each [@ui.itemDuplicateButton, @ui.itemDeleteButton], (i, el) ->
           el.addClass('disp-none')
 
     _showEntityList: ->
@@ -92,7 +91,7 @@ define [
     toggleCheck: (ev) =>
       checked = @ui.mainCheckbox.is(':checked')
       @ui.collectionRegion.find('input[type=checkbox]').prop('checked', checked)
-      @_toggleActionBtnVisibility()
+      @_toggleActionsBtnVisibility()
 
     _updateSelectedItems: ->
       for check in @ui.collectionRegion.find('input[type=checkbox]')
@@ -104,7 +103,7 @@ define [
       if needToggle
         @ui.mainCheckbox.prop 'checked', true
 
-    _destroySelected: (ev) =>
+    _showDestroySelectedModal: (ev) =>
       ev.preventDefault()
       App.request 'base:confirmationalModal',
         title: "Delete item(s)"
