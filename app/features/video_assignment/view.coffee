@@ -14,7 +14,7 @@ define [
     template: template
 
     regions:
-      exerciseVideos: 'region.gc-exercises-videos'
+      videos: 'region.gc-videos'
       search: 'region.video-search'
 
     ui:
@@ -22,7 +22,7 @@ define [
       innerNavLinks: '.gc-assign-video-filter li a'
       uploadButton: '.gc-upload-video'
 
-    className: 'gc-exercises-assign-videos'
+    className: 'gc-assign-video-layout'
 
     events:
       'click @ui.innerNavLinks': 'changeViewEvent'
@@ -49,7 +49,7 @@ define [
       @listenTo(@searchInput, 'searchStart', @searchVideos)
 
     onShow: ->
-      @getRegion('exerciseVideos').show(@view)
+      @getRegion('videos').show(@view)
       @getRegion('search').show(@searchInput)
 
     changeViewEvent: (ev) ->

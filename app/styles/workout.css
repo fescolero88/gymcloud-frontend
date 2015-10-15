@@ -165,6 +165,10 @@ ul.workout-exercise-properties li.gc-property-item {
   padding: 6px 12px;
 }
 
+.gc-workout-video {
+  margin: 20px 0;
+}
+
 .gc-workout-author-block {
   padding-top: 25px;
   width: 290px;

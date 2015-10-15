@@ -4,4 +4,5 @@ define [
   './gc-content-nav'
   './messenger-theme-gymcloud'
   './switch'
+  './video-assignment'
 ], ->
