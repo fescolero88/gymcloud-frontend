@@ -21,7 +21,7 @@ define [
     className: 'gc-global-ewp-wrapper'
 
     regions:
-      exercises: '#exercises-region'
+      collectionRegion: 'region[data-name="collection"]'
       modalRegion: '#gc-modal-region'
       breadcrumbs: 'region[data-name="breadcrumbs"]'
 
@@ -29,7 +29,7 @@ define [
       title: '.gc-breadcrumbs-title'
       liveSearch: '.live-search'
       mainCheckbox: '.gc-content-nav-checkall input'
-      itemsRegion: '#exercises-region'
+      collectionRegion: 'region[data-name="collection"]'
       addExerciseButton: '.gc-show-add-exercise-modal'
       addExerciseFolderButton: '.gc-show-add-exercise-folder-modal'
       duplicateButton: '.gc-show-duplicate-modal'
@@ -85,17 +85,17 @@ define [
       @listView = new EntityListView
         collection: @collection
         type: @typeName
-      @exercises.show(@listView)
+      @getRegion('collectionRegion').show(@listView)
 
       @listenTo(@listView, 'item:clicked', @_updateSelectedItems)
 
     toggleCheck: (ev) =>
       checked = @ui.mainCheckbox.is(':checked')
-      @ui.itemsRegion.find('input[type=checkbox]').prop('checked', checked)
-      @_toggleActionsBtnVisibility()
+      @ui.collectionRegion.find('input[type=checkbox]').prop('checked', checked)
+      @_toggleActionBtnVisibility()
 
     _updateSelectedItems: ->
-      for check in @ui.itemsRegion.find('input[type=checkbox]')
+      for check in @ui.collectionRegion.find('input[type=checkbox]')
         if needToggle?
           if needToggle != $(check).is(':checked')
             @ui.mainCheckbox.prop 'checked', false
@@ -113,7 +113,7 @@ define [
         confirmCallBack: @_onDestroyConfirm
 
     _onDestroyConfirm: =>
-      checked = @ui.itemsRegion.find('input[type=checkbox]:checked')
+      checked = @ui.collectionRegion.find('input[type=checkbox]:checked')
       ids = checked.map( (_index, el) -> $(el).data('id') ).toArray()
       @listView.trigger('items:delete', ids, @model.get('id'))
 
@@ -147,7 +147,7 @@ define [
       @ui.actionModal.modal('show')
 
     _duplicateEntity: (foldersIds) ->
-      checked = @ui.itemsRegion.find('input[type=checkbox]:checked')
+      checked = @ui.collectionRegion.find('input[type=checkbox]:checked')
       ids = checked.map( (_index, el) -> $(el).data('id') )
 
       if ids.length and foldersIds.length
