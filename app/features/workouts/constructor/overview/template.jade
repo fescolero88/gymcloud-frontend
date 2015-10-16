@@ -5,6 +5,8 @@
         textarea.gc-workout-description-editor.gc-description-editor.form-control(type='text', placeholder='Start typing a description here...', data-bind='description')
       else
         .gc-workout-description(type='text', placeholder='Start typing a description here...', data-bind='description')
+    .gc-workout-video(class=!video_url && 'hidden')
+      iframe(width='320', height='180', src=video_url, frameborder='0', allowfullscreen='')
     // Note Fields
     .form-group.gc-workout-note-container(class=hasNote ? '' : 'hidden')
       label.gc-workout-notes-label

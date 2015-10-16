@@ -1,13 +1,13 @@
 define [
   './overview/view'
   'features/breadcrumbs/view'
-  './template'
   'features/video_assignment/view'
+  './template'
 ], (
   OverviewView
   Breadcrumbs
-  template
   VideoAssignmentView
+  template
 ) ->
   class ExerciseConstructorView extends Marionette.LayoutView
 

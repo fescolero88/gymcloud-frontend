@@ -6,17 +6,28 @@
           span.fa.fa-chevron-left
         region(data-name="breadcrumbs")
       .col-xs-5.gc-exercises-nav-right.text-right
-        // workout tabs
-        ul.gc-content-nav
-          li.active(data-view='program')
-            a(href='#') Overview
+        ul.gc-content-nav.gc-workout-nav
+          li.active(data-view='overview')
+            a
+              | Overview
+          li(data-view='video')
+            a
+              | Add Video
           li(data-view='assign')
-            a(href='#') Assign
-        // /workout tabs
+            a
+             | Assign
         if isAuthor
-          a#gc-workout-actions-dropdown.gc-workout-actions-button.btn.btn-primary(data-toggle='dropdown', aria-haspopup='true', role='button', aria-expanded='false')
+          a#gc-workout-actions-dropdown.gc-workout-actions-button.btn.btn-primary(
+            data-toggle='dropdown',
+            aria-haspopup='true',
+            role='button',
+            aria-expanded='false'
+          )
             i.fa.fa-chevron-down
-          ul.dropdown-menu.pull-right.gc-actions-list(role='menu', aria-labelledby='gc-workout-actions-dropdown')
+          ul.dropdown-menu.pull-right.gc-actions-list(
+            role='menu', 
+            aria-labelledby='gc-workout-actions-dropdown'
+          )
             li.row
               a.col-xs-12.gc-workout-add-note
                 | Add Note
@@ -30,14 +41,8 @@
               a.col-xs-12.text-danger
                 | Delete
         else
-          button.btn.brn-primary Add to library
-    .row.gc-inner-nav-wrapper
-      .col-xs-6
-        ul.gc-inner-nav
-          li.active(data-view='description')
-            a Description
-          li(data-view='video')
-            a Video
+          button.btn.brn-primary 
+            | Add to library
       .col-xs-6
         if !isAuthor
           .gc-workout-author-block.pull-right
@@ -67,4 +72,5 @@
                 | Used by 
                 i.glyphicon.glyphicon-user
                 |  250
-    #workout-manage
+                
+    region(data-name="workout-manage")
