@@ -53,7 +53,6 @@ define [
       @getRegion('search').show(@searchInput)
 
     changeViewEvent: (ev) ->
-      ev.preventDefault()
       navItem = $(ev.currentTarget).parent()
       @searchScope = $(ev.currentTarget).data('scope')
       unless $(navItem).hasClass 'active'

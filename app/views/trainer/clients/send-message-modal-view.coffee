@@ -62,15 +62,12 @@ module.exports = class SendMessageModalView extends Marionette.ItemView
         @ui.liveSearch[0].selectize.addItem item
 
   selectNone: (ev) =>
-    ev.preventDefault()
     @ui.liveSearch[0].selectize.clear()
 
   selectAll: (ev) =>
-    ev.preventDefault()
     @ui.liveSearch[0].selectize.setValue(Object.keys(@ui.liveSearch[0].selectize.options))
 
   submitForm: (ev) ->
-    ev.preventDefault()
     isError = false
     clients = @ui.liveSearch.val()
     message = @ui.messageBody.val()

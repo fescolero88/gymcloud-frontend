@@ -40,7 +40,6 @@ module.exports = class ClientPageSidebarView extends Marionette.LayoutView
     @updateProfile()
 
   showClientEditModal: (ev) ->
-    ev.preventDefault()
     profileModel = App.request 'current_user'
     clientFormModal = new ClientFormModalView model: profileModel
 

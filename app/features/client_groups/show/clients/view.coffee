@@ -34,7 +34,6 @@ define [
       @initSearchSelect()
 
     rmAssign: (ev) =>
-      ev.preventDefault()
       assignId = $(ev.currentTarget).data 'id'
       model = @collection.get assignId
       model.destroy()
@@ -43,8 +42,6 @@ define [
       @ui.removeModal.modal 'show'
 
     submitRemoveClient: (ev) ->
-      ev.preventDefault()
-
       currentUser = App.request('current_user')
       clientCollection = currentUser.clients
 

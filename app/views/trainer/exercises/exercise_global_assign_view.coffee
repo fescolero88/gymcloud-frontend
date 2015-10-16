@@ -28,7 +28,6 @@ class ExerciseGlobalAssignClientsItemView extends Marionette.ItemView
     @model.off 'assignees:loaded', @assigneesLoaded
 
   toggleAssign: (ev) =>
-    ev.preventDefault()
     assigned = @ui.mark.hasClass 'active'
     @ui.mark.toggleClass 'active'
     @trigger 'client:assign:toggle', assigned

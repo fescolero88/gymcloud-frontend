@@ -50,7 +50,6 @@ define [
       @getRegion('workout').show(@workoutList)
 
     addWorkout: (ev) ->
-      ev.preventDefault()
       @workoutList.addProgramWorkout(true)
 
     removeModel: ->

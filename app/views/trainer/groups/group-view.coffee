@@ -28,7 +28,6 @@ module.exports = class GroupView extends Marionette.LayoutView
       reader.readAsDataURL(input.files[0])
 
   submitGroupForm: (ev) ->
-    ev.preventDefault()
     #TODO validation
     @model.set @ui.groupForm.serializeObject()
     if @model.hasChanged()

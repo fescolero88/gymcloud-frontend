@@ -172,7 +172,6 @@ define [
 
     onSavedOrder: ->
       App.request 'messenger:show',
-        hideAfter: 5
         message: "Order Position Saved."
         type: 'success'
 

@@ -40,7 +40,6 @@ module.exports = class ModalAddToLibraryView extends Marionette.LayoutView
     @name = @ui.input.val()
 
   submit: (ev) ->
-    ev.preventDefault()
     if @name
       root_id = App.request "data:#{@type}:root"
       if not @parent_id

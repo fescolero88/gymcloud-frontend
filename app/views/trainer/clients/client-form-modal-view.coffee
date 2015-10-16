@@ -42,7 +42,6 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
       reader.readAsDataURL(input.files[0])
 
   submitClientForm: (ev) =>
-    ev.preventDefault()
     @avatar = $(ev.target).find('input[type=file]')
     formData = @ui.clientForm.serializeObject()
     for key, value of formData

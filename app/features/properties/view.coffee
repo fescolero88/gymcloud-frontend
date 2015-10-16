@@ -35,7 +35,6 @@ define [
       @propertyList.show(@collectionView)
 
     editProperty: (ev) ->
-      ev.preventDefault()
       model_id = $(ev.currentTarget).data('id')
       model = @collection.get(model_id)
       @propertyModalView.trigger 'showModal',

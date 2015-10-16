@@ -36,7 +36,6 @@ define [
       noMore: @collection?.noMore
 
     loadMore: (ev) ->
-      ev.preventDefault()
       @collection.loadMore()
 
     refresh: (_ev) ->

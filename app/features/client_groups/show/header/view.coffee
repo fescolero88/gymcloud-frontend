@@ -18,8 +18,6 @@ define [
       @clientForm.show(@modalView)
 
     showClientEditModal: (ev) ->
-      ev.preventDefault()
-
       @listenTo @modalView, 'closeModal', =>
         $('.modal-backdrop.fade.in').remove()
         @ui.clientFormModal.modal('hide')

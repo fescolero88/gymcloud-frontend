@@ -60,7 +60,6 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
       @ui.privateMarker.removeClass('hide')
 
   changeViewEvent: (ev) =>
-    ev.preventDefault()
     navItem = $(ev.currentTarget).parent()
     if not $(navItem).hasClass 'active'
       @ui.innerNavItems.removeClass 'active'
@@ -90,11 +89,9 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
     @manageRegion.show @exerciseEditView
 
   showAddToLibrary: (ev) =>
-    ev.preventDefault()
     App.request 'base:addToLibraryModal', type: 'exercises', model: @model
 
   removeFromLibrary: (ev) =>
-    ev.preventDefault()
     copyId = $(ev.currentTarget).data('source')
     App.request 'base:confirmationalModal',
       title: "Remove exercise?"

@@ -34,7 +34,6 @@ define [
         @model.destroy()
 
     deleteSingle: (ev) =>
-      ev.preventDefault()
       App.request 'base:confirmationalModal',
         title: "Delete group"
         content: "Are you sure you want to delete #{@model.get('name')}?"

@@ -11,7 +11,6 @@ define ->
         error = error.join(', ') if _.isArray(error)
         message = error.replace( /\s+(\[.+\])/, "")
         App.request 'messenger:show',
-          hideAfter: 5
           message: message
           type: 'error'
 

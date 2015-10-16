@@ -83,7 +83,6 @@ define [
 
     submitClientForm: (ev) ->
       #TODO validation
-      ev.preventDefault()
       formData = @ui.inviteForm.serializeObject()
       if @_isMyProfile()
         url = "/api/mobile/me/invite"
@@ -106,7 +105,6 @@ define [
         $inputGroup.find('.gc-error-message').text(error)
 
     showClientEditModal: (ev) ->
-      ev.preventDefault()
       @ui.clientFormModal.modal('show')
 
     showSendMessageModal: (ev) ->

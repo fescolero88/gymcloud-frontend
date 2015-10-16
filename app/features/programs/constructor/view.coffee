@@ -61,7 +61,6 @@ define [
 
     _changeViewEvent: (ev, ui) ->
       ui = @ui.contentNavItems
-      ev.preventDefault()
       navItem = $(ev.currentTarget).parent()
       if not $(navItem).hasClass('active')
         ui.removeClass('active')
@@ -85,7 +84,6 @@ define [
 
     _onSyncUpdate: (_response) ->
       App.request 'messenger:show',
-        hideAfter: 5
         message: "Program Updated."
         type: 'success'
 

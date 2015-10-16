@@ -35,7 +35,6 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
     @changeViewEvent(ev, @ui.contentNavItems)
 
   changeViewEvent: (ev, ui) =>
-    ev.preventDefault()
     navItem = $(ev.currentTarget).parent()
     if not $(navItem).hasClass 'active'
       ui.removeClass 'active'

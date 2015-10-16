@@ -32,7 +32,6 @@ define [
         parent_id: @parent.get('id')
 
     submitForm: (ev) ->
-      ev.preventDefault()
       @model.save().then =>
         user = App.request('current_user')
         folders = user.folders
@@ -43,6 +42,5 @@ define [
 
     _showSuccessMessage: ->
       App.request 'messenger:show',
-        hideAfter: 5
         message: "New folder added"
         type: 'success'

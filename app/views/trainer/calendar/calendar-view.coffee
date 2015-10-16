@@ -23,7 +23,6 @@ module.exports = class CalendarView extends Marionette.LayoutView
     navigate_back: true
 
   navLinkClick: (ev) ->
-    ev.preventDefault()
     @ui.calendarNav.removeClass('active')
     @$el.find(ev.currentTarget).addClass('active')
     navView = @$el.find(ev.currentTarget).data('nav-view')

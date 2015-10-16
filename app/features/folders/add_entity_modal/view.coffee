@@ -46,7 +46,6 @@ define [
       ), 400
 
     submitForm: (ev) =>
-      ev.preventDefault()
       @model.save().then =>
         user = App.request('current_user')
         collection = user[@type]
@@ -57,7 +56,6 @@ define [
 
     _showSuccessMessage: ->
       App.request 'messenger:show',
-        hideAfter: 5
         message: "New item added"
         type: 'success'
 

@@ -33,7 +33,6 @@ module.exports = class ExerciseEditView extends Marionette.ItemView
       @trigger 'switchError', error_msg, $inputGroup
 
   submitForm: (e) =>
-    e.preventDefault()
     formData = @ui.form.serializeObject()
     @model.set formData
     if @model.isValid true
@@ -42,7 +41,6 @@ module.exports = class ExerciseEditView extends Marionette.ItemView
   onSync: ->
     @trigger 'exercise:back'
     App.request 'messenger:show',
-      hideAfter: 5
       message: "Item was edited."
       type: 'success'
 
@@ -53,7 +51,6 @@ module.exports = class ExerciseEditView extends Marionette.ItemView
       @trigger 'switchError', error_msg[0], $inputGroup
 
   back: (e) =>
-    e.preventDefault()
     @model.set @model.previousAttributes()
     @trigger 'exercise:back'
 

@@ -64,7 +64,6 @@ define [
         reader.readAsDataURL(input.files[0])
 
     submitClientForm: (ev) ->
-      ev.preventDefault()
       @model.save()
 
     onSync: (model, response, options) ->

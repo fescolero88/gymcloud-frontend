@@ -21,7 +21,7 @@ define [
     className: 'gc-global-ewp-wrapper'
 
     regions:
-      exercises: '#exercises-region'
+      collectionRegion: 'region[data-name="collection"]'
       modalRegion: '#gc-modal-region'
       breadcrumbs: 'region[data-name="breadcrumbs"]'
 
@@ -29,20 +29,20 @@ define [
       title: '.gc-breadcrumbs-title'
       liveSearch: '.live-search'
       mainCheckbox: '.gc-content-nav-checkall input'
-      itemsRegion: '#exercises-region'
-      addExerciseButton: '.gc-show-add-exercise-modal'
-      addExerciseFolderButton: '.gc-show-add-exercise-folder-modal'
-      duplicateButton: '.gc-show-duplicate-modal'
+      collectionRegion: 'region[data-name="collection"]'
+      folderAddButton: '.gc-show-add-exercise-folder-modal'
+      itemAddButton: '.gc-show-add-exercise-modal'
+      itemDuplicateButton: '.gc-show-duplicate-modal'
+      itemDeleteButton: '[data-action="remove"]'
       actionModal: '#gc-modal-region'
-      deleteButton: '[data-action="remove"]'
       itemCheckBox: '.gc-exercises-chb input'
 
     events:
       'click @ui.mainCheckbox': 'toggleCheck'
-      'click @ui.addExerciseButton': '_showAddEntityModal'
-      'click @ui.addExerciseFolderButton': '_showAddFolderModal'
-      'click @ui.duplicateButton': '_showDuplicateModal'
-      'click @ui.deleteButton': '_destroySelected'
+      'click @ui.folderAddButton': '_showAddFolderModal'
+      'click @ui.itemAddButton': '_showAddEntityModal'
+      'click @ui.itemDuplicateButton': '_showDuplicateModal'
+      'click @ui.itemDeleteButton': '_showDestroySelectedModal'
       'click @ui.itemCheckBox': '_toggleActionsBtnVisibility'
 
     behaviors: ->
@@ -63,7 +63,6 @@ define [
       singularName: @singularName
 
     initialize: (data) ->
-      @exercisesList = data.items
       @collection = data.items
       @typeName = data.type
       @singularName = _.chain(@typeName).humanize().singularize().value()
@@ -75,27 +74,27 @@ define [
 
     _toggleActionsBtnVisibility: =>
       if $('.gc-exercises-chb input[type=checkbox]:checked').length > 0
-        $.each [@ui.duplicateButton, @ui.deleteButton], (i, el) ->
+        $.each [@ui.itemDuplicateButton, @ui.itemDeleteButton], (i, el) ->
           el.removeClass('disp-none')
       else
-        $.each [@ui.duplicateButton, @ui.deleteButton], (i, el) ->
+        $.each [@ui.itemDuplicateButton, @ui.itemDeleteButton], (i, el) ->
           el.addClass('disp-none')
 
     _showEntityList: ->
       @listView = new EntityListView
         collection: @collection
         type: @typeName
-      @exercises.show(@listView)
+      @getRegion('collectionRegion').show(@listView)
 
       @listenTo(@listView, 'item:clicked', @_updateSelectedItems)
 
     toggleCheck: (ev) =>
       checked = @ui.mainCheckbox.is(':checked')
-      @ui.itemsRegion.find('input[type=checkbox]').prop('checked', checked)
+      @ui.collectionRegion.find('input[type=checkbox]').prop('checked', checked)
       @_toggleActionsBtnVisibility()
 
     _updateSelectedItems: ->
-      for check in @ui.itemsRegion.find('input[type=checkbox]')
+      for check in @ui.collectionRegion.find('input[type=checkbox]')
         if needToggle?
           if needToggle != $(check).is(':checked')
             @ui.mainCheckbox.prop 'checked', false
@@ -104,8 +103,7 @@ define [
       if needToggle
         @ui.mainCheckbox.prop 'checked', true
 
-    _destroySelected: (ev) =>
-      ev.preventDefault()
+    _showDestroySelectedModal: (ev) =>
       App.request 'base:confirmationalModal',
         title: "Delete item(s)"
         content: "Are you sure you want to delete selected items?"
@@ -113,12 +111,11 @@ define [
         confirmCallBack: @_onDestroyConfirm
 
     _onDestroyConfirm: =>
-      checked = @ui.itemsRegion.find('input[type=checkbox]:checked')
+      checked = @ui.collectionRegion.find('input[type=checkbox]:checked')
       ids = checked.map( (_index, el) -> $(el).data('id') ).toArray()
       @listView.trigger('items:delete', ids, @model.get('id'))
 
     _showAddEntityModal: (ev) ->
-      ev.preventDefault()
       view = new AddEntityModalView
         folder: @model
         type: @typeName
@@ -127,7 +124,6 @@ define [
       @ui.actionModal.modal('show')
 
     _showAddFolderModal: (ev) ->
-      ev.preventDefault()
       view = new AddFolderModalView
         parent: @model
         type: @typeName
@@ -136,7 +132,6 @@ define [
       @ui.actionModal.modal('show')
 
     _showDuplicateModal: (ev) =>
-      ev.preventDefault()
       view = new DuplicateModalView
         collection: @model.nestedFolders
         type: @typeName
@@ -147,7 +142,7 @@ define [
       @ui.actionModal.modal('show')
 
     _duplicateEntity: (foldersIds) ->
-      checked = @ui.itemsRegion.find('input[type=checkbox]:checked')
+      checked = @ui.collectionRegion.find('input[type=checkbox]:checked')
       ids = checked.map( (_index, el) -> $(el).data('id') )
 
       if ids.length and foldersIds.length
@@ -157,13 +152,11 @@ define [
         ).then(@_onDuplicate)
       else
         App.request 'messenger:show',
-          hideAfter: 5
           message: "No #{@singularName} or folder was selected"
           type: 'error'
 
     _onDuplicate: (response) =>
       @ui.actionModal.modal('hide')
       App.request 'messenger:show',
-        hideAfter: 5
         message: "Item(s) duplicated"
         type: 'success'
