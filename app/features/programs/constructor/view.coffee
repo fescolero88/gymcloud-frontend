@@ -84,7 +84,6 @@ define [
 
     _onSyncUpdate: (_response) ->
       App.request 'messenger:show',
-        hideAfter: 5
         message: "Program Updated."
         type: 'success'
 

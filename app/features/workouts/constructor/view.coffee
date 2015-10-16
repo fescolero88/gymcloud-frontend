@@ -109,7 +109,6 @@ define [
 
     onExerciseAdded: () =>
       App.request 'messenger:show',
-        hideAfter: 5
         message: 'Exercise Added.'
         type: 'success'
       @model.fetch()
@@ -124,7 +123,6 @@ define [
 
     _onSyncUpdate: (_response) ->
       App.request 'messenger:show',
-        hideAfter: 5
         message: "Workout Updated."
         type: 'success'
 

@@ -56,7 +56,6 @@ define [
 
     _showSuccessMessage: ->
       App.request 'messenger:show',
-        hideAfter: 5
         message: "New item added"
         type: 'success'
 

@@ -152,13 +152,11 @@ define [
         ).then(@_onDuplicate)
       else
         App.request 'messenger:show',
-          hideAfter: 5
           message: "No #{@singularName} or folder was selected"
           type: 'error'
 
     _onDuplicate: (response) =>
       @ui.actionModal.modal('hide')
       App.request 'messenger:show',
-        hideAfter: 5
         message: "Item(s) duplicated"
         type: 'success'

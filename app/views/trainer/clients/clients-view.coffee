@@ -137,7 +137,6 @@ module.exports = class ClientsView extends Marionette.LayoutView
     # add validation for empty groups
     if _.isEmpty(@groups.currentView.collection.models)
       App.request 'messenger:show',
-        hideAfter: 5
         message: 'No available groups'
         type: 'error'
     else

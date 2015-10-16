@@ -41,7 +41,6 @@ module.exports = class ExerciseEditView extends Marionette.ItemView
   onSync: ->
     @trigger 'exercise:back'
     App.request 'messenger:show',
-      hideAfter: 5
       message: "Item was edited."
       type: 'success'
 
