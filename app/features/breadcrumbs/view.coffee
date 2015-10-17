@@ -29,4 +29,5 @@ define [
     _getBreadcrumbs: (model) ->
       @collection.unshift(model)
       parent = model.parent
-      @_getBreadcrumbs(parent) if parent?.get('parent_id') != null
+      if parent?.get('parent_id') && parent?.get('parent_id') != null
+        @_getBreadcrumbs(parent)

@@ -1,8 +1,9 @@
-a.row.toggle-menu(href="#personal_#{type}/")
+a.row.toggle-menu(href="##{type}/")
   span.col-xs-2
-    span.gc-sidebar-cat-icon.fix-bg-img-icon-exercises
+    - iconName = type.split('_')[1]
+    span.gc-sidebar-cat-icon(class="fix-bg-img-icon-#{iconName}")
   span.col-xs-8.gc-sidebar-cat-name
-    = type
+    = _.chain(type).humanize().words().last().value()
   span.col-xs-2.toggle-it
     span.fa.fa-chevron-down.toggle-it
 .gc-sidebar-sub

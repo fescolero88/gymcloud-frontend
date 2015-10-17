@@ -3,6 +3,12 @@
     <span class="gc-client-item-icon gc-client-item-icon-{{dataType}}"></span>
     {{name}}
   </a>
+  {{#isExercises dataType}}
+    FROM
+    <a class="gc-exercises-link" href="#personal_workouts/{{workout_id}}">
+      {{workout_name}}
+    </a>
+  {{/isExercises}}
 </div>
 {{#isExercises dataType}}
   <div class="col-xs-6 text-right">
