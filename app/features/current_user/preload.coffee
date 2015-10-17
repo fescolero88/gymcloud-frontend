@@ -30,6 +30,7 @@ define [
       client_groups: ClientGroup
       exercises: Exercise
       personal_properties: PersonalProperty
+      workout_exercises: Exercise
       personal_workouts: PersonalWorkout
       personal_programs: PersonalProgram
       workout_templates: WorkoutTemplate
@@ -41,6 +42,7 @@ define [
 
     if not user.get('is_pro')
       toExclude = [
+        'exercises'
         'client_groups'
         'folders'
         'personal_properties'

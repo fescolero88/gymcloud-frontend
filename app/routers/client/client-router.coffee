@@ -7,6 +7,8 @@ module.exports = class ClientRouter extends CustomRouter
     '': 'clientPageAssigments'
     '(/)': 'clientPageAssigments'
 
+    'workout_exercises(/)': 'workoutExercisesList'
+    'workout_exercises/:id(/)': 'workoutExercise'
     'personal_workouts(/)': 'personalWorkoutList'
     'personal_workouts/:id(/)': 'personalWorkout'
 

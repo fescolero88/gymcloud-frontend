@@ -30,11 +30,13 @@ define [
       catchList: '.gc-assign-catch'
       item: '.gc-sidebar-item > a'
       proRegion: 'pro-section'
+      workoutExercises: 'region[data-name="workout_exercises"]'
       personalWorkoutsRegion: 'region[data-name="personal_workouts"]'
       personalProgramsRegion: 'region[data-name="personal_programs"]'
 
     regions:
       pro: '@ui.proRegion'
+      workoutExercises: '@ui.workoutExercises'
       personalWorkouts: '@ui.personalWorkoutsRegion'
       personalPrograms: '@ui.personalProgramsRegion'
 
@@ -45,12 +47,13 @@ define [
       @currentUser = App.request('current_user')
 
     renderPersonalEntities: ->
-      _.each ['workouts', 'programs'], (item) =>
+      items = ['workout_exercises', 'personal_workouts', 'personal_programs']
+      _.each items, (item) =>
         view = new PersonalCollectionView
-          collection: @currentUser["personal_#{item}"]
+          collection: @currentUser[item]
           type: item
 
-        regionName = "personal#{_.capitalize(item)}"
+        regionName = _.camelCase(item)
         @getRegion(regionName).show(view)
 
     onRender: ->

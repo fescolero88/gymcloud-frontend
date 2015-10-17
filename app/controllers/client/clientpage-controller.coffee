@@ -2,6 +2,7 @@ ClientEWPView = require 'views/client/clientpage-ewp-view'
 UserCollection = require 'collections/user_collection'
 
 ExerciseGlobalView = require 'views/client/exercises/exercise_clientpage_view'
+WorkoutExercise = require 'models/workout_exercise'
 GlobalExercise = require 'models/global_exercise'
 
 WorkoutGlobalView = require 'views/client/workouts/workout-clientpage-view'
@@ -26,43 +27,54 @@ module.exports = class ClientPageController extends Marionette.Controller
         @queueArgs = null
 
   initialize: (options) =>
+    @userPageView = App.request('app:views:main')
     App.vent.on 'assignments:loaded', =>
       @queue()
 
+  workoutExercisesList: ->
+    @_assignedEntityList('workout_exercises')
+
+  workoutExercise: (id) ->
+    @_assignedEntityShow('workout_exercises', id)
+
   personalWorkoutList: ->
-    @_assignedEntityList('workouts')
+    @_assignedEntityList('personal_workouts')
 
   personalWorkout: (id) ->
-    @_assignedEntityShow('workouts', id)
+    @_assignedEntityShow('personal_workouts', id)
 
   personalProgramList: ->
-    @_assignedEntityList('programs')
+    @_assignedEntityList('personal_programs')
 
-  _assignedEntityList: (dataType) ->
-    @changeNavTitle dataType
+  _assignedEntityList: (type) ->
+    dataType = type.split('_')[1]
+    @changeNavTitle(dataType)
     eventName = 'clientpage:nav-click'
     elementId = "#gc-clientpage-nav-tab-#{dataType}"
     App.vent.trigger(eventName, elementId)
-    type = "personal_#{dataType}"
     view = new ClientEWPView
       collection: new UserCollection([], type: type)
       dataType: dataType
       type: type
     @userPageView.content.show(view)
 
-  _assignedEntityShow: (dataType, id) ->
+  _assignedEntityShow: (type, id) ->
+    dataType = type.split('_')[1]
     eventName = 'clientpage:nav-click'
     elementId = "#gc-clientpage-nav-tab-#{dataType}"
     App.vent.trigger(eventName, elementId)
 
     klasses = {
-      workouts:
-        model: PersonalWorkout,
+      workout_exercises:
+        model: WorkoutExercise
+        view: ExerciseGlobalView
+      personal_workouts:
+        model: PersonalWorkout
         view: WorkoutGlobalView
-      programs:
-        model: PersonalProgram,
+      personal_programs:
+        model: PersonalProgram
         view: WorkoutGlobalView
-    }[dataType]
+    }[type]
 
     model = new klasses.model(id: id)
     model.fetch().then =>
