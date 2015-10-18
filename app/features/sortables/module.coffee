@@ -35,7 +35,9 @@ define [
 
       @drake.on 'drop', (el, container) ->
         args =
+          position: $(el).index() + 1
+          el: el
+          container: container
           category: el.getAttribute('data-category')
           id: el.querySelector('[data-key]').getAttribute('data-key')
-        container.removeChild el
         App.vent.trigger 'sortables:on:drop', args
