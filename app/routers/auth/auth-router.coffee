@@ -13,5 +13,6 @@ module.exports = class AuthRouter extends CustomRouter
     'resend_confirmation(/)':   'resendConfirmation'
 
   before: (methodName) =>
-    App.vent.trigger 'body:change-class', 'auth'
-    App.vent.trigger 'module:auth:beforeAction'
+    unless App.request 'accessToken:get'
+      App.vent.trigger 'body:change-class', 'auth'
+      App.vent.trigger 'module:auth:beforeAction'
