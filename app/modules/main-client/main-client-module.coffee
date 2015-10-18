@@ -16,15 +16,15 @@ module.exports = class MainClientModule extends Marionette.Module
       @clientController = new ClientController
       @clientRouter = new ClientRouter
         controller: @clientController
-
+      App.vent.on 'module:main-client:beforeAction', @refresh
+  
   # not sure what this is for. leaving this here for future reference
-  ###
   refresh: =>
-    if !@userPageView or @userPageView.isDestroyed
-      @userPageView = new ClientPageView()
-      @mainView.content.show @userPageView
-      @clientController.userPageView = @userPageView
+    App.vent.trigger 'app:main_view:init', =>
+      if !@userPageView or @userPageView.isDestroyed
+        @userPageView = new ClientPageView()
+        App.request('app:views:main').getRegion('content').show @userPageView
+        @clientController.userPageView = @userPageView
 
-      @navView = new ClientPageNavView()
-      @userPageView.nav.show @navView
-  ###
+        @navView = new ClientPageNavView()
+        @userPageView.nav.show @navView

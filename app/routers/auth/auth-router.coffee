@@ -3,7 +3,7 @@ CustomRouter  = require 'routers/general/custom-router'
 module.exports = class AuthRouter extends CustomRouter
 
   appRoutes:
-    #'':                         'login'
+    '':                         'login'
     'login(/)':                 'login'
     'logout(/)':                'logout'
     'forgot-password(/)':       'forgotPassword'

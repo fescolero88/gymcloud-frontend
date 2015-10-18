@@ -75,6 +75,7 @@ define [
 
       @on 'start', ->
         defer = new $.Deferred
+        @vent.on 'app:main_view:init', @_reinitMainView
         @request('current_user:init:user')
           .then( =>
             @request('current_user:init:collections')
@@ -147,10 +148,22 @@ define [
       @appRegion = @baseView.appRegion
       defer.promise()
 
-    _initMainView: ->
+    _initMainView: =>
       @mainView = new MainView
       @baseView.getRegion('appRegion').show @mainView
       @baseView.currentView = @baseView
+      @_setMainViewHandler @mainView
+
+    _reinitMainView: (callback) =>
+      if @mainView.isDestroyed
+        @mainView = new MainView
+        @baseView.getRegion('appRegion').show @mainView
+        @baseView.currentView = @mainView
+        @_setMainViewHandler @mainView
+        @vent.trigger('app:view:main:render', @mainView)
+        callback()
+
+    _setMainViewHandler: (mainView) =>
       @reqres.setHandler 'app:views:main', =>
         @mainView
 
