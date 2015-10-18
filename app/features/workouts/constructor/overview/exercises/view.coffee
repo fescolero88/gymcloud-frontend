@@ -78,7 +78,7 @@ define [
       @listenTo App.vent, 'sortables:on:drop', @onDropExercise
 
     onDestroy: ->
-      App.vent.trigger 'sortables:remove:container', @ui.exercisesListWrapper[0]
+      App.vent.trigger 'sortables:remove:container', @ui.exercisesList[0]
 
       App.vent.off 'workout:reload:exercises', @getWorkoutData
       App.reqres.removeHandler 'workout_exercises:has_exercise?', @_hasExercise
@@ -99,10 +99,11 @@ define [
       @addSidebarDraggable()
 
     addSidebarDraggable: ->
-      App.vent.trigger 'sortables:add:container', @ui.exercisesListWrapper[0]
+      App.vent.trigger 'sortables:add:container', @ui.exercisesList[0]
 
     onDropExercise: (args) ->
       if args.category is 'exercises'
+        args.container.removeChild(args.el)
         App.vent.trigger 'workout:add:exercise', args
 
     getWorkoutData: =>
