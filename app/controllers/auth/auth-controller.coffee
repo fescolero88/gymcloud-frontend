@@ -18,11 +18,11 @@ module.exports = class AuthController extends Marionette.Controller
     @layoutView = options.layoutView
 
   login: (signUp) =>
-    view = new AuthView
-      signUp: signUp
     if App.request 'accessToken:get'
       window.location.replace '#'
     else
+      view = new AuthView
+        signUp: signUp
       @layoutView.mainRegion.show(view)
 
   logout: =>
@@ -35,12 +35,15 @@ module.exports = class AuthController extends Marionette.Controller
     view = new ForgotPasswordView
     @layoutView.mainRegion.show(view)
 
-  signUp: =>
-    view = new SignUpView
-    @layoutView.mainRegion.show(view)
-    @listenTo view, 'signup:complete', =>
-      Backbone.history.navigate('#login', { trigger:false, replace: true })
-      @login(true)
+  signUp: => # prevent signup when there is an active session
+    unless App.request 'accessToken:get'
+      view = new SignUpView
+      @layoutView.mainRegion.show(view)
+      @listenTo view, 'signup:complete', =>
+        Backbone.history.navigate('#login', { trigger:false, replace: true })
+        @login(true)
+    else
+      window.location.replace '#'
 
   resetPassword: (token) =>
     model = new ResetPasswordModel
