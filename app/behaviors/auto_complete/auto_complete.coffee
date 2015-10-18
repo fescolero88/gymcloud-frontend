@@ -25,7 +25,7 @@ define [
           itemTemplate(item)
         option: (item, escape) ->
           _item =
-            folder_name: escape(item.folder || "workouts")
+            folder_name: escape(item.folder || '')
             name: escape(item.name)
           optionTemplate(_item)
 
