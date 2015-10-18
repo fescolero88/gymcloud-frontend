@@ -59,8 +59,6 @@ define [
           @[@globalViewMethod](@globalType, @globalKey)
           @globalViewMethod = false
 
-      @mainView = App.request 'app:views:main'
-
     myProfile: ->
       currentUser = App.request('current_user')
       @_userProfile(currentUser)
@@ -78,7 +76,7 @@ define [
     _userProfile: (user) ->
       view = new ProfileView
         model: user
-      @mainView.content.show(view)
+      @_getMainView().getRegion('content').show(view)
 
     clientGroupShow: (id) ->
       user = App.request('current_user')
@@ -88,7 +86,7 @@ define [
         itemModel: clientGroup
         model: clientGroup
         itemId: id
-      @mainView.content.show(view)
+      @_getMainView().getRegion('content').show(view)
 
     clients: (viewType) ->
       profileModel = App.request 'current_user'
@@ -101,7 +99,7 @@ define [
 
     renderClientList: (uid, viewType) ->
       clientsPageView = new ClientsView viewType: viewType
-      @mainView.content.show clientsPageView
+      @_getMainView().getRegion('content').show clientsPageView
 
       clients = new Clients
       clients.url = "#{clients.url}/#{uid}/collections/clients"
@@ -135,9 +133,10 @@ define [
       clientsPageView.initRegionListeners()
 
     clientOrGroup: (type, id, assign, key) ->
-      currentViewName = @mainView.content.currentView?.constructor.name
+      mainView = @_getMainView()
+      currentViewName = mainView.content.currentView?.constructor.name
       if currentViewName is 'ClientGroupView'
-        @mainView.content.currentView.trigger 'load:view', assign, key
+        mainView.content.currentView.trigger 'load:view', assign, key
       else
         if id > 0
           if type is 'clients'
@@ -168,7 +167,7 @@ define [
           assign: assign
           key: key
           viewType: type
-        @mainView.content.show itemPageView
+        @_getMainView().getRegion('content').show itemPageView
 
     client: (id, assign, key) ->
       @clientOrGroup 'clients', id, assign, key
@@ -182,14 +181,14 @@ define [
 
     properties: ->
       propertiesPageView = new PropertiesView
-      @mainView.content.show(propertiesPageView)
+      @_getMainView().getRegion('content').show(propertiesPageView)
 
     exerciseConstructor: (id) ->
       collection = App.request('current_user').exercises
       model = collection.get(id) || new Exercise(id: id)
       model.fetch().then =>
         view = new ExerciseConstructorView(model: model)
-        @mainView.content.show(view)
+        @_getMainView().getRegion('content').show(view)
 
     workoutConstructor: (id) ->
       @_entityConstructor('workout', id)
@@ -209,7 +208,7 @@ define [
 
       model.fetch().then =>
         view = new View(model: model)
-        @mainView.content.show(view)
+        @_getMainView().getRegion('content').show(view)
 
     exercisesFolderView: (folder_id) ->
       @_entityFolderView('exercises', folder_id)
@@ -229,7 +228,7 @@ define [
         model: folder
         items: folder.items
         type: type
-      @mainView.content.show(view)
+      @_getMainView().getRegion('content').show(view)
 
     searchInLibrary: (items, key, breadcrumbs) ->
       filtered = items.where({key: parseInt(key)})
@@ -258,3 +257,5 @@ define [
           if col.length is 0
             view.ui.splash.removeClass 'hidden'
             viewTypeUI.addClass 'hidden'
+
+    _getMainView: -> App.request 'app:views:main'
