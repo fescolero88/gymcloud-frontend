@@ -38,12 +38,10 @@
     .col-xs-6
       a.gc-exercises-exercise-video-link(href=video_url, target='_blank')
         = name
-        i.fa.fa-youtube-play
+        i.gc-video-icon(class="gc-video-#{videoType}-icon")
         span
-          | Youtube
+          = _.capitalize(videoType)
     .col-xs-6.text-right
-      button.btn.btn-link.gc-exercise-video-update
-        | Update video
       button.btn.btn-link.gc-exercise-video-delete
         | Delete
 
