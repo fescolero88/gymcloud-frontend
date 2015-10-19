@@ -19,6 +19,13 @@ define [
     moveClient: =>
       @trigger 'individual:move'
 
+    viewComparator: (model) ->
+      model.get('name') ||
+        [
+          model.get('user_profile.first_name')
+          model.get('user_profile.last_name')
+        ].join(' ')
+
     initialize: (options) ->
       MyId = App.request('current_user_id')
       @collection = new Backbone.VirtualCollection options.collection,

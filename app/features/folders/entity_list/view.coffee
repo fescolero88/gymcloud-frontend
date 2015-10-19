@@ -35,6 +35,13 @@ define [
       'item:clicked': 'itemSelected'
       'folder:change': 'changeFolder'
 
+    viewComparator: (model) ->
+      isFolder = model.get('folder_id') is undefined
+      [
+        isFolder && 1 || 2
+        model.get('name')
+      ]
+
     initialize: (data) =>
       @on('items:delete', @_deleteItems)
       @typeName = data.type
