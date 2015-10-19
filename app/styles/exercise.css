@@ -240,6 +240,23 @@
   margin-top: 15px;
   max-height: 25px;
 }
+.gc-video-youtube-icon{
+  width: 17px;
+  background-image: url("../images/icon-video-youtube.png");
+}
+
+.gc-video-icon {
+  display: inline-block;
+  margin-right: 5px;
+  height: 10px;
+  width: 12px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.gc-video-vimeo-icon {
+  width: 12px;
+  background-image: url("../images/icon-video-vimeo.png");
+}
 .gc-exercise-video-controls .btn-link + .btn-link {
   margin-left: 10px;
 }

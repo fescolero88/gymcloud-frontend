@@ -12,7 +12,7 @@ define [
 
     model: VideoModel
 
-    search: (q, scope = 'gymcloud') ->
+    search: (q, scope = 'mine') ->
       options = App.request 'ajax:options:create',
         url: "#{@url()}/search"
         type: 'GET'

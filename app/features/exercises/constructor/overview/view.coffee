@@ -41,6 +41,7 @@ define [
 
     templateHelpers: =>
       isAuthor: @_isAuthor()
+      videoType: @_getVideoType()
 
     initialize: (data) =>
       @oldDescription = @model.get('description')
@@ -89,3 +90,7 @@ define [
         confirmBtn: 'Remove'
         confirmCallBack: =>
           @model.save({video_url: null, video_id: null}, wait: true)
+
+    _getVideoType: ->
+      url = @model.get('video_url')
+      type = if url.indexOf('vimeo') isnt -1 then 'vimeo' else 'youtube'

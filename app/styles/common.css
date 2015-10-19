@@ -205,6 +205,7 @@ body > region[data-name="app"] > .container-fluid {
 .gc-content-both > .row.gc-clients-nav-wrapper {
   overflow: visible;
 }
+
 .gc-clients-nav-wrapper .btn, .gc-global-list-splash .btn {
   border-radius: 50px;
   font-size: 12px;
@@ -360,6 +361,10 @@ body > region[data-name="app"] > .container-fluid {
   text-align: center;
   line-height: 16px;
   margin-top: -5px;
+}
+
+.btn .fa {
+  padding-right: 5px;
 }
 
 /* Auto Complete */
