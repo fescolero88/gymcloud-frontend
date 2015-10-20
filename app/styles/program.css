@@ -92,10 +92,11 @@
 }
 .gc-program-week-item .gc-program-weeks-workouts-container {
   border: 1px dashed rgba(40,45,48,0.1);
-  padding: 10px;
   border-radius: 5px;
   background-color: #F9F9F9;
-  padding: 20px 10px;
+}
+.gc-program-weeks-workouts-container .gc-program-workouts-list {
+  padding: 0px;
 }
 .gc-week-workouts-empty {
   text-align: center;
