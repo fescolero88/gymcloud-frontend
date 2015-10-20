@@ -1,76 +1,75 @@
 .gc-main-workspace.row
-  .col-xs-12.gc-content-both
-    .gc-clients-nav-wrapper.row
-      .col-xs-7.gc-clients-nav-left
-        a.gc-content-nav-back
-          span.fa.fa-chevron-left
-        region(data-name="breadcrumbs")
-      .col-xs-5.gc-exercises-nav-right.text-right
-        ul.gc-content-nav.gc-workout-nav
-          li.active(data-view='overview')
-            a
-              | Overview
-          li(data-view='video')
-            a
+  .gc-clients-nav-wrapper.row
+    .col-xs-7.gc-clients-nav-left
+      a.gc-content-nav-back
+        span.fa.fa-chevron-left
+      region(data-name="breadcrumbs")
+    .col-xs-5.gc-exercises-nav-right.text-right
+      ul.gc-content-nav.gc-workout-nav
+        li.active(data-view='overview')
+          a
+            | Overview
+        li(data-view='video')
+          a
+            | Add Video
+        li(data-view='assign')
+          a
+           | Assign
+      if isAuthor
+        a#gc-workout-actions-dropdown.gc-workout-actions-button.btn.btn-primary(
+          data-toggle='dropdown',
+          aria-haspopup='true',
+          role='button',
+          aria-expanded='false'
+        )
+          i.fa.fa-chevron-down
+        ul.dropdown-menu.pull-right.gc-actions-list(
+          role='menu',
+          aria-labelledby='gc-workout-actions-dropdown'
+        )
+          li.row
+            a.col-xs-12.gc-workout-add-note
+              | Add Note
+          li.row
+            a.col-xs-12.gc-workout-edit-description
+              | Edit Description
+          li.row
+            a.col-xs-12
               | Add Video
-          li(data-view='assign')
-            a
-             | Assign
-        if isAuthor
-          a#gc-workout-actions-dropdown.gc-workout-actions-button.btn.btn-primary(
-            data-toggle='dropdown',
-            aria-haspopup='true',
-            role='button',
-            aria-expanded='false'
-          )
-            i.fa.fa-chevron-down
-          ul.dropdown-menu.pull-right.gc-actions-list(
-            role='menu', 
-            aria-labelledby='gc-workout-actions-dropdown'
-          )
-            li.row
-              a.col-xs-12.gc-workout-add-note
-                | Add Note
-            li.row
-              a.col-xs-12.gc-workout-edit-description
-                | Edit Description
-            li.row
-              a.col-xs-12
-                | Add Video
-            li.row
-              a.col-xs-12.text-danger
-                | Delete
-        else
-          button.btn.brn-primary 
-            | Add to library
-      .col-xs-6
-        if !isAuthor
-          .gc-workout-author-block.pull-right
-            .gc-exercise-author-info
-              a.gc-exercise-author-avatar.gc-exercise-author-avatar-exist(href="#users/#{author.id}")
-                img(src=author.avatar_url, onerror="this.src='app/images/avatar-placeholder.png';")
-              p.gc-exercise-author-name
-                | Trainer
-                br
-                a(href="#users/#{author.id}")
-                  | #{author.user_profile.first_name} #{author.user_profile.last_name}
-            .gc-rating
-              div
-                span.gc-rating-count 25
-                ul.gc-rating-stars
-                  li
-                    i.fa.fa-star
-                  li
-                    i.fa.fa-star
-                  li
-                    i.fa.fa-star
-                  li
-                    i.fa.fa-star
-                  li
-                    i.fa.fa-star-o
-              p.gc-rating-used.pull-right.text-right
-                | Used by 
-                i.glyphicon.glyphicon-user
-                |  250
-                
-    region(data-name="workout-manage")
+          li.row
+            a.col-xs-12.text-danger
+              | Delete
+      else
+        button.btn.brn-primary
+          | Add to library
+    .col-xs-6
+      if !isAuthor
+        .gc-workout-author-block.pull-right
+          .gc-exercise-author-info
+            a.gc-exercise-author-avatar.gc-exercise-author-avatar-exist(href="#users/#{author.id}")
+              img(src=author.avatar_url, onerror="this.src='app/images/avatar-placeholder.png';")
+            p.gc-exercise-author-name
+              | Trainer
+              br
+              a(href="#users/#{author.id}")
+                | #{author.user_profile.first_name} #{author.user_profile.last_name}
+          .gc-rating
+            div
+              span.gc-rating-count 25
+              ul.gc-rating-stars
+                li
+                  i.fa.fa-star
+                li
+                  i.fa.fa-star
+                li
+                  i.fa.fa-star
+                li
+                  i.fa.fa-star
+                li
+                  i.fa.fa-star-o
+            p.gc-rating-used.pull-right.text-right
+              | Used by
+              i.glyphicon.glyphicon-user
+              |  250
+
+  region.gc-workspace-content(data-name="workout-manage")
