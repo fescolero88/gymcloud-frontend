@@ -2,17 +2,21 @@ define [
   'backbone'
   './personal_program'
   './personal_workout'
+  './client_group'
   'collections/program_workouts'
   'collections/program_weeks'
 ], (
   Backbone
   PersonalProgram
   PersonalWorkout
+  ClientGroup
   ProgramWorkouts
   ProgramWeeks
 ) ->
 
   class ProgramTemplate extends Backbone.Model
+
+    type: 'ProgramTemplate'
 
     urlRoot: '/program_templates/'
 
@@ -25,7 +29,6 @@ define [
       @__defineGetter__ 'folder', @_getFolder
 
     constructor: ->
-      ClientGroup = require('models/client_group')
       Groups = Backbone.Collection.extend(model: ClientGroup)
       @program_weeks = new ProgramWeeks
       @program_workouts = new ProgramWorkouts
@@ -37,8 +40,8 @@ define [
       @_parseProgramWorkouts(data.workouts) && delete data.workouts
       @_parseAssignees(data.assignees) && delete data.assignees
       @_parseWeeks(data.weeks) && delete data.weeks
-      if data.group_assignments
-        @_parseGroupAssignments(data.group_assignments)
+      data.group_assignments &&
+        @_parseGroupAssignments(data.group_assignments) &&
         delete data.group_assignments
       data
 

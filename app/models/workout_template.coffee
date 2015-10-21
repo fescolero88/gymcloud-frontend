@@ -1,7 +1,7 @@
 define [
   './workout_exercise'
   './personal_workout'
-  'models/client_group'
+  './client_group'
 ], (
   WorkoutExercise
   PersonalWorkout
@@ -9,6 +9,8 @@ define [
 ) ->
 
   class WorkoutTemplate extends Backbone.Model
+
+    type: 'WorkoutTemplate'
 
     urlRoot: '/workout_templates/'
 
@@ -20,8 +22,6 @@ define [
         required: true
 
     constructor: (_attributes) ->
-      # had strange problem, had to write like this
-      ClientGroup = require('models/client_group')
       Exercises = Backbone.Collection.extend(model: WorkoutExercise)
       Groups = Backbone.Collection.extend(model: ClientGroup)
       @exercises = new Exercises
@@ -35,12 +35,14 @@ define [
       @__defineGetter__ 'author', @_getAuthor
 
     parse: (data) ->
-      if data.exercises
-        @_parseExercises(data.exercises) && delete data.exercises
-      if data.assignees
-        @_parseAssignees(data.assignees) && delete data.assignees
-      if data.group_assignments
-        @_parseGroupAssignments(data.group_assignments)
+      data.exercises &&
+        @_parseExercises(data.exercises) &&
+        delete data.exercises
+      data.assignees &&
+        @_parseAssignees(data.assignees) &&
+        delete data.assignees
+      data.group_assignments &&
+        @_parseGroupAssignments(data.group_assignments) &&
         delete data.group_assignments
       data
 

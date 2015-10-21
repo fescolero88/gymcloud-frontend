@@ -1,12 +1,11 @@
 define [
   'models/user'
-  'models/workout_template'
-  'models/program_template'
+  './concerns/avatar_background_color'
 ], (
   User
-  WorkoutTemplate
-  ProgramTemplate
+  AvatarBackgroundColor
 ) ->
+
   class ClientGroup extends Backbone.Model
 
     urlRoot: '/client_groups'
@@ -15,6 +14,10 @@ define [
 
       name:
         required: true
+
+    initialize: ->
+      super
+      @_initBgColor()
 
     updateAvatar: (formData) ->
 
@@ -70,11 +73,6 @@ define [
       @_assignment(template, 'unassign')
 
     _assignment: (template, type) ->
-      if template instanceof WorkoutTemplate
-        template_type = 'WorkoutTemplate'
-      else
-        template_type = 'ProgramTemplate'
-
       method = if type == 'assign' then 'POST' else 'DELETE'
       options =
         url: "#{@url()}/assignments"
@@ -82,7 +80,7 @@ define [
         contentType: 'application/json'
         data: JSON.stringify
           template_id: template.id
-          template_type: template_type
+          template_type: template.constructor.prototype.type
 
       request = (@sync || Backbone.sync).call(@, null, @, options)
       request
@@ -106,3 +104,6 @@ define [
           clientCollection.add(client)
         client
       @clients = new Backbone.Collection(clients)
+
+  _.extend(ClientGroup::, AvatarBackgroundColor)
+  ClientGroup
