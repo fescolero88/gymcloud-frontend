@@ -1,11 +1,12 @@
 define [
   './workout_exercise'
   './personal_workout'
+  'models/client_group'
 ], (
   WorkoutExercise
   PersonalWorkout
+  ClientGroup
 ) ->
-  Exercises = Backbone.Collection.extend(model: WorkoutExercise)
 
   class WorkoutTemplate extends Backbone.Model
 
@@ -18,14 +19,29 @@ define [
       name:
         required: true
 
+    constructor: (_attributes) ->
+      # had strange problem, had to write like this
+      ClientGroup = require('models/client_group')
+      Exercises = Backbone.Collection.extend(model: WorkoutExercise)
+      Groups = Backbone.Collection.extend(model: ClientGroup)
+      @exercises = new Exercises
+      @assignees = new Backbone.Collection
+      @groupAssignments = new Groups
+      super
+
     initialize: (_options) ->
       @__defineGetter__ 'parent', @_getFolder
       @__defineGetter__ 'folder', @_getFolder
       @__defineGetter__ 'author', @_getAuthor
 
     parse: (data) ->
-      @_parseExercises(data.exercises) && delete data.exercises
-      @_parseAssignees(data.assignees) && delete data.assignees
+      if data.exercises
+        @_parseExercises(data.exercises) && delete data.exercises
+      if data.assignees
+        @_parseAssignees(data.assignees) && delete data.assignees
+      if data.group_assignments
+        @_parseGroupAssignments(data.group_assignments)
+        delete data.group_assignments
       data
 
     assignTo: (user) ->
@@ -41,9 +57,10 @@ define [
       collection.get(@get('folder_id'))
 
     _parseExercises: (exercises) ->
-      @exercises ||= new Exercises
-      if @exercises.length is 0
-        @exercises.add(exercises, parse: true)
+      @exercises.reset(exercises, parse: true)
+
+    _parseGroupAssignments: (assignments) ->
+      @groupAssignments.reset(assignments, parse: true)
 
     _parseAssignees: (assignees) ->
       template = this
@@ -54,7 +71,7 @@ define [
           item.workout_template_id = template.id
           personalWorkout = new PersonalWorkout(item)
         personalWorkout
-      @assignees = new Backbone.Collection(items)
+      @assignees.reset(items)
 
     _getAuthor: ->
       author_id = @get('author_id')

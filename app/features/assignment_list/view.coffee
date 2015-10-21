@@ -1,8 +1,10 @@
 define [
   './clients/view'
+  './groups/view'
   './template'
 ], (
   AssignClientsListView
+  AssignGroupsListView
   template
 ) ->
 
@@ -20,6 +22,11 @@ define [
         clientAssignees: @model.assignees
         entity: @model
         entityType: options.entityType
+      @assignGroupsView = new AssignGroupsListView
+        collection: @model.groupAssignments
+        entity: @model
+        entityType: options.entityType
 
     onShow: ->
       @getRegion('clients').show(@assignClientsView)
+      @getRegion('groups').show(@assignGroupsView)

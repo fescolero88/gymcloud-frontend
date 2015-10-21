@@ -25,14 +25,21 @@ define [
       @__defineGetter__ 'folder', @_getFolder
 
     constructor: ->
+      ClientGroup = require('models/client_group')
+      Groups = Backbone.Collection.extend(model: ClientGroup)
       @program_weeks = new ProgramWeeks
       @program_workouts = new ProgramWorkouts
+      @groupAssignments = new Groups
+      @assignees = new Backbone.Collection
       super
 
     parse: (data) ->
       @_parseProgramWorkouts(data.workouts) && delete data.workouts
       @_parseAssignees(data.assignees) && delete data.assignees
       @_parseWeeks(data.weeks) && delete data.weeks
+      if data.group_assignments
+        @_parseGroupAssignments(data.group_assignments)
+        delete data.group_assignments
       data
 
     assignTo: (user) ->
@@ -53,6 +60,9 @@ define [
     _parseProgramWorkouts: (workouts) ->
       @program_workouts.reset(workouts)
 
+    _parseGroupAssignments: (assignments) ->
+      @groupAssignments.reset(assignments, parse: true)
+
     _parseAssignees: (assignees) ->
       template = this
       items = _.map assignees, (item) ->
@@ -62,4 +72,4 @@ define [
           item.program_template_id = template.id
           personalProgram = new PersonalProgram(item)
         personalProgram
-      @assignees = new Backbone.Collection(items)
+      @assignees.reset(items)

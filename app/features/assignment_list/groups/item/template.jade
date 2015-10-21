@@ -1,0 +1,10 @@
+.col-xs-10
+  a.gc-clients-list-avatar-wrapper(href='#', data-id=id, class=avatar_url ? 'gc-clients-list-avatar-exist' : '', style="background-color: #{avatar_background_color}")
+    img(src=avatar_url, alt='')
+  span.gc-clients-list-client-link
+    = name
+.col-xs-2.text-right.gc-global-ewp-assigned-mark
+  - cssClass = is_assigned ? '' : (assigned_count ? 'partial' : 'hidden')
+  i.glyphicon.glyphicon-ok(data-id=id, class=cssClass)
+  if assigned_count
+    | #{assigned_count} of #{clients_count}

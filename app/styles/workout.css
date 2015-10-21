@@ -357,6 +357,10 @@ ul.gc-workout-exercises-list .dragged {
 .gc-assign-list .gc-workout-group-item i {
   padding: 19px 10px;
 }
+.gc-assign-list .gc-workout-client-item i.partial,
+.gc-assign-list .gc-workout-group-item i.partial {
+  color: #9ea0a1;
+}
 
 .gc-workout-exercise-sort {
   background-image: url("../images/sort-icon.png");
