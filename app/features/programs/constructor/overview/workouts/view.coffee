@@ -51,9 +51,6 @@ define [
           ).then =>
             @collection.remove model
             App.vent.trigger 'add:program:workout', model, position
-            App.request 'messenger:show',
-              message: "Workout successfully moved."
-              type: 'success'
         else if @el is container
           @.children.call '_positionChanged'
 
