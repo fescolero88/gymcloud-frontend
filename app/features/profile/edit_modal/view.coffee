@@ -30,6 +30,7 @@ define [
       'submit @ui.clientForm': 'submitClientForm'
       'change .gc-edit-profile-modal-upload-input': 'showThumbnail'
       'blur form input': 'validateInput'
+      'change @ui.avatarInput': 'uploadAvatar'
 
     modelEvents:
       'sync': 'onSync'
@@ -38,6 +39,7 @@ define [
 
     ui:
       clientForm: 'form'
+      avatarInput: 'input[type="file"]'
 
     initialize: ->
       Backbone.Validation.bind(this)
@@ -81,3 +83,17 @@ define [
 
     onSyncError: (model, response, options) ->
       #todo implement sync error
+
+    uploadAvatar: ->
+      data = new FormData()
+      data.append('avatar', @ui.avatarInput[0].files[0])
+      $.ajax
+        url: "/user_profiles/#{@model.get('id')}/avatar"
+        type: 'PATCH'
+        data: data
+        cache: false
+        dataType: 'file'
+        processData: false
+        contentType: false
+        success: (data) =>
+          model.set 'avatar_url', data.avatar_url
