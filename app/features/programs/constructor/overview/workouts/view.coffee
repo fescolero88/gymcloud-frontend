@@ -31,9 +31,17 @@ define [
       @weekId = options.weekId || ''
       @el.setAttribute 'data-week-id', @weekId
       @listenTo App.vent, 'add:program:workout', @reorderProgramWorkouts
+      @listenTo @collection, 'update', @checkEmptyContainer
 
     onShow: ->
+      @checkEmptyContainer()
       @addSortable()
+
+    checkEmptyContainer: ->
+      if @collection.length is 0
+        @$el.addClass('empty')
+      else
+        @$el.removeClass('empty')
 
     addSortable: ->
       @sortable.containers.push @el
