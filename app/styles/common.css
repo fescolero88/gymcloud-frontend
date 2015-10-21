@@ -106,7 +106,6 @@ body > region[data-name="app"] > .container-fluid {
   position: relative;
   height:100%;
   background-color: #fff;
-  overflow: auto;
 }
 
 .gc-main > div {
@@ -146,7 +145,6 @@ body > region[data-name="app"] > .container-fluid {
   background: #fff;
   position: relative;
   height:100%;
-  overflow: auto;
 }
 .gc-main-workspace > div {
   padding: 0;

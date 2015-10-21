@@ -323,6 +323,7 @@ ul.gc-workout-exercises-list .dragged {
   outline: none;
   display: block;
   width: 100%;
+  background: transparent;
 }
 .gc-workout-exercise-name:hover,
 .gc-workout-exercise-name:active,
