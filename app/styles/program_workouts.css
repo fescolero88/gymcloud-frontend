@@ -2,11 +2,15 @@
   padding: 10px;
   list-style-type: none;
   position: relative;
+  margin-bottom: 0px;
+}
+.gc-program-workouts-list.empty {
+  padding: 20px;
 }
 .gc-program-workouts-list .gc-workout-draggable {
   display: block;
 }
-.gc-program-workout-item {
+.gc-program-workouts-list > .gc-workout-draggable:not(:last-child) {
   margin-bottom: 20px;
 }
 .gc-workout-draggable.dragged .gc-program-workout-item {
