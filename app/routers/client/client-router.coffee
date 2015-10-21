@@ -4,9 +4,6 @@ module.exports = class ClientRouter extends CustomRouter
 
   appRoutes:
 
-    '': 'clientPageAssigments'
-    '(/)': 'clientPageAssigments'
-
     'workout_exercises(/)': 'workoutExercisesList'
     'workout_exercises/:id(/)': 'workoutExercise'
     'personal_workouts(/)': 'personalWorkoutList'

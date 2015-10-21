@@ -3,6 +3,7 @@ CustomRouter  = require 'routers/general/custom-router'
 module.exports = class TrainerRouter extends CustomRouter
 
   appRoutes:
+    '': 'root'
     'welcome' : 'stats'
     'tr(/)': 'clients'
     'tr/clients(/)(/:view_type)': 'clients'

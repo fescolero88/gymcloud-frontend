@@ -63,6 +63,11 @@ define [
           @[@globalViewMethod](@globalType, @globalKey)
           @globalViewMethod = false
 
+    root: ->
+      Backbone.history.navigate '#welcome',
+        trigger: true
+        replace: true
+
     myProfile: ->
       currentUser = App.request('current_user')
       @_userProfile(currentUser)

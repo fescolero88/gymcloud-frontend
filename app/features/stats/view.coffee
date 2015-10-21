@@ -14,3 +14,9 @@ define [
     childViewContainer: '.stats-collection-container'
 
     className: 'gc-main-workspace row'
+
+    templateHelpers: ->
+
+      name: ->
+        App.request('current_user')
+          .get('user_profile.first_name')
