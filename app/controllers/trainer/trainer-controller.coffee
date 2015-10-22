@@ -18,6 +18,8 @@ define [
   'features/workouts/constructor/view' #WorkoutConstructorView
   'features/programs/constructor/view' #ProgramConstructorView
   'features/folders/view' #FoldersView
+  'features/stats/collection'
+  'features/stats/view'
 ],
 (
   ClientsView
@@ -39,6 +41,8 @@ define [
   WorkoutConstructorView
   ProgramConstructorView
   FoldersView
+  StatsCollection
+  StatsCompositeView
 ) ->
 
   class TrainerController extends Marionette.Controller
@@ -59,6 +63,11 @@ define [
           @[@globalViewMethod](@globalType, @globalKey)
           @globalViewMethod = false
 
+    root: ->
+      Backbone.history.navigate '#welcome',
+        trigger: true
+        replace: true
+
     myProfile: ->
       currentUser = App.request('current_user')
       @_userProfile(currentUser)
@@ -76,6 +85,13 @@ define [
     _userProfile: (user) ->
       view = new ProfileView
         model: user
+      @_getMainView().getRegion('content').show(view)
+
+    stats: ->
+      user = App.request('current_user')
+      collection = new StatsCollection
+      collection.build(user)
+      view = new StatsCompositeView collection: collection
       @_getMainView().getRegion('content').show(view)
 
     clientGroupShow: (id) ->
