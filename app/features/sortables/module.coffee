@@ -27,7 +27,7 @@ define [
         copy: true
         revertOnSpill: true
         moves: (el, container, handle) ->
-          handle.classList.contains('draggable-handle')
+          el.classList.contains('gc-sidebar-item')
         accepts: (el, container) ->
           !container.classList.contains('gc-sidebar-sub')
 

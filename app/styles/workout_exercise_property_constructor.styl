@@ -20,7 +20,7 @@
     .gc-property
       margin: 0!important
 
-    
+
 span.gc-property-value
   min-width: 16px
   display: inline-block
@@ -60,3 +60,30 @@ span.gc-property-value
 .gc-selected-property
       padding 0 8px 0 0
 
+.gc-workout-exercises-list
+  .gu-transit
+    position: relative
+    display: table
+    width: 100%
+    background-color: rgba(58,153,216,0.5)
+    opacity: 1
+    height: 40px
+
+    a
+      display: none
+
+    &:not([data-category='exercises'])
+      display: none
+
+    &:before
+      position: absolute
+      top: 5px
+      left: 5px
+      bottom: 5px
+      right: 5px
+      content: 'drop exercise here'
+      text-transform: uppercase
+      text-align: center
+      border: 1px dashed #fff
+      color: #fff
+      line-height: 27px
