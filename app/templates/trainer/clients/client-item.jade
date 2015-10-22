@@ -1,7 +1,12 @@
 .col-xs-8
   label.gc-clients-list-client-chb
     input(data-id="#{id}", type='checkbox')
-  a(class="gc-clients-list-avatar-wrapper #{avatar_url ? 'gc-clients-list-avatar-exist' : ''}")
+  a(
+    class="gc-clients-list-avatar-wrapper #{user_profile.avatar.thumb.url? ? 'gc-clients-list-avatar-exist' : ''}"
+    style="background-color: #{user_profile.avatar_background_color}"
+  )
+    if user_profile.avatar.url
+      img(src=user_profile.avatar.thumb.url, alt=' ')
   a.gc-clients-list-client-link(href="#users/#{id}")
     = user_profile.first_name + " " + user_profile.last_name
 .col-xs-4.text-right.gc-clients-list-client-actions

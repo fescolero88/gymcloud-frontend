@@ -118,7 +118,7 @@
 }
 .gc-modal input[type=radio] {
   position: relative;
-  top: 2px;
+  top: -1px;
 }
 .gc-modal .input-group-addon {
   background: #fff;
@@ -223,7 +223,7 @@
   width: 25px;
   height: 25px;
   position: relative;
-  top: 2px;
+  top: -1px;
 }
 .gc-clients-list-client-chb input {
   margin: 0;
