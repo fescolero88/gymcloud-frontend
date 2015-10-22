@@ -110,6 +110,7 @@ body > region[data-name="app"] > .container-fluid {
 
 .gc-main > div {
   height: 100%;
+  position: relative;
 }
 .gc-main-wrapper {
   margin-left: 230px;
