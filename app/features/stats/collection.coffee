@@ -24,7 +24,11 @@ define ->
       user[symbol].length
 
     _getTitleBySymbol: (symbol, count) ->
-      _.chain(symbol).humanize().pluralize(count)
+      _.chain(symbol)
+        .humanize()
+        .singularize()
+        .pluralize(count)
+        .value()
 
     _getPathBySymbol: (symbol, user) ->
       _.result({
