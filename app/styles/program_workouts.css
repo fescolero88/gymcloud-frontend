@@ -7,6 +7,9 @@
 .gc-program-workouts-list.empty {
   padding: 20px;
 }
+.gc-program-weeks-workouts-container .gc-program-workouts-list.empty {
+  border: 1px dashed rgba(40,45,48,0.1);
+}
 .gc-program-workouts-list .gc-workout-draggable {
   display: block;
 }
