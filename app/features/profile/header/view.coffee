@@ -32,6 +32,21 @@ define [
       stickit:
         model: => @model.profile
         bindings:
+          '.gc-usercard-avatar-wrapper':
+            attributes: [
+                observe: 'avatar'
+                name: 'class'
+                onGet: (value) ->
+                  if _.any(value.large.url)
+                    'gc-usercard-avatar-exist'
+            ]
+          'img.gc-usercard-avatar':
+            attributes: [
+                observe: 'avatar'
+                name: 'src'
+                onGet: (value) ->
+                  value.large.url
+            ]
           'span[data-bind="location"]': 'location'
           'span[data-bind="zip"]': 'zip'
           'span[data-bind="first_name"]': 'first_name'
