@@ -45,6 +45,10 @@ define ->
         exercises: =>
           id = @_getRootFolderId('Exercises', user)
           "#exercises_folder/#{id}"
+        personal_programs: =>
+          "#personal_programs"
+        personal_workouts: =>
+          "#personal_workouts"
       }, symbol) || '#'
 
     _getRootFolderId: (name, user) ->
