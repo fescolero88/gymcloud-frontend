@@ -93,4 +93,5 @@ define [
 
     _getVideoType: ->
       url = @model.get('video_url')
-      type = if url.indexOf('vimeo') isnt -1 then 'vimeo' else 'youtube'
+      return unless _.any(url)
+      url.indexOf('vimeo') isnt -1 && 'vimeo' || 'youtube'
