@@ -167,9 +167,22 @@ define [
       @reqres.setHandler 'app:views:main', =>
         @mainView
 
+    _changeLocaltionHash: ->
+      if not @request('current_user_id')
+        path = window.location.hash
+          .match(/^\#\/?(.*)$/)?[1]
+        hash = if path in [
+          'login'
+          'signup'
+          'prototype/ui'
+        ]
+          path
+        else
+          'login'
+        window.location.hash = hash
+
     _initHistory: ->
-      unless @request('current_user_id')
-        window.location.hash = 'login'
+      @_changeLocaltionHash()
       @_startHistory()
 
     _startHistory: -> Backbone.history?.start()
