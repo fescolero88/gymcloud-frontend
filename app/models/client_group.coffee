@@ -1,7 +1,9 @@
 define [
   'models/user'
+  './concerns/avatar_background_color'
 ], (
   User
+  AvatarBackgroundColor
 ) ->
 
   class ClientGroup extends Backbone.Model
@@ -12,6 +14,10 @@ define [
 
       name:
         required: true
+
+    initialize: ->
+      super
+      @_initBgColor()
 
     updateAvatar: (formData) ->
 
@@ -60,6 +66,30 @@ define [
           @trigger 'user:remove:error', arguments
       request
 
+    assign: (template) ->
+      @_assignment(template, 'assign')
+
+    unassign: (template) ->
+      @_assignment(template, 'unassign')
+
+    _assignment: (template, type) ->
+      method = if type == 'assign' then 'POST' else 'DELETE'
+      options =
+        url: "#{@url()}/assignments"
+        type: method
+        contentType: 'application/json'
+        data: JSON.stringify
+          template_id: template.id
+          template_type: template.constructor.prototype.type
+
+      request = (@sync || Backbone.sync).call(@, null, @, options)
+      request
+        .then (response) =>
+          @trigger("template:#{type}:success", response)
+        .fail (xhr, textStatus, errorThrown) =>
+          @trigger("template:#{type}:fail")
+      request
+
     parse: (data) ->
       @_parseClients(data.clients) && delete data.clients
       data
@@ -74,3 +104,6 @@ define [
           clientCollection.add(client)
         client
       @clients = new Backbone.Collection(clients)
+
+  _.extend(ClientGroup::, AvatarBackgroundColor)
+  ClientGroup

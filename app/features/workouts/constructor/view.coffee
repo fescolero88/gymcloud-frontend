@@ -87,7 +87,7 @@ define [
         video: VideoAssignmentView
         assign: AssignView
       }[navView] || OverviewView
-      view = new View(model: @model)
+      view = new View(model: @model, entityType: 'workout')
       @getRegion('manage').show(view)
 
     showAddToLibrary: (ev) =>
