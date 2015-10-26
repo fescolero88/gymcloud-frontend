@@ -66,6 +66,7 @@ define [
       sendMessageForm: '#gc-send-message-modal'
 
     ui:
+      inviteButton: '.invite-client-button'
       inviteModal: '#gc-invite-client-modal'
       inviteForm: '.invite-client-form'
       inviteEmail: '.invite-client-form input[name=email]'
@@ -97,14 +98,9 @@ define [
       @ui.inviteEmail.val @model.get('email')
 
     submitClientForm: (ev) ->
-      #TODO validation
       formData = @ui.inviteForm.serializeObject()
-      if @_isMyProfile()
-        url = "/api/mobile/me/invite"
-      else
-        url = "/api/mobile/clients/#{@model.get('id')}/invite"
-
-      @model.invite(formData, url)
+      @model.invite(formData.email).then =>
+        @ui.inviteModal.modal('hide')
 
     onInvite: ->
       @ui.inviteModal.modal('hide')

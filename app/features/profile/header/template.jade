@@ -13,9 +13,15 @@
         span(data-bind="zip")
       input.gc-usercard-link(type='text', value='http://gymcloud.com/clients/john-doe', readonly='readonly')
       .btn-group.gc-usercard-actions(role='group')
-        button.btn.btn-default.show-message-form(type='button') New message
-        button.btn.btn-default(type='button', data-toggle='modal', data-target='#gc-invite-client-modal') Invite client
-        button.btn.btn-default.show-client-form(type='button') Edit profile
+        button.btn.btn-default.show-message-form(type='button')
+          | New message
+        button.btn.btn-default.invite-client-button(
+          type='button',
+          data-toggle='modal',
+          data-target='#gc-invite-client-modal'
+        ) Invite client
+        button.btn.btn-default.show-client-form(type='button')
+          | Edit profile
   .col-xs-2.gc-usercard-params.text-right
     dl
       dt Height
