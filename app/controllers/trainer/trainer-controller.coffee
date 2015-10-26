@@ -98,6 +98,7 @@ define [
       user = App.request('current_user')
       clientGroup = user.client_groups.get(id)
 
+      clientGroup.fetch()
       view = new ClientGroupView
         itemModel: clientGroup
         model: clientGroup

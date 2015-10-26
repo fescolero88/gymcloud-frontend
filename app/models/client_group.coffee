@@ -15,6 +15,10 @@ define [
       name:
         required: true
 
+    constructor: ->
+      @clients = new Backbone.Collection
+      super
+
     initialize: ->
       super
       @_initBgColor()
@@ -103,7 +107,7 @@ define [
           client = new User(user, parse: true)
           clientCollection.add(client)
         client
-      @clients = new Backbone.Collection(clients)
+      @clients.reset(clients)
 
   _.extend(ClientGroup::, AvatarBackgroundColor)
   ClientGroup
