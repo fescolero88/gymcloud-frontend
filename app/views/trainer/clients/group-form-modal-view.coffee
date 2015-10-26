@@ -34,7 +34,7 @@ module.exports = class GroupFormModalView extends Marionette.ItemView
 
   showThumbnail: (ev) ->
     input = ev.target
-    if input.files && input.files[0]
+    if input.files?[0]
       reader = new FileReader()
       reader.onload = (e) ->
         $(ev.target).parents('form').find('.gc-edit-profile-modal-avatar').attr('src', e.target.result)
@@ -55,7 +55,7 @@ module.exports = class GroupFormModalView extends Marionette.ItemView
     App.vent.trigger ''
     @trigger 'closeModal'
     @trigger 'addToGroupsCollection', @model
-    if @avatar[0].files[0]
+    if @avatar?[0]?.files?[0]
       data = new FormData()
       data.append('avatar', @avatar[0].files[0])
       @model.updateAvatar data
