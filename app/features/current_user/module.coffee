@@ -45,7 +45,8 @@ define [
             .then =>
               @app.request('current_user:init:collections')
                 .then =>
-                  window.location.replace '#'
+                  @app.vent.trigger 'app:main_view:init', ->
+                    window.location.replace '#'
 
     _initUserHandlers: ->
       @app.reqres.setHandlers
