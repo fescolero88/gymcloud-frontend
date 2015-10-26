@@ -14,7 +14,6 @@ define [
       id: undefined
       name: undefined
       preview_picture_url: undefined
-      privacy: undefined
       status: undefined
       uploaded_at: undefined
       vimeo_id: undefined
