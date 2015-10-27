@@ -2,23 +2,38 @@ define ->
 
   class Stats extends Backbone.Collection
 
-    symbols: [
-      'clients'
-      'client_groups'
-      'program_templates'
-      'workout_templates'
-      'exercises'
-      'personal_programs'
-      'personal_workouts'
-    ]
+    symbols:
+      client: [
+        'workout_exercises'
+        'personal_workouts'
+        'personal_programs'
+      ]
+      pro: [
+        'clients'
+        'client_groups'
+        'exercises'
+        'workout_templates'
+        'program_templates'
+        'personal_workouts'
+        'personal_programs'
+      ]
 
     build: (user) ->
-      @reset _.map @symbols, (symbol) =>
-        {
-          count: count = @_getCountBySymbol(symbol, user)
-          title: @_getTitleBySymbol(symbol, count)
-          path: @_getPathBySymbol(symbol, user)
-        }
+      symbols = if user.get('is_pro') then @symbols.pro else @symbols.client
+      data = _.chain(symbols)
+        .select((symbol) =>
+          user[symbol] instanceof Backbone.Collection
+        )
+        .map((symbol) =>
+          {
+            count: count = @_getCountBySymbol(symbol, user)
+            title: @_getTitleBySymbol(symbol, count)
+            path: @_getPathBySymbol(symbol, user)
+          }
+        )
+        .value()
+
+      @reset(data)
 
     _getCountBySymbol: (symbol, user) ->
       user[symbol].length
@@ -36,19 +51,21 @@ define ->
           '#tr/clients/individuals'
         client_groups: ->
           '#tr/clients/groups'
-        program_templates: =>
-          id = @_getRootFolderId('Programs', user)
-          "#program_templates_folder/#{id}"
-        workout_templates: =>
-          id = @_getRootFolderId('Workouts', user)
-          "#workout_templates_folder/#{id}"
         exercises: =>
           id = @_getRootFolderId('Exercises', user)
           "#exercises_folder/#{id}"
-        personal_programs: =>
-          "#personal_programs"
+        workout_templates: =>
+          id = @_getRootFolderId('Workouts', user)
+          "#workout_templates_folder/#{id}"
+        program_templates: =>
+          id = @_getRootFolderId('Programs', user)
+          "#program_templates_folder/#{id}"
+        workout_exercises: =>
+          "#workout_exercises"
         personal_workouts: =>
           "#personal_workouts"
+        personal_programs: =>
+          "#personal_programs"
       }, symbol) || '#'
 
     _getRootFolderId: (name, user) ->
