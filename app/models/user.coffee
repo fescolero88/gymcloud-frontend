@@ -7,7 +7,9 @@ define [
 
   class User extends Backbone.NestedModel
 
-    urlRoot: '/users/me'
+    urlRoot: ->
+      currentUserId = App.request('current_user_id')
+      if currentUserId == @id then '/users/me' else '/users'
 
     defaults:
       user_profile: {}
@@ -16,3 +18,19 @@ define [
       @profile = new UserProfile(data.user_profile)
       data.user_profile = @profile.attributes
       data
+
+    invite: (email) ->
+      options =
+        url: "/users/#{@id}/invite"
+        type: 'POST'
+        processData: false
+        contentType: false
+      options.data = JSON.stringify(email: email) if email
+
+      request = (@sync || Backbone.sync).call(@, null, @, options)
+      request
+        .then (response) =>
+          @trigger 'invite:success', response
+        .fail (xhr, textStatus, errorThrown) =>
+          @trigger 'invite:fail', 'Something went wrong'
+      request
