@@ -6,3 +6,5 @@ define [
   class NoResultsView extends Marionette.ItemView
 
     template: template
+
+    className: 'gc-empty-view-content'
