@@ -97,6 +97,7 @@ define [
     clientGroupShow: (id) ->
       user = App.request('current_user')
       clientGroup = user.client_groups.get(id)
+      clientGroup ||= new ClientGroup(id: id)
 
       clientGroup.fetch()
       view = new ClientGroupView
