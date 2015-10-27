@@ -34,6 +34,7 @@ define [
 
     constructor: ->
       @collection = new VideosCollection
+      @searchScope = 'mine'
       super
 
     initialize: ->
@@ -70,11 +71,18 @@ define [
       unless _.trim(query)
         @view.viewState.set('state', 'search_not_started')
         return
-      @request = @collection.search(query, @searchScope)
+
+      @collection.queryParams.q = query
+      @collection.queryParams.scope = @searchScope
+      @request = @collection.fetch
+        data:
+          q: query
+          scope: @searchScope
+        reset: true
+
       @request
         .then (response) =>
           @view.viewState.set('state', 'no_results') unless response.length
-          @collection.reset(response)
         .fail ->
           return false if arguments[1] is 'abort'
           App.request 'messenger:show',
