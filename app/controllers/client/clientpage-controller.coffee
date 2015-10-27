@@ -27,7 +27,6 @@ module.exports = class ClientPageController extends Marionette.Controller
         @queueArgs = null
 
   initialize: (options) =>
-    @userPageView = App.request('app:views:main')
     App.vent.on 'assignments:loaded', =>
       @queue()
 
@@ -56,7 +55,7 @@ module.exports = class ClientPageController extends Marionette.Controller
       collection: new UserCollection([], type: type)
       dataType: dataType
       type: type
-    @userPageView.content.show(view)
+    @_userPageView().content.show(view)
 
   _assignedEntityShow: (type, id) ->
     dataType = type.split('_')[1]
@@ -81,7 +80,7 @@ module.exports = class ClientPageController extends Marionette.Controller
       view = new klasses.view
         model: model
         breadcrumbs: [{title: dataType}]
-      @userPageView.content.show(view)
+      @_userPageView().content.show(view)
 
   clientPageAssigments: (dataType, key) =>
     dataType = dataType || 'exercises'
@@ -99,7 +98,7 @@ module.exports = class ClientPageController extends Marionette.Controller
 
       if (childModel and childModel.get('isFolder')) or not key
         exercisesGlobalView = new ClientEWPView(collection: new Backbone.Collection(items), dataType: dataType)
-        @userPageView.content.show exercisesGlobalView
+        @_userPageView().content.show exercisesGlobalView
       else
         klasses = {
           exercises:
@@ -116,7 +115,7 @@ module.exports = class ClientPageController extends Marionette.Controller
           view = new klasses.view
             model: model
             breadcrumbs: breadcrumbs
-          @userPageView.content.show view
+          @_userPageView().content.show view
     else
       @queueMethod = 'clientPageAssigments'
       @queueArgs = arguments
@@ -137,21 +136,24 @@ module.exports = class ClientPageController extends Marionette.Controller
 
   clientPageCalendarDay: (id) =>
     contentView = new CalendarDayView()
-    @userPageView.content.show contentView
+    @_userPageView().content.show contentView
     @changeNavTitle 'Calendar'
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-c'
 
   clientPageCalendarWeek: (id) =>
     contentView = new CalendarWeekView()
-    @userPageView.content.show contentView
+    @_userPageView().content.show contentView
     @changeNavTitle 'Calendar'
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-c'
 
   clientPageCalendarMonth: (id) =>
     contentView = new CalendarMonthView()
-    @userPageView.content.show contentView
+    @_userPageView().content.show contentView
     @changeNavTitle 'Calendar'
     App.vent.trigger 'clientpage:nav-click', '#gc-clientpage-nav-tab-c'
 
   changeNavTitle: (type) ->
     App.vent.trigger 'client:nav:change', type
+
+  _userPageView: ->
+    App.request('app:views:main')
