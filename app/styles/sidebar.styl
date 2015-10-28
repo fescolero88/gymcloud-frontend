@@ -47,6 +47,7 @@
   font-weight: 300
   line-height: 18px
   color: rgba(255,255,255,0.65)
+  border-left: 2px solid #282d30
   text-transform: uppercase
   padding: 14px 0
   height: 46px
@@ -61,20 +62,33 @@
   opacity: 1
 
 .gc-sidebar-cat > a.active
-  color: #3398db
+  background: #3c4248
+  border-left: 2px solid #34749e
 
 .gc-sidebar-cat > a.active .gc-sidebar-cat-icon
-  background-position: right top
   opacity: 1
 
 .gc-sidebar-cat > a > .col-xs-1
   padding: 0
   text-align: center
 
-.gc-sidebar-cat > a .fa-chevron-right
-  font-size: 13px
-  top: -1px
-  position: relative
+.gc-sidebar-cat
+
+  .gc-menu-item-arrow
+    background: url('../images/sidebar-item-arrow.png') no-repeat
+    width: 6px
+    height: 10px
+    background-size: cover
+    top: 6px
+    position: relative
+
+  > a.active
+    .gc-menu-item-arrow
+      -webkit-transform: rotate(90deg)
+      -moz-transform: rotate(90deg)
+      -o-transform: rotate(90deg)
+      -ms-transform: rotate(90deg)
+      transform: rotate(90deg)
 
 .gc-sidebar-cat-icon
   display: block
@@ -98,62 +112,66 @@
   max-height: 9000px
   transition: max-height 0.5s ease-in
 
-.gc-sidebar-cat > a.active .fa.fa-chevron-down
-  -webkit-transform: rotate(180deg)
-  -moz-transform: rotate(180deg)
-  -o-transform: rotate(180deg)
-  -ms-transform: rotate(180deg)
-  transform: rotate(180deg)
-
-.gc-sidebar-folder > a
-  display: block
-  margin: 0
-  font-size: 15px
-  font-weight: 300
-  line-height: 18px
-  color: rgba(255,255,255,0.65)
-  padding: 14px 0
-  height: 46px
-
 .gc-sidebar-folder-name
   padding: 0 5px
 
-.gc-sidebar-folder > a:hover
-  color: #fff
+.gc-sidebar-folder
 
-.gc-sidebar-folder > a.active
-  color: #3398db
+  .gc-sidebar-folder-icon
+    background: url('../images/sidebar-folder.png') no-repeat
+    width: 14px
+    height: 10px
+    background-size: cover
+    top: 4px
+    left: 2px
+    position: relative
 
-.gc-sidebar-folder > a.active + .gc-sidebar-sub
-  max-height: 9000px
-  transition: max-height 0.5s ease-in
-  padding-left: 30px
+  > a
+    display: block
+    margin: 0
+    font-size: 15px
+    font-weight: 300
+    line-height: 18px
+    color: rgba(255,255,255,0.65)
+    padding: 14px 0
+    height: 46px
 
-.gc-sidebar-folder > a.active > span > .fa-folder-o
-  color: #3398db
+  > a:hover
+    color: #3398db
 
-.gc-sidebar-folder > a.active .fa:after
-  display: block
-  content: " "
-  position: absolute
-  bottom: -14px
-  top: 13px
-  left: 21px
-  width: 0
-  border-left: 1px solid #3398db
+    .gc-sidebar-folder-icon
+      background: url('../images/sidebar-folder-active.png') no-repeat
 
-.gc-sidebar-folder .gc-sidebar-folder .gc-sidebar-folder > a.active .fa:after
-  left: 15px
+  > a.active
+    color: #fff
 
-.gc-sidebar-folder > .gc-sidebar-sub:before
-  display: block
-  content: " "
-  position: absolute
-  bottom: 14px
-  top: -19px
-  left: 21px
-  width: 0
-  border-left: 1px solid #3398db
+    .fa:after
+      display: block
+      content: " "
+      position: absolute
+      bottom: -14px
+      top: 14px
+      left: 21px
+      width: 0
+      border-left: 1px solid #3398db
+
+  > a.active + .gc-sidebar-sub
+    max-height: 9000px
+    transition: max-height 0.5s ease-in
+    padding-left: 30px
+
+  .gc-sidebar-folder > a.active .fa:after
+    left: 15px
+
+  > .gc-sidebar-sub:before
+    display: block
+    content: " "
+    position: absolute
+    bottom: 18px
+    top: -19px
+    left: 21px
+    width: 0
+    border-left: 1px solid #3398db
 
 .gc-sidebar-item.dragged
   position: absolute
@@ -167,38 +185,48 @@
 .gc-sidebar-item.sortable-placeholder
   position: relative
 
-.gc-sidebar-item > a
-  display: block
-  margin: 0
-  font-size: 15px
-  font-weight: 300
-  line-height: 18px
-  color: rgba(255,255,255,0.65)
-  padding: 14px 0
-  height: 46px
-  text-decoration: none
+.gc-sidebar-item
 
-.gc-sidebar-item > a.gc-client-sidebar-item
-  padding-left: 15px
+  .gc-menu-item-icon
+    background: url('../images/sidebar-item-icon.png') center no-repeat
+    width: 7px
+    height: 10px
+    background-size: cover
+    top: 4px;
+    left: 5px
+    position: relative
 
-.gc-sidebar-item > a.gc-client-sidebar-item .gc-sidebar-cat-icon
-  margin-right: 7px
+  > a
+    display: block
+    margin: 0
+    font-size: 15px
+    font-weight: 300
+    line-height: 18px
+    color: rgba(255,255,255,0.65)
+    padding: 14px 0
+    height: 46px
+    text-decoration: none
 
-.gc-sidebar-item > a.gc-client-sidebar-item:hover .gc-sidebar-cat-icon,
-.gc-sidebar-item > a.gc-client-sidebar-item.active .gc-sidebar-cat-icon
-  background-position: right top
+  > a.gc-client-sidebar-item
+    padding-left: 15px
 
-.gc-sidebar-item > a .glyphicon-th,
-.gc-sidebar-item > a .fa-arrows
-  font-size: 12px
-  position: relative
-  top: -1px
+    .gc-sidebar-cat-icon
+      margin-right: 7px
 
-.gc-sidebar-item > a:hover
-  color: #3398db
+  > a.gc-client-sidebar-item:hover .gc-sidebar-cat-icon,
+  > a.gc-client-sidebar-item.active .gc-sidebar-cat-icon
+    background-position: right top
 
-.gc-sidebar-item > a.active
-  color: #3398db
+  > a .glyphicon-th,
+    font-size: 12px
+    position: relative
+    top: -1px
+
+  > a:hover
+    color: #3398db
+
+  > a.active
+    color: #3398db
 
 .gc-sidebar-item-name
   padding: 0 5px
