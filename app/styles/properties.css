@@ -53,14 +53,14 @@
   padding: 25px 0;
 }
 .gc-properties-list .row > div > .fa {
-  color: #3a93da;
+  color: #3a99d8;
   font-size: 14px;
   display: inline-block;
   margin: 0 25px 0 15px;
 }
 .gc-properties-list .row > div > .fa + span {
   text-transform: uppercase;
-  color: #3a93da;
+  color: #3a99d8;
   font-size: 14px;
 }
 .gc-properties-list .row > div.gc-properties-property-actions {
@@ -69,9 +69,9 @@
 .gc-properties-property-edit {
   font-size: 12px;
   text-transform: uppercase;
-  color: #3a93da;
+  color: #3a99d8;
   background: transparent;
-  border-color: #3a93da;
+  border-color: #3a99d8;
   border-radius: 50px;
   outline: none;
   padding: 5px 14px;
@@ -80,9 +80,9 @@
 .gc-properties-property-edit:active,
 .gc-properties-property-edit:focus {
   color: #fff;
-  border-color: #3a93da;
+  border-color: #3a99d8;
   text-decoration: none;
-  background: #3a93da;
+  background: #3a99d8;
   outline: none;
   box-shadow: none;
 }
@@ -116,8 +116,8 @@
 }
 .gc-properties-list-empty .btn {
   background: #fff;
-  color: #3398db;
-  border-color: #3398db;
+  color: #3a99d8;
+  border-color: #3a99d8;
   text-transform: uppercase;
   font-size: 12px;
   line-height: 20px;
@@ -127,8 +127,8 @@
 .gc-properties-list-empty .btn:hover,
 .gc-properties-list-empty .btn:active,
 .gc-properties-list-empty .btn:focus {
-  color: #3398db;
-  border-color: #3398db;
+  color: #3a99d8;
+  border-color: #3a99d8;
   text-decoration: none;
   outline: none;
 }

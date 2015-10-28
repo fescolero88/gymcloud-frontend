@@ -51,7 +51,7 @@
     height: 25px;
     width: 25px;
     border-radius: 30px;
-    background: #3398db url('../images/avatar-placeholder.png') center center no-repeat;
+    background: #3a99d8 url('../images/avatar-placeholder.png') center center no-repeat;
     background-size: 80%;
     margin: 3px 5px 0 0;
 }
@@ -76,7 +76,7 @@
   font-size: 12px;
 }
 .gc-exercise-author-name a {
-  color: #3598da;
+  color: #3a99d8;
   text-transform: uppercase;
   font-size: 14px;
   text-decoration: none;
@@ -107,7 +107,7 @@
   margin-bottom: 0;
 }
 .gc-rating-used > i {
-  color: #3699dd;
+  color: #3a99d8;
   font-size: 10px;
   margin: 0 2px;
 }
@@ -137,10 +137,10 @@
 .gc-exercise-edit-button {
   border-radius: 50px;
   font-size: 12px;
-  color: #3398db;
+  color: #3a99d8;
   text-transform: uppercase;
   background: #fff;
-  border-color: #3398db;
+  border-color: #3a99d8;
   border-radius: 50px;
   text-align: center;
   line-height: 16px;
@@ -150,7 +150,7 @@
 .gc-exercise-edit-button:focus {
   text-decoration: none;
   outline: none;
-  border-color: #3398db;
+  border-color: #3a99d8;
 }
 .gc-exercise-delete-button {
   border-radius: 50px;
@@ -174,10 +174,10 @@
 .gc-exercise-back-button {
   border-radius: 50px;
   font-size: 12px;
-  color: #3398db;
+  color: #3a99d8;
   text-transform: uppercase;
   background: #fff;
-  border-color: #3398db;
+  border-color: #3a99d8;
   border-radius: 50px;
   text-align: center;
   line-height: 16px;
@@ -187,15 +187,15 @@
 .gc-exercise-back-button:focus {
   text-decoration: none;
   outline: none;
-  border-color: #3398db;
+  border-color: #3a99d8;
 }
 .gc-exercise-save-button {
   border-radius: 50px;
   font-size: 12px;
-  color: #3398db;
+  color: #3a99d8;
   text-transform: uppercase;
   background: #fff;
-  border-color: #3398db;
+  border-color: #3a99d8;
   border-radius: 50px;
   text-align: center;
   line-height: 16px;
@@ -205,7 +205,7 @@
 .gc-exercise-save-button:focus {
   text-decoration: none;
   outline: none;
-  border-color: #3398db;
+  border-color: #3a99d8;
 }
 #gc-privacy-button-region {
   display: inline-block;
@@ -232,7 +232,7 @@
 .gc-exercise-privates label:focus,
 .gc-exercise-privates label.active {
   background: #fff;
-  color: #3398db;
+  color: #3a99d8;
   border-color: #ccc;
   box-shadow: none;
 }
@@ -261,7 +261,7 @@
   margin-left: 10px;
 }
 .gc-exercise-video-update {
-  color: #3398db;
+  color: #3a99d8;
   padding: 0;
 }
 .gc-exercise-video-update:hover,
@@ -269,7 +269,7 @@
 .gc-exercise-video-update:focus {
   background: transparent;
   text-decoration: none;
-  color: #3398db;
+  color: #3a99d8;
 }
 .gc-exercise-video-delete {
   color: #ee6d5d;
@@ -311,7 +311,7 @@
   height: 78px;
   width: 78px;
   text-align: center;
-  color: #3697dc;
+  color: #3a99d8;
   font-size: 30px;
   line-height: 84px;
   margin: 110px auto 15px auto;
@@ -326,10 +326,10 @@
 .gc-exercises-exercise-video-placeholder .btn {
   border-radius: 50px;
   font-size: 12px;
-  color: #3398db;
+  color: #3a99d8;
   text-transform: uppercase;
   background: transparent;
-  border-color: #3398db;
+  border-color: #3a99d8;
   border-radius: 50px;
   text-align: center;
   line-height: 16px;
@@ -353,7 +353,7 @@
   cursor: pointer;
 }
 .gc-exercises-assign-view .gc-global-ewp-assigned-mark .glyphicon {
-  color: #3398db;
+  color: #3a99d8;
   display: none;
 }
 .gc-exercises-assign-view .gc-global-ewp-assigned-mark .glyphicon.active {
@@ -365,14 +365,14 @@
   overflow: hidden;
 }
 .gc-exercise-edit-form label {
-  color: #3398db;
+  color: #3a99d8;
   font-size: 15px;
   font-weight: normal;
   line-height: 15px;
   min-height: 15px;
 }
 .gc-exercise-title > span:hover {
-  border-bottom: 1px dashed #3598dc;
+  border-bottom: 1px dashed #3a99d8;
   cursor: pointer;
 }
 .gc-exercise-title > span:focus {
@@ -390,13 +390,13 @@ textarea.gc-exercise-description-editor {
   max-height: 15em;
 }
 textarea.gc-exercise-description-editor:hover {
-  border-color: #3598dc;
+  border-color: #3a99d8;
   cursor: pointer;
 }
 textarea.gc-exercise-description-editor:focus {
   box-shadow: none;
   outline: none;
-  border-color: #3598dc;
+  border-color: #3a99d8;
   -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
 }

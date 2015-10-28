@@ -13,7 +13,7 @@ define [
       radius: 17
       scale: 2.25
       corners: 1
-      color: '#3398db'
+      color: '#3a99d8'
       opacity: 0
       rotate: 0
       direction: 1
