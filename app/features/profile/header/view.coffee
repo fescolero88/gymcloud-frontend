@@ -51,15 +51,23 @@ define [
           'span[data-bind="zip"]': 'zip'
           'span[data-bind="first_name"]': 'first_name'
           'span[data-bind="last_name"]': 'last_name'
-          'dd[data-bind="height"]': 'height'
-          'dd[data-bind="weight"]': 'weight'
-          'dd[data-bind="bodyfat"]': 'bodyfat'
-          'dd[data-bind="gender"]': 'gender'
+          'dd[data-bind="height"]':
+            observe: 'height'
+            onGet: '_formatEmptyValue'
+          'dd[data-bind="weight"]':
+            observe: 'weight'
+            onGet: '_formatEmptyValue'
+          'dd[data-bind="bodyfat"]':
+            observe: 'bodyfat'
+            onGet: '_formatEmptyValue'
+          'dd[data-bind="gender"]':
+            observe: 'gender'
+            onGet: '_formatEmptyValue'
           'dd[data-bind="birthday"]':
             observe: 'birthday'
             onGet: (value)->
               date = moment(value)
-              if date.isValid() then date.fromNow(true) else ''
+              if date.isValid() then date.fromNow(true) else '-'
 
     regions:
       clientForm: '#gc-edit-client-modal'
@@ -125,3 +133,6 @@ define [
       @ui.sendMessageModal.modal('show')
       @listenTo sendMessageModal, 'modal:close', =>
         @ui.sendMessageModal.modal('hide')
+
+    _formatEmptyValue: (value) ->
+      _.any(value) && value || '-'
