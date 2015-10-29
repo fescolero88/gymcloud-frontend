@@ -214,6 +214,7 @@
 .gc-clients-list-client-link:focus {
   color: #282d30;
   text-decoration: none;
+  cursor: pointer;
 }
 .gc-clients-list-client-chb {
   display: inline-block;
