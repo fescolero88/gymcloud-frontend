@@ -21,6 +21,9 @@ define [
       navLink: '.gc-content-nav :not(.gc-content-nav-back) a'
       deleteButton: '.gc-content-nav-delete'
 
+    behaviors:
+      navigate_back: true
+
     getActiveTabName: ->
       tab = @ui.activeTab
       tab.find('a').data('nav-view')
