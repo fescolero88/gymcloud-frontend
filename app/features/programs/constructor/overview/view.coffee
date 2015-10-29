@@ -70,7 +70,8 @@ define [
       dragOptions =
         revertOnSpill: true
         moves: (el, container, handle) ->
-          handle.classList.contains('gc-program-workout-sort')
+          handle.classList.contains('gc-program-workout-sort') ||
+          handle.classList.contains('gc-workout-header')
 
       @dragula = Dragula [], dragOptions
 
