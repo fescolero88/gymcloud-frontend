@@ -38,7 +38,7 @@
   margin-bottom: 0;
 }
 .gc-calendar-activity li p a {
-  color: #3398db;
+  color: #3a99d8;
 }
 .gc-calendar-nav {
   height: 50px;
@@ -49,7 +49,7 @@
   margin: 0;
 }
 .gc-calendar-nav-date .btn-group .btn {
-  color: #3398db;
+  color: #3a99d8;
   padding: 1px 6px;
 }
 .gc-calendar-nav-date .btn-group .btn:hover,
@@ -77,7 +77,7 @@
 .gc-calendar-nav-views .btn-group .btn:active,
 .gc-calendar-nav-views .btn-group .btn:focus,
 .gc-calendar-nav-views .btn-group .btn.active {
-  color: #3398db;
+  color: #3a99d8;
   background: #fff;
   text-decoration: none;
   outline: none;
@@ -115,7 +115,7 @@
   margin: 1px 0;
 }
 .gc-calendar-day-view > li > div:last-child p a {
-  color: #3398db;
+  color: #3a99d8;
 }
 .gc-calendar-week-view {
 
@@ -174,7 +174,7 @@
   line-height: 12px;
 }
 .gc-calendar-week-hour p a {
-  color: #3398db;
+  color: #3a99d8;
 }
 .gc-calendar-month-week-days {
   margin: 0;
@@ -227,7 +227,7 @@
   line-height: 12px;
 }
 .gc-calendar-month-day p a {
-  color: #3398db;
+  color: #3a99d8;
 }
 @media (min-width: 1025px) {
   .gc-calendar-activity li .fa-clock-o {

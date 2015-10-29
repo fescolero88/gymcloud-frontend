@@ -16,7 +16,7 @@
 .gc-program-empty-icon {
   height: 38px;
   width: 40px;
-  color: #3697dc;
+  color: #3a99d8;
   margin: 110px auto 15px auto;
   background-image: url(../images/workouts-single.png);
   background-repeat: no-repeat;
@@ -33,10 +33,10 @@
 .gc-program-empty-placeholder .btn {
   border-radius: 50px;
   font-size: 12px;
-  color: #3398db;
+  color: #3a99d8;
   text-transform: uppercase;
   background: transparent;
-  border-color: #3398db;
+  border-color: #3a99d8;
   border-radius: 50px;
   text-align: center;
   line-height: 16px;

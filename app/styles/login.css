@@ -128,12 +128,12 @@ body.auth {
 }
 .gc-login-form-wrapper form [type=submit],
 .gc-login-form-wrapper form .gc-form-submit-button {
-    color: #2f90e3;
+    color: #3a99d8;
     padding: 10px 28px;
     border-radius: 50px;
     font-weight: bold;
     text-transform: uppercase;
-    border: 2px solid #2f90e3;
+    border: 2px solid #3a99d8;
     margin-top: 20px;
     font-size: 18px;
     line-height: 24px;
@@ -149,7 +149,7 @@ body.auth {
 }
 .gc-login-form-wrapper form [type=submit]:hover,
 .gc-login-form-wrapper form .gc-form-submit-button:hover {
-  background-color: #2f90e3;
+  background-color: #3a99d8;
   color: #fff;
 }
 .gc-login-signup-wrapper {
@@ -157,7 +157,7 @@ body.auth {
     margin-top: 25px;
 }
 .gc-login-signup-wrapper a {
-    color: #2f90e3;
+    color: #3a99d8;
 }
 .gc-login-form-wrapper form .form-control {
   height: 45px;
@@ -303,7 +303,7 @@ form .checkbox {
     background: none;
   }
   .gc-nav-top .navbar-nav > li > a {
-    color: #2f90e3;
+    color: #3a99d8;
     font-size: 17px;
     padding: 14px 12px;
   }

@@ -77,6 +77,16 @@
     background: transparent;
     position: relative;
 }
+.gc-topbar-item .gc-help-button {
+    background: url('../images/icon-help.png') no-repeat;
+    position: relative;
+    width: 19px;
+    height: 18px;
+    display: block;
+    position: relative;
+    top: 17px;
+    left: 17px;
+}
 .gc-topbar-item .btn .fa-question {
     font-size: 14px;
     border: 1px solid rgba(255,255,255,0.45);
@@ -113,7 +123,7 @@
     height: 46px;
     width: 46px;
     border-radius: 50px;
-    background: #3398db url('../images/avatar-placeholder.png') center center no-repeat;
+    background: #3a99d8 url('../images/avatar-placeholder.png') center center no-repeat;
     background-size: 70%;
     border: 2px solid #fff;
 }

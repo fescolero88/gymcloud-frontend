@@ -4,6 +4,6 @@ a.row.toggle-menu(href="##{type}/")
     span.gc-sidebar-cat-icon(class="fix-bg-img-icon-#{iconName}")
   span.col-xs-8.gc-sidebar-cat-name
     = _.chain(type).humanize().words().last().value()
-  span.col-xs-2.toggle-it
-    span.fa.fa-chevron-down.toggle-it
+  .col-xs-2.toggle-it
+    .gc-menu-item-arrow.toggle-it
 .gc-sidebar-sub

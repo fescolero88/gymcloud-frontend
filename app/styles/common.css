@@ -208,10 +208,10 @@ body > region[data-name="app"] > .container-fluid {
 .gc-clients-nav-wrapper .btn, .gc-global-list-splash .btn {
   border-radius: 50px;
   font-size: 12px;
-  color: #3398db;
+  color: #3a99d8;
   text-transform: uppercase;
   background: #fff;
-  border-color: #3398db;
+  border-color: #3a99d8;
   border-radius: 50px;
   text-align: center;
   line-height: 16px;
@@ -232,7 +232,7 @@ body > region[data-name="app"] > .container-fluid {
 .gc-clients-nav-right p {
   display: inline-block;
   font-size: 12px;
-  color: #3398db;
+  color: #3a99d8;
   margin: 19px 10px 19px 0;
   line-height: 10px;
 }
@@ -290,11 +290,11 @@ body > region[data-name="app"] > .container-fluid {
   outline: none;
 }
 .btn:hover {
-  background: #3398db;
+  background: #3a99d8;
   color: #fff;
 }
 .form-group.gc-valid input.form-control {
-  border-color: #3598dc;
+  border-color: #3a99d8;
   position: relative;
 }
 .form-group .gc-valid-icon {
@@ -305,12 +305,12 @@ body > region[data-name="app"] > .container-fluid {
   position: absolute;
   right: 25px;
   bottom: 25px;
-  color: #3598dc;
+  color: #3a99d8;
   font-size: 12px;
 }
 .form-group.gc-valid input.form-control,
 .form-group.gc-valid select.form-control {
-  border-color: #3598dc;
+  border-color: #3a99d8;
 }
 .form-group.gc-invalid input.form-control,
 .form-group.gc-invalid select.form-control {
@@ -352,17 +352,17 @@ body > region[data-name="app"] > .container-fluid {
 .gc-btn {
   border-radius: 50px;
   font-size: 12px;
-  color: #3398db;
+  color: #3a99d8;
   text-transform: uppercase;
   background: #fff;
-  border-color: #3398db;
+  border-color: #3a99d8;
   border-radius: 50px;
   text-align: center;
   line-height: 16px;
   margin-top: -5px;
 }
 
-.btn .fa {
+.btn .fa-plus {
   padding-right: 5px;
 }
 
