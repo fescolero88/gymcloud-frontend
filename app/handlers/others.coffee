@@ -1,6 +1,6 @@
 define [
   'views/general/modal-confirm-view'
-  'views/general/modal_add_to_library_view'
+  'features/add_to_library/view'
   'views/trainer/workouts/workout_schedule_modal_view'
   'models/workout_schedule'
   'views/trainer/account-type-modal-view'
@@ -37,15 +37,13 @@ define [
         region.$el.modal('hide')
         region.destroy()
 
-    App.reqres.setHandler 'base:addToLibraryModal', (data) =>
+    App.reqres.setHandler 'base:addToLibraryModal', (data) ->
       addToLibraryView = new ModalAddToLibraryView data
       region = App.baseView.baseModalRegion
       region.show(addToLibraryView)
       region.$el.modal('show')
-
-      App.listenToOnce addToLibraryView, "modal:closed", ->
-        region.$el.modal('hide')
-        region.destroy()
+      region.$el.one 'hidden.bs.modal', ->
+        addToLibraryView.destroy()
 
     App.reqres.setHandler 'base:workoutSchedule', (data) =>
       view = new WorkoutScheduleView

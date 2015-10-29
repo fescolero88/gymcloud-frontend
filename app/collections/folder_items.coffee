@@ -16,7 +16,9 @@ define ->
           folder_ids: options.foldersIds
 
       sync = (@sync || Backbone.sync)
-      sync.call(@, null, @, options).then(@_parseDuplicatedModels)
+      request = sync.call(@, null, @, options)
+      request.then(@_parseDuplicatedModels)
+      request
 
     _parseDuplicatedModels: (response) =>
       user = App.request('current_user')
