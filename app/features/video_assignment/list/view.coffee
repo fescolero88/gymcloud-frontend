@@ -2,10 +2,12 @@ define [
   './item/view'
   './empty/start_search'
   './empty/no_results'
+  './empty/in_progress'
 ], (
   AssignVideoItemView
   StartSearchView
   NoResultsView
+  InProgressView
 ) ->
   class AssignVideosView extends Marionette.CollectionView
 
@@ -17,6 +19,7 @@ define [
       switch @viewState.get('state')
         when 'search_not_started' then StartSearchView
         when 'no_results' then NoResultsView
+        when 'in_progress' then InProgressView
 
     childEvents:
       assign: 'sendEvent'

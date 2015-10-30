@@ -61,6 +61,8 @@ define [
         $(navItem).addClass 'active'
         query = _.trim(@searchInput.model.get('query'))
         if query
+          @collection.reset()
+          @view.viewState.set('state', 'in_progress')
           @searchVideos(query)
         else
           @collection.reset()
