@@ -22,6 +22,45 @@
   padding: 6px 12px;
   border-bottom-color: transparent;
 }
+.gc-workout-video-controls {
+  margin: 15px 0 20px;
+  max-height: 25px;
+  width: 352px;
+}
+.gc-workout-video-controls .btn-link + .btn-link {
+  margin-left: 10px;
+}
+.gc-workout-video-controls > div {
+  padding: 0px;
+}
+.gc-workout-video-link {
+  font-size: 13px;
+  color: #747474;
+  display: inline-block;
+  text-decoration: none;
+}
+.gc-workout-video-link span {
+  color: #cacaca;
+}
+.gc-workout-video-link > i {
+  margin: 0 5px;
+}
+.gc-workout-video-link:hover,
+.gc-workout-video-link:active {
+  color: #747474;
+  text-decoration: none;
+}
+.gc-workout-video-delete {
+  color: #ee6d5d;
+  padding: 0;
+}
+.gc-workout-video-delete:hover,
+.gc-workout-video-delete:active,
+.gc-workout-video-delete:focus {
+  background: transparent;
+  text-decoration: none;
+  color: #ee6d5d;
+}
 .gc-workout-actions-button {
   width: 30px;
   padding: 6px;
