@@ -2,10 +2,12 @@ define [
   './workout_exercise'
   './personal_workout'
   './client_group'
+  './user'
 ], (
   WorkoutExercise
   PersonalWorkout
   ClientGroup
+  User
 ) ->
 
   class WorkoutTemplate extends Backbone.Model
