@@ -9,6 +9,7 @@ define [
 
     events:
       'keydown input': 'getSearchQuery'
+      'click .video-search-btn': 'getSearchQuery'
 
     behaviors:
       form_validation: true
@@ -18,5 +19,7 @@ define [
           'input': 'query'
 
     getSearchQuery: (event) ->
-      return event if event.which != 13
+      if (event.which isnt 13 and
+      not $(event.target).hasClass('video-search-btn'))
+        return event
       @trigger('searchStart', @model.get('query'))
