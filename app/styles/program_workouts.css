@@ -135,8 +135,12 @@
   width: 30px;
   text-align: center;
 }
-.gc-add-create-workout-wrapper > div:last-child {
+.gc-add-create-workout-wrapper > div:nth-child(3),
+.gc-add-create-workout-wrapper > div:nth-child(4) {
   width: 100px;
+}
+.gc-add-create-workout-wrapper .gc-program-add-week {
+  margin-left: 5px;
 }
 .gc-add-create-workout-wrapper .gc-clear-quick-add {
   font-size: 12px;
