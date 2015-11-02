@@ -23,14 +23,18 @@ define [
       workoutDescription: '.gc-workout-description-editor'
       workoutExerciseAddButton: '.gc-workout-add-exercise-button'
       workoutDeleteButton: '.gc-workout-delete-button'
+      workoutVideoDeleteButton: '.gc-workout-video-delete'
       workoutNotesContainer: '.gc-workout-note-container'
       workoutNoteEditor: '.gc-workout-note-editor'
+      iframe: 'iframe'
+      player: '.gc-workout-video'
 
     events:
       'keyup @ui.workoutDescription': 'workoutDescriptionAutoHeight'
       'keyup @ui.workoutNoteEditor': 'workoutNoteAutoHeight'
       'click @ui.workoutExerciseAddButton': 'workoutExerciseAdd'
       'click @ui.workoutDeleteButton': 'workoutDelete'
+      'click @ui.workoutVideoDeleteButton': '_deleteVideo'
       'blur @ui.workoutDescription': '_saveAttribute'
       'blur @ui.workoutNoteEditor': '_saveAttribute'
 
@@ -42,9 +46,13 @@ define [
           '[data-bind="note"]': 'note'
           '[data-bind="is_public"]': 'is_public'
 
+    modelEvents:
+      'change:video_url': '_togglePlayer'
+
     templateHelpers: =>
       isAuthor: @_isAuthor()
       hasNote: !!@model.get('note')
+      videoType: @_getVideoType()
 
     initialize: (data) ->
       @originalModel = new Backbone.Model(@model.attributes)
@@ -100,3 +108,23 @@ define [
       @model.save()
         .then( (response) => @originalModel.set(response) )
         .fail( => @model.set(@originalModel.attributes) )
+
+    _togglePlayer: ->
+      if @model.get('video_url')
+        @ui.player.removeClass('hidden')
+        @ui.iframe.attr('src', @model.get('video_url'))
+      else
+        @ui.player.addClass('hidden')
+
+    _deleteVideo: ->
+      App.request 'base:confirmationalModal',
+        title: 'Remove workout video?'
+        content: 'Are you sure you want to remove this video from workout?'
+        confirmBtn: 'Remove'
+        confirmCallBack: =>
+          @model.save({video_url: null, video_id: null}, wait: true)
+
+    _getVideoType: ->
+      url = @model.get('video_url')
+      return unless _.any(url)
+      url.indexOf('vimeo') isnt -1 && 'vimeo' || 'youtube'

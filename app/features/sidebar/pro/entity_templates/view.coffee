@@ -16,6 +16,13 @@ define [
     events:
       'click a:first': '_disableRedirect'
 
+    ui:
+      sidebarElements: '.gc-sidebar-sub'
+
+    onShow: ->
+      for el in @ui.sidebarElements
+        App.vent.trigger('sortables:add:container', el)
+
     getChildView: (item) ->
       if typeof item.attributes.folder_id isnt 'undefined'
         TemplateCollectionItemView
@@ -24,7 +31,7 @@ define [
 
     childViewOptions: (model, index) ->
       attributes:
-        'data-category': @name.toLowerCase()
+        'data-category': @type.toLowerCase()
       type: @type
       name: model.get('name')
       collection: model.items

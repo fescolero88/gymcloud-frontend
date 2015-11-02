@@ -154,7 +154,7 @@ define [
       dragOptions =
         revertOnSpill: true
         moves: (el, container, handle) ->
-          handle.classList.contains('gc-workout-exercise-sort')
+          $(handle).has('.gc-workout-exercise-name')
 
       Dragula [@ui.exercisesList[0]], dragOptions
         .on 'drop', (el, container) =>

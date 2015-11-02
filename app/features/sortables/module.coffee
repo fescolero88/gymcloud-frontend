@@ -26,10 +26,8 @@ define [
       options =
         copy: true
         revertOnSpill: true
-        moves: (el, container, handle) ->
-          el.classList.contains('gc-sidebar-item')
-        accepts: (el, container) ->
-          !container.classList.contains('gc-sidebar-sub')
+        moves: (el, source, handle) ->
+          $(handle).parents('.gc-sidebar-item:first').length or $(handle).has('.gc-sidebar-item')
 
       @drake = Dragula [], options
 
