@@ -174,7 +174,7 @@ body > region[data-name="app"] > .container-fluid {
   height: 50px;
   padding: 10px 0
 }
-.gc-clients-nav-wrapper h2 {
+.gc-nav-wrapper h2 {
   display: inline-block;
   text-transform: uppercase;
   font-size: 18px;
@@ -195,17 +195,22 @@ body > region[data-name="app"] > .container-fluid {
     padding: 0;
   }
 }
-.gc-clients-nav-wrapper {
+.gc-nav-wrapper {
   height: 50px;
   border-bottom: 1px solid rgba(40,45,48,0.1);
   margin: 0;
   overflow: visible;
+  position: relative;
+  z-index: 2;
+  -webkit-box-shadow: 0px -5px 17px 1px rgba(143,143,143,1);
+  -moz-box-shadow: 0px -5px 17px 1px rgba(143,143,143,1);
+  box-shadow: 0px -5px 17px 1px rgba(143,143,143,1);
 }
-.gc-content-both > .row.gc-clients-nav-wrapper {
+.gc-content-both > .row.gc-nav-wrapper {
   overflow: visible;
 }
 
-.gc-clients-nav-wrapper .btn, .gc-global-list-splash .btn {
+.gc-nav-wrapper .btn, .gc-global-list-splash .btn {
   border-radius: 50px;
   font-size: 12px;
   color: #3a99d8;
@@ -217,12 +222,12 @@ body > region[data-name="app"] > .container-fluid {
   line-height: 16px;
   margin-top: -5px;
 }
-.gc-clients-nav-wrapper .btn + .btn {
+.gc-nav-wrapper .btn + .btn {
   margin-left: 8px;
 }
-.gc-clients-nav-wrapper .btn:hover,
-.gc-clients-nav-wrapper .btn:active,
-.gc-clients-nav-wrapper .btn:focus {
+.gc-nav-wrapper .btn:hover,
+.gc-nav-wrapper .btn:active,
+.gc-nav-wrapper .btn:focus {
   text-decoration: none;
   outline: none;
 }
@@ -242,7 +247,7 @@ body > region[data-name="app"] > .container-fluid {
 .gc-clients-nav-right .btn:hover {
   color: #fff;
 }
-.gc-clients-nav-wrapper .btn-danger {
+.gc-nav-wrapper .btn-danger {
   border-radius: 50px;
   background: transparent;
   border-radius: 50px;
@@ -256,31 +261,31 @@ body > region[data-name="app"] > .container-fluid {
   color: #ee6d5d;
   border-color: #ee6d5d;
 }
-.gc-clients-nav-wrapper .btn-danger:hover {
+.gc-nav-wrapper .btn-danger:hover {
   background: #ee6d5d;
   color: #fff;
 }
-.gc-clients-nav-wrapper .btn-warning {
+.gc-nav-wrapper .btn-warning {
   color: #ffac61;
   border-color: #ffac61;
 }
-.gc-clients-nav-wrapper .btn-warning:hover {
+.gc-nav-wrapper .btn-warning:hover {
   background: #ffac61;
   color: #fff;
 }
-.gc-clients-nav-wrapper span.btn-warning:hover {
+.gc-nav-wrapper span.btn-warning:hover {
   background: #fff;
   color: #ffac61;
 }
-.gc-clients-nav-wrapper .btn-success {
+.gc-nav-wrapper .btn-success {
   color: #39ca74;
   border-color: #39ca74;
 }
-.gc-clients-nav-wrapper .btn-success:hover {
+.gc-nav-wrapper .btn-success:hover {
   background: #39ca74;
   color: #fff;
 }
-.gc-clients-nav-wrapper span.btn-success:hover {
+.gc-nav-wrapper span.btn-success:hover {
   background: #fff;
   color: #39ca74;
 }
