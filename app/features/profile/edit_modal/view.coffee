@@ -42,7 +42,7 @@ define [
       avatarInput: 'input[type="file"]'
 
     initialize: ->
-      Backbone.Validation.bind(this)
+      Backbone.Validation.bind(@)
       @previousAttributes = @model.toJSON()
 
     validateInput: (ev) ->
@@ -95,5 +95,5 @@ define [
         dataType: 'file'
         processData: false
         contentType: false
-        success: (data) =>
+        success: (data) ->
           model.set 'avatar_url', data.avatar_url

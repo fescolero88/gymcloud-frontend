@@ -1,11 +1,9 @@
 define [
-  '../../breadcrumbs/view'
   './actions/view'
   './overview/view'
   'features/assignment_list/view'
   './template'
 ], (
-  Breadcrumbs
   ActionsView
   OverviewView
   AssignView
@@ -17,6 +15,8 @@ define [
     behaviors:
 
       navigate_back: true
+
+      breadcrumbs: true
 
       stickit:
         bindings:
@@ -30,7 +30,6 @@ define [
     regions:
       manageRegion: '#program-manage'
       actionsRegion: 'region[data-name="program-actions"]'
-      breadcrumbs: 'region[data-name="breadcrumbs"]'
 
     ui:
       innerNav: '.gc-inner-nav'
@@ -51,11 +50,9 @@ define [
         !@_isMine() && !@_isAuthor() && @model.get('is_public')
 
     initialize: ->
-      @breadcrumbs = new Breadcrumbs(model: @model)
       @actionsView = new ActionsView(model: @model) if @_isAuthor()
 
     onShow: ->
-      @getRegion('breadcrumbs').show(@breadcrumbs)
       @getRegion('actionsRegion').show(@actionsView) if @_isAuthor()
       @_changeView('program')
 
@@ -86,11 +83,11 @@ define [
     _onSync: (_model, response, options) ->
       funcName = {PATCH: '_onSyncUpdate'}[options.type] || '_onDestroy'
 
-      this[funcName](response)
+      @[funcName](response)
 
     _onSyncUpdate: (_response) ->
       App.request 'messenger:show',
-        message: "Program Updated."
+        message: 'Program Updated.'
         type: 'success'
 
     _onSyncError: (_response) ->

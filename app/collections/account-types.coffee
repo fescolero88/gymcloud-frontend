@@ -6,4 +6,6 @@ define [
 
   class AccountTypes extends Backbone.Collection
 
+    type: 'AccountTypes'
+
     model: AccountTypeModel

@@ -20,24 +20,30 @@ define [
       @spinner = new SpinnerView
 
     _initHandlers: ->
-      @listenTo @app.vent.on 'spinner:start', =>
+      @listenTo @app.vent, 'spinner:start', =>
         @spinner.trigger('start')
-      @listenTo @app.vent.on 'spinner:stop', =>
+      @listenTo @app.vent, 'spinner:stop', =>
         @spinner.trigger('stop')
       @listenTo @app, 'start', =>
         @_showView()
+        @spinner.trigger('start')
       @listenTo @app, 'started', =>
-        @app.vent.trigger('spinner:stop')
+        setTimeout =>
+          @spinner.trigger('stop')
+        , 500
       @listenTo @app, 'started', =>
         @_initAjax()
 
     _initAjax: =>
-      loadingCount = 0
+      count = 0
+
       $(document).ajaxStart =>
-        if ++loadingCount is 1
+        count += 1
+        if count is 1
           @app.vent.trigger('spinner:start')
+
       $(document).ajaxComplete =>
-        if @app._isStarted && loadingCount > 0 && --loadingCount is 0
+        if @app._isStarted && count > 0 && count -= 1 is 0
           @app.vent.trigger('spinner:stop')
 
     _showView: ->

@@ -4,7 +4,7 @@
     h3.gc-workout-title
       span(contenteditable='true', data-bind="workout-name")
       label
-        input.hidden(type='checkbox', data-bind="is_visible")
+        input.hidden(type='checkbox', data-bind='is_visible')
         span.gc-workout-bookmark
     .gc-workout-actions
       a.btn.btn-primary.gc-cheevon-dropdown(data-toggle='dropdown', aria-haspopup='true', role='button', aria-expanded='false')
@@ -41,7 +41,7 @@
           | warmups
     .tab-content.gc-workout-tab-content
       .tab-pane.active(data-pane='description')
-        textarea.gc-program-description-editor.gc-description-editor.form-control(rows='1', type='text', placeholder='Start typing a description here...', data-bind="description")
+        textarea.gc-program-description-editor.gc-description-editor.form-control(rows='1', type='text', placeholder='Start typing a description here...', data-bind='description')
       .tab-pane(data-pane='video')
         .gc-workout-empty-video
           p

@@ -1,14 +1,15 @@
 define [
+  './template'
   '../entity_templates/view'
   '../entity_templates/item/view'
   'collections/user_collection'
-  './template'
 ], (
+  template
   TemplateCollectionView
   TemplateItemView
   UserCollection
-  template
 )->
+
   class RootFolderView extends Marionette.CompositeView
 
     template: template
@@ -37,9 +38,16 @@ define [
       name: @name
       isFolder: true
 
+    viewComparator: (model) ->
+      [
+        !!model.get('folder_id') && 2 || 1
+        _.underscored(model.get('name'))
+      ]
+
     initialize: (options)->
       @type = options.type
-      @name = options.name
+      @collection = @model.items
+      @name = @model.get('name')
 
     onRender: ->
       App.vent.trigger 'sortables:add:container', @ui.sidebarSubs[0]

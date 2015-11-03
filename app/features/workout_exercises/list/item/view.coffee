@@ -1,0 +1,105 @@
+define [
+  './template'
+  'features/exercise_properties/list/view'
+], (
+  template
+  ExercisePropertiesListView
+) ->
+
+  class WorkoutExercisesListItemView extends Marionette.LayoutView
+
+    template: template
+
+    tagName: 'li'
+
+    className: 'gc-workout-exercise-item'
+
+    ui:
+      deleteBtn: '.gc-delete-exercise'
+      addSingleProperty: '.gc-add-single-property-button'
+      setPropertyCheckboxWrapper: '.gc-set-property-checkbox-wrapper'
+      setPropertyCheckbox: '.gc-set-property-checkbox'
+      note: '.gc-workout-exercise-note'
+
+    events:
+      'click @ui.deleteBtn': 'deleteExercise'
+      'click @ui.addSingleProperty': 'initProperty'
+
+    behaviors:
+
+      regioned:
+        views: [
+          klass: ExercisePropertiesListView
+          region: 'exercise_properties'
+          options: ->
+            collection: @model.properties
+        ]
+
+      stickit:
+        bindings:
+          ':el':
+            classes:
+              'hover-enabled':
+                observe: 'state'
+                onGet: (value) ->
+                  value isnt 'edit'
+          '.gc-workout-exercise-sort':
+            attributes: [
+                observe: 'id'
+                name: 'data-workout-id'
+              ,
+                observe: 'exercise_id'
+                name: 'data-id'
+              ,
+                observe: 'position'
+                name: 'data-position'
+            ]
+          '.gc-workout-exercise-circle':
+            observe: 'order_name'
+            events: ['blur']
+            attributes: [
+                name: 'data-letter'
+                observe: 'order_name'
+                onGet: (value) ->
+                  @model.orderLetter()
+            ]
+          '.gc-workout-exercise-note':
+            observe: 'note'
+            events: ['blur']
+          '.gc-workout-exercise-name':
+            observe: 'name'
+            attributes: [
+                name: 'href'
+                observe: 'exercise_id'
+                onGet: (value) ->
+                  "#exercises/#{value}"
+            ]
+
+    initialize: (options) ->
+      @listenTo @model, 'change:note change:order_name', =>
+        @model.save()
+      @listenTo(@, 'actions:multi_constructor:start', @enableCheckbox)
+      @listenTo(@, 'actions:multi_constructor:stop', @disableCheckbox)
+      @listenTo(@, 'actions:multi_constructor:assign', @addProperties)
+
+    enableCheckbox: =>
+      @ui.setPropertyCheckboxWrapper.removeClass 'hidden'
+      @$el.removeClass 'hover-enabled'
+
+    disableCheckbox: =>
+      @ui.setPropertyCheckboxWrapper.addClass 'hidden'
+      @ui.setPropertyCheckbox.attr 'checked', false
+      @$el.addClass 'hover-enabled'
+
+    deleteExercise: ->
+      @model.destroy()
+
+    initProperty: ->
+      @views.exercise_properties.trigger 'properties:init',
+        workout_exercise_id: @model.get('id')
+
+    addProperties: (exercise_properties) =>
+      if @ui.setPropertyCheckbox.is(':checked')
+        @views.exercise_properties.trigger 'properties:add',
+          exercise_properties: exercise_properties
+          workout_exercise_id: @model.get('id')

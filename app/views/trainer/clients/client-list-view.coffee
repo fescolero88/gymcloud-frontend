@@ -20,11 +20,12 @@ define [
       @trigger 'individual:move'
 
     viewComparator: (model) ->
-      model.get('name') ||
+      name = model.get('name') ||
         [
           model.get('user_profile.first_name')
           model.get('user_profile.last_name')
         ].join(' ')
+      _.underscored(name)
 
     initialize: (options) ->
       MyId = App.request('current_user_id')

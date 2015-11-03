@@ -9,7 +9,7 @@ define ->
       if jqxhr.status is 403
         error = jqxhr.responseJSON.error
         error = error.join(', ') if _.isArray(error)
-        message = error.replace( /\s+(\[.+\])/, "")
+        message = error.replace( /\s+(\[.+\])/, '')
         App.request 'messenger:show',
           message: message
           type: 'error'
@@ -17,6 +17,11 @@ define ->
     Backbone.originalSync = Backbone.sync
     Backbone.sync = (method, model, options) ->
       options.type = 'PATCH' if method == 'update'
+      @listenTo @, 'request', =>
+        @_isRequested = true
+      @listenTo @, 'sync', =>
+        @_isRequested = false
+        @_isSynced = true
       Backbone.originalSync method, model, options
 
     $.ajaxSetup

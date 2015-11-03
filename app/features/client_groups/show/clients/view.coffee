@@ -66,7 +66,7 @@ define [
       clientCollection = currentUser.clients
       toSelect = clientCollection.difference(@collection.models)
       options = @searchItems(toSelect)
-      self = this
+      self = @
       @$el.find('.live-search').selectize
         hideSelected: true
         valueField: 'id'

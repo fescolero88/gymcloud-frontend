@@ -1,13 +1,11 @@
 define [
-  './workout_exercise'
+  'collections/workout_exercises'
   './personal_workout'
   './client_group'
-  './user'
 ], (
-  WorkoutExercise
+  WorkoutExercises
   PersonalWorkout
   ClientGroup
-  User
 ) ->
 
   class WorkoutTemplate extends Backbone.Model
@@ -23,18 +21,16 @@ define [
       name:
         required: true
 
-    constructor: (_attributes) ->
-      Exercises = Backbone.Collection.extend(model: WorkoutExercise)
+    constructor: ->
       Groups = Backbone.Collection.extend(model: ClientGroup)
-      @exercises = new Exercises
+      @exercises = new WorkoutExercises
       @assignees = new Backbone.Collection
       @groupAssignments = new Groups
       super
 
-    initialize: (_options) ->
-      @__defineGetter__ 'parent', @_getFolder
-      @__defineGetter__ 'folder', @_getFolder
-      @__defineGetter__ 'author', @_getAuthor
+    #initialize: (_options) ->
+      #@__defineGetter__ 'parent', @_getFolder
+      #@__defineGetter__ 'folder', @_getFolder
 
     parse: (data) ->
       data.exercises &&
@@ -67,7 +63,7 @@ define [
       @groupAssignments.reset(assignments, parse: true)
 
     _parseAssignees: (assignees) ->
-      template = this
+      template = @
       items = _.map assignees, (item) ->
         collection = App.request('current_user').personal_workouts
         personalWorkout = collection.get(item.id)
@@ -76,13 +72,3 @@ define [
           personalWorkout = new PersonalWorkout(item)
         personalWorkout
       @assignees.reset(items)
-
-    _getAuthor: ->
-      author_id = @get('author_id')
-      user = App.request('current_user')
-      author = user.clients.get(author_id) || user.pros.get(author_id)
-      unless author
-        author = new User(id: author_id)
-        author.fetch()
-      author
-

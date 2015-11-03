@@ -36,10 +36,10 @@ define [
       'folder:change': 'changeFolder'
 
     viewComparator: (model) ->
-      isFolder = model.get('folder_id') is undefined
+      isFolder = _.isUndefined(model.get('folder_id'))
       [
         isFolder && 1 || 2
-        model.get('name')
+        _.underscored(model.get('name'))
       ]
 
     initialize: (data) =>
@@ -81,14 +81,15 @@ define [
 
     highlightNew: (model) =>
       if model
-        $row = @ui.checkboxWrappers.find("[data-id=#{model.id}]").closest('.row')
+        $row = @ui.checkboxWrappers.find("[data-id=#{model.id}]")
+          .closest('.row')
         $row.addClass 'active'
         $('html, body').animate({
           scrollTop: $row.offset().top
         }, 1000)
         setTimeout ->
-            $row.removeClass 'active'
-          , 3000
+          $row.removeClass 'active'
+        , 3000
 
     _deleteItems: (ids, rootId) =>
       deletions = _.map ids, (id) =>
@@ -98,18 +99,10 @@ define [
         .then ->
           App.request 'messenger:show',
             hideAfter: 5
-            message: "Item(s) was deleted"
-            type: 'info'
+            message: 'Item(s) was deleted'
+            type: 'success'
         .fail ->
           App.request 'messenger:show',
             hideAfter: 5
-            message: "Some items were not deleted"
+            message: 'Some items were not deleted'
             type: 'error'
-
-    notifySidebarChanges: (model, rootId) ->
-      folderId = rootId
-      rootId = App.request "data:#{@typeName}:root"
-      if folderId and folderId isnt 0 and folderId isnt rootId
-        App.vent.trigger "#{@typeName}:folder:#{folderId}:model:removed", model
-      else
-        App.vent.trigger "#{@typeName}:model:removed", model

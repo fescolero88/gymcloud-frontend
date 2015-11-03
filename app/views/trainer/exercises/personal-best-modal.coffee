@@ -1,4 +1,4 @@
-ClientsProperties = require 'collections/clients_properties'
+#ClientsProperties = require 'collections/clients_properties'
 
 class PersonalBestResultModel extends Backbone.Model
 
@@ -67,9 +67,11 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
         date: 'fa fa-calendar'
       format: 'YYYY-MM-DD'
     if @myProfile
-      @properties = App.request('my:properties') || new ClientsProperties
+      @properties = App.request('my:properties') ||
+        new ClientsProperties
     else
-      @properties = App.request('client:properties', @id) || new ClientsProperties
+      @properties = App.request('client:properties', @id) ||
+        new ClientsProperties
     if @properties.length
       @fillProperties()
     else
@@ -132,7 +134,7 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
   addPersonalBest: =>
     if @validateDate() and @collection.length
       results = []
-      @collection.each (c) =>
+      @collection.each (c) ->
         results.push
           id: c.get('property_id')
           name: c.get('property_name')

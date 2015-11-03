@@ -46,7 +46,7 @@ define [
               @app.request('current_user:init:collections')
                 .then =>
                   @app.vent.trigger 'app:main_view:init', ->
-                    window.location.replace '#'
+                    @app.vent.trigger('redirect:to', '#')
 
     _initUserHandlers: ->
       @app.reqres.setHandlers

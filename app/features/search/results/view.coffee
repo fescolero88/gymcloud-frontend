@@ -49,16 +49,33 @@ define [
       searchScope = @model.get('search_scope')
 
       @searchScopes = new SearchScopes [
-        { name: 'all', value: 'all', inScope: searchScope == 'all' }
-        { name: 'gymcloud', value: 'public', inScope: searchScope == 'public' }
-        { name: 'mine', value: 'own', inScope: searchScope == 'own' }
+        {name: 'all', value: 'all', inScope: searchScope == 'all'}
+        {name: 'gymcloud', value: 'public', inScope: searchScope == 'public'}
+        {name: 'mine', value: 'own', inScope: searchScope == 'own'}
       ]
 
       @searchFilters = new SearchFilters [
-        { name: 'All', isSelected: entityType == 'all', href: "#search/#{q}" }
-        { name: 'Exercises', isSelected: entityType == 'exercises', href: "#search/#{q}/exercises" }
-        { name: 'Workouts', isSelected: entityType == 'workouts', href: "#search/#{q}/workouts" }
-        { name: 'Programs', isSelected: entityType == 'programs', href: "#search/#{q}/programs" }
-        { name: 'Clients', isSelected: entityType == 'clients', href: "#search/#{q}/clients" },
-        { name: 'Client Groups', isSelected: entityType == 'client_groups', href: "#search/#{q}/client_groups" }
+          name: 'All'
+          isSelected: entityType == 'all'
+          href: "#search/#{q}"
+        ,
+          name: 'Exercises'
+          isSelected: entityType == 'exercises'
+          href: "#search/#{q}/exercises"
+        ,
+          name: 'Workouts'
+          isSelected: entityType == 'workouts'
+          href: "#search/#{q}/workouts"
+        ,
+          name: 'Programs'
+          isSelected: entityType == 'programs'
+          href: "#search/#{q}/programs"
+        ,
+          name: 'Clients'
+          isSelected: entityType == 'clients'
+          href: "#search/#{q}/clients"
+        ,
+          name: 'Client Groups'
+          isSelected: entityType == 'client_groups'
+          href: "#search/#{q}/client_groups"
       ]

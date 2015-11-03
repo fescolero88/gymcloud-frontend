@@ -1,4 +1,4 @@
-.row
+'row
   if !isAuthor
     .gc-workout-author-block.pull-right
       .gc-exercise-author-info
@@ -41,9 +41,8 @@ if isMine
   .row
     .col-xs-6
     .col-xs-6.text-right
-      region#gc-privacy-button-region(data-name="privacy-buttons")
-      button.btn.btn-primary.gc-workout-delete-button
-        | Delete workout
+      region(data-name='privacy_toggle')
+      region(data-name='delete_button')
 .row
   .col-xs-12
     .form-group

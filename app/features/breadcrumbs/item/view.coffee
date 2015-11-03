@@ -1,12 +1,8 @@
-define [
-  './template'
-], (
-  template
-) ->
+define ->
 
   class BreadcrumbsItemView extends Marionette.ItemView
 
-    template: template
+    template: -> ''
 
     tagName: 'span'
 
@@ -14,12 +10,11 @@ define [
       'keydown': '_preventEnter'
 
     behaviors: ->
-      if @options.isEditable
-        stickit:
-          bindings:
-            ':el':
-              observe: 'name'
-              events: ['blur']
+      stickit:
+        bindings:
+          ':el':
+            observe: 'name'
+            events: ['blur']
 
     modelEvents:
       'change:name': '_saveName'
@@ -29,7 +24,10 @@ define [
       @isEditable = options.isEditable
 
     _saveName: ->
-      if @model.hasChanged('name') && @model.get('name') != @oldName
+      condition = !_.isUndefined(@oldName) &&
+        @model.hasChanged('name') &&
+        @model.get('name') != @oldName
+      if condition
         @model.save()
           .then =>
             @oldName = @model.get('name')

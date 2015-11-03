@@ -9,8 +9,12 @@ define [
   ProgramTemplate
   FolderItems
 )->
+
   Exercise = Backbone.Model
+
   class Folder extends Backbone.Model
+
+    type: 'Folder'
 
     constructor: (_attributes, _collectionOptions) ->
       @items = new FolderItems
@@ -26,7 +30,7 @@ define [
     initialize: (options) ->
       @_defineParent()
 
-    urlRoot: "/folders"
+    urlRoot: '/folders'
 
     validation:
       name:

@@ -5,6 +5,7 @@ define [
   FolderItemView
   template
 ) ->
+
   class FolderListView extends Marionette.CompositeView
 
     className: 'gc-add-modal-list-wrapper'

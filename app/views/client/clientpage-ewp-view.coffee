@@ -34,9 +34,9 @@ define [
       type: @type
       isExercises: (type, options) ->
         if type == 'exercises'
-          options.fn(this)
+          options.fn(@)
         else
-          options.inverse(this)
+          options.inverse(@)
 
   class ClientEWPView extends Marionette.CompositeView
 

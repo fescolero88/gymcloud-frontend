@@ -1,5 +1,8 @@
 define ->
+
   class ProgramWeek extends Backbone.Model
+
+    type: 'ProgramWeek'
 
     urlRoot: '/program_weeks/'
 

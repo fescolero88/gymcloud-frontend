@@ -1,6 +1,8 @@
 define ->
 
-  class ClientGroupModel extends Backbone.Model
+  class ClientGroup extends Backbone.Model
+
+    type: 'ClientGroup'
 
     defaults:
       client_ids: []
@@ -38,5 +40,8 @@ define ->
 
   class ClientGroups extends Backbone.Collection
 
-    model: ClientGroupModel
+    type: 'ClientGroups'
+
+    model: ClientGroup
+
     url: '/users'

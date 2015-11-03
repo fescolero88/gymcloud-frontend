@@ -6,6 +6,8 @@ define [
 
   class ExerciseProperty extends Backbone.Model
 
+    type: 'ExerciseProperty'
+
     urlRoot: '/exercise_properties'
 
     parse: (data) ->

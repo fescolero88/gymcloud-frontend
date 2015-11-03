@@ -1,12 +1,13 @@
 define [
+  './template'
   'collections/user_collection'
   './root_folders/view'
-  './template'
 ], (
+  template
   UserCollection
   RootFolderView
-  template
 )->
+
   class SidebarProView extends Marionette.LayoutView
 
     template: template
@@ -17,7 +18,8 @@ define [
       'click @ui.item': 'toggleItem'
 
     ui:
-      subs: '.gc-sidebar-folder>.gc-sidebar-sub, .gc-sidebar-cat>.gc-sidebar-sub'
+      subs: '.gc-sidebar-folder > .gc-sidebar-sub, ' +
+        '.gc-sidebar-cat > .gc-sidebar-sub'
       catchList: '.gc-assign-catch'
       item: '.gc-sidebar-item > a'
       exercisesRegion: 'region[data-name="exercises"]'
@@ -46,9 +48,7 @@ define [
         # App.request("data:#{type}:reset", folder.items)
         view = new RootFolderView
           model: folder
-          collection: folder.items
           type: type
-          name: folder.get('name')
         @getRegion(type).show(view)
         # @initDragAndDrop()
 

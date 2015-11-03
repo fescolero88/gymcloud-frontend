@@ -4,4 +4,5 @@ define [
   'expose?Backbone!deps/bundles/backbone/bundle'
   'expose?Marionette!deps/bundles/marionette/bundle'
   'expose?Handlebars!handlebars'
+  'expose?can!deps/bundles/can'
 ], ->

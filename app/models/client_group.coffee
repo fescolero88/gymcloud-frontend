@@ -12,6 +12,8 @@ define [
 
   class ClientGroup extends Backbone.Model
 
+    type: 'ClientGroup'
+
     urlRoot: '/client_groups'
 
     validation:
@@ -21,8 +23,8 @@ define [
 
     constructor: ->
       @clients = new Backbone.Collection
-      @workoutTemplates = new AssignedWorkoutTemplates(clientGroup: this)
-      @programTemplates = new AssignedProgramTemplates(clientGroup: this)
+      @workoutTemplates = new AssignedWorkoutTemplates(clientGroup: @)
+      @programTemplates = new AssignedProgramTemplates(clientGroup: @)
       super
 
     initialize: ->

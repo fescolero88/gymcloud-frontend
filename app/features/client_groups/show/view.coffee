@@ -35,11 +35,8 @@ define [
       @listenTo(@navView, 'navView', @loadCenterView)
       @listenTo(@navView, 'content-nav:delete', @_showRemoveModal)
       @listenTo(@navView, 'content-nav:tab', @_changeTab)
-
-      App.vent.on 'drag:complete', @assignDragged
-
-      @on('load:view', @loadView)
-
+      @listenTo(App.vent, 'drag:complete', @assignDragged)
+      @listenTo(@, 'load:view', @loadView)
 
     onShow: ->
       @getRegion('header').show(@headerView)

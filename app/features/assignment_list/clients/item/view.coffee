@@ -20,7 +20,6 @@ define [
     assignOptions: [
       'assignment'
       'entity'
-      'entityType'
       'clientAssignees'
     ]
 
@@ -31,13 +30,14 @@ define [
 
     initialize: (options) ->
       for option in @assignOptions
-        this[option] = options[option]
+        @[option] = options[option]
 
-      @assignedVersion = @assignment?.get("#{@entityType}_template_version")
+      type = _.underscored(@entity.type)
+      @assignedVersion = @assignment?.get("#{type}_template_version")
       @isAssigned = !!@assignment
       @isOutdated = @entity.get('version') > @assignedVersion
 
-      this
+      @
 
     toggleAssign: (ev) =>
       if @isAssigned then @_unassign() else @_assign()
@@ -63,10 +63,11 @@ define [
         @_toggleAssignSuccess('assign')
 
     _toggleAssignSuccess: (actionType) ->
+      type = @entity.type
       if actionType is 'assign'
-        message = "This #{@entityType} is assigned to client"
+        message = "This #{type} is assigned to client"
       else
-        message = "This #{@entityType} is unassigned from client"
+        message = "This #{type} is unassigned from client"
 
       App.request('messenger:show', message: message)
       @render()

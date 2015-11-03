@@ -8,6 +8,8 @@ define [
 
   class ProgramWorkout extends Backbone.Model
 
+    type: 'ProgramWorkout'
+
     urlRoot: '/program_workouts/'
 
     parse: (data) ->

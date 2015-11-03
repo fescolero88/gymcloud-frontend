@@ -5,6 +5,7 @@ define [
   template
   StatsItemView
 ) ->
+
   class StatsCompositeView extends Marionette.CompositeView
 
     template: template
@@ -25,7 +26,7 @@ define [
               if _.any(value)
                 "Welcome, #{value}!"
               else
-                "Welcome back!"
+                'Welcome back!'
 
     constructor: ->
       @model = App.request('current_user')

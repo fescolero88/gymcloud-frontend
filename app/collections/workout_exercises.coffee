@@ -1,5 +1,21 @@
-define ->
+define [
+  'models/workout_exercise'
+], (
+  WorkoutExercise
+) ->
 
   class WorkoutExercises extends Backbone.Collection
 
-    urlRoot: '/api/mobile'
+    type: 'WorkoutExercises'
+
+    model: WorkoutExercise
+
+    addExercise: (args = {}) ->
+      attrs = _.pick args, [
+        'exercise_id'
+        'workout_id'
+      ]...
+      model = new @model(attrs)
+      model.save()
+        .then =>
+          @add(model)

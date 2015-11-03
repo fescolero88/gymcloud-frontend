@@ -1,16 +1,17 @@
 .gc-usercard-large.row.account_type(class="#{ is_pro ? 'gc-trainer-card' : 'gc-client-card' }")
+
   .col-xs-10
     .gc-usercard-avatar-wrapper.text-center
       img.gc-usercard-avatar
     .gc-usercard-info
       h1.gc-usercard-name
-        span(data-bind="first_name")
+        span(data-bind='first_name')
         span=" "
-        span(data-bind="last_name")
+        span(data-bind='last_name')
       p.gc-usercard-address
-        span(data-bind="location")
+        span(data-bind='location')
         span=" "
-        span(data-bind="zip")
+        span(data-bind='zip')
       input.gc-usercard-link(type='text', value='http://gymcloud.com/clients/john-doe', readonly='readonly')
       .btn-group.gc-usercard-actions(role='group')
         button.btn.btn-default.show-message-form(type='button')
@@ -22,18 +23,20 @@
         ) Invite client
         button.btn.btn-default.show-client-form(type='button')
           | Edit profile
+
   .col-xs-2.gc-usercard-params.text-right
     dl
       dt Height
-      dd(data-bind="height")
+      dd(data-bind='height')
       dt Weight
-      dd(data-bind="weight")
+      dd(data-bind='weight')
       dt Bodyfat
-      dd(data-bind="bodyfat")
+      dd(data-bind='bodyfat')
       dt Age
-      dd(data-bind="birthday")
+      dd(data-bind='birthday')
       dt Gender
-      dd(data-bind="gender")
+      dd(data-bind='gender')
+
 #gc-invite-client-modal.modal.fade.gc-modal
   .modal-dialog.modal-md
     .modal-content

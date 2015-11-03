@@ -21,8 +21,8 @@ module.exports = class LibraryPresetModalView extends Marionette.ItemView
 
   onNext: (ev) ->
     @ui.presetSteps[@currentIndex].classList.remove 'active'
-    @ui.presetSteps[++@currentIndex].classList.add 'active'
+    @ui.presetSteps[@currentIndex += 1].classList.add 'active'
 
   onPrevious: (ev) ->
     @ui.presetSteps[@currentIndex].classList.remove 'active'
-    @ui.presetSteps[--@currentIndex].classList.add 'active'
+    @ui.presetSteps[@currentIndex -= 1].classList.add 'active'

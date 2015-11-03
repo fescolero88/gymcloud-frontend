@@ -1,6 +1,4 @@
-define [
-], (
-) ->
+define ->
 
   class LoginModel extends Backbone.Model
 

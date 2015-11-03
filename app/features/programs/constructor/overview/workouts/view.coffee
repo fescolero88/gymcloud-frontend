@@ -20,7 +20,7 @@ define [
 
     addChild: (child, ChildView, index) ->
       unless child.isInWeek
-        Marionette.CollectionView::addChild.apply this, arguments
+        Marionette.CollectionView::addChild.apply @, arguments
 
     viewComparator: (model) ->
       model.get 'position'

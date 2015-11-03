@@ -1,4 +1,5 @@
-WorkoutGlobalExercisesView = require 'views/client/workouts/workout_clientpage_exercises_view'
+WorkoutGlobalExercisesView =
+  require 'views/client/workouts/workout_clientpage_exercises_view'
 WorkoutExercises = require 'collections/workout_exercises'
 
 module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView

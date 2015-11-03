@@ -16,7 +16,7 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
 
   initialize: (data) =>
     @token = data.token
-    Backbone.Validation.bind(this)
+    Backbone.Validation.bind(@)
 
   submit: (ev) =>
     data = _.extend @ui.form.serializeObject(),
@@ -26,7 +26,7 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
     @model.save data,
       success: (model, data) ->
         App.request 'messenger:show',
-          message: "Password was successfully changed"
+          message: 'Password was successfully changed'
           type: 'success'
         window.location.replace '#login'
       error: (model, xhr, error) =>
@@ -38,5 +38,5 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
           @trigger 'switchError', message , uiGroup
         if errors.reset_password_token
           App.request 'messenger:show',
-            message: "Reset password token is invalid"
+            message: 'Reset password token is invalid'
             type: 'error'

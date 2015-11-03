@@ -3,6 +3,7 @@ define [
 ], (
   template
 ) ->
+
   class AssignmentItemView extends Marionette.ItemView
 
     template: template
@@ -22,11 +23,11 @@ define [
       viewType: @viewType
 
     _destroyModel: (ev) ->
-      App.request 'base:confirmationalModal',
-        title: "Delete item"
-        content: "Are you sure you want to delete selected item?"
-        confirmBtn: "Delete"
-        confirmCallBack: _.bind(@_confirmCallBack, this)
+      App.request 'modal:confirm',
+        title: 'Delete item'
+        content: 'Are you sure you want to delete selected item?'
+        confirmBtn: 'Delete'
+        confirmCallBack: _.bind(@_confirmCallBack, @)
 
     _confirmCallBack: ->
       @model.destroy(wait: true).then ->

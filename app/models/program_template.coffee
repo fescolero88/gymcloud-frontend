@@ -67,7 +67,7 @@ define [
       @groupAssignments.reset(assignments, parse: true)
 
     _parseAssignees: (assignees) ->
-      template = this
+      template = @
       items = _.map assignees, (item) ->
         collection = App.request('current_user').personal_programs
         personalProgram = collection.get(item.id)

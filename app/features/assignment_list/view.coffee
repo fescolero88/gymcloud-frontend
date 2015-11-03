@@ -12,21 +12,19 @@ define [
 
     template: template
 
-    regions:
-      clients: 'region[data-name="clients"]'
-      groups: 'region[data-name="groups"]'
-
-    initialize: (options) ->
-      @assignClientsView = new AssignClientsListView
-        collection: App.request('current_user').clients
-        clientAssignees: @model.assignees
-        entity: @model
-        entityType: options.entityType
-      @assignGroupsView = new AssignGroupsListView
-        collection: @model.groupAssignments
-        entity: @model
-        entityType: options.entityType
-
-    onShow: ->
-      @getRegion('clients').show(@assignClientsView)
-      @getRegion('groups').show(@assignGroupsView)
+    behaviors:
+      regioned:
+        views: [
+            region: 'clients'
+            klass: AssignClientsListView
+            options: ->
+              collection: App.request('current_user').clients
+              clientAssignees: @model.assignees
+              entity: @model
+          ,
+            region: 'groups'
+            klass: AssignGroupsListView
+            options: ->
+              collection: @model.groupAssignments
+              entity: @model
+        ]
