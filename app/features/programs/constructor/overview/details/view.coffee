@@ -19,7 +19,7 @@ define [
       programNoteEditor: '.gc-program-note-editor'
 
     regions:
-      counters: '.col-xs-4'
+      counters: 'region[data-name="counters"]'
 
     behaviors:
 

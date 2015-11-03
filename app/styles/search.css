@@ -27,6 +27,7 @@
 
 .gc-search-results-list .row:hover .gc-not-in-library > .gc-add-to-library-button {
   display: inline!important;
+  margin-top: 18px;
 }
 
 .gc-add-to-library-button {

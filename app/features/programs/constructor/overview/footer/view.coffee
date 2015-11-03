@@ -56,7 +56,7 @@ define [
       @toggleAddWorkoutButton()
 
     onRender: ->
-      @getRegion('privacyButtons').show(@privacyButtons)
+      @getRegion('privacyButtons').show(@privacyButtons) if @_isAuthor()
 
     deleteProgram: ->
       App.request 'base:confirmationalModal',
@@ -88,3 +88,6 @@ define [
       else
         @ui.addWorkout.addClass 'hidden'
         @ui.addWeek.addClass 'hidden'
+
+    _isAuthor: =>
+      @model.get('author_id') is App.request('current_user_id')

@@ -1,4 +1,14 @@
 .row
+  if !isAuthor
+    .gc-workout-author-block.pull-right
+      .gc-exercise-author-info
+        a.gc-exercise-author-avatar.gc-exercise-author-avatar-exist(href="#users/#{author.id}")
+          img(src=author.avatar_url, onerror="this.src='app/images/avatar-placeholder.png';")
+        p.gc-exercise-author-name
+          | Trainer
+          br
+          a(href="#users/#{author.id}")
+            = author_full_name
   .col-xs-12
     .form-group
       if isAuthor
@@ -27,7 +37,7 @@
         .gc-workout-description(type='text', placeholder='Start typing a description here...', data-bind='note')
     // / Note Fields
 #gc-exercises-list-region
-if isAuthor
+if isMine
   .row
     .col-xs-6
     .col-xs-6.text-right

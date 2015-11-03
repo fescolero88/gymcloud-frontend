@@ -14,7 +14,8 @@
         .input-group
           .input-group-addon.gc-add-modal-input-type-wrapper
             span.gc-add-modal-input-type(class="fix-bg-img-#{type}")
-          input.form-control.gc-new-item-name-input(type='text', readonly=true, placeholder="Enter name of #{typeNameSingle} here", value=name)
+          span.form-control.gc-new-item-name-input
+            = name
           .input-group-addon.gc-add-modal-submit-wrapper
             button.btn.btn-primary(type='submit')
               | Add

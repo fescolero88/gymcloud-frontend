@@ -17,14 +17,12 @@ define [
 
     ui:
       form: 'form'
-      input: '.gc-new-item-name-input'
 
     regions:
       library: '#gc-modal-library-region'
 
     events:
       'submit @ui.form': '_onSubmit'
-      'change @ui.input': 'nameChanged'
 
     viewData: (new Backbone.Model)
 
@@ -75,7 +73,8 @@ define [
       folder.items.duplicate(
         ids: [@model.id]
         foldersIds: [folder.id]
-      ).then ->
+      ).then =>
+        @$el.parent().modal('hide')
         App.request 'messenger:show',
           message: 'Item added to library'
           type: 'success'

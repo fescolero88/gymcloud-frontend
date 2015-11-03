@@ -82,7 +82,7 @@ define [
         collection: @collection
         workoutsCollection: @workoutsCollection
 
-      if App.request('current_user_id') is @model.get('author_id')
+      if App.request('current_user_id') is @model.get('user_id')
         views.footer = new FooterControlsView
           model: @model
           collection: @collection

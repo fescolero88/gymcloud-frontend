@@ -46,6 +46,9 @@ define [
 
     templateHelpers: =>
       isAuthor: @_isAuthor()
+      isMine: @_isMine()
+      canAddToLibrary: do =>
+        !@_isMine() && !@_isAuthor() && @model.get('is_public')
 
     initialize: ->
       @breadcrumbs = new Breadcrumbs(model: @model)
@@ -58,6 +61,9 @@ define [
 
     _isAuthor: =>
       @model.get('author_id') is App.request('current_user_id')
+
+    _isMine: ->
+      @model.get('user_id') == App.request('current_user_id')
 
     _changeViewEvent: (ev, ui) ->
       ui = @ui.contentNavItems

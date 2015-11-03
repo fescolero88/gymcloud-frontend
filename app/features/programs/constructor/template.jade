@@ -5,7 +5,7 @@
         span.fa.fa-chevron-left
       region(data-name="breadcrumbs")
     .col-xs-5.gc-exercises-nav-right.text-right
-      if isAuthor
+      if isMine
         ul.gc-content-nav.gc-program-content-navs
           li.active(data-view='program')
             a(href='#')
@@ -14,7 +14,8 @@
             a(href='#')
               | Assign
       else
-        button.btn.brn-primary.gc-add-to-library-button
-          | Add to library
+        if canAddToLibrary
+          button.btn.brn-primary.gc-add-to-library-button
+            | Add to library
       region(data-name='program-actions')
   #program-manage.gc-workspace-content
