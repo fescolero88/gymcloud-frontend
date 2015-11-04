@@ -40,6 +40,8 @@ define [
       'change:video_url': '_togglePlayer'
 
     templateHelpers: =>
+      # TODO: Render author as view
+      authorAvatar: @model.get('author')?.user_profile?.avatar?.thumb?.url
       isAuthor: @_isAuthor()
       videoType: @_getVideoType()
 

@@ -50,9 +50,13 @@ define [
       'change:video_url': '_togglePlayer'
 
     templateHelpers: =>
+      author: @model.author.toJSON()
       isAuthor: @_isAuthor()
+      isMine: @_isMine()
       hasNote: !!@model.get('note')
       videoType: @_getVideoType()
+      canAddToLibrary: do =>
+        !@_isMine() && !@_isAuthor() && @model.get('is_public')
 
     initialize: (data) ->
       @originalModel = new Backbone.Model(@model.attributes)
@@ -94,6 +98,9 @@ define [
 
     _isAuthor: ->
       @model.get('author_id') == App.request('current_user_id')
+
+    _isMine: ->
+      @model.get('user_id') == App.request('current_user_id')
 
     _textAreaAutoHeight: (area) ->
       el = @ui[area]?.get(0)

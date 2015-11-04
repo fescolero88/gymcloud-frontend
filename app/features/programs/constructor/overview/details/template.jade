@@ -13,3 +13,14 @@
     else
       .gc-program-description(type='text', placeholder='Start typing your note here...', data-bind="note")
 .col-xs-4
+  if !isAuthor
+    .col-xs-6.text-right.pull-right
+      .gc-exercise-author-info
+        a.gc-exercise-author-avatar.gc-exercise-author-avatar-exist(href="#users/#{author_id}")
+          //- img(src=authorAvatar)
+        p.gc-exercise-author-name
+          | Trainer
+          br
+          a(href="#users/#{author_id}")
+            = author_full_name
+  region(data-name="counters")

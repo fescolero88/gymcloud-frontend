@@ -1,15 +1,15 @@
 .row.gc-exercise-info
-  .col-xs-6.text-right
-    if !isAuthor
+  if !isAuthor
+    .col-xs-6.text-right.pull-right
       .gc-exercise-author-info
         a.gc-exercise-author-avatar.gc-exercise-author-avatar-exist(href="#users/#{author_id}")
-          img(src='app/images/portrait.jpg')
+          img(src=authorAvatar)
         p.gc-exercise-author-name
           | Trainer
           br
           a(href="#users/#{author_id}")
             = author_full_name
-      .gc-rating
+      //- .gc-rating
         div
           span.gc-rating-count 25
           ul.gc-rating-stars
@@ -54,7 +54,7 @@
     | You can either upload one or select from a list.
   button.btn.btn-primary.gc-add-video
     | Add video to this exercise
-if isAuthor
+if isMine
   .gc-exercise-author-controls.row
     .col-xs-6
     .col-xs-6.text-right
