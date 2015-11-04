@@ -24,7 +24,7 @@ define [
         url: "/users/#{@id}/invite"
         type: 'POST'
         processData: false
-        contentType: false
+        contentType: 'application/json'
       options.data = JSON.stringify(email: email) if email
 
       request = (@sync || Backbone.sync).call(@, null, @, options)
