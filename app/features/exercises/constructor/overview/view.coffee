@@ -43,6 +43,7 @@ define [
       # TODO: Render author as view
       authorAvatar: @model.get('author')?.user_profile?.avatar?.thumb?.url
       isAuthor: @_isAuthor()
+      isMine: @_isMine()
       videoType: @_getVideoType()
 
     initialize: (data) =>
@@ -50,7 +51,7 @@ define [
       @privacyButtonsView = new PrivacyButtonsView(model: @model)
 
     onShow: ->
-      @privacyButtons.show(@privacyButtonsView) if @_isAuthor()
+      @getRegion('privacyButtons').show(@privacyButtonsView) if @_isAuthor()
 
     _descriptionAutoHeight: ->
       exerciseDesc = @ui.exerciseDescription.get 0
@@ -59,6 +60,9 @@ define [
 
     _isAuthor: ->
       @model.get('author_id') == App.request('current_user_id')
+
+    _isMine: ->
+      @model.get('user_id') == App.request('current_user_id')
 
     _saveDescription: ->
       description = @model.get('description')
