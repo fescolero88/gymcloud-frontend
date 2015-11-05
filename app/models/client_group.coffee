@@ -1,8 +1,12 @@
 define [
   'models/user'
+  'collections/assigned_workout_templates_to_client_group'
+  'collections/assigned_program_templates_to_client_group'
   './concerns/avatar_background_color'
 ], (
   User
+  AssignedWorkoutTemplates
+  AssignedProgramTemplates
   AvatarBackgroundColor
 ) ->
 
@@ -17,6 +21,8 @@ define [
 
     constructor: ->
       @clients = new Backbone.Collection
+      @workoutTemplates = new AssignedWorkoutTemplates(clientGroup: this)
+      @programTemplates = new AssignedProgramTemplates(clientGroup: this)
       super
 
     initialize: ->
@@ -84,7 +90,7 @@ define [
         contentType: 'application/json'
         data: JSON.stringify
           template_id: template.id
-          template_type: template.constructor.prototype.type
+          template_type: template.constructor::type
 
       request = (@sync || Backbone.sync).call(@, null, @, options)
       request
