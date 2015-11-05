@@ -9,3 +9,4 @@ config/base.coffee
 *.iml
 .nvmrc
 npm-debug.log
+/.project

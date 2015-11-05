@@ -5,4 +5,5 @@ define [
   './messenger-theme-gymcloud'
   './switch'
   './video-assignment'
+  '../prototype/payment.styl'
 ], ->
