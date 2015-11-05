@@ -7,4 +7,4 @@ module.exports = class PrototypeRouter extends CustomRouter
 
   appRoutes:
     'prototype/ui': 'ui'
-    'ui/template/:templateName': 'renderTemplate'
+    'prototype/template/:templateName': 'renderTemplate'

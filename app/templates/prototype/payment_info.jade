@@ -18,7 +18,7 @@ div.page-wrap.payment-page
           br
           .form-group.no-padding
             label
-              | Card Number    
+              | Card Number
             input.form-control(type="text")
           .expiration-n-security-code
             .expiration-month.form-group.no-padding
@@ -37,18 +37,18 @@ div.page-wrap.payment-page
                   | Year
                 each val in _.range(2015, 2026)
                   option= val
-                  
+
             .space-filler
             .security-code.form-group.no-padding
               label
-                | Security code    
+                | Security code
               input.form-control(type="text")
             .question-in-circle
               | ?
           br
           .form-group.no-padding
             label
-              | Cardholder name    
+              | Cardholder name
             input.form-control(type="text")
           br
           .finish-block
