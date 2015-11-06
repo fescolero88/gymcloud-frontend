@@ -64,6 +64,9 @@ define [
           @collection.reset()
           @view.viewState.set('state', 'in_progress')
           @searchVideos(query)
+        else if !query and @searchScope is 'mine'
+          @collection.reset()
+          @view.viewState.set('state', 'library')
         else
           @collection.reset()
           @view.viewState.set('state', 'search_not_started')
