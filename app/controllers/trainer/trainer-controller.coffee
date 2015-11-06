@@ -20,6 +20,7 @@ define [
   'features/folders/view' #FoldersView
   'features/stats/collection'
   'features/stats/view'
+  'features/new_profile_view/view'
 ],
 (
   ClientsView
@@ -43,6 +44,7 @@ define [
   FoldersView
   StatsCollection
   StatsCompositeView
+  NewProfileView
 ) ->
 
   class TrainerController extends Marionette.Controller
@@ -71,6 +73,11 @@ define [
     myProfile: ->
       currentUser = App.request('current_user')
       @_userProfile(currentUser)
+
+    editMyProfile: ->
+      user = App.request('current_user')
+      view = new NewProfileView(model: user.profile)
+      @_getMainView().getRegion('content').show(view)
 
     profile: (id) ->
       currentUser = App.request('current_user')
