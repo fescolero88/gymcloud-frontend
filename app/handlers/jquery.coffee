@@ -18,6 +18,17 @@ define [
           event.preventDefault()
           false
 
+    navBarShadow: ->
+      manageShadow = (event) ->
+        if $(event.target).hasClass('gc-workspace-content')
+          scroll = $(event.target).scrollTop()
+          if scroll >= 10
+            $('.gc-nav-wrapper').addClass('gc-nav-shadow')
+          else
+            $('.gc-nav-wrapper').removeClass('gc-nav-shadow')
+      throttledManageShadow = _.throttle(manageShadow, 300)
+      document.addEventListener 'scroll', throttledManageShadow, true
+
     falseForms: ->
       selector = [
         "form:not('[action]')"
