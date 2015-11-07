@@ -12,7 +12,6 @@ define [
     className: 'gc-assign-videos'
 
     initialize: ->
-      console.log 'inited'
       @collection = new VideosListCollection
       @collection.fetch()
 
@@ -21,8 +20,8 @@ define [
       playVideo: 'replaceIframe'
 
     sendEvent: (childView) ->
-      debugger
-      @trigger('assignVideo', childView.model)
+      @model = childView.model
+      @trigger('assign')
 
     replaceIframe: (childView) ->
       @activeVideo?.trigger('destroyIframe')
