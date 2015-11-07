@@ -68,8 +68,8 @@ define [
           @collection.reset()
           @view.viewState.set('state', 'library')
         else
-          @collection.reset()
           @view.viewState.set('state', 'search_not_started')
+          @collection.reset()
 
     searchVideos: (query) ->
       @request.abort() if @request?.state() is 'pending'
