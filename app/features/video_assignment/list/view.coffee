@@ -35,6 +35,7 @@ define [
       @listenTo(@viewState, 'change:state', @onStateChange)
 
     childViewOptions: (model, index) =>
+      templateEntity: @model
       isAssigned: model.get('embed_url')?.length &&
         @model.get('video_url') is model.get('embed_url')
 
