@@ -23,13 +23,6 @@ define [
       checked: 'input[type=checkbox]:checked'
       removeForm: '.gc-remove-from-group-form'
 
-    childViewOptions: ->
-      groupId: @groupId
-
-    initialize: (data) ->
-      @groupId = data.groupId
-      @clientGroup = data.clientGroup
-
     onShow: ->
       @initSearchSelect()
 
@@ -48,7 +41,7 @@ define [
       for check in @$el.find('input[type=checkbox]:checked')
         id = $(check).data('id')
         user = clientCollection.get(id)
-        @clientGroup.removeUser(user).done =>
+        @model.removeUser(user).done =>
           @initSearchSelect()
 
       @ui.removeModal.modal 'hide'
@@ -65,13 +58,13 @@ define [
       currentUser = App.request('current_user')
       clientCollection = currentUser.clients
       user = clientCollection.get(item.id)
-      @clientGroup.addUser(user).done =>
+      @model.addUser(user).done =>
         @initSearchSelect()
 
     initSearchSelect: ->
       currentUser = App.request('current_user')
       clientCollection = currentUser.clients
-      toSelect = clientCollection.difference(@clientGroup.clients.models)
+      toSelect = clientCollection.difference(@collection.models)
       options = @searchItems(toSelect)
       self = this
       @$el.find('.live-search').selectize
