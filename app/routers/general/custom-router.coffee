@@ -18,6 +18,13 @@ module.exports = class CustomRouter extends Marionette.AppRouter
       Backbone.history.trigger "route", router, name, args
       return
   onRoute: (name, path, opts)->
+    @_setBodyClass name
     App.request 'lastHash:set',
       hash: window.location.hash
       action: name
+
+  _setBodyClass: (route) ->
+    if route is 'login' or route is 'signUp'
+      document.body.style.overflow = 'auto'
+    else
+      document.body.style.overflow = ''

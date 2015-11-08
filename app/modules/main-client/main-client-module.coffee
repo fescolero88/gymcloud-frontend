@@ -18,7 +18,6 @@ module.exports = class MainClientModule extends Marionette.Module
         controller: @clientController
       App.vent.on 'module:main-client:beforeAction', @refresh
   
-  # not sure what this is for. leaving this here for future reference
   refresh: =>
     App.vent.trigger 'app:main_view:init', =>
       if !@userPageView or @userPageView.isDestroyed
