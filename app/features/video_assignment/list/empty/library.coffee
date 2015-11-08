@@ -9,8 +9,6 @@ define [
 
     childView: AssignVideoItemView
 
-    className: 'gc-assign-videos'
-
     initialize: ->
       @collection = new VideosListCollection
       @collection.fetch()
@@ -18,6 +16,10 @@ define [
     childEvents:
       assign: 'sendEvent'
       playVideo: 'replaceIframe'
+
+    childViewOptions: (model, index) =>
+      isAssigned: model.get('embed_url')?.length &&
+        @options.templateEntity.get('video_url') is model.get('embed_url')
 
     sendEvent: (childView) ->
       @model = childView.model

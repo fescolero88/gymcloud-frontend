@@ -37,11 +37,10 @@ define [
               $el.css 'background-image', "url(#{val})"
 
     templateHelpers: =>
-      isAssigned: @isAssigned
+      isAssigned: @options.isAssigned
       durationTime: @convertDuration(@model.get('duration'))
 
-    initialize: (options) ->
-      @isAssigned = options.isAssigned
+    initialize: (_options) ->
       @listenTo(this, 'destroyIframe', @destroyIframe)
 
     renderIframe: (ev) ->
