@@ -1,11 +1,7 @@
 define [
   './item/view'
-  'models/workout_template'
-  'models/program_template'
 ], (
   AssignedTemplateItemView
-  WorkoutTemplate
-  ProgramTemplate
 ) ->
   class AssignedTemplatesListView extends Marionette.CollectionView
 
