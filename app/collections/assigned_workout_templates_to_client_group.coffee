@@ -1,12 +1,11 @@
 define [
-  'models/workout_template'
 ], (
-  WorkoutTemplate
 ) ->
 
   class AssignedWorkoutTemplatesToClientGroup extends Backbone.Collection
 
-    model: WorkoutTemplate
+    model: (attrs, options) ->
+      new (Backbone.Model.extend(type: 'WorkoutTemplate'))(attrs, options)
 
     url: ->
       "#{@clientGroup.url()}/assignments/workout_templates"
