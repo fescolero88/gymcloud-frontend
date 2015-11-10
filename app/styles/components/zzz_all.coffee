@@ -6,4 +6,5 @@ define [
   './switch'
   './video-assignment'
   '../prototype/payment.styl'
+  './charge-edit-profile-modal'
 ], ->
