@@ -7,7 +7,6 @@ define [
 
     initialize: ->
       Backbone.Validation.bind(this)
-      window.profile = @model
 
     behaviors: ->
       form_validation: true
