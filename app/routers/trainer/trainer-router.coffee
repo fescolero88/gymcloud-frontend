@@ -17,6 +17,7 @@ module.exports = class TrainerRouter extends CustomRouter
     'tr/me/:assign/:key(/)': 'me'
 
     'users/me(/)': 'myProfile'
+    'users/me/edit': 'editMyProfile'
     'users/:id(/)': 'profile'
     'client_groups/:id(/)': 'clientGroupShow'
     'properties(/)': 'properties'

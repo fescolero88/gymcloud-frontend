@@ -1,0 +1,121 @@
+.profile-left-side
+  .profile-fullfillment
+    | Your profile is 
+    span
+      | 70% 
+    | ready
+  .profile-progress-bar
+    .profile-progress
+      
+  .name
+    span.first
+    span.last
+  
+  .avatar
+    .image-container
+      img
+    input.upload-avatar(type='file')
+    .avatar-overlay
+      .note
+        span.fa.fa-plus
+        br
+        | Upload 
+        br
+        | photo
+      
+    
+  .space-filler
+    
+  .account-and-payment
+    .account-type
+      .type-label
+        | Account type
+      .type
+        | Strength and Conditional Couch
+    .space-filler
+    p.mmmoney
+      sup
+        | $ &nbsp;
+      | 2.99
+  .control-links
+    a.change(href="#")
+      | CHANGE
+    .space-filler
+    a.history(href="#")
+      | PAYMENT HISTORY
+      
+      
+.profile-right-side
+  .form-group
+    label
+      | Gender
+      .radio
+        label.gc-radio
+          input(type='radio', value='male', name='gender')
+          | Male
+          span.gc-radio-clone
+      .radio
+        label.gc-radio
+          input(type='radio', value='female', name='gender')
+          | Female
+          span.gc-radio-clone
+
+  .form-group
+    label(for='first_name')
+      | First name
+      span.gc-req *
+    label.gc-error-message
+    input.form-control(name='first_name', type='text')
+    span.gc-valid-icon.fa.fa-check.hide
+      
+  .form-group
+    label(for='last_name')
+      | Last name
+      span.gc-req *
+    label.gc-error-message
+    input.form-control(name='last_name', type='text')
+    span.gc-valid-icon.fa.fa-check.hide
+      
+  .form-group
+    label(for='email')
+      | Email 
+      span.gc-req *
+    label.gc-error-message
+    input.form-control(name='email', type='text')
+    span.gc-valid-icon.fa.fa-check.hide
+
+  .row
+    .col-xs-8
+      .form-group
+        label(for='location')
+          | Location
+        label.gc-error-message
+        input.form-control(name='location', type='text')
+        span.gc-valid-icon.fa.fa-check.hide
+    .col-xs-4
+      .form-group
+        label(for='zip')
+          | ZIP
+        label.gc-error-message
+        input.form-control(name='zip', type='text')
+        span.gc-valid-icon.fa.fa-check.hide
+          
+  .form-group
+    label(for='employer')
+      | Employer
+    label.gc-error-message
+    input.form-control(name='employer', type='text')
+    span.gc-valid-icon.fa.fa-check.hide
+      
+  .form-group
+    label(for='birthday')
+      | Date of birth
+    input.form-control(name='birthday', type='date')
+    span.gc-valid-icon.fa.fa-check.hide
+
+  .space-filler
+
+  .row
+    .col-xs-12.text-right
+      button.btn.btn-primary.btn-lg.gc-custom(type='submit')
+        | Save profile
