@@ -72,9 +72,11 @@ define [
       upload.always =>
         @model.fetch()
 
-    onShow: ->
+    onShow: =>
       $('.gc-main').css('padding-left', '0px')
       $('.gc-main').css('padding-right', '0px')
+      $.get("/users/#{@model.get('user_id')}").done (user) ->
+        $('input[name="email"]').val(user.email)
 
     onDestroy: ->
       $('.gc-main').css('padding-left', '15px')
