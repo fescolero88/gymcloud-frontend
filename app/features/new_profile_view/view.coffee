@@ -27,12 +27,15 @@ define [
           'input[name="employer"]': 'employer'
           'input[name="birthday"]': 'birthday'
           '.avatar':
-            attributes: [{
+            attributes: [
               name: 'style'
               observe: 'avatar'
               onGet: (ava) ->
-                return "background-image: url(#{ava.large.url})"
-              }]
+                if _.any(ava?.large.url)
+                  "background-image: url(#{ava.large.url})"
+                else
+                  "background-image: url(app/images/logo-big.png)"
+              ]
 
     className: 'new-profile-view'
 
