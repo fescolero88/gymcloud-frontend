@@ -109,6 +109,9 @@ define [
       formData = @ui.inviteForm.serializeObject()
       @model.invite(formData.email).then =>
         @ui.inviteModal.modal('hide')
+        App.request 'messenger:show',
+          message: 'Invitation successfully sent'
+          type: 'success'
 
     onInvite: ->
       @ui.inviteModal.modal('hide')
