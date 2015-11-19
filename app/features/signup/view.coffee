@@ -31,6 +31,16 @@ define [
 
     events:
       'submit @ui.form': 'createAccount'
+      'blur input': 'validateInput'
+
+    validateInput: (ev) ->
+      $input = $(ev.target)
+      input_name = $(ev.target).attr 'name'
+      input_value = $(ev.target).val()
+      if input_value
+        $inputGroup = $input.closest('.form-group')
+        error_msg = @model.preValidate input_name, input_value
+        @trigger 'switchError', error_msg, $inputGroup
 
     initialize: (options) ->
       Backbone.Validation.bind @
