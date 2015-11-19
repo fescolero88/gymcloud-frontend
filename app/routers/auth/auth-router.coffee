@@ -7,6 +7,7 @@ module.exports = class AuthRouter extends CustomRouter
     'logout(/)':                'logout'
     'forgot-password(/)':       'forgotPassword'
     'signup(/)':                'signUp'
+    'signup?*queryString':      'signUp'
     'reset/:token(/)':          'resetPassword'
     'confirm/:token(/)':        'confirmRegistration'
     'resend_confirmation(/)':   'resendConfirmation'

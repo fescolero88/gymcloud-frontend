@@ -179,6 +179,9 @@ define [
           path
         else
           'login'
+
+        # check if path is invitation
+        hash = path if path.indexOf('signup?') != -1
         window.location.hash = hash
 
     _initHistory: ->
