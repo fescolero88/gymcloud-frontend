@@ -69,8 +69,15 @@ define [
 
           loginModel.login()
 
-        ).fail =>
-          throw new Error 'Initial Account Creation Failed'
+        ).fail (xhr, settings, errorThrown)  =>
+          errorJSON = xhr.responseJSON.error
+          for key of errorJSON
+            errorMsg = "#{key} #{errorJSON[key].join(',')}" if errorJSON.hasOwnProperty(key)
+            break
+          
+          App.request 'messenger:show',
+            type: 'error'
+            message: errorMsg
 
     acceptInvite: ->
       if @isValid true

@@ -181,7 +181,6 @@ define [
           'login'
 
         # check if path is invitation
-        debugger
         hash = path if path and  path.indexOf('signup?') != -1
         window.location.hash = hash
 
