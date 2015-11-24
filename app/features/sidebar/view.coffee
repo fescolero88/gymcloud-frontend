@@ -66,7 +66,6 @@ define [
       target = $(ev.target)
       currentTarget = $(ev.currentTarget)
       if target.hasClass('toggle-it') or currentTarget.hasClass('toggle-it')
-        ev.preventDefault()
         currentTarget.toggleClass('active')
 
     toggleItem: (ev) ->
