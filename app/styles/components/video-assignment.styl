@@ -1,10 +1,28 @@
 .video-search-btn
+  @keyframes changeColor
+    0%, 66%
+      color: #ccc
+    33%, 100%
+      color: #0f82ca
+
   position: absolute
   top: 2px
   right: 15px
   padding: 10px
-  color: #ccc
+  color: #0f82ca
   cursor: pointer
+
+  &:not(.disabled)
+    animation: changeColor 1.3s ease-in 0s
+
+  &.disabled
+    color: #ccc
+    cursor: inherit
+    -webkit-transition: color 300ms ease-in
+    -moz-transition: color 300ms ease-in
+    -o-transition: color 300ms ease-in
+    -ms-transition: color 300ms ease-in
+    transition color 300ms ease-in
 
 .gc-empty-view-content
   margin-bottom: 50px
