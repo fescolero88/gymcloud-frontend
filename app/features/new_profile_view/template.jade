@@ -1,10 +1,10 @@
 .profile-left-side
-  .profile-fullfillment
+  .profile-fullfillment.hidden
     | Your profile is 
     span
       | 70% 
     | ready
-  .profile-progress-bar
+  .profile-progress-bar.hidden
     .profile-progress
       
   .name
@@ -102,7 +102,7 @@
           
   .form-group
     label(for='employer')
-      | Employer
+      | Occupation
     label.gc-error-message
     input.form-control(name='employer', type='text')
     span.gc-valid-icon.fa.fa-check.hide
