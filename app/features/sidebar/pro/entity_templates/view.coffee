@@ -14,7 +14,7 @@ define [
     className: 'gc-sidebar-folder'
 
     events:
-      'click a:first': '_disableRedirect'
+      'click a:first .gc-sidebar-folder-icon': '_disableRedirect'
 
     ui:
       sidebarElements: '.gc-sidebar-sub'

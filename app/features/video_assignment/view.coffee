@@ -56,6 +56,7 @@ define [
     changeViewEvent: (ev) ->
       navItem = $(ev.currentTarget).parent()
       @searchScope = $(ev.currentTarget).data('scope')
+      @collection.trigger('request')
       unless $(navItem).hasClass 'active'
         @ui.innerNavItems.removeClass 'active'
         $(navItem).addClass 'active'
@@ -87,6 +88,7 @@ define [
 
       @request
         .then (response) =>
+          @collection.trigger('request')
           @view.viewState.set('state', 'no_results') unless response.length
         .fail ->
           return false if arguments[1] is 'abort'
