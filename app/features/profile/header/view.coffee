@@ -107,11 +107,21 @@ define [
 
     submitClientForm: (ev) ->
       formData = @ui.inviteForm.serializeObject()
-      @model.invite(formData.email).then =>
-        @ui.inviteModal.modal('hide')
-        App.request 'messenger:show',
-          message: 'Invitation successfully sent'
-          type: 'success'
+      @model.invite(formData.email)
+        .then =>
+          @ui.inviteModal.modal('hide')
+          App.request 'messenger:show',
+            message: 'Invitation successfully sent'
+            type: 'success'
+        .fail (xhr, error, errorType) ->
+          try
+            error = xhr.responseJSON.error
+            message = "email #{error.email.join(', ')}"
+          catch error
+            message = errorType
+          App.request 'messenger:show',
+            message: message
+            type: 'error'
 
     onInvite: ->
       @ui.inviteModal.modal('hide')
