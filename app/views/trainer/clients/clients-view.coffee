@@ -6,7 +6,7 @@ Client = require 'models/client'
 GroupFormModalView = require 'views/trainer/clients/group-form-modal-view'
 ClientGroup = require 'models/client_group'
 
-ClientGroupService = require 'models/client_groups_service'
+ClientGroupMember = require 'models/client_group_member'
 
 module.exports = class ClientsView extends Marionette.LayoutView
 
@@ -47,9 +47,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
   initialize: (options) =>
     viewType = options.viewType || 'clients'
     @viewType = viewType
-    @clientGroupService = new ClientGroupService
-    @listenTo @clientGroupService, 'clients:assigned', @_onClientsAssigned
-
+    
   initRegionListeners: =>
     if @clients.currentView? # temp fix for existing issue
       @listenTo @clients.currentView, 'individual:move', @showMovetogroupModal
@@ -150,21 +148,25 @@ module.exports = class ClientsView extends Marionette.LayoutView
 
   submitMovetogroupForm: (ev) ->
     #TODO validation
-    clientsId = []
-    groupsId = []
+    clientIds = []
+    groupIds = []
+    promises = []
+
     for check in @ui.clientsRegion.find('input[type=checkbox]:checked')
-      clientsId.push $(check).data('id')
+      clientIds.push $(check).data('id')
     for check in @$el.find('.gc-move-to-group-form').find('input[type=checkbox]:checked')
-      groupsId.push $(check).data('id')
+      groupIds.push $(check).data('id')
 
-    @clientGroupService.set
-      clientIds: clientsId
-      clientGroupIds: groupsId
+    groupIds.forEach (groupId) =>
+      clientIds.forEach (clientId) =>
+        clientGroupMember = new ClientGroupMember
+          clientId: clientId
+          groupId: groupId
 
-    @clientGroupService.assignClients()
-  
-  _onClientsAssigned: ->
-    @ui.modalContainer.modal('hide')
+        promises.push clientGroupMember.save()
+
+    $.when.apply($, promises).done =>
+      @ui.modalContainer.modal('hide')
 
   countSelected: ($el) ->
     return $el.find('input[type=checkbox]:checked').length
