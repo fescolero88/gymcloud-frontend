@@ -6,6 +6,8 @@ Client = require 'models/client'
 GroupFormModalView = require 'views/trainer/clients/group-form-modal-view'
 ClientGroup = require 'models/client_group'
 
+ClientGroupService = require 'models/client_groups_service'
+
 module.exports = class ClientsView extends Marionette.LayoutView
 
   template: require('templates/trainer/clients/clients')
@@ -45,6 +47,8 @@ module.exports = class ClientsView extends Marionette.LayoutView
   initialize: (options) =>
     viewType = options.viewType || 'clients'
     @viewType = viewType
+    @clientGroupService = new ClientGroupService
+    @listenTo @clientGroupService, 'clients:assigned', @_onClientsAssigned
 
   initRegionListeners: =>
     if @clients.currentView? # temp fix for existing issue
@@ -153,22 +157,14 @@ module.exports = class ClientsView extends Marionette.LayoutView
     for check in @$el.find('.gc-move-to-group-form').find('input[type=checkbox]:checked')
       groupsId.push $(check).data('id')
 
-    data =
-      client_ids: clientsId
-      client_group_ids: groupsId
+    @clientGroupService.set
+      clientIds: clientsId
+      clientGroupIds: groupsId
 
+    @clientGroupService.assignClients()
+  
+  _onClientsAssigned: ->
     @ui.modalContainer.modal('hide')
-
-    $.ajax
-      url: '/api/mobile/client_groups/add'
-      type: 'POST'
-      data: JSON.stringify data
-      dataType: 'json'
-      success: =>
-        @ui.clientsRegion.find('input[type=checkbox]:checked').removeAttr('checked')
-        App.request 'messenger:show',
-          message: 'Success'
-          type: 'success'
 
   countSelected: ($el) ->
     return $el.find('input[type=checkbox]:checked').length
