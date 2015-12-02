@@ -14,7 +14,6 @@ define [
     className: 'row'
 
     modelEvents:
-      sync: 'render'
       change: 'render'
 
     ui:
@@ -42,7 +41,8 @@ define [
         content: "Are you sure you want to delete #{@model.get('first_name')} #{@model.get('last_name')}?"
         confirmBtn: "Delete"
         confirmCallBack: =>
-          @model.destroy()
+          @model.destroy().then =>
+            @model.collection?.remove @model
 
     moveSingle: (ev) =>
       $(ev.currentTarget).closest('.row').find(':checkbox').prop('checked', true)
