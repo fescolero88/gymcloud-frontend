@@ -3,13 +3,11 @@ define [
   './empty/start_search'
   './empty/no_results'
   './empty/in_progress'
-  './empty/library'
 ], (
   AssignVideoItemView
   StartSearchView
   NoResultsView
   InProgressView
-  LibraryView
 ) ->
   class AssignVideosView extends Marionette.CollectionView
 
@@ -22,16 +20,17 @@ define [
         when 'search_not_started' then StartSearchView
         when 'no_results' then NoResultsView
         when 'in_progress' then InProgressView
-        when 'library' then LibraryView
 
     childEvents:
       assign: 'sendEvent'
       playVideo: 'replaceIframe'
 
     initialize: =>
-      @viewState = new Backbone.Model(
-        state: 'library'
-      )
+      @viewState = new Backbone.Model(state: 'library')
+      @collection.fetch(data: q: '')
+        .then =>
+          @viewState.set(state: 'no_results') unless @collection.length
+          @collection.trigger('request')
       @listenTo(@viewState, 'change:state', @onStateChange)
 
     childViewOptions: (model, index) =>

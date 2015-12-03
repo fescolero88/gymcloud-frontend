@@ -56,7 +56,6 @@ define [
     changeViewEvent: (ev) ->
       navItem = $(ev.currentTarget).parent()
       @searchScope = $(ev.currentTarget).data('scope')
-      @collection.trigger('request')
       unless $(navItem).hasClass 'active'
         @ui.innerNavItems.removeClass 'active'
         $(navItem).addClass 'active'
@@ -68,13 +67,15 @@ define [
         else if !query and @searchScope is 'mine'
           @collection.reset()
           @view.viewState.set('state', 'library')
+          @searchVideos(query)
         else
           @view.viewState.set('state', 'search_not_started')
           @collection.reset()
+      @collection.trigger('request')
 
     searchVideos: (query) ->
       @request.abort() if @request?.state() is 'pending'
-      unless _.trim(query)
+      if !_.trim(query) && @searchScope != 'mine'
         @view.viewState.set('state', 'search_not_started')
         return
 
