@@ -5,6 +5,7 @@ define [
   'behaviors/navigate_back'
   'behaviors/auto_complete/auto_complete'
   'behaviors/pagination'
+  'behaviors/social_login'
 ], (
   StickitBehavior
   VideoAssignBehavior
@@ -12,6 +13,7 @@ define [
   NavigateBackBehavior
   AutoCompleteBehavior
   PaginationBehavior
+  SocialLoginBehavior
 ) ->
 
   Behaviors =
@@ -21,5 +23,6 @@ define [
     navigate_back: NavigateBackBehavior
     auto_complete: AutoCompleteBehavior
     pagination: PaginationBehavior
+    social_login: SocialLoginBehavior
 
   Behaviors

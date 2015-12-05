@@ -15,6 +15,7 @@ define [
 
     behaviors:
       form_validation: true
+      social_login: true
 
       stickit:
         bindings:
@@ -33,6 +34,10 @@ define [
       'submit @ui.form': 'createAccount'
       'blur input': 'validateInput'
 
+    initialize: (options) ->
+      Backbone.Validation.bind @
+      @client = options.client
+
     validateInput: (ev) ->
       $input = $(ev.target)
       input_name = $(ev.target).attr 'name'
@@ -41,10 +46,6 @@ define [
         $inputGroup = $input.closest('.form-group')
         error_msg = @model.preValidate input_name, input_value
         @trigger 'switchError', error_msg, $inputGroup
-
-    initialize: (options) ->
-      Backbone.Validation.bind @
-      @client = options.client
 
     onRender: ->
       if @client
