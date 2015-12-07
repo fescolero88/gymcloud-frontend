@@ -12,7 +12,8 @@ module.exports = class AuthView extends Marionette.ItemView
     signUpModal: '#gc-signup-message'
 
   behaviors:
-    social_login: true
+    facebook_login: true
+    google_login: true
 
     stickit:
       bindings:
