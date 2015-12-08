@@ -22,7 +22,10 @@ define ->
     $.ajaxSetup
       headers: {'X-Requested-With': 'XMLHttpRequest'}
       contentType: 'application/json'
+      crossDomain: true
+      xhrFields: withCredentials: true
       beforeSend: (xhr, options) ->
+        xhr.withCredentials = true
         options.url = "#{config.api.url}#{options.url}"
         accessToken = App.request('accessToken:get')
         if accessToken

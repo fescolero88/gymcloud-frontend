@@ -1,5 +1,10 @@
 module.exports =
   env: undefined
+  vendor:
+    facebook:
+      app_id: ''
+    google:
+      client_id: ''
   api:
     url: undefined
     urls:
