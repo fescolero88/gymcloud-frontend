@@ -17,12 +17,13 @@ define [
       throw('Not Implemented')
 
     getToken: (provider, resp) ->
+      data = JSON.stringify _.omit(resp, 'g-oauth-window')
       $.ajax
         type: 'POST'
         url: "/users/auth/#{provider}/callback"
         dataType: 'json'
         contentType: 'application/json'
-        data: JSON.stringify(resp)
+        data: data
         xhrFields: withCredentials: true
         success: (json) ->
           App.request('auth:onSuccess', json)
