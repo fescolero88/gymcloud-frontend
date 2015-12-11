@@ -35,6 +35,6 @@ define [
       FB.login ((response) =>
         @getToken('facebook', response) if response.authResponse
       ), {
-        auth_type: 'reauthenticate'
+        auth_type: 'rerequest'
         scope: 'email,public_profile'
       }
