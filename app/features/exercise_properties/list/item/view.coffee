@@ -1,10 +1,12 @@
 define [
   './template'
+  'features/properties/select_box/view'
 ], (
   template
+  PropertiesSelectBox
 ) ->
 
-  class PropertyView extends Marionette.ItemView
+  class ExercisePropertiesListItemView extends Marionette.LayoutView
 
     template: template
 
@@ -12,11 +14,17 @@ define [
 
     className: 'gc-property-item'
 
+
+    behaviors:
+
+      regioned:
+        views: [
+            region: 'properties_select_box'
+            klass: PropertiesSelectBox
+        ]
+
     templateHelpers: ->
-      properties = App.request('data:personal_properties:visible')
       editMode: @state is 'edit'
-      properties: properties.toJSON()
-      defaultProperty: properties.first().get('name')
 
     ui: ->
       removePropertyButton: '.gc-remove'
@@ -24,14 +32,13 @@ define [
       selectedPropertyLabel: '.gc-selected-property'
       selectedPropertyValue: '.gc-property-value'
       propertyValueNameLabel: '.gc-property-value-name-label'
-      editPropertyControl: '.gc-property-edit'
+      editPropertyControl: '.gc-property'
       viewPropertyControl: '.gc-property-view'
       toggleEditMode: '.gc-toggle-edit-mode'
       savePropertyButton: '.gc-save'
 
     events: ->
       'click @ui.removePropertyButton': 'removeProperty'
-      'click @ui.propertyItem': 'selectProperty'
       'focusout @ui.editPropertyControl':  _.debounce(@saveOnBlur, 200)
       'keypress @ui.selectedPropertyValue': 'saveOnEnter'
       'click @ui.savePropertyButton': 'saveProperty'
@@ -42,9 +49,9 @@ define [
 
     initialize: (options) ->
       @state = @model.get('state') || 'view'
-      @collection = App.request('data:personal_properties:visible')
 
     onRender: ->
+      @listenTo(@views.properties_select_box, 'selected', @selectProperty)
       if @model.isNew()
         @toggleEditMode()
         setTimeout =>
@@ -56,9 +63,8 @@ define [
       ev.preventDefault()
       @model.destroy()
 
-    selectProperty: (ev) ->
-      @ui.selectedPropertyLabel.html(ev.currentTarget.innerHTML)
-      @model.set(personal_property_id: ev.target.dataset.id)
+    selectProperty: (id) ->
+      @model.set(personal_property_id: id)
       @ui.selectedPropertyValue.focus()
 
     _toggleEditMode: (e) ->
