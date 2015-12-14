@@ -2,6 +2,12 @@ define ->
 
   (App, config) ->
 
+    $(document).ajaxStart ->
+      App.vent.trigger('ajax:start', arguments...)
+
+    $(document).ajaxComplete ->
+      App.vent.trigger('ajax:complete', arguments...)
+
     $(document).ajaxError (event, jqxhr, settings, thrownError) ->
       if jqxhr.status is 401 && '/login' != Backbone.history.fragment
         Backbone.history.navigate('/login')
