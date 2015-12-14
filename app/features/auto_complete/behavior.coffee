@@ -23,13 +23,9 @@ define [
       onLoad: undefined
       render:
         item: (item, escape) ->
-          item.name = escape(item.name)
           itemTemplate(item)
         option: (item, escape) ->
-          _item =
-            folder_name: escape(item.folder || '')
-            name: escape(item.name)
-          optionTemplate(_item)
+          optionTemplate(item)
 
     onShow: ->
       items = _.result @options, 'collection'
