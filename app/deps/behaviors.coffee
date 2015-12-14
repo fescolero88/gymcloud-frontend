@@ -3,6 +3,8 @@ define [
   'behaviors/navigate_back'
   'behaviors/regioned'
   'behaviors/stickit'
+  'behaviors/facebook_login'
+  'behaviors/google_login'
   'features/add_to_library/button/behavior'
   'features/author/widget/behavior'
   'features/auto_complete/behavior'
