@@ -1,9 +1,9 @@
 .gc-property-edit.btn-group.clearfix.pull-right.gc-property.editable(class=editMode ? '' : 'hidden')
-  button.btn.btn-sm.btn-primary.gc-custom(type='button')
+  button.btn.btn-sm.btn-primary.gc-custom
     i.gc-icon-bars
     span.gc-property-value(contenteditable='true')
   .btn-group(role='group')
-    button.btn.btn-sm.btn-primary.gc-custom.dropdown-toggle(type='button', data-toggle='dropdown')
+    button.btn.btn-sm.btn-primary.gc-custom.dropdown-toggle(data-toggle='dropdown')
       span.gc-selected-property
         = defaultProperty
       i.fa.fa-sort
@@ -12,17 +12,17 @@
         li
           a.gc-property-item(href='#', data-id=property.id)
             = property.name
-  button.btn.btn-sm.btn-primary.gc-custom.gc-save(type='button')
+  button.btn.btn-sm.btn-primary.gc-custom.gc-save
     i.glyphicon.glyphicon-ok
-  button.btn.btn-sm.btn-primary.gc-custom.gc-remove(type='button')
+  button.btn.btn-sm.btn-primary.gc-custom.gc-remove
     | ×
 .gc-property-view.gc-workout-exercise-prop(class=editMode ? 'hidden' : '')
   a.gc-toggle-edit-mode(href='#')
     .btn-group.gc-property-view.gc-property(role='group')
-      button(type='button', class='btn btn-sm btn-primary gc-custom gc-property-label')
+      button(class='btn btn-sm btn-primary gc-custom gc-property-label')
         i.gc-icon-bars
         | &nbsp;
         span.gc-property-value-name-label
           | #{personal_property.name}: #{value} #{personal_property.global_property.unit}
-      button(type='button', class='gc-remove btn btn-sm btn-primary gc-custom')
+      button(class='gc-remove btn btn-sm btn-primary gc-custom')
         i.glyphicon.glyphicon-remove
