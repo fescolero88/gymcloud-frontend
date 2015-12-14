@@ -36,8 +36,8 @@ define [
         controller: controller
 
     _initVentListeners: ->
-      @app.vent.on('search:global', @_navigateToResults)
-      @app.vent.on('app:view:header:render', @_renderSearchBarView)
+      @listenTo(@app.vent, 'search:global', @_navigateToResults)
+      @listenTo(@app.vent, 'app:view:header:render', @_renderSearchBarView)
 
     _navigateToResults: (q, entityType = 'all', searchScope = 'all') ->
       Backbone.history.navigate "search/#{q}/#{entityType}/#{searchScope}",

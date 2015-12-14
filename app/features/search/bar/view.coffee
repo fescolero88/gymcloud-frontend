@@ -37,13 +37,14 @@ define [
 
     cancelSearch: ->
       @ui.searchTerm.val('')
-      unless @ui.searchTerm.is(":focus")
+      unless @ui.searchTerm.is(':focus')
         @ui.searchIcon.addClass('glyphicon-search')
         @ui.searchIcon.removeClass('glyphicon-remove')
       App.vent.trigger 'search:cancel'
 
     search: (ev) ->
-      isSearchInProgress = @ui.searchButton.find('i').hasClass('glyphicon-remove')
+      isSearchInProgress = @ui.searchButton.find('i')
+        .hasClass('glyphicon-remove')
       if isSearchInProgress
         do @cancelSearch
       else

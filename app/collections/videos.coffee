@@ -2,15 +2,18 @@ define [
   'models/videos'
   'backbone.paginator'
 ], (
-  VideoModel
+  Video
   PageableCollection
 ) ->
-  class VideosCollection extends Backbone.PageableCollection
+
+  class Videos extends Backbone.PageableCollection
+
+    type: 'Videos'
 
     url: ->
       '/videos/search'
 
-    model: VideoModel
+    model: Video
 
     queryParams:
       q: null

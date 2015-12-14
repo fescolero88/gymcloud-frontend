@@ -6,6 +6,8 @@ define [
 
   class GoogleLoginBehavior extends SocialLoginBehavior
 
+    key: 'google_login'
+
     _vendorKey: 'client_id'
 
     _vendorName: 'google'
@@ -32,4 +34,3 @@ define [
           @getToken('google_oauth2', response)
         else
           # google authentication failed
-          console.log arguments

@@ -1,31 +1,28 @@
 define [
-  'behaviors/stickit'
-  'behaviors/video_assign'
   'behaviors/form_validation'
   'behaviors/navigate_back'
-  'behaviors/auto_complete/auto_complete'
-  'behaviors/pagination'
+  'behaviors/regioned'
+  'behaviors/stickit'
   'behaviors/facebook_login'
   'behaviors/google_login'
-], (
-  StickitBehavior
-  VideoAssignBehavior
-  FormValidationBehavior
-  NavigateBackBehavior
-  AutoCompleteBehavior
-  PaginationBehavior
-  FacebookLoginBehavior
-  GoogleLoginBehavior
-) ->
+  'features/add_to_library/button/behavior'
+  'features/author/widget/behavior'
+  'features/auto_complete/behavior'
+  'features/breadcrumbs/behavior'
+  'features/delete_button/behavior'
+  'features/editable_textarea/behavior'
+  'features/navigation/content_tabs/behavior'
+  'features/pagination/behavior'
+  'features/privacy/toggle/behavior'
+  'features/privacy/widget/behavior'
+  'features/rating/widget/behavior'
+  'features/video/assigned/behavior'
+], ->
 
-  Behaviors =
-    stickit: StickitBehavior
-    video_assign: VideoAssignBehavior
-    form_validation: FormValidationBehavior
-    navigate_back: NavigateBackBehavior
-    auto_complete: AutoCompleteBehavior
-    pagination: PaginationBehavior
-    facebook_login: FacebookLoginBehavior
-    google_login: GoogleLoginBehavior
+  klasses = _.toArray(arguments)
 
-  Behaviors
+  _.reduce klasses, (memo, klass) ->
+    key = _.result(klass::, 'key')
+    memo[key] = klass
+    memo
+  , {}

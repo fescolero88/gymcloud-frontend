@@ -1,10 +1,8 @@
 define [
   './folder_list/view'
-  'models/global_exercise'
   './template'
 ], (
   FolderListView
-  GlobalExercise
   template
 ) ->
   class ModalAddToLibraryView extends Marionette.LayoutView
@@ -19,17 +17,20 @@ define [
       form: 'form'
 
     regions:
-      library: '#gc-modal-library-region'
+      library: 'region[data-name="library"]'
 
     events:
       'submit @ui.form': '_onSubmit'
 
-    viewData: (new Backbone.Model)
-
-    initialize: (data) ->
+    initialize: ->
       user = App.request('current_user')
+      @options.type = _.chain(@options.model.type)
+        .underscored()
+        .pluralize()
+        .value()
       initialFolder = user.getRootFolderFor(@options.type)
 
+      @viewData = new Backbone.Model
       @viewData.set
         folder: initialFolder
         folderList: @_getFolderListView(initialFolder)
@@ -37,7 +38,7 @@ define [
       @listenTo(@viewData, 'change:folder', @_onFolderChange)
       @listenTo(@viewData, 'change:folderList', @_showFolderList)
 
-      this
+      @
 
     templateHelpers: ->
       type: @options.type
@@ -67,8 +68,6 @@ define [
       @viewData.set(folder: folder)
 
     _onSubmit: (ev) ->
-      ev.preventDefault()
-
       folder = @viewData.get('folder')
       folder.items.duplicate(
         ids: [@model.id]

@@ -12,11 +12,10 @@ define [
       searchBar: 'region[data-name="search-bar"]'
 
     initialize: ->
-      App.vent.on('profile:ready', @render)
+      @listenTo(App.vent, 'profile:ready', @render)
 
     onRender: ->
       App.vent.trigger('app:view:header:render', @)
 
     onDestroy: ->
       App.vent.trigger('app:view:header:destroy', @)
-      App.vent.off('profile:ready', @render)

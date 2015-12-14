@@ -58,5 +58,5 @@ define [
 
     accountTypeChanged: ->
       App.request 'messenger:show',
-        message: "Account type successfully changed."
+        message: 'Account type successfully changed.'
         type: 'success'

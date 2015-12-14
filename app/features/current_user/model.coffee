@@ -10,7 +10,7 @@ define [
     url: '/users/me'
 
     parse: (data) =>
-      @.clear()
+      @clear()
       @profile = new UserProfile(data.user_profile)
       data.user_profile = @profile.attributes
       data

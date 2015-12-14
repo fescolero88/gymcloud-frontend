@@ -1,11 +1,12 @@
 define [
-  './exercise_property'
+  'collections/exercise_properties'
 ], (
-  ExerciseProperty
+  ExerciseProperties
 ) ->
-  ExerciseProperties = Backbone.Collection.extend(model: ExerciseProperty)
 
   class WorkoutsExercise extends Backbone.Model
+
+    type: 'WorkoutsExercise'
 
     urlRoot: '/workout_exercises'
 

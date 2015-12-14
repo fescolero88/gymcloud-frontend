@@ -1,7 +1,9 @@
 define [
   './template'
+  'moment'
 ], (
   template
+  moment
 ) ->
 
   class EntityItemView extends Marionette.ItemView
@@ -22,29 +24,62 @@ define [
 
       stickit:
         bindings:
-          '[data-bind="name"]': 'name'
-          '[data-bind="updated_at"]': 'updated_at'
           ':el':
-            observe: ['folder_id', 'id']
-            update: ($el, _val, model, _options) ->
-              $el.attr('data-id', model.get('id'))
-              if model.get('folder_id')
-                $el.addClass('gc-folder-item')
-              else
-                $el.addClass('gc-folder')
+            attributes: [
+              observe: 'id'
+              name: 'data-id'
+            ]
+            classes:
+              'gc-folder':
+                observe: 'folder_id'
+                onGet: (value) ->
+                  !value
+              'gc-folder-item':
+                observe: 'folder_id'
+                onGet: (value) ->
+                  !!value
+          'input':
+            observe: 'folder_id'
+            visible: (value) ->
+              !value
+            attributes: [
+                'data-id': 'id'
+            ]
+          '.gc-exercises-folder-icon':
+            observe: 'folder_id'
+            visible: (value) ->
+              !value
+          '.gc-exercises-item-icon':
+            observe: 'folder_id'
+            visible: (value) ->
+              !!value
+            attributes: [
+                name: 'class'
+                onGet: (value) ->
+                  "gc-exercises-item-icon-#{@type}"
+            ]
+          '.gc-exercises-link':
+            observe: 'name'
+            attributes: [
+                observe: ['id', 'folder_id']
+                name: 'href'
+                onGet: (values) ->
+                  if values[1]
+                    "##{@type}/#{values[0]}"
+                  else
+                    "##{@type}_folder/#{values[0]}"
+              ,
+                observe: ['id']
+                name: 'data-key'
+            ]
+          '.gc-exercises-update-time':
+            observe: 'updated_at'
+            onGet: (value) ->
+              moment(value).fromNow()
 
     initialize: (options) =>
       @type = options.type
       @dragula = options.dragula
-
-    templateHelpers: ->
-      type: @type
-      isFolder: !@model.get('folder_id')
-      url: do =>
-        if @model.get('folder_id')
-          "##{@type}/#{@model.get('id')}"
-        else
-          "##{@type}_folder/#{@model.get('id')}"
 
     itemChecked: (ev) =>
       @trigger 'item:clicked'

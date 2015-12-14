@@ -1,6 +1,8 @@
 define [
+  './collection'
   './item/view'
 ], (
+  Collection
   BreadcrumbsItemView
 ) ->
 
@@ -13,21 +15,27 @@ define [
     childView: BreadcrumbsItemView
 
     childViewOptions: (model, index) ->
-      isEditable = !!model.get('folder_id')
-      options = { isEditable: isEditable }
-      options.attributes = { contenteditable: isEditable } if isEditable
+      isEditable = @_isEditable(model)
+      options =
+        isEditable: isEditable
+      if isEditable
+        options.attributes =
+          contenteditable: isEditable
       options
 
-    initialize: (options) ->
-      @collection = new Backbone.Collection
-      @_getBreadcrumbs(@model)
+    constructor: ->
+      @collection = new Collection
+      super
 
-    reinitCollection: ->
-      @collection.reset()
-      @_getBreadcrumbs(@model)
+    onShow: ->
+      @targetModel = _.result(@options, 'model')
+      if _.isUndefined(@targetModel)
+        throw new Error('target model should exist')
+      @listenTo(@targetModel, 'change:name', @_initBreadcrumbs)
+      @_initBreadcrumbs()
 
-    _getBreadcrumbs: (model) ->
-      @collection.unshift(model)
-      parent = model.parent
-      if parent?.get('parent_id') && parent?.get('parent_id') != null
-        @_getBreadcrumbs(parent)
+    _initBreadcrumbs: ->
+      @collection.initFromModel(@targetModel)
+
+    _isEditable: (model) ->
+      !! model.get('folder_id')

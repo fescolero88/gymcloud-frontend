@@ -1,12 +1,10 @@
 define [
-  '../breadcrumbs/view'
   './entity_list/view'
   './add_entity_modal/view'
   './add_folder_modal/view'
   './duplicate_modal/view'
   './template'
 ], (
-  Breadcrumbs
   EntityListView
   AddEntityModalView
   AddFolderModalView
@@ -23,10 +21,8 @@ define [
     regions:
       collectionRegion: 'region[data-name="collection"]'
       modalRegion: '#gc-modal-region'
-      breadcrumbs: 'region[data-name="breadcrumbs"]'
 
     ui:
-      title: '.gc-breadcrumbs-title'
       liveSearch: '.live-search'
       mainCheckbox: '.gc-content-nav-checkall input'
       collectionRegion: 'region[data-name="collection"]'
@@ -48,6 +44,9 @@ define [
     behaviors: ->
 
       navigate_back: true
+
+      breadcrumbs: true
+
       auto_complete:
         onItemAdd: (id, $item) =>
           Backbone.history.navigate("##{@typeName}/#{id}", trigger: true)
@@ -66,11 +65,9 @@ define [
       @collection = data.items
       @typeName = data.type
       @singularName = _.chain(@typeName).humanize().singularize().value()
-      @breadcrumbs = new Breadcrumbs(model: @model)
 
     onShow: ->
       @_showEntityList()
-      @getRegion('breadcrumbs').show(@breadcrumbs)
 
     _toggleActionsBtnVisibility: =>
       if $('.gc-exercises-chb input[type=checkbox]:checked').length > 0
@@ -104,10 +101,10 @@ define [
         @ui.mainCheckbox.prop 'checked', true
 
     _showDestroySelectedModal: (ev) =>
-      App.request 'base:confirmationalModal',
-        title: "Delete item(s)"
-        content: "Are you sure you want to delete selected items?"
-        confirmBtn: "Delete"
+      App.request 'modal:confirm',
+        title: 'Delete item(s)'
+        content: 'Are you sure you want to delete selected items?'
+        confirmBtn: 'Delete'
         confirmCallBack: @_onDestroyConfirm
 
     _onDestroyConfirm: =>
@@ -158,5 +155,5 @@ define [
     _onDuplicate: (response) =>
       @ui.actionModal.modal('hide')
       App.request 'messenger:show',
-        message: "Item(s) duplicated"
+        message: 'Item(s) duplicated'
         type: 'success'

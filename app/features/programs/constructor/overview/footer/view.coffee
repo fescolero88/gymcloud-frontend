@@ -1,8 +1,6 @@
 define [
-  'features/privacy_buttons/view'
   './template'
 ], (
-  PrivacyButtons
   template
 ) ->
   class FooterControlsView extends Marionette.LayoutView
@@ -11,11 +9,7 @@ define [
 
     template: template
 
-    regions:
-      privacyButtons: 'region[data-name="privacy-buttons"]'
-
     ui:
-      privacyButtons: '.privacy-buttons > .btn'
       privacyRadios: '[name="privacy"]'
       deleteProgram: '.gc-program-delete-button'
       addWeek: '.gc-program-add-week'
@@ -26,6 +20,7 @@ define [
       cancelAddWorkout: '.gc-cancel-add-workout'
 
     behaviors: ->
+      privacy_toggle: true
       auto_complete:
         onItemAdd: @_addProgramWorkoutFromLibrary
         collection: ->
@@ -42,7 +37,6 @@ define [
       'click @ui.cancelAddWorkout': 'toggleControlsView'
 
     initialize: (options) ->
-      @privacyButtons = new PrivacyButtons(model: @model)
       @workoutsCollection = options.workoutsCollection
       App.commands.setHandler 'program_workouts:add:toggle', @toggleControlsView
       @listenTo(@collection, 'update', @toggleAddWorkoutButton)
@@ -50,19 +44,17 @@ define [
       @
 
     onDestroy: ->
-      App.commands.removeHandler 'program_workouts:add:toggle', @toggleControlsView
+      App.commands.removeHandler 'program_workouts:add:toggle',
+        @toggleControlsView
 
     onShow: ->
       @toggleAddWorkoutButton()
 
-    onRender: ->
-      @getRegion('privacyButtons').show(@privacyButtons) if @_isAuthor()
-
     deleteProgram: ->
-      App.request 'base:confirmationalModal',
-        title: "Remove program?"
-        content: "Are you sure you want to delete this program?"
-        confirmBtn: "Remove"
+      App.request 'modal:confirm',
+        title: 'Remove program?'
+        content: 'Are you sure you want to delete this program?'
+        confirmBtn: 'Remove'
         confirmCallBack: =>
           @model.destroy()
 

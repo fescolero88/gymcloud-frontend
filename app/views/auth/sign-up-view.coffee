@@ -37,7 +37,7 @@ class SignUpStep1 extends Marionette.ItemView
       if key is 'trainer-type'
         formData[key] = parseInt value
     @model.set formData
-    @model.save this.model.attributes,
+    @model.save @model.attributes,
       wait: true
       success: (data) =>
         loginModel = new LoginModel
@@ -76,7 +76,7 @@ class SignUpStep2 extends Marionette.ItemView
     @on 'signup:errors', @returnedErrors
 
   submit: (ev) =>
-    formData = this.prepare_attributes @ui.form.serializeObject()
+    formData = @prepare_attributes @ui.form.serializeObject()
     @model.set formData
 
     if @model.isValid true
@@ -89,14 +89,14 @@ class SignUpStep2 extends Marionette.ItemView
         currentUser.fetch().then (model) =>
           profile_id = model.get('user_profile').id
           @model.set 'id', profile_id
-          this.saveProfile()
+          @saveProfile()
 
   prepare_attributes: (formData)->
     year = formData['birth_year']
     month = formData['birth_month']
     day = formData['birth_day']
     birth = "#{year}-#{month}-#{day}"
-    if moment(birth, "YYYY-MM-DD", true).isValid()
+    if moment(birth, 'YYYY-MM-DD', true).isValid()
       formData['birthday'] = birth
     else
       @trigger 'switchError', 'Incorrect date', @ui.dateInputFroup

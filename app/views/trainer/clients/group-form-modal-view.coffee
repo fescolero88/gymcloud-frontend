@@ -37,7 +37,9 @@ module.exports = class GroupFormModalView extends Marionette.ItemView
     if input.files?[0]
       reader = new FileReader()
       reader.onload = (e) ->
-        $(ev.target).parents('form').find('.gc-edit-profile-modal-avatar').attr('src', e.target.result)
+        $(ev.target).parents('form')
+          .find('.gc-edit-profile-modal-avatar')
+          .attr('src', e.target.result)
       reader.readAsDataURL(input.files[0])
 
   submitGroupForm: (ev) =>

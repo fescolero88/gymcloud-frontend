@@ -2,6 +2,8 @@ define ->
 
   class FolderItems extends Backbone.Collection
 
+    type: 'FolderItems'
+
     url: ->
       "/#{@type}"
 

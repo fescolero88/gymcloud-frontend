@@ -6,6 +6,8 @@ define [
 
   class FacebookLoginBehavior extends SocialLoginBehavior
 
+    key: 'facebook_login'
+
     _vendorKey: 'app_id'
 
     _vendorName: 'facebook'

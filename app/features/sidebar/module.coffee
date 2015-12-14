@@ -12,8 +12,10 @@ define [
         @_initVentListeners()
 
     _initVentListeners: ->
-      @app.vent.on('app:view:main:render', @_renderSidebarView)
+      @listenTo(@app.vent, 'app:layouts:main:render', @_renderSidebarView)
 
-    _renderSidebarView: (targetView) ->
+    _renderSidebarView: ->
       view = new SidebarView
-      targetView.getRegion('menu')?.show(view)
+      @app.request 'views:show', view,
+        layout: 'main'
+        region: 'menu'

@@ -3,6 +3,7 @@ define [
 ], (
   template
 ) ->
+
   class MembersItemView extends Marionette.ItemView
 
     template: template

@@ -31,31 +31,54 @@ module.exports =
     ]
 
     alias:
-      'config': path.join(__dirname, 'config', process.env.NODE_ENV || 'test')
-      'selectize': 'app/deps/vendor/selectize.js'
-      'spinner': 'bower_components/spin.js/spin.js'
-      'jquery-sortable': 'bower_components/jquery-sortable/source/js/jquery-sortable.js'
-      'datetimepicker': 'bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker'
-      'nanoscroller': 'bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js'
-      'messenger': 'bower_components/messenger/build/js/messenger.js'
-      'bootstrap': 'bower_components/bootstrap/dist/js/bootstrap.js'
-      'backbone_original': 'node_modules/backbone/backbone.js'
-      'marionette_original': 'node_modules/backbone.marionette/lib/core/backbone.marionette.js'
-      'jquery_original': 'node_modules/jquery/dist/jquery.js'
-      'marionette': 'deps/bundles/marionette/bundle'
-      'jquery.ui.widget': 'bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget.js'
-      'jquery-iframe-transport': 'bower_components/blueimp-file-upload/js/jquery.iframe-transport.js'
-      'load-image': 'bower_components/blueimp-load-image/js/load-image.all.min.js'
-      'tmpl': 'bower_components/blueimp-tmpl/js/tmpl.min.js'
-      'jquery-file-upload': 'bower_components/blueimp-file-upload/js/jquery.fileupload.js'
-      'jquery-file-upload-process': 'bower_components/blueimp-file-upload/js/jquery.fileupload-process.js'
-      'jquery-file-upload-video': 'bower_components/blueimp-file-upload/js/jquery.fileupload-video.js'
-      'jquery-file-upload-validate': 'bower_components/blueimp-file-upload/js/jquery.fileupload-validate.js'
-      'jquery-file-upload-ui': 'bower_components/blueimp-file-upload/js/jquery.fileupload-ui.js'
-
-      #'underscore': 'app/deps/bundles/underscore'
-      #'backbone': 'app/deps/bundles/backbone'
-      #'backbone.marionette': 'app/deps/bundles/marionette'
+      'config':
+        path.join(__dirname, 'config', process.env.NODE_ENV || 'test')
+      'selectize':
+        'app/deps/vendor/selectize.js'
+      'spinner':
+        'bower_components/spin.js/spin.js'
+      'jquery-sortable':
+        'bower_components/jquery-sortable/source/js/jquery-sortable.js'
+      'datetimepicker':
+        'bower_components/eonasdan-bootstrap-datetimepicker' +
+          '/src/js/bootstrap-datetimepicker'
+      'nanoscroller':
+        'bower_components/nanoscroller' +
+          '/bin/javascripts/jquery.nanoscroller.js'
+      'messenger':
+        'bower_components/messenger/build/js/messenger.js'
+      'bootstrap':
+        'bower_components/bootstrap/dist/js/bootstrap.js'
+      'backbone_original':
+        'node_modules/backbone/backbone.js'
+      'marionette_original':
+        'node_modules/backbone.marionette' +
+          '/lib/core/backbone.marionette.js'
+      'jquery_original':
+        'node_modules/jquery/dist/jquery.js'
+      'marionette':
+        'deps/bundles/marionette/bundle'
+      'jquery.ui.widget':
+        'bower_components/blueimp-file-upload' +
+          '/js/vendor/jquery.ui.widget.js'
+      'jquery-iframe-transport':
+        'bower_components/blueimp-file-upload' +
+          '/js/jquery.iframe-transport.js'
+      'load-image':
+        'bower_components/blueimp-load-image' +
+          '/js/load-image.all.min.js'
+      'tmpl':
+        'bower_components/blueimp-tmpl/js/tmpl.min.js'
+      'jquery-file-upload':
+        'bower_components/blueimp-file-upload/js/jquery.fileupload.js'
+      'jquery-file-upload-process':
+        'bower_components/blueimp-file-upload/js/jquery.fileupload-process.js'
+      'jquery-file-upload-video':
+        'bower_components/blueimp-file-upload/js/jquery.fileupload-video.js'
+      'jquery-file-upload-validate':
+        'bower_components/blueimp-file-upload/js/jquery.fileupload-validate.js'
+      'jquery-file-upload-ui':
+        'bower_components/blueimp-file-upload/js/jquery.fileupload-ui.js'
 
     extensions: [
       ''
@@ -148,21 +171,27 @@ module.exports =
 
   plugins: [
       new webpack.ProvidePlugin(
-        #$: 'jquery'
-        #jQuery: 'jquery'
-        #'window.jQuery': 'jquery'
-        $: 'deps/bundles/jquery/original'
-        jQuery: 'deps/bundles/jquery/original'
-        'window.jQuery': 'deps/bundles/jquery/original'
-        _: 'deps/bundles/underscore/bundle'
-        Backbone: 'deps/bundles/backbone/original'
-        Marionette: 'deps/bundles/marionette/original'
+        $:
+          'deps/bundles/jquery/original'
+        jQuery:
+          'deps/bundles/jquery/original'
+        'window.jQuery':
+          'deps/bundles/jquery/original'
+        _:
+          'deps/bundles/underscore/bundle'
+        Backbone:
+          'deps/bundles/backbone/original'
+        Marionette:
+          'deps/bundles/marionette/original'
+        can:
+          'deps/bundles/can'
       )
     ,
-      new ExtractTextPlugin("[name].css")
+      new ExtractTextPlugin('[name].css')
     ,
       new webpack.ResolverPlugin(
-        new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('bower.json', ['main'])
+        new webpack.ResolverPlugin
+          .DirectoryDescriptionFilePlugin('bower.json', ['main'])
       )
   ]
 

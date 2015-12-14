@@ -21,7 +21,7 @@ define ->
     build: (user) ->
       symbols = if user.get('is_pro') then @symbols.pro else @symbols.client
       data = _.chain(symbols)
-        .select((symbol) =>
+        .select((symbol) ->
           user[symbol] instanceof Backbone.Collection
         )
         .map((symbol) =>
@@ -48,9 +48,9 @@ define ->
     _getPathBySymbol: (symbol, user) ->
       _.result({
         clients: ->
-          '#tr/clients/individuals'
+          '#clients/individuals'
         client_groups: ->
-          '#tr/clients/groups'
+          '#clients/groups'
         exercises: =>
           id = @_getRootFolderId('Exercises', user)
           "#exercises_folder/#{id}"
@@ -60,12 +60,12 @@ define ->
         program_templates: =>
           id = @_getRootFolderId('Programs', user)
           "#program_templates_folder/#{id}"
-        workout_exercises: =>
-          "#workout_exercises"
-        personal_workouts: =>
-          "#personal_workouts"
-        personal_programs: =>
-          "#personal_programs"
+        workout_exercises: ->
+          '#workout_exercises'
+        personal_workouts: ->
+          '#personal_workouts'
+        personal_programs: ->
+          '#personal_programs'
       }, symbol) || '#'
 
     _getRootFolderId: (name, user) ->

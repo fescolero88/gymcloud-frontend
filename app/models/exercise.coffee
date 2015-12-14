@@ -6,6 +6,8 @@ define [
 
   class Exercise extends Backbone.Model
 
+    type: 'Exercise'
+
     urlRoot: '/exercises/'
 
     validation:

@@ -1,5 +1,5 @@
 define [
-  'lodash'
+  'underscore'
 ], (
   o_
 ) ->

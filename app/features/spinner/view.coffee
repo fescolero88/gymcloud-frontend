@@ -16,6 +16,7 @@ define [
       pointer: '.pointer'
 
     initialize: ->
+      window.view = @
       @listenTo(@, 'start', @_start)
       @listenTo(@, 'stop', @_stop)
       @
@@ -28,14 +29,18 @@ define [
       @_deactivate(@_hide)
 
     _show: ->
-      @ui.clock.stop().show()
+      @ui.clock.stop()
+        .show()
 
     _hide: ->
-      @ui.clock.stop().fadeOut('fast')
+      @ui.clock.stop()
+        .fadeOut('fast')
 
     _activate: ->
-      @ui.pointer.stop().fadeIn('fast')
+      @ui.pointer.stop()
+        .fadeIn('fast')
 
     _deactivate: (cb) ->
-      @ui.pointer.stop().fadeOut 'fast', =>
-        cb.apply(@)
+      @ui.pointer.stop()
+        .fadeOut 'fast', =>
+          cb.apply(@)

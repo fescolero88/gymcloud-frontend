@@ -2,6 +2,8 @@ define ->
 
   class Activities extends Backbone.Collection
 
+    type: 'Activities'
+
     initialize: ->
       super
       @page = 0

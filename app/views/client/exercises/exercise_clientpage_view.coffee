@@ -1,4 +1,5 @@
-ExerciseGlobalOverviewView = require 'views/client/exercises/exercise_clientpage_overview_view'
+ExerciseGlobalOverviewView =
+  require 'views/client/exercises/exercise_clientpage_overview_view'
 Breadcrumbs = require 'features/breadcrumbs/view'
 # BreadcrumbsView = require 'views/general/breadcrumbs/breadcrumbs-view'
 

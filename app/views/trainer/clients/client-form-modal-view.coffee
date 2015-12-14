@@ -38,7 +38,9 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
     if input.files && input.files[0]
       reader = new FileReader()
       reader.onload = (e) ->
-        $(ev.target).parents('form').find('.gc-edit-profile-modal-avatar').attr('src', e.target.result)
+        $(ev.target).parents('form')
+          .find('.gc-edit-profile-modal-avatar')
+          .attr('src', e.target.result)
       reader.readAsDataURL(input.files[0])
 
   submitClientForm: (ev) =>
@@ -46,7 +48,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
     formData = @ui.clientForm.serializeObject()
     for key, value of formData
       if key in ['weight, height, bodyfat']
-        formData[key] = value.replace(/\,/g,'.')
+        formData[key] = value.replace(/\,/g, '.')
       if not value
         delete formData[key]
     @model.set(formData)

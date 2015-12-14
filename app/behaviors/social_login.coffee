@@ -6,6 +6,8 @@ define [
 
   class SocialLoginBehavior extends Marionette.Behavior
 
+    key: 'social_login'
+
     _vendorKey: 'trainer_id'
 
     _vendorName: 'gymcloud'

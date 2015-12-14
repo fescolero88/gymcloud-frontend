@@ -3,6 +3,7 @@ define [
 ], (
   template
 ) ->
+
   class AddExerciseFolderModalItemView extends Marionette.ItemView
 
     template: template

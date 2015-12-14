@@ -22,9 +22,4 @@ define [
       @model.trigger('note:toggle_editor')
 
     deleteProgram: ->
-      App.request 'base:confirmationalModal',
-        title: "Remove program?"
-        content: "Are you sure you want to delete this program?"
-        confirmBtn: "Remove"
-        confirmCallBack: =>
-          @model.destroy()
+      App.request('modal:confirm:delete', @model)

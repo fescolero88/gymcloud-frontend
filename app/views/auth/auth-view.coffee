@@ -25,7 +25,7 @@ module.exports = class AuthView extends Marionette.ItemView
     @listenTo(@model, 'model:login:success', @_onLoginSuccess)
     @listenTo(@model, 'model:login:fail', @_onLoginFail)
     @signUp = data.signUp
-    Backbone.Validation.bind(this)
+    Backbone.Validation.bind(@)
 
   onShow: ->
     if @signUp
@@ -40,5 +40,5 @@ module.exports = class AuthView extends Marionette.ItemView
   _onLoginFail: ->
     App.request 'messenger:show',
       hideAfter: 10
-      message: "The email or password you entered is incorrect"
+      message: 'The email or password you entered is incorrect'
       type: 'error'

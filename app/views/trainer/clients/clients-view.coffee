@@ -15,24 +15,23 @@ module.exports = class ClientsView extends Marionette.LayoutView
   className: 'clients-view-main-wrapper'
 
   events:
-    "click .gc-content-nav-checkall": "toggleCheck"
+    'click .gc-content-nav-checkall': 'toggleCheck'
     'click .gc-clients-list-client-chb': 'updateState'
-    "click .move-to-group-show": "showMovetogroupModal"
-    "click .show-client-form": "showClientAddModal"
-    "click .show-group-form": "showGroupAddModal"
+    'click .move-to-group-show': 'showMovetogroupModal'
+    'click .show-client-form': 'showClientAddModal'
+    'click .show-group-form': 'showGroupAddModal'
     'click @ui.removeButton': 'rmEvent'
-    "submit .gc-move-to-group-form": "submitMovetogroupForm"
+    'submit .gc-move-to-group-form': 'submitMovetogroupForm'
 
   ui:
     mainCheckbox: ".gc-content-nav-checkall input[type='checkbox']"
-    groupForm: ".group-form"
-    checkedCounter: ".gc-clients-nav-right p"
+    groupForm: '.group-form'
+    checkedCounter: '.gc-clients-nav-right p'
     modalContainer: '#gc-modal-container'
     moveButton: '.move-to-group-show'
     removeButton: '.remove-item'
-    mainCheckbox: ".gc-content-nav-checkall input[type='checkbox']"
-    clientsList: ".gc-clients-list-wrapper"
-    clientsRegion: "#clients-region"
+    clientsList: '.gc-clients-list-wrapper'
+    clientsRegion: '#clients-region'
     groupsRegion: '#groups-region'
     splash: '#clients-groups-splash'
 
@@ -47,7 +46,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
   initialize: (options) =>
     viewType = options.viewType || 'clients'
     @viewType = viewType
-    
+
   initRegionListeners: =>
     if @clients.currentView? # temp fix for existing issue
       @listenTo @clients.currentView, 'individual:move', @showMovetogroupModal
@@ -79,7 +78,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
   updateText: =>
     text = @getSelectedListItemsAsText()
     if text
-      @ui.checkedCounter.text(text + " selected")
+      @ui.checkedCounter.text(text + ' selected')
       @ui.checkedCounter.removeClass('hidden')
     else
       @ui.checkedCounter.addClass('hidden')
@@ -91,7 +90,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
     if clientsCount
       text += "#{clientsCount} client(s)"
     if clientsCount and groupsCount
-      text += ", "
+      text += ', '
     if groupsCount
       text += "#{groupsCount} group(s)"
     text
@@ -142,7 +141,8 @@ module.exports = class ClientsView extends Marionette.LayoutView
         message: 'No available groups'
         type: 'error'
     else
-      moveToGroupView = new MoveToGroupView collection: @groups.currentView.collection
+      moveToGroupView = new MoveToGroupView
+        collection: @groups.currentView.collection
       @modalContainer.show moveToGroupView
       @ui.modalContainer.modal('show')
 
@@ -154,11 +154,13 @@ module.exports = class ClientsView extends Marionette.LayoutView
 
     for check in @ui.clientsRegion.find('input[type=checkbox]:checked')
       clientIds.push $(check).data('id')
-    for check in @$el.find('.gc-move-to-group-form').find('input[type=checkbox]:checked')
+    els = @$el.find('.gc-move-to-group-form')
+      .find('input[type=checkbox]:checked')
+    for check in els
       groupIds.push $(check).data('id')
 
-    groupIds.forEach (groupId) =>
-      clientIds.forEach (clientId) =>
+    groupIds.forEach (groupId) ->
+      clientIds.forEach (clientId) ->
         clientGroupMember = new ClientGroupMember
           clientId: clientId
           groupId: groupId
@@ -172,10 +174,10 @@ module.exports = class ClientsView extends Marionette.LayoutView
     return $el.find('input[type=checkbox]:checked').length
 
   rmEvent: (ev) =>
-    App.request 'base:confirmationalModal',
-      title: "Delete items"
-      content: "Are you sure you want to delete selected items?"
-      confirmBtn: "Delete"
+    App.request 'modal:confirm',
+      title: 'Delete items'
+      content: 'Are you sure you want to delete selected items?'
+      confirmBtn: 'Delete'
       confirmCallBack: =>
         App.vent.trigger 'rm-client'
         App.vent.trigger 'rm-group'
@@ -199,7 +201,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
       @ui.splash.addClass 'hidden'
 
   showSplash: (views) =>
-    views.forEach (view) =>
+    views.forEach (view) ->
       view.$el.addClass 'hidden'
 
     @ui.splash.removeClass 'hidden'

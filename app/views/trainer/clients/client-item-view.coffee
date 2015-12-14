@@ -1,7 +1,6 @@
 define [
   'templates/trainer/clients/client-item'
-],
-(
+], (
   template
 ) ->
 
@@ -36,14 +35,16 @@ define [
         @model.destroy()
 
     deleteSingle: (ev) =>
-      App.request 'base:confirmationalModal',
-        title: "Delete client"
-        content: "Are you sure you want to delete #{@model.get('first_name')} #{@model.get('last_name')}?"
-        confirmBtn: "Delete"
+      App.request 'modal:confirm',
+        title: 'Delete client'
+        content: 'Are you sure you want to delete ' +
+          "#{@model.get('first_name')} #{@model.get('last_name')}?"
+        confirmBtn: 'Delete'
         confirmCallBack: =>
           @model.destroy().then =>
             @model.collection?.remove @model
 
     moveSingle: (ev) =>
-      $(ev.currentTarget).closest('.row').find(':checkbox').prop('checked', true)
+      $(ev.currentTarget).closest('.row')
+        .find(':checkbox').prop('checked', true)
       @trigger 'individual:move'

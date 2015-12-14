@@ -5,5 +5,4 @@ module.exports = class MoveToGroupView extends Marionette.ItemView
   className: 'modal-dialog modal-sm'
 
   events:
-    "submit .gc-move-to-group-form": "submitMovetogroupForm"
-
+    'submit .gc-move-to-group-form': 'submitMovetogroupForm'

@@ -6,4 +6,6 @@ define [
 
   class ProgramWeeks extends Backbone.Collection
 
+    type: 'ProgramWeeks'
+
     model: ProgramWeek

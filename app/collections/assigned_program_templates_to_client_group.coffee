@@ -1,6 +1,4 @@
-define [
-], (
-) ->
+define ->
 
   class AssignedWorkoutTemplatesToClientGroup extends Backbone.Collection
 

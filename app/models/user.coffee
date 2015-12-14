@@ -7,6 +7,8 @@ define [
 
   class User extends Backbone.NestedModel
 
+    type: 'User'
+
     urlRoot: ->
       currentUserId = App.request('current_user_id')
       if currentUserId == @id then '/users/me' else '/users'
@@ -18,6 +20,12 @@ define [
       @profile = new UserProfile(data.user_profile)
       data.user_profile = @profile.attributes
       data
+
+    fullName: ->
+      _.compact([
+        @get('user_profile.first_name')
+        @get('user_profile.last_name')
+      ]).join(' ')
 
     invite: (email) ->
       options =

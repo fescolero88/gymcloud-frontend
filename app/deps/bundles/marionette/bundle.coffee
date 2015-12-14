@@ -9,7 +9,7 @@ define [
   bBackbone
   oMarionette
   DirtyHack
-  Behaviors
+  behaviors
 )->
 
   oMarionette
@@ -17,5 +17,5 @@ define [
   bBackbone.Marionette = oMarionette
   _.extend(oMarionette.View.prototype, bBackbone.Stickit.ViewMixin)
   DirtyHack(oMarionette)
-  oMarionette.Behaviors.behaviorsLookup = -> Behaviors
+  oMarionette.Behaviors.behaviorsLookup = behaviors
   oMarionette

@@ -33,4 +33,4 @@ define [
     submitForm: (ev) ->
       checked = @ui.itemsList.find(':checked')
       ids = checked.map((_index, el) -> $(el).data('id'))
-      @trigger("items:duplicate", ids)
+      @trigger('items:duplicate', ids)

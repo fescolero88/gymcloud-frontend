@@ -6,13 +6,12 @@ define [
   class NewProfileView extends Marionette.ItemView
 
     initialize: ->
-      Backbone.Validation.bind(this)
+      Backbone.Validation.bind(@)
 
     behaviors: ->
       form_validation: true
 
       stickit:
-        model: => @model.profile
         bindings:
           'input[name="gender"]': 'gender'
           'input[name="weight"]': 'weight'
@@ -34,7 +33,7 @@ define [
                 if _.any(ava?.large.url)
                   "background-image: url(#{ava.large.url})"
                 else
-                  "background-image: url(app/images/logo-big.png)"
+                  'background-image: url(app/images/logo-big.png)'
               ]
 
     className: 'new-profile-view'

@@ -2,18 +2,26 @@ define ->
 
   class StickitBehavior extends Marionette.Behavior
 
-    defaults: ->
-      model: @view.model || undefined
-      bindings: @view.bindings || {}
+    key: 'stickit'
 
-    onRender: ->
-      @view.stickit(@_stickitArgs()...)
+    onShow: ->
+      @_initArgs()
+      @view.stickit(@args.model, @args.bindings)
 
     onDestroy: ->
-      @view.unstickit(@_stickitArgs()...)
+      unless _.isUndefined(@args)
+        @view.unstickit(@args.model, @args.bindings)
 
-    _stickitArgs: ->
-      [
-        _.result(@options, 'model')
-        _.result(@options, 'bindings')
-      ]
+    _initArgs: ->
+      @args ?= {}
+      @_initArg('model')
+      @_initArg('bindings')
+
+    _initArg: (name) ->
+      unless _.isUndefined(@options[name])
+        @args[name] = @options[name]
+      else
+        @args[name] = @view[name]
+      if _.isFunction(@args[name])
+        fn = @args[name].bind(@view)
+        @args[name] = fn()
