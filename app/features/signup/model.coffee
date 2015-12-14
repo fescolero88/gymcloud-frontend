@@ -34,12 +34,12 @@ define [
         msg: 'Password must be 6 characters'
 
       password_confirmation: [
-        equalTo: 'password'
-        msg: 'The passwords do not match'
+          equalTo: 'password'
+          msg: 'The passwords do not match'
         ,
-        required: true
-        minLength: 6
-        msg: 'Password must be 6 characters'
+          required: true
+          minLength: 6
+          msg: 'Password must be 6 characters'
       ]
 
       agree:
@@ -48,41 +48,44 @@ define [
     createAccount: ->
       user_profile_id = undefined
       if @isValid true
-        $.post( '/users.json', JSON.stringify( @_prepareInitialParams() ) ).then((response) =>
+        $.post('/users.json', JSON.stringify(@_prepareInitialParams()))
+          .then( (response) =>
 
-          # set created id and user_profile_id
-          @set('id', response.id)
-          @set('user_profile_id', user_profile_id = response.user_profile.id)
+            # set created id and user_profile_id
+            @set('id', response.id)
+            @set('user_profile_id', user_profile_id = response.user_profile.id)
 
-          # get the token once the account is created
-          loginModel = new LoginModel
-            username: @get 'email'
-            password: @get 'password'
+            # get the token once the account is created
+            loginModel = new LoginModel
+              username: @get 'email'
+              password: @get 'password'
 
-          loginModel.once 'model:login:success', (response) =>
-            App.request 'accessToken:set', response.access_token
-            App.request('current_user').fetch()
-            
-            # update user profile once access token is received
-            @_updateUserProfile user_profile_id, (userProfileResponse) =>
-              @trigger 'account:created', userProfileResponse
+            loginModel.once 'model:login:success', (response) =>
+              App.request 'accessToken:set', response.access_token
+              App.request('current_user').fetch()
 
-          loginModel.login()
+              # update user profile once access token is received
+              @_updateUserProfile user_profile_id, (userProfileResponse) =>
+                @trigger 'account:created', userProfileResponse
 
-        ).fail (xhr, settings, errorThrown)  =>
-          errorJSON = xhr.responseJSON.error
-          for key of errorJSON
-            errorMsg = "#{key} #{errorJSON[key].join(',')}" if errorJSON.hasOwnProperty(key)
-            break
-          
-          App.request 'messenger:show',
-            type: 'error'
-            message: errorMsg
+            loginModel.login()
+
+          )
+          .fail (xhr, settings, errorThrown)  ->
+            errorJSON = xhr.responseJSON.error
+            for key of errorJSON
+              if errorJSON.hasOwnProperty(key)
+                errorMsg = "#{key} #{errorJSON[key].join(',')}"
+              break
+
+            App.request 'messenger:show',
+              type: 'error'
+              message: errorMsg
 
     acceptInvite: ->
       if @isValid true
         $.ajax(
-          url: "/users/invitation.json"
+          url: '/users/invitation.json'
           data: JSON.stringify(@_prepareInviteParams())
           type: 'PUT'
         ).then (response) =>
@@ -94,10 +97,10 @@ define [
           loginModel.once 'model:login:success', (response) =>
             App.request 'accessToken:set', response.access_token
             App.request('current_user').fetch()
-            
+
             # update user profile once access token is received
-            @_updateUserProfile @get('user_profile_id'), (userProfileResponse) =>
-              @trigger 'account:created', userProfileResponse
+            @_updateUserProfile @get('user_profile_id'), (response) =>
+              @trigger 'account:created', response
 
           loginModel.login()
 
@@ -119,7 +122,7 @@ define [
       params = @_prepareInitialParams()
       params.user.invitation_token = @get('invitation_token')
       params
-      
+
     # update user profile using patch
     _updateUserProfile: (user_profile_id, doneCallback) =>
       $.ajax

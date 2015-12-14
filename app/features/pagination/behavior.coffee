@@ -15,8 +15,7 @@ define [
     behaviorViewOptions: ->
       collection: @view.collection
 
-    initialize: ->
-      super
+    onShow: ->
       @listenTo(@view.collection, 'request', @_changeVisibility)
 
     _changeVisibility: ->

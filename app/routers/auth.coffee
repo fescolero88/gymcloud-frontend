@@ -73,9 +73,9 @@ define [
           client: client
         @_showView(view)
 
-        @listenTo view, 'signup:complete', =>
-          App.request('current_user').fetch().then =>
-            App.request('current_user:init:collections').then =>
+        @listenTo view, 'signup:complete', ->
+          App.request('current_user').fetch().then ->
+            App.request('current_user:init:collections').then ->
               App.vent.trigger 'app:main_view:init', ->
                 App.vent.trigger('redirect:to', '#welcome', trigger: false)
       else

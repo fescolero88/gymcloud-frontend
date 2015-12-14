@@ -87,7 +87,7 @@ define [
     _changeLocaltionHash: ->
       if not @request('current_user_id')
         path = window.location.hash
-          .match(/^\#\/?(.*)$/)?[1]
+          .match(/^\#\/?(.*)$/)?[1] || ''
         exclusions = [
           /login/
           /signup/

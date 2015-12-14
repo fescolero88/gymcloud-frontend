@@ -33,7 +33,7 @@ define [
                 if _.any(ava?.large.url)
                   "background-image: url(#{ava.large.url})"
                 else
-                  "background-image: url(app/images/logo-big.png)"
+                  'background-image: url(app/images/logo-big.png)'
               ]
 
     className: 'new-profile-view'

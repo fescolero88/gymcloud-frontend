@@ -159,8 +159,8 @@ module.exports = class ClientsView extends Marionette.LayoutView
     for check in els
       groupIds.push $(check).data('id')
 
-    groupIds.forEach (groupId) =>
-      clientIds.forEach (clientId) =>
+    groupIds.forEach (groupId) ->
+      clientIds.forEach (clientId) ->
         clientGroupMember = new ClientGroupMember
           clientId: clientId
           groupId: groupId

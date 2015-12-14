@@ -34,4 +34,3 @@ define [
           @getToken('google_oauth2', response)
         else
           # google authentication failed
-          console.log arguments

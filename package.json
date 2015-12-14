@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "build": "gulp build",
+    "lint": "gulp lint",
     "test": "karma start --single-run",
     "start": "node server.js",
     "lint:jade": "jade-lint app/**/*.jade"

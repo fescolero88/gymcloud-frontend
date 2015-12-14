@@ -7,6 +7,7 @@ define [
   class BasePage extends Marionette.LayoutView
 
     constructor: (@options) ->
+      window.page = @
       @_bindAll()
       @views = {}
       @model = new PageModel
@@ -63,10 +64,7 @@ define [
       @views = _.result(@, 'initViews')
 
     _showView: (name, regionName) ->
-      fn = _.chain(@)
-        .result('views')
-        .get(name)
-        .value()
+      fn = _.result(@, 'views')[name]
       if typeof fn is 'function'
         fn = _.bind(fn, @)
       else

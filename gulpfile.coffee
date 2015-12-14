@@ -102,7 +102,7 @@ gulp.task 'lint:coffee', ->
     .src('./app/**/*.coffee')
     .pipe(coffeelint('./coffeelint.json'))
     .pipe(coffeelint.reporter(stylish))
-    #.pipe(coffeelint.reporter('failOnWarning'))
+    .pipe(coffeelint.reporter('failOnWarning'))
 
 gulp.task 'build:clean', ->
   gulp
