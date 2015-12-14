@@ -37,7 +37,6 @@ define [
 
     _onStart: ->
       defer = new $.Deferred
-      @listenTo(@vent, 'app:main_view:init', @_reinitMainView)
       @request('current_user:init:user')
         .then( =>
           @request('current_user:init:collections')

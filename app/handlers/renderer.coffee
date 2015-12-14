@@ -38,7 +38,8 @@ define [
         layout: 'main'
       options.region = options.region || @defaults[options.layout]['region']
 
-      @_ensureLayoutIs(options.layout) unless options.layout is 'base'
+      if options.layout isnt 'base'
+        @_ensureLayoutIs(options.layout)
       layout = @app.request("app:layouts:#{options.layout}")
       region = layout.getRegion(options.region)
       region.show(view)
@@ -50,8 +51,7 @@ define [
       baseLayout = @app.request('app:layouts:base')
       region = baseLayout.getRegion('appRegion')
       currentView = region.currentView
-      if not region.hasView()
-        # and (not (currentView instanceof klass))
+      unless region.hasView() and currentView instanceof klass
         view = new klass
         region.show(view)
 
