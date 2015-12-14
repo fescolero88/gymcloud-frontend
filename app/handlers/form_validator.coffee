@@ -16,7 +16,7 @@ define [
       loop
         pos = string.indexOf(subString, pos)
         if pos >= 0
-          n++
+          n += 1
           pos += step
         else
           break
@@ -36,9 +36,9 @@ define [
           $inputGroup.find('.gc-error-message').text(error)
 
     _.extend Backbone.Validation.validators,
-      isFloat: (value, attr, customValue, model) =>
+      isFloat: (value, attr, customValue, model) ->
         if value
-          value = value.replace(/\,/g,'.')
+          value = value.replace(/\,/g, '.')
           if occurrences(value, '.') > 1
             return 'error'
           if value.match(/^[0-9\.]+$/) is null

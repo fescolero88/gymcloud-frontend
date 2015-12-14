@@ -2,6 +2,8 @@ gulp = require('gulp')
 gutil = require('gulp-util')
 clean = require('gulp-clean')
 plumber = require('gulp-plumber')
+coffeelint = require('gulp-coffeelint')
+stylish = require('coffeelint-stylish')
 lazypipe = require('lazypipe')
 webpack = require('webpack')
 gulpWebpack = require('gulp-webpack')
@@ -17,7 +19,8 @@ gulp.task 'default', ['webpack-dev-server']
 # Disadvantage: Requests are not blocked until bundle is available,
 #               can serve an old app on refresh
 gulp.task 'build-dev', ['webpack:build-dev'], ->
-  gulp.watch ['app/**/*'], ['webpack:build-dev']
+  gulp
+    .watch ['app/**/*'], ['webpack:build-dev']
   return
 
 # Production build
@@ -37,9 +40,10 @@ gulp.task 'webpack:build', (callback) ->
   )
 
   # run webpack
-  gulp.src([
-    './app/app'
-  ])
+  gulp
+    .src([
+      './app/app'
+    ])
     .pipe(
       plumber(
         errorHandler: (err) ->
@@ -80,27 +84,43 @@ gulp.task 'webpack-dev-server', (callback) ->
       colors: true
 
   # Start a webpack-dev-server
-  new WebpackDevServer(webpack(myConfig), devServerConfig).listen 8080, 'localhost', (err) ->
-    throw new gutil.PluginError('webpack-dev-server', err)  if err
-    gutil.log '[webpack-dev-server]', 'http://localhost:8080/webpack-dev-server/index.html'
-    return
+  new WebpackDevServer(webpack(myConfig), devServerConfig)
+    .listen 8080, 'localhost', (err) ->
+      throw new gutil.PluginError('webpack-dev-server', err)  if err
+      gutil.log '[webpack-dev-server]',
+        'http://localhost:8080/webpack-dev-server/index.html'
+      return
 
   return
 
+gulp.task 'lint', [
+  'lint:coffee'
+]
+
+gulp.task 'lint:coffee', ->
+  gulp
+    .src('./app/**/*.coffee')
+    .pipe(coffeelint('./coffeelint.json'))
+    .pipe(coffeelint.reporter(stylish))
+    #.pipe(coffeelint.reporter('failOnWarning'))
+
 gulp.task 'build:clean', ->
-  gulp.src('build', read: false)
+  gulp
+    .src('build', read: false)
     .pipe(clean())
 
 gulp.task 'dist:clean', ->
-  gulp.src([
-    'dist/'
-  ])
+  gulp
+    .src([
+      'dist/'
+    ])
     .pipe(clean())
 
 gulp.task 'dist:prepare', ['dist:clean'], ->
-  gulp.src([
-    'build/**'
-    'index.html'
-    'favicon.ico'
-  ], base: '.')
+  gulp
+    .src([
+      'build/**'
+      'index.html'
+      'favicon.ico'
+    ], base: '.')
     .pipe(gulp.dest('dist/'))

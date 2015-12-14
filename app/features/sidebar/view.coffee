@@ -1,66 +1,64 @@
 define [
-  'models/draggable_menu_item'
-  'collections/sidebar_items'
+  './template'
   './personal/view'
   './pro/view'
-  './template'
 ], (
-  DraggableMenuItemModel
-  SidebarItemsCollection
+  template
   PersonalCollectionView
   SidebarProView
-  template
 )->
+
   class SidebarView extends Marionette.LayoutView
 
     template: template
 
     className: 'gc-scrollable-area'
 
+    ui:
+      item: '.gc-sidebar-item > a'
+
     events:
       'click .toggle-menu': 'toggleMenu'
       'click @ui.item': 'toggleItem'
       'click .nano': 'onClickSidebar'
 
-    ui:
-      subs: '.gc-sidebar-folder>.gc-sidebar-sub, .gc-sidebar-cat>.gc-sidebar-sub'
-      sidebar: '.gc-sidebar-menu-list'
-      dndArea: '.gc-dnd-area'
-      mainArea: '.gc-main'
-      catchList: '.gc-assign-catch'
-      item: '.gc-sidebar-item > a'
-      proRegion: 'pro-section'
-      workoutExercises: 'region[data-name="workout_exercises"]'
-      personalWorkoutsRegion: 'region[data-name="personal_workouts"]'
-      personalProgramsRegion: 'region[data-name="personal_programs"]'
+    behaviors:
 
-    regions:
-      pro: '@ui.proRegion'
-      workoutExercises: '@ui.workoutExercises'
-      personalWorkouts: '@ui.personalWorkoutsRegion'
-      personalPrograms: '@ui.personalProgramsRegion'
-
-    templateHelpers: ->
-      isPro: @currentUser.get('is_pro')
+      regioned:
+        views: [
+            region: 'pro'
+            klass: SidebarProView
+            options: -> {}
+            enabled: ->
+              @user.get('is_pro')
+          ,
+            region: 'workout_exercises'
+            klass: PersonalCollectionView
+            options: ->
+              collection: @user.workout_exercises
+              type: 'workout_exercises'
+            enabled: ->
+              not @user.get('is_pro')
+          ,
+            region: 'personal_workouts'
+            klass: PersonalCollectionView
+            options: ->
+              collection: @user.personal_workouts
+              type: 'personal_workouts'
+            enabled: ->
+              not @user.get('is_pro')
+          ,
+            region: 'personal_programs'
+            klass: PersonalCollectionView
+            options: ->
+              collection: @user.personal_programs
+              type: 'personal_programs'
+            enabled: ->
+              not @user.get('is_pro')
+        ]
 
     initialize: ->
-      @currentUser = App.request('current_user')
-
-    renderPersonalEntities: ->
-      items = ['workout_exercises', 'personal_workouts', 'personal_programs']
-      _.each items, (item) =>
-        view = new PersonalCollectionView
-          collection: @currentUser[item]
-          type: item
-
-        regionName = _.camelCase(item)
-        @getRegion(regionName).show(view)
-
-    onRender: ->
-      if @currentUser.get('is_pro')
-        @getRegion('pro').show(new SidebarProView)
-      else
-        @renderPersonalEntities()
+      @user = App.request('current_user')
 
     toggleMenu: (ev) ->
       target = $(ev.target)
@@ -71,11 +69,9 @@ define [
     toggleItem: (ev) ->
       activeItem = @el.querySelector('.gc-sidebar-item > a.active')
       activeItem.classList.remove('active') if activeItem
-
       ev.currentTarget.classList.add 'active'
 
     onClickSidebar: (ev) ->
-      #for catching of menu slide transition time 0.5s
       setTimeout =>
         @$el.find('.nano').nanoScroller()
       , 600

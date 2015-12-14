@@ -1,28 +1,12 @@
 define [
-  'collections/client_group_members'
-  'collections/exercises'
-  'collections/workouts'
-  'collections/programs'
   './header/view'
   './assignments/view'
   './activity/view'
-  'views/trainer/calendar/calendar-view'
-  'views/trainer/exercises/exercise-view'
-  'models/client_exercise'
-  'views/trainer/exercises/personal-best-view'
   'templates/trainer/clients/client'
 ], (
-  ClientGroupMembers
-  Exercises
-  Workouts
-  Programs
   HeaderView
   AssignmentsView
   ActivityView
-  CalendarView
-  ExerciseView
-  ClientExercise
-  PersonalBestView
   template
 ) ->
 
@@ -46,16 +30,16 @@ define [
       @viewType = data.viewType
       @key = data.key
 
-      @headerView = new HeaderView(model: @model, viewType: @viewType)
-      @assignmentsView = new AssignmentsView(model: @model)
+      @headerView = new HeaderView
+        model: @model
+        viewType: @viewType
+      @assignmentsView = new AssignmentsView
+        model: @model
       @activityView = new ActivityView
         user: @model
         collection: @model.notifications
 
-      App.vent.on 'drag:complete', @assignDragged
-
-    onDestroy: ->
-      App.vent.off 'drag:complete', @assignDragged
+      @listenTo(App.vent, 'drag:complete', @assignDragged)
 
     onShow: ->
       @getRegion('assignments').show(@assignmentsView)

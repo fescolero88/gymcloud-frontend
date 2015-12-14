@@ -2,15 +2,18 @@ define [
   'models/videos'
   'backbone.paginator'
 ], (
-  VideoModel
+  Video
   PageableCollection
 ) ->
-  class VideosListCollection extends Backbone.PageableCollection
+
+  class Videos extends Backbone.PageableCollection
+
+    type: 'Videos'
 
     url: ->
       '/videos'
 
-    model: VideoModel
+    model: Video
 
     getPreviousPage: ->
       return false if @state.currentPage <= 1

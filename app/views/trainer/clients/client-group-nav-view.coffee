@@ -35,4 +35,5 @@ module.exports = class ClientGroupNavView extends Marionette.ItemView
 
   changeActive: (category) =>
     @ui.nav.parent().removeClass('active')
-    @$el.find(".gc-content-nav a[data-nav-view = #{category}]").parent().addClass('active')
+    @$el.find(".gc-content-nav a[data-nav-view = #{category}]")
+      .parent().addClass('active')

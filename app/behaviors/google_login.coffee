@@ -6,6 +6,8 @@ define [
 
   class GoogleLoginBehavior extends SocialLoginBehavior
 
+    key: 'google_login'
+
     _vendorKey: 'client_id'
 
     _vendorName: 'google'

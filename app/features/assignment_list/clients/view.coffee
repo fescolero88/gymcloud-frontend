@@ -16,26 +16,26 @@ define [
 
     childViewContainer: 'ul.gc-clients-list'
 
-    childViewOptions: (client, _index) ->
+    childViewOptions: (client) ->
       options =
         assignment: @_getAssigmentBy(client)
         entity: @entity
-        entityType: @entityType
         clientAssignees: @clientAssignees
       if client.id == App.request('current_user_id')
-        options.attributes = style: 'background-color: #E3F2FD'
+        options.attributes =
+          style: 'background-color: #E3F2FD'
       options
 
     viewComparator: (model) ->
-      if model.id == App.request('current_user_id')
-        0 # will be first
+      if model.get('id') is App.request('current_user_id')
+        '1'
       else
-        model.id
+        '2' + _.underscored(_.result(model, 'fullName'))
 
     initialize: (options) ->
       @clientAssignees = options.clientAssignees
       @entity = options.entity
-      @entityType = options.entityType
 
     _getAssigmentBy: (user) ->
-      @clientAssignees.findWhere(person_id: user.id)
+      @clientAssignees.findWhere
+        person_id: user.id

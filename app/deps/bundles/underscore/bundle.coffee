@@ -1,7 +1,7 @@
 define [
   './original'
-  'imports?underscore=lodash!underscore.string'
-  'imports?underscore=lodash!underscore.inflections'
+  'imports?underscore=deps/bundles/underscore/original!underscore.string'
+  'imports?underscore=deps/bundles/underscore/original!underscore.inflections'
 ], (
   o_
   Strings

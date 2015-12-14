@@ -6,6 +6,8 @@ define [
 
   class UserProfile extends Backbone.Model
 
+    type: 'UserProfile'
+
     urlRoot: '/user_profiles'
 
     defaults:
@@ -50,4 +52,5 @@ define [
       @_initBgColor()
 
   _.extend(UserProfile::, AvatarBackgroundColor)
+
   UserProfile

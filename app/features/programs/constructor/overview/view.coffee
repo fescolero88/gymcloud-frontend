@@ -1,8 +1,8 @@
 define [
   './details/view'
   './footer/view'
-  './weeks/view'
-  './weeks/empty/view'
+  'features/program_weeks/list/view'
+  'features/program_weeks/list/empty/view'
   'collections/program_workouts'
   'collections/program_weeks'
   './workouts/view'
@@ -45,9 +45,13 @@ define [
       @views = @_prepareViews()
 
       @listenTo(@views.weeks, 'add:program_workout', @_addProgramWorkout)
-      @listenTo(@views.weeks, 'add:program_workout:from_library', @_addProgramWorkoutFromLibrary)
+      @listenTo @views.weeks,
+        'add:program_workout:from_library',
+        @_addProgramWorkoutFromLibrary
       @listenTo(@views.footer, 'add:program_workout', @_addProgramWorkout)
-      @listenTo(@views.footer, 'add:program_workout:from_library', @_addProgramWorkoutFromLibrary)
+      @listenTo @views.footer,
+        'add:program_workout:from_library',
+        @_addProgramWorkoutFromLibrary
       @listenTo(@collection, 'update', @toggleEmptyState)
       @listenTo(@workoutsCollection, 'update', @toggleEmptyState)
 

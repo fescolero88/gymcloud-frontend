@@ -1,3 +1,5 @@
+# NOTE: not used
+
 define [
   'spinner'
 ], (
@@ -30,11 +32,11 @@ define [
 
     spinner = new Spinner(opts)
 
-    App.vent.on 'spinner:start', ->
+    App.listenTo App.vent, 'spinner:start', ->
       spinEl = document.getElementById('spinner')
       spinner.spin(spinEl)
 
-    App.vent.on 'spinner:stop', ->
+    App.listenTo App.vent, 'spinner:stop', ->
       spinner.stop()
 
     App.on 'before:start', ->
@@ -46,9 +48,9 @@ define [
     loadingCount = 0
 
     $(document).ajaxStart ->
-      if ++loadingCount is 1
+      if loadingCount += 1 is 1
         App.vent.trigger('spinner:start')
 
     $(document).ajaxComplete ->
-      if App._isStarted && loadingCount > 0 && --loadingCount is 0
+      if App._isStarted && loadingCount > 0 && loadingCount -= 1 is 0
         App.vent.trigger('spinner:stop')

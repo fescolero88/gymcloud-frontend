@@ -16,12 +16,11 @@ define [
 
     childViewContainer: 'ul.gc-clients-list'
 
-    childViewOptions: (client, _index) ->
+    childViewOptions: ->
       entity: @entity
-      entityType: @entityType
 
-    viewComparator: (model) -> model.get('name')
+    viewComparator: (model) ->
+      _.underscored(model.get('name'))
 
     initialize: (options) ->
       @entity = options.entity
-      @entityType = options.entityType

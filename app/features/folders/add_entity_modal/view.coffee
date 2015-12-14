@@ -56,7 +56,7 @@ define [
 
     _showSuccessMessage: ->
       App.request 'messenger:show',
-        message: "New item added"
+        message: 'New item added'
         type: 'success'
 
     _onSyncFail: (model, data) ->

@@ -1,0 +1,21 @@
+.gc-video-assigned-wrapper
+  iframe(width='352', height='198', frameborder='0', allowfullscreen='')
+  .row.gc-video-controls
+    .col-xs-6
+      a.gc-video-link(target='_blank')
+        span.name
+        i.gc-video-icon
+        span.type
+    .col-xs-6.text-right
+      button.btn.btn-link.gc-video-delete
+        | Delete
+
+.gc-video-assigned-placeholder.text-center
+  .placeholder-icon
+    i.glyphicon.glyphicon-play
+  p
+    | Seems you don't have a video assigned
+    br
+    | You can either upload one or select from a list
+  button.btn.btn-primary.gc-add-video
+    | Assign video

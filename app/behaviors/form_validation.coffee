@@ -2,6 +2,8 @@ define ->
 
   class FormValidationBehavior extends Marionette.Behavior
 
+    key: 'form_validation'
+
     initialize: ->
       @listenTo(@view, 'switchError', @_switchError)
 

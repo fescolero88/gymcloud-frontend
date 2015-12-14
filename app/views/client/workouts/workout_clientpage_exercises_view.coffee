@@ -1,12 +1,14 @@
-ExercisePropertyItem = require('features/exercise_properties/view')
+ExercisePropertyItem =
+  require('features/exercise_properties/list_readable/item/view')
 
 class EmptyView extends Marionette.ItemView
 
-  template: require('templates/client/workouts/workout_clientpage_exercises_empty')
+  template: require('features/workout_exercises/list/empty/template')
 
 class ExercisesItemView extends Marionette.CompositeView
 
-  template: require('templates/client/workouts/workout_clientpage_exercise_item')
+  template:
+    require('templates/client/workouts/workout_clientpage_exercise_item')
 
   tagName: 'li'
 
@@ -20,9 +22,10 @@ class ExercisesItemView extends Marionette.CompositeView
     @collection = new Backbone.Collection(@model.get('exercise_properties'))
 
   viewComparator: (model) ->
-    model.get('personal_property').name
+    _.underscored(model.get('personal_property').name)
 
-module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeView
+
+module.exports = class View extends Marionette.CompositeView
 
   template: require('templates/client/workouts/workout_clientpage_exercises')
 
@@ -41,9 +44,10 @@ module.exports = class WorkoutGlobalExercisesView extends Marionette.CompositeVi
     @on 'render:collection', @showConnectionLines
 
   showConnectionLines: =>
-    circles = @$el.find(".gc-workout-exercise-circle[data-letter]")
+    circles = @$el
+      .find('.gc-workout-exercise-circle[data-letter]')
     previous = null
-    $.each circles, (index, item) =>
+    $.each circles, (index, item) ->
       $item = $ item
       letter = $item.data 'letter'
 

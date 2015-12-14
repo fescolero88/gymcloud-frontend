@@ -1,10 +1,11 @@
 define [
-  './item/view'
   './template'
+  './item/view'
 ], (
-  PersonalCollectionItemView
   template
+  PersonalCollectionItemView
 )->
+
   class PersonalCollectionView extends Marionette.CompositeView
 
     template: template

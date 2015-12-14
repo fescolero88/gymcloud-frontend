@@ -4,7 +4,9 @@ CalendarDayView = require 'views/trainer/calendar/calendar-day-view'
 CalendarWeekView = require 'views/trainer/calendar/calendar-week-view'
 CalendarMonthView = require 'views/trainer/calendar/calendar-month-view'
 
-CalendarEvents = require 'collections/calendar_events'
+class CalendarEvents extends Backbone.Collection
+
+  url: '/api/mobile/calendar/'
 
 module.exports = class CalendarView extends Marionette.LayoutView
 
@@ -34,11 +36,12 @@ module.exports = class CalendarView extends Marionette.LayoutView
     @calendar_url = @calendarEventCollection.url
 
     year = @currentDate.year()
-    month = @currentDate.month()+1
+    month = @currentDate.month() + 1
     @getData year, month
 
   getData: (year, month) ->
-    @calendarEventCollection.url = "#{@calendar_url}?year=#{year}&month=#{month}"
+    @calendarEventCollection.url =
+      "#{@calendar_url}?year=#{year}&month=#{month}"
     @calendarEventCollection.fetch()
 
   onShow: =>

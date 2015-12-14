@@ -41,13 +41,13 @@ define [
 
     initialize: (options) ->
       @entity = options.entity
-      @entityType = options.entityType
 
     toggleAssign: (ev) =>
       if @model.get('is_assigned')
-        App.request 'base:confirmationalModal',
-          title: "Unassign #{@entityType}?"
-          content: "Are you sure you want unassign #{@entityType} from group?"
+        type = @entity.type
+        App.request 'modal:confirm',
+          title: "Unassign #{type}?"
+          content: "Are you sure you want unassign #{type} from group?"
           confirmBtn: 'Unassign'
           confirmCallBack: =>
             @model.unassign(@entity).then (response) =>
@@ -59,10 +59,12 @@ define [
           @_toggleAssignSuccess('assign')
 
     _toggleAssignSuccess: (actionType) ->
+      type = @entity.type
       if actionType is 'assign'
-        message = "This #{@entityType} is assigned to group"
+        message = "This #{type} is assigned to group"
       else
-        message = "This #{@entityType} is unassigned from group"
-
-      App.request('messenger:show', message: message)
+        message = "This #{type} is unassigned from group"
+      App.request 'messenger:show',
+        message: message
+        type: 'success'
       @render()

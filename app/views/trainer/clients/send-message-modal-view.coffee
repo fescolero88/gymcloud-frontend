@@ -53,7 +53,8 @@ module.exports = class SendMessageModalView extends Marionette.ItemView
         options: options
         render:
           item: (item, escape) ->
-            return '<div>' + escape(item.first_name) + ' ' + escape(item.last_name) + '</div>'
+            '<div>' + escape(item.first_name) +
+              ' ' + escape(item.last_name) + '</div>'
           option: (item, escape) ->
             return "<div><span class='avatar' style='background-color: " +  \
               item.color + ";'><img src='" + item.url + "'></span>" + \
@@ -65,7 +66,8 @@ module.exports = class SendMessageModalView extends Marionette.ItemView
     @ui.liveSearch[0].selectize.clear()
 
   selectAll: (ev) =>
-    @ui.liveSearch[0].selectize.setValue(Object.keys(@ui.liveSearch[0].selectize.options))
+    @ui.liveSearch[0].selectize
+      .setValue(Object.keys(@ui.liveSearch[0].selectize.options))
 
   submitForm: (ev) ->
     isError = false

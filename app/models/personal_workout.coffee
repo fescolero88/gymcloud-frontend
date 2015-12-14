@@ -2,6 +2,8 @@ define ->
 
   class PersonalWorkout extends Backbone.Model
 
+    type: 'PersonalWorkout'
+
     urlRoot: '/personal_workouts'
 
     person: ->

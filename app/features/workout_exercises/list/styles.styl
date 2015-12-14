@@ -1,0 +1,190 @@
+ul.gc-workout-exercises-list
+  padding: 2px 22px
+  list-style-type: none
+
+  &:after
+    content: ''
+    clear: both
+    display: block
+
+  li
+    &.gc-workout-exercise-item
+      display: table
+      width: 100%
+      padding: 16px 0
+      min-height: 60px
+      float: right
+
+    ul.workout-exercise-properties:after
+      display: block
+      clear: both
+      content: ''
+
+    label.gc-alt-checkbox
+      width: 0
+      position: relative
+      padding-left: 29px
+      cursor: pointer
+
+    li.gc-property-item
+      display: block
+
+    .gc-exercises-cell,
+    .gc-clientpage-exercises-cell
+      display: table-cell
+      vertical-align: middle
+
+    > .gc-exercises-cell:first-child
+      width: 10px
+
+    > .gc-exercises-cell.gc-cell-trash
+      width: 30px
+      text-align: right
+
+    > .gc-exercises-cell.gc-cell-add
+      width: 40px
+      text-align: right
+
+    > .gc-clientpage-exercises-cell:first-child,
+    > .gc-exercises-cell:nth-child(2)
+      width: 20px
+
+    .gc-cell-property
+      text-align: right
+
+    .gc-property
+      margin: 0!important
+
+  .dragged
+    position: absolute
+
+  .gc-delete-exercise
+    color: #acacac
+    font-size: 22px
+    line-height: 17px
+    opacity: 0.7
+    visibility: hidden
+
+  .gc-add-single-property-button
+    opacity: 0.7
+    visibility: hidden
+    margin-right: 6px
+    cursor: pointer
+
+  .gc-delete-exercise:hover,
+  .gc-add-single-property-button:hover
+    opacity: 1
+
+  .li.hover-enabled:hover .gc-delete-exercise,
+  .li.hover-enabled:hover .gc-add-single-property-button
+    visibility: visible
+
+  .li .gc-hover-hidden
+    visibility: hidden!important
+
+  .li.hover-enabled .gc-hover-hidden
+    display: table-cell!important
+
+.gc-workout-exercise-item
+
+  &.gu-mirror
+    height: auto!important
+    background-color: rgba(255,255,255,0.5)
+    padding: 5px
+    border-radius: 5px
+
+    .gc-exercises-cell
+      float: left
+
+    > .gc-exercises-cell:first-child
+      margin-top: 4px
+
+    .gc-workout-exercise-note,
+    > .gc-exercises-cell:not(:nth-child(3)):not(:first-child)
+      display: none
+
+.gc-workout-exercise-sort
+  background-image: url("../../../images/sort-icon.png")
+  background-size: contain
+  background-repeat: no-repeat
+  margin-right: 12px
+  width: 6px
+  height: 13px
+  cursor: move
+  opacity: 0.6
+  display: block
+
+  &:hover
+    opacity: 1
+
+.gc-workout-exercise-circle
+  background-color: #f47b22
+  border-radius: 24px
+  min-width: 24px
+  max-width: 60px
+  display: inline-block
+  height: 24px
+  color: #fff
+  font: 400 10px / 21px 'Source Sans Pro'
+  text-align: center
+  position: relative
+  line-height: 24px
+  text-transform: uppercase
+  padding: 0 5px
+
+  &[contenteditable]
+    outline: none
+
+  &[contenteditable=true]:active,
+  &[contenteditable=true]:focus
+    box-shadow: 0 0 10px rgba(0,0,0,0.6)
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.6)
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.6)
+    -o-box-shadow: 0 0 10px rgba(0,0,0,0.6)
+
+  &.first::after,
+  &.middle::after
+    content: ""
+    display: block
+    width: 3px
+    position: absolute
+    bottom: -100%
+    background: inherit
+    left: 10px
+    top: 100%
+
+  &.last::before,
+  &.middle::before
+    content: ""
+    display: block
+    width: 3px
+    position: absolute
+    top: -100%
+    bottom: 100%
+    background: inherit
+    left: 10px
+
+.gc-workout-exercise-name
+  text-transform: uppercase
+  color: #3a99d8
+  font: 400 14px / 21px 'Source Sans Pro'
+  margin-left: 15px
+  line-height: 12px
+
+  &:hover,
+  &:active,
+  &:focus
+    text-decoration: none
+
+.gc-workout-exercise-note
+  margin-left: 15px
+  margin-bottom: 0px
+  line-height: 15px
+  height: 15px
+  cursor: pointer
+  font-size: 12px
+  border: none
+  outline: none
+  display: block
+  width: 100%
+  background: transparent

@@ -27,7 +27,8 @@ define [
         copy: true
         revertOnSpill: true
         moves: (el, source, handle) ->
-          $(handle).parents('.gc-sidebar-item:first').length or $(handle).has('.gc-sidebar-item')
+          $(handle).parents('.gc-sidebar-item:first').length or
+            $(handle).has('.gc-sidebar-item')
 
       @drake = Dragula [], options
 

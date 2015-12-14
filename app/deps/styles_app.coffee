@@ -27,6 +27,13 @@ define [
   'styles/program_workouts'
   'styles/account_type_modal'
   'styles/upload'
+  'features/video/assigned/styles'
+  'features/privacy/toggle/styles'
+  'features/author/widget/styles'
+  'features/rating/widget/styles'
+  'features/delete_button/styles'
+  'features/workout_exercises/list/styles'
+  'features/modal/styles'
   'styles/components/zzz_all'
   'styles/zzz_override'
 ], ->

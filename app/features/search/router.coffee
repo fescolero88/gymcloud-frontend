@@ -1,5 +1,5 @@
 define [
-  'routers/general/custom-router'
+  'routers/custom'
 ], (
   CustomRouter
 ) ->
@@ -11,7 +11,7 @@ define [
 
     initialize: ->
       super
-      App.vent.on('search:cancel', @previous)
+      @listenTo(App.vent, 'search:cancel', @previous)
 
     previous: ->
       info = App.request('lastHash:get')

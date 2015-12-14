@@ -6,6 +6,6 @@ define [
 
   class Properties extends Backbone.Collection
 
-    url: '/api/mobile/properties'
+    type: 'Properties'
 
     model: Property

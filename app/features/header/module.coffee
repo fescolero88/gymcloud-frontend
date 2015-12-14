@@ -12,8 +12,10 @@ define [
         @_initVentListeners()
 
     _initVentListeners: ->
-      @app.vent.on('app:view:main:render', @_renderHeaderView)
+      @listenTo(@app.vent, 'app:layouts:main:render', @_renderHeaderView)
 
-    _renderHeaderView: (targetView) ->
+    _renderHeaderView: ->
       view = new HeaderView
-      targetView.getRegion('header').show(view)
+      @app.request 'views:show', view,
+        layout: 'main'
+        region: 'header'

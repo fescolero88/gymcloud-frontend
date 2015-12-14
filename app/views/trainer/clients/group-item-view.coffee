@@ -34,9 +34,4 @@ define [
         @model.destroy()
 
     deleteSingle: (ev) =>
-      App.request 'base:confirmationalModal',
-        title: "Delete group"
-        content: "Are you sure you want to delete #{@model.get('name')}?"
-        confirmBtn: "Delete"
-        confirmCallBack: =>
-          @model.destroy()
+      App.request('modal:confirm:delete', @model)

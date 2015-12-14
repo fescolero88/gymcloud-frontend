@@ -3,10 +3,11 @@ define [
 ], (
   template
 ) ->
+
   class StatsItemView extends Marionette.ItemView
 
-     template: template
+    template: template
 
-     tagName: 'li'
+    tagName: 'li'
 
-     className: 'row gc-folder'
+    className: 'row gc-folder'

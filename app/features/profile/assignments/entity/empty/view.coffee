@@ -3,6 +3,7 @@ define [
 ], (
   template
 ) ->
+
   class EmptyView extends Marionette.ItemView
 
     template: template

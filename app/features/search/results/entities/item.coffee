@@ -20,7 +20,8 @@ define [
 
     templateHelpers: ->
       entity_context = @options.entity_context
-      entity_context = "#{_.singularize(entity_context)}_templates" if entity_context != 'exercises'
+      if entity_context != 'exercises'
+        entity_context = "#{_.singularize(entity_context)}_templates"
 
       type: entity_context
       profile_link: '#users/me'

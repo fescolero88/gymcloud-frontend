@@ -6,4 +6,6 @@ define [
 
   class ProgramWorkouts extends Backbone.Collection
 
+    type: 'ProgramWorkouts'
+
     model: ProgramWorkout

@@ -1,11 +1,7 @@
 define [
   './results/view'
-  'views/general/main-view'
-  'features/sidebar/view'
 ], (
   SearchResultsView
-  MainView
-  SideBarView
 ) ->
 
   class Controller extends Marionette.Controller
@@ -21,6 +17,6 @@ define [
         collection: collection
         model: model
 
-      appRegion = App.request('app:views:base').getRegion('appRegion')
+      appRegion = App.request('app:layouts:base').getRegion('appRegion')
       region = appRegion.currentView.getRegion('content')
       region.show(view)

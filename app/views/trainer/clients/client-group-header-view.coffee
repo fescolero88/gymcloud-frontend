@@ -47,7 +47,7 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
     #TODO validation
     formData = @ui.inviteForm.serializeObject()
     if @myProfile
-      url = "/api/mobile/me/invite"
+      url = '/api/mobile/me/invite'
     else
       url = "/api/mobile/clients/#{@model.get('id')}/invite"
 

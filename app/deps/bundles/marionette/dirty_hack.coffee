@@ -1,6 +1,4 @@
-define [
-], (
-)->
+define ->
 
   (oMarionette) ->
 
