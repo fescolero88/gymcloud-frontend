@@ -28,9 +28,9 @@ define [
       @groupAssignments = new Groups
       super
 
-    #initialize: (_options) ->
-      #@__defineGetter__ 'parent', @_getFolder
-      #@__defineGetter__ 'folder', @_getFolder
+    initialize: (_options) ->
+      @__defineGetter__ 'parent', @_getFolder
+      @__defineGetter__ 'folder', @_getFolder
 
     parse: (data) ->
       data.exercises &&
