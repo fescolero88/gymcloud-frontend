@@ -24,4 +24,5 @@ define [
         .result('enabled')
         .value() || false
 
+
   new FeatureFactory(config.features)
