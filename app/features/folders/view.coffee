@@ -109,7 +109,7 @@ define [
 
     _onDestroyConfirm: =>
       checked = @ui.collectionRegion.find('input[type=checkbox]:checked')
-      ids = checked.map( (_index, el) -> $(el).data('id') ).toArray()
+      ids = checked.map( (_index, el) -> $(el).closest('li').data('id') )
       @listView.trigger('items:delete', ids, @model.get('id'))
 
     _showAddEntityModal: (ev) ->
