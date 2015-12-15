@@ -3,11 +3,13 @@ define [
   './template'
   'models/program_template'
   'features/assignment_list/view'
+  './overview/view'
 ], (
   BasePage
   template
   ProgramTemplate
   AssignView
+  OverviewView
 ) ->
 
   class Page extends BasePage
@@ -50,7 +52,8 @@ define [
 
     initViews: ->
       overview: ->
-        new Marionette.View
+        new OverviewView
+          model: @model.get('data.model')
       assign: ->
         new AssignView
           model: @model.get('data.model')

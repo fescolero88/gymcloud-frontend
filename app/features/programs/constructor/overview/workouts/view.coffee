@@ -7,6 +7,7 @@ define [
   WorkoutTemplate
   ProgramWorkout
 ) ->
+
   class WorkoutListView extends Marionette.CollectionView
 
     tagName: 'ul'
@@ -35,7 +36,7 @@ define [
 
     onShow: ->
       @checkEmptyContainer()
-      @addSortable()
+      #@addSortable()
 
     checkEmptyContainer: ->
       if @collection.length is 0
