@@ -1,9 +1,11 @@
 define [
   'exports?Messenger!messenger'
   './template'
+  './explain'
 ], (
   Messenger
   template
+  explain
 ) ->
 
   class Message extends Messenger.Message
@@ -36,3 +38,6 @@ define [
           message: data.message
           type: data.type ?= 'info'
           hideAfter: data.hideAfter ?= 5
+
+      @app.reqres.setHandler 'messenger:explain', (key, attrs = {}) =>
+        @app.request('messenger:show', explain(key, attrs))
