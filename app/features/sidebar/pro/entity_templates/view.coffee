@@ -43,6 +43,12 @@ define [
       name: @name
       isFolder: true
 
+    viewComparator: (model) ->
+      [
+        !!model.get('folder_id') && 2 || 1
+        _.underscored(model.get('name'))
+      ]
+
     initialize: (options)->
       @type = options.type
       @name = options.name
