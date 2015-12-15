@@ -40,8 +40,6 @@ define [
                   !!value
           'input':
             observe: 'folder_id'
-            visible: (value) ->
-              !value
             attributes: [
                 'data-id': 'id'
             ]
