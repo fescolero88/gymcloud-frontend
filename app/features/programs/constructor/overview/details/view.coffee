@@ -1,8 +1,6 @@
 define [
-  './counters/view'
   './template'
 ], (
-  CountersView
   template
 ) ->
 
@@ -17,9 +15,6 @@ define [
       programDescriptionEditor: '.gc-program-description-editor'
       programNotesContainer: '.gc-program-note-container'
       programNoteEditor: '.gc-program-note-editor'
-
-    regions:
-      counters: 'region[data-name="counters"]'
 
     behaviors:
 
@@ -43,14 +38,7 @@ define [
 
     initialize: (options) ->
       @workoutsCollection = options.workoutsCollection
-      @counters = new CountersView
-        weekCollection: @collection
-        workoutsCollection: @model.program_workouts
-
       @listenTo(@model, 'note:toggle_editor', @triggerNoteEditor)
-
-    onRender: ->
-      @getRegion('counters').show(@counters)
 
     triggerNoteEditor: =>
       if !!@model.get('note')

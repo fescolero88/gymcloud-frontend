@@ -34,6 +34,7 @@ define [
   'features/delete_button/styles'
   'features/workout_exercises/list/styles'
   'features/modal/styles'
+  'features/collections_counters/styles'
   'styles/components/zzz_all'
   'styles/zzz_override'
 ], ->

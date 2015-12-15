@@ -1,9 +1,11 @@
 define [
   './template'
+  'features/collections_counters/view'
   'features/program_weeks/list/view'
   'features/program_workouts/list/view'
 ], (
   template
+  CountersView
   ProgramWeeksListView
   ProgramWorkoutsListView
 ) ->
@@ -22,6 +24,17 @@ define [
       delete_button: true
       regioned:
         views: [
+            region: 'counters'
+            klass: CountersView
+            options: ->
+              collections: [
+                  collection: @model.program_weeks
+                  label: 'weeks'
+                ,
+                  collection: @model.program_workouts
+                  label: 'workouts'
+              ]
+          ,
             region: 'program_weeks'
             klass: ProgramWeeksListView
             options: ->
