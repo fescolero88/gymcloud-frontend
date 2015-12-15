@@ -35,6 +35,19 @@ define [
                 else
                   'background-image: url(app/images/logo-big.png)'
               ]
+          '.profile-fullfillment, .profile-progress-bar':
+            visible: ->
+              feature.isEnabled('user_profile_progress')
+          '.account-and-payment':
+            visible: ->
+              feature.isEnabled('user_account_type') and
+              feature.isEnabled('payments')
+          '.account-type, .control-links .change':
+            visible: ->
+              feature.isEnabled('user_account_type')
+          '.mmmoney, .control-links .history':
+            visible: ->
+              feature.isEnabled('payments')
 
     className: 'new-profile-view'
 

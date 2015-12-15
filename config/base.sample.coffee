@@ -7,7 +7,10 @@ defaults =
   api: url: undefined
   mobile: url: undefined
   features:
+    payments: enabled: false
     rating_widget: enabled: false
+    user_profile_progress: enabled: false
+    user_account_type: enabled: false
 
 module.exports =
 
