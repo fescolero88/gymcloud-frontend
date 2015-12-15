@@ -38,6 +38,7 @@ define [
               collection: @user.workout_exercises
               type: 'workout_exercises'
             enabled: ->
+              feature.isEnabled('workout_exercises') and
               not @user.get('is_pro')
           ,
             region: 'personal_workouts'
@@ -46,6 +47,7 @@ define [
               collection: @user.personal_workouts
               type: 'personal_workouts'
             enabled: ->
+              feature.isEnabled('personal_workouts') and
               not @user.get('is_pro')
           ,
             region: 'personal_programs'
@@ -54,6 +56,7 @@ define [
               collection: @user.personal_programs
               type: 'personal_programs'
             enabled: ->
+              feature.isEnabled('personal_programs') and
               not @user.get('is_pro')
         ]
 

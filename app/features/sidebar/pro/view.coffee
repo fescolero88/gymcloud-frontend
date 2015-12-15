@@ -46,10 +46,11 @@ define [
       root.items.each (folder) =>
         type = typeByName(folder.get('name'))
         # App.request("data:#{type}:reset", folder.items)
-        view = new RootFolderView
-          model: folder
-          type: type
-        @getRegion(type).show(view)
+        if feature.isEnabled(type)
+          view = new RootFolderView
+            model: folder
+            type: type
+          @getRegion(type).show(view)
         # @initDragAndDrop()
 
     toggleItem: (ev) ->

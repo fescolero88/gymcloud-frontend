@@ -7,6 +7,12 @@ defaults =
   api: url: undefined
   mobile: url: undefined
   features:
+    exercises: enabled: true
+    workout_templates: enabled: true
+    program_templates: enabled: false
+    workout_exercises: enabled: true
+    personal_workouts: enabled: true
+    personal_programs: enabled: true
     payments: enabled: false
     rating_widget: enabled: false
     user_profile_progress: enabled: false
@@ -18,6 +24,8 @@ module.exports =
     vendor: facebook: app_id: '774894325885277'
     api: url: '//localhost:3000'
     mobile: url: '#'
+    features:
+      program_templates: enabled: true
 
   staging: $.extend true, {}, defaults,
     vendor: facebook: app_id: '1457484574486556'
