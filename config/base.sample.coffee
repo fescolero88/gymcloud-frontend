@@ -6,6 +6,8 @@ defaults =
       client_id: '686822539338-h8pp1erjru867em1h45f7rf0qe0ftpdf.apps.googleusercontent.com'
   api: url: undefined
   mobile: url: undefined
+  features:
+    rating_widget: enabled: false
 
 module.exports =
 

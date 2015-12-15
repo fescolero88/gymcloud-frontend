@@ -13,17 +13,22 @@ define ->
     # NOTE: view options to pass
     behaviorViewOptions: {}
 
+    enabled: ->
+      @_featureIsEnabled()
+
     defaults: {}
 
     initialize: ->
       super
+      @isEnabled = _.result(@, 'enabled')
       @_initRegion()
       _.bindAll @, [
         '_initBehaviorView'
         '_renderBehaviorView'
       ]...
-      @listenTo(@view, 'before:show', @_initBehaviorView)
-      @listenTo(@view, 'show', @_renderBehaviorView)
+      if @isEnabled
+        @listenTo(@view, 'before:show', @_initBehaviorView)
+        @listenTo(@view, 'show', @_renderBehaviorView)
       @
 
     _initRegion: ->
@@ -39,3 +44,10 @@ define ->
     _renderBehaviorView: ->
       @view.getRegion(@regionName)
         .show(@behaviorView)
+
+    _featureIsEnabled: ->
+      key = _.result(@, 'key')
+      if feature.includes(key)
+        feature.isEnabled(key)
+      else
+        true

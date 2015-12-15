@@ -185,6 +185,8 @@ module.exports =
           'deps/bundles/marionette/original'
         can:
           'deps/bundles/can'
+        feature:
+          'features/feature/factory'
       )
     ,
       new ExtractTextPlugin('[name].css')
