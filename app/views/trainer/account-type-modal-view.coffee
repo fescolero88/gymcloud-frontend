@@ -57,6 +57,4 @@ define [
         @accountTypeChanged()
 
     accountTypeChanged: ->
-      App.request 'messenger:show',
-        message: 'Account type successfully changed.'
-        type: 'success'
+      App.request('messenger:explain', 'user.account_type.changed')

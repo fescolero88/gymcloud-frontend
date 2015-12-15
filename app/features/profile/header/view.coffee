@@ -110,9 +110,7 @@ define [
       @model.invite(formData.email)
         .then =>
           @ui.inviteModal.modal('hide')
-          App.request 'messenger:show',
-            message: 'Invitation successfully sent'
-            type: 'success'
+          App.request('messenger:explain', 'user.invitation.sent')
         .fail (xhr, error, errorType) ->
           try
             error = xhr.responseJSON.error
@@ -125,9 +123,7 @@ define [
 
     onInvite: ->
       @ui.inviteModal.modal('hide')
-      App.request 'messenger:show',
-        message: 'Invitation successfully sent'
-        type: 'info'
+      App.request('messenger:explain', 'user.invitation.sent')
 
     onInviteFail: (error) ->
       if error?

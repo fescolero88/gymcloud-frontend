@@ -57,9 +57,8 @@ define [
       App.request('modal:confirm:delete', @model)
 
     weekRemoved: ->
-      App.request 'messenger:show',
-        message: "Week #{@model.get('name')} has been removed."
-        type: 'info'
+      App.request 'messenger:explain', 'week.deleted',
+        name: @model.get('name')
 
     _assignWeekPosition: ->
       pos = @$el.index() + 1

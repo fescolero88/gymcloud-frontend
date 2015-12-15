@@ -38,7 +38,4 @@ module.exports = class AuthView extends Marionette.ItemView
     App.request('auth:onSuccess', data)
 
   _onLoginFail: ->
-    App.request 'messenger:show',
-      hideAfter: 10
-      message: 'The email or password you entered is incorrect'
-      type: 'error'
+    App.request('messenger:explain', 'login.failed')

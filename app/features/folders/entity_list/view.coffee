@@ -74,10 +74,9 @@ define [
             folder.items.add item
             @collection.remove item
 
-            App.request 'messenger:show',
-              hideAfter: 10
-              message: "#{item.get('name')} is moved to #{folder.get('name')}."
-              type: 'success'
+            App.request 'messenger:explain', 'item.moved',
+              item: item.get('name')
+              folder: folder.get('name')
 
     highlightNew: (model) =>
       if model
@@ -97,12 +96,6 @@ define [
         model.destroy(wait: true)
       $.when(deletions...)
         .then ->
-          App.request 'messenger:show',
-            hideAfter: 5
-            message: 'Item(s) was deleted'
-            type: 'success'
+          App.request('messenger:explain', 'item.deleted')
         .fail ->
-          App.request 'messenger:show',
-            hideAfter: 5
-            message: 'Some items were not deleted'
-            type: 'error'
+          App.request('messenger:explain', 'item.not_deleted')

@@ -47,9 +47,7 @@ define [
 
       programWeek.save().then =>
         @collection.add(programWeek)
-        App.request 'messenger:show',
-          message: 'Program week added.'
-          type: 'success'
+        App.request('messenger:explain', 'week.added')
 
     addProgramWorkout: ->
       @trigger('add:program_workout')

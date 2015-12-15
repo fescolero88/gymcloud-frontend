@@ -33,4 +33,6 @@ define [
           "#{model.type} (#{model.get('name')})?"
         confirmBtn: 'Delete'
         confirmCallBack: ->
-          model.destroy()
+          model.destroy(wait: true).then ->
+            App.request 'messenger:explain', 'item.deleted',
+              type: model.type

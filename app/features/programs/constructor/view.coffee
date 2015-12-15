@@ -86,14 +86,12 @@ define [
       @[funcName](response)
 
     _onSyncUpdate: (_response) ->
-      App.request 'messenger:show',
-        message: 'Program Updated.'
-        type: 'success'
+      App.request('messenger:explain', 'program.updated')
 
     _onSyncError: (_response) ->
-      App.request('messenger:show', message: 'Oops. Something went wrong')
+      App.request('messenger:explain', 'program.not_updated')
 
     _onDestroy: (response) ->
       url = "#program_templates_folder/#{response.folder_id}"
       Backbone.history.navigate(url, {trigger:true, replace: true})
-      App.request('messenger:show', message: 'Program removed from library')
+      App.request('messenger:explain', 'program.deleted')

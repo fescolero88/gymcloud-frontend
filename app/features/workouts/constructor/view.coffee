@@ -53,9 +53,7 @@ define [
           @model.exercises.add(workout_exercise, at: position - 1)
 
     onExerciseAdded: =>
-      App.request 'messenger:show',
-        message: 'Exercise Added.'
-        type: 'success'
+      App.request('messenger:explain', 'workout_exercise.added')
       @model.fetch()
 
     triggerAddNote: ->

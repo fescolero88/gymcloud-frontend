@@ -57,9 +57,7 @@ define [
 
     _removeProgramWorkout: (ev) ->
       @model.destroy().then ->
-        App.request 'messenger:show',
-          message: 'Workout Deleted'
-          type: 'success'
+        App.request('messenger:explain', 'workout.deleted')
 
     _saveOnEnter: (ev) ->
       if ev.which is 13

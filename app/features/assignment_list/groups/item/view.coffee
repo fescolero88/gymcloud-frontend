@@ -61,10 +61,9 @@ define [
     _toggleAssignSuccess: (actionType) ->
       type = @entity.type
       if actionType is 'assign'
-        message = "This #{type} is assigned to group"
+        App.request 'messenger:explain', 'item.client_group.assigned',
+          type: type
       else
-        message = "This #{type} is unassigned from group"
-      App.request 'messenger:show',
-        message: message
-        type: 'success'
+        App.request 'messenger:explain', 'item.client_group.unassigned',
+          type: type
       @render()

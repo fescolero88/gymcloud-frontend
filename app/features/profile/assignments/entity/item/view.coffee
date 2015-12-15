@@ -31,6 +31,4 @@ define [
 
     _confirmCallBack: ->
       @model.destroy(wait: true).then ->
-        App.request 'messenger:show',
-          message: "#{_.humanize(@viewType)} was deleted from the list"
-          type: 'error'
+        App.request('messenger:explain', 'item.deleted')

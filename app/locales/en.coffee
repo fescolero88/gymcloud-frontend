@@ -57,6 +57,10 @@ define ->
       added:
         '[s] Workout was added'
 
+    exercise:
+      deleted:
+        '[s] Exercise was deleted'
+
     workout:
       deleted:
         '[s] Workout was deleted'

@@ -86,7 +86,5 @@ module.exports = class PersonalBestView extends Marionette.LayoutView
 
   personalBestAdded: =>
     @ui.modal.modal 'hide'
-    App.request 'messenger:show',
-      message: 'New personal best added'
-      type: 'info'
+    App.request('messenger:explain', 'personal_best.added')
     @personalBest.fetch()

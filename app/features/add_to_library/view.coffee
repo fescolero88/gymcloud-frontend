@@ -74,6 +74,5 @@ define [
         foldersIds: [folder.id]
       ).then =>
         @$el.parent().modal('hide')
-        App.request 'messenger:show',
-          message: 'Item added to library'
-          type: 'success'
+        App.request 'messenger:explain', 'item.added_to_library',
+          type: @model.type

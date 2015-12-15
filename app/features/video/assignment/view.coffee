@@ -93,9 +93,7 @@ define [
           @view.viewState.set('state', 'no_results') unless response.length
         .fail ->
           return false if arguments[1] is 'abort'
-          App.request 'messenger:show',
-            message: 'Videos search error'
-            type: 'error'
+          App.request('messenger:explain', 'video.search.error')
 
     openUploadPopup: ->
       view = App.request('base:uploadVideo')

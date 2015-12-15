@@ -81,13 +81,9 @@ define [
       value = parseInt @ui.selectedPropertyValue.text()
       if @model.get('value') != value
         @model.save(value: value, wait: true).then ->
-          App.request 'messenger:show',
-            type: 'success'
-            message: 'Exercise was updated'
+          App.request('messenger:explain', 'item.updated', type: 'Exercise')
         .fail ->
-          App.request 'messenger:show',
-            type: 'error',
-            message: 'Something went wrong'
+          App.request('messenger:explain', 'item.not_updated', type: 'Exercise')
       else
         @_toggleViewMode()
 

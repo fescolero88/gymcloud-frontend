@@ -55,9 +55,7 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
 
   onInvite: ->
     @ui.inviteModal.modal('hide')
-    App.request 'messenger:show',
-      message: 'Invitation successfully sent'
-      type: 'info'
+    App.request('messenger:explain', 'user.invitation.sent')
 
   onInviteFail: (error) ->
     if error?

@@ -55,9 +55,7 @@ define [
         @_showSuccessMessage()
 
     _showSuccessMessage: ->
-      App.request 'messenger:show',
-        message: 'New item added'
-        type: 'success'
+      App.request('messenger:explain', 'item.added')
 
     _onSyncFail: (model, data) ->
       for name, error_msg of data.error

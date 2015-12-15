@@ -148,12 +148,8 @@ define [
           foldersIds: foldersIds.toArray()
         ).then(@_onDuplicate)
       else
-        App.request 'messenger:show',
-          message: "No #{@singularName} or folder was selected"
-          type: 'error'
+        App.request('messenger:explain', 'item.not_selected')
 
     _onDuplicate: (response) =>
       @ui.actionModal.modal('hide')
-      App.request 'messenger:show',
-        message: 'Item(s) duplicated'
-        type: 'success'
+      App.request('messenger:explain', 'item.duplicated')

@@ -25,9 +25,7 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
 
     @model.save data,
       success: (model, data) ->
-        App.request 'messenger:show',
-          message: 'Password was successfully changed'
-          type: 'success'
+        App.request('messenger:explain', 'user.password.changed')
         window.location.replace '#login'
       error: (model, xhr, error) =>
         errors = xhr.responseJSON.error
@@ -37,6 +35,4 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
           uiGroup = input.parents('.form-group')
           @trigger 'switchError', message , uiGroup
         if errors.reset_password_token
-          App.request 'messenger:show',
-            message: 'Reset password token is invalid'
-            type: 'error'
+          App.request('messenger:explain', 'user.password.invalid_token')

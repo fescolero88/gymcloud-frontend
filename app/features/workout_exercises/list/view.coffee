@@ -125,8 +125,4 @@ define [
         #model.set 'position', i+1
 
     #onSavedOrder: ->
-      #App.request 'messenger:show',
-        #message: "Order Position Saved."
-        #type: 'success'
-
       #@showConnectionLines()

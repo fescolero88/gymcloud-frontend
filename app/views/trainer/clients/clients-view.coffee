@@ -137,9 +137,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
 
     # add validation for empty groups
     if _.isEmpty(@groups.currentView.collection.models)
-      App.request 'messenger:show',
-        message: 'No available groups'
-        type: 'error'
+      App.request('messenger:explain', 'client_groups.empty')
     else
       moveToGroupView = new MoveToGroupView
         collection: @groups.currentView.collection

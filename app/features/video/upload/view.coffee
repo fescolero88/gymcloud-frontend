@@ -79,9 +79,7 @@ define [
     _onFileAdd: (_e, data) =>
       @file = data.files[0]
       if !@extensionsRegex.test(@file.name)
-        App.request 'messenger:show',
-          message: 'Invalid File Type'
-          type: 'info'
+        App.request('messenger:explain', 'video.invalid_type')
         return
 
       @processFile @file
@@ -94,7 +92,7 @@ define [
         @ui.uploadDetailsPanel.addClass('hidden')
         @ui.uploadControls.addClass('hidden')
         @_updateProgress(0)
-        App.request('messenger:show', message: 'Video Deleted')
+        App.request('messenger:explain', 'video.deleted')
 
     toggleEditName: ->
       @ui.videoFileName.focus()
@@ -103,9 +101,7 @@ define [
       return ev unless @model.hasChanged('name')
 
       @model.save().then ->
-        App.request 'messenger:show',
-          type: 'success'
-          message: 'filename updated'
+        App.request('messenger:explain', 'video.updated')
 
     cancelVideoUpload: (ev) ->
       return @trigger('modal:closed') unless @jqXHR

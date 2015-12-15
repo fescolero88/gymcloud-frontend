@@ -41,6 +41,4 @@ define [
         @_showSuccessMessage()
 
     _showSuccessMessage: ->
-      App.request 'messenger:show',
-        message: 'New folder added'
-        type: 'success'
+      App.request('messenger:explain', 'folder.added')
