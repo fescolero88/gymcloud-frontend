@@ -1,11 +1,17 @@
 a
   cursor: pointer
 
-  &:hover,
+a,
+input,
+button,
+.btn,
+span
+  outline: none
   &:active,
-  &:focus
+  &:focus,
+  &:active:focus,
+  &.hover,
+  &.active,
+  &.focus
     outline: none
-
-  &:hover,
-  &:active
     text-decoration: none
