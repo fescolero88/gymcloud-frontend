@@ -1,7 +1,9 @@
 define [
-  './item/view'
+  './item/readable/view'
+  './item/editable/view'
 ], (
-  ItemView
+  ItemReadableView
+  ItemEditableView
 ) ->
 
   class ExercisePropertiesListView extends Marionette.CollectionView
@@ -10,9 +12,18 @@ define [
 
     className: 'workout-exercise-properties'
 
-    childView: ItemView
+    getChildView: (model) =>
+      if @editableStateId is model.id
+        ItemEditableView
+      else
+        ItemReadableView
+
+    childEvents:
+      'switchTo:editable': '_switchToEditable'
+      'switchTo:readable': '_switchToReadable'
 
     initialize: ->
+      @editableStateId = null
       @default_property = App.request('data:personal_properties:visible')
         .first().attributes
       @listenTo(@, 'properties:init', @initProperty)
@@ -29,3 +40,11 @@ define [
         options.exercise_properties,
         options.workout_exercise_id
       )
+
+    _switchToEditable: (childView) ->
+      @editableStateId = childView.model.id
+      @render()
+
+    _switchToReadable: (childView) ->
+      @editableStateId = null
+      @render()
