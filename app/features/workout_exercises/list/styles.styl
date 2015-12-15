@@ -75,15 +75,18 @@ ul.gc-workout-exercises-list
   .gc-add-single-property-button:hover
     opacity: 1
 
-  .li.hover-enabled:hover .gc-delete-exercise,
-  .li.hover-enabled:hover .gc-add-single-property-button
-    visibility: visible
+  li.hover-enabled
+    .gc-hover-hidden
+      display: table-cell!important
 
-  .li .gc-hover-hidden
+    &:hover
+
+      .gc-delete-exercise,
+      .gc-add-single-property-button
+        visibility: visible
+
+  li .gc-hover-hidden
     visibility: hidden!important
-
-  .li.hover-enabled .gc-hover-hidden
-    display: table-cell!important
 
 .gc-workout-exercise-item
 
@@ -167,14 +170,8 @@ ul.gc-workout-exercises-list
 .gc-workout-exercise-name
   text-transform: uppercase
   color: #3a99d8
-  font: 400 14px / 21px 'Source Sans Pro'
+  font-size: 14px
   margin-left: 15px
-  line-height: 12px
-
-  &:hover,
-  &:active,
-  &:focus
-    text-decoration: none
 
 .gc-workout-exercise-note
   margin-left: 15px
