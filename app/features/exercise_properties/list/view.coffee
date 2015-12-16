@@ -42,9 +42,15 @@ define [
       )
 
     _switchToEditable: (childView) ->
-      @editableStateId = childView.model.id
-      @render()
+      @_switchViewStateFor(childView, 'editable')
 
     _switchToReadable: (childView) ->
-      @editableStateId = null
-      @render()
+      @_switchViewStateFor(childView, 'readable')
+
+    _switchViewStateFor: (childView, state = 'readable') ->
+      if state is 'readable'
+        @editableStateId = null
+      else
+        @editableStateId = childView.model.id
+      @collection.remove(childView.model)
+      @collection.add(childView.model, at: childView._index)
