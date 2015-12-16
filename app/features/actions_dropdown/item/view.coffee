@@ -12,8 +12,7 @@ define [
 
     className: 'row'
 
-    events:
-      'click': '_triggerAction'
-
-    _triggerAction: ->
-      @model.get('action')?()
+    triggers:
+      'click':
+        event: 'action'
+        stopPropagation: false

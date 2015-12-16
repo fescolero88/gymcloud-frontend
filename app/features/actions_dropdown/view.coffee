@@ -16,7 +16,13 @@ define [
 
     childView: ItemView
 
+    childEvents:
+      'action': '_triggerAction'
+
     childViewContainer: 'ul'
 
     initialize: ->
       @collection = new Collection(@options.items)
+
+    _triggerAction: (childView) ->
+      childView.model.get('action')?()
