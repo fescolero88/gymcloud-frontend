@@ -78,8 +78,7 @@ define [
                 errorMsg = "#{key} #{errorJSON[key].join(',')}"
               break
 
-            App.request 'messenger:show',
-              type: 'error'
+            App.request 'messenger:explain', 'message.error',
               message: errorMsg
 
     acceptInvite: ->

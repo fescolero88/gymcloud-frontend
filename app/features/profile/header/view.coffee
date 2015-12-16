@@ -117,9 +117,8 @@ define [
             message = "email #{error.email.join(', ')}"
           catch error
             message = errorType
-          App.request 'messenger:show',
+          App.request 'messenger:explain', 'message:error',
             message: message
-            type: 'error'
 
     onInvite: ->
       @ui.inviteModal.modal('hide')

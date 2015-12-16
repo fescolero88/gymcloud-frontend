@@ -2,6 +2,14 @@ define ->
 
   explain:
 
+    message:
+      success: '[s] {{message}}'
+      error: '[e] {{message}}'
+
+    error:
+      unknown:
+        '[e] Something went wrong'
+
     login:
       failed:
         '[e] Failed to login'
@@ -58,6 +66,8 @@ define ->
         '[s] Workout was added'
 
     exercise:
+      updated:
+        '[s] Exercise was updated'
       deleted:
         '[s] Exercise was deleted'
 

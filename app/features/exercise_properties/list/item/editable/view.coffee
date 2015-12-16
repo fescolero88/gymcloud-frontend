@@ -62,13 +62,9 @@ define [
 
     saveProperty: ->
       @model.save({}, {wait: true}).then ->
-        App.request 'messenger:show',
-          type: 'success'
-          message: 'Exercise was updated'
+        App.request('messenger:explain', 'exercise.updated')
       .fail ->
-        App.request 'messenger:show',
-          type: 'error',
-          message: 'Something went wrong'
+        App.request('messenger:explain', 'error.unknown')
       .always =>
         @trigger('switchTo:readable')
 

@@ -16,9 +16,8 @@ define ->
         error = jqxhr.responseJSON.error
         error = error.join(', ') if _.isArray(error)
         message = error.replace( /\s+(\[.+\])/, '')
-        App.request 'messenger:show',
+        App.request 'messenger:explain', 'message:error',
           message: message
-          type: 'error'
 
     Backbone.originalSync = Backbone.sync
     Backbone.sync = (method, model, options) ->
