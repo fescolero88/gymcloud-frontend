@@ -1,10 +1,8 @@
 define [
-  './actions/view'
   './overview/view'
   'features/assignment_list/view'
   './template'
 ], (
-  ActionsView
   OverviewView
   AssignView
   template
@@ -23,7 +21,6 @@ define [
           '[data-bind="name"]':
             observe: 'name'
             events: ['change']
-
 
     template: template
 
@@ -49,11 +46,7 @@ define [
       canAddToLibrary: do =>
         !@_isMine() && !@_isAuthor() && @model.get('is_public')
 
-    initialize: ->
-      @actionsView = new ActionsView(model: @model) if @_isAuthor()
-
     onShow: ->
-      @getRegion('actionsRegion').show(@actionsView) if @_isAuthor()
       @_changeView('program')
 
     _isAuthor: =>
