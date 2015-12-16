@@ -3,7 +3,7 @@ define ->
   class View extends Marionette.ItemView
 
     template: (attrs) ->
-      "Delete #{attrs.type}"
+      "Delete #{_.humanize(attrs.type)}"
 
     tagName: 'button'
 
