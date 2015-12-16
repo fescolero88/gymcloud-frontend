@@ -9,7 +9,7 @@ define ->
 
     initialize: ->
       @_bindAll()
-      @view.views = {}
+      @view.views ?= {}
       super
       @_initRegions()
       @
@@ -37,30 +37,30 @@ define ->
       defer.promise()
 
     _initRegions: ->
-      @_doForEach (view) =>
-        selector = @_getRegionSelector(view.region)
-        @view.addRegion(view.region, selector)
+      @_doForEachViewOption (viewOption) =>
+        selector = @_getRegionSelector(viewOption.region)
+        @view.addRegion(viewOption.region, selector)
 
     _getRegionSelector: (regionName) ->
       "region[data-name='#{regionName}']"
 
     _initBehaviorViews: ->
-      @_doForEach (view) =>
-        view.options ?= -> @options
-        view.enabled ?= -> true
-        options = _.bind(view.options, @view)()
-        @view.views[view.region] = new view.klass(options)
+      @_doForEachViewOption (viewOption) =>
+        viewOption.options ?= -> @options
+        viewOption.enabled ?= -> true
+        options = _.bind(viewOption.options, @view)()
+        @view.views[viewOption.region] = new viewOption.klass(options)
 
     _renderBehaviorViews: ->
-      @_doForEach (view) =>
-        enabled = _.bind(view.enabled, @view)()
-        v = @view.views[view.region]
+      @_doForEachViewOption (viewOption) =>
+        enabled = _.bind(viewOption.enabled, @view)()
+        v = @view.views[viewOption.region]
         if enabled
           @view
-            .getRegion(view.region)
+            .getRegion(viewOption.region)
             .show(v)
 
-    _doForEach: (fn) ->
+    _doForEachViewOption: (fn) ->
       _.each(@options.views, fn)
 
     _bindAll: ->
@@ -68,6 +68,6 @@ define ->
         '_initRegions'
         '_initBehaviorViews'
         '_renderBehaviorViews'
-        '_doForEach'
+        '_doForEachViewOption'
       ]
       _.bindAll(@, fns...)

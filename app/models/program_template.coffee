@@ -31,6 +31,7 @@ define [
     constructor: ->
       Groups = Backbone.Collection.extend(model: ClientGroup)
       @program_weeks = new ProgramWeeks
+      @program_weeks.program_template = @
       @program_workouts = new ProgramWorkouts
       @groupAssignments = new Groups
       @assignees = new Backbone.Collection

@@ -38,6 +38,7 @@ define [
             region: 'program_weeks'
             klass: ProgramWeeksListView
             options: ->
+              console.log '!!!', @model.program_weeks
               model: @model
               collection: @model.program_weeks
           ,
@@ -45,5 +46,8 @@ define [
             klass: ProgramWorkoutsListView
             options: ->
               model: @model
-              collection: @model.program_workouts
+              collection:
+                new Backbone.VirtualCollection @model.program_workouts,
+                  filter:
+                    week_id: undefined
         ]

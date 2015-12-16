@@ -1,18 +1,12 @@
 define [
   './template'
-  './workouts'
-  'models/workout_template'
-  'models/program_workout'
-  'collections/program_workouts'
+  'features/program_workouts/list/view'
 ], (
   template
-  WorkoutListView
-  WorkoutTemplate
-  ProgramWorkout
-  ProgramWorkouts
+  ProgramWorkoutsListView
 ) ->
 
-  class WeekItemView extends Marionette.LayoutView
+  class ProgramWeeksListItemView extends Marionette.LayoutView
 
     template: template
 
@@ -20,14 +14,9 @@ define [
 
     ui:
       removeWeek: '.gc-remove-program-week'
-      addWorkoutBtn: '.gc-week-workouts-empty button'
-
-    regions:
-      workout: '.gc-program-weeks-workouts-container'
 
     events:
       'click @ui.removeWeek': 'removeModel'
-      'click @ui.addWorkoutBtn': 'addWorkout'
 
     behaviors:
       stickit:
@@ -35,23 +24,23 @@ define [
           '[data-bind="name"]':
             observe: 'name'
             events: ['change']
+      regioned:
+        views: [
+            region: 'week_workouts'
+            klass: ProgramWorkoutsListView
+            enabled: -> false
+            options: ->
+              model: @model
+              collection:
+                new Backbone.Collection
+                #new Backbone.VirtualCollection \
+                  #@model.collection.program_template.program_workouts,
+                  #filter: (item) =>
+                    #item.get('week_id') is @model.get('id')
+        ]
 
     modelEvents:
       'remove': 'weekRemoved'
-
-    initialize: (options) ->
-      collection = new ProgramWorkouts @model.get('program_workouts')
-      @workoutList = new WorkoutListView
-        collection: collection
-        program: options.program
-        sortable: options.sortable
-        weekId: @model.get 'id'
-
-    onRender: ->
-      @getRegion('workout').show(@workoutList)
-
-    addWorkout: (ev) ->
-      @workoutList.addProgramWorkout(true)
 
     removeModel: ->
       App.request('modal:confirm:delete', @model)
@@ -59,7 +48,3 @@ define [
     weekRemoved: ->
       App.request 'messenger:explain', 'week.deleted',
         name: @model.get('name')
-
-    _assignWeekPosition: ->
-      pos = @$el.index() + 1
-      @model.setPosition(pos)
