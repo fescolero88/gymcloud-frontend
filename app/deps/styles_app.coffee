@@ -9,7 +9,6 @@ define [
   'styles/exercise'
   'styles/exercises'
   'styles/im'
-  'styles/item_actions_list'
   'styles/librarypreset'
   'styles/login'
   'styles/modals'
@@ -35,6 +34,7 @@ define [
   'features/workout_exercises/list/styles'
   'features/modal/styles'
   'features/collections_counters/styles'
+  'features/actions_dropdown/styles'
   'styles/components/zzz_all'
   'styles/zzz_override'
 ], ->

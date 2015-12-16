@@ -1,10 +1,11 @@
 define [
+  'behaviors/facebook_login'
   'behaviors/form_validation'
+  'behaviors/google_login'
   'behaviors/navigate_back'
   'behaviors/regioned'
   'behaviors/stickit'
-  'behaviors/facebook_login'
-  'behaviors/google_login'
+  'features/actions_dropdown/behavior'
   'features/add_to_library/button/behavior'
   'features/author/widget/behavior'
   'features/auto_complete/behavior'

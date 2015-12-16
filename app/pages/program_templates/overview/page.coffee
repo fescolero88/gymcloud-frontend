@@ -38,6 +38,19 @@ define [
       add_to_library:
         model: -> @view.model.get('data.model')
 
+      actions_dropdown:
+        model: -> @view.model.get('data.model')
+        items: [
+            label: 'Add Note'
+          ,
+            label: 'Edit Description'
+          ,
+            label: 'Add Video'
+          ,
+            label: 'Delete'
+            className: 'text-danger'
+        ]
+
     template: template
 
     regions:
