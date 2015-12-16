@@ -33,5 +33,7 @@ define [
       ev.preventDefault()
       @trigger('switchTo:editable')
 
-    removeProperty: ->
+    removeProperty: (ev) ->
+      ev.preventDefault()
+      ev.stopImmediatePropagation()
       @model.destroy(wait: true)

@@ -13,7 +13,7 @@ define [
     className: 'workout-exercise-properties'
 
     getChildView: (model) =>
-      if @editableStateId is model.id
+      if @editableStateId is model.cid
         ItemEditableView
       else
         ItemReadableView
@@ -30,10 +30,12 @@ define [
       @listenTo(@, 'properties:add', @addProperties)
 
     initProperty: (options = {}) ->
-      @collection.initProperty(
+      model = @collection.initProperty(
         options.workout_exercise_id,
         @default_property
       )
+      childView = @children.findByModel(model)
+      @_switchViewStateFor(childView, 'editable')
 
     addProperties: (options = {}) ->
       @collection.addProperties(
@@ -51,6 +53,6 @@ define [
       if state is 'readable'
         @editableStateId = null
       else
-        @editableStateId = childView.model.id
+        @editableStateId = childView.model.cid
       @collection.remove(childView.model)
       @collection.add(childView.model, at: childView._index)

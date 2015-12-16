@@ -25,6 +25,6 @@ define [
         position: @length
         personal_property: default_property
         personal_property_id: default_property.id
-        state: 'edit'
+        value: 0
       @add(model)
 

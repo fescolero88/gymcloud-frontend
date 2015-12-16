@@ -46,7 +46,9 @@ define [
         @ui.selectedPropertyValue.focus()
       , 200
 
-    _removeProperty: ->
+    _removeProperty: (ev) ->
+      e.preventDefault()
+      ev.stopImmediatePropagation()
       @model.destroy(wait: true)
 
     selectProperty: (model) ->
@@ -60,7 +62,7 @@ define [
         e.preventDefault()
         @_saveProperty()
 
-    saveProperty: ->
+    _saveProperty: ->
       @model.save({}, {wait: true}).then ->
         App.request('messenger:explain', 'exercise.updated')
       .fail ->
@@ -71,4 +73,4 @@ define [
     saveOnBlur: (ev) ->
       activeEl = $(':focus')
       if @ui.editPropertyControl?.find(activeEl).length is 0
-        @saveProperty()
+        @_saveProperty()
