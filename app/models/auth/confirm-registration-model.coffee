@@ -2,7 +2,7 @@ define ->
 
   class ConfirmRegistrationModel extends Backbone.Model
 
-    url: '/api/mobile/users/confirmation/confirm.json'
+    url: '/users/confirmation/confirm.json'
 
     validation:
 
