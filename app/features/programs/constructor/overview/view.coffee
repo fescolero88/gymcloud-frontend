@@ -1,5 +1,4 @@
 define [
-  './details/view'
   './footer/view'
   'features/program_weeks/list/view'
   'features/program_weeks/list/empty/view'
@@ -9,7 +8,6 @@ define [
   './template'
   'dragula'
 ], (
-  DetailsView
   FooterControlsView
   WeeksView
   WeekEmptyView
@@ -25,7 +23,6 @@ define [
     template: template
 
     regions:
-      programDetails: '.gc-program-detail-region'
       footer: '.gc-programs-footer-region'
       weeks: '.gc-program-weeks-list-region'
       workoutList: 'region[data-name="gc-program-workout-list"]'
@@ -81,10 +78,6 @@ define [
 
     _prepareViews: ->
       views = {}
-      views.programDetails = new DetailsView
-        model: @model
-        collection: @collection
-        workoutsCollection: @workoutsCollection
 
       if App.request('current_user_id') is @model.get('user_id')
         views.footer = new FooterControlsView

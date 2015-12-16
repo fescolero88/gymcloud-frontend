@@ -26,7 +26,6 @@ define [
 
     regions:
       manageRegion: '#program-manage'
-      actionsRegion: 'region[data-name="program-actions"]'
 
     ui:
       innerNav: '.gc-inner-nav'
