@@ -3,6 +3,7 @@ define [
 ], (
   template
 ) ->
+
   class FooterControlsView extends Marionette.LayoutView
 
     className: 'row gc-remove-margin'
@@ -10,8 +11,6 @@ define [
     template: template
 
     ui:
-      privacyRadios: '[name="privacy"]'
-      deleteProgram: '.gc-program-delete-button'
       addWeek: '.gc-program-add-week'
       createWorkout: '.gc-program-create-workout'
       addWorkout: '.gc-program-add-workout'
@@ -30,7 +29,6 @@ define [
             label: item.get('name')
 
     events:
-      'click @ui.deleteProgram': 'deleteProgram'
       'click @ui.addWeek': 'addProgramWeek'
       'click @ui.createWorkout': 'addProgramWorkout'
       'click @ui.addWorkout': 'toggleControlsView'
@@ -49,14 +47,6 @@ define [
 
     onShow: ->
       @toggleAddWorkoutButton()
-
-    deleteProgram: ->
-      App.request 'modal:confirm',
-        title: 'Remove program?'
-        content: 'Are you sure you want to delete this program?'
-        confirmBtn: 'Remove'
-        confirmCallBack: =>
-          @model.destroy()
 
     addProgramWeek: ->
       App.vent.trigger 'add:program:week'
