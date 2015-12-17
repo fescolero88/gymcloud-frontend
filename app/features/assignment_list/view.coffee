@@ -25,6 +25,6 @@ define [
             region: 'groups'
             klass: AssignGroupsListView
             options: ->
-              collection: @model.groupAssignments
+              collection: @model.group_assignments
               entity: @model
         ]
