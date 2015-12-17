@@ -1,12 +1,11 @@
 define [
   './template'
   './item/view'
-  'collections/user_collection'
 ], (
   template
   TemplateCollectionItemView
-  UserCollection
 )->
+
   class TemplateCollectionView extends Marionette.CompositeView
 
     template: template

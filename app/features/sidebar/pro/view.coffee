@@ -1,10 +1,8 @@
 define [
   './template'
-  'collections/user_collection'
   './root_folders/view'
 ], (
   template
-  UserCollection
   RootFolderView
 )->
 

@@ -2,12 +2,10 @@ define [
   './template'
   '../entity_templates/view'
   '../entity_templates/item/view'
-  'collections/user_collection'
 ], (
   template
   TemplateCollectionView
   TemplateItemView
-  UserCollection
 )->
 
   class RootFolderView extends Marionette.CompositeView

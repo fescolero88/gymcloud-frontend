@@ -59,6 +59,7 @@ define [
       @listenTo(@model, 'change:state', (_model, state) =>
         @trigger('views:show', state)
       )
+      @listenTo(@model.get('data.model'), 'destroy', @_onModelDestroy)
 
     _initViews: ->
       @views = _.result(@, 'initViews')
@@ -85,6 +86,19 @@ define [
 
     _syncCollection: ->
       # FIXME: TBD
+
+    _onModelDestroy: ->
+      model = @model.get('data.model')
+      namespace = _.chain(model.type)
+        .pluralize()
+        .underscored()
+        .value()
+      user = App.request('current_user')
+      collection = user[namespace]
+      model = collection.get(model.get('id'))
+      if model
+        model.stopListening()
+        model.trigger('destroy', model, model.collection, {})
 
     _showPage: ->
       App.request('views:show', @)
