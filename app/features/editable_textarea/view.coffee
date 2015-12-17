@@ -1,7 +1,9 @@
 define [
   './template'
+  'autosize'
 ], (
   template
+  autosize
 ) ->
 
   class View extends Marionette.ItemView
@@ -11,30 +13,32 @@ define [
     behaviors:
 
       stickit:
-        bindings:
-          '[data-bind="description"]': 'description'
+        bindings: ->
+          'textarea':
+            observe: 'description'
+            afterUpdate: ->
+              autosize.update(@ui.editor)
+            attributes: [
+                name: 'placeholder'
+                observe: 'description'
+                onGet: (value) ->
+                  'Start typing a description here...'
+            ]
 
     ui:
       editor: 'textarea'
 
     events:
-      'keyup @ui.editor': '_fixAutoHeight'
-      'blur @ui.editor': '_saveAttribute'
+      'blur @ui.editor': '_save'
 
     onBeforeRender: ->
       @model = @options.model()
-      @originalModel = new Backbone.Model(@model.attributes)
 
-    _fixAutoHeight: (area) ->
-      el = @ui.editor.get(0)
-      if el?.scrollHeight > el?.clientHeight
-        el.style.height = "#{el.scrollHeight}px"
+    onRender: ->
+      autosize(@ui.editor)
 
-    _saveAttribute: (ev) ->
-      $el = $(ev.currentTarget)
-      attribute = $el.data('bind')
-      return ev if @originalModel.get(attribute) is @model.get(attribute)
+    onBeforeDestroy: ->
+      autosize.destroy(@ui.editor)
 
+    _save: ->
       @model.save()
-        .then( (response) => @originalModel.set(response) )
-        .fail( => @model.set(@originalModel.attributes) )
