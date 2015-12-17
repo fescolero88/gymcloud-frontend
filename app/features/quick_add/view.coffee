@@ -29,20 +29,33 @@ define [
             observe: 'state'
             visible: (value) ->
               value is 'button'
+          'button span span':
+            observe: 'modelName'
+            onGet: (value) ->
+              "Add #{value}"
           '.gc-exercises-assign-input-wrapper':
             observe: 'state'
             visible: (value) ->
               value is 'autocomplete'
-
+          '.gc-exercises-assign-input':
+            attributes: [
+                name: 'placeholder'
+                observe: 'modelName'
+                onGet: (value) ->
+                  name = _.chain(value)
+                    .humanize()
+                    .pluralize()
+                    .value()
+                  "Search #{name}"
+            ]
       auto_complete:
         onItemAdd: ((view) ->
           (value, $item) ->
             @clear()
             view.trigger('quick_add:chosen', value, $item)
         )(@)
-        collection: ->
-          #_.result(@options, 'collection')
-          App.request('current_user').exercises
+        collection: =>
+          @collection
             .map (item) ->
               folder: false
               id: item.get('id')
@@ -52,6 +65,7 @@ define [
     constructor: ->
       @model = new Model
       super
+      @model.set('modelName', @options.typeToAdd)
 
     initialize: ->
       @listenTo @, 'quick_add:chosen', =>

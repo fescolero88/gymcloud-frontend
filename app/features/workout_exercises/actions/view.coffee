@@ -18,7 +18,9 @@ define [
         views: [
             region: 'quick_add'
             klass: QuickAddView
-            options: -> {}
+            options: ->
+              collection: App.request('current_user').exercises
+              typeToAdd: 'Exercise'
             enabled: ->
               can('update', @model)
           ,
