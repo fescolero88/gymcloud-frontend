@@ -47,7 +47,7 @@ define [
       , 200
 
     _removeProperty: (ev) ->
-      e.preventDefault()
+      ev.preventDefault()
       ev.stopImmediatePropagation()
       @model.destroy(wait: true)
 
