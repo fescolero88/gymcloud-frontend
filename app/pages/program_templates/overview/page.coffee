@@ -51,6 +51,9 @@ define [
             className: 'text-danger'
         ]
 
+      redirect_back_on_destroy:
+        model: -> @view.model.get('data.model')
+
     template: template
 
     regions:

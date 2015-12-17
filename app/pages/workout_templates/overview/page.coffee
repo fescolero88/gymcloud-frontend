@@ -43,6 +43,9 @@ define [
       add_to_library:
         model: -> @view.model.get('data.model')
 
+      redirect_back_on_destroy:
+        model: -> @view.model.get('data.model')
+
     template: template
 
     regions:

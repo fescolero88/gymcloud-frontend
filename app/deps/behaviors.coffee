@@ -3,6 +3,7 @@ define [
   'behaviors/form_validation'
   'behaviors/google_login'
   'behaviors/navigate_back'
+  'behaviors/redirect_back_on_destroy'
   'behaviors/regioned'
   'behaviors/stickit'
   'features/actions_dropdown/behavior'
