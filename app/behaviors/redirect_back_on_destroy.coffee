@@ -6,7 +6,7 @@ define ->
 
     onShow: ->
       model = _.bind(@options.model, @)()
-      @listenTo model, 'destroy', (model) =>
+      @listenTo model, 'destroy', (model) ->
         type = _.chain(model.type)
           .pluralize()
           .underscored()
