@@ -106,7 +106,7 @@ define [
           workout_exercise_id: @model.get('id')
       @trigger('actions:multi_constructor:stop')
 
-    _typeAllowedChars: (ev) =>
+    _typeAllowedChars: (ev) ->
       char = String.fromCharCode(ev.keyCode || ev.which)
       re = /[a-z\d]/i
       return false if not char.match(re)
