@@ -33,16 +33,4 @@ define [
         ev.preventDefault()
         value = $(ev.currentTarget).find('input').val() is 'true'
         @model.set(@modelAttribute, value)
-
-    modelEvents: ->
-      "change:#{@modelAttribute}": '_saveAttr'
-
-    onBeforeRender: ->
-      @oldValue = @model.get(@modelAttribute)
-
-    _saveAttr: ->
-      newValue = @model.get(@modelAttribute)
-      if @model.hasChanged(@modelAttribute) && newValue isnt @oldValue
-        @model.save(@model.pick(@modelAttribute), patch: true)
-          .then => @oldValue = newValue
-          .fail => @model.set(@modelAttribute, @oldValue)
+        @model.save()

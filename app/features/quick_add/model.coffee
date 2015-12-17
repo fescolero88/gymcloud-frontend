@@ -4,3 +4,4 @@ define ->
 
     defaults:
       state: 'button'
+      modelName: ''

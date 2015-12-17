@@ -1,11 +1,13 @@
 define [
-  'collections/workout_exercises'
+  './concerns/nested_models'
   './personal_workout'
   './client_group'
+  'collections/workout_exercises'
 ], (
-  WorkoutExercises
+  NestedModelsConcern
   PersonalWorkout
   ClientGroup
+  WorkoutExercises
 ) ->
 
   class WorkoutTemplate extends Backbone.Model
@@ -23,9 +25,10 @@ define [
 
     constructor: ->
       Groups = Backbone.Collection.extend(model: ClientGroup)
-      @exercises = new WorkoutExercises
-      @assignees = new Backbone.Collection
-      @groupAssignments = new Groups
+      @_nestedModelsInit
+        exercises: WorkoutExercises
+        group_assignments: Groups
+        assignees: Backbone.Collection
       super
 
     initialize: (_options) ->
@@ -33,15 +36,10 @@ define [
       @__defineGetter__ 'folder', @_getFolder
 
     parse: (data) ->
-      data.exercises &&
-        @_parseExercises(data.exercises) &&
-        delete data.exercises
+      @_nestedModelsParseAll(data)
       data.assignees &&
         @_parseAssignees(data.assignees) &&
         delete data.assignees
-      data.group_assignments &&
-        @_parseGroupAssignments(data.group_assignments) &&
-        delete data.group_assignments
       data
 
     assignTo: (user) ->
@@ -56,19 +54,16 @@ define [
       collection = user.folders
       collection.get(@get('folder_id'))
 
-    _parseExercises: (exercises) ->
-      @exercises.reset(exercises, parse: true)
-
-    _parseGroupAssignments: (assignments) ->
-      @groupAssignments.reset(assignments, parse: true)
-
     _parseAssignees: (assignees) ->
-      template = @
-      items = _.map assignees, (item) ->
+      items = _.map assignees, (item) =>
         collection = App.request('current_user').personal_workouts
         personalWorkout = collection.get(item.id)
         unless personalWorkout
-          item.workout_template_id = template.id
+          item.workout_template_id = @get('id')
           personalWorkout = new PersonalWorkout(item)
         personalWorkout
       @assignees.reset(items)
+
+  _.extend(WorkoutTemplate::, NestedModelsConcern)
+
+  WorkoutTemplate

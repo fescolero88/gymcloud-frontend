@@ -8,5 +8,5 @@ define ->
       collection: undefined
 
     initialize: ->
-      @listenTo @get('collection'), 'update', ->
+      @listenTo @get('collection'), 'reset update', ->
         @set('count', @get('collection').length)
