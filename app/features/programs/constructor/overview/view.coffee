@@ -1,5 +1,4 @@
 define [
-  './footer/view'
   'features/program_weeks/list/view'
   'features/program_weeks/list/empty/view'
   'collections/program_workouts'
@@ -8,7 +7,6 @@ define [
   './template'
   'dragula'
 ], (
-  FooterControlsView
   WeeksView
   WeekEmptyView
   ProgramWorkouts
@@ -23,7 +21,6 @@ define [
     template: template
 
     regions:
-      footer: '.gc-programs-footer-region'
       weeks: '.gc-program-weeks-list-region'
       workoutList: 'region[data-name="gc-program-workout-list"]'
       emptyState: 'region[data-name="gc-program-empty-state"]'
@@ -43,10 +40,6 @@ define [
 
       @listenTo(@views.weeks, 'add:program_workout', @_addProgramWorkout)
       @listenTo @views.weeks,
-        'add:program_workout:from_library',
-        @_addProgramWorkoutFromLibrary
-      @listenTo(@views.footer, 'add:program_workout', @_addProgramWorkout)
-      @listenTo @views.footer,
         'add:program_workout:from_library',
         @_addProgramWorkoutFromLibrary
       @listenTo(@collection, 'update', @toggleEmptyState)
@@ -78,12 +71,6 @@ define [
 
     _prepareViews: ->
       views = {}
-
-      if App.request('current_user_id') is @model.get('user_id')
-        views.footer = new FooterControlsView
-          model: @model
-          collection: @collection
-          workoutsCollection: @workoutsCollection
 
       views.weeks = new WeeksView
         model: @model
