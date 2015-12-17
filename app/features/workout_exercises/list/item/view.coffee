@@ -24,6 +24,7 @@ define [
     events:
       'click @ui.deleteBtn': 'deleteExercise'
       'click @ui.addSingleProperty': 'initProperty'
+      'keypress .gc-workout-exercise-circle': '_typeAllowedChars'
 
     behaviors:
 
@@ -104,3 +105,8 @@ define [
           exercise_properties: exercise_properties
           workout_exercise_id: @model.get('id')
       @trigger('actions:multi_constructor:stop')
+
+    _typeAllowedChars: (ev) =>
+      char = String.fromCharCode(ev.keyCode || ev.which)
+      re = /[a-z\d]/i
+      return false if not char.match(re)

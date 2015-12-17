@@ -127,29 +127,22 @@ ul.gc-workout-exercises-list
     opacity: 1
 
 .gc-workout-exercise-circle
+  padding: 0
+  border: 0 none
+  width: 30px
+  height: 30px
+  line-height: 30px
   background-color: #f47b22
-  border-radius: 24px
-  min-width: 24px
-  max-width: 60px
-  display: inline-block
-  height: 24px
+  border-radius: 15px
   color: #fff
-  font: 400 10px / 21px 'Source Sans Pro'
+  font-size: 10px
+  font-weight: bold
   text-align: center
-  position: relative
-  line-height: 24px
   text-transform: uppercase
-  padding: 0 5px
 
-  &[contenteditable]
-    outline: none
-
-  &[contenteditable=true]:active,
-  &[contenteditable=true]:focus
-    box-shadow: 0 0 10px rgba(0,0,0,0.6)
-    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.6)
-    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.6)
-    -o-box-shadow: 0 0 10px rgba(0,0,0,0.6)
+  &:active,
+  &:focus
+    box-shadow: 0 0 1px 3px rgba(0,0,0,0.3) inset
 
   &.first::after,
   &.middle::after
