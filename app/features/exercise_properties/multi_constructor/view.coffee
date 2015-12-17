@@ -48,7 +48,7 @@ define [
       super
 
     initialize: (options) ->
-      @listenTo @collection, 'add remove', =>
+      @listenTo @collection, 'reset add remove', =>
         state = @collection.isEmpty() && 'empty' || 'collection'
         @model.set('state', state)
       @listenTo @model, 'change:state', (_model, value) =>
@@ -61,4 +61,5 @@ define [
       @collection.add({})
 
     assignProperties: ->
-      @trigger('multi_constructor:assign', @collection)
+      @trigger('multi_constructor:assign', @collection.models)
+      @collection.reset()

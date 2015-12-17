@@ -103,3 +103,4 @@ define [
         @views.exercise_properties.trigger 'properties:add',
           exercise_properties: exercise_properties
           workout_exercise_id: @model.get('id')
+      @trigger('actions:multi_constructor:stop')

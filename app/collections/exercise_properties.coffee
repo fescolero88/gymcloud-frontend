@@ -10,8 +10,8 @@ define [
 
     model: ExerciseProperty
 
-    addProperties: (sourceCollection, workout_exercise_id) ->
-      sourceCollection.each (sourceModel) =>
+    addProperties: (sourceModels, workout_exercise_id) ->
+      _.each sourceModels, (sourceModel) =>
         model = new ExerciseProperty(sourceModel.attributes)
         model.set
           workout_exercise_id: workout_exercise_id
