@@ -35,7 +35,7 @@ define [
     editMyProfile: ->
       user = App.request('current_user')
       view = new NewProfileView
-        model: user.profile
+        model: user.user_profile
       @_showView(view)
 
     _userProfile: (user) ->

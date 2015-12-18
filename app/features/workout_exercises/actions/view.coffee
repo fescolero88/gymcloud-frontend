@@ -12,6 +12,8 @@ define [
 
     template: template
 
+    className: 'gc-exercises-list-actions'
+
     behaviors: ->
 
       regioned:

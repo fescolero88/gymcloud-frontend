@@ -1,6 +1,7 @@
 define [
   'styles/000_vendors_override'
   'styles/app'
+  'features/layouts/main/styles'
   'styles/calendar'
   'styles/client'
   'styles/clientpage'
@@ -35,6 +36,7 @@ define [
   'features/modal/styles'
   'features/collections_counters/styles'
   'features/actions_dropdown/styles'
+  'features/folders/entity_list/styles'
   'styles/components/zzz_all'
   'styles/zzz_override'
 ], ->

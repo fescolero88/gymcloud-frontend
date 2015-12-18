@@ -10,6 +10,8 @@ define [
 
     template: template
 
+    className: 'form-group'
+
     behaviors:
 
       stickit:

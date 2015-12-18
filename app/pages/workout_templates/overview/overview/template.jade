@@ -1,22 +1,16 @@
 .row
-  .col-lg-6.col-lg-offset-6.text-right
+  .col-md-8
+    region(data-name='editable_textarea')
+    region(data-name='video_assigned')
+
+  .col-md-4.text-right
     region(data-name='author_widget')
     region(data-name='rating_widget')
 
 .row
-  .col-xs-12
-    region(data-name='editable_textarea')
-    region(data-name='video_assigned')
-    //-region(data-name='editable_textarea' data-bind='note')
-    //-.form-group.gc-workout-note-container(class=hasNote ? '' : 'hidden')
-      label.gc-workout-notes-label
-        | Workout Notes
-      textarea.gc-workout-note-editor.gc-note-editor.form-control(type='text', placeholder='Start typing a description here...', data-bind='note')
-      .gc-workout-description(type='text', placeholder='Start typing a description here...', data-bind='note')
-
-region(data-name='workout_exercises')
+  region(data-name='workout_exercises')
 
 .row.row-margin-v
-  .col-lg-6.col-lg-offset-6.text-right
+  .col-md-12.text-right
     region(data-name='privacy_toggle')
     region(data-name='delete_button')

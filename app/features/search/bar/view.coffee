@@ -8,6 +8,8 @@ define [
 
     template: template
 
+    className: 'gc-topbar-search'
+
     events:
       'blur @ui.searchTerm': 'searchFocusLost'
       'click @ui.searchButton': 'search'
@@ -18,8 +20,6 @@ define [
       searchTerm: '#gc-topnav-search'
       searchIcon: '.gc-topnav-search-icon'
       searchButton: '.gc-topnav-search-btn'
-
-    className: 'gc-topbar-search'
 
     searchOnEnter: (ev)->
       if ev.which is 13

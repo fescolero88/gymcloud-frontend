@@ -1,6 +1,3 @@
-.gc-properties-list-wrapper
-  margin: 0 25px
-
 .gc-properties-list-header
   font-size: 13px
   color: #98a7ac
@@ -8,63 +5,60 @@
   padding: 15px 0
   border-bottom: 1px solid #ededed
 
-.gc-properties-list-header > div
-  padding-left: 0
-
 .gc-properties-list
   padding: 0
   margin: 0
 
-.gc-properties-list > li
-  list-style-type: none
+  > li
+    list-style-type: none
 
-.gc-properties-list > li.sortable-placeholder
-  height: 50px
-  margin: 0 -15px
-  background: rgba(51, 152, 219, 0.5)
-  outline: 8px solid rgba(51, 152, 219, 0.5)
-  border: 1px dashed #fff
+    &.sortable-placeholder
+      height: 50px
+      margin: 0 -15px
+      background: rgba(51, 152, 219, 0.5)
+      outline: 8px solid rgba(51, 152, 219, 0.5)
+      border: 1px dashed #fff
 
-.gc-properties-list > li.dragged
-  left: 15px!important
-  right: 0!important
-  position: absolute
-  z-index: 2000
-  background: #fff
-  box-shadow: 0px 2px 5px #999
+    &.dragged
+      left: 15px!important
+      right: 0!important
+      position: absolute
+      z-index: 2000
+      background: #fff
+      box-shadow: 0px 2px 5px #999
 
-.gc-properties-list > li.dragged .row
-  border: none
+      .row
+        border: none
 
-.gc-properties-list > li .draggable-handle
-  cursor: pointer
+    .draggable-handle
+      cursor: pointer
 
-.gc-properties-list .row
-  border-bottom: 1px solid #ededed
+  .row
+    border-bottom: 1px solid #ededed
 
-.gc-properties-list .row .switch
-  margin-top: 10px
+    .switch
+      margin-top: 10px
 
-.gc-properties-list .row > div
-  font-size: 14px
-  color: #666769
-  height: 66px
-  line-height: 16px
-  padding: 25px 0
+    > div
+      font-size: 14px
+      color: #666769
+      height: 66px
+      line-height: 16px
+      padding: 25px 0
 
-.gc-properties-list .row > div > .fa
-  color: #3a99d8
-  font-size: 14px
-  display: inline-block
-  margin: 0 25px 0 15px
+      > .fa
+        color: #3a99d8
+        font-size: 14px
+        display: inline-block
+        margin: 0 25px 0 15px
 
-.gc-properties-list .row > div > .fa + span
-  text-transform: uppercase
-  color: #3a99d8
-  font-size: 14px
+      > .fa + span
+        text-transform: uppercase
+        color: #3a99d8
+        font-size: 14px
 
-.gc-properties-list .row > div.gc-properties-property-actions
-  padding: 12px 0
+      &.gc-properties-property-actions
+        padding: 12px 0
 
 .gc-properties-property-edit
   font-size: 12px
@@ -129,4 +123,3 @@
   border-color: #3a99d8
   text-decoration: none
   outline: none
-

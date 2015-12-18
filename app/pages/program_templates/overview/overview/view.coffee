@@ -20,7 +20,7 @@ define [
 
     template: template
 
-    className: 'gc-workouts-workout-view'
+    className: 'gc-box-content'
 
     behaviors:
       author_widget: true

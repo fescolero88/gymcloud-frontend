@@ -54,7 +54,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
     @model.set(formData)
     if @model.isValid true
       @model.save().then (_response) =>
-        @model.profile.save(formData, wait: true)
+        @model.user_profile.save(formData, wait: true)
 
   onSync: (model, response, options) ->
     @trigger 'modal:close'

@@ -120,51 +120,23 @@ body
 
 *
   margin: 0
-  font-family: 'Source Sans Pro', sans-serif
 
 html,
 body
   height: 100%
+
+body
   background: #282d30
+  font-family: 'Source Sans Pro', sans-serif
 
 body.dragging,
 body.dragging *
   cursor: move !important
 
-body > region[data-name="app"]
-  display: block
-  height: 100%
-  min-height: 100%
-
-body > region[data-name="app"] > .container-fluid
-  padding: 0
-  height: 100%
-
 .gc-centered
   margin-left: auto
   margin-right: auto
   float: none
-
-.gc-main
-  position: relative
-  height: 100%
-  background-color: #fff
-
-.gc-main > div
-  height: 100%
-  position: relative
-
-.gc-main-wrapper
-  margin-left: 230px
-  height: 100%
-
-.gc-main-wrapper:after
-  content: " "
-  display: table
-  clear: both
-
-.gc-main-wrapper.gc-fixed-top-bar
-  position: relative
 
 .gc-fixed-top-bar .gc-topbar
   position: fixed
@@ -180,9 +152,6 @@ body > region[data-name="app"] > .container-fluid
 .gc-fixed-top-bar .gc-topbar > div
   display: table
   width: 100%
-
-.gc-fixed-top-bar .gc-main
-  padding-top: 64px
 
 .gc-main-workspace
   background: #fff
@@ -224,7 +193,7 @@ body > region[data-name="app"] > .container-fluid
   color: #9ea0a1
   line-height: 46px
   padding: 2px 0
-  margin: 0 15px
+  margin: 0
   font-weight: bold
   color: #757575
 

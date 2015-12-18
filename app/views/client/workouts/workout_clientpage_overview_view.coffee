@@ -6,7 +6,7 @@ module.exports = class WorkoutGlobalOverviewView extends Marionette.LayoutView
 
   template: require('templates/client/workouts/workout_clientpage_overview.hbs')
 
-  className: 'gc-workouts-workout-view'
+  className: 'gc-box-content'
 
   regions:
     exercisesListRegion: '#gc-exercises-list-region'
