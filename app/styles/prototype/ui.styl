@@ -13,8 +13,6 @@ red = #e54d42
 
 /*functions*/
 transition(type, duration, animation)
-  -webkit-transition type duration animation
-  -moz-transition type duration animation
   transition type duration animation
 
 /*base styles*/
@@ -463,15 +461,11 @@ a.gc-text-link:hover
 
 .gc-textarea-no-border
   border none
-  -webkit-box-shadow none
-  -moz-box-shadow none
   box-shadow none
   outline none
   resize none
 
 .gc-textarea-no-borderfocus
-  -webkit-box-shadow none
-  -moz-box-shadow none
   box-shadow none
 
 .gc-textarea
@@ -617,14 +611,12 @@ region[data-name="pagination"] > div
   border-bottom-color white
 
 .gc-tooltip.gc-tooltip-no-header
-  -webkit-box-shadow 0px 2px 12px 1px rgba(0,0,0,.2)
   box-shadow 0px 2px 12px 1px rgba(0,0,0,.2)
 
 .gc-alert-message
   background #FAFAFA
   border-radius 3px
   max-width 250px
-  -webkit-box-shadow 0 2px 8px rgba(0,0,0,.2)
   box-shadow 0 2px 8px rgba(0,0,0,.2)
   display table
   margin 15px
@@ -834,7 +826,6 @@ region[data-name="pagination"] > div
   bottom 0
   left 50%
   transform translateX(-50%)
-  -webkit-transform translateX(-50%)
 
 /*for demo grid*/
 .gc-row-4:after

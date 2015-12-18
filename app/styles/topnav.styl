@@ -25,24 +25,11 @@
   border-radius: 50px 0 0 50px
   height: 32px
   background: #343a3d
-  -webkit-transition: background 0.2s linear 0.2s, color 0.2s linear 0.2s
-  -moz-transition: background 0.2s linear 0.2s, color 0.2s linear 0.2s
-  -o-transition: background 0.2s linear 0.2s, color 0.2s linear 0.2s
   transition: background 0.2s linear 0.2s, color 0.2s linear 0.2s
 
-.gc-topbar-search input[type=text]::-webkit-input-placeholder
-  color: rgba(255,255,255,0.25)
-
-.gc-topbar-search input[type=text]:-moz-placeholder
+.gc-topbar-search input[type=text]::placeholder
   color: rgba(255,255,255,0.25)
   opacity: 1
-
-.gc-topbar-search input[type=text]::-moz-placeholder
-  color: rgba(255,255,255,0.25)
-  opacity: 1
-
-.gc-topbar-search input[type=text]:-ms-input-placeholder
-  color: rgba(255,255,255,0.25)
 
 .gc-topbar-search input[type=text]:focus,
 .gc-topbar-search input[type=text].active
@@ -55,9 +42,6 @@
   border-radius: 0 50px 50px 0
   background: #343a3d
   color: rgba(255,255,255,0.25)
-  -webkit-transition: background 0.2s linear 0.2s, color 0.2s linear 0.2s
-  -moz-transition: background 0.2s linear 0.2s, color 0.2s linear 0.2s
-  -o-transition: background 0.2s linear 0.2s, color 0.2s linear 0.2s
   transition: background 0.2s linear 0.2s, color 0.2s linear 0.2s
 
 .gc-topbar-search .input-group-btn .btn:hover,
