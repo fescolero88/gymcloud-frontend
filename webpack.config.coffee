@@ -1,5 +1,6 @@
 path = require('path')
 webpack = require('webpack')
+autoprefixer = require('autoprefixer')
 ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 require('dotenv').load()
@@ -125,7 +126,7 @@ module.exports =
       {
         test: /\.styl$/
         # loader: 'style!css!stylus'
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!stylus-loader', publicPath: '')
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!stylus-loader', publicPath: '')
       }
       {
         test: /\.scss$/
@@ -166,6 +167,9 @@ module.exports =
         loader: 'file?prefix=img/&mimetype=image/gif'
       }
     ]
+
+  postcss: ->
+    [autoprefixer]
 
   externals: {}
 
