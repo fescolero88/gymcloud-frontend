@@ -22,7 +22,7 @@ define [
           '.gc-topbar-avatar a':
             classes:
               'presents':
-                observe: 'user_profile.avatar.url'
+                observe: 'user_profile.avatar.thumb.url'
             attributes: [
                 name: 'title'
                 observe: [
