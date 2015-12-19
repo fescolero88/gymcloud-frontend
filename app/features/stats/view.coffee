@@ -12,7 +12,7 @@ define [
 
     childView: StatsItemView
 
-    childViewContainer: '.stats-collection-container'
+    childViewContainer: 'ul'
 
     className: 'gc-main-workspace row'
 

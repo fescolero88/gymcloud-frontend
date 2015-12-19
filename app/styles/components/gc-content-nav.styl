@@ -3,14 +3,14 @@
   border-bottom: 1px solid rgba(40,45,48,0.1)
   margin: 0
 
-  > div
-    padding: 0 5px
-
 .gc-content-nav
   padding: 0
   margin: 0
   height: 50px
   display: inline-block
+
+  .gc-nav-wrapper &
+    margin-top: -0.55em
 
   li
     display: inline-block
@@ -39,10 +39,10 @@
         cursor: pointer
 
 .gc-content-nav-checkall
-  padding: 10px
-  width: 35px
-  height: 35px
-  margin: 0
+  padding: 4px
+  width: 25px
+  height: 25px
+  margin: 0 0 0 4px
   cursor: pointer
 
   input
@@ -99,23 +99,9 @@
 .gc-content-nav-back
 
   .gc-content-nav &
-    margin-left: -15px
 
     a
       color: #3a99d8
 
       &:hover
         cursor: pointer
-
-@media (min-width: 992px)
-
-  .gc-content-nav
-    padding: 0 15px 0 15px
-
-  .gc-content-nav-wrapper
-
-    > div
-      padding: 0 15px
-
-    > .gc-content-nav-actions
-      padding: 11px 30px 0 0

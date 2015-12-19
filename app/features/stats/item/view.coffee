@@ -10,4 +10,4 @@ define [
 
     tagName: 'li'
 
-    className: 'row gc-folder'
+    className: 'gc-folder row'
