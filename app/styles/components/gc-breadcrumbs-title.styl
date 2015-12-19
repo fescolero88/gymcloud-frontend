@@ -4,6 +4,7 @@ region[data-name="breadcrumbs"]
 .gc-breadcrumbs-title
 
   span
+    margin-left: 0.5rem
 
     &:after
       content "\f054"
@@ -12,7 +13,7 @@ region[data-name="breadcrumbs"]
       font-size 8px
       line-height 18px
       vertical-align 2px
-      margin 0 5px
+      margin: 0 0.5rem 0 1rem
       display inline-block
 
     &:last-child
@@ -20,14 +21,16 @@ region[data-name="breadcrumbs"]
         display none
 
     &[contenteditable]
-      line-height 1em
-      border 1px dashed transparent
-      transition border-color ease-in-out .15s,box-shadow ease-in-out .15s
+      margin: 0
+      line-height: 1em
+      border: 1px solid transparent
+      padding: 3px 8px
+      border-radius: 5px
 
       &:hover
-        border-bottom-color #3a99d8
-        cursor pointer
+        border: 1px dashed #ddd
+        border-style: dashed
+        cursor: pointer
 
       &:focus
-        padding 6px 12px
-        border-bottom-color transparent
+        border: 1px solid #ddd
