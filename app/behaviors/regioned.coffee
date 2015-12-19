@@ -11,13 +11,13 @@ define ->
       @_bindAll()
       @view.views ?= {}
       super
-      @_initRegions()
       @
 
-    onBeforeRender: ->
+    onBeforeShow: ->
+      @_initRegions()
       @_initBehaviorViews()
 
-    onRender: ->
+    onShow: ->
       @_ensureDataIsSynced()
         .done =>
           @_renderBehaviorViews()
@@ -56,9 +56,7 @@ define ->
         enabled = _.bind(viewOption.enabled, @view)()
         v = @view.views[viewOption.region]
         if enabled
-          @view
-            .getRegion(viewOption.region)
-            .show(v)
+          @view.getRegion(viewOption.region)?.show(v)
 
     _doForEachViewOption: (fn) ->
       _.each(@options.views, fn)
