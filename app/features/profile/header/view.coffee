@@ -30,7 +30,7 @@ define [
     behaviors: ->
 
       stickit:
-        model: => @model.profile
+        model: => @model.user_profile
         bindings:
           '.gc-usercard-avatar-wrapper':
             attributes: [
@@ -85,7 +85,7 @@ define [
       isMyProfile: @_isMyProfile()
 
     initialize: ->
-      @modal = new ProfileEditModalView(model: @model.profile)
+      @modal = new ProfileEditModalView(model: @model.user_profile)
 
       @listenTo @modal, 'modal:close', =>
         @ui.clientFormModal.modal('hide')

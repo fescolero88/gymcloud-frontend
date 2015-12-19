@@ -1,14 +1,15 @@
 .row
-  .col-lg-6.col-lg-offset-6.text-right
-    region(data-name='author_widget')
-    region(data-name='rating_widget')
-
-.row
-  .col-lg-6
+  .col-md-8
     region(data-name='editable_textarea')
 
-  .col-lg-6.text-right
-    region(data-name='counters')
+  .col-md-4.text-right
+    .row
+      .col-xs-12
+        region(data-name='author_widget')
+        region(data-name='rating_widget')
+    .row
+      .col-xs-12
+        region(data-name='counters')
 
 .row
   region(data-name='program_weeks')
@@ -23,6 +24,6 @@
   region(data-name='program_workouts_actions')
 
 .row.row-margin-v
-  .col-lg-6.col-lg-offset-6.text-right
+  .col-md-12.text-right
     region(data-name='privacy_toggle')
     region(data-name='delete_button')

@@ -8,13 +8,13 @@ define [
 
     template: template
 
-    className: 'container-fluid'
+    className: 'gc-layout-main'
 
     regions:
       menu: '.gc-sidebar-wrapper'
-      header: '.gc-topbar'
+      header: 'region[data-name="header"]'
       content: '.gc-main'
-      modals: '.gc-modals'
+      modals: 'region[data-name="modals"]'
 
     initialize: ->
       @_initHandlers()

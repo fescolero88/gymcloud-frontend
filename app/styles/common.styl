@@ -120,51 +120,23 @@ body
 
 *
   margin: 0
-  font-family: 'Source Sans Pro', sans-serif
 
 html,
 body
   height: 100%
+
+body
   background: #282d30
+  font-family: 'Source Sans Pro', sans-serif
 
 body.dragging,
 body.dragging *
   cursor: move !important
 
-body > region[data-name="app"]
-  display: block
-  height: 100%
-  min-height: 100%
-
-body > region[data-name="app"] > .container-fluid
-  padding: 0
-  height: 100%
-
 .gc-centered
   margin-left: auto
   margin-right: auto
   float: none
-
-.gc-main
-  position: relative
-  height: 100%
-  background-color: #fff
-
-.gc-main > div
-  height: 100%
-  position: relative
-
-.gc-main-wrapper
-  margin-left: 230px
-  height: 100%
-
-.gc-main-wrapper:after
-  content: " "
-  display: table
-  clear: both
-
-.gc-main-wrapper.gc-fixed-top-bar
-  position: relative
 
 .gc-fixed-top-bar .gc-topbar
   position: fixed
@@ -181,16 +153,10 @@ body > region[data-name="app"] > .container-fluid
   display: table
   width: 100%
 
-.gc-fixed-top-bar .gc-main
-  padding-top: 64px
-
 .gc-main-workspace
   background: #fff
   position: relative
   height: 100%
-
-.gc-main-workspace > div
-  padding: 0
 
 .gc-content-both
   /*float: none;*/
@@ -216,18 +182,6 @@ body > region[data-name="app"] > .container-fluid
   height: 50px
   padding: 10px 0
 
-.gc-nav-wrapper h2
-  display: inline-block
-  text-transform: uppercase
-  font-size: 18px
-  text-transform: uppercase
-  color: #9ea0a1
-  line-height: 46px
-  padding: 2px 0
-  margin: 0 15px
-  font-weight: bold
-  color: #757575
-
 @media (min-width: 1025px)
   .gc-content-right header h3
     font-size: 18px
@@ -237,12 +191,36 @@ body > region[data-name="app"] > .container-fluid
     padding: 0
 
 .gc-nav-wrapper
+  padding-top: 0.55em
+  padding-bottom: 0.55em
   height: 50px
   border-bottom: 1px solid rgba(40,45,48,0.1)
   margin: 0
   overflow: visible
   position: relative
   z-index: 2
+
+  h2
+    display: inline-block
+    text-transform: uppercase
+    font-size: 18px
+    text-transform: uppercase
+    color: #9ea0a1
+    padding: 0
+    margin: 0
+    font-weight: bold
+    color: #757575
+    line-height: 1.8
+
+  .btn
+    margin-left: 1rem
+
+  .text-right,
+  .text-sm-right
+    .btn
+      margin-left: 0
+      margin-right: 1rem
+
 
 .gc-nav-shadow
   box-shadow: 0px 5px 10px -8px rgba(143,143,143,1)
@@ -260,8 +238,6 @@ body > region[data-name="app"] > .container-fluid
   border-color: #3a99d8
   border-radius: 50px
   text-align: center
-  line-height: 16px
-  margin-top: -5px
 
 .gc-nav-wrapper .btn + .btn
   margin-left: 8px
@@ -338,8 +314,8 @@ body > region[data-name="app"] > .container-fluid
 .form-group.gc-valid .gc-valid-icon
   display: block
   position: absolute
-  right: 25px
-  bottom: 25px
+  right: 10px
+  bottom: 13px
   color: #3a99d8
   font-size: 12px
 

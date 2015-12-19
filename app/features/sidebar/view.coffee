@@ -12,7 +12,7 @@ define [
 
     template: template
 
-    className: 'gc-scrollable-area'
+    className: 'gc-sidebar'
 
     ui:
       item: '.gc-sidebar-item > a'

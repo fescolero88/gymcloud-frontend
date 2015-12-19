@@ -10,8 +10,6 @@ define [
 
   class PropertyListView extends Marionette.CompositeView
 
-    className: 'gc-properties-list-wrapper row'
-
     template: template
 
     emptyView: EmptyView

@@ -10,14 +10,10 @@ define [
 
     className: 'row'
 
-    regions:
-      avatar: 'region[data-name="avatar-wrapper"]'
+    behaviors: ->
 
-    initialize: ->
-      super
-      @on('render', @_renderAvatar)
-
-    _renderAvatar: ->
-      view = new AvatarView
-        model: @model
-      @getRegion('avatar').show(view)
+      regioned:
+        views: [
+            region: 'avatar'
+            klass: AvatarView
+        ]

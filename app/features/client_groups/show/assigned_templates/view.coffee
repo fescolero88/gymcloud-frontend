@@ -3,11 +3,12 @@ define [
 ], (
   AssignedTemplateItemView
 ) ->
+
   class AssignedTemplatesListView extends Marionette.CollectionView
 
     tagName: 'ul'
 
-    className: 'gc-exercises-assign-list'
+    className: 'gc-folders-entity-list'
 
     childView: AssignedTemplateItemView
 

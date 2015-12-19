@@ -16,8 +16,6 @@ define [
 
     template: template
 
-    className: 'gc-global-ewp-wrapper'
-
     regions:
       collectionRegion: 'region[data-name="collection"]'
       modalRegion: '#gc-modal-region'

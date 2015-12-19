@@ -7,8 +7,10 @@ define [
   class Controller extends Marionette.Controller
 
     search: (q, entityType = 'all', searchScope = 'all') ->
-      collection = App.request('search:request:collection')
-      model = App.request('search:request:model')
+      collection =
+        App.request('search:request:collection')
+      model =
+        App.request('search:request:model')
       model.set
         q: q
         entity_type: entityType
@@ -16,7 +18,4 @@ define [
       view = new SearchResultsView
         collection: collection
         model: model
-
-      appRegion = App.request('app:layouts:base').getRegion('appRegion')
-      region = appRegion.currentView.getRegion('content')
-      region.show(view)
+      App.request('views:show', view)

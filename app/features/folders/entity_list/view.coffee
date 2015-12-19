@@ -12,7 +12,7 @@ define [
 
     tagName: 'ul'
 
-    className: 'gc-exercises-assign-list'
+    className: 'gc-folders-entity-list'
 
     emptyView: EntityEmptyView
 
@@ -25,7 +25,7 @@ define [
       'highlight': 'highlightNew'
 
     ui:
-      checkboxWrappers: '.gc-exercises-assign-list'
+      checkboxWrappers: 'gc-folders-entity-list'
 
     childViewOptions: =>
       'type': @typeName

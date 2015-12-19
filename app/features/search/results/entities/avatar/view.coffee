@@ -12,15 +12,17 @@ define [
 
     className: 'gc-clients-list-avatar-wrapper'
 
-    attributes:
-      href: '#'
-
     behaviors:
 
       stickit:
         bindings:
           ':el':
             attributes: [
+                observe: 'author_id'
+                name: 'href'
+                onGet: (val) ->
+                  "#/users/#{val}"
+              ,
                 observe: 'avatar_background_color'
                 name: 'style'
                 onGet: (val) ->

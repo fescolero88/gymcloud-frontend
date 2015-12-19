@@ -1,7 +1,9 @@
 define [
+  './concerns/nested_models'
   'models/user_profile'
   'backbone-nested'
 ], (
+  NestedModelsConcern
   UserProfile
 ) ->
 
@@ -10,15 +12,20 @@ define [
     type: 'User'
 
     urlRoot: ->
-      currentUserId = App.request('current_user_id')
-      if currentUserId == @id then '/users/me' else '/users'
+      uid = App.request('current_user_id')
+      uid is @id and '/users/me' or '/users'
 
     defaults:
       user_profile: {}
 
+    initialize: ->
+      @_nestedModelsInit
+        user_profile: UserProfile
+
     parse: (data) ->
-      @profile = new UserProfile(data.user_profile)
-      data.user_profile = @profile.attributes
+      user_profile = data.user_profile
+      @_nestedModelsParseAll(data)
+      data.user_profile = user_profile
       data
 
     fullName: ->
@@ -42,3 +49,14 @@ define [
         .fail (xhr, textStatus, errorThrown) =>
           @trigger 'invite:fail', 'Something went wrong'
       request
+
+    getRootFolderFor: (type) ->
+      name = _.titleize(type)
+      if _.indexOf(['Exercises', 'Workouts', 'Programs'], name) == -1
+        throw Error('No such folder')
+      rootFolder = @library.first()
+      rootFolder.items.findWhere(name: name)
+
+  _.extend(User::, NestedModelsConcern)
+
+  User

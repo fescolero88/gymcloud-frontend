@@ -13,7 +13,10 @@ define ->
   _nestedModelsParse: (data, namespaces) ->
     _.each namespaces, (namespace) =>
       unless _.isUndefined(data[namespace])
-        @[namespace].reset(data[namespace], parse: true)
+        if _.isFunction(@[namespace].reset)
+          @[namespace].reset(data[namespace], parse: true)
+        else if _.isFunction(@[namespace].set)
+          @[namespace].set(data[namespace])
         delete data[namespace]
 
   _nestedModelsParseAll: (data) ->

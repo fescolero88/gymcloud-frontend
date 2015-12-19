@@ -10,8 +10,6 @@ define [
 
     template: template
 
-    className: 'gc-scrollable-area'
-
     events:
       'click @ui.item': 'toggleItem'
 

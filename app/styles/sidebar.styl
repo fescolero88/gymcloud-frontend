@@ -1,90 +1,57 @@
-.gc-sidebar-wrapper
-  max-width: 230px
-  min-width: 230px
-  padding: 0
-  background: #282d30
-  height: 100%
-  position: fixed
-  top: 0
-  bottom: 0
+.gc-sidebar
+  display: flex
+  flex-flow: row wrap
+  min-height: min-content
 
-.gc-scrollable-area
-  height: 100%
-  position: relative
-
-.gc-scrollable-area .nano
-  position: absolute
-  top: 64px
-  bottom: 0
-  height: auto
-
-.gc-sidebar-wrapper:after
-  clear: both
-  display: table
-  content: " "
-
-.gc-sidebar-wrapper:before
-  display: table
-  content: " "
-
-.gc-sidebar-logo
-  background: #23292b
-  display: block
-  text-align: center
-  height: 64px
-  padding: 14px 0
-
-.gc-sidebar-primary > .row
-  margin: 0
+  > region
+    flex: 1 100%
 
 .gc-sidebar-cat
   background: transparent
+  flex: 1 100%
 
-.gc-sidebar-cat > a
-  display: block
-  margin: 0
-  font-size: 15px
-  font-weight: 300
-  line-height: 18px
-  color: rgba(255,255,255,0.65)
-  border-left: 2px solid #282d30
-  text-transform: uppercase
-  padding: 14px 0
-  height: 46px
+  > a
+    display: block
+    margin: 0
+    font-size: 15px
+    font-weight: 300
+    line-height: 18px
+    color: rgba(255,255,255,0.65)
+    border-left: 2px solid #282d30
+    text-transform: uppercase
+    padding: 14px 0
+    height: 46px
+
+  > a:hover
+    color: #fff
+
+  > a:hover .gc-sidebar-cat-icon
+    opacity: 1
+
+  > a.active
+    background: #3c4248
+    border-left: 2px solid #34749e
+
+  > a.active .gc-sidebar-cat-icon
+    opacity: 1
+
+  > a > .col-xs-1
+    padding: 0
+    text-align: center
+
+.gc-menu-item-arrow
+  background: url('../images/sidebar-item-arrow.png') no-repeat
+  width: 6px
+  height: 10px
+  background-size: cover
+  top: 6px
+  position: relative
+
+  .active &
+    transform: rotate(90deg)
 
 .gc-sidebar-cat-name
   padding: 0 5px
-
-.gc-sidebar-cat > a:hover
-  color: #fff
-
-.gc-sidebar-cat > a:hover .gc-sidebar-cat-icon
-  opacity: 1
-
-.gc-sidebar-cat > a.active
-  background: #3c4248
-  border-left: 2px solid #34749e
-
-.gc-sidebar-cat > a.active .gc-sidebar-cat-icon
-  opacity: 1
-
-.gc-sidebar-cat > a > .col-xs-1
-  padding: 0
-  text-align: center
-
-.gc-sidebar-cat
-
-  .gc-menu-item-arrow
-    background: url('../images/sidebar-item-arrow.png') no-repeat
-    width: 6px
-    height: 10px
-    background-size: cover
-    top: 6px
-    position: relative
-
-  > a.active
-    .gc-menu-item-arrow
-      transform: rotate(90deg)
 
 .gc-sidebar-cat-icon
   display: block
@@ -96,6 +63,11 @@
   position: relative
   left: -3px
   top: -3px
+
+
+.gc-sidebar-logo
+  background: #23292b url('../images/gymcloud-logo.png') center center no-repeat
+  padding: 32px 115px
 
 .gc-sidebar-sub
   max-height: 0
