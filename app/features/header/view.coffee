@@ -35,7 +35,7 @@ define [
           '.gc-topbar-avatar img':
             attributes: [
                 name: 'src'
-                observe: 'user_profile.avatar.url'
+                observe: 'user_profile.avatar.thumb.url'
             ]
 
     initialize: ->
