@@ -58,11 +58,16 @@ define [
           '.gc-workout-exercise-circle':
             observe: 'order_name'
             events: ['blur']
+            getVal: ($el) ->
+              $el.text().toUpperCase()
             attributes: [
-                name: 'data-letter'
-                observe: 'order_name'
+                name: 'style'
+                observe: 'color'
                 onGet: (value) ->
-                  @model.orderLetter()
+                  "background-color: #{value}"
+              ,
+                name: 'data-order_position'
+                observe: 'order_position'
             ]
           '.gc-workout-exercise-note':
             observe: 'note'
@@ -93,7 +98,7 @@ define [
       @$el.addClass 'hover-enabled'
 
     deleteExercise: ->
-      @model.destroy()
+      @model.destroy(wait: true)
 
     initProperty: ->
       @views.exercise_properties.trigger 'properties:init',
@@ -107,6 +112,7 @@ define [
       @trigger('actions:multi_constructor:stop')
 
     _typeAllowedChars: (ev) ->
+      return false if ev.currentTarget.innerText.length >= 3
       char = String.fromCharCode(ev.keyCode || ev.which)
       re = /[a-z\d]/i
       return false if not char.match(re)

@@ -21,13 +21,10 @@ define [
       exercise_id:
         required: true
 
-    orderLetter: ->
-      orderName = @get('order_name')
-      letter = orderName?.match(/[a-zA-z]+/)?[0]
-      letter || "~#{orderName}"
-
-    orderNumber: ->
-      @get('order_name')?.match(/\d+/)?[0]
+    initialize: ->
+      @listenTo(@, 'change:order_name', @_syncOrderName)
+      @_syncOrderName()
+      @
 
     parse: (data) ->
       @properties ||= new ExerciseProperties
@@ -36,6 +33,10 @@ define [
       delete data.exercise_properties
       data
 
-    updatePosition: (pos) ->
-      @set('position', pos)
-      @save()
+    _syncOrderName: ->
+      value = @get('order_name')
+      re = /^([a-z]{1,2})(\d{1,2})$/i
+      match = value.match(re)
+      @set
+        order_letter: match?[1] || '~'
+        order_number: match?[2]

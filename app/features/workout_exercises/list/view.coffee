@@ -34,12 +34,12 @@ define [
         ]
 
       @listenTo(@, 'actions:add', @_addExerciseToCollection)
-      #@listenTo(@collection, 'add', @showConnectionLines)
-      #@listenTo(@collection, 'remove', @showConnectionLines)
-      #@listenTo(@collection, 'change', @showConnectionLines)
-
+      @listenTo(@collection, 'add remove change', @_initConnections)
       #@listenTo(@model, 'sync', @onSavedOrder)
       #@listenTo App.vent, 'sortables:on:drop', @onDropExercise
+
+    onShow: ->
+      @_initConnections()
 
     _addExerciseToCollection: (id) =>
       @collection.addExercise
@@ -51,7 +51,6 @@ define [
 
     #onRender: ->
       #@addSortable()
-      #@showConnectionLines()
       #@addSidebarDraggable()
 
     #addSidebarDraggable: ->
@@ -62,46 +61,45 @@ define [
         #args.container.removeChild(args.el)
         #App.vent.trigger 'workout:add:exercise', args
 
-    #showConnectionLines: =>
-      #circles = @$el.find(".gc-workout-exercise-circle[data-letter]")
-      #colors = [
-        #'#38cb73'
-        #'#389adb'
-        #'#fed929'
-        #'#e54d40'
-        #'#e459fe'
-      #]
-      #groupColors = {}
-      #colorIndex = 0
-      #previous = null
+    _initConnections: ->
+      colors = [
+        '#4caf50', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3',
+        '#03a9f4', '#00bcd4', '#009688', '#f44336', '#8bc34a', '#cddc39',
+        '#ffeb3b', '#ffc107', '#ff9800', '#ff5722', '#795548', '#9e9e9e',
+        '#607d8b'
+      ]
 
-      #$.each circles, (index, item) ->
-        #$item = $ item
-        #letter = $item.data('letter').toLowerCase()
-        #$item[0].className = 'gc-workout-exercise-circle'
+      letterColors = {}
+      lastColor = -1
 
-        #if previous
+      @collection.each (model, index) =>
+        previous =
+          @collection.models[index - 1]?.get('order_letter')
+        next =
+          @collection.models[index + 1]?.get('order_letter')
+        current = model.get('order_letter')
 
-          #if previous.data('letter').toLowerCase() == letter and letter != ''
-            #$item.addClass 'last'
+        unless letterColors[current]
+          lastColor = (lastColor + 1) % colors.length
+          letterColors[current] = colors[lastColor]
+        model.set
+          color: letterColors[current]
 
-            #if previous.hasClass 'last'
-              #previous.removeClass('last').addClass('middle')
-            #else
-              #previous.addClass('first')
+        position =
+          if current is '~'
+            ''
+          else if current is previous
+            if current is next
+              'middle'
+            else
+              'last'
+          else if current is next
+            'first'
+          else
+            ''
 
-          #else
-            #$item.removeClass('last')
-            #previous.removeClass('middle').removeClass('first')
-
-        #if groupColors.hasOwnProperty(letter)
-          #$item.css 'background-color', groupColors[letter]
-        #else
-          #groupColors[letter] = colors[colorIndex]
-          #$item.css 'background-color', groupColors[letter]
-          #colorIndex++
-
-        #previous = $item
+        model.set
+          order_position: position
 
     #addSortable: ->
       #dragOptions =

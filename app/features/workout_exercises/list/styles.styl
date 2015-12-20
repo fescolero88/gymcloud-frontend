@@ -151,6 +151,8 @@ ul.gc-workout-exercises-list
     opacity: 1
 
 .gc-workout-exercise-circle
+  display: block
+  position: relative
   padding: 0
   border: 0 none
   width: 30px
@@ -163,32 +165,36 @@ ul.gc-workout-exercises-list
   font-weight: bold
   text-align: center
   text-transform: uppercase
+  &::after
+    color: #000
 
   &:active,
   &:focus
     box-shadow: 0 0 1px 3px rgba(0,0,0,0.3) inset
 
-  &.first::after,
-  &.middle::after
-    content: ""
-    display: block
-    width: 3px
-    position: absolute
-    bottom: -100%
-    background: inherit
-    left: 10px
-    top: 100%
+  &[data-order_position=first],
+  &[data-order_position=middle]
+    &::after
+      content: ""
+      display: block
+      width: 3px
+      position: absolute
+      bottom: -100%
+      background: inherit
+      left: 13px
+      top: 100%
 
-  &.last::before,
-  &.middle::before
-    content: ""
-    display: block
-    width: 3px
-    position: absolute
-    top: -100%
-    bottom: 100%
-    background: inherit
-    left: 10px
+  &[data-order_position=last],
+  &[data-order_position=middle]
+    &::before
+      content: ""
+      display: block
+      width: 3px
+      position: absolute
+      top: -100%
+      bottom: 100%
+      background: inherit
+      left: 13px
 
 .gc-workout-exercise-name
   text-transform: uppercase
