@@ -32,5 +32,6 @@ define [
       'click label': (ev) ->
         ev.preventDefault()
         value = $(ev.currentTarget).find('input').val() is 'true'
-        @model.set(@modelAttribute, value)
-        @model.save()
+        attrs = {}
+        attrs[@modelAttribute] = value
+        @model.patch(attrs)

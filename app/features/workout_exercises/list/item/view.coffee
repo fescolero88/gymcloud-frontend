@@ -85,8 +85,12 @@ define [
             ]
 
     initialize: (options) ->
-      @listenTo @model, 'change:note change:order_name', =>
-        @model.save()
+      @listenTo @model, 'change:note change:order_name change:position', =>
+        console.log @model.changedAttributes()
+        @model.changedAttributes() and @model.save(
+          @model.changedAttributes()
+          , {patch:true}
+        )
       @listenTo(@, 'actions:multi_constructor:start', @enableCheckbox)
       @listenTo(@, 'actions:multi_constructor:stop', @disableCheckbox)
       @listenTo(@, 'actions:multi_constructor:assign', @addProperties)

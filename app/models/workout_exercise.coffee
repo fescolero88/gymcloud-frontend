@@ -26,6 +26,15 @@ define [
       @_syncOrderName()
       @
 
+    changedAttributes: ->
+      result = super
+      if _.isObject(result)
+        result = _.omit(result, [
+          'order_number'
+          'order_letter'
+        ]...)
+      if _.isEmpty(result) then false else result
+
     parse: (data) ->
       @properties ||= new ExerciseProperties
       if @properties.length is 0
@@ -34,7 +43,7 @@ define [
       data
 
     _syncOrderName: ->
-      value = @get('order_name')
+      value = "#{@get('order_name') || ''}"
       re = /^([a-z]{1,2})(\d{1,2})$/i
       match = value.match(re)
       @set

@@ -13,4 +13,12 @@ define [
 
   oBackbone
   oBackbone.$ = b$
+
+  _.extend oBackbone.Model::,
+    patch: (attrs = {}) ->
+      if _.isEmpty(attrs)
+        attrs = @changedAttributes()
+        return false if _.isEmpty(attrs)
+      @save(attrs, patch: true, wait: true)
+
   oBackbone
