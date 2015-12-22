@@ -55,20 +55,23 @@ define [
                 observe: 'position'
                 name: 'data-position'
             ]
-          '.gc-workout-exercise-circle':
-            observe: 'order_name'
-            events: ['blur']
-            getVal: ($el) ->
-              $el.text().toUpperCase()
+          '.gc-workout-exercise-circle-cell':
+            attributes: [
+                name: 'data-order_position'
+                observe: 'order_position'
+            ]
+          '.gc-workout-exercise-circle, .line-top, .line-bottom':
             attributes: [
                 name: 'style'
                 observe: 'color'
                 onGet: (value) ->
                   "background-color: #{value}"
-              ,
-                name: 'data-order_position'
-                observe: 'order_position'
             ]
+          '.gc-workout-exercise-circle':
+            observe: 'order_name'
+            events: ['blur']
+            getVal: ($el) ->
+              $el.text().toUpperCase()
           '.gc-workout-exercise-note':
             observe: 'note'
             events: ['blur']

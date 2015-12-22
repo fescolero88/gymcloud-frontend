@@ -11,7 +11,7 @@ ul.gc-workout-exercises-list
     &.gc-workout-exercise-item
       display: table
       width: 100%
-      padding: 16px 0
+      padding: 0
       min-height: 60px
       float: right
 
@@ -150,9 +150,37 @@ ul.gc-workout-exercises-list
   &:hover
     opacity: 1
 
+.gc-workout-exercise-circle-cell
+  position: relative
+
+  .line-top,
+  .line-bottom
+    display: none
+    position: absolute
+    z-index: 1
+    content: ""
+    width: 3px
+    background: inherit
+    left: 13px
+
+  &[data-order_position=first],
+  &[data-order_position=middle]
+    .line-bottom
+      display: block
+      top: 50%
+      bottom: 0
+
+  &[data-order_position=middle],
+  &[data-order_position=last]
+    .line-top
+      display: block
+      top: 0
+      bottom: 50%
+
 .gc-workout-exercise-circle
   display: block
   position: relative
+  z-index: 2
   padding: 0
   border: 0 none
   width: 30px
@@ -165,36 +193,9 @@ ul.gc-workout-exercises-list
   font-weight: bold
   text-align: center
   text-transform: uppercase
-  &::after
-    color: #000
-
   &:active,
   &:focus
     box-shadow: 0 0 1px 3px rgba(0,0,0,0.3) inset
-
-  &[data-order_position=first],
-  &[data-order_position=middle]
-    &::after
-      content: ""
-      display: block
-      width: 3px
-      position: absolute
-      bottom: -100%
-      background: inherit
-      left: 13px
-      top: 100%
-
-  &[data-order_position=last],
-  &[data-order_position=middle]
-    &::before
-      content: ""
-      display: block
-      width: 3px
-      position: absolute
-      top: -100%
-      bottom: 100%
-      background: inherit
-      left: 13px
 
 .gc-workout-exercise-name
   text-transform: uppercase
