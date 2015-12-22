@@ -41,7 +41,7 @@
           | warmups
     .tab-content.gc-workout-tab-content
       .tab-pane.active(data-pane='description')
-        textarea.gc-program-description-editor.gc-description-editor.form-control(rows='1', type='text', placeholder='Start typing a description here...')
+        region(data-name='editable_textarea')
       .tab-pane(data-pane='video')
         .gc-workout-empty-video
           p

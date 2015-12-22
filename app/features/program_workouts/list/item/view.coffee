@@ -12,6 +12,8 @@ define [
 
     behaviors:
 
+      editable_textarea: true
+
       stickit:
         bindings:
           '.gc-workout-title > span': 'name'
