@@ -11,9 +11,7 @@ define [
 
     type: 'User'
 
-    urlRoot: ->
-      uid = App.request('current_user_id')
-      uid is @id and '/users/me' or '/users'
+    urlRoot: '/users/'
 
     defaults:
       user_profile: {}

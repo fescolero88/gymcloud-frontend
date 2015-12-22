@@ -13,4 +13,4 @@ define [
     behaviorViewClass: BehaviorView
 
     behaviorViewOptions: ->
-      model: @view.model
+      parent: @view.model

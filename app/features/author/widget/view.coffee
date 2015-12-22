@@ -1,7 +1,9 @@
 define [
   './template'
+  'models/user'
 ], (
   template
+  User
 ) ->
 
   class View extends Marionette.ItemView
@@ -10,6 +12,13 @@ define [
 
     className: 'gc-author-widget'
 
+    constructor: ->
+      @model = new User
+      super
+
+    initialize: ->
+      @listenTo(@options.parent, 'change:author_id', @_syncWithParentModel)
+
     behaviors:
 
       stickit:
@@ -17,15 +26,27 @@ define [
           'a':
             attributes: [
                 name: 'href'
-                observe: 'author_id'
+                observe: 'id'
                 onGet: (value) ->
                   "#users/#{value}"
             ]
           'img':
             attributes: [
                 name: 'src'
-                observe: 'author_id'
-                onGet: (value) ->
-                  @model.get('author')?.user_profile?.avatar?.thumb?.url
+                observe: 'user_profile.avatar.thumb.url'
             ]
-          'a:last': 'author_full_name'
+          'a:last':
+            observe: [
+              'user_profile.first_name'
+              'user_profile.last_name'
+            ]
+            onGet: ([first_name, last_name]) ->
+              _.compact([
+                first_name
+                last_name
+              ]).join(' ')
+
+    _syncWithParentModel: ->
+      @model.set
+        id: @options.parent.get('author_id')
+      @model.fetch()
