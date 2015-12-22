@@ -26,6 +26,3 @@ define [
               model: @model.workout
               collection: @model.workout.exercises
         ]
-
-    initialize: ->
-      # debugger

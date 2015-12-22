@@ -63,9 +63,6 @@ define [
                     week_id: null
         ]
 
-    initialize: ->
-      # debugger
-
     onShow: ->
       @listenTo @views.program_weeks_actions, 'program_weeks:build', ->
         @model.weeks.add({})
