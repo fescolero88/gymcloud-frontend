@@ -49,9 +49,17 @@ define [
       searchScope = @model.get('search_scope')
 
       @searchScopes = new SearchScopes [
-        {name: 'all', value: 'all', inScope: searchScope == 'all'}
-        {name: 'gymcloud', value: 'public', inScope: searchScope == 'public'}
-        {name: 'mine', value: 'own', inScope: searchScope == 'own'}
+          name: 'all'
+          value: 'all'
+          inScope: searchScope == 'all'
+        ,
+          name: 'gymcloud'
+          value: 'public'
+          inScope: searchScope == 'public'
+        ,
+          name: 'mine'
+          value: 'own'
+          inScope: searchScope == 'own'
       ]
 
       @searchFilters = new SearchFilters [

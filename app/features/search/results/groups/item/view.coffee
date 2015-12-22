@@ -1,45 +1,26 @@
 define [
   './templates/entity'
   './templates/clients'
-  '../../entities/item'
-  '../../entities/client'
-  '../../entities/client_group'
+  '../../entities/item/view'
+  '../collection'
 ], (
   templateEntity
   templateClients
-  ResultEntityItemView
-  ResultEntityClientView
-  ResultEntityClientGroupView
+  ItemView
+  Collection
 ) ->
 
-  class View extends Marionette.CompositeView
+  class View extends Marionette.CollectionView
 
     tagName: 'ul'
 
     className: 'gc-search-results-list'
 
     initialize: (opts)->
-      @collection = new Backbone.Collection(opts.model.get('items'))
+      @collection = new Collection(opts.model.get('items'))
+      @collection.klass = @model.get('klass')
 
-    getTemplate: ->
-      @_templatesMap()[@model.get('klass')]
-
-    getChildView: (item)->
-      @_childViewsMap()[@model.get('klass')]
+    childView: ItemView
 
     childViewOptions: ->
       entity_context: @model.get('title').toLowerCase()
-
-    _templatesMap: ->
-      'Exercise': templateEntity
-      'WorkoutTemplate': templateEntity
-      'ProgramTemplate': templateEntity
-      'User': templateClients
-      'ClientGroup': templateClients
-
-    _childViewsMap: ->
-      'Exercise': ResultEntityItemView
-      'WorkoutTemplate': ResultEntityItemView
-      'ProgramTemplate': ResultEntityItemView
-      'User': ResultEntityClientView
-      'ClientGroup': ResultEntityClientGroupView

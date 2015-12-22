@@ -3,11 +3,12 @@
   flex-flow: row wrap
   height: 100%
 
-.gc-topbar
-  flex: 1 100%
+  region[data-name='header'],
+  .gc-topbar
+    flex: 1 0 100%
 
 .gc-sidebar-wrapper
-  flex: 1
+  flex: 1 0 0%
   display: flex
   min-width: 230px
   background: #282d30
@@ -20,7 +21,7 @@
   background-color: #fff
   display: flex
   flex-direction: column
-  flex: 8
+  flex: 8 0 0%
   padding: 0 15px
 
 .gc-main > div
