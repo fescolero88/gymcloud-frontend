@@ -14,18 +14,24 @@ define [
     ui:
       clock: '.gc-busy-indicator-clock'
       pointer: '.pointer'
+      message: '.message'
 
     initialize: ->
-      window.view = @
       @listenTo(@, 'start', @_start)
       @listenTo(@, 'stop', @_stop)
       @
 
     _start: =>
+      @_messageTimeoutId = _.chain(@_showMessage)
+        .bind(@)
+        .delay(2000)
+        .value()
       @_show()
       @_activate()
 
     _stop: =>
+      clearTimeout(@_messageTimeoutId)
+      @_hideMessage()
       @_deactivate(@_hide)
 
     _show: ->
@@ -44,3 +50,11 @@ define [
       @ui.pointer.stop()
         .fadeOut 'fast', =>
           cb.apply(@)
+
+    _showMessage: ->
+      @ui.message.stop()
+        .fadeIn('fast')
+
+    _hideMessage: (cb) ->
+      @ui.message.stop()
+        .fadeOut('fast')
