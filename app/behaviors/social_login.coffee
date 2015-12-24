@@ -19,6 +19,7 @@ define [
       throw('Not Implemented')
 
     getToken: (provider, resp) ->
+      resp['is_signup'] = @options.isSignup
       data = JSON.stringify _.omit(resp, 'g-oauth-window')
       $.ajax
         type: 'POST'
