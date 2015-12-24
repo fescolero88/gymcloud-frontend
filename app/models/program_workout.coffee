@@ -1,7 +1,9 @@
 define [
+  './concerns/nested_models'
   './workout_template'
   './personal_workout'
 ], (
+  NestedModelsConcern
   WorkoutTemplate
   PersonalWorkout
 ) ->
@@ -12,9 +14,18 @@ define [
 
     urlRoot: '/program_workouts/'
 
+    constructor: ->
+      @_nestedModelsInit
+        workout: WorkoutTemplate
+      super
+
     parse: (data) ->
-      @_parseWorkout(data.workout, data.workout_type) && delete data.workout
+      @_nestedModelsParseAll(data)
       data
+
+    # parse: (data) ->
+    #   @_parseWorkout(data.workout, data.workout_type) && delete data.workout
+    #   data
 
     _parseWorkout: (workout, type) ->
       Workout = {
@@ -25,3 +36,7 @@ define [
       if type is 'WorkoutTemplate'
         collection = App.request('current_user').workout_templates
         collection.add(@workout, merge: true)
+
+  _.extend(ProgramWorkout::, NestedModelsConcern)
+
+  ProgramWorkout
