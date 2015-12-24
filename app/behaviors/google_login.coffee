@@ -22,7 +22,7 @@ define [
         cache: true
         beforeSend: -> # don't add our domain to url
 
-    login: (e) ->
+    login: ->
       window.gapi?.auth.authorize {
         immediate: false
         response_type: 'code'

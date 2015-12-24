@@ -31,6 +31,7 @@ define [
           App.request('auth:onSuccess', json)
         error: ->
           App.request('messenger:explain', 'login.failed')
+      false
 
     getVendorAppId: ->
       vendor = config.vendor[@_vendorName]

@@ -31,7 +31,7 @@ define [
           xfbml: true
           version: 'v2.2'
 
-    login: (e) ->
+    login: ->
       FB.login ((response) =>
         @getToken('facebook', response) if response.authResponse
       ), {
