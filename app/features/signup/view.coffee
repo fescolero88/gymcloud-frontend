@@ -15,8 +15,10 @@ define [
 
     behaviors:
       form_validation: true
-      facebook_login: true
-      google_login: true
+      facebook_login:
+        isSignup: true
+      google_login:
+        isSignup: true
 
       stickit:
         bindings:
