@@ -72,6 +72,10 @@ define [
             events: ['blur']
             getVal: ($el) ->
               $el.text().toUpperCase()
+            attributes: [
+                name: 'tabindex'
+                observe: 'position'
+            ]
           '.gc-workout-exercise-note':
             observe: 'note'
             events: ['blur']
