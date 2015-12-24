@@ -36,7 +36,7 @@ define [
   'features/actions_dropdown/styles'
   'features/folders/entity_list/styles'
   'features/properties/list/styles'
-  'features/exercise_properties/list/item/readable/styles'
+  'features/exercise_properties/list/styles'
   'features/exercise_properties/multi_constructor/styles'
   'styles/components/zzz_all'
   'styles/zzz_override'

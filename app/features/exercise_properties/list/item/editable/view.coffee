@@ -36,11 +36,11 @@ define [
 
     events: ->
       'click @ui.removePropertyButton': '_removeProperty'
-      'focusout':  _.debounce(@saveOnBlur, 200)
+      'focusout': _.debounce(@saveOnBlur, 200)
       'keypress @ui.selectedPropertyValue': '_saveOnEnter'
       'click @ui.savePropertyButton': '_saveProperty'
 
-    onRender: ->
+    onShow: ->
       @listenTo(@views.properties_select_box, 'selected', @selectProperty)
       setTimeout =>
         @ui.selectedPropertyValue.focus()
@@ -72,5 +72,5 @@ define [
 
     saveOnBlur: (ev) ->
       activeEl = $(':focus')
-      if @ui.editPropertyControl?.find(activeEl).length is 0
+      if @ui.editPropertyControl.find(activeEl).length is 0
         @_saveProperty()
