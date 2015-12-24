@@ -16,9 +16,10 @@ define [
     defaults:
       user_profile: {}
 
-    initialize: ->
+    constructor: ->
       @_nestedModelsInit
         user_profile: UserProfile
+      super
 
     parse: (data) ->
       user_profile = data.user_profile
