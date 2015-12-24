@@ -115,10 +115,3 @@ define [
           #@collection.add model, at:pos
           #@fixExercisesPositions()
           #@children.call '_positionChanged'
-
-    #fixExercisesPositions: ->
-      #@collection.each (model, i) ->
-        #model.set 'position', i+1
-
-    #onSavedOrder: ->
-      #@showConnectionLines()

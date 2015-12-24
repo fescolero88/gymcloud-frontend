@@ -19,6 +19,10 @@ define [
           'input[name="weight"]': 'weight'
           'input[name="height"]': 'height'
           'input[name="bodyfat"]': 'bodyfat'
+          'input[name="email"]':
+            observe: 'email'
+            onGet: (value) ->
+              value || 'User is not registered yet'
           'input[name="first_name"]': 'first_name'
           'input[name="last_name"]': 'last_name'
           'input[name="location"]': 'location'
@@ -42,6 +46,7 @@ define [
       avatarInput: 'input[type="file"]'
 
     initialize: ->
+      window.view = @
       Backbone.Validation.bind(@)
       @previousAttributes = @model.toJSON()
 

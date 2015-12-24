@@ -85,7 +85,8 @@ define [
       isMyProfile: @_isMyProfile()
 
     initialize: ->
-      @modal = new ProfileEditModalView(model: @model.user_profile)
+      @modal = new ProfileEditModalView
+        model: @model.user_profile
 
       @listenTo @modal, 'modal:close', =>
         @ui.clientFormModal.modal('hide')
@@ -94,7 +95,7 @@ define [
     onRender: ->
       @getRegion('clientForm').show(@modal)
       @ui.clientFormModal.on 'hidden.bs.modal', (_ev) =>
-        @model.profile.set(@modal.previousAttributes)
+        @model.user_profile.set(@modal.previousAttributes)
 
     onDestroy: ->
       @ui.clientFormModal.off('hidden.bs.modal')

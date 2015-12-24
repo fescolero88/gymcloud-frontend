@@ -71,15 +71,12 @@
                 label.gc-error-message
                 input.form-control(name='last_name', type='text')
                 span.gc-valid-icon.fa.fa-check.hide
-          // .row
+          .row
             .col-xs-12
               .form-group
                 label(for='email')
-                  | Email 
-                  span.gc-req *
-                label.gc-error-message
-                input.form-control(name='email', type='text')
-                span.gc-valid-icon.fa.fa-check.hide
+                  | Email
+                input.form-control(name='email', type='text', disabled)
           .row
             .col-xs-8
               .form-group

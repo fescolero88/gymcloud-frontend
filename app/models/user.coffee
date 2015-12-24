@@ -21,6 +21,9 @@ define [
         user_profile: UserProfile
       super
 
+    initialize: ->
+      @_updateUserProfileAttrs()
+
     parse: (data) ->
       user_profile = data.user_profile
       @_nestedModelsParseAll(data)
@@ -55,6 +58,11 @@ define [
         throw Error('No such folder')
       rootFolder = @library.first()
       rootFolder.items.findWhere(name: name)
+
+    _updateUserProfileAttrs: ->
+      @user_profile.set
+        email: @get('email')
+        live: @get('live')
 
   _.extend(User::, NestedModelsConcern)
 
