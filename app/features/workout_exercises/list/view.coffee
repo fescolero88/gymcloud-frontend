@@ -18,9 +18,6 @@ define [
 
     childView: ExercisesItemView
 
-    viewComparator: (model) ->
-      model.get('position')
-
     initialize: (data) =>
       App.request 'fwd',
         context: @
