@@ -13,6 +13,8 @@ define [
     initialize: ->
       @listenTo(@, 'add remove', @_updateAllPositions)
 
+    comparator: 'position'
+
     addExercise: (args = {}) ->
       attrs = _.pick args, [
         'exercise_id'
