@@ -30,11 +30,9 @@ define [
         views: [
             region: 'week_workouts'
             klass: ProgramWorkoutsListView
-            # enabled: -> false
             options: ->
-              debugger
               model: @model.collection.program_template
-              collection: new Backbone.Collection @model.program_workouts
+              collection: @model.program_workouts
         ]
 
     modelEvents:

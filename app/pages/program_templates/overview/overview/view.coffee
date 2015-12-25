@@ -55,7 +55,6 @@ define [
             region: 'program_workouts'
             klass: ProgramWorkoutsListView
             options: ->
-              debugger
               model: @model
               collection:
                 new Backbone.VirtualCollection @model.workouts,
