@@ -38,6 +38,7 @@ define [
   'features/properties/list/styles'
   'features/exercise_properties/list/styles'
   'features/exercise_properties/multi_constructor/styles'
+  'features/user_authentications/styles'
   'styles/components/zzz_all'
   'styles/zzz_override'
 ], ->

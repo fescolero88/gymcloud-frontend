@@ -14,8 +14,10 @@ module.exports = class AuthView extends Marionette.ItemView
   behaviors:
     facebook_login:
       isSignup: false
+      isLinking: false
     google_login:
       isSignup: false
+      isLinking: false
 
     stickit:
       bindings:

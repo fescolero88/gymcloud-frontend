@@ -17,8 +17,10 @@ define [
       form_validation: true
       facebook_login:
         isSignup: true
+        isLinking: false
       google_login:
         isSignup: true
+        isLinking: false
 
       stickit:
         bindings:
