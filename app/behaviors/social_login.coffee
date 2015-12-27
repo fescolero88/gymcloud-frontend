@@ -30,8 +30,11 @@ define [
         xhrFields: withCredentials: true
         success: (json) ->
           App.request('auth:onSuccess', json)
-        error: ->
-          App.request('messenger:explain', 'login.failed')
+        error: (error) ->
+          if error.status is 404
+            App.request('messenger:explain', 'login.abscent')
+          else
+            App.request('messenger:explain', 'login.failed')
       false
 
     getVendorAppId: ->
