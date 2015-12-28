@@ -40,6 +40,7 @@ define [
                   !!value
           'input':
             observe: 'folder_id'
+            updateModel: false
             attributes: [
                 'data-id': 'id'
             ]
