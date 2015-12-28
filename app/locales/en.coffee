@@ -14,8 +14,8 @@ define ->
       failed:
         '[e] Failed to login'
       abscent:
-        '[e] Account with provided email does not exists.
-        You have to Sign Up first.'
+        '[e] Account with provided email does not exists.' +
+          'You have to Sign Up first.'
 
     user:
       password:
