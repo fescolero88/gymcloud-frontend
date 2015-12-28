@@ -20,6 +20,7 @@ define [
         'exercise_id'
         'workout_id'
         'order_name'
+        'position'
       ]...
       model = new @model(attrs)
       model.save()

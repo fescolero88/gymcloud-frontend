@@ -43,6 +43,7 @@ define [
         exercise_id: id
         workout_id: @model.get('id')
         order_name: @collection.length + 1
+        position: @collection.length + 1
 
     #onDestroy: ->
       #App.vent.trigger 'sortables:remove:container', @$el[0]
