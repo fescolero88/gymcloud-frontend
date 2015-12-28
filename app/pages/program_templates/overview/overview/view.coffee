@@ -50,7 +50,6 @@ define [
             region: 'program_weeks'
             klass: ProgramWeeksListView
             options: ->
-              model: @model
               collection: @model.weeks
           ,
             region: 'program_workouts'
@@ -59,15 +58,22 @@ define [
               model: @model
               collection:
                 new Backbone.VirtualCollection @model.workouts,
-                  filter:
-                    week_id: null
+                  filter: (model) -> !model.get('week_id')
         ]
 
     onShow: ->
-      @listenTo @views.program_weeks_actions, 'program_weeks:build', ->
-        @model.weeks.add({})
+      @listenTo @views.program_weeks_actions, 'program_weeks:build', =>
+        position = @model.weeks.length + 1
+        model = @model.weeks.add
+          program_id: @model.get('id')
+          position: position
+          name: "Week #{position}"
+        model.save().then =>
+          @model.weeks.add(model)
+
       @listenTo @views.program_workouts_actions, 'program_workouts:build', ->
         @model.workouts.add({})
+
       @listenTo @views.program_workouts_actions, 'program_workouts:add', (id) =>
         model = new ProgramWorkout
           program_template_id: @model.get('id')

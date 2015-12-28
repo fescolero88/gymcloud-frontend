@@ -1,7 +1,9 @@
 define [
+  './concerns/nested_models'
   './workout_template'
   './personal_workout'
 ], (
+  NestedModelsConcern
   WorkoutTemplate
   PersonalWorkout
 ) ->
@@ -12,16 +14,19 @@ define [
 
     urlRoot: '/program_workouts/'
 
+    constructor: ->
+      @_nestedModelsInit
+        workout:
+          polymorphicKey: 'workout_type'
+          polymorphicModels:
+            WorkoutTemplate: WorkoutTemplate
+            PersonalWorkout: PersonalWorkout
+      super
+
     parse: (data) ->
-      @_parseWorkout(data.workout, data.workout_type) && delete data.workout
+      @_nestedModelsParseAll(data)
       data
 
-    _parseWorkout: (workout, type) ->
-      Workout = {
-        WorkoutTemplate: WorkoutTemplate
-        PersonalWorkout: PersonalWorkout
-      }[type]
-      @workout ||= new Workout(workout, parse: true)
-      if type is 'WorkoutTemplate'
-        collection = App.request('current_user').workout_templates
-        collection.add(@workout, merge: true)
+  _.extend(ProgramWorkout::, NestedModelsConcern)
+
+  ProgramWorkout
