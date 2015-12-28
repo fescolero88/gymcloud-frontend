@@ -6,7 +6,7 @@ define [
 
   class BasePage extends Marionette.LayoutView
 
-    className: 'row gc-main-workspace'
+    className: 'gc-main-workspace'
 
     constructor: (@options) ->
       window.page = @

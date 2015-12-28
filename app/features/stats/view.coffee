@@ -14,7 +14,7 @@ define [
 
     childViewContainer: 'ul'
 
-    className: 'gc-main-workspace row'
+    className: 'gc-main-workspace'
 
     behaviors:
 

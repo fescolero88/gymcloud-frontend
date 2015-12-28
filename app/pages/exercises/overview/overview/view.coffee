@@ -8,8 +8,6 @@ define [
 
     template: template
 
-    className: 'gc-exercises-exercise-view'
-
     behaviors:
       privacy_toggle: true
       delete_button: true
