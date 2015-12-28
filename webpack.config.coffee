@@ -67,7 +67,7 @@ module.exports =
           '/js/jquery.iframe-transport.js'
       'load-image':
         'bower_components/blueimp-load-image' +
-          '/js/load-image.all.min.js'
+          '/js/load-image.js'
       'tmpl':
         'bower_components/blueimp-tmpl/js/tmpl.min.js'
       'jquery-file-upload':

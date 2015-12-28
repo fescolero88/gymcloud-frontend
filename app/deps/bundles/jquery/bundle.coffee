@@ -4,7 +4,6 @@ define [
   'bootstrap'
   'jQuery.serializeObject'
   'jquery-sortable'
-  'load-image'
   'tmpl'
   'imports?define=>undefined&exports=>undefined&' +
     'jQuery=deps/bundles/jquery/original!jquery.ui.widget'
