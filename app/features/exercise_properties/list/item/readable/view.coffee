@@ -19,7 +19,10 @@ define [
           '.gc-property-value-name-label':
             observe: ['personal_property', 'value']
             onGet: ([property, value]) ->
-              "#{property.name}: #{value} #{property.global_property.unit}"
+              if value
+                "#{property.name}: #{value} #{property.global_property.unit}"
+              else
+                "#{property.name}"
 
     ui: ->
       removePropertyButton: '.gc-remove'

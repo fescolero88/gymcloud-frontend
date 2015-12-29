@@ -25,6 +25,5 @@ define [
         position: @length
         personal_property: default_property
         personal_property_id: default_property.id
-        value: 0
+        value: null
       @add(model)
-
