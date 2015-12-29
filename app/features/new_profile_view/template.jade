@@ -111,6 +111,22 @@
     input.form-control(name='birthday', type='date')
     span.gc-valid-icon.fa.fa-check.hide
 
+  .form-group
+    label
+      | Connected accounts
+    region(data-name='user_authentications')
+    .gc-login-social
+      .row
+        .col-xs-12.text-xs-center.col-md-3.text-md-left
+          span.btn.btn-primary(data-social='fb')
+            i.fa.fa-facebook
+            | Connect Facebook account
+      .row
+        .col-xs-12.text-xs-center.col-md-3.text-md-left
+          span.btn.btn-danger(data-social='gplus')
+            i.fa.fa-google-plus
+            | Connect Google+ account
+
   .space-filler
 
   .row

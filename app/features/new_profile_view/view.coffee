@@ -1,15 +1,31 @@
 define [
   './template'
+  'features/user_authentications/view'
 ], (
   template
+  UserAuthenticationsView
 ) ->
-  class NewProfileView extends Marionette.ItemView
+
+  class NewProfileView extends Marionette.LayoutView
 
     initialize: ->
       Backbone.Validation.bind(@)
 
     behaviors: ->
       form_validation: true
+      facebook_login:
+        isSignup: true
+        isLinking: true
+        successCallback: @successCallback
+      google_login:
+        isSignup: true
+        isLinking: true
+        successCallback: @successCallback
+      regioned:
+        views: [
+          region: 'user_authentications'
+          klass: UserAuthenticationsView
+        ]
 
       stickit:
         bindings:
@@ -86,6 +102,9 @@ define [
         contentType: false
       upload.always =>
         @model.fetch()
+
+    successCallback: (json) =>
+      @views.user_authentications.trigger('oauthCreated', json)
 
     onShow: =>
       $('.gc-main').css('padding-left', '0px')

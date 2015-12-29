@@ -20,6 +20,11 @@ define [
 
     getToken: (provider, resp) ->
       resp['is_signup'] = @options.isSignup
+      resp['is_linking'] = @options.isLinking
+      if @options.isLinking
+        successCallback = @options.successCallback
+      else
+        successCallback = @successCallback
       data = JSON.stringify _.omit(resp, 'g-oauth-window')
       $.ajax
         type: 'POST'
@@ -28,8 +33,7 @@ define [
         contentType: 'application/json'
         data: data
         xhrFields: withCredentials: true
-        success: (json) ->
-          App.request('auth:onSuccess', json)
+        success: successCallback
         error: (error) ->
           if error.status is 404
             App.request('messenger:explain', 'login.abscent')
@@ -40,3 +44,6 @@ define [
     getVendorAppId: ->
       vendor = config.vendor[@_vendorName]
       vendor?[@_vendorKey] || throw('Not Implemented')
+
+    successCallback: (json) ->
+      App.request('auth:onSuccess', json)
