@@ -105,7 +105,7 @@ define [
       @$el.addClass 'hover-enabled'
 
     deleteExercise: ->
-      @model.destroy(wait: true)
+      App.request 'modal:confirm:delete', @model
 
     initProperty: ->
       @views.exercise_properties.trigger 'properties:init',
