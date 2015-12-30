@@ -69,12 +69,27 @@ define [
       if target.hasClass('toggle-it') or currentTarget.hasClass('toggle-it')
         currentTarget.toggleClass('active')
 
+      # remove active ewp item if any
+      @_setActiveMenuItem(currentTarget)
+      @_removeActiveItem()
+
     toggleItem: (ev) ->
-      activeItem = @el.querySelector('.gc-sidebar-item > a.active')
-      activeItem.classList.remove('active') if activeItem
+      @_removeActiveItem()
       ev.currentTarget.classList.add 'active'
 
     onClickSidebar: (ev) ->
       setTimeout =>
         @$el.find('.nano').nanoScroller()
       , 600
+
+    _removeActiveItem: ->
+      activeItem = @$el.find('.gc-sidebar-item > a.active')
+      activeItem.removeClass('active') if activeItem
+
+    # Note: An Active Menu is the one that is currently being
+    # viewed by the user. (list that is dispalyed in the content region)
+    _setActiveMenuItem: (target) ->
+      currentActiveMenu = @$el.find('.gc-sidebar-cat > a.active-menu')
+      currentActiveMenu.removeClass('active-menu') if currentActiveMenu
+
+      target.addClass('active-menu')
