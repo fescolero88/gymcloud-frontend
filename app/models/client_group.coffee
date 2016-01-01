@@ -17,7 +17,6 @@ define [
     urlRoot: '/client_groups'
 
     validation:
-
       name:
         required: true
 

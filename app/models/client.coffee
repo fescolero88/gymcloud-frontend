@@ -6,4 +6,6 @@ define [
 
   class Client extends User
 
+    type: 'Client'
+
     urlRoot: '/clients'

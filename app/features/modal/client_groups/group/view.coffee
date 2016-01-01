@@ -1,0 +1,61 @@
+define [
+  './template'
+], (
+  template
+) ->
+
+  class GroupModalView extends Marionette.ItemView
+
+    template: template
+
+    behaviors:
+
+      form_validation: true,
+      stickit:
+        bindings:
+          '[name="name"]': 'name'
+
+    className: 'modal-dialog'
+
+    modelEvents:
+      'sync': 'onSync'
+      'model:avatar_update:success': 'onAvatarUpate'
+
+    events:
+      'submit @ui.groupForm': 'submitGroupForm'
+      'change .gc-edit-profile-modal-upload-input': 'showThumbnail'
+
+    ui:
+      groupForm: 'form'
+
+    initialize: =>
+      Backbone.Validation.bind @
+
+    showThumbnail: (ev) ->
+      input = ev.target
+      if input.files?[0]
+        reader = new FileReader()
+        reader.onload = (e) ->
+          $(input).parents('form')
+            .find('.gc-edit-profile-modal-avatar')
+            .attr('src', e.target.result)
+        reader.readAsDataURL(input.files[0])
+
+    submitGroupForm: (ev) =>
+      @avatar = $(ev.target).find('input[type=file]')
+
+      if @model.isValid true
+        App.vent.trigger('spinner:start')
+        @model.save()
+
+    onSync: ->
+      @trigger 'modal:closed'
+      @trigger 'addToGroupsCollection', @model
+      if @avatar?[0]?.files?[0]
+        data = new FormData()
+        data.append('avatar', @avatar[0].files[0])
+        @model.updateAvatar data
+
+    onAvatarUpate: (data) ->
+      model.set 'avatar_url', data.avatar_url
+      @trigger 'avatarChange'

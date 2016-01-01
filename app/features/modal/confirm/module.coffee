@@ -26,7 +26,7 @@ define [
         region.$el.modal('hide')
         region.destroy()
 
-    _initModalDelete: (model) ->
+    _initModalDelete: (model, callback) ->
       App.request 'modal:confirm',
         title: "Delete #{model.type}"
         content: "Are you sure you want to delete
@@ -36,3 +36,5 @@ define [
           model.destroy(wait: true).then ->
             App.request 'messenger:explain', 'item.deleted',
               type: model.type
+
+            callback() if _.isFunction(callback)

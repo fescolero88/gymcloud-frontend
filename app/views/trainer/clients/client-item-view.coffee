@@ -35,14 +35,12 @@ define [
         @model.destroy()
 
     deleteSingle: (ev) =>
-      App.request 'modal:confirm',
-        title: 'Delete client'
-        content: 'Are you sure you want to delete ' +
-          "#{@model.get('first_name')} #{@model.get('last_name')}?"
-        confirmBtn: 'Delete'
-        confirmCallBack: =>
-          @model.destroy().then =>
-            @model.collection?.remove @model
+      # set name as full name to be recognized by
+      # modal:confirm:delete
+      @model.set('name', @model.fullName())
+      App.request('modal:confirm:delete', @model, =>
+        @model.collection?.remove(@model)
+      )
 
     moveSingle: (ev) =>
       $(ev.currentTarget).closest('.row')

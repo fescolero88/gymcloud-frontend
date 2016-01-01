@@ -18,9 +18,4 @@ define [
       @clientForm.show(@modalView)
 
     showClientEditModal: (ev) ->
-      @listenTo @modalView, 'closeModal', =>
-        $('.modal-backdrop.fade.in').remove()
-        @ui.clientFormModal.modal('hide')
-      @listenTo(@modalView, 'avatarChange', @render)
-
-      @ui.clientFormModal.modal('show')
+      App.request('modal:groups', @model)
