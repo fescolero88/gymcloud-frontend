@@ -90,6 +90,7 @@ define [
         exclusions = [
           /login/
           /signup/
+          /reset/
           /prototype\/ui/
         ]
         exclusion = _.any exclusions, (rule) ->
