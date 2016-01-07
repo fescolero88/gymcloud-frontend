@@ -14,6 +14,9 @@ define [
 
     emptyView: EmptyView
 
+    childEvents:
+      'duplicate:program_workout': '_onDuplicate'
+
     viewComparator: (model) ->
       model.get('position')
 
@@ -33,3 +36,16 @@ define [
       # @collection.add({})
       App.vent.trigger 'redirect:to', '#/workout_templates',
         replace: false
+
+    _onDuplicate: (childView) ->
+      programWorkout = childView.model
+      ProgramWorkout = programWorkout.constructor
+
+      newProgramWorkout = new ProgramWorkout
+        program_template_id: programWorkout.get('program_id')
+        workout_template_id: programWorkout.get('workout_id')
+        position: @collection.length + 1
+        week_id: programWorkout.get('week_id')
+
+      newProgramWorkout.save({}, wait: true).then =>
+        @collection.add(newProgramWorkout)

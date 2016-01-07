@@ -10,20 +10,20 @@
       a.btn.btn-primary.gc-cheevon-dropdown(data-toggle='dropdown', aria-haspopup='true', role='button', aria-expanded='false')
         i.fa.fa-chevron-down
       ul.dropdown-menu.gc-dropdown.pull-right(aria-labelledby='gc-workout-actions-dropdown', role='menu')
-        li
+        //- li
           a(href='#')
             | Add Note
-        li
+        //- li
           a(href='#')
             | Edit Description
-        li
+        //- li
           a(href='#')
             | Add Video
         li
-          a(href='#')
+          a(href='#', data-action='save_in_library')
             | Save Workout
         li
-          a(href='#')
+          a(href='#', data-action='duplicate')
             | Duplicate
         li.gc-danger
           a.gc-delete-program-workout(href='#')
