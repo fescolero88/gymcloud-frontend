@@ -10,15 +10,6 @@
       a.btn.btn-primary.gc-cheevon-dropdown(data-toggle='dropdown', aria-haspopup='true', role='button', aria-expanded='false')
         i.fa.fa-chevron-down
       ul.dropdown-menu.gc-dropdown.pull-right(aria-labelledby='gc-workout-actions-dropdown', role='menu')
-        //- li
-          a(href='#')
-            | Add Note
-        //- li
-          a(href='#')
-            | Edit Description
-        //- li
-          a(href='#')
-            | Add Video
         li
           a(href='#', data-action='save_in_library')
             | Save Workout
@@ -36,20 +27,15 @@
       li
         a(data-toggle='tab', data-content='video')
           | video
-      li
+      //- li
         a(data-toggle='tab', data-content='warmups')
           | warmups
     .tab-content.gc-workout-tab-content
       .tab-pane.active(data-pane='description')
         region(data-name='editable_textarea')
       .tab-pane(data-pane='video')
-        .gc-workout-empty-video
-          p
-            | Seems you don’t have any video in your workout.
-          p
-            button.btn.btn-primary.gc-custom
-              | Add Video
-      .tab-pane(data-pane='warmups')
+        region(data-name='video_assigned')
+      //- .tab-pane(data-pane='warmups')
         .gc-workout-empty-warmups
           p
             | Seems you don’t have any warmups in your workout.

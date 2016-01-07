@@ -1,9 +1,11 @@
 define [
   './item/view'
   './empty/view'
+  'models/program_workout'
 ], (
   ItemView
   EmptyView
+  ProgramWorkout
 ) ->
 
   class ProgramWorkoutsListView extends Marionette.CollectionView
@@ -39,7 +41,6 @@ define [
 
     _onDuplicate: (childView) ->
       programWorkout = childView.model
-      ProgramWorkout = programWorkout.constructor
 
       newProgramWorkout = new ProgramWorkout
         program_template_id: programWorkout.get('program_id')
