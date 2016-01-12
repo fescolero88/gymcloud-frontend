@@ -69,15 +69,15 @@ body
   border-bottom none!important
 
 .gc-main-workspace
-  position relative
 
   .gc-workspace-content
-    position absolute
     top 50px
     bottom 0
     left 0
-    overflow auto
+    overflow-y auto
+    overflow-x hidden
     width 100%
+    height: calc(100% - 114px)
 
 .gc-client-list
   height: auto
