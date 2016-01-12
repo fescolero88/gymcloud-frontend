@@ -31,4 +31,5 @@ define [
 
     _redirectToWorkouts: ->
       # @collection.add({})
-      App.vent.trigger('redirect:to', '#/workout_templates')
+      App.vent.trigger 'redirect:to', '#/workout_templates',
+        replace: false

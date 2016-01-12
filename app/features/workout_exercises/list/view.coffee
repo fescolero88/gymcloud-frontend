@@ -47,7 +47,8 @@ define [
         position: @collection.length + 1
 
     _redirectToExercises: ->
-      App.vent.trigger('redirect:to', '#/exercises')
+      App.vent.trigger 'redirect:to', '#/exercises',
+        replace: false
 
     #onDestroy: ->
       #App.vent.trigger 'sortables:remove:container', @$el[0]
