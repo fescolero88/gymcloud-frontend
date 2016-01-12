@@ -8,10 +8,17 @@ define [
 
     appRoutes:
 
+      'exercises': 'toFolder'
       'exercises/:id': 'root'
       'exercises/:id/:state': 'overview'
 
   class Controller extends Marionette.Controller
+
+    toFolder: ->
+      user = App.request('current_user')
+      id = user.folders.findWhere(name: 'Exercises').get('id')
+      path = "exercises_folder/#{id}"
+      App.vent.trigger('redirect:to', path)
 
     root: (id) ->
       path = "exercises/#{id}/overview"
