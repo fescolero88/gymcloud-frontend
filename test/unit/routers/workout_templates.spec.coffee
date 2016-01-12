@@ -12,6 +12,7 @@ define [
 
       before ->
         @controller =
+          toFolder: sinon.spy()
           root: sinon.spy()
           overview: sinon.spy()
         @it = new Module.Router
@@ -22,6 +23,7 @@ define [
 
       it '#appRoutes', ->
         expect(@it.appRoutes).have.all.keys [
+          'workout_templates'
           'workout_templates/:id'
           'workout_templates/:id/:state'
         ]
@@ -32,6 +34,7 @@ define [
         @it = new Module.Controller
 
       it 'has methods', ->
+        expect(@it).to.respondTo('toFolder')
         expect(@it).to.respondTo('root')
         expect(@it).to.respondTo('overview')
 
