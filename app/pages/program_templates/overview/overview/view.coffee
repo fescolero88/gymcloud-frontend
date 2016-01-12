@@ -62,6 +62,15 @@ define [
         ]
 
     onShow: ->
+      App.request 'fwd',
+        context: @
+        from: @views.program_workouts_actions
+        to: @views.program_workouts
+        events: [
+          'actions:add'
+          'actions:create'
+        ]
+
       @listenTo @views.program_weeks_actions, 'program_weeks:build', =>
         position = @model.weeks.length + 1
         model = @model.weeks.add
@@ -70,13 +79,3 @@ define [
           name: "Week #{position}"
         model.save().then =>
           @model.weeks.add(model)
-
-      @listenTo @views.program_workouts_actions, 'program_workouts:build', ->
-        @model.workouts.add({})
-
-      @listenTo @views.program_workouts_actions, 'program_workouts:add', (id) =>
-        model = new ProgramWorkout
-          program_template_id: @model.get('id')
-          workout_template_id: id
-        model.save().then =>
-          @model.workouts.add(model)

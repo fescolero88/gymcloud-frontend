@@ -18,7 +18,7 @@ define [
 
     childView: ExercisesItemView
 
-    initialize: (data) =>
+    initialize: ->
       App.request 'fwd',
         context: @
         from: @
@@ -31,6 +31,7 @@ define [
         ]
 
       @listenTo(@, 'actions:add', @_addExerciseToCollection)
+      @listenTo(@, 'actions:create', @_redirectToExercises)
       @listenTo(@collection, 'add remove change', @_initConnections)
       #@listenTo(@model, 'sync', @onSavedOrder)
       #@listenTo App.vent, 'sortables:on:drop', @onDropExercise
@@ -44,6 +45,9 @@ define [
         workout_id: @model.get('id')
         order_name: @collection.length + 1
         position: @collection.length + 1
+
+    _redirectToExercises: ->
+      App.vent.trigger('redirect:to', '#/exercises')
 
     #onDestroy: ->
       #App.vent.trigger 'sortables:remove:container', @$el[0]

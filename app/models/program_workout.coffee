@@ -2,10 +2,14 @@ define [
   './concerns/nested_models'
   './workout_template'
   './personal_workout'
+  './program_template'
+  './personal_program'
 ], (
   NestedModelsConcern
   WorkoutTemplate
   PersonalWorkout
+  ProgramTemplate
+  PersonalProgram
 ) ->
 
   class ProgramWorkout extends Backbone.Model
@@ -16,6 +20,11 @@ define [
 
     constructor: ->
       @_nestedModelsInit
+        program:
+          polymorphicKey: 'program_type'
+          polymorphicModels:
+            ProgramTemplate: ProgramTemplate
+            PersonalProgram: PersonalProgram
         workout:
           polymorphicKey: 'workout_type'
           polymorphicModels:
