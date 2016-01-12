@@ -7,6 +7,9 @@
   .gc-topbar
     flex: 1 0 100%
 
+  region[data-name='search-bar']
+    flex: 1
+
 .gc-sidebar-wrapper
   flex: 1 0 0%
   display: flex
@@ -14,6 +17,7 @@
   background: #282d30
   overflow: auto
   align-items: flex-start
+  height: calc(100% - 64px)
 
 .gc-main
   position: relative
@@ -22,7 +26,7 @@
   display: flex
   flex-direction: column
   flex: 8 0 0%
-  padding: 0 15px
+  padding-left: 15px
 
 .gc-main > div
   height: 100%
