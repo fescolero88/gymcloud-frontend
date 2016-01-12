@@ -34,6 +34,7 @@ define [
         to: @views.workout_exercises_list
         events: [
           'actions:add'
+          'actions:create'
           'actions:multi_constructor:start'
           'actions:multi_constructor:stop'
           'actions:multi_constructor:assign'

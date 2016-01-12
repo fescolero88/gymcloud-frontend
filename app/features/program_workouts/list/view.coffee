@@ -1,16 +1,12 @@
 define [
-  #'./template'
   './item/view'
   './empty/view'
 ], (
-  #template
   ItemView
   EmptyView
 ) ->
 
   class ProgramWorkoutsListView extends Marionette.CollectionView
-
-    #template: template
 
     className: 'gc-program-workouts-list'
 
@@ -20,3 +16,20 @@ define [
 
     viewComparator: (model) ->
       model.get('position')
+
+    initialize: ->
+      @listenTo(@, 'actions:add', @_addWorkoutToCollection)
+      @listenTo(@, 'actions:create', @_redirectToWorkouts)
+
+    _addWorkoutToCollection: (id) ->
+      model = @collection.add
+        program_template_id:
+          @collection.collection.program_template.get('id')
+        workout_template_id: parseInt(id)
+        position: @collection.length + 1
+      model.save()
+
+    _redirectToWorkouts: ->
+      # @collection.add({})
+      App.vent.trigger 'redirect:to', '#/workout_templates',
+        replace: false

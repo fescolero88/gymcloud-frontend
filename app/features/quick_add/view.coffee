@@ -54,13 +54,19 @@ define [
             @clear()
             view.trigger('quick_add:chosen', value, $item)
         )(@)
-        collection: =>
-          @collection
+        collection: ((view) ->
+          result = view.options.collection
             .map (item) ->
               folder: false
               id: item.get('id')
               name: item.get('name')
-              label: item.get('name')
+          type = _.humanize(view.options.collection.model.prototype.type)
+          result.unshift
+            id: 0
+            name: "CREATE NEW #{type}"
+            icon: 'gc-icon-exercises-add'
+          result
+        )(@)
 
     constructor: ->
       @model = new Model

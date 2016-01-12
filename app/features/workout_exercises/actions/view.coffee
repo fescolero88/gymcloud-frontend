@@ -33,7 +33,10 @@ define [
 
     onShow: ->
       @listenTo @views.quick_add, 'quick_add:chosen', (id) =>
-        @trigger('actions:add', id)
+        if id is '0'
+          @trigger('actions:create')
+        else
+          @trigger('actions:add', id)
       App.request 'fwd',
         context: @
         from: @views.exercise_properties_multi_construtor

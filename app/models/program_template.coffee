@@ -36,6 +36,7 @@ define [
         group_assignments: Groups
         assignees: Backbone.Collection
       @weeks.program_template = @
+      @workouts.program_template = @
       super
 
     parse: (data) ->

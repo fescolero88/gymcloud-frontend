@@ -27,4 +27,7 @@ define [
 
     onShow: ->
       @listenTo @views.quick_add, 'quick_add:chosen', (id) =>
-        @trigger('program_workouts:add', id)
+        if id is '0'
+          @trigger('actions:create')
+        else
+          @trigger('actions:add', id)
