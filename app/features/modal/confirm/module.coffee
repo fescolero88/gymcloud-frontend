@@ -29,8 +29,8 @@ define [
     _initModalDelete: (model) ->
       App.request 'modal:confirm',
         title: "Delete #{model.type}"
-        content: 'Are you sure you want to delete ' +
-          "#{model.type} (#{model.get('name')})?"
+        content: "Are you sure you want to delete
+          #{model.type} (#{model.get('name')})?"
         confirmBtn: 'Delete'
         confirmCallBack: ->
           model.destroy(wait: true).then ->

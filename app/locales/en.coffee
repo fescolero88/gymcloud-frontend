@@ -86,6 +86,10 @@ define ->
       deleted:
         '[s] Program was deleted'
 
+    program_workout:
+      saved:
+        '[s] Workout was saved to your library'
+
     video:
       deleted:
         '[s] Video was deleted'

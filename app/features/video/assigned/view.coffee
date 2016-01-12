@@ -69,7 +69,7 @@ define [
           @model.save
             video_url: null
             video_id: null
-        , wait: true
+          , wait: true
 
     _getVideoType: (url) ->
       return unless _.any(url)
