@@ -5,6 +5,7 @@ define [
   'features/program_workouts/list/view'
   'features/program_weeks/actions/view'
   'features/program_workouts/actions/view'
+  './empty/view'
   'models/program_workout'
 ], (
   template
@@ -13,6 +14,7 @@ define [
   ProgramWorkoutsListView
   ProgramWeeksActionsView
   ProgramWorkoutsActionsView
+  EmptyView
   ProgramWorkout
 ) ->
 
@@ -59,6 +61,12 @@ define [
               collection:
                 new Backbone.VirtualCollection @model.workouts,
                   filter: (model) -> !model.get('week_id')
+          ,
+            region: 'program_empty'
+            klass: EmptyView
+            options: ->
+              weeks: @model.weeks
+              workouts: @model.workouts
         ]
 
     onShow: ->
