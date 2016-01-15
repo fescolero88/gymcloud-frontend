@@ -31,8 +31,10 @@ define [
             region: 'week_workouts'
             klass: ProgramWorkoutsListView
             options: ->
-              model: @model.collection.program_template
-              collection: @model.program_workouts
+              program = @model.collection.program_template
+              model: program
+              collection: new Backbone.VirtualCollection program.workouts,
+                filter: (model) => model.get('week_id') == @model.get('id')
         ]
 
     modelEvents:
