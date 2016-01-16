@@ -38,9 +38,8 @@ define [
       # set name as full name to be recognized by
       # modal:confirm:delete
       @model.set('name', @model.fullName())
-      App.request('modal:confirm:delete', @model, =>
+      App.request('modal:confirm:delete', @model).then =>
         @model.collection?.remove(@model)
-      )
 
     moveSingle: (ev) =>
       $(ev.currentTarget).closest('.row')

@@ -21,14 +21,15 @@ define [
       'sync': 'onSync'
       'model:avatar_update:success': 'onAvatarUpate'
 
-    events:
-      'submit @ui.groupForm': 'submitGroupForm'
-      'change .gc-edit-profile-modal-upload-input': 'showThumbnail'
-
     ui:
       groupForm: 'form'
+      modalUploadInput: '.gc-edit-profile-modal-upload-input'
 
-    initialize: =>
+    events:
+      'submit @ui.groupForm': 'submitGroupForm'
+      'change @ui.modalUploadInput': 'showThumbnail'
+
+    initialize: ->
       Backbone.Validation.bind @
 
     showThumbnail: (ev) ->
@@ -45,7 +46,6 @@ define [
       @avatar = $(ev.target).find('input[type=file]')
 
       if @model.isValid true
-        App.vent.trigger('spinner:start')
         @model.save()
 
     onSync: ->

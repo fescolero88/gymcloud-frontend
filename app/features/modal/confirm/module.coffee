@@ -27,14 +27,19 @@ define [
         region.destroy()
 
     _initModalDelete: (model, callback) ->
+      defer = new $.Deferred
       App.request 'modal:confirm',
         title: "Delete #{model.type}"
         content: "Are you sure you want to delete
           #{model.type} (#{model.get('name')})?"
         confirmBtn: 'Delete'
         confirmCallBack: ->
-          model.destroy(wait: true).then ->
-            App.request 'messenger:explain', 'item.deleted',
-              type: model.type
+          model.destroy(wait: true)
+            .then ->
+              App.request 'messenger:explain', 'item.deleted',
+                type: model.type
 
-            callback() if _.isFunction(callback)
+            .then(defer.resolve)
+            .fail(defer.reject)
+
+      defer.promise()
