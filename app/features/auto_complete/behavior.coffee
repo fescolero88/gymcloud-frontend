@@ -17,6 +17,7 @@ define [
       hideSelected: true
       valueField: 'id'
       labelField: 'name'
+      sortField: 'sort_id'
       searchField: ['name']
       collection: undefined
       onItemAdd: undefined
@@ -33,6 +34,7 @@ define [
         hideSelected: @options.hideSelected
         valueField: @options.valueField
         labelField: @options.labelField
+        sortField: @options.sortField
         searchField: @options.searchField
         options: items
         onItemAdd: @options.onItemAdd

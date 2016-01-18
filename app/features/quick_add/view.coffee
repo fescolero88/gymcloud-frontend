@@ -60,11 +60,13 @@ define [
               folder: false
               id: item.get('id')
               name: item.get('name')
+              sort_id: "~-2-#{_.underscore(item.get('name'))}"
           type = _.humanize(view.options.collection.model.prototype.type)
           result.unshift
             id: 0
             name: "CREATE NEW #{type}"
             icon: 'gc-icon-exercises-add'
+            sort_id: '~-1-sort'
           result
         )(@)
 
