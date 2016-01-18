@@ -27,12 +27,16 @@ define [
       @listenTo(@, 'actions:create', @_redirectToWorkouts)
 
     _addWorkoutToCollection: (id) ->
-      model = @collection.add
+      attrs =
         program_template_id:
           @collection.collection.program_template.get('id')
         workout_template_id: parseInt(id)
         position: @collection.length + 1
+      Model = @collection.collection.model
+      model = new Model(attrs)
       model.save()
+        .then =>
+          @collection.collection.add(model)
 
     _redirectToWorkouts: ->
       # @collection.add({})
