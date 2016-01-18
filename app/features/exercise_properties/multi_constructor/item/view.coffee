@@ -16,7 +16,7 @@ define [
 
     ui:
       removeButton: '.gc-remove'
-      propertyItem: '.gc-property-item'
+      propertyItem: '.gc-dropdown li a'
       selectedPropertyLabel: '.gc-selected-property'
       selectedPropertyValue: '.gc-property-value'
       selectedPropertyValueContainer: '.gc-property-value-container'
