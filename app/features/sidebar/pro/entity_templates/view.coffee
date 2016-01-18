@@ -18,10 +18,6 @@ define [
     ui:
       sidebarElements: '.gc-sidebar-sub'
 
-    onShow: ->
-      for el in @ui.sidebarElements
-        App.vent.trigger('sortables:add:container', el)
-
     getChildView: (item) ->
       if typeof item.attributes.folder_id isnt 'undefined'
         TemplateCollectionItemView
