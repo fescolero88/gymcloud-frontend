@@ -19,14 +19,19 @@ define ->
         App.request 'messenger:explain', 'message:error',
           message: message
 
+    _.each ['Model', 'Collection'], (namespace) ->
+      oldCtr = Backbone[namespace]
+      Backbone[namespace]::constructor = ->
+        @listenTo @, 'request', ->
+          @_isRequested = true
+        @listenTo @, 'sync', ->
+          @_isRequested = false
+          @_isSynced = true
+        oldCtr.apply(@, arguments)
+
     Backbone.originalSync = Backbone.sync
     Backbone.sync = (method, model, options) ->
       options.type = 'PATCH' if method == 'update'
-      @listenTo @, 'request', =>
-        @_isRequested = true
-      @listenTo @, 'sync', =>
-        @_isRequested = false
-        @_isSynced = true
       Backbone.originalSync method, model, options
 
     $.ajaxSetup

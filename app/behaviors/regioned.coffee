@@ -26,13 +26,14 @@ define ->
       defer = new $.Deferred
       dfds = {}
       _.each ['model', 'collection'], (namespace) =>
+        data = @view[namespace]
         dfds[namespace] = new $.Deferred
-        if @view[namespace] and not @view[namespace]._isSynced
-          @listenToOnce(@view[namespace], 'sync', ->
-            dfds[namespace].resolve())
+        dfd = dfds[namespace]
+        if data and data._isRequested
+          @listenToOnce(data, 'sync', ->
+            dfd.resolve())
         else
-          dfds[namespace].resolve()
-        _.delay(dfds[namespace].resolve, 500)
+          dfd.resolve()
       $.when(_.values(dfds)...).then(defer.resolve)
       defer.promise()
 
