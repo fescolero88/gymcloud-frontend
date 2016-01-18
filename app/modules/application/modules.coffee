@@ -8,6 +8,7 @@ define [
   'features/search/module'
   'features/modal/confirm/module'
   'features/modal/client_groups/module'
+  'features/drag_n_drop/module'
 ], (
   AllRouters
   CurrentUserModule
@@ -18,6 +19,7 @@ define [
   SearchModule
   ModalConfirmModule
   ModalClientGroupModule
+  DragNDropModule
 ) ->
 
   (app) ->
@@ -31,3 +33,4 @@ define [
     app.module 'Search', SearchModule
     app.module 'ModalConfirm', ModalConfirmModule
     app.module 'ClientGroupModal', ModalClientGroupModule
+    app.module 'DragNDrop', DragNDropModule
