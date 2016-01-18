@@ -5,7 +5,6 @@
     "bootstrap": "~3.3.2",
     "eonasdan-bootstrap-datetimepicker": "~4.0.0",
     "fontawesome": "~4.2.0",
-    "jquery-sortable": "~0.9.12",
     "jQuery.serializeObject": "~2.0.3",
     "messenger": "~1.4.1",
     "nanoscroller": "~0.8.7",

@@ -25,15 +25,16 @@ define [
     templateHelpers: =>
       collection: @collection
 
-    onShow: ->
-      @$el.find('.gc-properties-list').sortable
-        handle: '.draggable-handle'
-        placeholder: '<li class="placeholder sortable-placeholder"/>'
-        onDrop: ($item) =>
-          $item.removeClass('dragged').removeAttr('style')
-          $('body').removeClass('dragging')
-          @$(@childViewContainer).children().each (index, item) =>
-            id = $(item).data('id')
-            model = @collection.get(id)
-            model.set(position: index)
-            model.save() unless _.isEmpty(model.changed)
+    # FIXME: DRAGULA
+    # onShow: ->
+    #   @$el.find('.gc-properties-list').sortable
+    #     handle: '.draggable-handle'
+    #     placeholder: '<li class="placeholder sortable-placeholder"/>'
+    #     onDrop: ($item) =>
+    #       $item.removeClass('dragged').removeAttr('style')
+    #       $('body').removeClass('dragging')
+    #       @$(@childViewContainer).children().each (index, item) =>
+    #         id = $(item).data('id')
+    #         model = @collection.get(id)
+    #         model.set(position: index)
+    #         model.save() unless _.isEmpty(model.changed)
