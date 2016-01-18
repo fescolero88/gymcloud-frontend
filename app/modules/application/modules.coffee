@@ -8,6 +8,7 @@ define [
   'features/sortables/module'
   'features/search/module'
   'features/modal/confirm/module'
+  'features/modal/client_groups/module'
 ], (
   AllRouters
   CurrentUserModule
@@ -18,6 +19,7 @@ define [
   SortableModule
   SearchModule
   ModalConfirmModule
+  ModalClientGroupModule
 ) ->
 
   (app) ->
@@ -31,3 +33,4 @@ define [
     app.module 'Sortable', SortableModule
     app.module 'Search', SearchModule
     app.module 'ModalConfirm', ModalConfirmModule
+    app.module 'ClientGroupModal', ModalClientGroupModule
