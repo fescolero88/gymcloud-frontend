@@ -34,6 +34,7 @@ define [
               program = @model.collection.program_template
               collection = new Backbone.VirtualCollection program.workouts,
                 filter: (model) => model.get('week_id') == @model.get('id')
+                comparator: 'position'
               collection.week_id = @model.get('id')
               model: program
               collection: collection

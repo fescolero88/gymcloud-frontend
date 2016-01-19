@@ -9,3 +9,5 @@ define [
     type: 'ProgramWorkouts'
 
     model: ProgramWorkout
+
+    comparator: 'position'

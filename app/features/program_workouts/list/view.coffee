@@ -19,12 +19,10 @@ define [
     childEvents:
       'duplicate:program_workout': '_onDuplicate'
 
-    viewComparator: (model) ->
-      model.get('position')
-
     initialize: ->
       @listenTo(@, 'actions:add', @_addWorkoutToCollection)
       @listenTo(@, 'actions:create', @_redirectToWorkouts)
+      @listenTo(@collection, 'add remove', @_updatePosition)
       @listenTo(App.vent, 'drag_n_drop:item:dropped', @_handleDropped)
 
     _addWorkoutToCollection: (id) ->
@@ -58,20 +56,14 @@ define [
 
     _handleDropped: (el, target, source, sibling) ->
       if target is @el
-        if @collection.week_id
-          @_updateWeek()
-        else
-          @_updatePosition()
+        App.vent.trigger('dropped:to:week', el, @collection.week_id or null)
+        @_updatePosition(el)
 
-    _updateWeek: ->
-      @collection.each (view) ->
-        view.model.set
+    _updatePosition: (el) ->
+      @children.each (view) =>
+        id = view.$el.data('id')
+        model = @collection.collection.find(id: id)
+        return unless model
+        model.set
           position: view.$el.index()
-          week_id: view.week_id
-        view.model.patch()
-
-    _updatePosition: ->
-      @children.each (view) ->
-        view.model.set
-          position: view.$el.index()
-        view.model.patch()
+        model.patch()
