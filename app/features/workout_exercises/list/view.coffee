@@ -31,7 +31,7 @@ define [
       @listenTo(@, 'actions:add', @_addExerciseToCollection)
       @listenTo(@, 'actions:create', @_redirectToExercises)
       @listenTo(@collection, 'add remove change', @_initConnections)
-      @listenTo(App.vent, 'drag_n_drop:item:dropped', @_updatePosition)
+      @listenTo(App.vent, 'drag_n_drop:item:dropped', @_handleDropped)
 
     viewComparator: (model) ->
       model.get('position')
@@ -49,6 +49,9 @@ define [
     _redirectToExercises: ->
       App.vent.trigger 'redirect:to', '#/exercises',
         replace: false
+
+    _handleDropped: (el, target, source, sibling) ->
+      @_updatePosition() if target is @el
 
     _updatePosition: ->
       @children.each (view) ->

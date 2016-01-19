@@ -20,7 +20,7 @@ define [
       @smaug = Dragula [], options
 
       @smaug.on 'drop', (el, target, source, sibling) ->
-        App.vent.trigger('drag_n_drop:item:dropped', el)
+        App.vent.trigger('drag_n_drop:item:dropped', arguments...)
 
     _initHandlers: ->
       @app.reqres.setHandlers
