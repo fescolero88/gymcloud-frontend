@@ -10,7 +10,7 @@ define [
 
     tagName: 'ul'
 
-    className: 'gc-workout-exercises-list'
+    className: 'gc-workout-exercises-list draggable-container'
 
     emptyView: EmptyView
 
@@ -31,6 +31,10 @@ define [
       @listenTo(@, 'actions:add', @_addExerciseToCollection)
       @listenTo(@, 'actions:create', @_redirectToExercises)
       @listenTo(@collection, 'add remove change', @_initConnections)
+      @listenTo(App.vent, 'drag_n_drop:item:dropped', @_updatePosition)
+
+    viewComparator: (model) ->
+      model.get('position')
 
     onShow: ->
       @_initConnections()
@@ -45,6 +49,13 @@ define [
     _redirectToExercises: ->
       App.vent.trigger 'redirect:to', '#/exercises',
         replace: false
+
+    _updatePosition: ->
+      @children.each (view) ->
+        view.model.set
+          position: view.$el.index()
+        view.model.patch()
+      @collection.sort()
 
     _initConnections: ->
       colors = [
