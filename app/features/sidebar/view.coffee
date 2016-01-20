@@ -70,7 +70,7 @@ define [
         currentTarget.toggleClass('active')
 
       # remove active ewp item if any
-      @_setActiveMenuItem(currentTarget)
+      @_setActiveRootMenuItem(currentTarget)
       @_removeActiveItem()
 
     toggleItem: (ev) ->
@@ -87,9 +87,9 @@ define [
       activeItem.removeClass('active') if activeItem
 
     # Note: An Active Menu is the one that is currently being
-    # viewed by the user. (list that is dispalyed in the content region)
-    _setActiveMenuItem: (target) ->
-      currentActiveMenu = @$el.find('.gc-sidebar-cat > a.active-menu')
+    # viewed by the user. (list or item that is dispalyed in the content region)
+    _setActiveRootMenuItem: (target) ->
+      currentActiveMenu = @$el.find('a.active-menu')
       currentActiveMenu.removeClass('active-menu') if currentActiveMenu
 
       target.addClass('active-menu')
