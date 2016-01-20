@@ -81,9 +81,9 @@ define [
 
       @listenTo @views.program_weeks_actions, 'program_weeks:build', =>
         position = @model.weeks.length + 1
-        model = @model.weeks.add
+        @model.weeks.create
           program_id: @model.get('id')
           position: position
           name: "Week #{position}"
-        model.save().then =>
-          @model.weeks.add(model)
+        ,
+          wait: true
