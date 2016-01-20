@@ -30,7 +30,7 @@ define [
         '_redirectToSubPath'
       ]...
       @listenTo(@behaviorView, 'activated', @_onActivated)
-      @listenTo(@view.model, 'change:state', @_onChangeState)
+      @listenTo(@view.model, 'change:state.subpage', @_onChangeState)
 
     _onActivated: (subPath) ->
       fn = @options.onActivated
@@ -39,14 +39,14 @@ define [
       fn(subPath)
 
     _onChangeState: ->
-      state = @view.model.get('state')
+      state = @view.model.get('state.subpage')
       @behaviorView.trigger('activate', state)
 
     _redirectToSubPath: (path) ->
       paths = @_getPaths(path)
       if @_shouldBeActivated(path)
-        if @view.model.get('state') isnt paths.dest
-          @view.model.set('state', paths.dest)
+        if @view.model.get('state.subpage') isnt paths.dest
+          @view.model.set('state.subpage', paths.dest)
         App.vent.trigger 'redirect:to', paths.full,
           replace: true
           trigger: false

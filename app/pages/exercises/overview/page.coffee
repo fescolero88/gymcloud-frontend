@@ -54,12 +54,12 @@ define [
         view = new OverviewView
           model: @model.get('data.model')
         @listenTo view, 'childview:video:assign', =>
-          @model.set('state', 'video')
+          @model.set('state.subpage', 'video')
         view
 
       video: ->
         view = new VideoAssignmentView
           model: @model.get('data.model')
         @listenTo view, 'video:assigned', =>
-          @model.set('state', 'overview')
+          @model.set('state.subpage', 'overview')
         view

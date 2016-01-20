@@ -52,7 +52,7 @@ define [
       page_content: 'region[data-name="page_content"]'
 
     init: ->
-      @model.set('state', @options.state)
+      @model.set('state.subpage', @options.state)
 
     initModel: ->
       new WorkoutTemplate
@@ -63,13 +63,13 @@ define [
         view = new OverviewView
           model: @model.get('data.model')
         @listenTo view, 'childview:video:assign', =>
-          @model.set('state', 'video')
+          @model.set('state.subpage', 'video')
         view
       video: ->
         view = new VideoAssignmentView
           model: @model.get('data.model')
         @listenTo view, 'video:assigned', =>
-          @model.set('state', 'overview')
+          @model.set('state.subpage', 'overview')
         view
       assign: ->
         new AssignView
@@ -79,4 +79,4 @@ define [
       @listenTo(@model.get('data.model'), 'change:video_url', @_videoAssigned)
 
     _videoAssigned: ->
-      @model.set('state', 'overview')
+      @model.set('state.subpage', 'overview')

@@ -5,7 +5,8 @@ define [
   class PageModel extends Backbone.NestedModel
 
     defaults:
-      state: 'default'
+      state:
+        subpage: 'default'
       data:
         model: undefined
         collection: undefined

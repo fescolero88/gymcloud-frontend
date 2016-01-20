@@ -60,7 +60,7 @@ define [
       page_content: 'region[data-name="page_content"]'
 
     init: ->
-      @model.set('state', @options.state)
+      @model.set('state.subpage', @options.state)
 
     initModel: ->
       new ProgramTemplate

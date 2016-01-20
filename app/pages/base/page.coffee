@@ -58,7 +58,7 @@ define [
     _initEvents: ->
       @listenTo(@, 'before:show', @_initViews)
       @listenTo(@, 'views:show', @_showView)
-      @listenTo(@model, 'change:state', (_model, state) =>
+      @listenTo(@model, 'change:state.subpage', (_model, state) =>
         @trigger('views:show', state)
       )
       @listenTo(@model.get('data.model'), 'destroy', @_onModelDestroy)
@@ -104,8 +104,8 @@ define [
 
     _showPage: ->
       App.request('views:show', @)
-      @model.set('state', @options.state)
-      @_showView(@model.get('state'))
+      @model.set('state.subpage', @options.state)
+      @_showView(@model.get('state.subpage'))
 
     _bindAll: ->
       _.bindAll @, [
