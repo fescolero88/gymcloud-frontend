@@ -1,4 +1,5 @@
 define [
+  'behaviors/exercises_connectors'
   'behaviors/facebook_login'
   'behaviors/form_validation'
   'behaviors/google_login'
