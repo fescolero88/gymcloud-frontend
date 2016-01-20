@@ -28,40 +28,51 @@ define ->
     ]
 
     initialize: ->
-      @listenTo(@view, 'show', @_init)
-      @listenTo(@view.collection, 'add remove change', @_init)
+      @_debouncedInit = _.debounce(@_init, 1000, true)
+      @listenTo(@view, 'show', @_debouncedInit)
+
+    onBeforeShow: ->
+      @listenTo(@view.collection, 'add remove change', @_debouncedInit)
 
     _init: ->
-      collection = @view.collection
+      @letterColors = {}
+      @lastColor = -1
 
-      letterColors = {}
-      lastColor = -1
-
-      collection.each (model, index) =>
-        previous =
-          collection.models[index - 1]?.get('order_letter')
-        next =
-          collection.models[index + 1]?.get('order_letter')
+      @view.collection.each (model, index) =>
         current = model.get('order_letter')
+        previous =
+          @view.collection.models[index - 1]?.get('order_letter')
+        next =
+          @view.collection.models[index + 1]?.get('order_letter')
 
-        unless letterColors[current]
-          lastColor = (lastColor + 1) % @colors.length
-          letterColors[current] = @colors[lastColor]
-        model.set
-          color: letterColors[current]
+        @_setColor(model, current)
+        @_setPosition(model, current, previous, next)
 
-        position =
-          if current is '~'
-            ''
-          else if current is previous
-            if current is next
-              'middle'
-            else
-              'last'
-          else if current is next
-            'first'
+    _setColor: (model, current) ->
+      color = if current is '~'
+        @colorDefault
+      else
+        unless @letterColors[current]
+          @lastColor = (@lastColor + 1) % @colors.length
+          @letterColors[current] = @colors[@lastColor]
+        @letterColors[current]
+
+      model.set
+        color: color
+
+    _setPosition: (model, current, previous, next) ->
+      position =
+        if current is '~'
+          ''
+        else if current is previous
+          if current is next
+            'middle'
           else
-            ''
+            'last'
+        else if current is next
+          'first'
+        else
+          ''
 
-        model.set
-          order_position: position
+      model.set
+        order_position: position
