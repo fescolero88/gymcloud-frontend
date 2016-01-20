@@ -14,17 +14,20 @@ define [
 
     childView: ItemView
 
-    emptyView: EmptyView
+    getEmptyView: ->
+      @options.hasEmptyView && EmptyView
 
     childEvents:
       'duplicate:program_workout': '_onDuplicate'
+      'actions:create': '_onCreate'
+      'actions:add': '_addWorkoutToCollection'
 
     viewComparator: (model) ->
       model.get('position')
 
     initialize: ->
       @listenTo(@, 'actions:add', @_addWorkoutToCollection)
-      @listenTo(@, 'actions:create', @_redirectToWorkouts)
+      @listenTo(@, 'actions:create', @_onCreate)
 
     _addWorkoutToCollection: (id) ->
       attrs =
@@ -38,11 +41,6 @@ define [
         .then =>
           @collection.collection.add(model)
 
-    _redirectToWorkouts: ->
-      # @collection.add({})
-      App.vent.trigger 'redirect:to', '#/workout_templates',
-        replace: false
-
     _onDuplicate: (childView) ->
       programWorkout = childView.model
 
@@ -51,6 +49,15 @@ define [
         workout_template_id: programWorkout.get('workout_id')
         position: @collection.length + 1
         week_id: programWorkout.get('week_id')
+
+      newProgramWorkout.save({}, wait: true).then =>
+        @collection.add(newProgramWorkout)
+
+    _onCreate: ->
+      newProgramWorkout = new ProgramWorkout
+        program_template_id: @model.get('id')
+        position: @collection.length + 1
+        week_id: @options.weekId
 
       newProgramWorkout.save({}, wait: true).then =>
         @collection.add(newProgramWorkout)

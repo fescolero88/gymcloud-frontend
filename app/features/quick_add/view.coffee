@@ -21,18 +21,22 @@ define [
       'blur @ui.inputWrapper': =>
         @model.set('state', 'button')
 
+    templateHelpers: ->
+      isIconHidden: =>
+        !!@options.isIconHidden
+
     behaviors: ->
 
       stickit:
-        bindings:
+        bindings: ->
           'button':
             observe: 'state'
             visible: (value) ->
               value is 'button'
           'button span span':
             observe: 'modelName'
-            onGet: (value) ->
-              "Add #{value}"
+            onGet: (value) =>
+              @options.buttonName || "Add #{value}"
           '.gc-exercises-assign-input-wrapper':
             observe: 'state'
             visible: (value) ->
