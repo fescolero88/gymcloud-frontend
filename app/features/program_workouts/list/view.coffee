@@ -20,7 +20,7 @@ define [
     childEvents:
       'duplicate:program_workout': '_onDuplicate'
       'actions:create': '_onCreate'
-      'actions:add': '_addWorkoutToCollection'
+      'actions:add': '_quickAddWorkoutToCollection'
 
     viewComparator: (model) ->
       model.get('position')
@@ -29,17 +29,17 @@ define [
       @listenTo(@, 'actions:add', @_addWorkoutToCollection)
       @listenTo(@, 'actions:create', @_onCreate)
 
+    _quickAddWorkoutToCollection: (_childView, id) ->
+      @trigger('actions:add', id)
+
     _addWorkoutToCollection: (id) ->
       attrs =
         program_template_id:
           @collection.collection.program_template.get('id')
         workout_template_id: parseInt(id)
         position: @collection.length + 1
-      Model = @collection.collection.model
-      model = new Model(attrs)
-      model.save()
-        .then =>
-          @collection.collection.add(model)
+        week_id: @options.weekId
+      @collection.collection.create(attrs, wait: true)
 
     _onDuplicate: (childView) ->
       programWorkout = childView.model
