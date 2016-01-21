@@ -32,6 +32,9 @@ define [
             title: 'Assign'
         ]
 
+      program_action_panel:
+        model: -> @view.model.get('data.model')
+
       privacy_widget:
         model: -> @view.model.get('data.model')
 

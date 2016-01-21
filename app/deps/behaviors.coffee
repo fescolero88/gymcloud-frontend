@@ -20,6 +20,7 @@ define [
   'features/privacy/widget/behavior'
   'features/rating/widget/behavior'
   'features/video/assigned/behavior'
+  'features/program_action_panel/behavior'
 ], ->
 
   klasses = _.toArray(arguments)
