@@ -3,7 +3,6 @@ define [
   'selectize'
   'bootstrap'
   'jQuery.serializeObject'
-  'jquery-sortable'
   'tmpl'
   'imports?define=>undefined&exports=>undefined&' +
     'jQuery=deps/bundles/jquery/original!jquery.ui.widget'

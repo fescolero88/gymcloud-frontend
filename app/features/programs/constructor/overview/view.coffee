@@ -5,7 +5,6 @@ define [
   'collections/program_weeks'
   './workouts/view'
   './template'
-  'dragula'
 ], (
   WeeksView
   WeekEmptyView
@@ -13,7 +12,6 @@ define [
   ProgramWeeks
   WorkoutListView
   template
-  Dragula
 ) ->
 
   class OverviewView extends Marionette.LayoutView
@@ -32,8 +30,6 @@ define [
 
     initialize: ->
       @collection = @model.program_weeks
-
-      @initDrag()
 
       @workoutsCollection = @model.program_workouts
       @views = @_prepareViews()
@@ -60,27 +56,16 @@ define [
       else
         @ui.weeks.removeClass 'hidden'
 
-    initDrag: ->
-      dragOptions =
-        revertOnSpill: true
-        moves: (el, container, handle) ->
-          handle.classList.contains('gc-program-workout-sort') ||
-          handle.classList.contains('gc-workout-header')
-
-      @dragula = Dragula [], dragOptions
-
     _prepareViews: ->
       views = {}
 
       views.weeks = new WeeksView
         model: @model
         collection: @collection
-        sortable: @dragula
 
       views.workoutList = new WorkoutListView
         program: @model
         collection: @workoutsCollection
-        sortable: @dragula
 
       views
 

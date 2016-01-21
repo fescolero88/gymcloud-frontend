@@ -10,6 +10,8 @@ define [
 
     template: template
 
+    className: 'gc-program-workout-item'
+
     behaviors:
 
       editable_textarea:
@@ -23,6 +25,12 @@ define [
         model: ->
           @model.workout
         bindings:
+          ':el':
+            attributes: [
+                observe: 'id'
+                name: 'data-id'
+                onGet: -> @model.get('id')
+            ]
           '.gc-workout-title > span': 'name'
           'label input': 'is_visible'
 
@@ -45,6 +53,9 @@ define [
 
     triggers:
       'click a[data-action="duplicate"]': 'duplicate:program_workout'
+
+    initialize: ->
+      @listenTo(App.vent, 'dropped:to:week', @_updateWeekId)
 
     onShow: ->
       @listenToOnce @video_assigned, 'show', ->
@@ -78,3 +89,8 @@ define [
         video_url: model.get('embed_url')
         video_id: model.get('id')
       , wait: true
+
+    _updateWeekId: (el, weekId) ->
+      if el is @el
+        @model.set(week_id: weekId)
+        @model.patch()

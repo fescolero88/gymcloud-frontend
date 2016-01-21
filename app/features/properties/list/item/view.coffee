@@ -10,7 +10,7 @@ define [
 
     tagName: 'li'
 
-    className: 'row'
+    className: 'row gc-properties-list-item'
 
     events:
       'change .switch input': 'switchProperty'

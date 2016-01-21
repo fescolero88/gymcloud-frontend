@@ -9,3 +9,5 @@ define [
     type: 'ProgramWeeks'
 
     model: ProgramWeek
+
+    comparator: 'position'

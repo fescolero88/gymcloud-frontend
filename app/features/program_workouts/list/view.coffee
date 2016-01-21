@@ -10,7 +10,7 @@ define [
 
   class ProgramWorkoutsListView extends Marionette.CollectionView
 
-    className: 'gc-program-workouts-list'
+    className: 'gc-program-workouts-list draggable-container'
 
     childView: ItemView
 
@@ -22,12 +22,12 @@ define [
       'actions:create': '_onCreate'
       'actions:add': '_quickAddWorkoutToCollection'
 
-    viewComparator: (model) ->
-      model.get('position')
-
     initialize: ->
       @listenTo(@, 'actions:add', @_addWorkoutToCollection)
       @listenTo(@, 'actions:create', @_onCreate)
+      @listenTo(@, 'actions:create', @_redirectToWorkouts)
+      @listenTo(@collection, 'add remove', @_updatePosition)
+      @listenTo(App.vent, 'drag_n_drop:item:dropped', @_handleDropped)
 
     _quickAddWorkoutToCollection: (_childView, id) ->
       @trigger('actions:add', id)
@@ -61,3 +61,17 @@ define [
 
       newProgramWorkout.save({}, wait: true).then =>
         @collection.add(newProgramWorkout)
+
+    _handleDropped: (el, target, source, sibling) ->
+      if target is @el
+        App.vent.trigger('dropped:to:week', el, @collection.week_id or null)
+        @_updatePosition(el)
+
+    _updatePosition: (el) ->
+      @children.each (view) =>
+        id = view.$el.data('id')
+        model = @collection.collection.find(id: id)
+        return unless model
+        model.set
+          position: view.$el.index()
+        model.patch()

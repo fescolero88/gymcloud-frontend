@@ -47,9 +47,6 @@ define [
       @collection = @model.items
       @name = @model.get('name')
 
-    onRender: ->
-      App.vent.trigger 'sortables:add:container', @ui.sidebarSubs[0]
-
     _collectionViewOptions: (model) ->
       type: @type
       name: model.get('name')

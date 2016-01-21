@@ -57,10 +57,11 @@ define [
             region: 'program_workouts'
             klass: ProgramWorkoutsListView
             options: ->
+              collection = new Backbone.VirtualCollection @model.workouts,
+                filter: (model) -> !model.get('week_id')
+                comparator: 'position'
               model: @model
-              collection:
-                new Backbone.VirtualCollection @model.workouts,
-                  filter: (model) -> !model.get('week_id')
+              collection: collection
           ,
             region: 'program_empty'
             klass: EmptyView

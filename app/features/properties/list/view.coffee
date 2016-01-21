@@ -18,22 +18,21 @@ define [
 
     childViewContainer: 'ul'
 
+    initialize: ->
+      @listenTo(App.vent, 'drag_n_drop:item:dropped', @_updatePosition)
+
     childViewOptions: (model, index) ->
       attributes:
         'data-id': model.id
 
+    viewComparator: (model) ->
+      model.get('position')
+
     templateHelpers: =>
       collection: @collection
 
-    onShow: ->
-      @$el.find('.gc-properties-list').sortable
-        handle: '.draggable-handle'
-        placeholder: '<li class="placeholder sortable-placeholder"/>'
-        onDrop: ($item) =>
-          $item.removeClass('dragged').removeAttr('style')
-          $('body').removeClass('dragging')
-          @$(@childViewContainer).children().each (index, item) =>
-            id = $(item).data('id')
-            model = @collection.get(id)
-            model.set(position: index)
-            model.save() unless _.isEmpty(model.changed)
+    _updatePosition: ->
+      @children.each (view) ->
+        view.model.set
+          position: view.$el.index()
+        view.model.patch()
