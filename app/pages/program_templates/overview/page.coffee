@@ -35,9 +35,6 @@ define [
       program_action_panel:
         model: -> @view.model.get('data.model')
 
-      privacy_widget:
-        model: -> @view.model.get('data.model')
-
       add_to_library:
         model: -> @view.model.get('data.model')
 

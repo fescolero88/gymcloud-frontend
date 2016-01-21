@@ -18,9 +18,17 @@ define [
 
       stickit:
         model: -> @data
-        bindings:
-          '.counter.weeks': 'weeksCount'
-          '.counter.workouts': 'workoutsCount'
+        bindings: ->
+          highlight = ($el) ->
+            $el.addClass('highlight')
+            setTimeout (-> $el.removeClass('highlight')), 350
+
+          '.counter.weeks':
+            observe: 'weeksCount'
+            afterUpdate: highlight
+          '.counter.workouts':
+            observe: 'workoutsCount'
+            afterUpdate: highlight
 
     events:
       'click button.add-week': '_addWeek'

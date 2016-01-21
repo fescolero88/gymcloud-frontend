@@ -25,24 +25,11 @@ define [
     className: 'gc-box-content'
 
     behaviors:
-      author_widget: true
-      rating_widget: true
       editable_textarea: true
       privacy_toggle: true
       delete_button: true
       regioned:
         views: [
-            region: 'counters'
-            klass: CountersView
-            options: ->
-              collections: [
-                  collection: @model.weeks
-                  label: 'weeks'
-                ,
-                  collection: @model.workouts
-                  label: 'workouts'
-              ]
-          ,
             region: 'program_weeks_actions'
             klass: ProgramWeeksActionsView
           ,
