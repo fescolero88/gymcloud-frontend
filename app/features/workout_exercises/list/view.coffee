@@ -1,18 +1,16 @@
 define [
   './item/view'
   './empty/view'
-  'dragula'
 ], (
   ExercisesItemView
   EmptyView
-  Dragula
 ) ->
 
   class WorkoutExercisesListView extends Marionette.CollectionView
 
     tagName: 'ul'
 
-    className: 'gc-workout-exercises-list'
+    className: 'gc-workout-exercises-list draggable-container'
 
     emptyView: EmptyView
 
@@ -20,6 +18,9 @@ define [
 
     behaviors:
       exercises_connectors: true
+
+    viewComparator: (model) ->
+      model.get('position')
 
     initialize: ->
       App.request 'fwd',
@@ -35,8 +36,7 @@ define [
 
       @listenTo(@, 'actions:add', @_addExerciseToCollection)
       @listenTo(@, 'actions:create', @_redirectToExercises)
-      #@listenTo(@model, 'sync', @onSavedOrder)
-      #@listenTo App.vent, 'sortables:on:drop', @onDropExercise
+      @listenTo(App.vent, 'drag_n_drop:item:dropped', @_handleDropped)
 
     _addExerciseToCollection: (id) =>
       @collection.addExercise
@@ -49,34 +49,12 @@ define [
       App.vent.trigger 'redirect:to', '#/exercises',
         replace: false
 
-    #onDestroy: ->
-      #App.vent.trigger 'sortables:remove:container', @$el[0]
+    _handleDropped: (el, target, source, sibling) ->
+      @_updatePosition() if target is @el
 
-    #onRender: ->
-      #@addSortable()
-      #@addSidebarDraggable()
-
-    #addSidebarDraggable: ->
-      #App.vent.trigger 'sortables:add:container', @$el[0]
-
-    #onDropExercise: (args) ->
-      #if args.category is 'exercises'
-        #args.container.removeChild(args.el)
-        #App.vent.trigger 'workout:add:exercise', args
-
-    #addSortable: ->
-      #dragOptions =
-        #revertOnSpill: true
-        #moves: (el, container, handle) ->
-          #$(handle).has('.gc-workout-exercise-name')
-
-      #Dragula [@$el[0]], dragOptions
-        #.on 'drop', (el, container) =>
-          #draggable = $(el).find 'span.gc-workout-exercise-sort'
-          #pos = $(el).index()
-
-          #model = @collection.get id: draggable.data('workout-id')
-          #@collection.remove model
-          #@collection.add model, at:pos
-          #@fixExercisesPositions()
-          #@children.call '_positionChanged'
+    _updatePosition: ->
+      @children.each (view) ->
+        view.model.set
+          position: view.$el.index()
+        view.model.patch()
+      @collection.sort()
