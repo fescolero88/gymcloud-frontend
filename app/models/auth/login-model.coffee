@@ -29,4 +29,4 @@ define ->
           .then (response) =>
             @trigger 'model:login:success', response
           .fail (xhr, textStatus, errorThrown) =>
-            @trigger 'model:login:fail', 'Something went wrong'
+            @trigger 'model:login:fail', xhr.status

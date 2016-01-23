@@ -13,6 +13,8 @@ define ->
     login:
       failed:
         '[e] Failed to login'
+      unauthorized:
+        '[e] Invalid credentials'
       abscent:
         '[e] Account with provided email does not exists.' +
           'You have to Sign Up first.'
