@@ -160,7 +160,8 @@
     flex-direction: row
     justify-content: flex-start
 
-    .counter, .counter-name
+    .counter,
+    .counter-name
       align-self: center
       color: #797979
 
@@ -185,3 +186,18 @@
 
       &:hover
         background: #3a99d8
+
+  .widgets
+    display: flex
+
+  region
+    display: flex
+    height: calc(65px - 1px - 1.1em)
+
+    > div,
+    > span
+      flex-direction: row
+      align-self: center
+
+    .gc-author-widget
+      padding: 0
