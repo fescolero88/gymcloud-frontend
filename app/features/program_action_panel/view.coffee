@@ -16,7 +16,7 @@ define [
 
     behaviors:
       author_widget: true
-      privacy_widget: true
+      privacy_button: true
 
       stickit:
         model: -> @data

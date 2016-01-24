@@ -17,6 +17,7 @@ define [
   'features/navigation/content_tabs/behavior'
   'features/pagination/behavior'
   'features/privacy/toggle/behavior'
+  'features/privacy/button/behavior'
   'features/privacy/widget/behavior'
   'features/rating/widget/behavior'
   'features/video/assigned/behavior'
