@@ -40,8 +40,8 @@ define [
       super
 
     parse: (data) ->
-      @_nestedModelsParseAll(data)
       @_parseAssignees(data.assignees) && delete data.assignees
+      @_nestedModelsParseAll(data)
       data
 
     assignTo: (user) ->

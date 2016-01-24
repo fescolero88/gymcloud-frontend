@@ -36,10 +36,10 @@ define [
       @__defineGetter__ 'folder', @_getFolder
 
     parse: (data) ->
-      @_nestedModelsParseAll(data)
       data.assignees &&
         @_parseAssignees(data.assignees) &&
         delete data.assignees
+      @_nestedModelsParseAll(data)
       data
 
     assignTo: (user) ->
