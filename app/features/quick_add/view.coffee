@@ -82,3 +82,5 @@ define [
     initialize: ->
       @listenTo @, 'quick_add:chosen', =>
         @ui.inputWrapper.trigger('blur')
+      @listenTo @, 'autocomplete', =>
+        @ui.button.trigger('click')

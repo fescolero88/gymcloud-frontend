@@ -1,9 +1,11 @@
 define [
   './template'
   './model'
+  'features/quick_add/view'
 ], (
   template
   DataModel
+  QuickAddView
 ) ->
 
   class View extends Marionette.LayoutView
@@ -29,9 +31,28 @@ define [
           '.counter.workouts':
             observe: 'workoutsCount'
             afterUpdate: highlight
+          '.counters':
+            observe: 'state'
+            visible: (value) ->
+              value isnt 'autocomplete'
+
+      regioned:
+        views: [
+            region: 'quick_add'
+            klass: QuickAddView
+            options: ->
+              collection: App.request('current_user').workout_templates
+              typeToAdd: 'Workout'
+        ]
+
+    ui:
+      counters: '.counters'
+      addWeekBtn: 'button.add-week'
+      addWorkoutBtn: 'button.add-workout'
 
     events:
-      'click button.add-week': '_addWeek'
+      'click @ui.addWeekBtn': '_addWeek'
+      'click @ui.addWorkoutBtn': '_showAutocomplete'
 
     initialize: ->
       @data = new DataModel
@@ -39,6 +60,23 @@ define [
         @data.set(weeksCount: @model.weeks.length)
       @listenTo @model.workouts, 'reset add remove', =>
         @data.set(workoutsCount: @model.workouts.length)
+
+    onShow: ->
+      @listenTo @views.quick_add, 'quick_add:chosen', (id) =>
+        @_addWorkoutToCollection(parseInt(id) || undefined)
+      @listenTo @views.quick_add.model, 'change:state', (_model, state) =>
+        @data.set('state', state)
+
+    _showAutocomplete: ->
+      @views.quick_add.trigger('autocomplete')
+
+    _addWorkoutToCollection: (id) ->
+      @model.workouts.create
+        program_template_id: @model.get('id')
+        workout_template_id: id
+        position: @model.workouts.length + 1
+      ,
+        wait: true
 
     _addWeek: ->
       position = @model.weeks.length + 1

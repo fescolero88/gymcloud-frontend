@@ -139,7 +139,7 @@
 .gc-nav-wrapper.program
   height: 65px
   background-color: #F9F9F9
-  z-index: 0
+  z-index: 3
 
 .gc-main-workspace .gc-workspace-content.program
   top: 110px
@@ -147,6 +147,25 @@
 
 .program-action-panel
   margin: 0
+  display: flex
+
+  > div
+    align-self: center
+
+  .selectize-input,
+  .selectize-input.focus
+    border-radius: 19px
+    padding-top: 9px
+    padding-left: 19px
+    height: 38px
+
+  .selectize-dropdown
+    margin-top: 6px
+    margin-left: 19px
+    max-width: calc(100% - 38px)
+
+  .quick-add
+    display: none!important
 
   .counters
     display: flex
@@ -190,14 +209,14 @@
   .widgets
     display: flex
 
-  region
-    display: flex
-    height: calc(65px - 1px - 1.1em)
+    region
+      display: flex
+      height: calc(65px - 1px - 1.1em)
 
-    > div,
-    > span
-      flex-direction: row
-      align-self: center
+      > div,
+      > span
+        flex-direction: row
+        align-self: center
 
     .gc-author-widget
       padding: 0
