@@ -31,7 +31,9 @@ define [
                 name: 'data-id'
                 onGet: -> @model.get('id')
             ]
-          '.gc-workout-title > span': 'name'
+          '.gc-workout-title > span':
+            observe: 'name'
+            events: ['blur']
           'label input': 'is_visible'
 
       regioned:
@@ -56,6 +58,7 @@ define [
 
     initialize: ->
       @listenTo(App.vent, 'dropped:to:week', @_updateWeekId)
+      @listenTo(@model.workout, 'change:name', @_patchWorkout)
 
     onShow: ->
       @listenToOnce @video_assigned, 'show', ->
@@ -94,3 +97,6 @@ define [
       if el is @el
         @model.set(week_id: weekId)
         @model.patch()
+
+    _patchWorkout: ->
+      @model.workout.patch()
