@@ -7,6 +7,7 @@ defaults =
   api: url: undefined
   mobile: url: undefined
   features:
+    sign_up: enabled: true
     exercises: enabled: true
     workout_templates: enabled: true
     program_templates: enabled: true
@@ -34,6 +35,8 @@ module.exports =
     vendor: facebook: app_id: '444988735644338'
     api: url: '//api.gymcloud.com'
     mobile: url: '//mobile.gymcloud.com'
+    features:
+      sign_up: enabled: false
 
   alpha_staging: $.extend true, {}, defaults,
     api: url: '//alpha.s.gymcloud.com'

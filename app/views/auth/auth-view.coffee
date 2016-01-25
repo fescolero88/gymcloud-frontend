@@ -23,6 +23,9 @@ module.exports = class AuthView extends Marionette.ItemView
       bindings:
         'input[name="username"]': 'username'
         'input[name="password"]': 'password'
+        '.gc-login-signup-wrapper':
+          visible: ->
+            feature.isEnabled('sign_up')
 
   initialize: (data) ->
     @model = new LoginModel
