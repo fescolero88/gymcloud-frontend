@@ -29,7 +29,7 @@ define [
     events:
       'click @ui.deleteSingle': 'deleteSingle'
 
-    @removeGroup: =>
+    removeGroup: =>
       if @ui.checkbox.is(':checked')
         @model.destroy()
 

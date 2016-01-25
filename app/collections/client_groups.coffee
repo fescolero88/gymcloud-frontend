@@ -8,15 +8,7 @@ define ->
       client_ids: []
       client_group_ids: []
 
-    url: (actionType) ->
-      workoutId = @get 'workoutId'
-      switch actionType
-        when 'assign'
-          "/api/mobile/workouts/#{workoutId}/assignees/bulk_assign"
-        when 'unassign'
-          "/api/mobile/workouts/#{workoutId}/assignees/bulk_unassign"
-        else
-          throw new Error('invalid action type')
+    urlRoot: '/client_groups'
 
     toggleAssign: ->
       actionType = if @get('isAssigned') then 'unassign' else 'assign'
