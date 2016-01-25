@@ -1,6 +1,4 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-ClientsPropertyCollection = require 'models/trainer/clients-property-collection'
+#ClientsProperties = require 'collections/clients_properties'
 
 class PersonalBestResultModel extends Backbone.Model
 
@@ -24,7 +22,6 @@ class PersonalBestResultView extends Marionette.ItemView
     'click @ui.deleteButton': 'deleteProperty'
 
   deleteProperty: (ev) =>
-    ev.preventDefault()
     @model.destroy()
 
 module.exports = class PersonalBestModalView extends Marionette.CompositeView
@@ -60,7 +57,7 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
     @collection = new Backbone.Collection
     if parseInt(@id) is 0
       @myProfile = true
-    @profile = App.request('data:profile')
+    @profile = App.request('current_user')
 
 
   onShow: =>
@@ -70,9 +67,11 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
         date: 'fa fa-calendar'
       format: 'YYYY-MM-DD'
     if @myProfile
-      @properties = App.request('my:properties') || new ClientsPropertyCollection
+      @properties = App.request('my:properties') ||
+        new ClientsProperties
     else
-      @properties = App.request('client:properties', @id) || new ClientsPropertyCollection
+      @properties = App.request('client:properties', @id) ||
+        new ClientsProperties
     if @properties.length
       @fillProperties()
     else
@@ -99,7 +98,6 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
       @ui.properties.append $option
 
   submitGroupForm: (ev) =>
-    ev.preventDefault()
     if @validateResult()
       result = new PersonalBestResultModel
         property_id: @ui.properties.val()
@@ -136,7 +134,7 @@ module.exports = class PersonalBestModalView extends Marionette.CompositeView
   addPersonalBest: =>
     if @validateDate() and @collection.length
       results = []
-      @collection.each (c) =>
+      @collection.each (c) ->
         results.push
           id: c.get('property_id')
           name: c.get('property_name')

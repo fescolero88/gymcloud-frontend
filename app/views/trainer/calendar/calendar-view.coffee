@@ -1,11 +1,12 @@
 moment = require 'moment'
-Marionette = require 'backbone.marionette'
 
 CalendarDayView = require 'views/trainer/calendar/calendar-day-view'
 CalendarWeekView = require 'views/trainer/calendar/calendar-week-view'
 CalendarMonthView = require 'views/trainer/calendar/calendar-month-view'
 
-CalendarEventCollection = require 'models/trainer/calendar-event-collection'
+class CalendarEvents extends Backbone.Collection
+
+  url: '/api/mobile/calendar/'
 
 module.exports = class CalendarView extends Marionette.LayoutView
 
@@ -13,7 +14,6 @@ module.exports = class CalendarView extends Marionette.LayoutView
 
   events:
     'click @ui.calendarNav': 'navLinkClick'
-    'click .gc-content-nav-back a': 'navBack'
 
   ui:
     calendarNav: '.calendar-nav'
@@ -21,8 +21,10 @@ module.exports = class CalendarView extends Marionette.LayoutView
   regions:
     calendar: '#calendar-content'
 
+  behaviors:
+    navigate_back: true
+
   navLinkClick: (ev) ->
-    ev.preventDefault()
     @ui.calendarNav.removeClass('active')
     @$el.find(ev.currentTarget).addClass('active')
     navView = @$el.find(ev.currentTarget).data('nav-view')
@@ -30,15 +32,16 @@ module.exports = class CalendarView extends Marionette.LayoutView
 
   initialize: ->
     @currentDate = moment()
-    @calendarEventCollection = new CalendarEventCollection
+    @calendarEventCollection = new CalendarEvents
     @calendar_url = @calendarEventCollection.url
 
     year = @currentDate.year()
-    month = @currentDate.month()+1
+    month = @currentDate.month() + 1
     @getData year, month
 
   getData: (year, month) ->
-    @calendarEventCollection.url = "#{@calendar_url}?year=#{year}&month=#{month}"
+    @calendarEventCollection.url =
+      "#{@calendar_url}?year=#{year}&month=#{month}"
     @calendarEventCollection.fetch()
 
   onShow: =>

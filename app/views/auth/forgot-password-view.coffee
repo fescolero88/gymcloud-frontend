@@ -1,42 +1,48 @@
 config = require 'config'
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
 
 ForgotPasswordModel = require 'models/auth/forgot-password-model'
-FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
 
 class ForgotPasswordFormView extends Marionette.ItemView
 
   template: require('templates/auth/forgot-password')
 
   behaviors:
-    FormValidationBehaviour:
-      behaviorClass: FormValidationBehaviour
+
+    form_validation: true
 
   ui:
     form: '.gc-forgot-password-form'
     emailField: '.gc-forgot-password-email'
+    submitButton: 'button[type="submit"]'
 
   events:
     'submit @ui.form': 'submitForm'
+    'keyup @ui.emailField': '_checkIfEmailValid'
 
   initialize: =>
     Backbone.Validation.bind @
 
   submitForm: (ev) =>
-    ev.preventDefault()
     formData = @ui.form.serializeObject()
     @model.set formData
-    if @model.isValid true
-      @model.save null,
-        success: (model, data) =>
-          if data.errors
-            $input = @ui.emailField
-            $inputGroup = $input.closest('.form-group')
-            @trigger 'switchError', data.error, $inputGroup
-        statusCode:
-          201: (data) =>
-            @trigger 'next'
+    @model.save null,
+      success: (model, data) =>
+        @trigger 'next'
+      error: (model, xhr, error) =>
+        errors = xhr.responseJSON.error
+        for key, value of errors
+          message = value.join(', ')
+          input = @ui.form.find("input[name='#{key}']")
+          uiGroup = input.parents('.form-group')
+          @trigger 'switchError', message , uiGroup
+
+  _checkIfEmailValid: =>
+    @model.set email: @ui.emailField.val()
+    @model.validate()
+    if @model.isValid()
+      @ui.submitButton.removeClass('disabled')
+    else
+      @ui.submitButton.addClass('disabled')
 
 class ForgotPasswordSuccessView extends Marionette.ItemView
 

@@ -1,0 +1,9 @@
+- url = "#"+type+"_folder/"+id
+
+a.row(href=url, class='toggle-menu sidebar-sub-folder toggle-it')
+  .col-xs-2
+    .gc-sidebar-folder-icon
+  span.col-xs-10.gc-sidebar-folder-name(data-key=id)
+    = name
+
+.gc-sidebar-sub

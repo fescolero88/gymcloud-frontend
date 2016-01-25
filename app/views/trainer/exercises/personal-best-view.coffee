@@ -1,7 +1,12 @@
-Marionette = require 'backbone.marionette'
-PersonalBestModel = require 'models/trainer/personal-best-model'
-PersonalBestCollection = require 'models/trainer/personal-best-collection'
-PersonalBestModalView = require 'views/trainer/exercises/personal-best-modal'
+PersonalBestModalView = require './personal-best-modal'
+
+class PersonalBestModel extends Backbone.Model
+
+class PersonalBestCollection extends Backbone.Collection
+
+  urlRoot: '/api/mobile'
+
+  model: PersonalBestModel
 
 class EmptyView extends Marionette.ItemView
 
@@ -27,13 +32,7 @@ class PersonalBestItemView extends Marionette.ItemView
     sync: 'render'
 
   deletePersonalBest: (ev) =>
-    ev.preventDefault()
-    App.request 'base:confirmationalModal',
-      title: "Delete personal best"
-      content: "Are you sure you want to delete this personal best?"
-      confirmBtn: "Delete"
-      confirmCallBack: =>
-        @model.destroy()
+    App.request('modal:confirm:delete', @model)
 
 class PersonalBestCollectionView extends Marionette.CollectionView
 
@@ -68,9 +67,11 @@ module.exports = class PersonalBestView extends Marionette.LayoutView
   onShow: =>
     @personalBest = new PersonalBestCollection
     if @myProfile
-      @personalBest.url = "#{@personalBest.urlRoot}/me/#{@assign}/#{@key}/records"
+      @personalBest.url =
+        "#{@personalBest.urlRoot}/me/#{@assign}/#{@key}/records"
     else
-      @personalBest.url = "#{@personalBest.urlRoot}/clients/#{@itemId}/#{@assign}/#{@key}/records"
+      @personalBest.url =
+        "#{@personalBest.urlRoot}/clients/#{@itemId}/#{@assign}/#{@key}/records"
     @personalBest.fetch()
     personalBestView = new PersonalBestCollectionView collection: @personalBest
     @list.show personalBestView
@@ -85,7 +86,5 @@ module.exports = class PersonalBestView extends Marionette.LayoutView
 
   personalBestAdded: =>
     @ui.modal.modal 'hide'
-    App.request 'messenger:show',
-      message: 'New personal best added'
-      type: 'info'
+    App.request('messenger:explain', 'personal_best.added')
     @personalBest.fetch()

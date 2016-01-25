@@ -1,23 +1,8 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
-MembersCollection = require 'models/trainer/members-collection'
-ExercisesCollection = require 'models/trainer/exercises-collection'
-WorkoutsCollection = require 'models/trainer/workouts-collection'
-ProgramsCollection = require 'models/trainer/programs-collection'
-
 ClientGroupHeaderView = require 'views/trainer/clients/client-group-header-view'
 ClientGroupNavView = require 'views/trainer/clients/client-group-nav-view'
-ActivityView = require 'views/trainer/clients/activity-view'
-
-AssignmentsView = require 'views/trainer/assignments/assignments-view'
+# ActivityView = require 'views/trainer/clients/activity-view'
 CalendarView = require 'views/trainer/calendar/calendar-view'
-
-MembersView = require 'views/trainer/groups/members-view'
-ExerciseView = require 'views/trainer/exercises/exercise-view'
-ClientExerciseModel = require 'models/trainer/client-exercise'
 PersonalBestView = require 'views/trainer/exercises/personal-best-view'
-
 
 module.exports = class ClientGroupView extends Marionette.LayoutView
 
@@ -33,7 +18,8 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
     rightside: '#client-right-region'
 
   ui:
-    itemsLinks: '.gc-exercises-link-exercises, .gc-exercises-link-workouts, .gc-exercises-link-programs'
+    itemsLinks: '.gc-exercises-link-exercises, ' +
+      '.gc-exercises-link-workouts, .gc-exercises-link-programs'
 
   initialize: (data) ->
     @isDroppable = true
@@ -46,7 +32,9 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
     @key = data.key
     @recentActivityCollection = data.recentActivity
 
-    @headerView = new ClientGroupHeaderView model: data.itemModel, viewType: @viewType
+    @headerView = new ClientGroupHeaderView
+      model: data.itemModel
+      viewType: @viewType
     @navView = new ClientGroupNavView itemId: @itemId, viewType: @viewType
     @showActivity(false)
 
@@ -68,7 +56,8 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
 
   showActivity: (isShow) ->
     if !@activityView? or @activityView.isDestroyed
-      @activityView = new ActivityView collection: @recentActivityCollection
+      @activityView = new ActivityView
+        collection: @recentActivityCollection
       if isShow
         @rightside.show @activityView
 
@@ -80,15 +69,6 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
 
   loadCenterView: (navView) =>
     if @key
-      exercise = new ClientExerciseModel
-      if @myProfile
-        exercise.url = "#{exercise.urlRoot}/me/#{@assign}/#{@key}"
-      else
-        exercise.url = "#{exercise.urlRoot}/clients/#{@itemId}/#{@assign}/#{@key}"
-      exercise.fetch()
-      @centerView = new ExerciseView
-        model: exercise
-
       personalBestView = new PersonalBestView
         itemId: @itemId
         assign: @assign
@@ -101,44 +81,6 @@ module.exports = class ClientGroupView extends Marionette.LayoutView
       if @myProfile
         link = 'me'
       switch navView
-        when 'members'
-          @collection = new MembersCollection
-          @collection.url = "#{@collection.urlRoot}/#{@itemId}/members"
-          @collection.fetch()
-          @centerView = new MembersView
-            groupId: @itemId
-            collection: @collection
-          @showCenterView()
-        when 'exercises'
-          @collection = new ExercisesCollection
-          @collection.url = "/api/mobile/#{link}/exercises"
-          @collection.fetch().then =>
-            @showCenterView()
-          @centerView = new AssignmentsView
-            collection: @collection
-            clientId: @itemId
-            viewType: @viewType
-            assignName: navView
-        when 'workouts'
-          @collection = new WorkoutsCollection
-          @collection.url = "/api/mobile/#{link}/workouts"
-          @collection.fetch().then =>
-            @showCenterView()
-          @centerView = new AssignmentsView
-            collection: @collection
-            clientId: @itemId
-            viewType: @viewType
-            assignName: navView
-        when 'programs'
-          @collection = new ProgramsCollection
-          @collection.url = "/api/mobile/#{link}/programs"
-          @collection.fetch().then =>
-            @showCenterView()
-          @centerView = new AssignmentsView
-            collection: @collection
-            clientId: @itemId
-            viewType: @viewType
-            assignName: navView
         when 'calendar'
           @centerView = new CalendarView
           @showCenterView()

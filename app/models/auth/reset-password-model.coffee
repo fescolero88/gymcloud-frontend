@@ -1,21 +1,24 @@
-Backbone = require 'backbone'
+define ->
 
-module.exports = class ResetPasswordModel extends Backbone.Model
+  class ResetPasswordModel extends Backbone.Model
 
-  urlRoot: '/users/password.json'
+    url: '/users/password.json'
 
-  validation:
+    toJSON: ->
+      user: _.omit(super, 'id')
 
-    password:
-      required: true
-      minLength: 6
-      msg: 'Password must be 6 characters'
+    validation:
 
-    password_confirmation: [
-      equalTo: 'password'
-      msg: 'The passwords do not match'
-    ,
-      required: true
-      minLength: 6
-      msg: 'Password must be 6 characters'
-    ]
+      password:
+        required: true
+        minLength: 6
+        msg: 'Password must be 6 characters'
+
+      password_confirmation: [
+        equalTo: 'password'
+        msg: 'The passwords do not match'
+      ,
+        required: true
+        minLength: 6
+        msg: 'Password must be 6 characters'
+      ]

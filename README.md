@@ -3,13 +3,13 @@
 You need installed globally:
 
 ```sh
-$ npm i -g bower
+$ npm i -g bower gulp karma
 ```
 
 You need installed locally:
 ```sh
-$ bower install
 $ npm install
+$ bower install
 ```
 
 ### Development
@@ -49,6 +49,13 @@ or
 ```sh
 $ karma start --single-run
 ```
+
+Running linter:
+
+```sh
+$ gulp lint
+```
+
 ## Deployment
 
 ### prepare before deployment

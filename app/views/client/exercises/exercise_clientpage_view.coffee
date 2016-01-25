@@ -1,10 +1,7 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
-ExerciseGlobalOverviewView = require 'views/client/exercises/exercise_clientpage_overview_view'
-
-BreadcrumbsView = require 'views/general/breadcrumbs/breadcrumbs-view'
-BreadcrumbsCollection = require 'models/general/breadcrumbs'
+ExerciseGlobalOverviewView =
+  require 'views/client/exercises/exercise_clientpage_overview_view'
+Breadcrumbs = require 'features/breadcrumbs/view'
+# BreadcrumbsView = require 'views/general/breadcrumbs/breadcrumbs-view'
 
 module.exports = class ExerciseGlobalView extends Marionette.LayoutView
 
@@ -14,21 +11,14 @@ module.exports = class ExerciseGlobalView extends Marionette.LayoutView
     manageRegion: '#exercise-manage'
     breadcrumbsRegion: '#breadcrumbs'
 
-  ui:
-    backButton: '.gc-content-nav-back'
+  behaviors:
 
-  events:
-    'click @ui.backButton': 'goBack'
+    navigate_back: true
 
   initialize: (data) =>
-    @breadcrumbs = data.breadcrumbs
-    @breadcrumbsView = new BreadcrumbsView(collection: new BreadcrumbsCollection(@breadcrumbs))
+    @breadcrumbs = new Breadcrumbs(model: @model)
 
   onShow: =>
-    overviewView = new ExerciseGlobalOverviewView model: @model
-    @manageRegion.show overviewView
-    @breadcrumbsRegion.show @breadcrumbsView
-
-  goBack: (ev) ->
-    ev.preventDefault()
-    window.history.back()
+    overviewView = new ExerciseGlobalOverviewView(model: @model)
+    @manageRegion.show(overviewView)
+    @breadcrumbsRegion.show(@breadcrumbs)

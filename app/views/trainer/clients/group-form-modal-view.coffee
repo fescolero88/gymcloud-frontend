@@ -1,15 +1,10 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
-FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
-
 module.exports = class GroupFormModalView extends Marionette.ItemView
 
   template: require('templates/trainer/clients/group-form-modal')
 
   behaviors:
-    FormValidationBehaviour:
-      behaviorClass: FormValidationBehaviour
+
+    form_validation: true
 
   className: 'modal-dialog'
 
@@ -39,14 +34,15 @@ module.exports = class GroupFormModalView extends Marionette.ItemView
 
   showThumbnail: (ev) ->
     input = ev.target
-    if input.files && input.files[0]
+    if input.files?[0]
       reader = new FileReader()
       reader.onload = (e) ->
-        $(ev.target).parents('form').find('.gc-edit-profile-modal-avatar').attr('src', e.target.result)
+        $(ev.target).parents('form')
+          .find('.gc-edit-profile-modal-avatar')
+          .attr('src', e.target.result)
       reader.readAsDataURL(input.files[0])
 
   submitGroupForm: (ev) =>
-    ev.preventDefault()
     @avatar = $(ev.target).find('input[type=file]')
     formData = @ui.groupForm.serializeObject()
     for key, value of formData
@@ -54,14 +50,14 @@ module.exports = class GroupFormModalView extends Marionette.ItemView
         delete formData[key]
     @model.set formData
     if @model.isValid true
-      App.vent.trigger('spinner:global:start')
+      App.vent.trigger('spinner:start')
       @model.save()
 
   onSync: ->
-    App.vent.trigger 'spinner:global:stop'
+    App.vent.trigger ''
     @trigger 'closeModal'
     @trigger 'addToGroupsCollection', @model
-    if @avatar[0].files[0]
+    if @avatar?[0]?.files?[0]
       data = new FormData()
       data.append('avatar', @avatar[0].files[0])
       @model.updateAvatar data

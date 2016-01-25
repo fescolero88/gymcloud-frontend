@@ -1,0 +1,208 @@
+.gc-exercises-exercise-view
+
+  h2
+    font-size: 16px
+    color: #404447
+    font-weight: 700
+    margin: 0 0 20px 0
+
+    span[contenteditable="true"]
+      display: inline-block
+      max-width: 100%
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+
+      &:focus
+        text-overflow: initial!important
+
+  .gc-exercises-exercise-descr
+    font-size: 16px
+    color: #404447
+    margin-bottom: 1em
+
+.gc-exercises-exercise-video
+  position: relative
+  padding-bottom: 56.25%
+  padding-top: 25px
+  height: 0
+
+.gc-exercises-exercise-video iframe
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+
+.gc-exercises-exercise-video-link
+  font-size: 13px
+  color: #747474
+  display: inline-block
+  text-decoration: none
+
+.gc-exercises-exercise-video-link span
+  color: #cacaca
+
+.gc-exercises-exercise-video-link > i
+  margin: 0 5px
+
+.gc-exercises-exercise-video-link:hover,
+.gc-exercises-exercise-video-link:active
+  color: #747474
+  text-decoration: none
+
+.gc-exercise-edit-button
+  border-radius: 50px
+  font-size: 12px
+  color: #3a99d8
+  text-transform: uppercase
+  background: #fff
+  border-color: #3a99d8
+  border-radius: 50px
+  text-align: center
+  line-height: 16px
+
+.gc-exercise-edit-button:hover,
+.gc-exercise-edit-button:active,
+.gc-exercise-edit-button:focus
+  border-color: #3a99d8
+
+.gc-exercise-back-button
+  border-radius: 50px
+  font-size: 12px
+  color: #3a99d8
+  text-transform: uppercase
+  background: #fff
+  border-color: #3a99d8
+  border-radius: 50px
+  text-align: center
+  line-height: 16px
+
+.gc-exercise-back-button:hover,
+.gc-exercise-back-button:active,
+.gc-exercise-back-button:focus
+  border-color: #3a99d8
+
+.gc-exercise-save-button
+  border-radius: 50px
+  font-size: 12px
+  color: #3a99d8
+  text-transform: uppercase
+  background: #fff
+  border-color: #3a99d8
+  border-radius: 50px
+  text-align: center
+  line-height: 16px
+
+.gc-exercise-save-button:hover,
+.gc-exercise-save-button:active,
+.gc-exercise-save-button:focus
+  border-color: #3a99d8
+
+.gc-exercise-video-controls
+  margin-top: 15px
+  max-height: 25px
+
+.gc-video-youtube-icon
+  width: 17px
+  background-image: url("../images/icon-video-youtube.png")
+
+.gc-video-icon
+  display: inline-block
+  margin-right: 5px
+  height: 10px
+  width: 12px
+  background-repeat: no-repeat
+  background-position: center
+
+.gc-video-vimeo-icon
+  width: 12px
+  background-image: url("../images/icon-video-vimeo.png")
+
+.gc-exercise-video-controls .btn-link + .btn-link
+  margin-left: 10px
+
+.gc-exercise-video-update
+  color: #3a99d8
+  padding: 0
+
+.gc-exercise-video-update:hover,
+.gc-exercise-video-update:active,
+.gc-exercise-video-update:focus
+  background: transparent
+  color: #3a99d8
+
+.gc-exercise-video-delete
+  color: #ee6d5d
+  padding: 0
+
+.gc-exercise-video-delete:hover,
+.gc-exercise-video-delete:active,
+.gc-exercise-video-delete:focus
+  background: transparent
+  color: #ee6d5d
+
+.gc-content-nav ~ .btn
+  margin: -5px 0 0 0
+
+.gc-exercises-exercise-view .gc-exercises-exercise-descr-placeholder
+  font-size: 16px
+  color: #c1c1c1
+  margin-bottom: 1em
+
+.gc-exercises-assign-view
+  padding: 15px 23px 5px 23px
+
+.gc-exercises-assign-view ul a
+  cursor: pointer
+
+.gc-exercises-assign-view .gc-global-ewp-assigned-mark .glyphicon
+  color: #3a99d8
+  display: none
+
+.gc-exercises-assign-view .gc-global-ewp-assigned-mark .glyphicon.active
+  display: inline-block
+  padding: 16px 0px
+  line-height: 32px
+
+.gc-exercise-edit-form .row
+  overflow: hidden
+
+.gc-exercise-edit-form label
+  color: #3a99d8
+  font-size: 15px
+  font-weight: normal
+  line-height: 15px
+  min-height: 15px
+
+.gc-exercise-title > span:hover
+  border-bottom: 1px dashed #3a99d8
+  cursor: pointer
+
+.gc-exercise-title > span:focus
+  border: 1px solid #404447
+  padding: 5px 10px
+
+textarea.gc-exercise-description-editor
+  overflow: hidden
+  border: 1px dashed transparent
+  box-shadow: none
+  color: #333
+  font-size: 14px
+  resize: vertical
+  height: 2.5em
+  max-height: 15em
+
+textarea.gc-exercise-description-editor:hover
+  border-color: #3a99d8
+  cursor: pointer
+
+textarea.gc-exercise-description-editor:focus
+  box-shadow: none
+  outline: none
+  border-color: #3a99d8
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+
+.gc-exercise-description-editor::placeholder
+  color: #999
+  opacity: 1

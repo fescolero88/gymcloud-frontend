@@ -1,5 +1,3 @@
-Marionette = require 'backbone.marionette'
-
 module.exports = class MoveToGroupView extends Marionette.ItemView
 
   template: require('templates/trainer/clients/move_to_group')
@@ -7,5 +5,4 @@ module.exports = class MoveToGroupView extends Marionette.ItemView
   className: 'modal-dialog modal-sm'
 
   events:
-    "submit .gc-move-to-group-form": "submitMovetogroupForm"
-
+    'submit .gc-move-to-group-form': 'submitMovetogroupForm'

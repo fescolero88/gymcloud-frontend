@@ -16,6 +16,7 @@ module.exports = (config) ->
 
     files: [
       'test/**/*.spec.*'
+      #'app/**/*.coffee'
     ]
 
     proxies:
@@ -25,12 +26,26 @@ module.exports = (config) ->
       'test/**/*': [
         'webpack'
       ]
+      'app/**/*.coffee': [
+        'coffeelint'
+      ]
+
+    coffeelint:
+      onStart: true
+      onChange: true
+      options: 'coffeelint.json'
+      reporter:
+        type: 'default'
+        options:
+          colorize: true
 
     webpack: require('./webpack.config')
 
     webpackMiddleware:
+      quiet: true
       noInfo: true
-      stats: colors: true
+      stats:
+        colors: true
 
     reporters: [
       'spec'
@@ -61,6 +76,7 @@ module.exports = (config) ->
       require('karma-firefox-launcher')
       require('karma-phantomjs-launcher')
       require('karma-webpack')
+      require('karma-coffeelint')
     ]
 
   return

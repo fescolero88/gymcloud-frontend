@@ -1,5 +1,3 @@
-Marionette = require 'backbone.marionette'
-
 SendMessageModalView = require 'views/trainer/clients/send-message-modal-view'
 ClientFormModalView = require 'views/trainer/clients/client-form-modal-view'
 GroupFormModalView = require 'views/trainer/clients/group-form-modal-view'
@@ -34,7 +32,7 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
 
   initialize: (data) ->
     @viewType = data.viewType
-    @profile = App.request 'data:profile'
+    @profile = App.request 'current_user'
     if @model.get('id') is @profile.get('id')
       @myProfile = true
 
@@ -47,10 +45,9 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
 
   submitClientForm: (ev) ->
     #TODO validation
-    ev.preventDefault()
     formData = @ui.inviteForm.serializeObject()
     if @myProfile
-      url = "/api/mobile/me/invite"
+      url = '/api/mobile/me/invite'
     else
       url = "/api/mobile/clients/#{@model.get('id')}/invite"
 
@@ -58,9 +55,7 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
 
   onInvite: ->
     @ui.inviteModal.modal('hide')
-    App.request 'messenger:show',
-      message: 'Invitation successfully sent'
-      type: 'info'
+    App.request('messenger:explain', 'user.invitation.sent')
 
   onInviteFail: (error) ->
     if error?
@@ -70,7 +65,6 @@ module.exports = class ClientGroupHeaderView extends Marionette.LayoutView
       $inputGroup.find('.gc-error-message').text(error)
 
   showClientEditModal: (ev) ->
-    ev.preventDefault()
     if @viewType is 'clients'
       clientFormModal = new ClientFormModalView model: @model
     else

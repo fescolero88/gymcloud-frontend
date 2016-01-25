@@ -1,6 +1,6 @@
 Handlebars = require('handlebars')
 
 module.exports = (options) ->
-  profileModel = App.request('data:profile')
+  profileModel = App.request('current_user')
   context = profileModel.attributes
-  Handlebars.helpers.with.call(this, context, options)
+  Handlebars.helpers.with.call(@, context, options)

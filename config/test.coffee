@@ -4,7 +4,4 @@ define [
   base
 ) ->
 
-  config = $.extend(true, {}, base)
-  config.env = 'test'
-  config.api.url = config.api.urls[config.env]
-  config
+  base.test

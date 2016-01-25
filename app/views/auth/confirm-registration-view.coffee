@@ -1,5 +1,3 @@
-Marionette = require 'backbone.marionette'
-
 module.exports = class ConfirmRegistrationView extends Marionette.ItemView
 
   template: require('templates/auth/confirm_registration')

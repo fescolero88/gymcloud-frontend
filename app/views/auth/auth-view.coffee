@@ -1,5 +1,4 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
+LoginModel = require 'models/auth/login-model'
 
 module.exports = class AuthView extends Marionette.ItemView
 
@@ -8,53 +7,45 @@ module.exports = class AuthView extends Marionette.ItemView
   events:
     'submit form': 'login'
 
-  modelEvents:
-    'model:login:success': 'onLoginSuccess'
-    'model:login:fail': 'onLoginFail'
-
   ui:
     form: '.gc-login-form'
     signUpModal: '#gc-signup-message'
 
+  behaviors:
+    facebook_login:
+      isSignup: false
+      isLinking: false
+    google_login:
+      isSignup: false
+      isLinking: false
+
+    stickit:
+      bindings:
+        'input[name="username"]': 'username'
+        'input[name="password"]': 'password'
+        '.gc-login-signup-wrapper':
+          visible: ->
+            feature.isEnabled('sign_up')
+
   initialize: (data) ->
+    @model = new LoginModel
+    @listenTo(@model, 'model:login:success', @_onLoginSuccess)
+    @listenTo(@model, 'model:login:fail', @_onLoginFail, status)
     @signUp = data.signUp
-    Backbone.Validation.bind @
+    Backbone.Validation.bind(@)
 
   onShow: ->
     if @signUp
       @ui.signUpModal.modal 'show'
 
   login: (event) ->
-    event.preventDefault()
-    formData = @ui.form.serializeObject()
-    @model.set formData
     @model.login()
 
-  getProfile: ->
-    profileModel = App.request 'data:profile'
-    profileModel.fetch().then =>
-      accountType = profileModel.get('account_type')
-      # a workaround - treat a coach as a trainer, treat athlete as a client
-      if accountType is 'coach'
-        profileModel.set('account_type', 'trainer')
-        accountType = 'trainer'
-      else if accountType is 'athlete'
-        profileModel.set('account_type', 'client')
-        accountType = 'client'
+  _onLoginSuccess: (data) ->
+    App.request('auth:onSuccess', data)
 
-      App.vent.trigger("module:main-#{accountType}:start")
-      if accountType is 'trainer'
-        window.location.replace '#/tr'
-      else
-        window.location.replace '#'
-      App.vent.trigger 'profile:ready'
-
-  onLoginSuccess: (data) ->
-    App.request 'accessToken:set', data.access_token
-    @getProfile()
-
-  onLoginFail: ->
-    App.request 'messenger:show',
-      hideAfter: 10
-      message: "The email or password you entered is incorrect"
-      type: 'error'
+  _onLoginFail: (status) ->
+    if status == 401
+      App.request('messenger:explain', 'login.unauthorized')
+    else
+      App.request('messenger:explain', 'login.failed')

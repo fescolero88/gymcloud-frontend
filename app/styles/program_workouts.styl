@@ -1,0 +1,164 @@
+.gc-program-workouts-list
+  padding: 10px
+  list-style-type: none
+  position: relative
+  margin-bottom: 0px
+
+.gc-program-workouts-list.empty
+  padding: 20px
+
+.gc-program-weeks-workouts-container .gc-program-workouts-list.empty
+  border: 1px dashed rgba(40,45,48,0.1)
+
+.gc-program-workouts-list .gc-workout-draggable
+  display: block
+
+.gc-program-workouts-list > .gc-workout-draggable:not(:last-child)
+  margin-bottom: 20px
+
+.gc-workout-draggable.dragged .gc-program-workout-item
+  cursor: move
+
+.gc-program-workout-item
+  margin-bottom: 2rem
+
+.gc-program-workout-item .gc-workout-header
+  position: relative
+  background: #3a99d8
+  line-height: 20px
+  padding: 20px
+  color: #fff
+  border: 1px solid #3a99d8
+  border-top-left-radius: 6px
+  border-top-right-radius: 6px
+
+.gc-program-workout-item .gc-workout-bookmark
+  position: absolute
+  height: 28px
+  width: 13px
+  z-index: 1
+  background-image: url(../images/workout-bookmark-icon.png)
+  top: -1px
+  left: 20px
+  cursor: pointer
+
+.gc-program-workout-item .gc-workout-bookmark.active,
+.gc-program-workout-item input[type=checkbox]:checked + .gc-workout-bookmark
+  background-image: url(../images/workout-bookmark-active-icon.png)
+
+.gc-program-workout-item .gc-program-workout-sort
+  background-image: url("../images/sort-icon-white.png")
+  background-size: contain
+  background-repeat: no-repeat
+  position: absolute
+  width: 6px
+  height: 13px
+  cursor: move
+  display: inline-block
+  left: 8px
+  top: 23px
+
+.gc-program-workout-item .gc-workout-body
+  padding: 10px 20px
+  background-color: #fff
+  border-left: 1px solid #ececec
+  border-right: 1px solid #ececec
+
+.gc-program-workout-item .gc-workout-footer
+  padding: 5px
+  background: #fafafa
+  border: 1px solid #ededed
+  margin-left: 0px
+  margin-right: 0px
+  border-bottom-left-radius: 6px
+  border-bottom-right-radius: 6px
+
+.gc-program-workout-item .gc-workout-header .gc-workout-title
+  margin: 0
+  font-size: 15px
+  line-height: 20px
+  font-weight: bold
+  padding-left: 20px
+
+.gc-program-workout-item .gc-workout-body .gc-workout-body-empty
+  padding: 40px 20px
+
+.gc-program-workout-item .gc-workout-body-nav
+  height: auto
+  border: none
+  padding: 0px
+  margin: 10px 0
+
+.gc-program-workout-item .gc-workout-body-nav li.active a
+  border-bottom-width: 1px
+
+.gc-program-workout-item .gc-workout-body-nav a
+  font-size: 14px
+  line-height: 18px
+
+.gc-program-workout-item .gc-workout-tab-content .tab-pane
+  padding: 15px 0
+
+.gc-program-workout-item .gc-workout-empty-warmups,
+.gc-program-workout-item .gc-workout-empty-video
+  background-color: #fafafa
+  padding: 30px 20px
+  text-align: center
+  color: #9ea0a1
+  font-weight: 300
+
+.gc-program-workout-item .gc-workout-empty-warmups a.gc-quick-add
+  color: #3a99d8
+  outline: none
+  font-weight: normal
+
+.gc-program-workout-item .gc-workout-actions
+  float: right
+  position: relative
+
+.gc-program-workout-item .gc-workout-actions .gc-cheevon-dropdown.btn-primary
+  margin-top: -5px
+  background-color: transparent
+  border-color: #fff
+  color: #fff
+  border-radius: 100%
+  padding: 4px 0
+  height: 30px
+  width: 30px
+
+.gc-add-create-workout-wrapper
+  display: table
+  width: 100%
+
+.gc-add-create-workout-wrapper > div
+  display: table-cell
+  vertical-align: middle
+  position: relative
+
+.gc-add-create-workout-wrapper > div:nth-child(2)
+  width: 30px
+  text-align: center
+
+.gc-add-create-workout-wrapper > div:nth-child(3),
+.gc-add-create-workout-wrapper > div:nth-child(4)
+  width: 100px
+
+.gc-add-create-workout-wrapper .gc-program-add-week
+  margin-left: 5px
+
+.gc-add-create-workout-wrapper .gc-clear-quick-add
+  font-size: 12px
+  text-transform: uppercase
+  position: absolute
+  border: none
+  background-color: transparent
+  color: red
+  right: 5px
+  top: 8px
+  outline: none
+  z-index: 100
+
+.gc-program-empty-placeholder .gc-add-workout-controls
+  margin: 17% auto 0
+  width: 75%
+

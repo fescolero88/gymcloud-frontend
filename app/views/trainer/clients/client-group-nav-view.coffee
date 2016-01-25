@@ -1,12 +1,9 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
 module.exports = class ClientGroupNavView extends Marionette.ItemView
 
   template: require('templates/trainer/clients/client-group-nav')
 
   events:
     'click @ui.deleteButton': 'deleteButtonClick'
-    'click .gc-content-nav-back a': 'navBack'
 
   ui:
     nav: '.gc-content-nav a'
@@ -33,12 +30,10 @@ module.exports = class ClientGroupNavView extends Marionette.ItemView
         $nav.parent().addClass('active')
     @trigger 'navView', navView
 
-  navBack: (ev) ->
-    window.history.back()
-
   deleteButtonClick: (ev) ->
     App.vent.trigger 'content-nav:delete'
 
   changeActive: (category) =>
     @ui.nav.parent().removeClass('active')
-    @$el.find(".gc-content-nav a[data-nav-view = #{category}]").parent().addClass('active')
+    @$el.find(".gc-content-nav a[data-nav-view = #{category}]")
+      .parent().addClass('active')

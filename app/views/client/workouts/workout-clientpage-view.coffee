@@ -1,8 +1,8 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
+WorkoutGlobalOverviewView =
+  require 'views/client/workouts/workout_clientpage_overview_view'
+WorkoutGlobalVideoView =
+  require 'views/trainer/workouts/workout_global_video_view'
 
-WorkoutGlobalOverviewView = require 'views/client/workouts/workout_clientpage_overview_view'
-WorkoutGlobalVideoView = require 'views/trainer/workouts/workout_global_video_view'
 module.exports = class WorkoutGlobalView extends Marionette.LayoutView
 
   template: require('templates/client/workouts/workout_clientpage')
@@ -17,20 +17,19 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
     innerNavLinks: '.gc-inner-nav li a'
     contentNavItems: '.gc-content-nav li'
     contentNavLinks: '.gc-content-nav li a'
-    navBack: '.gc-content-nav-back'
     addToLibraryButton: '.gc-add-to-library-button'
     addNoteButton: '.gc-workout-add-note'
 
   events:
-    'click @ui.navBack': 'navigateBack'
     'click @ui.innerNavLinks': 'changeOverviewActiveTab'
     'click @ui.contentNavLinks': 'changeActiveTab'
 
-  onShow: =>
-    @changeView 'description'
+  behaviors:
 
-  navigateBack: =>
-    window.history.back()
+    navigate_back: true
+
+  onShow: ->
+    @changeView 'description'
 
   changeOverviewActiveTab: (ev) ->
     @changeViewEvent(ev, @ui.innerNavItems)
@@ -39,7 +38,6 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
     @changeViewEvent(ev, @ui.contentNavItems)
 
   changeViewEvent: (ev, ui) =>
-    ev.preventDefault()
     navItem = $(ev.currentTarget).parent()
     if not $(navItem).hasClass 'active'
       ui.removeClass 'active'

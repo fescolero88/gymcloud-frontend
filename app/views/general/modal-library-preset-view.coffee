@@ -1,6 +1,3 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 module.exports = class LibraryPresetModalView extends Marionette.ItemView
 
   template: require('templates/general/library-preset-modal')
@@ -23,11 +20,9 @@ module.exports = class LibraryPresetModalView extends Marionette.ItemView
     'click @ui.previousButton': 'onPrevious'
 
   onNext: (ev) ->
-    ev.preventDefault()
     @ui.presetSteps[@currentIndex].classList.remove 'active'
-    @ui.presetSteps[++@currentIndex].classList.add 'active'
+    @ui.presetSteps[@currentIndex += 1].classList.add 'active'
 
   onPrevious: (ev) ->
-    ev.preventDefault()
     @ui.presetSteps[@currentIndex].classList.remove 'active'
-    @ui.presetSteps[--@currentIndex].classList.add 'active'
+    @ui.presetSteps[@currentIndex -= 1].classList.add 'active'

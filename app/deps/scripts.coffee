@@ -1,13 +1,8 @@
 define [
-  'expose?$!jquery'
-  'expose?_!lodash'
-  'expose?Backbone!backbone'
-  'backbone-validation'
-  'backbone.marionette'
+  'expose?jQuery!expose?$!deps/bundles/jquery/bundle'
+  'expose?_!deps/bundles/underscore/bundle'
+  'expose?Backbone!deps/bundles/backbone/bundle'
+  'expose?Marionette!deps/bundles/marionette/bundle'
   'expose?Handlebars!handlebars'
-  'bootstrap'
-  'selectize'
-  'datetimepicker'
-  'nanoscroller'
-  'jquery-sortable'
+  'expose?can!deps/bundles/can'
 ], ->

@@ -1,60 +1,33 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
+define [
+  'views/trainer/clients/client-item-view'
+  'templates/trainer/clients/client-list'
+], (
+  ClientItemView
+  template
+) ->
+  class ClientListView extends Marionette.CompositeView
 
-class ClientItemView extends Marionette.ItemView
+    template: template
 
-  template: require('templates/trainer/clients/client-item')
+    childView: ClientItemView
 
-  tagName: 'li'
+    childViewContainer: 'ul'
 
-  className: 'row'
+    childEvents:
+      'individual:move': 'moveClient'
 
-  modelEvents:
-    sync: 'render'
-    change: 'render'
+    moveClient: =>
+      @trigger 'individual:move'
 
-  ui:
-    deleteSingle: '.gc-clients-list-client-delete'
-    moveSingle: '.gc-clients-list-client-move'
+    viewComparator: (model) ->
+      name = model.get('name') ||
+        [
+          model.get('user_profile.first_name')
+          model.get('user_profile.last_name')
+        ].join(' ')
+      _.underscored(name)
 
-  events:
-    'click @ui.deleteSingle': 'deleteSingle'
-    'click @ui.moveSingle': 'moveSingle'
-
-  deleteSingle: (ev) =>
-    ev.preventDefault()
-    App.request 'base:confirmationalModal',
-      title: "Delete client"
-      content: "Are you sure you want to delete #{@model.get('first_name')} #{@model.get('last_name')}?"
-      confirmBtn: "Delete"
-      confirmCallBack: =>
-        @model.destroy()
-
-  moveSingle: (ev) =>
-    ev.preventDefault()
-    $(ev.currentTarget).closest('.row').find(':checkbox').prop('checked', true)
-    @trigger 'individual:move'
-
-
-module.exports = class ClientListView extends Marionette.CompositeView
-
-  template: require('templates/trainer/clients/client-list')
-
-  childView: ClientItemView
-
-  childViewContainer: 'ul'
-
-  initialize: =>
-    @on 'rm-client', @removeClient
-
-  childEvents:
-    'individual:move': 'moveClient'
-
-  removeClient: =>
-    for check in @$el.find('input[type=checkbox]')
-      if $(check).is(':checked')
-        model = @collection.get $(check).data('id')
-        model.destroy()
-
-  moveClient: =>
-    @trigger 'individual:move'
+    initialize: (options) ->
+      MyId = App.request('current_user_id')
+      @collection = new Backbone.VirtualCollection options.collection,
+        filter: (model) -> MyId != model.get('id')

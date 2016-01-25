@@ -1,11 +1,14 @@
-Backbone = require 'backbone'
+define ->
 
-module.exports = class ForgotPasswordModel extends Backbone.Model
+  class ForgotPasswordModel extends Backbone.Model
 
-  url: '/api/mobile/users/forgot_password'
+    url: '/users/password.json'
 
-  validation:
+    toJSON: ->
+      user: super
 
-    email:
-      required: true
-      pattern: 'email'
+    validation:
+
+      email:
+        required: true
+        pattern: 'email'

@@ -1,5 +1,9 @@
 path = require('path')
 webpack = require('webpack')
+autoprefixer = require('autoprefixer')
+ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+require('dotenv').load()
 
 require('dotenv').load()
 
@@ -13,12 +17,13 @@ module.exports =
 
   entry:
     main: 'app'
+    pre: 'pre'
 
   output:
     path: path.resolve('build')
     publicPath: 'build/'
-    filename: 'app-[name].js'
-    chunkFilename: '[chunkhash].js'
+    filename: '[name].js'
+    chunkFilename: '[id].js'
 
   resolve:
 
@@ -29,13 +34,54 @@ module.exports =
     ]
 
     alias:
-      'config': path.join(__dirname, 'config', process.env.NODE_ENV || 'test')
-      'selectize': 'bower_components/selectize/dist/js/selectize'
-      'spinner': 'bower_components/spin.js/spin.js'
-      'jquery-sortable': 'bower_components/jquery-sortable/source/js/jquery-sortable.js'
-      'datetimepicker': 'bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker'
-      'nanoscroller': 'bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js'
-      'messenger': 'bower_components/messenger/build/js/messenger.js'
+      'config':
+        path.join(__dirname, 'config', process.env.NODE_ENV || 'test')
+      'selectize':
+        'app/deps/vendor/selectize.js'
+      'spinner':
+        'bower_components/spin.js/spin.js'
+      'jquery-sortable':
+        'bower_components/jquery-sortable/source/js/jquery-sortable.js'
+      'datetimepicker':
+        'bower_components/eonasdan-bootstrap-datetimepicker' +
+          '/src/js/bootstrap-datetimepicker'
+      'nanoscroller':
+        'bower_components/nanoscroller' +
+          '/bin/javascripts/jquery.nanoscroller.js'
+      'messenger':
+        'bower_components/messenger/build/js/messenger.js'
+      'bootstrap':
+        'bower_components/bootstrap/dist/js/bootstrap.js'
+      'backbone_original':
+        'node_modules/backbone/backbone.js'
+      'marionette_original':
+        'node_modules/backbone.marionette' +
+          '/lib/core/backbone.marionette.js'
+      'jquery_original':
+        'node_modules/jquery/dist/jquery.js'
+      'marionette':
+        'deps/bundles/marionette/bundle'
+      'jquery.ui.widget':
+        'bower_components/blueimp-file-upload' +
+          '/js/vendor/jquery.ui.widget.js'
+      'jquery-iframe-transport':
+        'bower_components/blueimp-file-upload' +
+          '/js/jquery.iframe-transport.js'
+      'load-image':
+        'bower_components/blueimp-load-image' +
+          '/js/load-image.js'
+      'tmpl':
+        'bower_components/blueimp-tmpl/js/tmpl.min.js'
+      'jquery-file-upload':
+        'bower_components/blueimp-file-upload/js/jquery.fileupload.js'
+      'jquery-file-upload-process':
+        'bower_components/blueimp-file-upload/js/jquery.fileupload-process.js'
+      'jquery-file-upload-video':
+        'bower_components/blueimp-file-upload/js/jquery.fileupload-video.js'
+      'jquery-file-upload-validate':
+        'bower_components/blueimp-file-upload/js/jquery.fileupload-validate.js'
+      'jquery-file-upload-ui':
+        'bower_components/blueimp-file-upload/js/jquery.fileupload-ui.js'
 
     extensions: [
       ''
@@ -76,11 +122,13 @@ module.exports =
       }
       {
         test: /\.css$/
-        loader: 'style!css'
+        # loader: 'style!css'
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader', publicPath: '')
       }
       {
         test: /\.styl$/
-        loader: 'style!css!stylus'
+        # loader: 'style!css!stylus'
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!stylus-loader', publicPath: '')
       }
       {
         test: /\.scss$/
@@ -122,19 +170,36 @@ module.exports =
       }
     ]
 
+  postcss: ->
+    [autoprefixer]
+
   externals: {}
 
   plugins: [
       new webpack.ProvidePlugin(
-        jQuery: 'jquery'
-        $: 'jquery'
-        'window.jQuery': 'jquery'
-        _: 'lodash'
-        Backbone: 'backbone'
+        $:
+          'deps/bundles/jquery/original'
+        jQuery:
+          'deps/bundles/jquery/original'
+        'window.jQuery':
+          'deps/bundles/jquery/original'
+        _:
+          'deps/bundles/underscore/bundle'
+        Backbone:
+          'deps/bundles/backbone/original'
+        Marionette:
+          'deps/bundles/marionette/original'
+        can:
+          'deps/bundles/can'
+        feature:
+          'features/feature/factory'
       )
     ,
+      new ExtractTextPlugin('[name].css')
+    ,
       new webpack.ResolverPlugin(
-        new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('bower.json', ['main'])
+        new webpack.ResolverPlugin
+          .DirectoryDescriptionFilePlugin('bower.json', ['main'])
       )
   ]
 

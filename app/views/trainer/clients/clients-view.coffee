@@ -1,13 +1,12 @@
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
-
 MoveToGroupView = require 'views/trainer/clients/move-to-group-view'
 
 ClientFormModalView = require 'views/trainer/clients/client-form-modal-view'
-ClientModel = require 'models/trainer/client-model'
+Client = require 'models/client'
 
 GroupFormModalView = require 'views/trainer/clients/group-form-modal-view'
-GroupModel = require 'models/trainer/group-model'
+ClientGroup = require 'models/client_group'
+
+ClientGroupMember = require 'models/client_group_member'
 
 module.exports = class ClientsView extends Marionette.LayoutView
 
@@ -16,24 +15,23 @@ module.exports = class ClientsView extends Marionette.LayoutView
   className: 'clients-view-main-wrapper'
 
   events:
-    "click .gc-content-nav-checkall": "toggleCheck"
+    'click .gc-content-nav-checkall': 'toggleCheck'
     'click .gc-clients-list-client-chb': 'updateState'
-    "click .move-to-group-show": "showMovetogroupModal"
-    "click .show-client-form": "showClientAddModal"
-    "click .show-group-form": "showGroupAddModal"
+    'click .move-to-group-show': 'showMovetogroupModal'
+    'click .show-client-form': 'showClientAddModal'
+    'click .show-group-form': 'showGroupAddModal'
     'click @ui.removeButton': 'rmEvent'
-    "submit .gc-move-to-group-form": "submitMovetogroupForm"
+    'submit .gc-move-to-group-form': 'submitMovetogroupForm'
 
   ui:
     mainCheckbox: ".gc-content-nav-checkall input[type='checkbox']"
-    groupForm: ".group-form"
-    checkedCounter: ".gc-clients-nav-right p"
+    groupForm: '.group-form'
+    checkedCounter: '.gc-clients-nav-right p'
     modalContainer: '#gc-modal-container'
     moveButton: '.move-to-group-show'
     removeButton: '.remove-item'
-    mainCheckbox: ".gc-content-nav-checkall input[type='checkbox']"
-    clientsList: ".gc-clients-list-wrapper"
-    clientsRegion: "#clients-region"
+    clientsList: '.gc-clients-list-wrapper'
+    clientsRegion: '#clients-region'
     groupsRegion: '#groups-region'
     splash: '#clients-groups-splash'
 
@@ -80,7 +78,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
   updateText: =>
     text = @getSelectedListItemsAsText()
     if text
-      @ui.checkedCounter.text(text + " selected")
+      @ui.checkedCounter.text(text + ' selected')
       @ui.checkedCounter.removeClass('hidden')
     else
       @ui.checkedCounter.addClass('hidden')
@@ -92,7 +90,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
     if clientsCount
       text += "#{clientsCount} client(s)"
     if clientsCount and groupsCount
-      text += ", "
+      text += ', '
     if groupsCount
       text += "#{groupsCount} group(s)"
     text
@@ -106,8 +104,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
     @updateState()
 
   showClientAddModal: (ev) ->
-    ev.preventDefault()
-    clientModel = new ClientModel
+    clientModel = new Client
     clientFormModal = new ClientFormModalView model: clientModel
 
     @listenTo clientFormModal, 'closeModal', =>
@@ -122,8 +119,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
     @ui.modalContainer.modal('show')
 
   showGroupAddModal: (ev) ->
-    ev.preventDefault()
-    groupModel = new GroupModel
+    groupModel = new ClientGroup
     groupFormModal = new GroupFormModalView model: groupModel
 
     @listenTo groupFormModal, 'closeModal', =>
@@ -138,58 +134,51 @@ module.exports = class ClientsView extends Marionette.LayoutView
     @ui.modalContainer.modal('show')
 
   showMovetogroupModal: (ev) =>
-    ev?.preventDefault()
 
     # add validation for empty groups
     if _.isEmpty(@groups.currentView.collection.models)
-      App.request 'messenger:show',
-        hideAfter: 5
-        message: 'No available groups'
-        type: 'error'
+      App.request('messenger:explain', 'client_groups.empty')
     else
-      moveToGroupView = new MoveToGroupView collection: @groups.currentView.collection
+      moveToGroupView = new MoveToGroupView
+        collection: @groups.currentView.collection
       @modalContainer.show moveToGroupView
       @ui.modalContainer.modal('show')
 
   submitMovetogroupForm: (ev) ->
-    ev.preventDefault()
     #TODO validation
-    clientsId = []
-    groupsId = []
+    clientIds = []
+    groupIds = []
+    promises = []
+
     for check in @ui.clientsRegion.find('input[type=checkbox]:checked')
-      clientsId.push $(check).data('id')
-    for check in @$el.find('.gc-move-to-group-form').find('input[type=checkbox]:checked')
-      groupsId.push $(check).data('id')
+      clientIds.push $(check).data('id')
+    els = @$el.find('.gc-move-to-group-form')
+      .find('input[type=checkbox]:checked')
+    for check in els
+      groupIds.push $(check).data('id')
 
-    data =
-      client_ids: clientsId
-      client_group_ids: groupsId
+    groupIds.forEach (groupId) ->
+      clientIds.forEach (clientId) ->
+        clientGroupMember = new ClientGroupMember
+          clientId: clientId
+          groupId: groupId
 
-    @ui.modalContainer.modal('hide')
+        promises.push clientGroupMember.save()
 
-    $.ajax
-      url: '/api/mobile/client_groups/add'
-      type: 'POST'
-      data: JSON.stringify data
-      dataType: 'json'
-      success: =>
-        @ui.clientsRegion.find('input[type=checkbox]:checked').removeAttr('checked')
-        App.request 'messenger:show',
-          message: 'Success'
-          type: 'success'
+    $.when.apply($, promises).done =>
+      @ui.modalContainer.modal('hide')
 
   countSelected: ($el) ->
     return $el.find('input[type=checkbox]:checked').length
 
   rmEvent: (ev) =>
-    ev.preventDefault()
-    App.request 'base:confirmationalModal',
-      title: "Delete items"
-      content: "Are you sure you want to delete selected items?"
-      confirmBtn: "Delete"
+    App.request 'modal:confirm',
+      title: 'Delete items'
+      content: 'Are you sure you want to delete selected items?'
+      confirmBtn: 'Delete'
       confirmCallBack: =>
-        @clients.currentView?.trigger 'rm-client'
-        @groups.currentView?.trigger 'rm-group'
+        App.vent.trigger 'rm-client'
+        App.vent.trigger 'rm-group'
         clientLength = @clients.currentView?.collection.length
         groupLength = @groups.currentView?.collection.length
         if @clients.currentView? and @groups.currentView?
@@ -210,7 +199,7 @@ module.exports = class ClientsView extends Marionette.LayoutView
       @ui.splash.addClass 'hidden'
 
   showSplash: (views) =>
-    views.forEach (view) =>
+    views.forEach (view) ->
       view.$el.addClass 'hidden'
 
     @ui.splash.removeClass 'hidden'

@@ -1,20 +1,17 @@
 config = require 'config'
-Marionette = require 'backbone.marionette'
-Backbone = require 'backbone'
 moment = require 'moment'
 
 SignUpStep1Model = require 'models/auth/signup-step1-model'
 SignUpStep2Model = require 'models/auth/signup-step2-model'
-
-FormValidationBehaviour = require 'views/helpers/form-validation-behaviour'
+LoginModel = require 'models/auth/login-model'
 
 class SignUpStep1 extends Marionette.ItemView
 
   template: require('templates/auth/sign-up-1')
 
   behaviors:
-    FormValidationBehaviour:
-      behaviorClass: FormValidationBehaviour
+
+    form_validation: true
 
   ui:
     types: '.gc-trainer-type'
@@ -35,32 +32,37 @@ class SignUpStep1 extends Marionette.ItemView
       $(ev.currentTarget).closest('.gc-trainer-type').addClass 'active'
 
   submit: (ev) =>
-    ev.preventDefault()
     formData = @ui.form.serializeObject()
     for key, value of formData
       if key is 'trainer-type'
         formData[key] = parseInt value
     @model.set formData
-    if @model.isValid true
-      $.ajax
-        method: 'GET'
-        url: '/api/mobile/users/is_email_in_use'
-        dataType: 'json'
-        data:
-          email: @model.get 'email'
-        success: (data) =>
+    @model.save @model.attributes,
+      wait: true
+      success: (data) =>
+        loginModel = new LoginModel
+          username: @model.get('email')
+          password: @model.get('password')
+        loginModel.once 'model:login:success', (response) =>
+          App.request 'accessToken:set', response.access_token
+          App.request('current_user').fetch()
           @trigger 'next', @model
-        statusCode:
-          403: (data) =>
-            @trigger 'switchError', data.responseJSON.message.email, @ui.emailGroup
+        loginModel.login()
+      error: (model, xhr, error) =>
+        errors = xhr.responseJSON.error
+        for key, value of errors
+          message = value.join(', ')
+          input = @ui.form.find("input[name='#{key}']")
+          uiGroup = input.parents('.form-group')
+          @trigger 'switchError', message , uiGroup
 
 class SignUpStep2 extends Marionette.ItemView
 
   template: require('templates/auth/sign-up-2')
 
   behaviors:
-    FormValidationBehaviour:
-      behaviorClass: FormValidationBehaviour
+
+    form_validation: true
 
   ui:
     form: '#gc-signup-step-2'
@@ -74,19 +76,49 @@ class SignUpStep2 extends Marionette.ItemView
     @on 'signup:errors', @returnedErrors
 
   submit: (ev) =>
-    ev.preventDefault()
-    formData = @ui.form.serializeObject()
-    for key, value of formData
-      if key is 'gender'
-        formData[key] = parseInt value
+    formData = @prepare_attributes @ui.form.serializeObject()
     @model.set formData
+
     if @model.isValid true
-      birth = "#{@model.get('birth_year')}-#{@model.get('birth_month')}-#{@model.get('birth_day')}"
-      if moment(birth, "YYYY-MM-DD", true).isValid()
-        @model.set 'dob', birth
-        @trigger 'final', @model
+      currentUser = App.request('current_user')
+      profile = currentUser.get('user_profile')
+      if profile_id = profile?.id
+        @model.set 'id', profile_id
+        @saveProfile()
       else
-        @trigger 'switchError', 'Incorrect date', @ui.dateInputFroup
+        currentUser.fetch().then (model) =>
+          profile_id = model.get('user_profile').id
+          @model.set 'id', profile_id
+          @saveProfile()
+
+  prepare_attributes: (formData)->
+    year = formData['birth_year']
+    month = formData['birth_month']
+    day = formData['birth_day']
+    birth = "#{year}-#{month}-#{day}"
+    if moment(birth, 'YYYY-MM-DD', true).isValid()
+      formData['birthday'] = birth
+    else
+      @trigger 'switchError', 'Incorrect date', @ui.dateInputFroup
+    formData['location'] = [
+      formData['state'],
+      formData['city'],
+      formData['address']
+    ].join(', ')
+    formData
+
+  saveProfile: ->
+    @model.save @model.attributes,
+      wait: true
+      success: (data) =>
+        @trigger 'final', @model
+      error: (model, xhr, error) =>
+        errors = xhr.responseJSON.error
+        for key, value of errors
+          message = value.join(', ')
+          input = @ui.form.find("input[name='#{key}']")
+          uiGroup = input.parents('.form-group')
+          @trigger 'switchError', message , uiGroup
 
   stepBack: (ev) =>
     @trigger 'signup:back'
@@ -120,17 +152,5 @@ module.exports = class SignUpView extends Marionette.LayoutView
     @signUp.show @step2
 
   final: (dataStep2) =>
-    @steps.set dataStep2.attributes
-    @steps.set 'address', "#{@steps.get('state')}, #{@steps.get('city')}, #{@steps.get('address')}"
-    $.ajax
-      method: 'POST'
-      url: '/api/mobile/users'
-      dataType: 'json'
-      data: JSON.stringify @steps.attributes
-      success: (data) =>
-        App.vent.trigger 'spinner:global:stop'
-        @trigger 'signup:complete'
-      statusCode:
-        403: (data) =>
-          if data.responseJSON.error
-            @step2.trigger 'signup:errors', data.responseJSON.message
+    App.vent.trigger ''
+    @trigger 'signup:complete'

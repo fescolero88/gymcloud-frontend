@@ -1,0 +1,14 @@
+.gc-usercard-large.row.account_type(class='gc-client-card')
+  .col-xs-10
+    .gc-usercard-avatar-wrapper.text-center(class=avatar_url ? 'gc-usercard-avatar-exist' : '')
+      img.gc-usercard-avatar(src=avatar_url, alt='')
+    .gc-usercard-info
+      h1.gc-usercard-name
+        = name
+      p.gc-usercard-address
+      input.gc-usercard-link(type='text', value='http://gymcloud.com/clients/john-doe', readonly='readonly')
+      .btn-group.gc-usercard-actions(role='group')
+        button.btn.btn-default.show-client-form
+          | Edit
+  .col-xs-2.gc-usercard-params.text-right
+#gc-edit-client-modal.modal.fade.gc-modal

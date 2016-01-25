@@ -13,8 +13,6 @@ red = #e54d42
 
 /*functions*/
 transition(type, duration, animation)
-  -webkit-transition type duration animation
-  -moz-transition type duration animation
   transition type duration animation
 
 /*base styles*/
@@ -58,7 +56,8 @@ textarea.form-control
   padding 15px
   max-width 1100px
   margin 0 auto
-  overflow-y auto
+  overflow auto
+  height 100%
 
 .gc-prototype-title
   color blue
@@ -119,6 +118,9 @@ textarea.form-control
   border-color white
   color blue
 
+.btn.gc-custom.gc-no-border
+  border none
+
 .form-group
   position relative
 
@@ -155,7 +157,7 @@ input.form-control.gc-active
   {faIcon}
 
 input.form-control:disabled
-  background-color white
+  background-color #ccc
   color #bbb
 
 input.form-control
@@ -299,7 +301,7 @@ label.gc-alt-checkbox:after
   color red
 
 a.gc-text-link
-  color #3398db
+  color #3a99d8
   font-size 14px
   line-height 30px
   margin 0
@@ -351,9 +353,6 @@ a.gc-text-link:hover
 .gc-icon-load-more
   background transparent url('../../images/prototypes/load-more-icon.png') 3px 7px no-repeat
   bacground-size 15px
-
-.input-group.gc-datetime
-  width 220px
 
 .input-group.gc-datetime .btn
   height 38px
@@ -462,15 +461,11 @@ a.gc-text-link:hover
 
 .gc-textarea-no-border
   border none
-  -webkit-box-shadow none
-  -moz-box-shadow none
   box-shadow none
   outline none
   resize none
 
 .gc-textarea-no-borderfocus
-  -webkit-box-shadow none
-  -moz-box-shadow none
   box-shadow none
 
 .gc-textarea
@@ -508,26 +503,6 @@ a.gc-text-link:hover
   border-top-right-radius 50px
   border-bottom-right-radius 50px
 
-.gc-property
-  margin 10px 0
-
-.gc-property .gc-remove
-  padding 0 10px
-  background-color #EFEFF0
-  font-weight 300
-  font-size 19px
-  border-left none
-
-.gc-property.editable .btn span
-  color black
-
-.gc-property .gc-icon-bars
-  background-image url('../../images/prototypes/property-bars-icon.png')
-  {backgroundCenter}
-  height: 10px;
-  width: 10px;
-  display: inline-block;
-
 .gc-nav-breadcrumbs .gc-breadcrumbs
   display inline-block
   margin-left 15px
@@ -545,6 +520,10 @@ a.gc-text-link:hover
 .gc-topbar-avatar
   border-left none
 
+region[data-name="pagination"] > div
+  clear: both
+  margin-left: 15px
+
 .gc-pagination-bordered > li:first-child > a
   border-top-left-radius 50px
   border-bottom-left-radius 50px
@@ -555,11 +534,11 @@ a.gc-text-link:hover
 
 .gc-pagination-bordered li a
   border-color #e6e6e6
-  color #3398db
+  color #3a99d8
 
 .gc-pagination li a
   border none
-  color #3398db
+  color #3a99d8
   padding 6px 8px
 
 .gc-pagination li a:hover
@@ -603,14 +582,12 @@ a.gc-text-link:hover
   border-bottom-color white
 
 .gc-tooltip.gc-tooltip-no-header
-  -webkit-box-shadow 0px 2px 12px 1px rgba(0,0,0,.2)
   box-shadow 0px 2px 12px 1px rgba(0,0,0,.2)
 
 .gc-alert-message
   background #FAFAFA
   border-radius 3px
   max-width 250px
-  -webkit-box-shadow 0 2px 8px rgba(0,0,0,.2)
   box-shadow 0 2px 8px rgba(0,0,0,.2)
   display table
   margin 15px
@@ -820,7 +797,6 @@ a.gc-text-link:hover
   bottom 0
   left 50%
   transform translateX(-50%)
-  -webkit-transform translateX(-50%)
 
 /*for demo grid*/
 .gc-row-4:after
@@ -891,6 +867,12 @@ a.gc-text-link:hover
   background-size 18px 13px
   {backgroundCenter}
 
+.gc-icon.upload
+  background-image url('../../images/icon-upload.png')
+  background-size 18px 13px
+  {backgroundCenter}
+
+
 .gc-icon-primary
   color blueSecondary
 
@@ -916,38 +898,6 @@ a.gc-text-link:hover
   background-image url('../../images/prototypes/actions-icon-blue.png')
   background-size cover
   background-position 0px 0px
-
-.gc-block-group
-  display block
-  border-collapse collapse
-  border-radius 4px
-
-.gc-block-group .gc-block
-  float left
-  padding 15px 10px
-  text-align center
-  color #757575
-  background #F9F9F9
-  border 1px solid #ededed
-  width 115px
-
-.gc-block-group > .gc-block:first-child
-  border-top-left-radius 4px
-  border-bottom-left-radius 4px
-
-.gc-block-group > .gc-block:last-child
-  border-top-right-radius 4px
-  border-bottom-right-radius 4px
-
-.gc-block-group > .gc-block:not(:first-child)
-  border-left none
-
-.gc-block-group .gc-block .gc-block-highlight
-  font-size 40px
-
-.gc-block-group .gc-block label
-  text-transform uppercase
-  font-weight normal
 
 .gc-pill-label
   border 1px solid blue
@@ -1032,29 +982,6 @@ a.gc-text-link:hover
   border-top-right-radius 50px
   border-bottom-right-radius 50px
 
-.gc-busy-indicator-clock
-  display inline-block
-  height 43px
-  width 40px
-  background-image url('../../images/icon-clock-body.png')
-  background-size cover
-  background-repeat no-repeat
-  position relative
-
-.gc-busy-indicator-clock .gc-busy-indicator-pointer
-  background-image url('../../images/icon-clock-pointer.png')
-  background-size 6px 20px
-  background-repeat no-repeat
-  background-position center 5px
-  position absolute
-  left 0
-  right 0
-  bottom 0
-  top 5px
-
-.gc-busy-indicator-clock .gc-busy-indicator-pointer.busy
-  animation rotateHourHand 2.5s infinite linear
-
 @keyframes rotateHourHand
   0%
     transform rotate(0deg)
@@ -1118,3 +1045,170 @@ a.gc-text-link:hover
 
 .gc-status-icon.gc-status-cancel
   background-position -17px 0
+
+.gc-assign-videos
+  margin 10px 15px
+
+.gc-assign-videos:before
+  display block
+  content ' '
+  clear both
+
+.gc-assign-videos .gc-video-thumb
+  float left
+  position relative
+  min-height 1px
+  padding-right 15px
+  padding-left 15px
+
+@media only screen and (min-width: 1501px) {
+  .gc-assign-videos .gc-video-thumb {
+    width: 20%;
+  }
+}
+
+@media only screen and (max-width: 1500px) {
+  .gc-assign-videos .gc-video-thumb {
+    width: 25%;
+  }
+}
+@media only screen and (max-width: 1350px) {
+  .gc-assign-videos .gc-video-thumb {
+    width: 33.33333%;
+  }
+}
+@media only screen and (max-width: 1080px) {
+  .gc-assign-videos .gc-video-thumb {
+    width: 50%;
+  }
+}
+
+.gc-video-player
+  border-radius 4px
+  overflow hidden
+  border 1px solid gray
+  margin-bottom 20px
+
+  .gc-video-details
+    border-top 1px solid gray
+    padding 15px
+    background-color #FAFAFA
+    position relative
+
+    .gc-video-report
+      background url('../../images/icon-video-flag.png')
+      background-size contain
+      background-repeat no-repeat
+      height 10px
+      width 10px
+      position absolute
+      right 10px
+      top 17px
+      display inline-block
+      cursor pointer
+
+  .gc-video-title
+    margin-top 0px
+    padding-right: 10px
+    font-size 15px
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+
+  .gc-video-timer,
+  .gc-video-type
+    color #808080
+    font-size 13px
+    line-height 18px
+    margin-right 10px
+
+  .gc-video-time-icon,
+  .gc-video-icon
+    display inline-block
+    margin-right 5px
+    height 10px
+    width 12px
+    background-repeat no-repeat
+    background-position center
+
+  .gc-video-time-icon
+    height 12px
+    background-image url("../../images/icon-video-time.png")
+
+  .gc-video-library-icon
+    width 14px
+    background-image url("../../images/icon-video-library.png")
+
+  .gc-video-youtube-icon
+    width 17px
+    background-image url("../../images/icon-video-youtube.png")
+
+  .gc-video-vimeo-icon
+    width 12px
+    background-image url("../../images/icon-video-vimeo.png")
+
+  .gc-video-gymcloud-icon
+    width 18px
+    background-image url("../../images/icon-video-gymcloud.png")
+
+  .gc-assign-video
+    margin-top 10px
+    background-color transparent
+
+  .gc-assign-video:hover
+    background-color blue
+    color #fff
+
+  .gc-assign-video.assigned
+    background-color blue
+    color #fff
+
+  .gc-video-preview
+    position relative
+    height: 184px
+    background: center center no-repeat
+    background-size: cover
+
+    iframe
+      width: 100%
+      height: 100%
+
+    .gc-video-play
+      cursor pointer
+      height 44px
+      width 44px
+      background-color rgba(255, 255, 255, 0.7)
+      position absolute
+      left 50%
+      top 40%
+      border-radius 44px
+      overflow hidden
+      background-image url("../../images/icon-video-play.png")
+      background-repeat no-repeat
+      background-position center
+      transform translateX(-50%)
+
+.gc-progress-panel
+  padding 10px 0
+
+  label
+    color green
+    float left
+    margin-bottom 0
+    margin-right 7px
+    font-size 14px
+    font-weight normal
+    line-height 21px
+
+  .gc-progress-bar
+    display block
+    height 5px
+    border-radius 5px
+    background-color #EDEDED
+    overflow hidden
+    margin 8px 0
+
+    .gc-progress
+      background green
+      height 5px
+      transition(all, 0.20s, linear)
