@@ -11,10 +11,11 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
   ui:
     form: '.gc-reset-password-form'
     passwords: '#password-input, #confirm-password-input'
+    submitButton: 'button[type="submit"]'
 
   events:
     'submit @ui.form': 'submit'
-    'change @ui.passwords': '_validatePasswords'
+    'keyup @ui.passwords': '_validatePasswords'
 
   initialize: (data) =>
     @token = data.token
@@ -29,6 +30,11 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
       attrib = 'password_confirmation'
     @model.set attrib, value
     @model.isValid(attrib)
+
+    if @model.isValid('password') && @model.isValid('password_confirmation')
+      @ui.submitButton.removeClass('disabled')
+    else
+      @ui.submitButton.addClass('disabled')
 
   submit: (ev) =>
     data = _.extend @ui.form.serializeObject(),
