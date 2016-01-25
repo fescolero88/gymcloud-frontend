@@ -13,10 +13,11 @@ class ForgotPasswordFormView extends Marionette.ItemView
   ui:
     form: '.gc-forgot-password-form'
     emailField: '.gc-forgot-password-email'
+    submitButton: 'button[type="submit"]'
 
   events:
     'submit @ui.form': 'submitForm'
-    'change @ui.emailField': '_checkIfEmailValid'
+    'keyup @ui.emailField': '_checkIfEmailValid'
 
   initialize: =>
     Backbone.Validation.bind @
@@ -37,7 +38,11 @@ class ForgotPasswordFormView extends Marionette.ItemView
 
   _checkIfEmailValid: =>
     @model.set email: @ui.emailField.val()
-    @model.isValid('email')
+    @model.validate()
+    if @model.isValid()
+      @ui.submitButton.removeClass('disabled')
+    else
+      @ui.submitButton.addClass('disabled')
 
 class ForgotPasswordSuccessView extends Marionette.ItemView
 
