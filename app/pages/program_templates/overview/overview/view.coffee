@@ -3,8 +3,6 @@ define [
   'features/collections_counters/view'
   'features/program_weeks/list/view'
   'features/program_workouts/list/view'
-  'features/program_weeks/actions/view'
-  'features/program_workouts/actions/view'
   './empty/view'
   'models/program_workout'
 ], (
@@ -12,8 +10,6 @@ define [
   CountersView
   ProgramWeeksListView
   ProgramWorkoutsListView
-  ProgramWeeksActionsView
-  ProgramWorkoutsActionsView
   EmptyView
   ProgramWorkout
 ) ->
@@ -25,30 +21,11 @@ define [
     className: 'gc-box-content'
 
     behaviors:
-      author_widget: true
-      rating_widget: true
       editable_textarea: true
       privacy_toggle: true
       delete_button: true
       regioned:
         views: [
-            region: 'counters'
-            klass: CountersView
-            options: ->
-              collections: [
-                  collection: @model.weeks
-                  label: 'weeks'
-                ,
-                  collection: @model.workouts
-                  label: 'workouts'
-              ]
-          ,
-            region: 'program_weeks_actions'
-            klass: ProgramWeeksActionsView
-          ,
-            region: 'program_workouts_actions'
-            klass: ProgramWorkoutsActionsView
-          ,
             region: 'program_weeks'
             klass: ProgramWeeksListView
             options: ->

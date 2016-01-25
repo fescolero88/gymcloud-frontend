@@ -136,3 +136,93 @@
 .gc-add-workout
   margin-right: 5px
 
+.gc-nav-wrapper.program
+  height: 65px
+  background-color: #F9F9F9
+  z-index: 3
+
+.gc-main-workspace .gc-workspace-content.program
+  top: 110px
+  height: calc(100% - 179px)
+
+.program-action-panel
+  margin: 0
+  display: flex
+
+  > div
+    align-self: center
+
+  .selectize-input,
+  .selectize-input.focus
+    border-radius: 19px
+    padding-top: 9px
+    padding-left: 19px
+    height: 38px
+
+  .selectize-dropdown
+    margin-top: 6px
+    margin-left: 19px
+    max-width: calc(100% - 38px)
+
+  .quick-add
+    display: none!important
+
+  .counters
+    display: flex
+    flex-direction: row
+    // .gc-nav-wrapper.program -1px border -paddings
+    height: calc(65px - 1px - 1.1em)
+
+  .counter-group
+    width: 210px
+    display: flex
+    flex-direction: row
+    justify-content: flex-start
+
+    .counter,
+    .counter-name
+      align-self: center
+      color: #797979
+
+    .counter
+      font-size: 31px
+      margin-right: 10px
+      transition: color .3s ease;
+
+      &.highlight
+        color: #3a99d8
+
+    .counter-name
+      font-size: 15px
+      text-transform: uppercase
+
+    button
+      align-self: center
+      height: 27px
+      font-size: 12px
+      padding: 0 12px
+      background: transparent
+
+      &:hover
+        background: #3a99d8
+
+  .widgets
+    display: flex
+
+    region
+      display: flex
+      height: calc(65px - 1px - 1.1em)
+      align-items: center
+
+      > div,
+      > span
+        flex-direction: row
+        align-self: center
+
+    .gc-author-widget
+      padding: 0
+
+    button
+      border: none
+      color: #9EA0A1
+      background: #E5E5E5

@@ -32,7 +32,7 @@ define [
             title: 'Assign'
         ]
 
-      privacy_widget:
+      program_action_panel:
         model: -> @view.model.get('data.model')
 
       add_to_library:
