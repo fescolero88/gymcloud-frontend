@@ -20,7 +20,7 @@ module.exports = class ResetPasswordView extends Marionette.LayoutView
     @token = data.token
     Backbone.Validation.bind(@)
 
-  _validatePasswords: =>
+  _validatePasswords: (event) =>
     id = event.target.id
     value = event.target.value
     if id is 'password-input'
