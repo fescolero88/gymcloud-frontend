@@ -10,14 +10,15 @@ define [
 
     model: ExerciseProperty
 
+    comparator: 'position'
+
     addProperties: (sourceModels, workout_exercise_id) ->
-      _.each sourceModels, (sourceModel) =>
-        model = new ExerciseProperty(sourceModel.attributes)
-        model.set
+      _.each sourceModels, (sourceModel, key) =>
+        attributes = _.extend({}, sourceModel.attributes, {
           workout_exercise_id: workout_exercise_id
-        model.save()
-          .then =>
-            @add(model)
+          position: @length + key
+        })
+        @create(attributes, wait: true)
 
     initProperty: (workout_exercise_id, default_property = {}) ->
       model = new ExerciseProperty
