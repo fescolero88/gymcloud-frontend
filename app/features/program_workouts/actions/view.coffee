@@ -1,3 +1,4 @@
+# NOTE: not used anymore
 define [
   './template'
   'features/quick_add/view'
