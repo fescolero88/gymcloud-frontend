@@ -18,7 +18,6 @@ define [
       view = new GroupModalView model: model
       region = App.request('app:layouts:base').getRegion('modal')
       region.show(view)
-
       region.$el.modal('show')
 
       @listenToOnce view, 'modal:closed', ->
