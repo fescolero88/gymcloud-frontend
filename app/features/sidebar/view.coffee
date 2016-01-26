@@ -66,12 +66,16 @@ define [
     toggleMenu: (ev) ->
       target = $(ev.target)
       currentTarget = $(ev.currentTarget)
-      if target.hasClass('toggle-it') or currentTarget.hasClass('toggle-it')
-        currentTarget.toggleClass('active')
 
-      # remove active ewp item if any
-      @_setActiveRootMenuItem(currentTarget)
-      @_removeActiveItem()
+      # if target is caret prevent navigation
+      # only cascade sub-items
+      if target.hasClass('toggle-it')
+        ev.preventDefault()
+        currentTarget.toggleClass('active')
+      else # redirect and set as active item
+        # remove active ewp item if any
+        @_setActiveRootMenuItem(currentTarget)
+        @_removeActiveItem()
 
     toggleItem: (ev) ->
       @_removeActiveItem()
