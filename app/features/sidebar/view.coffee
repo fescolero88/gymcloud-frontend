@@ -73,7 +73,8 @@ define [
         ev.preventDefault()
         currentTarget.toggleClass('active')
       else # redirect and set as active item
-        # remove active ewp item if any
+        # remove active ewp item if any #3a99d8
+        window.location.href = $(ev.currentTarget).attr('href')
         @_setActiveRootMenuItem(currentTarget)
         @_removeActiveItem()
 
