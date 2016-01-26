@@ -43,12 +43,10 @@ define [
         items: [
             label: 'Add Note'
           ,
-            label: 'Edit Description'
-          ,
-            label: 'Add Video'
-          ,
             label: 'Delete'
             className: 'text-danger'
+            action: ->
+              App.request('modal:confirm:delete', @model)
         ]
 
       redirect_back_on_destroy:

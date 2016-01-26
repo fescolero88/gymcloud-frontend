@@ -170,7 +170,7 @@
   .counters
     display: flex
     flex-direction: row
-    // .gc-nav-wrapper.program -1px border -paddings
+    // (".gc-nav-wrapper.program" height) - (1px border) - (sum of t/b paddings)
     height: calc(65px - 1px - 1.1em)
 
   .counter-group
@@ -208,6 +208,7 @@
 
   .widgets
     display: flex
+    justify-content: flex-end
 
     region
       display: flex
