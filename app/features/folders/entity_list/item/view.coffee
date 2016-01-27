@@ -34,6 +34,10 @@ define [
                 observe: 'folder_id'
                 onGet: (value) ->
                   !!value
+            attributes: [
+                observe: 'id'
+                name: 'data-id'
+              ]
           'input':
             observe: 'folder_id'
             updateModel: false
