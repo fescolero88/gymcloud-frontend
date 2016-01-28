@@ -11,11 +11,5 @@ define [
 
     template: template
 
-    initialize: ->
-      @modalView = new GroupFormModalView(model: @model)
-
-    onShow: ->
-      @clientForm.show(@modalView)
-
     showClientEditModal: (ev) ->
       App.request('modal:groups', @model)

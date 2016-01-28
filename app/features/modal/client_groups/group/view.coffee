@@ -49,12 +49,12 @@ define [
         @model.save()
 
     onSync: ->
-      @trigger 'modal:closed'
       @trigger 'addToGroupsCollection', @model
       if @avatar?[0]?.files?[0]
         data = new FormData()
         data.append('avatar', @avatar[0].files[0])
         @model.updateAvatar data
+      @trigger 'modal:closed'
 
     onAvatarUpate: (data) ->
       model.set 'avatar_url', data.avatar_url

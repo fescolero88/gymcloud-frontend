@@ -102,7 +102,8 @@ define [
       request
 
     parse: (data) ->
-      @_parseClients(data.clients) && delete data.clients
+      if data.clients
+        @_parseClients(data.clients) && delete data.clients
       data
 
     _parseClients: (clients) ->
