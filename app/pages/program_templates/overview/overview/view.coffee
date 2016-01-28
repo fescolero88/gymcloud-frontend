@@ -22,8 +22,6 @@ define [
 
     behaviors:
       editable_textarea: true
-      privacy_toggle: true
-      delete_button: true
       regioned:
         views: [
             region: 'program_weeks'

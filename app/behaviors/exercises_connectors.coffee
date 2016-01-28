@@ -32,7 +32,7 @@ define ->
       @listenTo(@view, 'show', @_debouncedInit)
 
     onBeforeShow: ->
-      @listenTo(@view.collection, 'add remove change', @_debouncedInit)
+      @listenTo(@view.collection, 'reset add remove change', @_debouncedInit)
 
     _init: ->
       @letterColors = {}

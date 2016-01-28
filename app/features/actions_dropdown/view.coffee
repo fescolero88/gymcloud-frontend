@@ -25,4 +25,5 @@ define [
       @collection = new Collection(@options.items)
 
     _triggerAction: (childView) ->
-      childView.model.get('action')?()
+      action = childView.model.get('action')
+      _.bind(action, @)() if _.isFunction(action)
