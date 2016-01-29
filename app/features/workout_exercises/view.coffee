@@ -27,6 +27,9 @@ define [
               can('update', @model)
         ]
 
+    initialize: ->
+      @listenTo(@collection, 'add remove', @_actionsVisibility)
+
     onShow: ->
       App.request 'fwd',
         context: @
@@ -39,3 +42,20 @@ define [
           'actions:multi_constructor:stop'
           'actions:multi_constructor:assign'
         ]
+      App.request 'fwd',
+        context: @
+        from: @
+        to: @views.workout_exercises_actions
+        events: [
+          'actions:hide'
+          'actions:show'
+        ]
+
+      @listenToOnce @views.workout_exercises_actions, 'show',
+        @_actionsVisibility
+
+    _actionsVisibility: ->
+      if @collection.length > 1
+        @trigger 'actions:show'
+      else
+        @trigger 'actions:hide'
