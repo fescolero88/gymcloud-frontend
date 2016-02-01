@@ -28,7 +28,7 @@ define ->
     ]
 
     initialize: ->
-      @_debouncedInit = _.debounce(@_init, 1000, true)
+      @_debouncedInit = _.debounce(@_init, 300)
       @listenTo(@view, 'show', @_debouncedInit)
 
     onBeforeShow: ->
