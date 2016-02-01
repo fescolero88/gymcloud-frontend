@@ -33,7 +33,6 @@ define [
       'workout_exercises(/)': 'workoutExercisesList'
       'workout_exercises/:id(/)': 'workoutExercise'
       'personal_workouts(/)': 'personalWorkoutList'
-      'personal_workouts/:id(/)': 'personalWorkout'
       'personal_programs(/)': 'personalProgramList'
 
       'calendar(/)': 'clientPageCalendarDay'
@@ -51,9 +50,6 @@ define [
 
     personalWorkoutList: ->
       @_assignedEntityList('personal_workouts')
-
-    personalWorkout: (id) ->
-      @_assignedEntityShow('personal_workouts', id)
 
     personalProgramList: ->
       @_assignedEntityList('personal_programs')

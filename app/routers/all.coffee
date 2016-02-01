@@ -9,6 +9,7 @@ define [
   './program_templates'
   './users'
   './workout_templates'
+  './personal_workouts'
   './prototype'
   './old_client_router'
 ], ->
