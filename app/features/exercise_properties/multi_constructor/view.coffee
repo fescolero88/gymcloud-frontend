@@ -57,6 +57,9 @@ define [
         else if value is 'empty'
           @trigger('multi_constructor:stop')
 
+      @listenTo(@, 'actions:show', -> @$el.removeClass('hidden'))
+      @listenTo(@, 'actions:hide', -> @$el.addClass('hidden'))
+
     addProperty: ->
       @collection.add({})
 

@@ -37,6 +37,7 @@ define [
           @trigger('actions:create')
         else
           @trigger('actions:add', id)
+
       App.request 'fwd',
         context: @
         from: @views.exercise_properties_multi_construtor
@@ -46,4 +47,13 @@ define [
           'multi_constructor:start'
           'multi_constructor:stop'
           'multi_constructor:assign'
+        ]
+
+      App.request 'fwd',
+        context: @
+        from: @
+        to: @views.exercise_properties_multi_construtor
+        events: [
+          'actions:show'
+          'actions:hide'
         ]
