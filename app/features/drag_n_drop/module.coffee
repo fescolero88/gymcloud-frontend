@@ -40,3 +40,33 @@ define [
 
       @smaug.on 'drop', (el, target, source, sibling) ->
         App.vent.trigger('drag_n_drop:item:dropped', arguments...)
+
+      @smaug.on 'drag', (el, source) =>
+        document.addEventListener('mousemove', @_onMouseMove)
+
+      @smaug.on 'dragend', (el) =>
+        document.removeEventListener('mousemove', @_onMouseMove)
+
+    _onMouseMove: (e) =>
+      @_pageY = e.pageY
+      if @smaug.dragging
+        delta = 120
+        y = @_pageY
+        container = $('.gc-workspace-content')[0]
+        containerTop = container.offsetTop
+        containerBottom = containerTop + container.offsetHeight
+        if containerBottom - y < delta
+          @_scrollDown(container, y)
+        else if (containerTop + y) < (delta + 200)
+          @_scrollUp(container, y)
+      return
+
+    _scrollDown: (container, pageY) ->
+      if @smaug.dragging and pageY == @_pageY
+        container.scrollTop += 5
+        setTimeout @_scrollDown.bind(@, container, pageY), 20
+
+    _scrollUp: (container, pageY) ->
+      if @smaug.dragging and pageY == @_pageY
+        container.scrollTop -= 5
+        setTimeout @_scrollUp.bind(@, container, pageY), 20
