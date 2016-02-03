@@ -1,16 +1,25 @@
 define [
   'behaviors/base/regioned'
-  './view'
+  './editable/view'
+  './readable/view'
 ], (
   BaseRegionedBehavior
-  BehaviorView
+  EditableBehaviorView
+  ReadableBehaviorView
 ) ->
 
   class ProgramActionPanelBehavior extends BaseRegionedBehavior
 
     regionName: 'program_action_panel'
 
-    behaviorViewClass: BehaviorView
+    behaviorViewClass: undefined
+
+    initialize: ->
+      @behaviorViewClass = if @options.readonly
+        ReadableBehaviorView
+      else
+        EditableBehaviorView
+      super
 
     behaviorViewOptions: ->
       model: _.bind(@options.model, @)()

@@ -1,3 +1,4 @@
+# NOTE: not used anymore, to delete
 define [
   './item/view'
   './collection'
