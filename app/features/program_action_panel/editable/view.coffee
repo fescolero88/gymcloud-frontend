@@ -1,6 +1,6 @@
 define [
   './template'
-  './model'
+  '../model'
   'features/quick_add/view'
 ], (
   template

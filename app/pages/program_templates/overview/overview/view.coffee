@@ -1,13 +1,11 @@
 define [
   './template'
-  'features/collections_counters/view'
   'features/program_weeks/list/view'
   'features/program_workouts/list/view'
   './empty/view'
   'models/program_workout'
 ], (
   template
-  CountersView
   ProgramWeeksListView
   ProgramWorkoutsListView
   EmptyView

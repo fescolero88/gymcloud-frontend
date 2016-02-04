@@ -7,6 +7,7 @@ define [
   './other'
   './personal_properties'
   './program_templates'
+  './personal_programs'
   './users'
   './workout_templates'
   './personal_workouts'
