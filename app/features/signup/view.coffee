@@ -61,11 +61,6 @@ define [
         @ui.form.find('input[name="email"]').attr('disabled', 'disabled')
 
     createAccount: ->
-      unless feature.isEnabled('sign_up')
-        App.request 'messenger:show',
-          message: 'Sign up is temporarily disabled'
-          type: 'error'
-        return
       if @client
         @model.acceptInvite()
       else
