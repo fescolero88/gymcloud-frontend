@@ -37,7 +37,7 @@ define [
           '.tabs':
             observe: ['video_url', 'description']
             visible: (attributes) ->
-              _.all(attributes)
+              _.any(attributes)
 
     ui:
       workoutTabsContent: '.gc-workout-tab-content'
