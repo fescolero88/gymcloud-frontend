@@ -9,6 +9,8 @@ define ->
     error:
       unknown:
         '[e] Something went wrong'
+      mobile_only:
+        '[w] Currently this feature is only available on mobile'
 
     login:
       failed:

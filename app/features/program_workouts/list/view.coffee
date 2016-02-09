@@ -33,9 +33,10 @@ define [
       @trigger('actions:add', id)
 
     _addWorkoutToCollection: (id) ->
+      program = @collection.collection.program
       attrs =
-        program_template_id:
-          @collection.collection.program_template.get('id')
+        program_id: program.get('id')
+        program_type: program.type
         workout_template_id: parseInt(id)
         position: @collection.length + 1
         week_id: @options.weekId
@@ -45,7 +46,8 @@ define [
       programWorkout = childView.model
 
       newProgramWorkout = new ProgramWorkout
-        program_template_id: programWorkout.get('program_id')
+        program_id: programWorkout.get('program_id')
+        program_type: programWorkout.get('program_type')
         workout_template_id: programWorkout.get('workout_id')
         position: @collection.length + 1
         week_id: programWorkout.get('week_id')
@@ -55,7 +57,8 @@ define [
 
     _onCreate: ->
       newProgramWorkout = new ProgramWorkout
-        program_template_id: @model.get('id')
+        program_id: @model.get('id')
+        program_type: @model.type
         position: @collection.length + 1
         week_id: @options.weekId
 

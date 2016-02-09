@@ -35,6 +35,10 @@ define [
             observe: 'name'
             events: ['blur']
           'label input': 'is_visible'
+          'a[data-action]':
+            observe: 'program_type'
+            visible: (value) ->
+              value is 'ProgramTemplate'
 
       regioned:
         views: [

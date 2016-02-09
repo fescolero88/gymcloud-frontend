@@ -42,6 +42,7 @@ define [
       @collection.addExercise
         exercise_id: id
         workout_id: @model.get('id')
+        workout_type: @model.type
         order_name: @collection.length + 1
         position: @collection.length + 1
 

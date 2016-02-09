@@ -15,8 +15,12 @@ define [
     className: 'program-action-panel row'
 
     behaviors:
-      author_widget: true
-      privacy_button: true
+      author_widget:
+        enabled: ->
+          @view.options.model.type is 'ProgramTemplate'
+      privacy_button:
+        enabled: ->
+          @view.options.model.type is 'ProgramTemplate'
 
       stickit:
         model: -> @data
@@ -72,7 +76,8 @@ define [
 
     _addWorkoutToCollection: (id) ->
       @model.workouts.create
-        program_template_id: @model.get('id')
+        program_id: @model.get('id')
+        program_type: @model.type
         workout_template_id: id
         position: @model.workouts.length + 1
       ,
@@ -82,6 +87,7 @@ define [
       position = @model.weeks.length + 1
       @model.weeks.create
         program_id: @model.get('id')
+        program_type: @model.type
         position: position
         name: "Week #{position}"
       ,

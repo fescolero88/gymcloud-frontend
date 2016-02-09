@@ -78,7 +78,8 @@ define [
       workout.save().then =>
         model = new ProgramWorkout
           workout_template_id: workout.id
-          program_template_id: @program.id
+          program_id: @program.get('id')
+          program_type: @program.type
         model.isInWeek = isInWeek
         model.save().then =>
           @collection.add(model)
@@ -87,7 +88,8 @@ define [
     addProgramWorkoutFromLibrary: (workoutId, isInWeek = false) ->
       model = new ProgramWorkout
         workout_template_id: workoutId
-        program_template_id: @program.id
+        program_id: @program.get('id')
+        program_type: @program.type
         position: @collection.length + 1
 
       model.isInWeek = isInWeek

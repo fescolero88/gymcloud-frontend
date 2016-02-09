@@ -20,7 +20,10 @@ define ->
 
     initialize: ->
       super
-      @isEnabled = _.result(@, 'enabled')
+      @isEnabled = if _.has(@options, 'enabled')
+        _.bind(@options.enabled, @)()
+      else
+        _.result(@, 'enabled')
       @_initRegion()
       _.bindAll @, [
         '_initBehaviorView'
