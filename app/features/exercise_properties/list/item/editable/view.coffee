@@ -37,7 +37,7 @@ define [
     events: ->
       'click @ui.removePropertyButton': '_removeProperty'
       'focusout': _.debounce(@saveOnBlur, 200)
-      'keypress @ui.selectedPropertyValue': '_saveOnEnter'
+      'keypress @ui.selectedPropertyValue': '_handleKeyPress'
       'click @ui.savePropertyButton': '_saveProperty'
 
     onShow: ->
@@ -57,10 +57,19 @@ define [
         personal_property: model.attributes
       @ui.selectedPropertyValue.focus()
 
-    _saveOnEnter: (e) ->
-      if e.which is 13
-        e.preventDefault()
+    _handleKeyPress: (ev) ->
+      @_saveOnEnter(ev) or @_typeAllowedChars(ev)
+
+    _saveOnEnter: (ev) ->
+      if ev.which is 13
+        ev.preventDefault()
         @_saveProperty()
+        false
+
+    _typeAllowedChars: (ev) ->
+      char = String.fromCharCode(ev.keyCode || ev.which)
+      re = /[\d]/i
+      return false if not char.match(re)
 
     _saveProperty: ->
       @model.save({}, {wait: true}).then ->
