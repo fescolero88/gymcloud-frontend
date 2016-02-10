@@ -19,7 +19,7 @@ define [
       @redirect() if @isMobile() and @shouldRedirect()
 
     redirect: ->
-      id = setTimeout (->
+      id = setTimeout (=>
         window.location.replace(@url)
       ), 5000
       document.addEventListener 'visibilitychange', ->
