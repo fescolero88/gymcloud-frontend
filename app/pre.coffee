@@ -7,4 +7,5 @@ define [
 ) ->
 
   new RedirectToMobile
-    path: config.mobile.url
+    appPath: config.mobile.app
+    appUrl: config.mobile.url

@@ -7,17 +7,24 @@ define [
   class RedirectToMobile
 
     constructor: (options) ->
-      @path = options.path
+      @path = options.appPath
+      @url = options.appUrl
+      @hash = window.location.hash
       @agent = window.navigator.userAgent
       @md = new MobileDetect(@agent)
       @check()
       @
 
     check: ->
-      @redirect()  if @isMobile() and @shouldRedirect()
+      @redirect() if @isMobile() and @shouldRedirect()
 
     redirect: ->
-      window.location.replace(@path)
+      id = setTimeout (->
+        window.location.replace(@url)
+      ), 5000
+      document.addEventListener 'visibilitychange', ->
+        clearTimeout(id)
+      window.location.replace(@path + @hash)
 
     isMobile: ->
       !! @md.mobile()
