@@ -7,6 +7,7 @@ define [
   'behaviors/redirect_back_on_destroy'
   'behaviors/regioned'
   'behaviors/stickit'
+  'behaviors/mobile_only_features'
   'features/actions_dropdown/behavior'
   'features/add_to_library/button/behavior'
   'features/author/widget/behavior'
