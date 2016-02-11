@@ -12,7 +12,7 @@ define [
 
     template: template
 
-    className: 'program-action-panel row'
+    className: 'program-action-panel'
 
     behaviors:
       author_widget:

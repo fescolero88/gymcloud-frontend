@@ -9,6 +9,8 @@ define [
 
     template: template
 
+    className: 'gc-clients-list-wrapper gc-assign-list'
+
     childView: ClientItemView
 
     childViewContainer: 'ul'

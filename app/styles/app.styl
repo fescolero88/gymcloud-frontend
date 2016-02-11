@@ -71,12 +71,13 @@ body
 .gc-main-workspace
 
   .gc-workspace-content
-    top 50px
-    bottom 0
-    left 0
-    overflow-y auto
-    overflow-x hidden
-    width 100%
+    position: absolute
+    top: 50px
+    bottom: 0
+    left: 0
+    right: 0
+    overflow-y: auto
+    overflow-x: hidden
     height: calc(100% - 114px)
 
 .gc-client-list
@@ -91,3 +92,6 @@ body
 .gc-clientpage-exercises
   max-height 100%
   overflow auto
+
+#client-header-region
+  padding: 0 15px

@@ -8,6 +8,8 @@ define [
 
     template: template
 
+    className: 'gc-box-content'
+
     behaviors:
       privacy_toggle: true
       delete_button: true
