@@ -29,22 +29,25 @@ define [
           '.gc-property-value': 'value'
 
     ui: ->
+      value: '.gc-property-value'
       removePropertyButton: '.gc-remove'
-      selectedPropertyValue: '.gc-property-value'
       editPropertyControl: '.gc-property'
       savePropertyButton: '.gc-save'
 
     events: ->
       'click @ui.removePropertyButton': '_removeProperty'
       'focusout': _.debounce(@saveOnBlur, 200)
-      'keypress @ui.selectedPropertyValue': '_handleKeyPress'
+      'keypress @ui.value': '_handleKeyPress'
+      'paste @ui.value': '_handlePaste'
       'click @ui.savePropertyButton': '_saveProperty'
 
     onShow: ->
       @listenTo(@views.properties_select_box, 'selected', @selectProperty)
-      setTimeout =>
-        @ui.selectedPropertyValue.focus()
-      , 200
+      _.chain(@_selectValue).bind(@).delay(100)
+
+    _selectValue: ->
+      @ui.value.focus()
+      @ui.value.selectText()
 
     _removeProperty: (ev) ->
       ev.preventDefault()
@@ -55,7 +58,20 @@ define [
       @model.set
         personal_property_id: model.id
         personal_property: model.attributes
-      @ui.selectedPropertyValue.focus()
+      @ui.value.focus()
+
+    _handlePaste: (ev) ->
+      ev.preventDefault()
+      data = ev.clipboardData ||
+        ev.originalEvent.clipboardData ||
+        window.clipboardData
+      value = data
+        .getData('text')
+        .replace(/[^\d]/ig, '')
+        .substring(0, 5)
+      @model.set
+        value: value
+      false
 
     _handleKeyPress: (ev) ->
       @_saveOnEnter(ev) or @_typeAllowedChars(ev)
@@ -67,6 +83,7 @@ define [
         false
 
     _typeAllowedChars: (ev) ->
+      return false if ev.currentTarget.innerText.length >= 5
       char = String.fromCharCode(ev.keyCode || ev.which)
       re = /[\d]/i
       return false if not char.match(re)
