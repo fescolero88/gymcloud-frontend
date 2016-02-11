@@ -5,8 +5,10 @@
     h2.gc-breadcrumbs-title
       span.name
   .col-xs-12.col-sm-6.text-sm-right.buttons
-    button.btn.brn-primary Enter Results
-    button.btn.brn-primary Schedule
+    button.btn.brn-primary(data-mobile-only)
+      | Enter Results
+    button.btn.brn-primary(data-mobile-only)
+      | Schedule
 
 .gc-workspace-content
   region(data-name='page_content')

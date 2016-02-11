@@ -39,6 +39,10 @@ define [
             observe: 'state'
             visible: (value) ->
               value isnt 'autocomplete'
+          '.back-to-overview':
+            observe: 'person_id'
+            visible: (value) ->
+              @model.type is 'PersonalProgram'
 
       regioned:
         views: [
@@ -57,9 +61,12 @@ define [
     events:
       'click @ui.addWeekBtn': '_addWeek'
       'click @ui.addWorkoutBtn': '_showAutocomplete'
+      'click .back-to-overview': '_backToOverview'
 
     initialize: ->
       @data = new DataModel
+      @listenTo @model, 'change:person_id', =>
+        @data.set(person_id: @model.get('person_id'))
       @listenTo @model.weeks, 'reset add remove', =>
         @data.set(weeksCount: @model.weeks.length)
       @listenTo @model.workouts, 'reset add remove', =>
@@ -92,3 +99,7 @@ define [
         name: "Week #{position}"
       ,
         wait: true
+
+    _backToOverview: ->
+      path = "#personal_programs/#{@model.id}"
+      App.vent.trigger('redirect:to', path, replace: false)

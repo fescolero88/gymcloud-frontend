@@ -15,6 +15,7 @@ define [
     behaviors:
 
       navigate_back: true
+      mobile_only_features: true
       stickit:
         model: ->
           @model.get('data.model')
@@ -25,10 +26,6 @@ define [
 
     regions:
       page_content: 'region[data-name="page_content"]'
-
-    events:
-      'click .buttons button': ->
-        App.request('messenger:explain', 'error.mobile_only')
 
     initModel: ->
       new PersonalWorkout

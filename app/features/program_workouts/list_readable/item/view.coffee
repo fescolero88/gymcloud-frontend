@@ -16,6 +16,7 @@ define [
 
     behaviors:
 
+      mobile_only_features: true
       stickit:
         model: -> @model.workout
         bindings:
