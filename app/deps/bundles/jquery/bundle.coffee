@@ -1,5 +1,6 @@
 define [
   './original'
+  'deps/vendor/jquery.select_text'
   'selectize'
   'bootstrap'
   'jQuery.serializeObject'
