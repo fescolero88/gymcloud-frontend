@@ -38,4 +38,5 @@ define [
       @collection.initFromModel(@targetModel)
 
     _isEditable: (model) ->
-      !! model.get('folder_id')
+      userId = App.request('current_user_id')
+      !! model.get('folder_id') and model.get('author_id') is userId

@@ -15,3 +15,6 @@ define [
       model.get('is_public') and
       model.get('user_id') isnt user.get('id') and
       model.get('author_id') isnt user.get('id')
+
+    @can 'update', Exercise, (model) ->
+      model.get('author_id') is user.get('id')
