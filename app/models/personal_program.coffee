@@ -20,8 +20,8 @@ define [
       @_nestedModelsInit
         weeks: ProgramWeeks
         workouts: ProgramWorkouts
-      @weeks.personal_program = @
-      @workouts.personal_program = @
+      @weeks.program = @
+      @workouts.program = @
       super
 
     parse: (data) ->

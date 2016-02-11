@@ -19,6 +19,7 @@ define [
       attrs = _.pick args, [
         'exercise_id'
         'workout_id'
+        'workout_type'
         'order_name'
         'position'
       ]...

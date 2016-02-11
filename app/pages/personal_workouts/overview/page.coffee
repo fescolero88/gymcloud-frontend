@@ -26,6 +26,10 @@ define [
     regions:
       page_content: 'region[data-name="page_content"]'
 
+    events:
+      'click .buttons button': ->
+        App.request('messenger:explain', 'error.mobile_only')
+
     initModel: ->
       new PersonalWorkout
         id: @options.id
