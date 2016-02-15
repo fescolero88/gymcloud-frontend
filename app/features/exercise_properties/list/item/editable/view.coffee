@@ -83,8 +83,10 @@ define [
         false
 
     _typeAllowedChars: (ev) ->
-      return false if ev.currentTarget.innerText.length >= 5
-      char = String.fromCharCode(ev.keyCode || ev.which)
+      key = ev.keyCode || ev.which
+      return true if key in [8, 46]
+      return false if $(ev.currentTarget).text().length >= 5
+      char = String.fromCharCode(key)
       re = /[\d]/i
       return false if not char.match(re)
 
