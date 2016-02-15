@@ -96,7 +96,6 @@ define [
         type: 'PATCH'
         data: data
         cache: false
-        dataType: 'file'
         processData: false
         contentType: false
         dataType: 'json'
