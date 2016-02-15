@@ -32,14 +32,17 @@ define [
 
     removeClient: =>
       if @ui.checkbox.is(':checked')
-        @model.destroy()
+        @model.destroy(wait: true).then =>
+          App.request('current_user').clients.remove(@model.id)
 
     deleteSingle: (ev) =>
       # set name as full name to be recognized by
       # modal:confirm:delete
+
       @model.set('name', @model.fullName())
       App.request('modal:confirm:delete', @model).then =>
         @model.collection?.remove(@model)
+        App.request('current_user').clients.remove(@model.id)
 
     moveSingle: (ev) =>
       $(ev.currentTarget).closest('.row')
