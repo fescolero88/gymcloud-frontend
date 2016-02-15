@@ -38,7 +38,7 @@ define [
           'a[data-action]':
             observe: 'program_type'
             visible: (value) ->
-              value is 'ProgramTemplate'
+              @model.get('program_type') is 'ProgramTemplate'
 
       regioned:
         views: [
