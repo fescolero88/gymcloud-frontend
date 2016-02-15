@@ -3,19 +3,13 @@ define ->
   class Stats extends Backbone.Collection
 
     symbols:
-      client: [
-        'workout_exercises'
-        'personal_workouts'
-        'personal_programs'
-      ]
+      client: []
       pro: [
         'clients'
         'client_groups'
         'exercises'
         'workout_templates'
         'program_templates'
-        'personal_workouts'
-        'personal_programs'
       ]
 
     build: (user) ->
