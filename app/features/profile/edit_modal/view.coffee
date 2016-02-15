@@ -46,7 +46,6 @@ define [
       avatarInput: 'input[type="file"]'
 
     initialize: ->
-      window.view = @
       Backbone.Validation.bind(@)
       @previousAttributes = @model.toJSON()
 
@@ -100,5 +99,11 @@ define [
         dataType: 'file'
         processData: false
         contentType: false
-        success: (data) ->
-          model.set 'avatar_url', data.avatar_url
+        dataType: 'json'
+        success: (data) =>
+          @model.set 'avatar', data.avatar
+          user = App.request('current_user')
+          if @model.id is user.user_profile.id
+            user.set('user_profile.avatar': data.avatar)
+            user.set('user_profile.avatar.thumb.url': data.avatar.thumb.url)
+            user.user_profile.set('avatar': data.avatar)
