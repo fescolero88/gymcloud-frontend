@@ -23,11 +23,11 @@ define [
 
     initialize: ->
       @_updateUserProfileAttrs()
+      @listenTo @user_profile, 'reset change', =>
+        @set(user_profile: @user_profile.attributes)
 
     parse: (data) ->
-      user_profile = data.user_profile
       @_nestedModelsParseAll(data)
-      data.user_profile = user_profile
       data
 
     fullName: ->

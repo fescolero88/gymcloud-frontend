@@ -100,9 +100,6 @@ define [
         contentType: false
         dataType: 'json'
         success: (data) =>
-          @model.set 'avatar', data.avatar
-          user = App.request('current_user')
-          if @model.id is user.user_profile.id
-            user.set('user_profile.avatar': data.avatar)
-            user.set('user_profile.avatar.thumb.url': data.avatar.thumb.url)
-            user.user_profile.set('avatar': data.avatar)
+          @model.set(avatar: data.avatar)
+          profile = App.request('current_user').user_profile
+          profile.set('avatar': data.avatar) if @model.id is profile.id
