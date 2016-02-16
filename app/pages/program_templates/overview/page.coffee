@@ -61,8 +61,9 @@ define [
       @model.set('state.subpage', @options.state)
 
     initModel: ->
-      new ProgramTemplate
-        id: @options.id
+      user = App.request('current_user')
+      program_template = user.program_templates.get(@options.id)
+      program_template || new ProgramTemplate(id: @options.id)
 
     initViews: ->
       overview: ->

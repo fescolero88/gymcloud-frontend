@@ -46,8 +46,9 @@ define [
       page_content: 'region[data-name="page_content"]'
 
     initModel: ->
-      new Exercise
-        id: @options.id
+      user = App.request('current_user')
+      exercise = user.exercises.get(@options.id)
+      exercise || new Exercise(id: @options.id)
 
     initViews: ->
       overview: ->

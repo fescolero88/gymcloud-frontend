@@ -55,8 +55,9 @@ define [
       @model.set('state.subpage', @options.state)
 
     initModel: ->
-      new WorkoutTemplate
-        id: @options.id
+      user = App.request('current_user')
+      workout_template = user.workout_templates.get(@options.id)
+      workout_template || new WorkoutTemplate(id: @options.id)
 
     initViews: ->
       overview: ->
