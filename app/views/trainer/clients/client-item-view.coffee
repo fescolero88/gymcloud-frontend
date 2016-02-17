@@ -39,12 +39,12 @@ define [
                 "background-color: #{value}" if value
             ]
           '.gc-clients-list-client-link':
-              observe: [
-                'user_profile.first_name'
-                'user_profile.last_name'
-              ]
-              onGet: (values) ->
-                _.compact(values).join(' ')
+            observe: [
+              'user_profile.first_name'
+              'user_profile.last_name'
+            ]
+            onGet: (values) ->
+              _.compact(values).join(' ')
           '.gc-clients-list-avatar-wrapper img':
             attributes: [
                 name: 'src'
