@@ -12,9 +12,6 @@ define [
 
     className: 'row'
 
-    modelEvents:
-      change: 'render'
-
     ui:
       deleteSingle: '.gc-clients-list-client-delete'
       moveSingle: '.gc-clients-list-client-move'
@@ -26,29 +23,35 @@ define [
 
     behaviors:
       stickit:
+        model: ->
+          @model.user_profile
         bindings:
           '.gc-clients-list-avatar-wrapper':
             classes:
               'gc-clients-list-avatar-exist':
-                observe: 'user_profile.avatar.thumb.url'
+                observe: 'avatar'
+                onGet: (value) ->
+                  value?.thumb?.url
           '.gc-clients-list-avatar-wrapper':
             attributes: [
               name: 'style',
-              observe: 'user_profile.avatar_background_color',
+              observe: 'avatar_background_color',
               onGet: (value) ->
                 "background-color: #{value}" if value
             ]
           '.gc-clients-list-client-link':
             observe: [
-              'user_profile.first_name'
-              'user_profile.last_name'
+              'first_name'
+              'last_name'
             ]
             onGet: (values) ->
               _.compact(values).join(' ')
           '.gc-clients-list-avatar-wrapper img':
             attributes: [
                 name: 'src'
-                observe: 'user_profile.avatar.thumb.url'
+                observe: 'avatar'
+                onGet: (value) ->
+                  value?.thumb?.url
             ]
 
     initialize: ->
