@@ -6,7 +6,7 @@ define ->
              '#90a4ae', '#3398db']
 
   _initBgColor: ->
-    @listenTo this, 'change:id', ->
+    @listenTo @, 'change:id', ->
       bgColorIndex = @id % @bgColors.length
       value = @bgColors[bgColorIndex]
       @set('avatar_background_color', value, silent: true)
