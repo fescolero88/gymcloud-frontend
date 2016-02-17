@@ -22,8 +22,11 @@ define [
       super
 
     initialize: ->
-      @listenTo @user_profile, 'all', =>
+      @listenTo @user_profile, 'reset change', =>
         @set(user_profile: @user_profile.attributes)
+      @listenTo @user_profile, 'change:avatar', (model, value, options) =>
+        url = value?.thumb?.url
+        @trigger('change:user_profile.avatar.thumb.url', @, url, options)
       @_updateUserProfileAttrs()
 
     parse: (data) ->
