@@ -24,6 +24,33 @@ define [
       'click @ui.deleteSingle': 'deleteSingle'
       'click @ui.moveSingle': 'moveSingle'
 
+    behaviors:
+      stickit:
+        bindings:
+          '.gc-clients-list-avatar-wrapper':
+            classes:
+              'gc-clients-list-avatar-exist':
+                observe: 'user_profile.avatar.thumb.url'
+          '.gc-clients-list-avatar-wrapper':
+            attributes: [
+              name: 'style',
+              observe: 'user_profile.avatar_background_color',
+              onGet: (value) ->
+                "background-color: #{value}" if value
+            ]
+          '.gc-clients-list-client-link':
+              observe: [
+                'user_profile.first_name'
+                'user_profile.last_name'
+              ]
+              onGet: (values) ->
+                _.compact(values).join(' ')
+          '.gc-clients-list-avatar-wrapper img':
+            attributes: [
+                name: 'src'
+                observe: 'user_profile.avatar.thumb.url'
+            ]
+
     initialize: ->
       App.vent.on 'rm-client', @removeClient
 

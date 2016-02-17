@@ -22,9 +22,9 @@ define [
       super
 
     initialize: ->
-      @_updateUserProfileAttrs()
-      @listenTo @user_profile, 'reset change', =>
+      @listenTo @user_profile, 'all', =>
         @set(user_profile: @user_profile.attributes)
+      @_updateUserProfileAttrs()
 
     parse: (data) ->
       @_nestedModelsParseAll(data)
