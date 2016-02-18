@@ -3,11 +3,13 @@ define [
   './modules'
   'features/layouts/base/view'
   'features/layouts/main/view'
+  'modules/utils/hotjar'
 ], (
   initializers
   modules
   BaseLayoutView
   MainView
+  hotjar
 ) ->
 
   class Application extends Marionette.Application
@@ -57,6 +59,7 @@ define [
       defer.promise()
 
     _onStarted: ->
+      feature.isEnabled('hotjar') && hotjar.init()
 
     _initPromises: ->
       names = [

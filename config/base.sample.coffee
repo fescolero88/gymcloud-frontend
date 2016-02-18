@@ -16,6 +16,7 @@ defaults =
     rating_widget: enabled: false
     user_profile_progress: enabled: false
     user_account_type: enabled: false
+    hotjar: enabled: false
 
 module.exports =
 
@@ -39,12 +40,16 @@ module.exports =
     vendor:
       facebook: app_id: '444988735644338'
       google: client_id: '512657583504-f9e94bg98gfg0mavfqv84nqthv9o0acg.apps.googleusercontent.com'
+      hotjar:
+        hjid: 154712
+        hjsv: 5
     api: url: '//api.gymcloud.com'
     mobile:
       app: 'gymcloud://'
       url: '//mobile.gymcloud.com'
     features:
       sign_up: enabled: false
+      hotjar: enabled: true
 
   test: $.extend true, {}, defaults,
     api: url: ''
