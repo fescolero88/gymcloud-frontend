@@ -13,7 +13,10 @@ define [
     behaviors:
       stickit:
         bindings:
-          'a': 'name'
+          'a':
+            observe: ['name', 'global_property.unit']
+            onGet: ([name, unit]) ->
+              _.chain([name, unit]).compact().join(', ').value()
 
     triggers:
       'click a':

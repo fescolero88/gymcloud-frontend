@@ -1,6 +1,8 @@
-define ->
+define [
+  'backbone-nested'
+], ->
 
-  class PersonalProperty extends Backbone.Model
+  class PersonalProperty extends Backbone.NestedModel
 
     type: 'PersonalProperty'
 

@@ -10,6 +10,7 @@
     ul.dropdown-menu.gc-dropdown
       each property in properties
         li
-          a(href='#', data-id=property.id)=property.name
+          a(href='#', data-id=property.id).
+            #{property.name}, #{property.global_property.unit}
   button.btn.btn-sm.btn-primary.gc-custom.gc-remove
     | ×
