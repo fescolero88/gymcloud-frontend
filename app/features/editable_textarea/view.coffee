@@ -19,7 +19,7 @@ define [
           'textarea':
             observe: 'description'
             afterUpdate: ->
-              autosize.update(@ui.editor)
+              @_updateAutosizeDelayed()
             attributes: [
                 name: 'placeholder'
                 observe: 'description'
@@ -38,13 +38,16 @@ define [
     events:
       'blur @ui.editor': '_save'
 
+    initialize: ->
+      @_updateAutosizeDelayed = _.debounce(@_updateAutosize, 200)
+
     onBeforeRender: ->
       @model = @options.model()
       @listenToOnce @model, 'sync', ->
         @initialValue = @model.get('description')
 
-    onRender: ->
-      autosize(@ui.editor)
+    onShow: ->
+      @_updateAutosizeDelayed()
 
     onBeforeDestroy: ->
       autosize.destroy(@ui.editor)
@@ -56,3 +59,6 @@ define [
           @initialValue = @model.get('description')
         .fail =>
           @model.set(description: @initialValue)
+
+    _updateAutosize: ->
+      autosize(@ui.editor)
