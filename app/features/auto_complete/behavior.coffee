@@ -39,3 +39,4 @@ define [
         options: items
         onItemAdd: @options.onItemAdd
         render: @options.render
+        dropdownParent: 'body'
