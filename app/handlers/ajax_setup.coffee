@@ -9,14 +9,19 @@ define ->
       App.vent.trigger('ajax:complete', arguments...)
 
     $(document).ajaxError (event, jqxhr, settings, thrownError) ->
-      if jqxhr.status is 401 && '/login' != Backbone.history.fragment
-        Backbone.history.navigate('/login')
+      if jqxhr.status is 401
+        if 'login' != Backbone.history.fragment
+          Backbone.history.navigate('login')
+        else
+          message = jqxhr.responseJSON.error_description
+          App.request 'messenger:explain', 'message.error',
+            message: message
 
       if jqxhr.status is 403
         error = jqxhr.responseJSON.error
         error = error.join(', ') if _.isArray(error)
         message = error.replace( /\s+(\[.+\])/, '')
-        App.request 'messenger:explain', 'message:error',
+        App.request 'messenger:explain', 'message.error',
           message: message
 
     _.each ['Model', 'Collection'], (namespace) ->
