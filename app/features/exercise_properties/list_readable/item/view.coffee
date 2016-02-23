@@ -20,6 +20,6 @@ define [
             observe: ['personal_property', 'value']
             onGet: ([property, value]) ->
               if value
-                "#{property.name}: #{value} #{property.global_property.unit}"
+                "#{value} #{property.global_property.unit}"
               else
                 "#{property.name}"
