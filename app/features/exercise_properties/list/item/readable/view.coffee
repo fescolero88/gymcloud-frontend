@@ -17,10 +17,13 @@ define [
       stickit:
         bindings:
           '.gc-property-value-name-label':
-            observe: ['personal_property', 'value']
-            onGet: ([property, value]) ->
+            observe: ['personal_property', 'value', 'value2']
+            onGet: ([property, value, value2]) ->
               if value
-                "#{value} #{property.global_property.unit}"
+                if value2
+                  "#{value} - #{value2} #{property.global_property.unit}"
+                else
+                  "#{value} #{property.global_property.unit}"
               else
                 "#{property.name}"
 
