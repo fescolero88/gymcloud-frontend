@@ -26,7 +26,12 @@ define [
 
       stickit:
         bindings:
-          '.gc-property-value': 'value'
+          '.gc-property-value':
+            observe: ['value', 'value2']
+            onGet: ([value, value2]) ->
+              _.chain([value, value2]).compact().join('-').value()
+            onSet: (input) ->
+              input.split(/[-]*/)
 
     ui: ->
       value: '.gc-property-value'
@@ -65,12 +70,13 @@ define [
       data = ev.clipboardData ||
         ev.originalEvent.clipboardData ||
         window.clipboardData
-      value = data
+      [value, value2] = data
         .getData('text')
-        .replace(/[^\d]/ig, '')
-        .substring(0, 5)
+        .replace(/[^\d\-]/ig, '')
+        .split(/\s*\-\s*/)
       @model.set
         value: value
+        value2: value2
       false
 
     _handleKeyPress: (ev) ->
@@ -85,10 +91,14 @@ define [
     _typeAllowedChars: (ev) ->
       key = ev.keyCode || ev.which
       return true if key in [8, 46]
-      return false if $(ev.currentTarget).text().length >= 5
+      return false unless @_inputValuesLengthIsValid($(ev.currentTarget).text())
       char = String.fromCharCode(key)
-      re = /[\d]/i
+      re = /[\d\-]/i
       return false if not char.match(re)
+
+    _inputValuesLengthIsValid: (text) ->
+      _.all text.split(/\s*\-\s*/), (value) ->
+        value.length <= 4
 
     _saveProperty: ->
       @model.save({}, {wait: true}).then ->
