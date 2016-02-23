@@ -195,7 +195,7 @@ body.dragging *
     padding: 0
 
 .gc-nav-wrapper
-  height: 50px
+  min-height: 50px
   padding: 9px 15px 0 0
   margin-left: 0
   border-bottom: 1px solid rgba(40,45,48,0.1)
@@ -211,6 +211,12 @@ body.dragging *
 
   .gc-content-nav-back
     margin: 6px 5px
+    display block
+    float: left
+  
+  .gc-content-breadcrumbs
+    display block
+    overflow: hidden
 
   h2
     display: inline-block
@@ -226,6 +232,11 @@ body.dragging *
 
   .btn
     margin-left: 1rem
+
+.gc-nav-right-side
+  position: absolute
+  right: 15px
+  bottom: -1px
 
 .gc-nav-shadow
   box-shadow: 0px 5px 10px -8px rgba(143,143,143,1)
