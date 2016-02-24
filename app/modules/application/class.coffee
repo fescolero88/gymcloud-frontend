@@ -50,6 +50,7 @@ define [
       dfds = _.values(@promises)
       $.when(dfds...).done =>
         @_initHistory()
+        @_openProgramPresetsLoader()
         defer.resolve()
 
       defer.done =>
@@ -107,3 +108,8 @@ define [
 
     _startHistory: ->
       Backbone.history.start()
+
+    _openProgramPresetsLoader: ->
+      settings = @request('current_user').user_settings
+      if settings.id and !settings.get('is_presets_loaded')
+        @request('base:accountTypes')

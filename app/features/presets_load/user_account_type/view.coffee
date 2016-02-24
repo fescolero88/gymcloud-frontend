@@ -1,11 +1,9 @@
 define [
   './template'
   './list/view'
-  './collection'
 ], (
   template
   UserAccountTypeListView
-  UserAccountTypesCollection
 ) ->
 
   class AccountTypeModalView extends Marionette.LayoutView
@@ -18,10 +16,6 @@ define [
         views: [
             region: 'user_account_types'
             klass: UserAccountTypeListView
-            options: ->
-              collection = new UserAccountTypesCollection
-              collection.fetch()
-              collection: collection
         ]
 
     events:

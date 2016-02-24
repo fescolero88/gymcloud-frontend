@@ -98,9 +98,7 @@ define [
       user = App.request('current_user')
       collection = user[namespace]
       model = collection.get(model.get('id'))
-      if model
-        model.stopListening()
-        model.trigger('destroy', model, model.collection, {})
+      model.stopListening() if model
 
     _showPage: ->
       App.request('views:show', @)

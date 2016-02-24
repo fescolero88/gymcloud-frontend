@@ -99,4 +99,4 @@ define [
         url: params.url
         type: params.type || 'POST'
         contentType: params.contentType || 'application/json'
-        data: params.data || {}
+        data: params.data || '{}'

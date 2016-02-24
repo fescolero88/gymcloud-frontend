@@ -13,3 +13,4 @@ define ->
       user_account_type_name: ''
       units_system: 'imperial'
       is_tutorial_finished: false
+      is_presets_loaded: false

@@ -2,10 +2,14 @@ define [
   './template'
   './model'
   './user_account_type/view'
+  './program_presets_select/view'
+  './finish/view'
 ], (
   template
   Model
   UserAccountTypeView
+  ProgramPresetModalView
+  FinishModalView
 ) ->
 
   class PresetLoadModalView extends Marionette.LayoutView
@@ -17,17 +21,17 @@ define [
 
     availableViews:
       user_account_type: UserAccountTypeView
-
-    modelEvents:
-      'change:state': @_renderRegionView
+      program_presets_select: ProgramPresetModalView
+      finish: FinishModalView
 
     initialize: ->
       @model = new Model
+      @listenTo(@model, 'change:state', @_renderRegionView)
 
     onRender: ->
-      @_renderRegionView(@model.get('state'))
+      @_renderRegionView(@model, @model.get('state'))
 
-    _renderRegionView: (state) ->
+    _renderRegionView: (_model, state) ->
       @stopListening(@view) if @view
 
       View = @availableViews[state] || @availableViews['user_account_type']
@@ -39,7 +43,7 @@ define [
 
     _changeView: (direction) ->
       states = _.keys(@availableViews)
-      index = _.indexOf(states, @model)
+      index = _.indexOf(states, @model.get('state'))
       switch direction
         when 'next'
           newState = states[index + 1] || _.last(states)
