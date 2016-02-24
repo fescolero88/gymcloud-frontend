@@ -1,10 +1,12 @@
 define [
   './concerns/nested_models'
   'models/user_profile'
+  'models/user_settings'
   'backbone-nested'
 ], (
   NestedModelsConcern
   UserProfile
+  UserSettings
 ) ->
 
   class User extends Backbone.NestedModel
@@ -19,6 +21,7 @@ define [
     constructor: ->
       @_nestedModelsInit
         user_profile: UserProfile
+        user_settings: UserSettings
       super
 
     initialize: ->

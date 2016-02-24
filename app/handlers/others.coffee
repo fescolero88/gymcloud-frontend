@@ -2,14 +2,14 @@ define [
   'features/add_to_library/view'
   'views/trainer/workouts/workout_schedule_modal_view'
   'models/workout_schedule'
-  'views/trainer/account-type-modal-view'
+  'features/presets_load/view'
   'features/video/upload/view'
   'features/video/upload/model'
 ], (
   ModalAddToLibraryView
   WorkoutScheduleView
   WorkoutSchedule
-  AccountTypeModalView
+  PresetsLoadModalView
   VideoUploadModalView
   VideoModel
 ) ->
@@ -65,7 +65,7 @@ define [
         region.destroy()
 
     App.reqres.setHandler 'base:accountTypes', (data) ->
-      view = new AccountTypeModalView
+      view = new PresetsLoadModalView
 
       region = App.baseView.getRegion('modal')
       region.show(view)
