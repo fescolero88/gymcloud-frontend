@@ -42,7 +42,8 @@ define [
             observe: 'folder_id'
             updateModel: false
             attributes: [
-                'data-id': 'id'
+                observe: 'id'
+                name: 'data-id'
             ]
           '.gc-exercises-folder-icon':
             observe: 'folder_id'
