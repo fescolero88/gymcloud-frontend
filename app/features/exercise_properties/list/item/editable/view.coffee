@@ -31,7 +31,7 @@ define [
             onGet: ([value, value2]) ->
               _.chain([value, value2]).compact().join('-').value()
             onSet: (input) ->
-              input.split(/[-]*/)
+              input.split(/\-+/)
 
     ui: ->
       value: '.gc-property-value'
@@ -90,11 +90,19 @@ define [
 
     _typeAllowedChars: (ev) ->
       key = ev.keyCode || ev.which
-      return true if key in [8, 46]
-      return false unless @_inputValuesLengthIsValid($(ev.currentTarget).text())
       char = String.fromCharCode(key)
-      re = /[\d\-]/i
-      return false if not char.match(re)
+      currentValue = $(ev.currentTarget).text()
+
+      if key in [8, 46]
+        return true
+      else if not @_inputValuesLengthIsValid(currentValue)
+        return false
+      else if char.match(/[\-]/) and not currentValue.match(/[\d]+/)
+        return false
+      else if char.match(/[\-]/) and currentValue.match(/[\-]+/)
+        return false
+      if not char.match(/[\d\-]/i)
+        return false
 
     _inputValuesLengthIsValid: (text) ->
       _.all text.split(/\s*\-\s*/), (value) ->
