@@ -29,8 +29,8 @@ define [
           optionTemplate(item)
 
     onShow: ->
-      items = _.result @options, 'collection'
-      @ui.autocomplete.selectize
+      items = @_prepareItems()
+      $select = @ui.autocomplete.selectize
         hideSelected: @options.hideSelected
         valueField: @options.valueField
         labelField: @options.labelField
@@ -40,3 +40,21 @@ define [
         onItemAdd: @options.onItemAdd
         render: @options.render
         dropdownParent: 'body'
+      @control = $select[0].selectize
+
+    _prepareItems: ->
+      collection = _.result @options, 'collection'
+      if collection instanceof Backbone.Collection
+        @collection = collection
+        @listenTo(collection, 'reset add remove', @_updateOptionItems)
+        collection.map(@options.serealizeFn)
+      else
+        collection
+
+    _updateOptionItems: ->
+      return unless @control
+      items = @collection.map(@options.serealizeFn)
+      @control.clearOptions()
+      @control.addOption(items)
+      @control.refreshOptions(false)
+

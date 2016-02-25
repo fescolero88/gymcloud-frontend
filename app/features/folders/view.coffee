@@ -49,11 +49,12 @@ define [
         onItemAdd: (id, $item) =>
           Backbone.history.navigate("##{@typeName}/#{id}", trigger: true)
         collection: =>
-          App.request('current_user')[@typeName].map (item) ->
-            folder: item.folder?.name
-            id: item.get('id')
-            name: item.get('name')
-            label: item.get('name')
+          App.request('current_user')[@typeName]
+        serealizeFn: (item) ->
+          folder: item.folder?.name
+          id: item.get('id')
+          name: item.get('name')
+          label: item.get('name')
 
     templateHelpers: ->
       type: @typeName
