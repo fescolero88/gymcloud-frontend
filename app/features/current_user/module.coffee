@@ -1,9 +1,11 @@
 define [
   './model'
   './preload'
+  'deps/vendor/js.cookie'
 ], (
   CurrentUser
   preload
+  Cookies
 ) ->
 
   class Module extends Marionette.Module
@@ -31,12 +33,14 @@ define [
           permission is 'client' and !isPro
 
         'accessToken:set': (token) ->
+          Cookies.set('logged', true, {domain: 'gymcloud.com'})
           window.localStorage.setItem('accessToken', token)
 
         'accessToken:get': ->
           window.localStorage.getItem('accessToken')
 
         'accessToken:remove': ->
+          Cookies.set('logged', false, {domain: 'gymcloud.com'})
           window.localStorage.removeItem('accessToken')
 
         'auth:onSuccess': (data) =>
