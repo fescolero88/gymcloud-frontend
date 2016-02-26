@@ -6,7 +6,7 @@
     padding: 0
 
   .gc-account-type-item
-    padding: 8px 5px 4px
+    padding: 8px 5px 8px
     border: 1px solid #ededed
     border-radius: 4px
     margin-bottom: 10px
@@ -93,9 +93,21 @@
   display: inline-block
   padding: 7px 70px 7px
 
-.account-type-footer
+.account-type-footer,
+.account-preset-footer
   text-align center
   margin-bottom: 40px
+
+.account-preset-footer
+  padding: 50px 55px 15px !important
+  
+  span
+    display: block
+    text-align: left
+    color: #808080
+  
+    &:last-of-type
+      margin-bottom: 40px
 
 .account-type-modal
   width: 550px
@@ -104,4 +116,25 @@
   width: 29px
   height: 29px
   background: url('../images/select-acc.png')
-  
+
+.gc-account-preset-select
+  padding-left: 31px
+
+.gc-account-preset-title
+  text-align: center
+  margin-bottom: 40px
+  font-size: 19px
+
+.gc-account-preset-body
+  padding: 30px 55px 0 !important
+
+.gc-preset-prev-btn
+  border: none !important
+
+.gc-preset-next-btn
+  padding-right: 22px !important
+  padding-left: 22px !important
+
+.account-preset-close
+  margin-top 30px !important
+  margin-right 25px !important

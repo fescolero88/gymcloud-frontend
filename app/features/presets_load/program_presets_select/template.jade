@@ -1,17 +1,19 @@
-.modal-dialog.modal-md
+.modal-dialog.modal-md.account-type-modal
   .modal-content.gc-remove-modal
-    .modal-header
-      h4.modal-title
-        i.gc-enveloper-icon
+    .modal-header.account-type-header
+      i.gc-enveloper-icon
+      button.close.account-preset-close(data-dismiss="modal") 
+        | Close
+    .modal-body.gc-account-preset-body
+      h1.gc-account-preset-title
         | Program Selection
-    .modal-body
       region.account-type-list-region(data-name='presets')
-    .modal-footer
+    .modal-footer.account-preset-footer
       span
         | Nothing here hit your requirements?
       span
         | You can use Global Search in GymCloud to search for specific programs, workouts &amp; exercises that will fit you more.
-      a.btn.btn-primary.gc-custom.gc-change-account-type.prev
+      a.btn.btn-primary.gc-custom.gc-preset-prev-btn.prev
         | Previous
-      a.btn.btn-primary.gc-custom.gc-change-account-type.next
+      a.btn.btn-primary.gc-custom.gc-preset-next-btn.next
         | Next
