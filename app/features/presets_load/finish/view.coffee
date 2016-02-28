@@ -9,7 +9,7 @@ define [
     template: template
 
     events:
-      'click a.gc-change-account-type': '_close'
+      'click a.change-account-type': '_close'
 
     _close: ->
       settings = App.request('current_user').user_settings

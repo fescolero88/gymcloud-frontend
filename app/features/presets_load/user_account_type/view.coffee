@@ -19,7 +19,7 @@ define [
         ]
 
     events:
-      'click a.gc-change-account-type': '_goNext'
+      'click a.change-account-type': '_goNext'
 
     _goNext: ->
       @trigger('changeView', 'next')

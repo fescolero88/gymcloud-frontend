@@ -9,7 +9,7 @@ define [
 
     tagName: 'li'
 
-    className: 'gc-account-type-item'
+    className: 'account-type-item'
 
     events:
       'click': 'changeSelected'
@@ -22,7 +22,7 @@ define [
             classes:
               active: 'is_selected'
           'h5': 'name'
-          '.gc-account-selected':
+          '.account-selected':
             classes:
               assigned: 'is_selected'
 
