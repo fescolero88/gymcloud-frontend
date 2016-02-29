@@ -30,6 +30,10 @@ define ->
       @reset(data)
 
     _getCountBySymbol: (symbol, user) ->
+      if symbol is 'clients'
+        clients = user[symbol].filter (client) ->
+          client.id isnt user.id
+        return clients.length
       user[symbol].length
 
     _getTitleBySymbol: (symbol, count) ->
