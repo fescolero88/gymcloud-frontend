@@ -110,6 +110,7 @@ define [
       Backbone.history.start()
 
     _openProgramPresetsLoader: ->
-      settings = @request('current_user').user_settings
-      if settings.id and !settings.get('is_presets_loaded')
+      user = @request('current_user')
+      settings = user.user_settings
+      if user.get('is_pro') and !settings.get('is_presets_loaded')
         @request('base:accountTypes')
