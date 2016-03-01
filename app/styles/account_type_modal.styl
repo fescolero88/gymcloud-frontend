@@ -15,9 +15,10 @@
       margin-top 30px
       margin-right 25px
   
-  h4.account-type-title
+  h4.preset-modal-title
     font-size: 16px
     margin-top: 25px
+    float: left
     
   .account-type-body
     padding: 44px 55px 0
@@ -40,6 +41,7 @@
       padding: 0
 
     .account-type-item
+      height: 54px
       padding: 8px 5px 8px
       border: 1px solid #ededed
       border-radius: 4px
@@ -51,12 +53,12 @@
         box-shadow: inset 0 0 4px #3a99d8
 
     .account-selected
-      margin: 4px 40px
+      margin: 4px 40px 4px 20px
       display: none
       float: right
 
       i
-        margin: 5px 3px 5px
+        margin: 0 3px
 
       &.assigned
         display: block
@@ -146,6 +148,13 @@
     height: 144px
     background: url("../images/preset-whistle.png")
     margin: 0 auto 66px
+  
+  .status-icon
+    width: 29px
+    height: 29px
+    display: inline-block
+    background-image: url("../images/select-acc.png")
+    background-repeat: no-repeat
 
 
 .gc-acc-personal-trainer
