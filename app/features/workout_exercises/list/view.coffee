@@ -47,8 +47,10 @@ define [
         position: @collection.length + 1
 
     _redirectToExercises: ->
-      App.vent.trigger 'redirect:to', '#/exercises',
-        replace: false
+      setTimeout ->
+        App.vent.trigger 'redirect:to', '#/exercises',
+          replace: false
+      , 100
 
     _handleDropped: (el, target, source, sibling) ->
       @_updatePosition() if target is @el
