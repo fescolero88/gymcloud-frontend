@@ -28,10 +28,8 @@ define [
       stickit:
         bindings:
           '.gc-video-title':
-            observe: 'name'
+            observe: 'nameFormatted'
             updateModel: false
-            onGet: (value) ->
-              @_stripExtention(value)
           '.gc-video-icon':
             observe: 'filter'
             update: ($el, val, model, options) ->
@@ -64,7 +62,3 @@ define [
       return null unless duration
       format = if duration > 60 * 60 then 'HH:mm:ss' else 'mm:ss'
       moment.utc(duration * 1000).format(format)
-
-    _stripExtention: (name) ->
-      re = /\.(webm|mkv|flv|vob|mp4|m4v|avi|mpeg|mpg|3gp|mov)$/i
-      name.replace(re, '')

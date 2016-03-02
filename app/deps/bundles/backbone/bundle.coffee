@@ -4,6 +4,7 @@ define [
   'backbone.stickit'
   'backbone-virtual-collection'
   'backbone-nested'
+  'backbone-computedfields'
   'imports?Backbone=deps/bundles/backbone/original' +
     '&_=deps/bundles/underscore/original!backbone-validation'
 ], (

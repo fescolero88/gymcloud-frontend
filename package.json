@@ -65,6 +65,7 @@
   "dependencies": {
     "autosize": "^3.0.15",
     "backbone": "~1.2.3",
+    "backbone-computedfields": "0.0.12",
     "backbone-nested": "~2.0.4",
     "backbone-validation": "~0.11.5",
     "backbone-virtual-collection": "~0.6.9",

@@ -10,4 +10,6 @@ define [
 
   o_.mixin Inflections
   o_.mixin Strings.exports()
+  o_.wrap = o_.o_wrap
+  delete o_.o_wrap
   o_
