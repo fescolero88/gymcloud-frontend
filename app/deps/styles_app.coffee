@@ -32,6 +32,7 @@ define [
   'features/workout_exercises/list/styles'
   'features/modal/styles'
   'styles/account_type_modal'
+  'styles/new_client_modal'
   'features/collections_counters/styles'
   'features/actions_dropdown/styles'
   'features/folders/entity_list/styles'
