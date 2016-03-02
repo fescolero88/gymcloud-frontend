@@ -2,7 +2,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
 
   template: require('templates/trainer/clients/client-form-modal')
 
-  className: 'modal-dialog'
+  className: 'modal-dialog gc-client-modal'
 
   behaviors:
 
