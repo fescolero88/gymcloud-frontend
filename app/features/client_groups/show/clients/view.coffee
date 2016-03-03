@@ -23,6 +23,9 @@ define [
       checked: 'input[type=checkbox]:checked'
       removeForm: '.gc-remove-from-group-form'
 
+    initialize: ->
+      @listenTo(@, 'nav:delete', @showRemoveClient)
+
     onShow: ->
       @initSearchSelect()
 

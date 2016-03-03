@@ -1,6 +1,7 @@
 define [
   './auth'
   './clients'
+  './client_groups'
   './dashboard'
   './exercises'
   './folders'
