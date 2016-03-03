@@ -60,7 +60,11 @@
                   | First name
                   span.gc-req *
                 label.gc-error-message
-                input.form-control(name='first_name', type='text')
+                input.form-control(
+                  name='first_name'
+                  type='text'
+                  maxlength='20'
+                )
                 span.gc-valid-icon.fa.fa-check.hide
           .row
             .col-xs-12
@@ -69,28 +73,45 @@
                   | Last name
                   span.gc-req *
                 label.gc-error-message
-                input.form-control(name='last_name', type='text')
+                input.form-control(
+                  name='last_name'
+                  type='text'
+                  maxlength='20'
+                )
                 span.gc-valid-icon.fa.fa-check.hide
           .row
             .col-xs-12
               .form-group
                 label(for='email')
                   | Email
-                input.form-control(name='email', type='text', disabled)
+                input.form-control(
+                  name='email'
+                  type='text'
+                  disabled
+                  maxlength='50'
+                )
           .row
             .col-xs-8
               .form-group
                 label(for='location')
                   | Location
                 label.gc-error-message
-                input.form-control(name='location', type='text')
+                input.form-control(
+                  name='location'
+                  type='text'
+                  maxlength='50'
+                )
                 span.gc-valid-icon.fa.fa-check.hide
             .col-xs-4
               .form-group
                 label(for='zip')
                   | ZIP
                 label.gc-error-message
-                input.form-control(name='zip', type='text')
+                input.form-control(
+                  name='zip'
+                  type='text'
+                  maxlength='10'
+                )
                 span.gc-valid-icon.fa.fa-check.hide
           .row
             .col-xs-12
@@ -98,7 +119,11 @@
                 label(for='employer')
                   | Employer
                 label.gc-error-message
-                input.form-control(name='employer', type='text')
+                input.form-control(
+                  name='employer'
+                  type='text'
+                  maxlength='50'
+                )
                 span.gc-valid-icon.fa.fa-check.hide
           .row
             .col-xs-6
