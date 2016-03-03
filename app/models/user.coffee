@@ -18,6 +18,15 @@ define [
     defaults:
       user_profile: {}
 
+    computed: ->
+      full_name:
+        depends: [
+          'user_profile.full_name',
+        ]
+        get: (attrs) ->
+          attrs['user_profile.full_name']
+        toJSON: false
+
     constructor: ->
       @_nestedModelsInit
         user_profile: UserProfile
@@ -25,6 +34,7 @@ define [
       super
 
     initialize: ->
+      @computedFields = new Backbone.ComputedFields(@)
       @listenTo @user_profile, 'reset change', =>
         @set(user_profile: @user_profile.attributes)
       @listenTo @user_profile, 'change:avatar', (model, value, options) =>

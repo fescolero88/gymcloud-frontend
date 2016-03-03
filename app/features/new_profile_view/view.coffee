@@ -34,13 +34,12 @@ define [
           'input[name="height"]': 'height'
           'input[name="bodyfat"]': 'bodyfat'
           'input[name="first_name"]': 'first_name'
-          '.name span.first': 'first_name'
           'input[name="last_name"]': 'last_name'
-          '.name span.last': 'last_name'
           'input[name="location"]': 'location'
           'input[name="zip"]': 'zip'
           'input[name="employer"]': 'employer'
           'input[name="birthday"]': 'birthday'
+          '.name': 'full_name'
           '.avatar':
             attributes: [
               name: 'style'

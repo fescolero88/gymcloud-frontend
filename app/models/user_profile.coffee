@@ -17,6 +17,19 @@ define [
         large: url: ''
         thumb: url: ''
 
+    computed: ->
+      full_name:
+        depends: [
+          'first_name',
+          'last_name'
+        ]
+        get: (attrs) ->
+          _.compact([
+            attrs['first_name']
+            attrs['last_name']
+          ]).join(' ')
+        toJSON: false
+
     validation:
 
       first_name:
@@ -49,6 +62,7 @@ define [
 
     initialize: ->
       super
+      @computedFields = new Backbone.ComputedFields(@)
       @_initBgColor()
 
   _.extend(UserProfile::, AvatarBackgroundColor)

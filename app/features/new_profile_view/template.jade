@@ -8,8 +8,6 @@
     .profile-progress
 
   .name
-    span.first
-    span.last
 
   .avatar
     .image-container
@@ -63,7 +61,7 @@
       | First name
       span.gc-req *
     label.gc-error-message
-    input.form-control(name='first_name', type='text')
+    input.form-control(name='first_name', type='text', maxlength='20')
     span.gc-valid-icon.fa.fa-check.hide
 
   .form-group
@@ -71,7 +69,7 @@
       | Last name
       span.gc-req *
     label.gc-error-message
-    input.form-control(name='last_name', type='text')
+    input.form-control(name='last_name', type='text', maxlength='20')
     span.gc-valid-icon.fa.fa-check.hide
 
   .form-group
@@ -79,7 +77,7 @@
       | Email
       span.gc-req *
     label.gc-error-message
-    input.form-control(name='email', type='text', disabled)
+    input.form-control(name='email', type='text', disabled, maxlength='50')
     span.gc-valid-icon.fa.fa-check.hide
 
   .row
