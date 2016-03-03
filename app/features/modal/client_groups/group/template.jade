@@ -26,7 +26,12 @@
                   | Group name 
                   span.gc-req *
                 label.gc-error-message
-                input.form-control(type='text', name='name', value=name)
+                input.form-control(
+                  type='text',
+                  name='name',
+                  maxlength=128,
+                  value=name
+                )
                 span.gc-valid-icon.fa.fa-check.hide
     .modal-footer
       .row

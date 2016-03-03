@@ -7,7 +7,7 @@ define ->
     tagName: 'span'
 
     events:
-      'keydown': '_preventEnter'
+      'keydown': '_onKeyDown'
 
     behaviors: ->
       stickit:
@@ -33,6 +33,18 @@ define ->
             @oldName = @model.get('name')
           .fail (_xhr, _textStatus, _errorThrown) =>
             @model.set(name: @oldName)
+
+    _onKeyDown: (ev) ->
+      @_preventEnter(ev)
+
+      key = ev.keyCode || ev.which
+      currentValue = $(ev.currentTarget).text()
+
+      if key in [8, 46]
+        return true
+      else if currentValue.length > 64
+        ev.preventDefault()
+        return false
 
     _preventEnter: (ev) ->
       if ev.which in [13, 27]
