@@ -53,11 +53,9 @@ define [
                   "Search #{name}"
             ]
       auto_complete:
-        onItemAdd: ((view) ->
-          (value, $item) ->
-            @clear()
-            view.trigger('quick_add:chosen', value, $item)
-        )(@)
+        onItemAdd: (value, $item, selectize) ->
+          selectize.clear()
+          @trigger('quick_add:chosen', value, $item)
         collection: ((view) ->
           result = view.options.collection
             .map (item) ->

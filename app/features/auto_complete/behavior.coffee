@@ -29,6 +29,7 @@ define [
           optionTemplate(item)
 
     onShow: ->
+      behavior = @
       items = @_prepareItems()
       $select = @ui.autocomplete.selectize
         hideSelected: @options.hideSelected
@@ -37,7 +38,10 @@ define [
         sortField: @options.sortField
         searchField: @options.searchField
         options: items
-        onItemAdd: @options.onItemAdd
+        onItemAdd: (value, $item) ->
+          func = behavior.options.onItemAdd
+          _.bind(func, behavior.view, value, $item, @)()
+          return
         render: @options.render
         dropdownParent: 'body'
       @control = $select[0].selectize

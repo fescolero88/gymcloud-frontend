@@ -34,12 +34,10 @@ define [
         ]
 
       auto_complete:
-        onItemAdd: ((view) ->
-          (id, $item) ->
-            @destroy()
-            path = "#{view.options.typeName}/#{id}"
-            App.vent.trigger('redirect:to', path, replace: false)
-        )(@)
+        onItemAdd: (id, $item, selectize) ->
+          path = "#{@options.typeName}/#{id}"
+          App.vent.trigger('redirect:to', path, replace: false)
+          selectize.close()
         collection: =>
           @collection
         serealizeFn: (item) ->
