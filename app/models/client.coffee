@@ -9,3 +9,18 @@ define [
     type: 'Client'
 
     urlRoot: '/clients'
+
+    computed:
+      name:
+        toJSON: false
+        depends: [
+          'first_name'
+          'last_name'
+        ]
+        get: (fields) ->
+          _.compact([fields.first_name, fields.last_name]).join(' ')
+        set: (value, fields) ->
+          [fields.first_name, fields.last_name] = value.split(' ')
+
+    initialize: ->
+      @computedFields = new Backbone.ComputedFields(@)

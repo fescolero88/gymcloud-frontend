@@ -10,6 +10,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
 
   events:
     'submit @ui.clientForm': 'submitClientForm'
+    'click button[data-action="invite"]': '_saveAndInvite'
     'change .gc-edit-profile-modal-upload-input': 'showThumbnail'
     'blur form input': 'validateInput'
 
@@ -43,8 +44,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
           .attr('src', e.target.result)
       reader.readAsDataURL(input.files[0])
 
-  submitClientForm: (ev) =>
-    @avatar = $(ev.target).find('input[type=file]')
+  submitClientForm: (ev, invite = false) =>
     formData = @ui.clientForm.serializeObject()
     for key, value of formData
       if key in ['weight, height, bodyfat']
@@ -52,9 +52,37 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
       if not value
         delete formData[key]
     @model.set(formData)
-    if @model.isValid true
-      @model.save().then (_response) =>
-        @model.user_profile.save(formData, wait: true)
+    return unless @model.isValid true
+    request = @model.save()
+    request.fail(@_onRequestFail)
+    if invite
+      request.then (response) =>
+        @_inviteClient(response.email)
+
+  _saveAndInvite: (ev) ->
+    ev.preventDefault()
+    ev.stopImmediatePropagation()
+    email = _.trim(@$el.find("input[name='email']").val())
+    if email
+      @submitClientForm(ev, true)
+    else
+      App.request 'messenger:explain', 'message.error',
+        message: 'Email is required'
+
+  _inviteClient: (email) ->
+    @model.invite(email)
+      .then ->
+        App.request('messenger:explain', 'user.invitation.sent')
+      .fail(@_onRequestFail)
+
+  _onRequestFail: (xhr, error, errorType) ->
+    try
+      error = xhr.responseJSON.error
+      message = _.humanize(error.join(', '))
+    catch error
+      message = errorType
+    App.request 'messenger:explain', 'message.error',
+      message: message
 
   onSync: (model, response, options) ->
     @trigger 'modal:close'
