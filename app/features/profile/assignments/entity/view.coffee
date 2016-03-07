@@ -16,7 +16,7 @@ define [
 
     behaviors: ->
       auto_complete:
-        onItemAdd: (id) =>
+        onItemAdd: (id) ->
           Backbone.history.navigate("#{@viewType}/#{id}", trigger: true)
         collection: =>
           @collection.map (item) =>

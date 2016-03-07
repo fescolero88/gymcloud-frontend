@@ -46,7 +46,7 @@ define [
       breadcrumbs: true
 
       auto_complete:
-        onItemAdd: (id, $item) =>
+        onItemAdd: (id, $item) ->
           Backbone.history.navigate("##{@typeName}/#{id}", trigger: true)
         collection: =>
           App.request('current_user')[@typeName]

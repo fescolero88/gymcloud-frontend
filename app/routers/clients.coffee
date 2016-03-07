@@ -6,7 +6,7 @@ define [
   'views/trainer/clients/clients-view'
   'views/trainer/clients/client-list-view'
   'views/trainer/clients/group-list-view'
-  'features/client_groups/show/view'
+  'views/trainer/clients/client-group-view'
 ], (
   Client
   ClientGroup
@@ -27,13 +27,8 @@ define [
       'clients/id/:id/:assign(/)': 'client'
       'clients/id/:id/:assign/:key(/)': 'client'
 
-      'client_groups/id/:id/:assign(/)': 'group'
-      'client_groups/id/:id/:assign/:key(/)': 'group'
-
       'tr/me/:assign(/)': 'me'
       'tr/me/:assign/:key(/)': 'me'
-
-      'client_groups/:id(/)': 'clientGroupShow'
 
   class Controller extends Marionette.Controller
 
@@ -49,24 +44,9 @@ define [
     client: (id, assign, key) ->
       @clientOrGroup 'clients', id, assign, key
 
-    group: (id, assign, key) ->
-      @clientOrGroup 'client_groups', id, assign, key
-
     me: (assign, key) ->
       assign = assign || 'exercises'
       @clientOrGroup 'clients', 0, assign, key
-
-    clientGroupShow: (id) ->
-      user = App.request('current_user')
-      clientGroup = user.client_groups.get(id)
-      clientGroup ||= new ClientGroup(id: id)
-
-      clientGroup.fetch()
-      view = new ClientGroupView
-        itemModel: clientGroup
-        model: clientGroup
-        itemId: id
-      @_showView(view)
 
     renderClientList: (uid, viewType) ->
       view = new ClientsView

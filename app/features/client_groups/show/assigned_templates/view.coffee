@@ -1,22 +1,47 @@
 define [
-  './item/view'
+  './list/view'
+  './template'
 ], (
-  AssignedTemplateItemView
+  AssignedTemplateListView
+  template
 ) ->
 
-  class AssignedTemplatesListView extends Marionette.CollectionView
+  class AssignedTemplatesLayoutView extends Marionette.LayoutView
 
-    tagName: 'ul'
+    template: template
 
-    className: 'gc-folders-entity-list'
+    className: 'gc-exercises-assign'
 
-    childView: AssignedTemplateItemView
+    behaviors: ->
 
-    childViewOptions: ->
-      clientGroup: @model
+      stickit:
+        bindings:
+          'input.gc-exercises-assign-input':
+            attributes: [
+                name: 'placeholder'
+                observe: 'name'
+                onGet: (value) ->
+                  name = _.humanize(@options.typeName)
+                  "Search through assigned #{name}"
+            ]
 
-    initialize: (data) ->
-      @request = @collection.fetch()
+      regioned:
+        views: [
+            region: 'list'
+            klass: AssignedTemplateListView
+            options: ->
+              collection: @collection
+        ]
 
-    onBeforeDestroy: ->
-      @request?.abort?()
+      auto_complete:
+        onItemAdd: (id, $item, selectize) ->
+          path = "#{@options.typeName}/#{id}"
+          App.vent.trigger('redirect:to', path, replace: false)
+          selectize.close()
+        collection: =>
+          @collection
+        serealizeFn: (item) ->
+          folder: item.folder?.name
+          id: item.get('id')
+          name: item.get('name')
+          label: item.get('name')
