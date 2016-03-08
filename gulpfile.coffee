@@ -99,7 +99,10 @@ gulp.task 'lint', [
 
 gulp.task 'lint:coffee', ->
   gulp
-    .src('./app/**/*.coffee')
+    .src([
+      './app/**/*.coffee'
+      '!./app/modules/utils/freshdesk.coffee'
+    ])
     .pipe(coffeelint('./coffeelint.json'))
     .pipe(coffeelint.reporter(stylish))
     .pipe(coffeelint.reporter('failOnWarning'))

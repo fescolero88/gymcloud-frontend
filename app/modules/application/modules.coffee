@@ -9,6 +9,7 @@ define [
   'features/modal/confirm/module'
   'features/modal/client_groups/module'
   'features/drag_n_drop/module'
+  'modules/utils/freshdesk'
 ], (
   AllRouters
   CurrentUserModule
@@ -20,6 +21,7 @@ define [
   ModalConfirmModule
   ModalClientGroupModule
   DragNDropModule
+  FreshDeskModule
 ) ->
 
   (app) ->
@@ -34,3 +36,4 @@ define [
     app.module 'ModalConfirm', ModalConfirmModule
     app.module 'ClientGroupModal', ModalClientGroupModule
     app.module 'DragNDrop', DragNDropModule
+    app.module 'FreshDesk', FreshDeskModule
