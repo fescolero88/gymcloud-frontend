@@ -33,7 +33,9 @@
     .tab-pane.active(data-pane='description')
       region(data-name='editable_textarea')
     .tab-pane(data-pane='video')
-      region(data-name='video_assigned')
+      .row
+        .col-md-4
+          region(data-name='video_assigned')
     //- .tab-pane(data-pane='warmups')
       .gc-workout-empty-warmups
         p
