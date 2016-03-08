@@ -47,7 +47,9 @@ define [
     _onEdit: ->
       App.request 'modal:confirm',
         title: "Edit #{@model.get('name')}?"
-        content: "Use it to adjust specific client's program."
+        content:
+          "You are editing ONLY the client's copy of this program. " +
+          'Select UPDATE to continue.'
         confirmBtn: 'Update'
         confirmCallBack: =>
           path = "#personal_programs/#{@model.id}/edit"
