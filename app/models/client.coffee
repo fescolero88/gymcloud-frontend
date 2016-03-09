@@ -20,7 +20,7 @@ define [
         get: (fields) ->
           _.compact([fields.first_name, fields.last_name]).join(' ')
         set: (value, fields) ->
-          [fields.first_name, fields.last_name] = value.split(' ')
+          [fields.first_name, fields.last_name] = _.compact(value.split(' '))
 
     initialize: ->
       @computedFields = new Backbone.ComputedFields(@)

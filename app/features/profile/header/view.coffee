@@ -14,10 +14,9 @@ define [
 
     template: template
 
-    autoRender: false
+    id: 'client-header-region'
 
     modelEvents:
-      'sync': 'render'
       'model:invite:success': 'onInvite'
       'model:invite:fail': 'onInviteFail'
 
@@ -37,8 +36,7 @@ define [
                 observe: 'avatar'
                 name: 'class'
                 onGet: (value) ->
-                  if _.any(value.large.url)
-                    'gc-usercard-avatar-exist'
+                  'gc-usercard-avatar-exist' if _.any(value.large.url)
             ]
           'img.gc-usercard-avatar':
             attributes: [
@@ -69,8 +67,15 @@ define [
               date = moment(value)
               if date.isValid() then date.fromNow(true) else '-'
 
+      regioned:
+        views: [
+            region: 'client_form'
+            klass: ProfileEditModalView
+            options: ->
+              model: @model.user_profile
+        ]
+
     regions:
-      clientForm: '#gc-edit-client-modal'
       sendMessageForm: '#gc-send-message-modal'
 
     ui:
@@ -85,17 +90,13 @@ define [
       isMyProfile: @_isMyProfile()
 
     initialize: ->
-      @modal = new ProfileEditModalView
-        model: @model.user_profile
 
-      @listenTo @modal, 'modal:close', =>
+    onShow: ->
+      @listenTo @views.client_form, 'modal:close', =>
         @ui.clientFormModal.modal('hide')
-      @listenTo(@modal, 'avatarChange', @render)
 
-    onRender: ->
-      @getRegion('clientForm').show(@modal)
       @ui.clientFormModal.on 'hidden.bs.modal', (_ev) =>
-        @model.user_profile.set(@modal.previousAttributes)
+        @model.user_profile.set(@views.client_form.previousAttributes)
 
     onDestroy: ->
       @ui.clientFormModal.off('hidden.bs.modal')
@@ -126,11 +127,12 @@ define [
       App.request('messenger:explain', 'user.invitation.sent')
 
     onInviteFail: (error) ->
-      if error?
-        $input = @ui.inviteForm.find('input[name=email]')
-        $inputGroup = $input.closest('.form-group')
-        $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
-        $inputGroup.find('.gc-error-message').text(error)
+      return unless error
+
+      $input = @ui.inviteForm.find('input[name=email]')
+      $inputGroup = $input.closest('.form-group')
+      $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
+      $inputGroup.find('.gc-error-message').text(error)
 
     showClientEditModal: (ev) ->
       @ui.clientFormModal.modal('show')
