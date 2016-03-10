@@ -3,6 +3,7 @@ define [
   'app/features/current_user/model'
   './namespaces/exercises'
   './namespaces/workout_templates'
+  './namespaces/program_templates'
   './namespaces/personal_workouts'
   './namespaces/personal_programs'
 ], (
@@ -10,6 +11,7 @@ define [
   User
   exercises
   workout_templates
+  program_templates
   personal_workouts
   personal_programs
 ) ->
@@ -17,6 +19,7 @@ define [
   namespaces = [
     exercises
     workout_templates
+    program_templates
     personal_workouts
     personal_programs
   ]
