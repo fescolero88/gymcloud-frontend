@@ -116,12 +116,22 @@ module.exports =
       {
         test: /\.css$/
         # loader: 'style!css'
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader', publicPath: '')
+        loader:
+          ExtractTextPlugin.extract(
+            'style-loader',
+            'css-loader',
+            publicPath: ''
+          )
       }
       {
         test: /\.styl$/
         # loader: 'style!css!stylus'
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!stylus-loader', publicPath: '')
+        loader:
+          ExtractTextPlugin.extract(
+            'style-loader',
+            'css-loader!postcss-loader!stylus-loader',
+            publicPath: ''
+          )
       }
       {
         test: /\.scss$/
