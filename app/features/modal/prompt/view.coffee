@@ -4,9 +4,11 @@ define [
   template
 ) ->
 
-  class ModalConfirmView extends Marionette.ItemView
+  class ModalPromptView extends Marionette.ItemView
 
     template: template
+
+    className: 'modal-dialog modal-md'
 
     ui:
       confirmButton: '.confirm'
@@ -23,7 +25,6 @@ define [
         bindings:
           '.title': 'title'
           'input': 'prompt'
-          '.modal-body p': 'content'
           '.gc-rm-buttons .confirm': 'confirmBtn'
 
     initialize: (data)->

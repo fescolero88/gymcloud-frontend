@@ -53,8 +53,10 @@ define [
           name: 'Assign new one'
 
         onItemAdd: (id, $item, selectize) ->
-          @_assign(id) if id
-          @_assignNewOne() unless id
+          intId = parseInt(id, 10)
+          @_assign(id) if intId
+          @_assignNewOne() unless intId
+
           selectize.clear()
           selectize.close()
 
@@ -102,7 +104,6 @@ define [
       type = _.singularize @options.viewType.split('_')[1]
       App.request 'modal:prompt',
         title: "Assign new #{type}"
-        content: "Choose new name for new #{type}"
         confirmBtn: 'Assign'
         confirmCallBack: _.bind(@_assignNewOneConfirmCallBack, @)
         cancelCallBack: -> # nothing
