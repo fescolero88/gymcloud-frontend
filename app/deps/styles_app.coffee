@@ -43,4 +43,5 @@ define [
   'styles/components/zzz_all'
   'styles/zzz_override'
   'styles/print'
+  'modules/utils/freshdesk.styl'
 ], ->
