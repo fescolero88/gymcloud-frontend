@@ -42,4 +42,5 @@ define [
   'features/user_authentications/styles'
   'styles/components/zzz_all'
   'styles/zzz_override'
+  'styles/print'
 ], ->
