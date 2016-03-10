@@ -22,6 +22,8 @@ define [
       collection: undefined
       onItemAdd: undefined
       onLoad: undefined
+      defaultOption: undefined
+      serealizeFn: ->
       render:
         item: (item, escape) ->
           itemTemplate(item)
@@ -46,19 +48,37 @@ define [
         dropdownParent: 'body'
       @control = $select[0].selectize
 
+    onDestroy: ->
+      @control.destroy()
+
     _prepareItems: ->
-      collection = _.result @options, 'collection'
-      if collection instanceof Backbone.Collection
-        @collection = collection
-        @listenTo(collection, 'reset add remove', @_updateOptionItems)
-        collection.map(@options.serealizeFn)
-      else
-        collection
+      items = _.result @options, 'collection'
+
+      if items instanceof Backbone.Collection
+        items = @_prepareCollection(items)
+
+      @_addDefaultOption(items)
+
+      items
+
+    _prepareCollection: (items) ->
+      @collection = items
+      @listenTo(@collection, 'reset add remove', @_updateOptionItems)
+      @collection.map(@options.serealizeFn)
 
     _updateOptionItems: ->
       return unless @control
       items = @collection.map(@options.serealizeFn)
+      @_addDefaultOption(items)
       @control.clearOptions()
       @control.addOption(items)
       @control.refreshOptions(false)
+
+    _addDefaultOption: (items) ->
+      return unless @options.defaultOption
+      items.unshift
+        id: 0
+        name: @options.defaultOption.name || 'CREATE NEW'
+        icon: @options.defaultOption.icon || 'gc-icon-exercises-add'
+        sort_id: @options.defaultOption.sort_id || '~-1-sort'
 

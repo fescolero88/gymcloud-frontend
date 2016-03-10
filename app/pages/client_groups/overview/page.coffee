@@ -31,11 +31,11 @@ define [
             title: 'Members'
             active: true
           ,
-            id: 'workouts'
-            title: 'Workouts'
-          ,
             id: 'programs'
             title: 'Programs'
+          ,
+            id: 'workouts'
+            title: 'Workouts'
         ]
 
       regioned:

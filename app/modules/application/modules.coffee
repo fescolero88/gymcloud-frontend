@@ -7,6 +7,7 @@ define [
   'features/sidebar/module'
   'features/search/module'
   'features/modal/confirm/module'
+  'features/modal/prompt/module'
   'features/modal/client_groups/module'
   'features/drag_n_drop/module'
   'modules/utils/freshdesk'
@@ -19,6 +20,7 @@ define [
   SidebarModule
   SearchModule
   ModalConfirmModule
+  ModalPromptModule
   ModalClientGroupModule
   DragNDropModule
   FreshDeskModule
@@ -34,6 +36,7 @@ define [
     app.module 'Messenger', MessengerModule
     app.module 'Search', SearchModule
     app.module 'ModalConfirm', ModalConfirmModule
+    app.module 'ModalPrompt', ModalPromptModule
     app.module 'ClientGroupModal', ModalClientGroupModule
     app.module 'DragNDrop', DragNDropModule
     app.module 'FreshDesk', FreshDeskModule
