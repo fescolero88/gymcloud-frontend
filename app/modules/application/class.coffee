@@ -2,13 +2,11 @@ define [
   './initializers'
   './modules'
   'features/layouts/base/view'
-  'features/layouts/main/view'
   'modules/utils/hotjar'
 ], (
   initializers
   modules
   BaseLayoutView
-  MainView
   hotjar
 ) ->
 
