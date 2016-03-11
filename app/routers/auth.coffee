@@ -72,11 +72,6 @@ define [
           model: new AccountModel
           client: client
         @_showView(view)
-
-        @listenTo view, 'signup:complete', ->
-          App.request('current_user').fetch().then ->
-            App.request('current_user:init:collections').then ->
-              App.vent.trigger('redirect:to', '#')
       else
         App.vent.trigger('redirect:to', '#')
 

@@ -66,7 +66,7 @@ define [
 
               # update user profile once access token is received
               @_updateUserProfile user_profile_id, (userProfileResponse) =>
-                @trigger 'account:created', userProfileResponse
+                @trigger 'account:created', response, userProfileResponse
 
             loginModel.login()
 

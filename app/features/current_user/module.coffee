@@ -50,6 +50,10 @@ define [
               @app.request('current_user:init:collections')
                 .then =>
                   @app.vent.trigger('redirect:to', '#')
+                  user = @app.request('current_user')
+                  settings = user.user_settings
+                  if user.get('is_pro') and !settings.get('is_presets_loaded')
+                    @app.request('base:accountTypes')
 
     _initUserHandlers: ->
       @app.reqres.setHandlers

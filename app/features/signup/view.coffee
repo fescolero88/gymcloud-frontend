@@ -66,5 +66,6 @@ define [
       else
         @model.createAccount()
 
-    onAccountCreated: ->
+    onAccountCreated: (data, _userProfile)->
+      App.request('auth:onSuccess', data)
       @trigger 'signup:complete'
