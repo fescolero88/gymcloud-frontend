@@ -102,9 +102,10 @@ define [
 
     _assignNewOne: ->
       type = _.singularize @options.viewType.split('_')[1]
+      username = @model.user_profile.get('full_name')
       App.request 'modal:prompt',
-        title: "Assign new #{type}"
-        confirmBtn: 'Assign'
+        title: "Create new #{type} for #{username}"
+        confirmBtn: 'Create'
         confirmCallBack: _.bind(@_assignNewOneConfirmCallBack, @)
         cancelCallBack: -> # nothing
 
