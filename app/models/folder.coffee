@@ -100,10 +100,10 @@ define [
         Exercises:
           collectionName: 'exercises'
           modelClass: Exercise
-        Workouts:
+        'Workout Templates':
           collectionName: 'workout_templates'
           modelClass: WorkoutTemplate
-        Programs:
+        'Program Templates':
           collectionName: 'program_templates'
           modelClass: ProgramTemplate
       }[folder_name]

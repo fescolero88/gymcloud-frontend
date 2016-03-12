@@ -53,10 +53,10 @@ define ->
           id = @_getRootFolderId('Exercises', user)
           "#exercises_folder/#{id}"
         workout_templates: =>
-          id = @_getRootFolderId('Workouts', user)
+          id = @_getRootFolderId('Workout Templates', user)
           "#workout_templates_folder/#{id}"
         program_templates: =>
-          id = @_getRootFolderId('Programs', user)
+          id = @_getRootFolderId('Program Templates', user)
           "#program_templates_folder/#{id}"
         workout_exercises: ->
           '#workout_exercises'

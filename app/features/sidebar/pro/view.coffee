@@ -31,8 +31,8 @@ define [
       typeByName = (name) ->
         {
           Exercises: 'exercises'
-          Workouts: 'workout_templates'
-          Programs: 'program_templates'
+          'Workout Templates': 'workout_templates'
+          'Program Templates': 'program_templates'
         }[name]
 
       user = App.request('current_user')
