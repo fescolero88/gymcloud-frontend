@@ -3,7 +3,7 @@ a.row.toggle-menu(href="##{type}/")
     - iconName = type.split('_')[1]
     span.gc-sidebar-cat-icon(class="fix-bg-img-icon-#{iconName}")
   span.col-xs-8.gc-sidebar-cat-name
-    = _.chain(type).humanize().words().last().value()
+    = _.humanize(type)
   .col-xs-2.toggle-it
     .gc-menu-item-arrow.toggle-it
 .gc-sidebar-sub
