@@ -5,6 +5,9 @@
   list-style-type: none
 
   .gc-folder, .gc-folder-item
+    display: flex
+    flex-wrap: nowrap
+    justify-content: space-between
     list-style-type: none
     border-bottom: 1px solid #ededed
     padding: 15px
@@ -18,9 +21,29 @@
     &.padding-0
       padding: 0
 
+    .item
+      display: flex
+      justify-content: flex-start
+      align-items: center
+
+      .gc-exercises-chb
+        position: initial
+        margin: 0 5px
+        padding: 0
+        width: auto
+        height: auto
+
+      .gc-exercises-item-icon
+        height: 20px
+
+      .gc-exercises-folder-icon
+        margin: 0 5px
+        width: 23px
+        height: 13px
+
   .gc-exercises-link
     display: inline-block
-    width: 100%
+    width: calc(100% - 60px)
     margin: 0
     white-space: nowrap
     overflow: hidden
@@ -34,6 +57,3 @@
   .gc-exercises-link:active,
   .gc-exercises-link:focus
     color: #282d30
-
-  >li
-    margin: 20px 0 18px
