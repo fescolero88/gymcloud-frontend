@@ -21,7 +21,13 @@
                 label(for='name')
                   | Name
                 label.gc-error-message
-                input.form-control(name='name', type='text', maxlength='128', value=name, placeholder='Name')
+                input.form-control(
+                  name='name'
+                  type='text'
+                  maxlength='128'
+                  value=name
+                  placeholder='e.g. John Smith'
+                )
                 span.gc-valid-icon.fa.fa-check.hide
           .row
             .col-xs-12
@@ -29,7 +35,12 @@
                 label(for='email')
                   | Email
                 label.gc-error-message
-                input.form-control(name='email', type='text', value=email, placeholder='Email')
+                input.form-control(
+                  name='email'
+                  type='email'
+                  value=email
+                  placeholder='Email'
+                )
                 span.gc-valid-icon.fa.fa-check.hide
     .modal-footer
       .row

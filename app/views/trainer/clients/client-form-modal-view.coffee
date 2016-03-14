@@ -57,7 +57,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
     request.fail(@_onRequestFail)
     if invite
       request.then (response) =>
-        @_inviteClient(response.email)
+        @_inviteClient(@model.get('email'))
 
   _saveAndInvite: (ev) ->
     ev.preventDefault()

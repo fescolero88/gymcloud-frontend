@@ -10,6 +10,12 @@ define [
 
     urlRoot: '/clients'
 
+    validation:
+      email:
+        required: true
+        pattern: 'email'
+        msg: 'Please enter a valid email'
+
     computed:
       name:
         toJSON: false
