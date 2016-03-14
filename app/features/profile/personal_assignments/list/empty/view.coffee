@@ -23,7 +23,7 @@ define [
                 onGet: (_value) ->
                   user = App.request('current_user')
                   rootFolder = user.library.first()
-                  name = _.humanize(@resources)
+                  name = @_templatesFolderName()
                   folder = rootFolder.nestedFolders.findWhere({name: name})
                   "/##{@resource}_templates_folder/#{folder.id}"
             ]
@@ -36,3 +36,9 @@ define [
         .value()
       @resource = name
       @resources = _.pluralize(name)
+
+    _templatesFolderName: ->
+      {
+        PersonalProgram: 'Program Templates'
+        PersonalWorkout: 'Workout Templates'
+      }[@options.type]
