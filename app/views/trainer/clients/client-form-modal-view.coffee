@@ -8,6 +8,11 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
 
     form_validation: true
 
+    stickit:
+      bindings:
+        'input[name="email"]': 'email'
+        'input[name="name"]': 'name'
+
   events:
     'submit @ui.clientForm': 'submitClientForm'
     'click button[data-action="invite"]': '_saveAndInvite'
@@ -29,10 +34,9 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
     $input = $(ev.target)
     input_name = $(ev.target).attr 'name'
     input_value = $(ev.target).val()
-    if input_value
-      $inputGroup = $input.closest('.form-group')
-      error_msg = @model.preValidate input_name, input_value
-      @trigger 'switchError', error_msg, $inputGroup
+    $inputGroup = $input.closest('.form-group')
+    error_msg = @model.preValidate input_name, input_value
+    @trigger 'switchError', error_msg, $inputGroup
 
   showThumbnail: (ev) ->
     input = ev.target
@@ -51,6 +55,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
         formData[key] = value.replace(/\,/g, '.')
       if not value
         delete formData[key]
+    formData.invite = invite
     @model.set(formData)
     return unless @model.isValid true
     request = @model.save()
@@ -62,12 +67,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
   _saveAndInvite: (ev) ->
     ev.preventDefault()
     ev.stopImmediatePropagation()
-    email = _.trim(@$el.find("input[name='email']").val())
-    if email
-      @submitClientForm(ev, true)
-    else
-      App.request 'messenger:explain', 'message.error',
-        message: 'Email is required'
+    @submitClientForm(ev, true)
 
   _inviteClient: (email) ->
     @model.invite(email)

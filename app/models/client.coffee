@@ -10,11 +10,19 @@ define [
 
     urlRoot: '/clients'
 
-    validation:
-      email:
-        required: true
-        pattern: 'email'
-        msg: 'Please enter a valid email'
+    validation: ->
+      obj =
+        name:
+          required: true
+          pattern: /\w+\s+\w+$/
+          msg: 'Please enter a first name and a last name'
+
+      if @get('invite') or !!@get('email')
+        obj.email =
+          required: true
+          pattern: 'email'
+          msg: 'Please enter a valid email'
+      obj
 
     computed:
       name:
