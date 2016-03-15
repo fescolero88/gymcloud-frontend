@@ -23,9 +23,24 @@ define [
       'clientAssignees'
     ]
 
+    behaviors:
+
+      stickit:
+        bindings:
+          '.gc-clients-list-client-link':
+            observe: 'full_name'
+            onGet: (value) ->
+              if @model.id == App.request('current_user_id')
+                'ME'
+              else
+                value
+          '.outdated':
+            observe: 'id'
+            onGet: ->
+              if @isOutdated
+                '(Outdated)'
+
     templateHelpers: =>
-      isMe: @_isMe()
-      isOutdated: @isOutdated
       isAssigned: @isAssigned
 
     initialize: (options) ->
@@ -41,9 +56,6 @@ define [
 
     toggleAssign: (ev) =>
       if @isAssigned then @_unassign() else @_assign()
-
-    _isMe: ->
-      @model.id == App.request('current_user_id')
 
     _unassign: ->
       @assignment.destroy().then =>

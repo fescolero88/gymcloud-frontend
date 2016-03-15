@@ -26,15 +26,21 @@ define [
 
     computed:
       name:
-        toJSON: false
         depends: [
           'first_name'
           'last_name'
         ]
-        get: (fields) ->
-          _.compact([fields.first_name, fields.last_name]).join(' ')
-        set: (value, fields) ->
-          [fields.first_name, fields.last_name] = _.compact(value.split(' '))
+        get: (attrs) ->
+          _.compact([
+            attrs['first_name']
+            attrs['last_name']
+          ]).join(' ')
+        set: (value, attrs) ->
+          [
+            attrs.first_name
+            attrs.last_name
+          ] = _.compact(value.split(' '))
+        toJSON: false
 
     initialize: ->
       @computedFields = new Backbone.ComputedFields(@)

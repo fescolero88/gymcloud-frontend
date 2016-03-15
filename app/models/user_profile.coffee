@@ -28,6 +28,11 @@ define [
             attrs['first_name']
             attrs['last_name']
           ]).join(' ')
+        set: (value, attrs) ->
+          [
+            attrs.first_name
+            attrs.last_name
+          ] = _.compact(value.split(' '))
         toJSON: false
 
     validation:

@@ -87,8 +87,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
   onSync: (model, response, options) ->
     @trigger 'modal:close'
     @trigger 'addToClientsCollection', model
-    clients = App.request('current_user').clients
-    clients.add(@model)
+    App.request('current_user').clients.add(@model)
 
   onAvatarUpdate: (response) ->
     @model.set 'avatar_url', data.avatar_url
@@ -96,5 +95,3 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
 
   onSyncError: (model, response, options) ->
     #todo implement sync error
-
-
