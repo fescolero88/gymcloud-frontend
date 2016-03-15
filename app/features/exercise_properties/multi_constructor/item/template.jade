@@ -2,15 +2,6 @@
   button.btn.btn-sm.btn-primary.gc-custom.gc-property-value-container
     i.gc-icon-bars
     span.gc-property-value(contenteditable='true')
-  .btn-group.dropup(role='group')
-    button.btn.btn-sm.btn-primary.gc-custom.dropdown-toggle(data-toggle='dropdown')
-      span.gc-selected-property=defaultProperty
-      i.fa.fa-sort
-    //- region
-    ul.dropdown-menu.gc-dropdown
-      each property in properties
-        li
-          a(href='#', data-id=property.id).
-            #{property.name}, #{property.global_property.unit}
+  region.select-box(data-name="properties_select_box")
   button.btn.btn-sm.btn-primary.gc-custom.gc-remove
     | ×
