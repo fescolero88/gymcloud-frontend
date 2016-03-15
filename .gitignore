@@ -1,4 +1,5 @@
 build/
+dist/
 static/
 node_modules/
 bower_components/

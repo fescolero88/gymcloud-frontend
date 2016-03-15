@@ -8,11 +8,11 @@
     "build": "gulp build",
     "lint": "gulp lint",
     "test": "karma start --single-run",
-    "start": "node server.js",
+    "start": "node dist/server.js",
     "lint:jade": "jade-lint app/**/*.jade"
   },
   "engines": {
-    "node": ">=0.12.0 <0.12.8"
+    "node": "5.8.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.1",
@@ -60,9 +60,7 @@
     "stylus-loader": "~1.5.1",
     "url-loader": "~0.5.7",
     "webpack": "~1.12.9",
-    "webpack-dev-server": "~1.14.1"
-  },
-  "dependencies": {
+    "webpack-dev-server": "~1.14.1",
     "autosize": "^3.0.15",
     "backbone": "~1.2.3",
     "backbone-computedfields": "0.0.12",
@@ -86,5 +84,8 @@
     "underscore": "~1.8.3",
     "underscore.inflections": "~0.2.1",
     "underscore.string": "~3.2.3"
+  },
+  "dependencies": {
+    "express": "~4.13.4"
   }
 }
