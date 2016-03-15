@@ -17,6 +17,7 @@ defaults =
     user_profile_progress: enabled: false
     user_account_type: enabled: false
     hotjar: enabled: false
+    freshdesk_widget: enabled: false
 
 module.exports =
 
@@ -50,6 +51,7 @@ module.exports =
     features:
       sign_up: enabled: false
       hotjar: enabled: true
+      freshdesk_widget: enabled: true
 
   test: $.extend true, {}, defaults,
     api: url: ''

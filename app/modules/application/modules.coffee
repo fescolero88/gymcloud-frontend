@@ -39,4 +39,5 @@ define [
     app.module 'ModalPrompt', ModalPromptModule
     app.module 'ClientGroupModal', ModalClientGroupModule
     app.module 'DragNDrop', DragNDropModule
-    app.module 'FreshDesk', FreshDeskModule
+    if feature.isEnabled('freshdesk_widget')
+      app.module 'FreshDesk', FreshDeskModule
