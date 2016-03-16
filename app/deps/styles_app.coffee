@@ -40,6 +40,7 @@ define [
   'features/exercise_properties/list/styles'
   'features/exercise_properties/multi_constructor/styles'
   'features/user_authentications/styles'
+  'features/properties/select_box/item/styles'
   'styles/components/zzz_all'
   'styles/zzz_override'
   'styles/print'

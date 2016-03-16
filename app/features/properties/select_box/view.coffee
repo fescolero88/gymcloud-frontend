@@ -10,7 +10,7 @@ define [
 
   class PropertiesSelectBoxView extends Marionette.CompositeView
 
-    className: 'btn-group'
+    className: 'gc-properties-select_box btn-group'
 
     attributes:
       role: 'group'
