@@ -23,6 +23,7 @@ define [
   'features/rating/widget/behavior'
   'features/video/assigned/behavior'
   'features/program_action_panel/behavior'
+  'features/exercise_properties/list/item/editable/behavior'
 ], ->
 
   klasses = _.toArray(arguments)
