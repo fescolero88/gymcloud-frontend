@@ -27,8 +27,8 @@ define [
                   'Start typing a description here...'
               ,
                 name: 'readonly'
-                observe: 'author_id'
-                onGet: (value) ->
+                observe: ['author_id', 'person_id']
+                onGet: (values) ->
                   !can('update', @model)
             ]
 
