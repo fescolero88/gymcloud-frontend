@@ -88,6 +88,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
     @trigger 'modal:close'
     @trigger 'addToClientsCollection', model
     App.request('current_user').clients.add(@model)
+    App.request('current_user').clients.fetch(reset: true)
 
   onAvatarUpdate: (response) ->
     @model.set 'avatar_url', data.avatar_url
