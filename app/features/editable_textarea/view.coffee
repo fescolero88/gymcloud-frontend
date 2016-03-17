@@ -31,6 +31,11 @@ define [
                 onGet: (values) ->
                   !can('update', @model)
             ]
+            classes:
+              'empty':
+                observe: 'description'
+                onGet: (value) ->
+                  "#{value}".length is 0
 
     ui:
       editor: 'textarea'
