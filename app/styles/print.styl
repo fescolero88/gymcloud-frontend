@@ -16,7 +16,9 @@
   .gc-program-workout-item .gc-workout-body-nav,
   .gc-workout-actions,
   .gc-btn-primary-outline,
-  .program-action-panel .widgets
+  .program-action-panel .widgets,
+  .gc-workout-exercise-note.empty,
+  .gc-description-editor.empty
     display: none !important
   
   .row-margin-v
@@ -122,6 +124,8 @@
   .gc-workout-exercise-name
     font-size: 21px
     font-weight: 700
+    width 58%
+    float: left
   
   .gc-workouts-exercises-view
     border: none
@@ -134,6 +138,7 @@
   
   .gc-property-item
     padding: 0
+    float: right
   
   .workout-exercise-properties
     padding: 0
@@ -149,6 +154,12 @@
   .gc-cell-property,
   .gc-exercise-details
     border-bottom: 1px solid #7c7c7c
+  
+  .gc-exercise-details
+    width 55%
+  
+  .gc-cell-property
+    width: 45%
   
   region[data-name='page_content']
     .col-md-12
