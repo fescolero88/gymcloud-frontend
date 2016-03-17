@@ -79,6 +79,11 @@ define [
           '.gc-workout-exercise-note':
             observe: 'note'
             events: ['blur']
+            classes:
+              'empty':
+                observe: 'note'
+                onGet: (value) ->
+                  "#{value}".length is 0
           '.gc-workout-exercise-name':
             observe: 'name'
             attributes: [
