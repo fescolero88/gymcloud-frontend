@@ -27,6 +27,14 @@ define [
 
       stickit:
         bindings:
+          '.glyphicon-ok':
+            observe: 'isAssigned'
+            attributes: [
+              name: 'data-id'
+              observe: 'id'
+            ]
+            visible: (value) ->
+              ! value
           '.gc-clients-list-client-link':
             observe: 'full_name'
             onGet: (value) ->
@@ -40,35 +48,32 @@ define [
               if @isOutdated
                 '(Outdated)'
 
-    templateHelpers: =>
-      isAssigned: @isAssigned
-
     initialize: (options) ->
       for option in @assignOptions
         @[option] = options[option]
 
       type = _.underscored(@entity.type)
       @assignedVersion = @assignment?.get("#{type}_template_version")
-      @isAssigned = !!@assignment
+      @model.set('isAssigned', !!@assignment)
       @isOutdated = @entity.get('version') > @assignedVersion
 
       @
 
-    toggleAssign: (ev) =>
-      if @isAssigned then @_unassign() else @_assign()
+    toggleAssign: ->
+      if @model.get('isAssigned') then @_unassign() else @_assign()
 
     _unassign: ->
       @assignment.destroy().then =>
         @assignment = null
         @assignedVersion = null
         @isOutdated = null
-        @isAssigned = false
+        @model.set('isAssigned', false)
         @_toggleAssignSuccess('unassign')
 
     _assign: ->
       @entity.assignTo(@model).then (response) =>
         @assignment = new PersonalWorkout(response)
-        @isAssigned = true
+        @model.set('isAssigned', true)
         @isOutdated = false
         @assignedVersion = @entity.get('version')
         @clientAssignees.add(@assignment)
@@ -80,4 +85,3 @@ define [
         App.request('messenger:explain', 'item.client.assigned', type: type)
       else
         App.request('messenger:explain', 'item.client.unassigned', type: type)
-      @render()
