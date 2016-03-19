@@ -41,6 +41,7 @@ define [
   'features/exercise_properties/multi_constructor/styles'
   'features/user_authentications/styles'
   'features/properties/select_box/item/styles'
+  'features/editable_textarea/styles'
   'styles/components/zzz_all'
   'styles/zzz_override'
   'styles/print'

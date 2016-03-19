@@ -10,12 +10,15 @@ define [
 
     template: template
 
-    className: 'form-group'
+    className: 'gc-editable-textarea form-group'
 
     behaviors:
 
       stickit:
         bindings: ->
+          '.content':
+            observe: 'description'
+            updateModel: false
           'textarea':
             observe: 'description'
             afterUpdate: ->
