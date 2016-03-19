@@ -11,3 +11,9 @@ define [
     tagName: 'li'
 
     className: 'gc-folder row'
+
+    behaviors:
+
+      stickit:
+        bindings: ->
+          'a': 'title'

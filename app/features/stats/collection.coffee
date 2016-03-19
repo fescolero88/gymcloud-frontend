@@ -23,14 +23,23 @@ define ->
         )
         .map((symbol) =>
           {
+            symbol: symbol
+            collection: user[symbol]
             count: count = @_getCountBySymbol(symbol, user)
             title: @_getTitleBySymbol(symbol, count)
             path: @_getPathBySymbol(symbol, user)
           }
         )
         .value()
-
       @reset(data)
+
+      @each (model) =>
+        collection = model.get('collection')
+        symbol = model.get('symbol')
+        @listenTo collection, 'add remove reset', =>
+          model.set
+            count: collection.length
+            title: @_getTitleBySymbol(symbol, collection.length)
 
     _getCountBySymbol: (symbol, user) ->
       if symbol is 'clients'
