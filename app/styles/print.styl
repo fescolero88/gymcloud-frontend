@@ -28,8 +28,6 @@
     
     textarea
       max-height: 100% !important
-      overflow: visible !important
-      height: 120px !important
       padding-left: 0
    
   .gc-workout-exercise-circle
@@ -112,11 +110,9 @@
       opacity: 0.5
      
      &:before 
-      content: 'Exercise'
       float: left
     
     &:after
-      content: 'Property'
       position: absolute
       right: 28px
   
@@ -164,6 +160,10 @@
     .col-md-12
       padding: 0
   
+  .form-control
+    font-size: 17px
+    color: #393939 !important
+  
   .gc-program-workout-item 
     
     .gc-workout-body
@@ -183,7 +183,7 @@
     padding: 10px 0
   
   .gc-workout-tab-content
-    .gc-editable-textarea
+    .form-control
       padding-left: 0
     
     .tab-pane
@@ -231,3 +231,10 @@
         .row-margin-v
           float: left
           width: 65%
+  
+  .gc-programs-weeks-list-container
+    .gc-program-workout-item
+      page-break-after: always
+  
+  .gc-program-week-item
+    border: none !important
