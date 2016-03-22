@@ -46,13 +46,34 @@ ul.gc-workout-exercises-list
     > .gc-exercises-cell.drag-area
       width: 10px
 
-    > .gc-exercises-cell.gc-cell-trash
-      width: 30px
-      text-align: right
+    > .gc-exercises-cell
 
-    > .gc-exercises-cell.gc-cell-add
-      width: 40px
-      text-align: right
+      &.gc-cell-trash,
+      &.gc-cell-add
+        display: none
+        width: 30px
+        text-align: right
+
+      &.gc-cell-add
+        width: 40px
+
+        &.gc-set-property-checkbox-wrapper
+          display: table-cell
+
+          .gc-alt-checkbox
+
+            input[type="checkbox"]:not(:checked):not(:hover) + .gc-checkbox-clone
+              width: 30px
+              height: 30px
+              border-color: #999
+              opacity: .5
+              background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAKCAMAAACzB5/1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADZQTFRFkZGRxMTE9vb2hoaGnp6ekpKSz8/PkJCQampqzs7O1NTUh4eH9fX11dXV+fn5xcXFbm5u////c3BhiwAAABJ0Uk5T//////////////////////8A4r+/EgAAAERJREFUeNpUzUkWgCAQxNASnEE097+sjbY8ye6vIn4dlzoN6oTG0nSC4vR6r0I5qjQhcjK7jOZlc1US0up6SJi/2S3AAG6qCCwZ67fkAAAAAElFTkSuQmCC')
+              background-position: center
+              background-repeat: no-repeat
+
+            input[type="checkbox"]:hover + .gc-checkbox-clone,
+            input[type="checkbox"]:checked + .gc-checkbox-clone
+              border-color: #3a99d8
 
     > .gc-clientpage-exercises-cell:first-child,
     > .gc-workout-exercise-circle-cell
@@ -117,6 +138,11 @@ ul.gc-workout-exercises-list
     opacity: 1
 
   li.hover-enabled
+
+    > .gc-cell-trash,
+    > .gc-cell-add
+      display: table-cell
+
     .gc-hover-hidden
       display: table-cell!important
 
