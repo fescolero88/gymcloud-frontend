@@ -18,6 +18,7 @@ defaults =
     user_account_type: enabled: false
     hotjar: enabled: false
     freshdesk_widget: enabled: false
+    google_analytics: enabled: false
 
 module.exports =
 
@@ -44,6 +45,8 @@ module.exports =
       hotjar:
         hjid: 154712
         hjsv: 5
+      google_analytics:
+        account: 'UA-74824574-3'
     api: url: '//api.gymcloud.com'
     mobile:
       app: 'gymcloud://'
@@ -52,6 +55,7 @@ module.exports =
       sign_up: enabled: false
       hotjar: enabled: true
       freshdesk_widget: enabled: true
+      google_analytics: enabled: true
 
   test: $.extend true, {}, defaults,
     api: url: ''

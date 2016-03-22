@@ -11,6 +11,7 @@ define [
   'features/modal/client_groups/module'
   'features/drag_n_drop/module'
   'modules/utils/freshdesk'
+  'modules/utils/google_analytics'
 ], (
   AllRouters
   CurrentUserModule
@@ -24,6 +25,7 @@ define [
   ModalClientGroupModule
   DragNDropModule
   FreshDeskModule
+  GoogleAnalyticsModule
 ) ->
 
   (app) ->
@@ -41,3 +43,5 @@ define [
     app.module 'DragNDrop', DragNDropModule
     if feature.isEnabled('freshdesk_widget')
       app.module 'FreshDesk', FreshDeskModule
+    if feature.isEnabled('google_analytics')
+      app.module 'GoogleAnalytics', GoogleAnalyticsModule
