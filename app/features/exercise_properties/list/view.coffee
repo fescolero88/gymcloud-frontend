@@ -1,9 +1,11 @@
 define [
   './item/readable/view'
   './item/editable/view'
+  './empty/view'
 ], (
   ItemReadableView
   ItemEditableView
+  EmptyView
 ) ->
 
   class ExercisePropertiesListView extends Marionette.CollectionView
@@ -11,6 +13,8 @@ define [
     tagName: 'ul'
 
     className: 'workout-exercise-properties'
+
+    emptyView: EmptyView
 
     getChildView: (model) =>
       if @editableStateId is model.cid
