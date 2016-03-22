@@ -47,6 +47,14 @@ define [
               user: @model.get('data.model')
         ]
 
+      stickit:
+        bindings: ->
+          '.gc-content-nav-add .title':
+            observe: 'state.subpage'
+            onGet: (value) ->
+              entityName = _.singularize(value)
+              "Add #{entityName}"
+
     events:
       'click .gc-content-nav-delete': '_deleteButtonClick'
       'click .gc-content-nav-add': '_assignNewOne'
