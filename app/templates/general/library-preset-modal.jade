@@ -6,7 +6,7 @@
           b Preload from our Library
         .row
           .col-sm-6
-            img(src='app/images/preset-intro.png', width='100%')
+            img(src=require('app/images/preset-intro.png'), width='100%')
           .col-sm-6
             p.gc-preset-desc
               | For the best gymcloud experience we recommend preloading you exercise workout, and program libaries
@@ -19,7 +19,7 @@
           | Yes
     .gc-step.gc-preset-step1
       .gc-preset-header.gc-bg-primary.clearfix
-        img.pull-left(src='app/images/preset-intro.png', width='80px')
+        img.pull-left(src=require('app/images/preset-intro.png'), width='80px')
         h4.title.pull-left
           b Step 1:
           | Title of the screen
@@ -45,7 +45,7 @@
           | Next
     .gc-step.gc-preset-step2
       .gc-preset-header.gc-bg-primary.clearfix
-        img.pull-left(src='app/images/preset-intro.png', width='80px')
+        img.pull-left(src=require('app/images/preset-intro.png'), width='80px')
         h4.title.pull-left
           b Step 2:
           | Title of the screen
@@ -77,7 +77,7 @@
       .gc-preset-body.gc-bg-primary
         h4.title
           | Congratulations, you have successfully preloaded you GymCloud library!
-        img(src='app/images/preset-whistle.png')
+        img(src=require('app/images/preset-whistle.png'))
         p
           | Are you ready to get started?
         a.btn.capitalize(href='#', data-dismiss='modal')

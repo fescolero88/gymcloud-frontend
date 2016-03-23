@@ -24,20 +24,29 @@ gulp.task 'build-dev', ['webpack:build-dev'], ->
   return
 
 # Production build
-gulp.task 'build', ['build:clean', 'webpack:build']
-gulp.task 'webpack:build', (callback) ->
+gulp.task 'build', [
+  'webpack:build'
+  'dist:prepare'
+]
+
+gulp.task 'webpack:build', ['build:clean'], (callback) ->
 
   # modify some webpack config options
   myConfig = Object.create(webpackConfig)
   myConfig.bail = true
-  myConfig.plugins = myConfig.plugins.concat(
-    new webpack.DefinePlugin(
-      'process.env':
-        NODE_ENV: JSON.stringify('production')
-    ),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin()
-  )
+  myConfig.plugins = myConfig.plugins.concat [
+      new webpack.DefinePlugin(
+        'process.env':
+          NODE_ENV: JSON.stringify('production')
+      )
+    ,
+      new webpack.optimize.DedupePlugin()
+    ,
+      new webpack.optimize.UglifyJsPlugin(
+        output:
+          comments: false
+      )
+  ]
 
   # run webpack
   gulp
@@ -51,7 +60,7 @@ gulp.task 'webpack:build', (callback) ->
           process.exit(1)
       )
     )
-    .pipe(gulpWebpack(myConfig))
+    .pipe(gulpWebpack(myConfig), webpack)
     .pipe(gulp.dest('build/'))
 
 # modify some webpack config options
@@ -114,16 +123,15 @@ gulp.task 'build:clean', ->
 
 gulp.task 'dist:clean', ->
   gulp
-    .src([
-      'dist/'
-    ])
+    .src('dist', read: false)
     .pipe(clean())
 
-gulp.task 'dist:prepare', ['dist:clean'], ->
+gulp.task 'dist:prepare', ['dist:clean', 'webpack:build'], ->
   gulp
     .src([
       'build/**'
       'index.html'
       'favicon.ico'
+      'server.js'
     ], base: '.')
     .pipe(gulp.dest('dist/'))
