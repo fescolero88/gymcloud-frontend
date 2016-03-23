@@ -17,6 +17,7 @@ define [
           pattern: /\w+\s+\w+$/
           msg: 'Please enter a first name and a last name'
         email:
+          required: false
           pattern: 'email'
           msg: 'Please enter a valid email'
 
