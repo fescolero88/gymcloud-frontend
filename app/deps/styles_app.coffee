@@ -39,6 +39,7 @@ define [
   'features/properties/list/styles'
   'features/exercise_properties/list/styles'
   'features/exercise_properties/multi_constructor/styles'
+  'features/property_unit_selector/styles'
   'features/user_authentications/styles'
   'features/properties/select_box/item/styles'
   'features/editable_textarea/styles'

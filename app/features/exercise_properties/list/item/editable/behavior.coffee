@@ -1,10 +1,12 @@
 define [
   'features/properties/select_box/view'
+  'features/property_unit_selector/view'
 ], (
   PropertiesSelectBox
+  PropertyUnitSelectorCollectionView
 ) ->
 
-  class BreadcrumbsBehavior extends Marionette.Behavior
+  class EditableExercisePropertyBehavior extends Marionette.Behavior
 
     key: 'editable_exercise_property'
 
@@ -23,6 +25,16 @@ define [
                 @model.get('personal_property')
 
               default_property: property
+          ,
+            region: 'property_unit_selector'
+            klass: PropertyUnitSelectorCollectionView
+            options: ->
+              property = if @model.isNew()
+                @_properties.first()
+              else
+                @model.personal_property
+
+              collection: property.property_units
         ]
 
       stickit:
