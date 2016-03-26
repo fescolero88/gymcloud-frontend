@@ -16,7 +16,9 @@ define [
             klass: PropertiesSelectBox
             options: ->
               property = if @model.isNew()
-                @_properties.first()?.attributes
+                name: 'Select property'
+                global_property:
+                  unit: ''
               else
                 @model.get('personal_property')
 
@@ -46,16 +48,18 @@ define [
 
     onShow: ->
       @listenTo(@view.views.properties_select_box, 'selected', @selectProperty)
-      if @view.model.isNew()
-        _.chain(@selectProperty).bind(@, @view._properties.first()).delay(100)
-      else
-        _.chain(@_selectValue).bind(@).delay(100)
+      _.chain(@_selectValue).bind(@).delay(100)
 
     selectProperty: (model) ->
+      unless @view.model.get('personal_property_id')
+        value = @view.model.get('value')
+        value2 = @view.model.get('value2')
       @view.model.set
         personal_property_id: model.id
         personal_property: model.attributes
         property_name: model.get('name')
+        value: value or null
+        value2: value2 or null
       @_selectValue()
 
     _removeProperty: (ev) ->

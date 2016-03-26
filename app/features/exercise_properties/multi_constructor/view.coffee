@@ -64,5 +64,6 @@ define [
       @collection.add({})
 
     assignProperties: ->
-      @trigger('multi_constructor:assign', @collection.models)
+      models = @collection.filter (model) -> !!model.get('personal_property_id')
+      @trigger('multi_constructor:assign', models)
       @collection.reset()
