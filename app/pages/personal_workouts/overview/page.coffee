@@ -44,6 +44,10 @@ define [
             path = "#personal_workouts/#{model.id}/edit"
             App.vent.trigger('redirect:to', path, replace: false)
 
+
+    init: ->
+      @_redirectToEditIfEmpty()
+
     initModel: ->
       new PersonalWorkout
         id: @options.id
@@ -52,3 +56,11 @@ define [
       overview: ->
         new OverviewView
           model: @model.get('data.model')
+
+    _redirectToEditIfEmpty: ->
+      model = @model.get('data.model')
+      @listenToOnce model, 'sync', ->
+        if can('update', model) and model.exercises.isEmpty()
+          App.request('messenger:explain', 'personal_workout.empty')
+          path = "#personal_workouts/#{model.id}/edit"
+          App.vent.trigger('redirect:to', path)

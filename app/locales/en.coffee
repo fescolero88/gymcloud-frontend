@@ -120,3 +120,7 @@ define ->
     personal_program:
       empty:
         'Program should contain some workouts'
+
+    personal_workout:
+      empty:
+        'Workout should contain some exercises'
