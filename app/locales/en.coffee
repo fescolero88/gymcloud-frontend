@@ -116,3 +116,7 @@ define ->
 
     personal_best:
       added: 'New personal best added'
+
+    personal_program:
+      empty:
+        'Program should contain some workouts'

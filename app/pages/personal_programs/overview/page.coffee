@@ -30,6 +30,7 @@ define [
 
     init: ->
       @model.set('state.subpage', @options.state)
+      @_redirectToEditIfEmpty()
 
     initModel: ->
       new PersonalProgram
@@ -39,3 +40,11 @@ define [
       overview: ->
         new OverviewView
           model: @model.get('data.model')
+
+    _redirectToEditIfEmpty: ->
+      model = @model.get('data.model')
+      @listenToOnce model, 'sync', ->
+        if can('update', model) and model.workouts.isEmpty()
+          App.request('messenger:explain', 'personal_program.empty')
+          path = "#personal_programs/#{model.id}/edit"
+          App.vent.trigger('redirect:to', path)
