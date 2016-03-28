@@ -34,7 +34,7 @@ define [
               observe: 'id'
             ]
             visible: (value) ->
-              ! value
+              !!value
           '.gc-clients-list-client-link':
             observe: 'full_name'
             onGet: (value) ->
