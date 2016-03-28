@@ -9,7 +9,7 @@ define [
     template: itemViewTpl
 
     tagName: 'li'
-    className: 'gc-folder row'
+    className: 'row gc-folder'
 
     initialize: (options) =>
       @dataType = options.dataType
