@@ -1,0 +1,13 @@
+.col-xs-12
+  a.gc-exercises-link(href="##{dataType}/#{id}")
+    span.gc-client-item-icon(class="gc-client-item-icon-#{dataType}")
+    = name
+  if isExercises(dataType)
+    | FROM
+    a.gc-exercises-link(href="#personal_workouts/#{workout_id}")
+      = workout_name
+  if isExercises(dataType)
+    .col-xs-12.text-right
+      a.btn.btn-link.gc-exercises-assign-btn(href='#') Schedule
+      |     
+      a.btn.btn-link.gc-exercises-assign-btn(href='#') Enter results

@@ -32,7 +32,7 @@ define [
 
       'workout_exercises(/)': 'workoutExercisesList'
       'workout_exercises/:id(/)': 'workoutExercise'
-      'personal_workouts(/)': 'personalWorkoutList'
+      # 'personal_workouts(/)': 'personalWorkoutList'
       'personal_programs(/)': 'personalProgramList'
 
       'calendar(/)': 'clientPageCalendarDay'
