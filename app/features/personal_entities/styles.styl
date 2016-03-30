@@ -5,11 +5,30 @@
     height: 25px
     margin-right: 16px
 
-  .gc-workout-link
-    color: #3a99d8
+  .item
+    display: flex
+    align-items: center
+    flex-wrap: nowrap
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
 
-    :hover
-      color: #282d30
+    .gc-exercises-link
+      width: auto
+
+    .workout
+      margin-left: 5px
+
+      .gc-workout-link
+        margin-left: 5px
+        color: #3a99d8
+
+        :hover
+          color: #282d30
+
+.gc-client-item-icon-exercises
+  background: transparent url('../../images/icon-exercises.png') -22px 0 no-repeat
+  background-size: 200%
 
 .gc-client-item-icon-personal_workouts
   background: transparent url('../../images/icon-workouts.png') -15px 3px no-repeat

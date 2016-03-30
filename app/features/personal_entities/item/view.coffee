@@ -32,10 +32,7 @@ define [
                 name: 'class'
                 observe: 'id'
                 onGet: ->
-                  type = _.chain(@model.type)
-                    .underscore()
-                    .pluralize()
-                    .value()
+                  type = _.chain(@model.type).underscore().pluralize().value()
                   "gc-client-item-icon-#{type}"
             ]
           'span.workout':
@@ -52,8 +49,4 @@ define [
           '.schedule-buttons':
             observe: 'id'
             visible: (value) ->
-              'WorkoutExercise' isnt @model.type
-
-    templateHelpers: =>
-      isExercises: (type) =>
-        'WorkoutExercise' is @model.type
+              'Exercise' isnt @model.type

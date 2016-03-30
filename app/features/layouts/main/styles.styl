@@ -3,6 +3,12 @@
   flex-flow: row wrap
   height: 100%
 
+  .content-container
+    display: flex
+    flex-flow: row nowrap
+    height: calc(100% - 64px)
+    width: 100%
+
   region[data-name='header'],
   .gc-topbar
     flex: 1 0 100%
@@ -23,6 +29,7 @@
 .gc-main
   position: relative
   height: 100%
+  width: 100%
   background-color: #fff
   display: flex
   flex-direction: column

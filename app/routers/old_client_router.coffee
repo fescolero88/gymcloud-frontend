@@ -1,6 +1,4 @@
 define [
-  'views/client/clientpage-ewp-view'
-  'collections/user_collection'
   'views/client/exercises/exercise_clientpage_view'
   'models/workout_exercise'
   'views/client/workouts/workout-clientpage-view'
@@ -12,8 +10,6 @@ define [
   'views/client/clientpage-calendar-month-view'
   'views/general/messages/messages-view'
 ], (
-  ClientEWPView
-  UserCollection
   ExerciseGlobalView
   WorkoutExercise
   WorkoutGlobalView
@@ -30,7 +26,6 @@ define [
 
     appRoutes:
 
-      'workout_exercises(/)': 'workoutExercisesList'
       'workout_exercises/:id(/)': 'workoutExercise'
 
       'calendar(/)': 'clientPageCalendarDay'
@@ -40,23 +35,8 @@ define [
 
   class Controller extends Marionette.Controller
 
-    workoutExercisesList: ->
-      @_assignedEntityList('workout_exercises')
-
     workoutExercise: (id) ->
       @_assignedEntityShow('workout_exercises', id)
-
-    _assignedEntityList: (type) ->
-      dataType = type.split('_')[1]
-      @changeNavTitle(dataType)
-      eventName = 'clientpage:nav-click'
-      elementId = "#gc-clientpage-nav-tab-#{dataType}"
-      App.vent.trigger(eventName, elementId)
-      view = new ClientEWPView
-        collection: new UserCollection([], type: type)
-        dataType: dataType
-        type: type
-      @_userPageView().content.show(view)
 
     _assignedEntityShow: (type, id) ->
       dataType = type.split('_')[1]

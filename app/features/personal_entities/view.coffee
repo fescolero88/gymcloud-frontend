@@ -21,6 +21,7 @@ define [
     emptyView: EmptyView
 
     filter: (model) ->
+      return true if model.type is 'Exercise'
       !model.get('is_program_part') and model.get('status') is 'active'
 
     emptyViewOptions: ->
