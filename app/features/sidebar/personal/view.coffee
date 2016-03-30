@@ -21,6 +21,8 @@ define [
 
     templateHelpers: ->
       type: @type
+      title: @title
 
     initialize: (options)->
       @type = options.type
+      @title = options.title
