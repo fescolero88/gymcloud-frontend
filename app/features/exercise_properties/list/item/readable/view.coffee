@@ -17,15 +17,16 @@ define [
       stickit:
         bindings:
           '.gc-property-value-name-label':
-            observe: ['personal_property', 'value', 'value2']
-            onGet: ([property, value, value2]) ->
+            observe: [
+              'property_unit_name'
+              'value_converted'
+              'value2_converted'
+            ]
+            onGet: ([unit_name, value, value2]) ->
               if value
-                if value2
-                  "#{value} - #{value2} #{property.global_property.unit}"
-                else
-                  "#{value} #{property.global_property.unit}"
+                "#{_.compact([value, value2]).join(' - ')} #{unit_name}"
               else
-                "#{property.name}"
+                @model.personal_property.get('name')
 
     ui: ->
       removePropertyButton: '.gc-remove'
