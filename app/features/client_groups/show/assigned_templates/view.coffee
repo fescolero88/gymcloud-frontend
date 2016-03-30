@@ -30,6 +30,7 @@ define [
             region: 'list'
             klass: AssignedTemplateListView
             options: ->
+              model: @model
               collection: @collection
         ]
 
