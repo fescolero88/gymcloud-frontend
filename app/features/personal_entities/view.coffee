@@ -3,34 +3,25 @@ define [
   './item/view'
   './template'
 ], (
-  emptyView
-  itemView
-  collectionViewTpl
+  EmptyView
+  ItemView
+  template
 ) ->
 
   class ClientEWPView extends Marionette.CompositeView
 
-    template: collectionViewTpl
+    template: template
+
     className: 'gc-clientpage-exercises row'
-    childView: itemView
+
+    childView: ItemView
+
     childViewContainer: 'ul'
-    emptyView: emptyView
 
-    collectionEvents:
-      sync: 'render'
+    emptyView: EmptyView
 
-    childViewOptions: ->
-      dataType: @dataType
-      type: @type
+    filter: (model) ->
+      !model.get('is_program_part') and model.get('status') is 'active'
 
     emptyViewOptions: ->
-      dataType: @dataType
-      type: @type
-
-    initialize: (data) ->
-      @dataType = data.dataType
-      @type = data.type
-      @collection.fetch()
-
-    templateHelpers: ->
-      dataType: @dataType
+      name: @collection.type.split('_')[1]

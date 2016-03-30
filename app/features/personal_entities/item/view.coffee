@@ -4,19 +4,56 @@ define [
   itemViewTpl
 ) ->
 
-  class ClientEWPItemView extends Marionette.ItemView
+  class PersonalEntityItemView extends Marionette.ItemView
 
     template: itemViewTpl
 
     tagName: 'li'
+
     className: 'row gc-folder'
 
-    initialize: (options) =>
-      @dataType = options.dataType
-      @type = options.type
+    behaviors: ->
+
+      mobile_only_features: true
+
+      stickit:
+        bindings:
+          '.name': 'name'
+          '.gc-exercises-link':
+            attributes: [
+                name: 'href'
+                observe: 'id'
+                onGet: ->
+                  root = _.chain(@model.type).underscore().pluralize().value()
+                  "##{root}/#{@model.id}"
+            ]
+          '.gc-client-item-icon':
+            attributes: [
+                name: 'class'
+                observe: 'id'
+                onGet: ->
+                  type = _.chain(@model.type)
+                    .underscore()
+                    .pluralize()
+                    .value()
+                  "gc-client-item-icon-#{type}"
+            ]
+          'span.workout':
+            observe: 'workout_name'
+            visible: (value) -> !!value
+          '.gc-workout-link':
+            observe: 'workout_name'
+            attributes: [
+                name: 'href'
+                observe: 'workout_id'
+                onGet: (value) ->
+                  "#personal_workouts/#{value}"
+            ]
+          '.schedule-buttons':
+            observe: 'id'
+            visible: (value) ->
+              'WorkoutExercise' isnt @model.type
 
     templateHelpers: =>
-      dataType: @dataType
-      type: @type
-      isExercises: (type, options) ->
-        type is 'exercises'
+      isExercises: (type) =>
+        'WorkoutExercise' is @model.type

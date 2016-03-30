@@ -1,13 +1,12 @@
 .col-xs-12.item
-  a.gc-exercises-link(href="##{dataType}/#{id}")
-    span.gc-client-item-icon(class="gc-client-item-icon-#{dataType}")
-    = name
-  if isExercises(dataType)
+  a.gc-exercises-link
+    span.gc-client-item-icon
+    span.name
+  span.workout
     | FROM
-    a.gc-exercises-link(href="#personal_workouts/#{workout_id}")
-      = workout_name
-  if isExercises(dataType)
-    .col-xs-12.text-right
-      a.btn.btn-link.gc-exercises-assign-btn(href='#') Schedule
-      |     
-      a.btn.btn-link.gc-exercises-assign-btn(href='#') Enter results
+    a.gc-workout-link
+  .col-xs-12.text-right.schedule-buttons
+    a.btn.btn-link.gc-exercises-assign-btn(data-mobile-only, href='#')
+      | Schedule
+    a.btn.btn-link.gc-exercises-assign-btn(data-mobile-only, href='#')
+      | Enter results

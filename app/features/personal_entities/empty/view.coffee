@@ -1,15 +1,14 @@
 define [
   './template'
 ], (
-  emptyTemplate
+  template
 ) ->
 
   class EmptyView extends Marionette.ItemView
 
-    template: emptyTemplate
+    template: template
 
-    initialize: (data) =>
-      @dataType = data.dataType
+    className: 'gc-client-assignments-empty'
 
     templateHelpers: =>
-      dataType: @dataType
+      name: @options.name

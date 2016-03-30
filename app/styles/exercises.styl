@@ -198,7 +198,7 @@
   position: relative
   min-height: 100%
   height: 100%
-  
+
   .gc-folders-entity-list
     padding: 0 20px
 
@@ -289,23 +289,26 @@
   display: inline-block
 
 .gc-exercises-assign-btn
-  background: #fff
-  color: #3a99d8
-  border-color: #3a99d8
-  text-transform: uppercase
-  font-size: 12px
-  line-height: 20px
-  border-radius: 50px
-  padding: 4px 8px
+  &,
+  &:focus
+    background: #fff
+    color: #3a99d8
+    border-color: #3a99d8
+    text-transform: uppercase
+    font-size: 12px
+    line-height: 20px
+    border-radius: 50px
+    padding: 4px 8px
 
-.gc-exercises-assign-btn + .btn
-  margin: 0 15px
+  &:hover,
+  &:active
+    background: #3a99d8
+    color: #fff
+    border-color: #fff
 
-.gc-exercises-assign-btn:hover,
-.gc-exercises-assign-btn:active,
-.gc-exercises-assign-btn:focus
-  color: #fff
-  border-color: #3a99d8
+  + .btn
+    margin: 0 15px
+
 
 .gc-exercises-assign-btn-del
   font-size: 18px
@@ -314,10 +317,10 @@
   position: relative
   display: inline-block
 
-.gc-exercises-assign-btn-del:hover,
-.gc-exercises-assign-btn-del:active,
-.gc-exercises-assign-btn-del:focus
-  color: #ee6d5d
+  &:hover,
+  &:active,
+  &:focus
+    color: #ee6d5d
 
 .gc-exercises-assign-empty
   margin: 15% auto 0 auto
@@ -325,35 +328,35 @@
   height: 180px
   text-align: center
 
-.gc-exercises-assign-empty img
-  opacity: 0.25
-  margin-bottom: 20px
+  img
+    opacity: 0.25
+    margin-bottom: 20px
 
-.gc-exercises-assign-empty p
-  font-size: 12px
-  color: #cbcacb
-  line-height: 15px
+  p
+    font-size: 12px
+    color: #cbcacb
+    line-height: 15px
 
-.gc-exercises-assign-empty .btn
-  background: #fff
-  color: #3a99d8
-  border-color: #3a99d8
-  text-transform: uppercase
-  font-size: 12px
-  line-height: 20px
-  border-radius: 50px
-  padding: 4px 8px
+  .btn
+    background: #fff
+    color: #3a99d8
+    border-color: #3a99d8
+    text-transform: uppercase
+    font-size: 12px
+    line-height: 20px
+    border-radius: 50px
+    padding: 4px 8px
 
-.gc-exercises-assign-empty .btn:active,
-.gc-exercises-assign-empty .btn:focus
-  color: #3a99d8
-  border-color: #3a99d8
+    &:active,
+    &:focus
+      color: #3a99d8
+      border-color: #3a99d8
 
-.gc-exercises-assign-empty .btn:hover
-  color: #fff
-  border-color: #3a99d8
-  background: #3a99d8
-  text-decoration: none
+    &:hover
+      color: #fff
+      border-color: #3a99d8
+      background: #3a99d8
+      text-decoration: none
 
 .gc-exercises-item-icon
   display: inline-block
@@ -363,6 +366,20 @@
   background-size: cover
   vertical-align: middle
   margin: 0 5px 0 4px
+
+  &.gc-exercises-item-icon-programs,
+  &.gc-exercises-item-icon-program_templates
+    background: transparent url('../images/icon-programs.png') -19px 1px no-repeat
+    height: 25px
+    width: 23px
+    background-size: 154%
+
+  &.gc-exercises-item-icon-workouts,
+  &.gc-exercises-item-icon-workout_templates
+    background: transparent url('../images/icon-workouts.png') -18px 0px no-repeat
+    height: 25px
+    width: 23px
+    background-size: 154%
 
 .gc-exercises-item-play-icon
   display: inline-block
@@ -382,20 +399,6 @@
   vertical-align: middle
   margin: 0 5px 0 4px
 
-.gc-exercises-item-icon.gc-exercises-item-icon-programs,
-.gc-exercises-item-icon.gc-exercises-item-icon-program_templates
-  background: transparent url('../images/icon-programs.png') -19px 1px no-repeat
-  height: 25px
-  width: 23px
-  background-size: 154%
-
-.gc-exercises-item-icon.gc-exercises-item-icon-workouts,
-.gc-exercises-item-icon.gc-exercises-item-icon-workout_templates
-  background: transparent url('../images/icon-workouts.png') -18px 0px no-repeat
-  height: 25px
-  width: 23px
-  background-size: 154%
-
 .gc-exercises-folder-icon
   color: #3a99d8
   display: inline-block
@@ -408,25 +411,25 @@
   height: 180px
   text-align: center
 
-.gc-content-right-exercises-empty img
-  opacity: 0.25
-  margin-bottom: 20px
+  img
+    opacity: 0.25
+    margin-bottom: 20px
 
-.gc-content-right-exercises-empty p
-  font-size: 14px
-  color: #cbcacb
-  line-height: 16px
+  p
+    font-size: 14px
+    color: #cbcacb
+    line-height: 16px
 
 .selectize-control.multi .selectize-input > div
   background: #e1eef6
 
-.selectize-control.multi .selectize-input > div .remove
-  color: #3a99d8
-  font-size: 16px
-  font-weight: lighter
+  .remove
+    color: #3a99d8
+    font-size: 16px
+    font-weight: lighter
 
-.selectize-control.multi .selectize-input > div .remove:active
-  color: #fff
+    &:active
+      color: #fff
 
 .gc-exercises-bests-best > .row > .gc-exercises-bests-delete-wrapper
   padding: 0 5px

@@ -15,15 +15,10 @@ define [
     regions:
       page_content: 'region[data-name="page_content"]'
 
-    init: ->
-      _.defer => @model.set('state.subpage', @options.state)
-
     initCollection: ->
-      user = App.request('current_user')
-      user.personal_programs
+      App.request('current_user').personal_programs
 
     initViews: ->
       list: ->
         new ListView
           collection: @model.get('data.collection')
-          dataType: 'personal_programs'

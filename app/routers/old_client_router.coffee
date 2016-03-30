@@ -32,8 +32,6 @@ define [
 
       'workout_exercises(/)': 'workoutExercisesList'
       'workout_exercises/:id(/)': 'workoutExercise'
-      # 'personal_workouts(/)': 'personalWorkoutList'
-      # 'personal_programs(/)': 'personalProgramList'
 
       'calendar(/)': 'clientPageCalendarDay'
       'calendar/day/:day(/)': 'clientPageCalendarDay'
@@ -47,12 +45,6 @@ define [
 
     workoutExercise: (id) ->
       @_assignedEntityShow('workout_exercises', id)
-
-    personalWorkoutList: ->
-      @_assignedEntityList('personal_workouts')
-
-    personalProgramList: ->
-      @_assignedEntityList('personal_programs')
 
     _assignedEntityList: (type) ->
       dataType = type.split('_')[1]

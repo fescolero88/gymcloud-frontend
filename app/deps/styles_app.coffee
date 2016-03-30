@@ -47,5 +47,5 @@ define [
   'styles/zzz_override'
   'styles/print'
   'modules/utils/freshdesk'
-  'features/personal_entities/style'
+  'features/personal_entities/styles'
 ], ->
