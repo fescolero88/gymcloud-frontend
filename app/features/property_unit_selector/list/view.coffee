@@ -24,7 +24,7 @@ define [
         return if model is childView.model
         model.set(checked: false)
       @hide()
-      @trigger('property_unit:selected', @childView.model)
+      @trigger('property_unit:selected', childView.model)
 
     hide: ->
       @$el.fadeOut(200)

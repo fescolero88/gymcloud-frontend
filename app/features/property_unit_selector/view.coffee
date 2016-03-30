@@ -26,6 +26,9 @@ define [
       'click i.fa.fa-cog': '_showTooltip'
 
     initialize: ->
+      @collection.get(@options.selected)?.set(checked: true)
+      @listenTo @collection, 'add remove reset', =>
+        if @collection.length > 1 then @$el.show() else @$el.hide()
       $(document).on "click.#{@cid} mousedown.#{@cid} tap.#{@cid}", (e) =>
         @_hideTooltip() if !@$el.is(e.target) and @$el.has(e.target).length is 0
 
@@ -36,10 +39,10 @@ define [
       @listenTo @views.tooltip, 'property_unit:selected', @_propertyUnitSelected
 
     _propertyUnitSelected: (model) ->
-      @trigger('property_unit:selected', model)
+      @trigger('selected', model)
 
     _showTooltip: ->
-      @views.tooltip.show()
+      @views.tooltip.show() unless @collection.isEmpty()
 
     _hideTooltip: ->
       @views.tooltip.hide()

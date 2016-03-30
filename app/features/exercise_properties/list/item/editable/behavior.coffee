@@ -29,18 +29,20 @@ define [
             region: 'property_unit_selector'
             klass: PropertyUnitSelectorCollectionView
             options: ->
-              property = if @model.isNew()
-                @_properties.first()
+              units = if @model.isNew()
+                []
               else
-                @model.personal_property
+                @model.personal_property.property_units.models
+              @_property_units.reset(units)
 
-              collection: property.property_units
+              collection: @_property_units
+              selected: @model.get('property_unit_id')
         ]
 
       stickit:
         bindings:
           '.gc-property-value':
-            observe: ['value', 'value2']
+            observe: ['value_converted', 'value2_converted']
             onGet: ([value, value2]) ->
               _.chain([value, value2]).compact().join('-').value()
             onSet: (input) ->
@@ -57,21 +59,20 @@ define [
 
     initialize: ->
       @view._properties = App.request('data:personal_properties:visible')
+      @view._property_units = new Backbone.Collection
 
     onShow: ->
       @listenTo(@view.views.properties_select_box, 'selected', @selectProperty)
+      @listenTo(@view.views.property_unit_selector, 'selected', @selectUnit)
+
       _.chain(@_selectValue).bind(@).delay(100)
 
+    selectUnit: (property_unit) ->
+      @view.model.setUnit(property_unit)
+
     selectProperty: (model) ->
-      unless @view.model.get('personal_property_id')
-        value = @view.model.get('value')
-        value2 = @view.model.get('value2')
-      @view.model.set
-        personal_property_id: model.id
-        personal_property: model.attributes
-        property_name: model.get('name')
-        value: value or null
-        value2: value2 or null
+      @view._property_units.reset(model.property_units.models)
+      @view.model.setProperty(model)
       @_selectValue()
 
     _removeProperty: (ev) ->
