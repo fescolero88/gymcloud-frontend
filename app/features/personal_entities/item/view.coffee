@@ -19,4 +19,4 @@ define [
       dataType: @dataType
       type: @type
       isExercises: (type, options) ->
-        type == 'exercises'
+        type is 'exercises'
