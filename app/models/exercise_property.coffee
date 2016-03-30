@@ -1,7 +1,9 @@
 define [
+  './concerns/nested_models'
   './personal_property'
   'mathjs'
 ], (
+  NestedModelsConcern
   PersonalProperty
   mathjs
 ) ->
@@ -47,14 +49,19 @@ define [
         set: _.bind(set, @, 'value2')
         toJSON: false
 
+    constructor: ->
+      @_nestedModelsInit
+        personal_property: PersonalProperty
+      super
+
     initialize: ->
       @computedFields = new Backbone.ComputedFields(@)
 
     parse: (data) ->
       attrs = data.personal_property
-      @personal_property = new PersonalProperty(attrs, parse: true)
-      data.personal_property = @personal_property.attributes
-      data.personal_property_id = @personal_property.get('id')
+      @_nestedModelsParseAll(data)
+      data.personal_property = attrs
+      data.personal_property_id = attrs.id
       data
 
     setUnit: (property_unit) ->
@@ -81,3 +88,7 @@ define [
         value2: value2 or null
         property_unit_id: property_unit_id or null
         property_unit_name: property_unit_name or null
+
+  _.extend(ExerciseProperty::, NestedModelsConcern)
+
+  ExerciseProperty
