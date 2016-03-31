@@ -76,7 +76,7 @@ define [
       units = model.property_units.models
       unitSelector.updateUnits(units, defaultUnitId)
       _.chain(unitSelector.showTooltip).bind(unitSelector).delay(0)
-      @_selectValue() if units.length is 1
+      @_selectValue()
 
     _removeProperty: (ev) ->
       ev.preventDefault()
