@@ -37,8 +37,8 @@ define [
         App.request 'modal:confirm',
           title: "Edit #{model.get('name')}?"
           content:
-            '''You are editing ONLY the client's copy of this workout.
-            Select UPDATE to continue.'''
+            '''Changes will be saved immediately
+            as soon as you move to the next field.'''
           confirmBtn: 'Update'
           confirmCallBack: ->
             path = "#personal_workouts/#{model.id}/edit"
