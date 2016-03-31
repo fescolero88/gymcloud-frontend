@@ -14,8 +14,8 @@ define [
 
       stickit:
         bindings:
+          '.name': 'name'
           'label':
-            observe: 'name'
             attributes: [
                 observe: 'id'
                 name: 'for'

@@ -70,15 +70,11 @@ define [
         property_unit_name: property_unit.get('short_name')
 
     setProperty: (personal_property) ->
-      units = personal_property.property_units
-      if units.length is 1
-        property_unit_id = units.first().get('id')
-        property_unit_name = units.first().get('short_name')
-
       unless @get('personal_property_id')
         value = @get('value')
         value2 = @get('value2')
 
+      default_unit = personal_property.get('default_unit')
       @personal_property = personal_property
       @set
         personal_property_id: personal_property.id
@@ -86,8 +82,8 @@ define [
         property_name: personal_property.get('name')
         value: value or null
         value2: value2 or null
-        property_unit_id: property_unit_id or null
-        property_unit_name: property_unit_name or null
+        property_unit_id: default_unit.id
+        property_unit_name: default_unit.short_name
 
   _.extend(ExerciseProperty::, NestedModelsConcern)
 

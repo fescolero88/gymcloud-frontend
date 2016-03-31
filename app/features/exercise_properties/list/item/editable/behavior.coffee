@@ -65,15 +65,18 @@ define [
       @listenTo(@view.views.properties_select_box, 'selected', @selectProperty)
       @listenTo(@view.views.property_unit_selector, 'selected', @selectUnit)
 
-      _.chain(@_selectValue).bind(@).delay(100)
-
     selectUnit: (property_unit) ->
       @view.model.setUnit(property_unit)
+      @_selectValue()
 
     selectProperty: (model) ->
-      @view._property_units.reset(model.property_units.models)
       @view.model.setProperty(model)
-      @_selectValue()
+      unitSelector = @view.views.property_unit_selector
+      defaultUnitId = @view.model.get('property_unit_id')
+      units = model.property_units.models
+      unitSelector.updateUnits(units, defaultUnitId)
+      _.chain(unitSelector.showTooltip).bind(unitSelector).delay(0)
+      @_selectValue() if units.length is 1
 
     _removeProperty: (ev) ->
       ev.preventDefault()

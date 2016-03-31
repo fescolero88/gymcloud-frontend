@@ -23,7 +23,7 @@ define [
         ]
 
     events:
-      'click i.fa.fa-cog': '_showTooltip'
+      'click i.fa.fa-cog': 'showTooltip'
 
     initialize: ->
       @collection.get(@options.selected)?.set(checked: true)
@@ -41,7 +41,12 @@ define [
     _propertyUnitSelected: (model) ->
       @trigger('selected', model)
 
-    _showTooltip: ->
+    updateUnits: (models, defaultUnitId) ->
+      @collection.reset(models)
+      @collection.each (model) ->
+        model.set(checked: model.id is defaultUnitId)
+
+    showTooltip: ->
       @views.tooltip.show() unless @collection.isEmpty()
 
     _hideTooltip: ->

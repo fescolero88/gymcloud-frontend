@@ -5,7 +5,7 @@ $text_color = #7c7c7c
 .property-unit-selector
   display: none
   position: absolute
-  right: -50px
+  left: -100%
   padding: 21px
   z-index: 4
   list-style-type: none
@@ -78,18 +78,22 @@ $text_color = #7c7c7c
     input[type='radio']
       display: none
 
-    i.fa
-      max-width: 15px
-      margin-right: 13px
-      font-size: 15px
-      color: $checkbox_color
-
-      &.fa-check-square
-        font-size: 14px
-
     label
+      display: flex
+      align-items: center
+      justify-content: flex-start
       margin: 0
       font-size: 12px
       font-weight: 500
       text-transform: uppercase
       text-align: left
+      cursor: pointer
+
+      i.fa
+        max-width: 15px
+        margin-right: 13px
+        font-size: 15px
+        color: $checkbox_color
+
+        &.fa-check-square
+          font-size: 14px
