@@ -17,9 +17,13 @@ define [
       stickit:
         bindings:
           '.gc-property-value-name-label':
-            observe: ['personal_property', 'value']
-            onGet: ([property, value]) ->
+            observe: [
+              'property_unit_name'
+              'value_converted'
+              'value2_converted'
+            ]
+            onGet: ([unit_name, value, value2]) ->
               if value
-                "#{value} #{property.global_property.unit}"
+                "#{_.compact([value, value2]).join(' - ')} #{unit_name}"
               else
-                "#{property.name}"
+                @model.personal_property.get('name')
