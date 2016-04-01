@@ -38,7 +38,11 @@ module.exports = class AuthView extends Marionette.ItemView
     if @signUp
       @ui.signUpModal.modal 'show'
 
-  login: (event) ->
+  login: ->
+    # safari autocomplete hack
+    @model.set
+      username: @$('input[name="username"]').val()
+      password: @$('input[name="password"]').val()
     @model.login()
 
   _onLoginSuccess: (data) ->

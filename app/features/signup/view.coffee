@@ -61,6 +61,20 @@ define [
         @ui.form.find('input[name="email"]').attr('disabled', 'disabled')
 
     createAccount: ->
+      # safari autocomplete hack
+      fields = [
+        'first_name'
+        'last_name'
+        'email'
+        'password'
+        'password_confirmation'
+      ]
+
+      @model.set _.reduce(fields, ((memo, field) ->
+        memo[field] = @$("input[name='#{field}']").val()
+        memo
+      ), {}, @)
+
       if @client
         @model.acceptInvite()
       else
