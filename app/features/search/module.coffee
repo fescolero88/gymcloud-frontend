@@ -15,6 +15,7 @@ define [
   class Module extends Marionette.Module
 
     initialize: ->
+      return unless feature.isEnabled('search_global')
 
       @on 'start', ->
         @_initModels()

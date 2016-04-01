@@ -12,6 +12,7 @@ defaults =
     workout_exercises: enabled: true
     personal_workouts: enabled: true
     personal_programs: enabled: true
+    search_global: enabled: true
     payments: enabled: false
     rating_widget: enabled: false
     user_profile_progress: enabled: false
@@ -53,6 +54,7 @@ module.exports =
       url: '//mobile.gymcloud.com'
     features:
       sign_up: enabled: false
+      search_global: enabled: false
       hotjar: enabled: true
       freshdesk_widget: enabled: true
       google_analytics: enabled: true
