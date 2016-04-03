@@ -19,23 +19,27 @@ define [
         Number(Math.round(value + 'e' + decimals) + 'e-' + decimals)
 
       get = (name, attrs) ->
-        unitsCount = @personal_property.property_units.length
-        return attrs[name] unless attrs[name]
-        return attrs[name] if _.contains([0, 1], unitsCount)
-        return attrs[name] unless @get('property_unit_id')
-        default_unit = @personal_property.get('default_unit').short_name
-        unit = mathjs.unit("#{attrs[name]} #{default_unit}")
+        if !attrs[name] or
+          _.include([0, 1], @personal_property.property_units.length) or
+          !@get('property_unit_id')
+
+            return round(attrs[name], 2)
+
+        saveUnit = @personal_property.get('save_unit').short_name
+        unit = mathjs.unit("#{attrs[name]} #{saveUnit}")
         value = unit.toNumber(@get('property_unit_name'))
         round(value, 2)
 
       set = (name, value, attrs) ->
-        unitsCount = @personal_property.property_units.length
-        return attrs[name] = value if _.contains([0, 1], unitsCount)
-        return attrs[name] = value unless @get('property_unit_id')
-        default_unit = @personal_property.get('default_unit').short_name
+        if _.include([0, 1], @personal_property.property_units.length) or
+          !@get('property_unit_id')
+
+            return attrs[name] = round(value, 2) || null
+
+        saveUnit = @personal_property.get('save_unit').short_name
         unit = mathjs.unit("#{value} #{@get('property_unit_name')}")
-        newValue = unit.toNumber(default_unit)
-        attrs[name] = round(newValue, 2)
+        newValue = unit.toNumber(saveUnit)
+        attrs[name] = round(newValue, 2) || null
 
       value_converted:
         depends: ['personal_property', 'property_unit_name', 'value']
