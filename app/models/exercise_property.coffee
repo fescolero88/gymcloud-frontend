@@ -31,7 +31,8 @@ define [
         round(value, 2)
 
       set = (name, value, attrs) ->
-        if _.include([0, 1], @personal_property.property_units.length) or
+        if !value or
+          _.include([0, 1], @personal_property.property_units.length) or
           !@get('property_unit_id')
 
             return attrs[name] = round(value, 2) || null
