@@ -2,7 +2,7 @@ define ->
 
   class ConfirmRegistrationModel extends Backbone.Model
 
-    url: '/users/confirmation/confirm.json'
+    url: '/users/confirmation'
 
     validation:
 
@@ -10,13 +10,12 @@ define ->
         required: true
 
     confirm: (token) ->
-      @set 'confirmation_token', token
 
       options =
         url: @url
-        type: 'POST'
+        type: 'GET'
         contentType: 'application/json'
-        data: JSON.stringify @toJSON()
+        data: $.param(confirmation_token: token)
 
       (@sync || Backbone.sync).call(@, null, @, options)
         .then (response) =>

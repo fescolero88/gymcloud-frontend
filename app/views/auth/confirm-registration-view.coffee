@@ -4,8 +4,6 @@ module.exports = class ConfirmRegistrationView extends Marionette.ItemView
 
   initialize: (options) ->
     @token = options.token
-    @profileModel = options.profileModel
-    @listenTo @profileModel, 'change', @profileRetrieved
 
   modelEvents:
     'model:auth_confirm:fail': 'confirmFailed'
@@ -18,15 +16,4 @@ module.exports = class ConfirmRegistrationView extends Marionette.ItemView
     # todo: implement resending of confirmation email
 
   confirmSuccess: (data) ->
-    App.request 'accessToken:set', data.access_token
-    @profileModel.fetch()
-
-  profileRetrieved: ->
-    accountType = @profileModel.get 'account_type'
-
-    App.vent.trigger("module:main-#{accountType}:start")
-    if accountType is 'trainer'
-      window.location.replace '#/tr'
-    else
-      window.location.replace '#'
-    App.vent.trigger 'profile:ready'
+    App.vent.trigger('redirect:to', '#', replace: true)
