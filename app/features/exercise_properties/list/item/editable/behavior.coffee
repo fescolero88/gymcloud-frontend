@@ -18,7 +18,7 @@ define [
             klass: PropertiesSelectBox
             options: ->
               property = if @model.isNew()
-                name: 'Select property'
+                name: 'Property'
                 global_property:
                   unit: ''
               else
