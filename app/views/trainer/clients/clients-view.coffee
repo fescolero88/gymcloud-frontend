@@ -40,6 +40,18 @@ module.exports = class ClientsView extends Marionette.LayoutView
     groups: '#groups-region'
     modalContainer: '#gc-modal-container'
 
+  behaviors: ->
+
+    stickit:
+      model: ->
+        App.request('current_user').user_settings
+      bindings:
+        '.gc-nav-wrapper h2': 'clients_title'
+        '.show-client-form .client-title':
+          observe: 'clients_title'
+          onGet: (value) ->
+            "Add #{_.singularize(value)}"
+
   templateHelpers: =>
     view_type: @viewType
 

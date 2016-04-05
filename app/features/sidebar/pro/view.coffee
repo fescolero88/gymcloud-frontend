@@ -27,6 +27,14 @@ define [
       workout_templates: '@ui.workoutsRegion'
       program_templates: '@ui.programsRegion'
 
+    behaviors: ->
+
+      stickit:
+        model: ->
+          App.request('current_user').user_settings
+        bindings:
+          '.clients-title': 'clients_title'
+
     onRender: ->
       typeByName = (name) ->
         {

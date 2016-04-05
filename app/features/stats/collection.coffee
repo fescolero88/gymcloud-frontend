@@ -26,7 +26,7 @@ define ->
             symbol: symbol
             collection: user[symbol]
             count: count = @_getCountBySymbol(symbol, user)
-            title: @_getTitleBySymbol(symbol, count)
+            title: @_getTitleBySymbol(symbol, count, user)
             path: @_getPathBySymbol(symbol, user)
           }
         )
@@ -39,7 +39,7 @@ define ->
         @listenTo collection, 'add remove reset', =>
           model.set
             count: collection.length
-            title: @_getTitleBySymbol(symbol, collection.length)
+            title: @_getTitleBySymbol(symbol, collection.length, user)
 
     _getCountBySymbol: (symbol, user) ->
       if symbol is 'clients'
@@ -48,7 +48,8 @@ define ->
         return clients.length
       user[symbol].length
 
-    _getTitleBySymbol: (symbol, count) ->
+    _getTitleBySymbol: (symbol, count, user) ->
+      symbol = user.user_settings.get('clients_title') if symbol is 'clients'
       _.chain(symbol)
         .humanize()
         .singularize()
