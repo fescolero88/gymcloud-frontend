@@ -16,7 +16,7 @@ define ->
       failed:
         '[e] Failed to login'
       unauthorized:
-        '[e] Invalid credentials'
+        '[e] Invalid Credentials'
       abscent:
         '[e] Account with provided email does not exists.' +
           'You have to Sign Up first.'
