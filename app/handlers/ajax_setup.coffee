@@ -13,9 +13,7 @@ define ->
         if 'login' != Backbone.history.fragment
           Backbone.history.navigate('login')
         else
-          message = jqxhr.responseJSON.error_description
-          App.request 'messenger:explain', 'message.error',
-            message: message
+          App.request('messenger:explain', 'login.unauthorized')
 
       if jqxhr.status is 403
         error = jqxhr.responseJSON.error

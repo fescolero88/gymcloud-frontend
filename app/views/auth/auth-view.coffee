@@ -49,7 +49,4 @@ module.exports = class AuthView extends Marionette.ItemView
     App.request('auth:onSuccess', data)
 
   _onLoginFail: (status) ->
-    if status == 401
-      App.request('messenger:explain', 'login.unauthorized')
-    else
-      App.request('messenger:explain', 'login.failed')
+    App.request('messenger:explain', 'login.failed') unless status is 401
