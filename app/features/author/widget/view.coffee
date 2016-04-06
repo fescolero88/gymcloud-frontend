@@ -17,7 +17,7 @@ define [
       super
 
     initialize: ->
-      @listenTo(@options.parent, 'change:author_id', @_syncWithParentModel)
+      @listenTo(@options.parent, 'sync', @_syncWithParentModel)
 
     behaviors:
 
