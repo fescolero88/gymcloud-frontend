@@ -14,13 +14,18 @@ define [
 
     behaviors:
 
+      breadcrumbs:
+        model: ->
+          @view.model.get('data.model')
+
       navigate_back: true
+
       mobile_only_features: true
+
       stickit:
         model: ->
           @model.get('data.model')
         bindings:
-          'span.name': 'name'
           '.buttons a':
             attributes: [
                 name: 'href'

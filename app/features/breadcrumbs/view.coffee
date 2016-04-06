@@ -38,5 +38,4 @@ define [
       @collection.initFromModel(@targetModel)
 
     _isEditable: (model) ->
-      userId = App.request('current_user_id')
-      !! model.get('folder_id') and model.get('author_id') is userId
+      can('update', _.result(@options, 'model'))
