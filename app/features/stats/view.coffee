@@ -1,22 +1,37 @@
 define [
   './template'
-  './item/view'
+  './list/view'
+  'features/payment/trial_ends_soon/view'
+  'moment'
 ], (
   template
-  StatsItemView
+  StatsListView
+  TrialEndsSoonView
+  moment
 ) ->
 
-  class StatsCompositeView extends Marionette.CompositeView
+  class StatsLayoutView extends Marionette.LayoutView
 
     template: template
-
-    childView: StatsItemView
-
-    childViewContainer: 'ul'
 
     className: 'gc-main-workspace'
 
     behaviors:
+
+      regioned:
+        views: [
+            region: 'stats_list'
+            klass: StatsListView
+            options: ->
+              collection: @collection
+          ,
+            region: 'trial_ends_soon'
+            klass: TrialEndsSoonView
+            enabled: ->
+              date = @model.get('subscription_end_at')
+              daysLeft = moment(date).diff(moment(), 'days')
+              @model.get('is_pro') && @model.get('is_trialing') && daysLeft < 5
+        ]
 
       stickit:
         bindings:
