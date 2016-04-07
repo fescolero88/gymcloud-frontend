@@ -1,10 +1,8 @@
 define [
   'templates/prototype/payment_info'
-  'templates/prototype/trial_ended'
   'templates/prototype/trial_ends_soon'
 ], (
   paymentInfoTemplate
-  trialEndedTemplate
   trialEndsSoonTemplate
 ) ->
 
@@ -12,7 +10,6 @@ define [
     constructor: (templateName) ->
       templateHash = {
         'payment-info': paymentInfoTemplate
-        'trial-ended': trialEndedTemplate
         'trial-ends-soon': trialEndsSoonTemplate
       }
       @template = templateHash[templateName]
