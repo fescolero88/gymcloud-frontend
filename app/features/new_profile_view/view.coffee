@@ -31,8 +31,9 @@ define [
         bindings:
           'input[name="gender"]': 'gender'
           'input[name="weight"]': 'weight'
-          'input[name="height"]': 'height'
           'input[name="bodyfat"]': 'bodyfat'
+          '.height-feet': 'height_feet'
+          '.height-inches': 'height_inches'
           'input[name="first_name"]': 'first_name'
           'input[name="last_name"]': 'last_name'
           'input[name="location"]': 'location'
@@ -63,6 +64,9 @@ define [
           '.mmmoney, .control-links .history':
             visible: ->
               feature.isEnabled('payments')
+          '.connected-accounts':
+            visible: ->
+              @model.id is App.request('current_user').user_profile.id
 
     className: 'new-profile-view'
 

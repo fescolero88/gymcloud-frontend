@@ -57,6 +57,30 @@
           span.gc-radio-clone
 
   .form-group
+    label(for='weight')
+      | Weight
+    input#weight.form-control(name='weight', type='text')
+    span.gc-valid-icon.fa.fa-check.hide
+
+  .form-group.profile-height-inputs
+    label(for='height')
+      | Height (ft' in")
+    .form-control
+      span.gc-height-value.height-feet(contenteditable='true')
+      span.gc-height-divider
+        | '
+      span.gc-height-value.height-inches(contenteditable='true')
+      span.gc-height-divider
+        | "
+    span.gc-valid-icon.fa.fa-check.hide
+
+  .form-group
+    label(for='bodyfat')
+      | Bodyfat
+    input.form-control(name='bodyfat', type='text')
+    span.gc-valid-icon.fa.fa-check.hide
+
+  .form-group
     label(for='first_name')
       | First name
       span.gc-req *
@@ -134,7 +158,7 @@
     input.form-control(name='birthday', type='date')
     span.gc-valid-icon.fa.fa-check.hide
 
-  .form-group
+  .form-group.connected-accounts
     label
       | Connected accounts
     region(data-name='user_authentications')

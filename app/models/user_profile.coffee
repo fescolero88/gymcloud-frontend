@@ -35,6 +35,24 @@ define [
           ] = _.compact(value.split(' '))
         toJSON: false
 
+      height_feet:
+        depends: ['height']
+        get: (attrs) ->
+          Math.floor(attrs.height / 12)
+        set: (value, attrs) ->
+          value = parseInt(value, 10) || 0
+          attrs.height = value * 12 + @get('height_inches')
+        toJSON: false
+
+      height_inches:
+        depends: ['height']
+        get: (attrs) ->
+          attrs.height % 12
+        set: (value, attrs) ->
+          value = parseInt(value, 10) || 0
+          attrs.height = @get('height_feet') * 12 + value
+        toJSON: false
+
     validation:
 
       first_name:
@@ -42,21 +60,6 @@ define [
 
       last_name:
         required: true
-
-      weight:
-        required: false
-        isFloat: true
-
-      height:
-        required: false
-        isFloat: true
-
-      bodyfat:
-        required: false
-        isFloat: true
-
-      address:
-        required: false
 
       zip:
         required: false
