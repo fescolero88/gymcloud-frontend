@@ -48,4 +48,5 @@ define [
   'styles/print'
   'modules/utils/freshdesk'
   'features/personal_entities/styles'
+  'features/payment/styles'
 ], ->

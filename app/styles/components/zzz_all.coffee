@@ -6,7 +6,6 @@ define [
   './messenger-theme-gymcloud'
   './switch'
   './video-assignment'
-  '../prototype/payment.styl'
   './charge-edit-profile-modal'
   '../new_profile_view.styl'
 ], ->
