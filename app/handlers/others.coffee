@@ -5,6 +5,7 @@ define [
   'features/presets_load/view'
   'features/video/upload/view'
   'features/video/upload/model'
+  'moment'
 ], (
   ModalAddToLibraryView
   WorkoutScheduleView
@@ -12,6 +13,7 @@ define [
   PresetsLoadModalView
   VideoUploadModalView
   VideoModel
+  moment
 ) ->
 
   (App) ->
@@ -100,3 +102,12 @@ define [
         type: params.type || 'POST'
         contentType: params.contentType || 'application/json'
         data: params.data || '{}'
+
+    App.reqres.setHandler 'check:trial', ->
+      user = App.request('current_user')
+      endDate = user.get('subscription_end_at')
+      trialing = user.get('is_trialing')
+      if trialing and moment(endDate) < moment()
+        App.vent.trigger('redirect:to', '#trial_ended')
+        return true
+      return false

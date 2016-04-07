@@ -7,6 +7,7 @@ define [
   'views/auth/reset-password-view'
   'views/auth/confirm-registration-view'
   'views/auth/resend-confirmation-view'
+  'features/payment/trial_ended/view'
 
   'models/auth/confirm-registration-model'
   'models/auth/resend-confirmation-model'
@@ -22,6 +23,7 @@ define [
   ResetPasswordView
   ConfirmRegistrationView
   ResendConfirmationView
+  TrialEndedView
 
   ConfirmRegistrationModel
   ResendConfirmationModel
@@ -41,6 +43,7 @@ define [
       'resend_confirmation': 'resendConfirmation'
       'reset/:token': 'resetPassword'
       'confirm/:token': 'confirmRegistration'
+      'trial_ended': 'trialEnded'
 
   class Controller extends Marionette.Controller
 
@@ -93,6 +96,10 @@ define [
       model = new ResendConfirmationModel
       view = new ResendConfirmationView
         model: model
+      @_showView(view)
+
+    trialEnded: ->
+      view = new TrialEndedView
       @_showView(view)
 
     _showView: (view) ->

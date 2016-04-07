@@ -47,6 +47,7 @@ define [
           @app.request('accessToken:set', data.access_token)
           @app.request('current_user').fetch()
             .then =>
+              return if @app.request('check:trial')
               @app.request('current_user:init:collections')
                 .then =>
                   @app.vent.trigger('redirect:to', '#')
