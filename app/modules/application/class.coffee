@@ -48,6 +48,7 @@ define [
       dfds = _.values(@promises)
       $.when(dfds...).done =>
         @_initHistory()
+        return if @request('check:trial')
         @_openProgramPresetsLoader()
         defer.resolve()
 
