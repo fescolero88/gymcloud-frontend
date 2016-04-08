@@ -59,6 +59,7 @@
     border-radius: 3px
     min-width: 210px
     display: block
+    cursor: text
 
     &:focus
       box-shadow: none
@@ -67,6 +68,7 @@
   .gc-usercard-actions
     display: block
     margin-top: 10px
+    text-align: center
 
     .btn
       border: 1px solid #fff
@@ -83,6 +85,20 @@
 
       + .btn
         margin-left: 5px
+    
+    .invite-client-button, 
+    .show-client-form
+      margin-left: 0 !important
+      float: none
+      transition: .3s opacity ease-in-out
+      
+      &:hover
+        background-color: transparent
+        color: #fff
+        opacity: .6
+    
+    .invite-client-button
+      margin-right: 10px
 
   .gc-usercard-info .btn-group.gc-usercard-actions .btn
     border-radius: 50px
