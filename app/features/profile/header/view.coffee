@@ -1,11 +1,9 @@
 define [
   'views/trainer/clients/send-message-modal-view'
-  '../edit_modal/view'
   'moment'
   './template'
 ], (
   SendMessageModalView
-  ProfileEditModalView
   moment
   template
 ) ->
@@ -22,7 +20,6 @@ define [
 
     events:
       'submit @ui.inviteForm': 'submitClientForm'
-      'click .show-client-form': 'showClientEditModal'
       'click .show-message-form': 'showSendMessageModal'
       'show.bs.modal @ui.inviteModal': 'fillClientEmail'
 
@@ -66,14 +63,13 @@ define [
             onGet: (value)->
               date = moment(value)
               if date.isValid() then date.fromNow(true) else '-'
-
-      regioned:
-        views: [
-            region: 'client_form'
-            klass: ProfileEditModalView
-            options: ->
-              model: @model.user_profile
-        ]
+          '.show-client-form':
+            attributes: [
+              observe: 'id'
+              name: 'href'
+              onGet: ->
+                "#users/#{@model.id}/edit"
+            ]
 
     regions:
       sendMessageForm: '#gc-send-message-modal'
@@ -88,15 +84,6 @@ define [
 
     templateHelpers: ->
       isMyProfile: @_isMyProfile()
-
-    initialize: ->
-
-    onShow: ->
-      @listenTo @views.client_form, 'modal:close', =>
-        @ui.clientFormModal.modal('hide')
-
-      @ui.clientFormModal.on 'hidden.bs.modal', (_ev) =>
-        @model.user_profile.set(@views.client_form.previousAttributes)
 
     onDestroy: ->
       @ui.clientFormModal.off('hidden.bs.modal')
@@ -133,9 +120,6 @@ define [
       $inputGroup = $input.closest('.form-group')
       $inputGroup.removeClass('gc-valid').addClass('gc-invalid')
       $inputGroup.find('.gc-error-message').text(error)
-
-    showClientEditModal: (ev) ->
-      @ui.clientFormModal.modal('show')
 
     showSendMessageModal: (ev) ->
       selectedItems = [@model.id]
