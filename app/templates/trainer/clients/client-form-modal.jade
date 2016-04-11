@@ -6,10 +6,7 @@
     h4.modal-title
       span.gc-modal-icon-sm
         img(src='app/images/add-client-icon.svg', alt='')
-      if id
-        | Edit #{first_name} #{last_name} information
-      else
-        | Add client
+      client-title
   form.form(role='form')
     .modal-body
       .row

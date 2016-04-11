@@ -12,6 +12,15 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
       bindings:
         'input[name="email"]': 'email'
         'input[name="name"]': 'name'
+        'client-title':
+          observe: ['id', 'first_name', 'last_name']
+          onGet: ([id, first_name, last_name]) ->
+            if id
+              "Edit #{first_name} #{last_name} information"
+            else
+              settings = App.request('current_user').user_settings
+              title = _.singularize(settings.get('clients_title'))
+              "Add #{title}"
 
   events:
     'submit @ui.clientForm': 'submitClientForm'
