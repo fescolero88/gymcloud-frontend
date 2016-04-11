@@ -71,6 +71,15 @@ define [
               onGet: ->
                 "#users/#{@model.id}/edit"
             ]
+          '.invite-client-button, client-title':
+            observe: 'id'
+            onGet: ->
+              "Invite #{@_clientTitle()}"
+          '.client-title-label':
+            observe: 'id'
+            onGet: ->
+              "#{@_clientTitle()}'s email"
+
 
     regions:
       sendMessageForm: '#gc-send-message-modal'
@@ -91,6 +100,10 @@ define [
 
     _isMyProfile: ->
       @model.get('id') is App.request('current_user_id')
+
+    _clientTitle: ->
+      currentUser = App.request('current_user').user_settings
+      _.singularize(currentUser.get('clients_title'))
 
     fillClientEmail: ->
       @ui.inviteEmail.val @model.get('email')

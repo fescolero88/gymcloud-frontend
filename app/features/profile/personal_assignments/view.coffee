@@ -31,9 +31,12 @@ define [
                 name: 'placeholder'
                 observe: 'name'
                 onGet: (value) ->
+                  currentUser = App.request('current_user').user_settings
+                  title = _.singularize(currentUser.get('clients_title'))
+                    .toLowerCase()
                   templateName = @_getTemplate(@options.viewType)
                   name = _.humanize(templateName)
-                  "Search & assign #{name} to this client"
+                  "Search & assign #{name} to this #{title}"
             ]
 
       regioned:

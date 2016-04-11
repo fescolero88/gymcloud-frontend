@@ -16,6 +16,10 @@ define [
     behaviors:
       stickit:
         bindings:
+          '.client-title':
+            observe: 'id'
+            onGet: ->
+              @model.user_settings.get('clients_title')
           '.is_pro':
             observe: 'is_pro'
             visible: true
