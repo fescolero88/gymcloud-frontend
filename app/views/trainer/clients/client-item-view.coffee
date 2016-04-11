@@ -10,7 +10,7 @@ define [
 
     tagName: 'li'
 
-    className: 'row'
+    className: 'row gc-workout-client-item'
 
     ui:
       deleteSingle: '.gc-clients-list-client-delete'
