@@ -1,14 +1,49 @@
 .gc-search-results-main
   height: 100%
+  .gc-content-nav
+    border-bottom: none
 
 .gc-search-results-list
   padding: 0 5px
 
-.gc-search-results-list .row
-  list-style-type: none
-  border-bottom: 1px solid #ededed
-  padding: 0 0 0 25px
-  min-height: 73px
+.gc-search-results-list 
+  margin-bottom 0
+  .row
+    list-style-type: none
+    border-bottom: 1px solid #ededed
+    padding: 0 0 0 25px
+    min-height: 73px
+    
+    >.col-xs-7,
+    >.gc-search-entity-field
+      display: flex
+      align-items: center
+    
+    >.col-xs-7,
+    >.gc-avatar-wrapper,
+    >.gc-not-in-library
+      min-height: inherit
+    
+    .gc-exercises-item-icon-program_templates
+      height: 20px
+    
+    .gc-exercises-item-icon-workout_templates
+      height: 18px
+    
+    .gc-exercises-item-icon-exercises,
+    .gc-exercises-item-icon-client_templates
+      background-size: 180%
+      height: 18px
+    
+    .gc-clients-list-client-link
+      padding-left: 0
+      margin-left: 0
+    
+    .gc-clients-list-avatar-wrapper
+      margin-right: 10px
+    
+    .gc-add-to-library-button
+      margin: 0
 
 .gc-search-results-list .row:hover
   background: #fbfbfb
@@ -69,3 +104,8 @@
 .gc-clients-list-avatar-wrapper
   cursor: default
 
+/*---------------------------------------*/
+
+
+.gc-content-both
+  padding: 0
