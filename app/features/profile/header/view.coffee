@@ -47,8 +47,9 @@ define [
           'span[data-bind="first_name"]': 'first_name'
           'span[data-bind="last_name"]': 'last_name'
           'dd[data-bind="height"]':
-            observe: 'height'
-            onGet: '_formatEmptyValue'
+            observe: ['height', 'height_feet', 'height_inches']
+            onGet: ([height, feet, inches]) ->
+              height and "#{feet}' #{inches}\"" or '-'
           'dd[data-bind="weight"]':
             observe: 'weight'
             onGet: '_formatEmptyValue'
