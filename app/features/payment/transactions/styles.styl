@@ -1,0 +1,35 @@
+$transactions-header-color = #c0c0c0
+$transactions-item-color = #7e7e7e
+$transactions-border-color = #ededed
+
+.transactions
+
+  margin: 0 15px
+
+  .transactions-header,
+  .transactions-item
+    display: flex
+    align-items: center
+    width: 100%
+    height: 61px
+    border-bottom: 1px solid $transactions-border-color
+
+    .date
+      padding-left: 0
+
+    .description
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+
+    .amount,
+    .status
+      display: flex
+      align-items: center
+      justify-content: center
+
+  .transactions-header
+    color: $transactions-header-color
+
+  .transactions-item
+    color: $transactions-item-color

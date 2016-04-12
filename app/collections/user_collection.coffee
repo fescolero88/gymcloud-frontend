@@ -2,9 +2,11 @@ define ->
 
   class UserCollection extends Backbone.Collection
 
+    type: undefined
+
     initialize: (models, options) ->
-      @uid = options.user?.id || App.request('current_user_id')
-      @type = options.type
+      @uid = options?.user?.id || App.request('current_user_id')
+      @type ||= options?.type
 
     url: ->
       "/users/#{@uid}/collections/#{@type}"
