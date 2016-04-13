@@ -103,7 +103,6 @@ define [
     _showPage: ->
       App.request('views:show', @)
       @model.set('state.subpage', @options.state)
-      @_showView(@model.get('state.subpage'))
 
     _bindAll: ->
       _.bindAll @, [

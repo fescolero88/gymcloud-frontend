@@ -49,4 +49,5 @@ define [
   'modules/utils/freshdesk'
   'features/personal_entities/styles'
   'features/payment/styles'
+  'features/payment/transactions/styles'
 ], ->
