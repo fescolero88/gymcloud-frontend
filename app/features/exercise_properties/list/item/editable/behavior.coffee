@@ -64,6 +64,7 @@ define [
     onShow: ->
       @listenTo(@view.views.properties_select_box, 'selected', @selectProperty)
       @listenTo(@view.views.property_unit_selector, 'selected', @selectUnit)
+      @_selectValue()
 
     selectUnit: (property_unit) ->
       @view.model.setUnit(property_unit)
@@ -85,7 +86,9 @@ define [
 
     _selectValue: ->
       @ui.value.focus()
-      @ui.value.selectText()
+      setTimeout =>
+        @ui.value.selectText()
+      , 100
 
     _handlePaste: (ev) ->
       ev.preventDefault()
