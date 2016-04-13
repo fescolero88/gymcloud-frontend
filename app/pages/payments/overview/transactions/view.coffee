@@ -3,7 +3,7 @@ define [
   'features/payment/transactions/view'
 ], (
   template
-  TransactionList
+  TransactionsList
 ) ->
 
   class TransactionsView extends Marionette.LayoutView
@@ -12,12 +12,22 @@ define [
 
     className: 'transactions'
 
+    ui:
+      header: '.transactions-header'
+
     behaviors:
 
       regioned:
         views: [
             region: 'transactions'
-            klass: TransactionList
+            klass: TransactionsList
             options: ->
               collection: @collection
         ]
+
+    initialize: ->
+      @listenTo @collection, 'sync', =>
+        if @collection.isEmpty()
+          @ui.header.hide()
+        else
+          @ui.header.show()
