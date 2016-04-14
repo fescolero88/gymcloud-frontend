@@ -50,4 +50,7 @@ define [
   'features/personal_entities/styles'
   'features/payment/styles'
   'features/payment/transactions/styles'
+  'features/payment/subscription/styles'
+  'features/payment/payment_methods/styles'
+  'features/payment/add_card/styles'
 ], ->

@@ -3,11 +3,13 @@ define [
   './template'
   './transactions/view'
   'features/payment/transactions/collection'
+  './details/view'
 ], (
   BasePage
   template
   TransactionsView
   TransactionsCollection
+  PaymentDetailsView
 ) ->
 
   class Page extends BasePage
@@ -41,4 +43,4 @@ define [
           collection: @model.get('data.collection')
 
       details: ->
-        new Marionette.CollectionView
+        new PaymentDetailsView
