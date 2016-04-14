@@ -56,32 +56,46 @@ Running linter:
 $ gulp lint
 ```
 
-## Deployment
+### Deploy
 
-### prepare before deployment
+#### Deploy to codeship
+
+To staging:
 
 ```sh
 git checkout master
-git pull
-git branch -D production
-git checkout -b production
+git push origin master
 ```
 
-### option 1: via codeship
+To production:
+
+Oneliner:
 
 ```sh
-touch .deploy
-git add .deploy
-git commit -m "[deploy]"
-git push --force origin production
+git checkout master && git branch -D production; git checkout -b production; git commit --allow-empty -m '[deploy]'; git push -f; git checkout master
 ```
 
-### option 2: directly to heroku
+#### Deploy to dokku
+
+Prepare:
 
 ```sh
-gulp build
-git remote add heroku_gymcloud-webapp-production git@heroku.com:gymcloud-webapp-production.git
-git add -f build
-git commit -m '[deploy]'
-git push --force heroku_gymcloud-webapp-production HEAD:master
+git remote add dokku-gymcloud-webapp-staging dokku@lite-1.server.gymcloud.com:gymcloud-webapp-staging
+git remote add dokku-gymcloud-webapp-production dokku@lite-1.server.gymcloud.com:gymcloud-webapp-production
+```
+
+To staging:
+
+Oneliner:
+
+```sh
+NODE_ENV=staging; git checkout master; git branch -D build; git checkout -b build; npm run build && git add -f dist && git commit -m '[build]' && git push dokku-gymcloud-webapp-staging HEAD:master -f && git checkout master
+```
+
+To production:
+
+Oneliner:
+
+```sh
+NODE_ENV=production; git checkout master; git branch -D build; git checkout -b build; npm run build && git add -f dist && git commit -m '[build]' && git push dokku-gymcloud-webapp-production HEAD:master -f && git checkout master
 ```
