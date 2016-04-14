@@ -51,7 +51,7 @@ define [
       @views.tooltip.show() unless @collection.isEmpty()
 
     _hideTooltip: ->
-      @views.tooltip.hide()
+      @views.tooltip?.hide()
 
     _ensureVisibility: ->
       if @collection.length > 1 then @$el.show() else @$el.hide()

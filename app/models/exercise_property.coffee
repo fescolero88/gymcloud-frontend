@@ -54,6 +54,17 @@ define [
         set: _.bind(set, @, 'value2')
         toJSON: false
 
+    validation:
+
+      property_unit_id:
+        required: true
+
+      personal_property_id:
+        required: true
+
+      workout_exercise_id:
+        required: true
+
     constructor: ->
       @_nestedModelsInit
         personal_property: PersonalProperty

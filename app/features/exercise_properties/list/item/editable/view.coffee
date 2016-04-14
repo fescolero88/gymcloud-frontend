@@ -26,7 +26,11 @@ define [
       'focusout': _.debounce(@saveOnBlur, 200)
       'click @ui.savePropertyButton': '_saveProperty'
 
+    initialize: ->
+      Backbone.Validation.bind @
+
     _saveProperty: ->
+      return unless @model.isValid(true)
       @model.save({}, {wait: true}).then ->
         App.request('messenger:explain', 'exercise.updated')
       .fail ->
