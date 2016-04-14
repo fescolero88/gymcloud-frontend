@@ -7,6 +7,23 @@
   .gc-workspace-content
     height: 100%
 
+  .payment-details
+    display: flex
+    flex-flow: row wrap
+    justify-content: space-between
+    margin: 15px
+
+    .subscription-wrapper
+      width: calc(60% - 15px)
+
+    .payment-methods-wrapper
+      width: 40%
+
+    .title
+      font-size: 16px
+      font-weight: 600
+      margin-bottom: 15px
+
 .flex-form
   display: flex
   flex-direction: column
@@ -26,6 +43,9 @@
 
 .payment-page
 
+  form.payment-info
+    padding: 30px 40px
+
   .trial-ended-img-mock
     background-image: url(../../images/prototypes/trial-ended.png)
     height: 232px
@@ -38,97 +58,6 @@
     font-size: 1em
     padding: 0px 70px
     text-align: center
-
-  form.payment-info
-    display: flex
-    flex-direction: column
-    padding: 40px 30px
-
-  .payment-notice
-    display: flex
-    flex-direction: row
-    align-items: center
-    background-color: #f6f5f0
-    border-radius: 3px
-    padding: 10px 20px
-    span
-      color: #1c80cb
-      font-weight: bold
-      &.bucks-sign
-        font-size: 18px
-        margin-right: 6px
-        align-self: flex-start
-        line-height: 1.2em
-      &.bucks-count
-        font-size: 30px
-        margin-right: 12px
-        align-self: flex-start
-        line-height: 0.9em
-
-  .payment-notice
-    p
-      font-size: 12px
-      line-height: 1.2em
-      margin: 0px
-
-  .no-padding
-    padding: 0px !important
-  .no-margin
-    margin: 0px !important
-
-  .expiration-n-security-code
-    position: relative
-    display: flex
-    flex-direction: row
-    align-items: flex-end
-
-  .expiration-n-security-code
-    .gc-caret
-      height: 21px !important
-      padding-top: 2px !important
-
-  .expiration-month
-    width: 120px
-  .expiration-year
-    width: 100px
-
-  .divider
-    width: 20px
-    color: #bbb
-    padding-bottom: 28px
-    padding-left: 7px
-
-
-  .security-code
-    width: 120px
-
-  .question-in-circle
-    position: absolute
-    right: 5px
-    top: 3px
-    border-radius: 50%
-    border: 1px solid #1c80cb
-    color: #1c80cb
-    width: 16px
-    height: 16px
-    padding-left: 4px
-    padding-bottom: 2px
-    line-height: 1.2em
-    font-weight: bold
-
-  .finish-block
-    display: flex
-    flex-direction: row
-    align-items: center
-
-  .lock-img-mock
-    background-image: url(../../images/prototypes/lock.png)
-    height: 34px
-    width: 27px
-    margin-right: 10px
-
-  p.secure-payment
-    line-height: 1.1em
 
 .trial-ends-soon
   display: flex
