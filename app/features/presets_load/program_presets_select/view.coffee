@@ -27,16 +27,23 @@ define [
 
       promises = _.map models, (model) =>
         promise = model.import()
-        promise.then(@_parseNewPrograms)
+        promise.then(_.bind(@_parseNewEntities, @))
         promise
 
       $.when(promises...).then => @trigger('changeView', 'next')
 
-    _parseNewPrograms: (response) ->
+    _parseNewEntities: (response) ->
       user = App.request('current_user')
       programs = user.program_templates
       models = programs.add(response, parse: true)
+      @_addToFolders(models)
+      _.each ['exercises', 'workout_templates'], (entities) =>
+        user[entities].fetch()
+          .then =>
+            @_addToFolders(user[entities].models)
 
+    _addToFolders: (models) ->
+      user = App.request('current_user')
       _.each models, (model) ->
         folderId = model.get('folder_id')
         folder = user.folders.get(folderId)
