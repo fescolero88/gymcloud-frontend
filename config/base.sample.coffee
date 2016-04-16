@@ -2,6 +2,7 @@ defaults =
   vendor:
     facebook: app_id: '774894325885277'
     google: client_id: '686822539338-h8pp1erjru867em1h45f7rf0qe0ftpdf.apps.googleusercontent.com'
+    stripe: publishable_key: 'pk_test_DahnHI1WWNXx0McT4XZlWFCq'
   api: url: undefined
   mobile: url: undefined
   features:

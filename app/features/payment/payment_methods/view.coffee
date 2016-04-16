@@ -1,9 +1,11 @@
 define [
   './template'
   '../add_card/view'
+  './list/view'
 ], (
   template
   AddCardView
+  CardList
 ) ->
 
   class PaymentMethodsView extends Marionette.LayoutView
@@ -24,6 +26,13 @@ define [
         views: [
             region: 'add_card'
             klass: AddCardView
+            options: ->
+              model: new @collection.model
+          ,
+            region: 'cards'
+            klass: CardList
+            options: ->
+              collection: @collection
         ]
 
     events:
@@ -33,7 +42,9 @@ define [
       @model = new Backbone.Model(add_card: false)
 
     onShow: ->
-      @listenTo(@views.add_card, 'card:added', => @model.set(add_card: false))
+      @listenTo @views.add_card, 'card:added', (card) =>
+        @collection.add(card)
+        @model.set(add_card: false)
 
     _showAddCard: ->
       @model.set(add_card: true)
