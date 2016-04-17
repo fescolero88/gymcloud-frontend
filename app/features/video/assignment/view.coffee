@@ -34,20 +34,20 @@ define [
 
     constructor: ->
       @collection = new VideosCollection
-      @searchScope = 'mine'
+      @searchScope = 'gymcloud'
       super
 
     initialize: ->
       @request = null
-      @searchInput = new SearchInputView(
+      @searchInput = new SearchInputView
         model: new Backbone.Model
-      )
-      @view = new AssignVideosView(
+          query: @model.get('name')
+      @view = new AssignVideosView
         collection: @collection
         model: @model
-      )
       @listenTo(@view, 'video:assigned', @assignVideo)
       @listenTo(@searchInput, 'searchStart', @searchVideos)
+      @searchVideos(@model.get('name'))
 
     onShow: ->
       @getRegion('videos').show(@view)
@@ -75,9 +75,10 @@ define [
 
     searchVideos: (query) ->
       @request.abort() if @request?.state() is 'pending'
-      if !_.trim(query) && @searchScope != 'mine'
-        @view.viewState.set('state', 'search_not_started')
-        return
+      # Commenting because serch will always have query for now
+      # if !_.trim(query) && @searchScope != 'mine'
+      #   @view.viewState.set('state', 'search_not_started')
+      #   return
 
       @collection.queryParams.q = query
       @collection.queryParams.scope = @searchScope
