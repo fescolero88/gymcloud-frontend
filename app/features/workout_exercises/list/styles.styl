@@ -92,6 +92,30 @@ ul.gc-workout-exercises-list
     .gc-property
       margin: 0!important
 
+    .gu-transit
+      position: relative
+      display: table
+      width: 100%
+      background-color: rgba(58,153,216,0.5)
+      opacity: 1
+      height: 40px
+
+      a
+        display: none
+
+      &:before
+        position: absolute
+        top: 5px
+        left: 5px
+        bottom: 5px
+        right: 5px
+        content: 'drop exercise here'
+        text-transform: uppercase
+        text-align: center
+        border: 1px dashed #fff
+        color: #fff
+        line-height: 27px
+
   .dragged
     position: absolute
 
@@ -129,6 +153,23 @@ ul.gc-workout-exercises-list
 
   li .gc-hover-hidden
     visibility: hidden!important
+
+.gc-workout-exercise-item
+  &.gu-mirror
+    height: auto!important
+    background-color: rgba(255,255,255,0.5)
+    padding: 5px
+    border-radius: 5px
+    
+    .gc-exercises-cell
+      float: left
+    
+    > .gc-exercises-cell:first-child
+      margin-top: 4px
+    
+    .gc-workout-exercise-note,
+    > .gc-exercises-cell:not(:nth-child(3)):not(:first-child)
+      display: none
 
 .gc-workout-exercise-sort
   background-image: url("../../../images/sort-icon.png")
