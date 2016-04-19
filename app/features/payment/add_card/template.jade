@@ -12,12 +12,12 @@ br
 .form-group.no-padding
   label
     | Card Number
-  input.form-control(type="text")
+  input.form-control.number(type="text")
 .expiration-n-security-code
   .expiration-month.form-group.no-padding
     label
       | Expiration Date
-    select.form-control
+    select.form-control.exp_month
       option
         | Month
       each val in ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
@@ -25,24 +25,24 @@ br
   .divider
     | /
   .expiration-year.form-group.no-padding
-    select.form-control
+    select.form-control.exp_year
       option
         | Year
-      each val in _.range(2015, 2026)
+      each val in _.range(2016, 2026)
         option= val
 
   .space-filler
   .security-code.form-group.no-padding
     label
       | Security code
-    input.form-control(type="text")
+    input.form-control.cvc(type="text")
   .question-in-circle
     | ?
 br
 .form-group.no-padding
   label
     | Cardholder name
-  input.form-control(type="text")
+  input.form-control.full-name(type="text")
 br
 .finish-block
   .lock-img-mock
