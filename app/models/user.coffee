@@ -70,7 +70,11 @@ define [
 
     getRootFolderFor: (type) ->
       name = _.titleize(type)
-      if _.indexOf(['Exercises', 'Workouts', 'Programs'], name) == -1
+      unless _.include([
+        'Exercises'
+        'Workout Templates'
+        'Program Templates'
+      ], name)
         throw Error('No such folder')
       rootFolder = @library.first()
       rootFolder.items.findWhere(name: name)
