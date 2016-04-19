@@ -15,12 +15,16 @@ define [
     behaviors:
 
       navigate_back: true
+
+      breadcrumbs:
+        model: -> @view.model.get('data.model')
+
       mobile_only_features: true
+
       stickit:
         model: ->
           @model.get('data.model')
         bindings:
-          'span.name': 'name'
           'button[data-action="edit"]':
             observe: 'id'
             visible: ->

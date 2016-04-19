@@ -3,11 +3,13 @@ define [
   './personal_workout'
   'collections/program_workouts'
   'collections/program_weeks'
+  'models/user'
 ], (
   NestedModelsConcern
   PersonalWorkout
   ProgramWorkouts
   ProgramWeeks
+  User
 ) ->
 
   class PersonalProgram extends Backbone.Model
@@ -17,6 +19,7 @@ define [
     urlRoot: '/personal_programs'
 
     constructor: ->
+      @__defineGetter__ 'parent', @_getUser
       @_nestedModelsInit
         weeks: ProgramWeeks
         workouts: ProgramWorkouts
@@ -27,6 +30,11 @@ define [
     parse: (data) ->
       @_nestedModelsParseAll(data)
       data
+
+    _getUser: ->
+      user = new User(id: @get('person_id'))
+      user.fetch()
+      user
 
   _.extend(PersonalProgram::, NestedModelsConcern)
 
