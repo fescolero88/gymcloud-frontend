@@ -19,6 +19,13 @@ define [
       user_profile: {}
 
     computed: ->
+      name:
+        depends: [
+          'full_name',
+        ]
+        get: (attrs) ->
+          attrs['full_name']
+        toJSON: false
       full_name:
         depends: [
           'user_profile.full_name',
