@@ -19,7 +19,12 @@ define [
     className: 'gc-box-content'
 
     behaviors:
+
       editable_textarea: true
+
+      program_action_panel_bottom:
+        model: -> @view.model
+
       regioned:
         views: [
             region: 'program_weeks'
@@ -44,6 +49,9 @@ define [
         ]
 
     onShow: ->
+      @views.program_weeks.onAddChild = @_onAddChild
+      @views.program_workouts.onAddChild = @_onAddChild
+
       App.request 'fwd',
         context: @
         from: @views.program_workouts_actions
@@ -61,3 +69,6 @@ define [
           name: "Week #{position}"
         ,
           wait: true
+
+    _onAddChild: (childView) ->
+      childView.el.scrollIntoViewIfNeeded?()

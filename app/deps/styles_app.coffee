@@ -53,4 +53,5 @@ define [
   'features/payment/subscription/styles'
   'features/payment/payment_methods/styles'
   'features/payment/add_card/styles'
+  'features/program_action_panel/styles'
 ], ->

@@ -64,6 +64,7 @@ define [
       'click .back-to-overview': '_backToOverview'
 
     initialize: ->
+      @options.position ||= 'top'
       @data = new DataModel
       @listenTo @model, 'change:person_id', =>
         @data.set(person_id: @model.get('person_id'))
@@ -82,16 +83,17 @@ define [
       @views.quick_add.trigger('autocomplete')
 
     _addWorkoutToCollection: (id) ->
+      position = @_calculatePosition(@model.workouts)
       @model.workouts.create
         program_id: @model.get('id')
         program_type: @model.type
         workout_template_id: id
-        position: @model.workouts.length + 1
+        position: position
       ,
         wait: true
 
     _addWeek: ->
-      position = @model.weeks.length + 1
+      position = @_calculatePosition(@model.weeks)
       @model.weeks.create
         program_id: @model.get('id')
         program_type: @model.type
@@ -99,6 +101,14 @@ define [
         name: "Week #{position}"
       ,
         wait: true
+
+    _calculatePosition: (collection) ->
+      if @options.position is 'bottom'
+        lastModelPosition = collection.last()?.get('position') or 0
+        lastModelPosition + 1
+      else
+        firstModelPosition = collection.first()?.get('position') or 1
+        firstModelPosition - 1
 
     _backToOverview: ->
       path = "#personal_programs/#{@model.id}"
