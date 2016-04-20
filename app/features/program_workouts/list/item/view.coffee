@@ -35,10 +35,6 @@ define [
             observe: 'name'
             events: ['blur']
           'label input': 'is_visible'
-          'a[data-action]':
-            observe: 'program_type'
-            visible: (value) ->
-              @model.get('program_type') is 'ProgramTemplate'
 
       regioned:
         views: [
@@ -73,10 +69,14 @@ define [
 
     _saveInLibrary: ->
       user = App.request('current_user')
-      workoutTemplatesFolder = user.getRootFolderFor('Workouts')
+      workoutTemplatesFolder = user.getRootFolderFor('Workout Templates')
       folderItems = workoutTemplatesFolder.items
+      id = if @model.get('program_type') is 'ProgramTemplate'
+        @model.workout.get('id')
+      else
+        @model.workout.get('workout_template_id')
       folderItems.duplicate(
-        ids: [@model.workout.get('id')]
+        ids: [id]
         foldersIds: [workoutTemplatesFolder.get('id')]
       ).then ->
         App.request('messenger:explain', 'program_workout.saved')

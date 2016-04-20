@@ -44,15 +44,7 @@ define [
 
     _onDuplicate: (childView) ->
       programWorkout = childView.model
-
-      newProgramWorkout = new ProgramWorkout
-        program_id: programWorkout.get('program_id')
-        program_type: programWorkout.get('program_type')
-        workout_template_id: programWorkout.get('workout_id')
-        position: @collection.length + 1
-        week_id: programWorkout.get('week_id')
-
-      newProgramWorkout.save({}, wait: true).then =>
+      programWorkout.duplicate().then (newProgramWorkout) =>
         @collection.add(newProgramWorkout)
 
     _onCreate: ->
