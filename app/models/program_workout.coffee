@@ -18,6 +18,12 @@ define [
 
     urlRoot: '/program_workouts/'
 
+    computed: ->
+      name:
+        depends: ['workout_id']
+        get: -> @workout?.get?('name')
+        toJSON: false
+
     constructor: ->
       @_nestedModelsInit
         program:
@@ -32,13 +38,16 @@ define [
             PersonalWorkout: PersonalWorkout
       super
 
+    initialize: ->
+      @computedFields = new Backbone.ComputedFields(@)
+
     parse: (data) ->
       @_nestedModelsParseAll(data)
       data
 
     duplicate: ->
+      defer = new $.Deferred
       if @get('workout_type') is 'PersonalWorkout'
-        defer = new $.Deferred
         options = App.request 'ajax:options:create',
           url: "#{@url()}/duplicate"
           data: null
@@ -48,7 +57,6 @@ define [
         request.then (response) ->
           newProgramWorkout = new ProgramWorkout(response, parse: true)
           defer.resolve(newProgramWorkout, response, options)
-        defer.promise()
       else
         newProgramWorkout = new ProgramWorkout
           program_id: @get('program_id')
@@ -57,7 +65,9 @@ define [
           position: @collection?.length + 1
           week_id: @get('week_id')
 
-        newProgramWorkout.save({}, wait: true)
+        newProgramWorkout.save({}, wait: true).then (response) ->
+          defer.resolve(newProgramWorkout, response)
+      defer.promise()
 
   _.extend(ProgramWorkout::, NestedModelsConcern)
 
