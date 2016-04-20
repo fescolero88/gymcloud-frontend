@@ -22,6 +22,7 @@ define [
       super
 
     behaviorViewOptions: ->
+      position: 'top'
       model: _.bind(@options.model, @)()
 
     defaults:
