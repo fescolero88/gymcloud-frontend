@@ -1,9 +1,11 @@
 define [
   './template'
+  './program_list/view'
 ], (
   template
+  ProgramListView
 ) ->
-  class ProgramPresetItemView extends Marionette.ItemView
+  class ProgramPresetItemView extends Marionette.LayoutView
 
     template: template
 
@@ -14,7 +16,7 @@ define [
     events:
       'click': 'changeSelected'
 
-    behaviors:
+    behaviors: ->
 
       stickit:
         bindings:
@@ -26,6 +28,13 @@ define [
             classes:
               assigned: 'is_selected'
 
+      regioned:
+        views: [
+          region: 'program_list'
+          klass: ProgramListView
+          options: ->
+            collection: @model.program_templates
+        ]
 
     changeSelected: ->
       is_selected = !@model.get('is_selected')
