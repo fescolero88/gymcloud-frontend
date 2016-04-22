@@ -30,7 +30,10 @@ define [
       Backbone.Validation.bind @
 
     _saveProperty: ->
-      return unless @model.isValid(true)
+      unless @model.isValid(true)
+        return App.request 'messenger:show',
+          type: 'error'
+          message: 'Please select a property.'
       @model.save({}, {wait: true}).then ->
         App.request('messenger:explain', 'exercise.updated')
       .fail ->
