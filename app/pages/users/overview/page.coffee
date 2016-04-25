@@ -4,6 +4,7 @@ define [
   'models/client'
   'features/profile/header/view'
   'features/profile/personal_assignments/view'
+  'features/profile/personal_exercises/view'
   'features/profile/activity/view'
 ], (
   BasePage
@@ -11,6 +12,7 @@ define [
   Client
   HeaderView
   AssignedTemplatesLayoutView
+  PersonalExercisesLayoutView
   ActivityView
 ) ->
 
@@ -32,6 +34,9 @@ define [
           ,
             id: 'workouts'
             title: 'Workouts'
+          ,
+            id: 'exercises'
+            title: 'Exercises'
         ]
 
       regioned:
@@ -76,6 +81,10 @@ define [
         new AssignedTemplatesLayoutView
           model: model
           viewType: 'personal_workouts'
+      exercises: ->
+        new PersonalExercisesLayoutView
+          model: model
+
 
     _deleteButtonClick: ->
       view = @getRegion('page_content').currentView

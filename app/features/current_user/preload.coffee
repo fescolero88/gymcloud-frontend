@@ -38,6 +38,7 @@ define [
       folders: Folder
       notifications: Backbone.Model
       library: Folder
+      personal_exercises: Exercise
       # workout_events: Backbone.Model
 
     if not user.get('is_pro')
