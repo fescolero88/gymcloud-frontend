@@ -1,10 +1,12 @@
 define [
   'features/new_profile_view/view'
   'pages/users/overview/page'
+  'pages/personal_exercises/overview/page'
   'models/user'
 ], (
   NewProfileView
   OverviewPage
+  PersonalExercisePage
   UserModel
 ) ->
 
@@ -17,6 +19,7 @@ define [
       'users/:id': 'root'
       'users/:id/edit': 'editUserProfile'
       'users/:id/:state': 'overview'
+      'users/:id/exercises/:exercise_id': 'personalExercise'
 
   class Controller extends Marionette.Controller
 
@@ -40,11 +43,18 @@ define [
 
     editUserProfile: (id) ->
       currentUser = App.request('current_user')
-      user = currentUser.clients.get(id)
-      user ||= new UserModel(id: id)
+      user = currentUser.clients.get(id) or new UserModel(id: id)
       return @_editUserProfile(user.user_profile) unless user.isNew()
       user.fetch()
         .then -> @_editUserProfile(user.user_profile)
+
+    personalExercise: (userId, exerciseId) ->
+      currentUser = App.request('current_user')
+      user = currentUser.clients.get(userId) or new UserModel(id: userId)
+      new PersonalExercisePage
+        id: exerciseId
+        user: user
+        state: 'overview'
 
     _editUserProfile: (profile) ->
       view = new NewProfileView
