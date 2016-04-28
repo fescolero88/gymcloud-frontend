@@ -1,0 +1,12 @@
+.title
+  .icon
+    i.fa.fa-trophy
+  span
+  .delete.fa.fa-trash
+.result-items
+  each result in exercise_result_items
+    .result-item
+      span.name
+        = result.name
+      span.value
+        | #{result.value} #{result.exercise_property.property_unit_name}
