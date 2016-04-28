@@ -33,7 +33,6 @@ define [
         '2' + _.underscored(model.get('full_name'))
 
     initialize: (options) ->
-      window.collection = @collection
       @clientAssignees = options.clientAssignees
       @entity = options.entity
 

@@ -9,7 +9,6 @@ define [
     className: 'gc-main-workspace'
 
     constructor: (@options) ->
-      window.page = @
       @_bindAll()
       @views = {}
       @model = new PageModel

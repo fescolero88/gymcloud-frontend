@@ -24,7 +24,6 @@ define [
       options
 
     constructor: ->
-      window.asd = @
       @collection = new Collection
       super
 
