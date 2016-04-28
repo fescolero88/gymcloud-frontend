@@ -24,6 +24,7 @@ define [
       options
 
     constructor: ->
+      window.asd = @
       @collection = new Collection
       super
 
@@ -38,4 +39,5 @@ define [
       @collection.initFromModel(@targetModel)
 
     _isEditable: (model) ->
-      can('update', _.result(@options, 'model'))
+      @collection.indexOf(model) is @collection.length - 1 and
+        can('update', _.result(@options, 'model'))
