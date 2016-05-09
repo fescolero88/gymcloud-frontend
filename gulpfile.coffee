@@ -131,7 +131,7 @@ gulp.task 'dist:prepare', ['dist:clean', 'webpack:build'], ->
     .src([
       'build/**'
       'index.html'
-      'favicon.ico'
+      'favicon.png'
       'server.js'
     ], base: '.')
     .pipe(gulp.dest('dist/'))
