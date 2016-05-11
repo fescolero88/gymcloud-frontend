@@ -9,6 +9,7 @@ define [
   'features/modal/confirm/module'
   'features/modal/prompt/module'
   'features/modal/client_groups/module'
+  'features/modal/assign_video/module'
   'features/drag_n_drop/module'
   'modules/utils/freshdesk'
   'modules/utils/google_analytics'
@@ -23,6 +24,7 @@ define [
   ModalConfirmModule
   ModalPromptModule
   ModalClientGroupModule
+  ModalAssignVideo
   DragNDropModule
   FreshDeskModule
   GoogleAnalyticsModule
@@ -40,6 +42,7 @@ define [
     app.module 'ModalConfirm', ModalConfirmModule
     app.module 'ModalPrompt', ModalPromptModule
     app.module 'ClientGroupModal', ModalClientGroupModule
+    app.module 'ModalAssignVideo', ModalAssignVideo
     app.module 'DragNDrop', DragNDropModule
     if feature.isEnabled('freshdesk_widget')
       app.module 'FreshDesk', FreshDeskModule
