@@ -60,10 +60,6 @@ define [
       @listenTo(App.vent, 'dropped:to:week', @_updateWeekId)
       @listenTo(@model.workout, 'change:name', @_patchWorkout)
 
-    onShow: ->
-      @listenToOnce @video_assigned, 'show', ->
-        @listenTo @video_assigned.currentView, 'video:assign', @_openUploadPopup
-
     _destroy: ->
       App.request('modal:confirm:delete', @model)
 

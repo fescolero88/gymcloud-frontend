@@ -11,7 +11,7 @@ define [
 
     tagName: 'div'
 
-    className: 'col-xs-4 gc-video-thumb'
+    className: 'col-xs-12 gc-video-thumb'
 
     ui:
       assignVideo: '.gc-assign-video'
