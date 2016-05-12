@@ -25,6 +25,7 @@ define [
   'features/program_action_panel/behavior'
   'features/program_action_panel/behavior_bottom'
   'features/exercise_properties/list/item/editable/behavior'
+  'features/tutorial/behavior'
 ], ->
 
   klasses = _.toArray(arguments)

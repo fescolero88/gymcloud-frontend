@@ -1,9 +1,11 @@
 define [
   './template'
   'features/workout_exercises/view'
+  './tooltips'
 ], (
   template
   WorkoutExercisesView
+  tooltips
 ) ->
 
   class View extends Marionette.LayoutView
@@ -12,7 +14,7 @@ define [
 
     className: 'gc-box-content'
 
-    behaviors:
+    behaviors: ->
       author_widget: true
       rating_widget: true
       editable_textarea: true
@@ -27,3 +29,6 @@ define [
               model: @model
               collection: @model.exercises
         ]
+      tutorial:
+        main: true
+        steps: tooltips
