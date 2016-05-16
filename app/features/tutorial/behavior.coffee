@@ -16,14 +16,13 @@ define ->
         @options.steps
 
       return if @tour.collection.isEmpty() and !@steps.length
-
       @tour.addSteps(@steps)
 
       return unless @options.main
-      @tour.restart()
+      @tour.restart() unless @tour.collection.isEmpty()
 
     onBeforeDestroy: ->
       return unless @options.main
-      unless @tour.ended()
+      if !@tour.ended() and !@tour.collection.isEmpty()
         @tour.end()
         @tour.collection.reset()
