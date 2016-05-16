@@ -9,6 +9,7 @@ define ->
 
     onShow: ->
       return unless feature.isEnabled('tooltips_tour')
+
       @steps = if _.isFunction(@options.steps)
           @options.steps(@view)
         else

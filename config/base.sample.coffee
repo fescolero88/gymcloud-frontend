@@ -21,6 +21,7 @@ defaults =
     hotjar: enabled: false
     freshdesk_widget: enabled: false
     google_analytics: enabled: false
+    tooltips_tour: enabled: true
 
 module.exports =
 
@@ -59,6 +60,7 @@ module.exports =
       hotjar: enabled: true
       freshdesk_widget: enabled: true
       google_analytics: enabled: true
+      tooltips_tour: enabled: false
 
   test: $.extend true, {}, defaults,
     api: url: ''

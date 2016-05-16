@@ -15,36 +15,16 @@ define [
       storage: false
       name: 'tour'
       steps: []
-      container: 'body'
       smartPlacement: true
       backdrop: false
       backdropContainer: 'body'
       backdropPadding: 0
-      keyboard: true
-      debug: false
-      redirect: true
-      orphan: false
-      duration: false
-      delay: false
-      basePath: ''
-      afterGetState: (key, value) ->
-      afterSetState: (key, value) ->
-      afterRemoveState: (key, value) ->
-      onStart: (tour) ->
-      onEnd: (tour) ->
-      onShow: (tour) ->
       onShown: (tour) ->
-      onHide: (tour) ->
-      onHidden: (tour) ->
-      onNext: (tour) ->
-      onPrev: (tour) ->
-      onPause: (tour, duration) ->
-      onResume: (tour, duration) ->
-      onRedirectError: (tour) ->
+        tour.collection.saveShowedStep(tour._current)
       template: (i, step) -> template(step)
 
     Tour::addStep = (step) ->
-      @collection.add(step)
+      @collection.add(step) if step
       @
 
     Tour::getStep = (i) ->
