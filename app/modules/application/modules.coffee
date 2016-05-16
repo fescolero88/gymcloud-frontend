@@ -11,6 +11,7 @@ define [
   'features/modal/client_groups/module'
   'features/modal/assign_video/module'
   'features/drag_n_drop/module'
+  'features/tutorial/module'
   'modules/utils/freshdesk'
   'modules/utils/google_analytics'
 ], (
@@ -26,6 +27,7 @@ define [
   ModalClientGroupModule
   ModalAssignVideo
   DragNDropModule
+  TutorialModule
   FreshDeskModule
   GoogleAnalyticsModule
 ) ->
@@ -44,6 +46,7 @@ define [
     app.module 'ClientGroupModal', ModalClientGroupModule
     app.module 'ModalAssignVideo', ModalAssignVideo
     app.module 'DragNDrop', DragNDropModule
+    app.module 'TutorialModule', TutorialModule
     if feature.isEnabled('freshdesk_widget')
       app.module 'FreshDesk', FreshDeskModule
     if feature.isEnabled('google_analytics')

@@ -6,7 +6,6 @@ define [
   'handlers/jquery'
   'handlers/renderer'
   'handlers/others'
-  'handlers/tour'
 ], (
   config
   dataHandler
@@ -15,7 +14,6 @@ define [
   formValidatorHandler
   rendererHandler
   othersHandler
-  tour
 ) ->
 
   (app) ->
@@ -25,4 +23,3 @@ define [
     formValidatorHandler()
     rendererHandler(app)
     othersHandler(app)
-    tour(app)

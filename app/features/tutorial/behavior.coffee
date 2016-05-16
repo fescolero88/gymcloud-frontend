@@ -11,9 +11,9 @@ define ->
       return unless feature.isEnabled('tooltips_tour')
 
       @steps = if _.isFunction(@options.steps)
-          @options.steps(@view)
-        else
-          @options.steps
+        @options.steps(@view)
+      else
+        @options.steps
 
       return if @tour.collection.isEmpty() and !@steps.length
 
