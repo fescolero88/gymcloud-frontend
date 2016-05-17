@@ -58,8 +58,8 @@ define [
       else
         attrs = _.extend({}, response.card, id: response.id)
         @model.patch(attrs)
-          .then =>
-            @trigger('card:added', attrs)
+          .then (cardResponse) =>
+            @trigger('card:added', cardResponse)
             @model.clear()
           .fail (error) ->
             App.request 'messenger:show',

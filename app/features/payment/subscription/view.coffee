@@ -36,4 +36,4 @@ define [
       @model = new @collection.model
       @listenTo @collection, 'reset sync', ->
         current = @collection.current()
-        @model.set(current.attributes)
+        @model.set(current?.attributes)
