@@ -1,0 +1,53 @@
+$order-background-color = #42e46f
+$order-text-color = white
+$docs-background-color = #ececec
+
+.tutorial
+  border: none
+  border-radius: 0
+  padding: 15px
+
+  button.close
+    position: absolute
+    right: 5px
+    top: 5px
+    color: $docs-background-color
+
+  .content
+    display: flex
+    align-items: flex-start
+
+    .order
+      display: flex
+      align-items: center
+      justify-content: center
+      min-width: 30px
+      width: 30px
+      height: 30px
+      border-radius: 50%
+      background: $order-background-color
+      color: $order-text-color
+
+    .text
+      display: flex
+      flex-direction: column
+
+      .popover-title
+        border: none
+        border-radius: 0
+        background: none
+
+  .buttons
+    display: flex
+    align-items: center
+    justify-content: space-between
+
+    .docs
+      background: $docs-background-color
+      border: none
+
+    .btn
+      font-size: 12px
+
+      :hover
+        background: none

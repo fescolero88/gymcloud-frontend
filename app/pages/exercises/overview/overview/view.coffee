@@ -1,7 +1,9 @@
 define [
   './template'
+  './tooltips'
 ], (
   template
+  tooltips
 ) ->
 
   class ExerciseOverviewView extends Marionette.LayoutView
@@ -10,10 +12,13 @@ define [
 
     className: 'gc-box-content'
 
-    behaviors:
+    behaviors: ->
       privacy_toggle: true
       delete_button: true
       author_widget: true
       rating_widget: true
       editable_textarea: true
       video_assigned: true
+      tutorial:
+        main: true
+        steps: tooltips

@@ -2,10 +2,12 @@ define [
   './template'
   '../model'
   'features/quick_add/view'
+  './tooltips'
 ], (
   template
   DataModel
   QuickAddView
+  tooltips
 ) ->
 
   class View extends Marionette.LayoutView
@@ -14,7 +16,7 @@ define [
 
     className: 'program-action-panel'
 
-    behaviors:
+    behaviors: ->
       author_widget:
         enabled: ->
           @view.options.model.type is 'ProgramTemplate'
@@ -52,6 +54,9 @@ define [
               collection: App.request('current_user').workout_templates
               typeToAdd: 'Workout'
         ]
+
+      tutorial:
+        steps: tooltips
 
     ui:
       counters: '.counters'

@@ -55,4 +55,5 @@ define [
   'features/payment/add_card/styles'
   'features/program_action_panel/styles'
   'features/personal_best/styles'
+  'features/tutorial/styles'
 ], ->

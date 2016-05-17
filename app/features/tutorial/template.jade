@@ -1,0 +1,23 @@
+.popover.tutorial
+  .arrow
+  button.btn.btn-default.close(data-role='end')
+    i.fa.fa-close
+  .content
+    .order
+      = id + 1
+    .text
+      h3.popover-title
+        = title
+      .popover-content
+        = content
+  .buttons
+    a.docs.btn.btn-primary.gc-custom(
+      target='_blank'
+      href="http://gymcloud.freshdesk.com/solution/articles/#{docs}"
+    )
+      | Got any docs?
+    .popover-navigation
+      button.btn.btn-link(data-role='prev')
+        | Prev
+      button.btn.btn-primary.gc-custom(data-role='next')
+        | Next

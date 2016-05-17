@@ -6,6 +6,7 @@ define [
   'models/personal_workout'
   'models/program_template'
   'models/workout_template'
+  './tooltips'
 ], (
   AssignedTemplateListView
   template
@@ -14,6 +15,7 @@ define [
   PersonalWorkout
   ProgramTemplate
   WorkoutTemplate
+  tooltips
 ) ->
 
   class AssignedTemplatesLayoutView extends Marionette.LayoutView
@@ -73,6 +75,10 @@ define [
           name: item.get('name')
           label: item.get('name')
           sort_id: "~-2-#{_.underscore(item.get('name'))}"
+
+      tutorial:
+        main: true
+        steps: tooltips
 
     initialize: ->
       @listenTo(@, 'nav:assign', @_assignNewOne)
