@@ -20,7 +20,7 @@ define [
 
       window.Tour::getStep = (i) ->
         step = @collection.getStep(i)
-        return if step is null
+        return unless step
         $.extend({
           id: 'step-' + i
           path: ''
@@ -64,7 +64,7 @@ define [
         name: 'tour'
         steps: []
         smartPlacement: true
-        backdrop: false
+        backdrop: true
         backdropContainer: 'body'
         backdropPadding: 0
         onShown: (tour) -> tour.collection.saveShowedStep(tour._current)
