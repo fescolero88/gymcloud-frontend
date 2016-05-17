@@ -8,6 +8,9 @@ define [
   'views/auth/confirm-registration-view'
   'views/auth/resend-confirmation-view'
   'features/payment/trial_ended/view'
+  'features/signup_trainer_invite/view'
+  'features/signup_trainer_invite/not_have_trainer/view'
+  'features/signup_trainer_invite/matching_trainer/view'
 
   'models/auth/confirm-registration-model'
   'models/auth/resend-confirmation-model'
@@ -24,6 +27,9 @@ define [
   ConfirmRegistrationView
   ResendConfirmationView
   TrialEndedView
+  TrainerInviteView
+  NotHaveTrainerView
+  MatchingTrainerView
 
   ConfirmRegistrationModel
   ResendConfirmationModel
@@ -44,6 +50,9 @@ define [
       'reset/:token': 'resetPassword'
       'confirm/:token': 'confirmRegistration'
       'trial_ended': 'trialEnded'
+      'trainer_invite': 'trainerInvite'
+      'not_have_trainer': 'notHaveTrainer'
+      'matching_trainer': 'matchingTrainer'
 
   class Controller extends Marionette.Controller
 
@@ -100,6 +109,18 @@ define [
 
     trialEnded: ->
       view = new TrialEndedView
+      @_showView(view)
+
+    trainerInvite: ->
+      view = new TrainerInviteView
+      @_showView(view)
+
+    notHaveTrainer: ->
+      view = new NotHaveTrainerView
+      @_showView(view)
+
+    matchingTrainer: ->
+      view = new MatchingTrainerView
       @_showView(view)
 
     _showView: (view) ->
