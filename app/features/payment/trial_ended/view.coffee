@@ -8,6 +8,8 @@ define [
 
     template: template
 
+    className: 'page-wrap payment-page'
+
     onShow: ->
       $('body').attr('class', 'auth')
 
