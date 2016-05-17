@@ -10,4 +10,4 @@ define [
 
     model: ProgramWorkout
 
-    comparator: 'position'
+    comparator: ['position', 'id']
