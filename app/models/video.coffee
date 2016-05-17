@@ -2,6 +2,8 @@ define ->
 
   class VideoModel extends Backbone.Model
 
+    type: 'Video'
+
     defaults:
       preview: undefined
       duration: undefined

@@ -16,6 +16,7 @@ define [
   './prototype'
   './old_client_router'
   './payments'
+  './video_library'
 ], ->
 
   modules = _.toArray(arguments)

@@ -34,7 +34,6 @@ define [
 
     constructor: ->
       @collection = new VideosCollection
-      @searchScope = 'gymcloud'
       super
 
     initialize: ->

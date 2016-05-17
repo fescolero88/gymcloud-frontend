@@ -1,5 +1,5 @@
 define [
-  'models/videos'
+  'models/video'
   'backbone.paginator'
 ], (
   Video

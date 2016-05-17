@@ -1,5 +1,5 @@
 define [
-  'models/videos'
+  'models/video'
   'backbone.paginator'
 ], (
   Video
@@ -18,6 +18,7 @@ define [
     queryParams:
       q: null
       scope: 'mine'
+      order: null
 
     getPreviousPage: ->
       return false if @state.currentPage <= 1

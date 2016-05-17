@@ -8,6 +8,7 @@ define [
   'behaviors/regioned'
   'behaviors/stickit'
   'behaviors/mobile_only_features'
+  'behaviors/video_features'
   'features/actions_dropdown/behavior'
   'features/add_to_library/button/behavior'
   'features/author/widget/behavior'
