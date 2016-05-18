@@ -1,20 +1,28 @@
 define [
-  './item/view'
+  './list/view'
+  './autocomplete/options'
   './template'
 ], (
-  MembersItemView
+  MembersCollectionView
+  autocompleteOptions
   template
 ) ->
-  class MembersView extends Marionette.CompositeView
+  class MembersView extends Marionette.LayoutView
 
     template: template
 
-    childView: MembersItemView
+    behaviors: ->
 
-    childViewContainer: 'ul'
+      regioned:
+        views: [
+            region: 'list'
+            klass: MembersCollectionView
+            options: -> @options
+        ]
+
+      auto_complete: autocompleteOptions
 
     events:
-      'click @ui.rmAssign': 'rmAssign'
       'submit @ui.removeForm': 'submitRemoveClient'
 
     ui:
@@ -25,14 +33,15 @@ define [
 
     initialize: ->
       @listenTo(@, 'nav:delete', @showRemoveClient)
+      @autocompleteCollection = new Backbone.Collection
+      @listenTo(@collection, 'reset', _.bind(@_refreshAutocomplete, @))
 
-    onShow: ->
-      @initSearchSelect()
+    onShow: @_refreshAutocomplete
 
-    rmAssign: (ev) =>
-      assignId = $(ev.currentTarget).data 'id'
-      model = @collection.get assignId
-      model.destroy()
+    _refreshAutocomplete: ->
+      user = App.request('current_user')
+      models = user.clients.filter((client) => !@collection.get(client.id))
+      @autocompleteCollection.reset(models)
 
     showRemoveClient: (ev) =>
       @ui.removeModal.modal 'show'
@@ -44,47 +53,16 @@ define [
       for check in @$el.find('input[type=checkbox]:checked')
         id = $(check).data('id')
         user = clientCollection.get(id)
-        @model.removeUser(user).done =>
-          @initSearchSelect()
+        @model
+          .removeUser(user)
+          .done(_.bind(@_refreshAutocomplete, @))
 
       @ui.removeModal.modal 'hide'
-
-    searchItems: (models) ->
-      _.map models, (model) ->
-        id: model.get('id')
-        last_name: model.get('user_profile.last_name')
-        first_name: model.get('user_profile.first_name')
-        color: model.get('user_profile.avatar_background_color')
-        url: model.get('user_profile.avatar.thumb.url')
 
     addMember: (item) ->
       currentUser = App.request('current_user')
       clientCollection = currentUser.clients
       user = clientCollection.get(item.id)
-      @model.addUser(user).done =>
-        @initSearchSelect()
-
-    initSearchSelect: ->
-      currentUser = App.request('current_user')
-      clientCollection = currentUser.clients
-      toSelect = clientCollection.difference(@collection.models)
-      options = @searchItems(toSelect)
-      self = @
-      @$el.find('.live-search').selectize
-        hideSelected: true
-        valueField: 'id'
-        labelField: 'first_name'
-        searchField: ['first_name', 'last_name']
-        options: options
-        onItemAdd: (value, $item) ->
-          @clear()
-          self.addMember(id: value)
-        render:
-          item: (item, escape) ->
-            return "<div><span class='avatar' style='background-color: " +  \
-              item.color + ";'><img src='" + item.url + "'></span>" + \
-              escape(item.first_name) + ' ' + escape(item.last_name) + '</div>'
-          option: (item, escape) ->
-            return "<div><span class='avatar' style='background-color: " +  \
-              item.color + ";'><img src='" + item.url + "'></span>" + \
-              escape(item.first_name) + ' ' + escape(item.last_name) + '</div>'
+      @model
+        .addUser(user)
+        .done(_.bind(@_refreshAutocomplete, @))

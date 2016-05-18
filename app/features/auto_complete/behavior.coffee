@@ -52,7 +52,10 @@ define [
       @control.destroy()
 
     _prepareItems: ->
-      items = _.result @options, 'collection'
+      items = if _.isFunction(@options.collection)
+        _.bind(@options.collection, @view)()
+      else
+        @options.collection
 
       if items instanceof Backbone.Collection
         items = @_prepareCollection(items)
