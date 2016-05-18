@@ -87,6 +87,7 @@
     "webpack-dev-server": "~1.14.1"
   },
   "dependencies": {
-    "express": "~4.13.4"
+    "express": "~4.13.4",
+    "http-auth": "^2.3.6"
   }
 }

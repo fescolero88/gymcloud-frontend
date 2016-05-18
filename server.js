@@ -1,5 +1,22 @@
 var express = require('express'),
+    auth = require('http-auth'),
+    fs = require('fs'),
     app = express();
+
+var appEnv = process.env.APP_ENV;
+
+var passwdFile = __dirname + '/../config/' + appEnv + '.htpasswd';
+
+if (fs.existsSync(passwdFile)) {
+
+  var basic = auth.basic({
+      realm: appEnv,
+      file: passwdFile
+  });
+
+  app.use(auth.connect(basic));
+
+}
 
 app.use(express.static('./dist/'));
 
