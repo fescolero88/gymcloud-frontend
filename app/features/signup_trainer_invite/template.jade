@@ -1,0 +1,42 @@
+header.gc-header-standard.gc-header-login
+  .container
+    .gc-login-form-wrapper.col-sm-6.cal-xs-12
+      h1.text-center
+        | Invite Your Trainer
+      form.gc-signup-form(role="form")
+        ul.gc-signup-checkbox-wrapper.row
+          li.col-xs-6
+            label.gc-signup-checkbox.gc-have-trainer-icon
+              span
+                | I already have
+                br
+                | a Trainer
+              input(type='radio', checked='', name='account_type', value='1')
+          li.col-xs-6
+            label.gc-signup-checkbox.gc-not-have-trainer-icon.active
+              span
+                | I don't have
+                br
+                | a Trainer
+              input(type='radio', name='account_type', value='3')
+        .row.gc-trainer-invite-title
+          | Enter you trainer's email to invite him.
+        .form-group.gc-email-form-group
+          label(for="gc-invite-trainer")
+            | You Trainer's Email
+          input.form-control(
+            type="text"
+            id="gc-invite-trainer"
+            name="first_name"
+            placeholder=""
+            data-bind="first_name"
+            autofocus
+          )
+          label.gc-error-message
+        .row.form-group.text-center
+            button.btn.btn-default.gc-invite-btn(type="submit")
+              | Send Invitation
+      p.gc-login-signup-wrapper.text-center
+        | Have a Gymcloud account? 
+        a(href='#login')
+          | Sign In

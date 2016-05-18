@@ -182,31 +182,37 @@ body.auth
   display: inline-block
   vertical-align: top
 
-.gc-trainer-type-wrapper
+.gc-trainer-type-wrapper,
+.gc-signup-checkbox-wrapper
   margin: 25px 0 40px 0
   padding: 0
 
-.gc-trainer-type-wrapper li
+.gc-trainer-type-wrapper li,
+.gc-signup-checkbox-wrapper li
   display: inline-block
   padding: 0
   text-align: center
 
-.gc-trainer-type
-  border: 1px solid #fff
+.gc-trainer-type,
+.gc-signup-checkbox
+  border: 1px solid #C9C9C9
   border-radius: 3px
   width: 132px
   height: 131px
   margin: 0
   transition: all 0.3s linear 0.05s
 
-.gc-trainer-type:hover
+.gc-trainer-type:hover,
+.gc-signup-checkbox:hover
   cursor: pointer
 
-.gc-trainer-type.active
+.gc-trainer-type.active,
+.gc-signup-checkbox.active
   border-color: #5db0f4
   box-shadow: inset 0 0 4px 0 #5db0f4
 
-.gc-trainer-type span
+.gc-trainer-type span,
+.gc-signup-checkbox span
   font-size: 13px
   line-height: 15px
   color: #404447
@@ -214,11 +220,42 @@ body.auth
   display: inline-block
   font-weight: normal
 
-.gc-trainer-type-not span
+.gc-trainer-type-not span,
+.gc-signup-checkbox-not span
   margin-top: 65px
 
-.gc-trainer-type input
+.gc-trainer-type input,
+.gc-signup-checkbox input
   display: none
+  
+.gc-signup-checkbox
+  width: 90%
+  height: 85px
+    
+  span
+    margin-top: 28px
+    float: right
+    font-size: 15px
+    color: #434343
+    text-align: left
+    width: 47%
+
+.gc-have-trainer-icon
+  background: transparent url('../images/have-trainer.png') 17% center no-repeat
+
+.gc-not-have-trainer-icon
+  background: transparent url('../images/not-have-trainer.png') 17% center no-repeat
+
+.gc-have-trainer-icon,
+.gc-not-have-trainer-icon
+  span
+    width: 51%
+  
+.gc-user-type-trainer
+  background: transparent url('../images/signup-type-1.png') 30% center no-repeat
+
+.gc-user-type-client
+  background: transparent url('../images/signup-type-3.png') 30% center no-repeat
 
 .gc-trainer-type-personal
   background: transparent url('../images/signup-type-1.png') 50% 20px no-repeat
@@ -229,6 +266,28 @@ body.auth
 .gc-trainer-type-not
   background: transparent url('../images/signup-type-3.png') 50% 20px no-repeat
 
+.gc-not-trainer-message,
+.gc-matching-trainer-message
+  text-align: center
+  font-size: 16px
+  color: #434343
+  margin-bottom: 40px
+
+.gc-finish-btn
+  min-width: 200px
+  margin-bottom: 40px
+
+.gc-back-btn,
+.gc-invite-btn
+  margin-bottom: 50px
+
+.gc-almost-ready-icon
+  display: block
+  width: 60px
+  height: 70px
+  margin: 20px auto 30px
+  background: url('../images/almost-ready.png') no-repeat
+
 form .checkbox
   margin-top: 30px
 
@@ -237,6 +296,11 @@ form .checkbox
 
 .gc-signup-with-email-title
   font-size: 13px
+  text-align: center
+  margin: 0 0 25px 0
+
+.gc-trainer-invite-title
+  font-size: 16px
   text-align: center
   margin: 0 0 25px 0
 

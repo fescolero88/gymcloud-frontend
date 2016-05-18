@@ -4,6 +4,21 @@ header.gc-header-standard.gc-header-login
       h1.text-center
         | Create a GymCloud Account
       form.gc-signup-form(role="form")
+        ul.gc-signup-checkbox-wrapper.row
+          li.col-xs-6
+            label.gc-signup-checkbox.gc-user-type-trainer
+              span
+                | I'm a
+                br
+                | Trainer
+              input(type='radio', checked='', name='account_type', value='1')
+          li.col-xs-6
+            label.gc-signup-checkbox.gc-user-type-client.active
+              span
+                | I'm a
+                br
+                | Client
+              input(type='radio', name='account_type', value='3')
         .form-group.row.gc-login-social
           .col-xs-12.col-md-6.text-xs-center.text-md-left
             span.btn.btn-primary(data-social='fb')
