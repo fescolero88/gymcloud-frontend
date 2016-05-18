@@ -20,6 +20,7 @@ define ->
         content: 'First, click your client\'s name.'
         docs: '3000048491--web-clients-how-to-register'
         orphan: true
+        onPrev: -> view.ui.modalContainer.modal('hide')
       ,
         id: 2
         uniq_id: 'clients_add_client_form_submit'
@@ -36,6 +37,7 @@ define ->
         content: '''Creating a group of clients will make it easier for you to
                     batch assign workouts and programs.'''
         docs: '3000048495--web-clients-how-to-create-a-group'
+        onPrev: -> view.showClientAddModal()
         onNext: -> view.showGroupAddModal()
       ,
         id: 4
@@ -44,8 +46,9 @@ define ->
         title: 'Creating A Client Group.'
         content: 'To create a client group, click here.'
         docs: '3000048495--web-clients-how-to-create-a-group'
-        onNext: -> view.ui.modalContainer.modal('hide')
         orphan: true
+        onPrev: -> view.ui.modalContainer.modal('hide')
+        onNext: -> view.ui.modalContainer.modal('hide')
       ,
         id: 5
         uniq_id: 'clients_point_client'
@@ -54,6 +57,7 @@ define ->
         content: 'Organize your clients by moving them to a client group.'
         docs: '3000048496--webapp-clients-how-to-add-to-group-through-clients-'+
               'list-page'
+        onPrev: -> view.showGroupAddModal()
         onNext: ->
           $('.gc-clients-list-client-actions:first').addClass('active')
       ,
@@ -64,6 +68,8 @@ define ->
         content: 'To do this, simply click this button.'
         docs: '3000048496--webapp-clients-how-to-add-to-group-through-clients-'+
               'list-page'
+        onPrev: ->
+          $('.gc-clients-list-client-actions:first').removeClass('active')
         onNext: ->
           $('.gc-clients-list-client-actions:first').removeClass('active')
       ,
@@ -74,6 +80,8 @@ define ->
         content: '''One of the major features of Gymcloud is to assign a workout
                     or a program to clients and groups.'''
         docs: '3000050220--web-clients-how-to-assign-workouts-and-programs'
+        onPrev: ->
+          $('.gc-clients-list-client-actions:first').addClass('active')
       ,
         id: 8
         uniq_id: 'clients_point_client3'

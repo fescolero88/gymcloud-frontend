@@ -67,12 +67,23 @@ define [
         backdrop: true
         backdropContainer: 'body'
         backdropPadding: 0
-        onShown: (tour) -> tour.collection.saveShowedStep(tour._current)
+        onShown: (tour) -> tour.collection.saveShowedStep(tour.getCurrentStep())
         template: (i, step) -> template(step)
+
+    _lastStep: ->
+      id: 99
+      uniq_id: 'last_step'
+      element: $(document)
+      title: ''
+      content: ''
+      docs: ''
+      onShow: (tour) -> !tour.ended() and tour.end()
 
     _initTour: ->
       tour = @_getTourInstance()
       tour.collection = new TutorialStepsCollection
+      tour.addStep(@_lastStep())
+      @listenTo(tour.collection, 'reset', => tour.addStep(@_lastStep()))
 
       delete tour._options.steps
       tour._options.__defineGetter__('steps', -> tour.collection.toJSON())

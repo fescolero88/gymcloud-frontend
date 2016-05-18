@@ -13,11 +13,11 @@ define ->
       super
 
     getStep: (i) ->
-      step = @get(i)
+      step = @at(i)
       step?.toJSON()
 
     saveShowedStep: (i) ->
-      step = @get(i)
+      step = @at(i)
       return null unless step
       uid = step.get('uniq_id')
       tour.push(uid) unless _.include(tour, uid)
