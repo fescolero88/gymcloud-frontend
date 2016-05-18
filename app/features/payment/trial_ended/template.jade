@@ -1,13 +1,12 @@
-div.page-wrap.payment-page
-  header.gc-header-standard.gc-header-login
-    .container
-      .col-xs-12.col-sm-6.gc-login-form-wrapper
-        h1.text-center
-          | Your Free Trial has Ended
-        form.flex-form.gc-login-form(role="form")
-          .trial-ended-img-mock
-          p.enter-payment-info
-            | Enter your payment information to continue using the GymCloud fitness platform.
-          button.btn.btn-default(type="submit")
-            | Enter payment info
-          .padding-block
+header.gc-header-standard.gc-header-login
+  .container
+    .col-xs-12.col-sm-6.gc-login-form-wrapper
+      h1.text-center
+        | Your Free Trial has Ended
+      form.flex-form.gc-login-form(role="form")
+        .trial-ended-img-mock
+        p.enter-payment-info
+          | Enter your payment information to continue using the GymCloud fitness platform.
+        a.btn.btn-default.gc-form-submit-button(href='#payments/info')
+          | Enter payment info
+        .padding-block

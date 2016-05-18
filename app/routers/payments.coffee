@@ -1,7 +1,9 @@
 define [
   'pages/payments/overview/page'
+  'features/payment/info/view'
 ], (
   PaymentsOverviewPage
+  PaymentsInfoPage
 ) ->
 
   class Router extends Marionette.AppRouter
@@ -9,6 +11,7 @@ define [
     appRoutes:
 
       'payments(/)': 'root'
+      'payments/info': 'info'
       'payments/:state': 'overview'
 
   class Controller extends Marionette.Controller
@@ -20,6 +23,12 @@ define [
     overview: (state) ->
       new PaymentsOverviewPage
         state: state
+
+    info: ->
+      view = new PaymentsInfoPage
+      App.request 'views:show', view,
+        layout: 'auth'
+        region: 'content'
 
     _showView: (view) ->
       App.request('views:show', view)
