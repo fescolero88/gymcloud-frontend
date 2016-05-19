@@ -16,5 +16,7 @@ define [
             region: 'video-assign-sec'
             klass: VideoAssignmentView
             options: ->
+              className: 'modal-video-assign-sec'
               model: @model
+              type: @options.type
         ]

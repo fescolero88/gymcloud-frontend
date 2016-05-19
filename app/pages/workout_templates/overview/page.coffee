@@ -2,12 +2,14 @@ define [
   'pages/base/page'
   './template'
   'models/workout_template'
+  'features/video/assignment/view'
   'features/assignment_list/view'
   './overview/view'
 ], (
   BasePage
   template
   WorkoutTemplate
+  VideoAssignmentView
   AssignView
   OverviewView
 ) ->
@@ -27,6 +29,9 @@ define [
             id: 'overview'
             title: 'Overview'
             active: true
+          ,
+            id: 'video'
+            title: 'Video'
           ,
             id: 'assign'
             title: 'Assign'
@@ -58,6 +63,15 @@ define [
       overview: ->
         view = new OverviewView
           model: @model.get('data.model')
+        @listenTo view, 'childview:video:assign', =>
+          @model.set('state.subpage', 'video')
+        view
+      video: ->
+        view = new VideoAssignmentView
+          model: @model.get('data.model')
+        @listenTo view, 'video:assigned', =>
+          @model.set('state.subpage', 'overview')
+        view
       assign: ->
         new AssignView
           model: @model.get('data.model')

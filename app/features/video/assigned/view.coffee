@@ -53,7 +53,9 @@ define [
 
     events:
       'click @ui.buttonDelete': '_deleteVideo'
-      'click @ui.buttonAssign': '_showAssignModal'
+
+    triggers:
+      'click @ui.buttonAssign': 'video:assign'
 
     onBeforeRender: ->
       @model = @options.model()
