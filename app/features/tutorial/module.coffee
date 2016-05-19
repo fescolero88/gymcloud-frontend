@@ -73,11 +73,11 @@ define [
     _lastStep: ->
       id: 99
       uniq_id: 'last_step'
-      element: $(document)
+      element: 'body'
       title: ''
       content: ''
       docs: ''
-      onShow: (tour) -> !tour.ended() and tour.end()
+      onShown: (tour) -> !tour.ended() and tour.end()
 
     _initTour: ->
       tour = @_getTourInstance()

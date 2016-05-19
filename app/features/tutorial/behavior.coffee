@@ -19,10 +19,10 @@ define ->
       @tour.addSteps(@steps)
 
       return unless @options.main
-      @tour.restart() unless @tour.collection.isEmpty()
+      @tour.restart() if @tour.collection.length > 1
 
     onBeforeDestroy: ->
       return unless @options.main
-      if !@tour.ended() and !@tour.collection.isEmpty()
+      if !@tour.ended() and @tour.collection.length > 1
         @tour.end()
         @tour.collection.reset()
