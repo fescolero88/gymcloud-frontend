@@ -57,4 +57,5 @@ define [
   'features/program_action_panel/styles'
   'features/personal_best/styles'
   'features/tutorial/styles'
+  'styles/workout_enter_result'
 ], ->
