@@ -20,5 +20,4 @@ define [
 
     initViews: ->
       root: ->
-        console.log 'qwwer'
         view = new AddResultView
