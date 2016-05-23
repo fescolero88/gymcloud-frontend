@@ -1047,7 +1047,8 @@ region[data-name="pagination"] > div
   background-position -17px 0
 
 .gc-assign-videos
-  margin 10px 0
+  margin 10px 15px
+  overflow: hidden
 
 .gc-assign-videos:before,
 .gc-manage-videos:before
@@ -1059,29 +1060,19 @@ region[data-name="pagination"] > div
   float left
   position relative
   min-height 1px
-  padding-right 0
-  padding-left 0
+  padding-right 15px
+  padding-left 15px
 
 .gc-video-player
   border-radius 4px
   overflow hidden
   border 1px solid gray
   margin-bottom 20px
-  display: flex
-  flex-wrap: wrap
-
-  .gc-video-preview,
-  .gc-video-details
-    display: flex
 
   .gc-video-details
     padding 15px
     background-color #FAFAFA
     position relative
-    align-items: center
-
-  .gc-video-details-inner
-    width: 100%
 
     .gc-video-report
       background url('../../images/icon-video-flag.png')
@@ -1091,7 +1082,7 @@ region[data-name="pagination"] > div
       width 10px
       position absolute
       right 10px
-      top 25px
+      top 17px
       display inline-block
       cursor pointer
 
@@ -1102,12 +1093,10 @@ region[data-name="pagination"] > div
     white-space: nowrap
     overflow: hidden
     text-overflow: ellipsis
-    color: #9EA0A1
-    font-weight: 300
 
   .gc-video-timer,
   .gc-video-type
-    color #9EA0A1
+    color #808080
     font-size 13px
     line-height 18px
     margin-right 10px
@@ -1144,7 +1133,6 @@ region[data-name="pagination"] > div
   .gc-assign-video
     margin-top 10px
     background-color transparent
-    max-width: 200px
 
   .gc-assign-video:hover
     background-color blue
@@ -1156,15 +1144,13 @@ region[data-name="pagination"] > div
 
   .gc-video-preview
     position relative
-    height: 130px
+    height: 184px
     background: center center no-repeat
     background-size: cover
-    padding: 0
 
     iframe
       width: 100%
       height: 100%
-      border: none
 
     .gc-video-play
       cursor pointer

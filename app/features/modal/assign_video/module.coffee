@@ -12,13 +12,16 @@ define [
 
     _initHandlers: ->
       @app.reqres.setHandler('modal:video:assign', @_initModal)
+      @listenTo(@app.vent, 'modal:video:close', @_closeModal)
 
     _initModal: (model) =>
-      view = new WorkoutVideoAssignView model: model
-      region = App.request('app:layouts:base').getRegion('modal')
-      region.show(view)
-      region.$el.modal('show')
+      view = new WorkoutVideoAssignView
+        model: model
+        type: 'modal'
+      @region = App.request('app:layouts:base').getRegion('modal')
+      @region.show(view)
+      @region.$el.modal('show')
 
-      @listenToOnce view, 'modal:closed', ->
-        region.$el.modal('hide')
-        region.destroy()
+    _closeModal: ->
+      @region.$el.modal('hide')
+      @region.destroy()

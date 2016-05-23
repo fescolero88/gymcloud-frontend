@@ -60,6 +60,11 @@ define [
       @listenTo(App.vent, 'dropped:to:week', @_updateWeekId)
       @listenTo(@model.workout, 'change:name', @_patchWorkout)
 
+    onShow: ->
+      @listenToOnce @video_assigned, 'show', =>
+        @listenTo(@video_assigned.currentView, 'video:assign',
+          @_showAssignModal)
+
     _destroy: ->
       App.request('modal:confirm:delete', @model)
 
@@ -81,6 +86,9 @@ define [
       tabName = $(ev.currentTarget).data('content')
       @ui.workoutTabsContent.find('.tab-pane.active').removeClass('active')
       @ui.workoutTabsContent.find("[data-pane='#{tabName}']").addClass('active')
+
+    _showAssignModal: ->
+      App.request('modal:video:assign', @model)
 
     _openUploadPopup: ->
       view = App.request('base:uploadVideo')

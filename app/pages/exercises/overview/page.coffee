@@ -3,11 +3,13 @@ define [
   './template'
   'models/exercise'
   './overview/view'
+  'features/video/assignment/view'
 ], (
   BasePage
   template
   Exercise
   OverviewView
+  VideoAssignmentView
 ) ->
 
   class Page extends BasePage
@@ -24,8 +26,10 @@ define [
         data: [
             id: 'overview'
             title: 'Overview'
+          ,
+            id: 'video'
+            title: 'Video'
         ]
-
       privacy_widget:
         model: -> @view.model.get('data.model')
 
@@ -49,3 +53,13 @@ define [
       overview: ->
         view = new OverviewView
           model: @model.get('data.model')
+        @listenTo view, 'childview:video:assign', =>
+          @model.set('state.subpage', 'video')
+        view
+
+      video: ->
+        view = new VideoAssignmentView
+          model: @model.get('data.model')
+        @listenTo view, 'video:assigned', =>
+          @model.set('state.subpage', 'overview')
+        view
