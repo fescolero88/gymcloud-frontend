@@ -1,29 +1,36 @@
 define [
   'moment'
+  'collections/videos_list'
   './template'
+  'features/video_library/list/item/template'
 ], (
   moment
+  VideosCollection
   template
+  VideoLibraryTemplate
 )->
   class AssignVideoItemView extends Marionette.ItemView
 
-    template: template
-
-    tagName: 'div'
+    getTemplate: ->
+      if @options.set_template?
+        VideoLibraryTemplate
+      else
+        template
 
     className: 'col-xs-12 gc-video-thumb'
 
     ui:
       assignVideo: '.gc-assign-video'
-      player: '.gc-video-preview'
+      remove: '.gc-icon-trash'
+
+    events:
+      'click @ui.remove': 'removeModel'
 
     triggers:
       'click @ui.assignVideo': 'assign'
 
-    events:
-      'click .gc-video-play': 'renderIframe'
-
     behaviors:
+      video_features: true
 
       stickit:
         bindings:
@@ -38,27 +45,14 @@ define [
             observe: 'preview_picture_url'
             update: ($el, val, model, options) ->
               $el.css 'background-image', "url(#{val})"
+          '.gc-video-uploaded-at':
+            observe: 'uploaded_at'
+            onGet: (date) ->
+              moment(date).format 'Do of MMM'
 
     templateHelpers: =>
       isAssigned: @options.isAssigned
-      durationTime: @convertDuration(@model.get('duration'))
 
-    initialize: (_options) ->
-      @listenTo(@, 'destroyIframe', @destroyIframe)
-
-    renderIframe: (ev) ->
-      @trigger('playVideo')
-      iframe = document.createElement('iframe')
-      iframe.setAttribute('src', "#{@model.get('embed_url')}?autoplay=1")
-      iframe.setAttribute('allowfullscreen', 'allowfullscreen')
-      @ui.player.append(iframe)
-      $(ev.currentTarget).hide()
-
-    destroyIframe: ->
-      @ui.player.find('iframe').remove()
-      @ui.player.find('i').show()
-
-    convertDuration: (duration) ->
-      return null unless duration
-      format = if duration > 60 * 60 then 'HH:mm:ss' else 'mm:ss'
-      moment.utc(duration * 1000).format(format)
+    removeModel: ->
+      @model.collection = new VideosCollection
+      App.request('modal:confirm:delete', @model)

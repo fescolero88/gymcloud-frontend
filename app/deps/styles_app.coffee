@@ -24,6 +24,7 @@ define [
   'styles/prototype/ui'
   'styles/program_workouts'
   'styles/upload'
+  'styles/video_library'
   'features/video/assigned/styles'
   'features/privacy/toggle/styles'
   'features/author/widget/styles'

@@ -28,10 +28,6 @@ define [
 
     initialize: =>
       @viewState = new Backbone.Model(state: 'library')
-      @collection.fetch(data: q: '')
-        .then =>
-          @viewState.set(state: 'no_results') unless @collection.length
-          @collection.trigger('request')
       @listenTo(@viewState, 'change:state', @onStateChange)
 
     childViewOptions: (model, index) =>
