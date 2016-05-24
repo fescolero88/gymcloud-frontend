@@ -4,17 +4,17 @@ define [
   './add_folder_modal/view'
   './duplicate_modal/view'
   './template'
-  './tooltips'
 ], (
   EntityListView
   AddEntityModalView
   AddFolderModalView
   DuplicateModalView
   template
-  tooltips
 ) ->
 
   class FolderListView extends Marionette.LayoutView
+
+    key: 'FolderListView'
 
     template: template
 
@@ -46,10 +46,6 @@ define [
       navigate_back: true
 
       breadcrumbs: true
-
-      tutorial:
-        main: true
-        steps: tooltips
 
       auto_complete:
         onItemAdd: (id, $item) ->

@@ -1,12 +1,12 @@
 define [
   './template'
-  './tooltips'
 ], (
   template
-  tooltips
 ) ->
 
   class ExerciseOverviewView extends Marionette.LayoutView
+
+    key: 'ExerciseOverviewView'
 
     template: template
 
@@ -19,6 +19,3 @@ define [
       rating_widget: true
       editable_textarea: true
       video_assigned: true
-      tutorial:
-        main: true
-        steps: tooltips
