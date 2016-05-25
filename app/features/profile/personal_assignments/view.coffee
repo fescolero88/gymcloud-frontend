@@ -122,9 +122,9 @@ define [
       template.save().then =>
         template.assignTo(@model)
           .then(_.bind(@_assignCallback, @, template))
+          .then -> template.destroy()
 
     _assignCallback:  (template, response) ->
       Model = @_getPersonalModelClass(@options.viewType)
       assignment = new Model(response)
       @views.list.collection.add(assignment)
-      template.destroy()
