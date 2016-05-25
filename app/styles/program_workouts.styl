@@ -45,10 +45,11 @@
 
   .gc-workout-bookmark
     position: absolute
-    height: 28px
-    width: 13px
+    height: 29px
+    width: 14px
     z-index: 1
     background-image: url("../images/workout-bookmark-icon.png")
+    background-repeat: no-repeat
     top: -1px
     left: 20px
     cursor: pointer
@@ -109,15 +110,19 @@
       margin-right: 5px
 
     .gc-cheevon-dropdown
-      &.btn-primary
-        margin-top: -5px
-        background-color: transparent
-        border-color: #fff
-        color: #fff
-        border-radius: 100%
-        padding: 4px 0px
-        height: 30px
-        width: 30px
+      background: url('../images/chevron-down-white.svg') no-repeat
+      background-size: contain
+      border: none
+      margin-top: -5px
+      background-color: transparent
+      box-shadow: none
+      color: #fff
+      padding: 4px 0px
+      height: 30px
+      width: 30px
+      
+      &:hover
+        opacity: .7
 
   .gc-workout-bookmark.active,
   input[type=checkbox]:checked + .gc-workout-bookmark

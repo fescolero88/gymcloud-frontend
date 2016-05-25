@@ -948,7 +948,11 @@ region[data-name="pagination"] > div
   width 17px
   display inline-block
   background-image url('../../images/prototypes/trash-icon.png')
-  background-size cover
+  background-size contain
+  background-repeat no-repeat
+  
+  &:hover
+    opacity: .8
 
 .gc-icon-lock-orange
   display inline-block

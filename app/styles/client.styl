@@ -296,7 +296,10 @@
   margin-left: 8px
 
 .gc-clients-list-client-delete.btn
-  background: transparent
+  width: 16px
+  height: 20px
+  background: transparent url('../images/prototypes/trash-icon.png') no-repeat center center
+  background-size: contain
   outline: none
   font-size: 20px
   line-height: 27px
@@ -305,10 +308,11 @@
   color: #d9d9d9
   border: none
   box-shadow: none
-
-.gc-clients-list-client-delete.btn:hover
-  color: #ee6d5d
-  background: transparent
+  
+  &:hover
+    background: transparent url('../images/prototypes/trash-icon.png') no-repeat center center
+    background-size: contain
+    opacity: .8
 
 @media (min-width: 768px)
   .modal-dialog
