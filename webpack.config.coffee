@@ -9,7 +9,7 @@ module.exports =
 
   cache: true
   debug: true
-  # devtool: 'source-map'
+  devtool: '#source-map'
 
   context: path.resolve('app')
 
@@ -118,8 +118,8 @@ module.exports =
         # loader: 'style!css'
         loader:
           ExtractTextPlugin.extract(
-            'style-loader',
-            'css-loader',
+            'style-loader?sourceMap',
+            'css-loader?sourceMap',
             publicPath: ''
           )
       }
@@ -128,8 +128,8 @@ module.exports =
         # loader: 'style!css!stylus'
         loader:
           ExtractTextPlugin.extract(
-            'style-loader',
-            'css-loader!postcss-loader!stylus-loader',
+            'style-loader?sourceMap',
+            'css-loader?sourceMap!postcss-loader!stylus-loader?sourceMap',
             publicPath: ''
           )
       }
