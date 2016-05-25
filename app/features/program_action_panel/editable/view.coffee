@@ -2,15 +2,15 @@ define [
   './template'
   '../model'
   'features/quick_add/view'
-  './tooltips'
 ], (
   template
   DataModel
   QuickAddView
-  tooltips
 ) ->
 
-  class View extends Marionette.LayoutView
+  class EditableProgramActionPanel extends Marionette.LayoutView
+
+    key: 'EditableProgramActionPanel'
 
     template: template
 
@@ -54,9 +54,6 @@ define [
               collection: App.request('current_user').workout_templates
               typeToAdd: 'Workout'
         ]
-
-      tutorial:
-        steps: tooltips
 
     ui:
       counters: '.counters'

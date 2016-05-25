@@ -1,14 +1,14 @@
 define [
   './template'
   'features/workout_exercises/view'
-  './tooltips'
 ], (
   template
   WorkoutExercisesView
-  tooltips
 ) ->
 
-  class View extends Marionette.LayoutView
+  class WorkoutOverviewView extends Marionette.LayoutView
+
+    key: 'WorkoutOverviewView'
 
     template: template
 
@@ -29,6 +29,3 @@ define [
               model: @model
               collection: @model.exercises
         ]
-      tutorial:
-        main: true
-        steps: tooltips

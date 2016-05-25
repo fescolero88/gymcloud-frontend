@@ -8,9 +8,9 @@ ClientGroup = require 'models/client_group'
 
 ClientGroupMember = require 'models/client_group_member'
 
-tooltips = require('./tooltips')
-
 module.exports = class ClientsView extends Marionette.LayoutView
+
+  key: 'ClientsView'
 
   template: require('templates/trainer/clients/clients')
 
@@ -53,10 +53,6 @@ module.exports = class ClientsView extends Marionette.LayoutView
           observe: 'clients_title'
           onGet: (value) ->
             "Add #{_.singularize(value)}"
-
-    tutorial:
-      main: true
-      steps: tooltips
 
   templateHelpers: =>
     view_type: @viewType

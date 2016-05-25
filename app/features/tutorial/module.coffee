@@ -1,17 +1,21 @@
 define [
   'features/tutorial/collection'
   'features/tutorial/template'
+  'features/tutorial/tooltips'
   'bootstrap-tour'
 ], (
   TutorialStepsCollection
   template
+  tooltips
 ) ->
 
   class Module extends Marionette.Module
 
     initialize: ->
-      tour = @_initTour()
-      App.reqres.setHandler('tour', -> tour)
+      @tour = @_initTour()
+      App.reqres.setHandler('tour', -> @tour)
+      App.vent.on('app:view:show', @onShowView, @)
+      App.vent.on('app:view:destroy', @onBeforeDestroyView, @)
 
     _getTourClass: ->
       window.Tour::addStep = (step) ->
@@ -90,3 +94,31 @@ define [
 
       tour.init()
       tour
+
+    onShowView: (view) ->
+      steps = _.reduce tooltips, (memo, step) ->
+        if step.key is view.key and step.rule()
+          newStep = _.clone(step)
+          newStep.element = step.element(view)
+          newStep.view = view
+          memo.push(newStep)
+        memo
+      , []
+
+      return unless steps.length
+      @tour.addSteps(steps)
+
+      return unless _.where(steps, main: true).length
+      @tour.restart() if @tour.collection.length > 1
+
+    onBeforeDestroyView: (view) ->
+      steps = @tour.collection.where(view: view)
+      @tour.collection.remove(steps)
+
+      return unless _.where(steps, main: true).length
+
+      if !@tour.ended() and @tour.collection.length > 1
+        try
+          @tour.end()
+          @tour.collection.reset()
+        catch err
