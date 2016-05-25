@@ -25,7 +25,11 @@ define [
                 observe: 'id'
                 onGet: ->
                   root = _.chain(@model.type).underscore().pluralize().value()
-                  "##{root}/#{@model.id}"
+                  if root is 'exercises'
+                    userId = App.request('current_user_id')
+                    "#users/#{userId}/#{root}/#{@model.get('exercise_id')}"
+                  else
+                    "##{root}/#{@model.id}"
             ]
           '.gc-client-item-icon':
             attributes: [

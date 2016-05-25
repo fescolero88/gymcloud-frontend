@@ -27,7 +27,7 @@ define [
 
     initModel: ->
       user = App.request('current_user')
-      exercise = user.exercises.get(@options.id)
+      exercise = user.exercises?.get(@options.id)
       exercise or new Exercise(id: @options.id)
 
     initViews: ->

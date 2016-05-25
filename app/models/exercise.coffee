@@ -21,4 +21,4 @@ define [
     _getFolder: ->
       user = App.request('current_user')
       collection = user.folders
-      collection.get(@get('folder_id'))
+      collection?.get(@get('folder_id'))
