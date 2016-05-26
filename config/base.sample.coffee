@@ -50,6 +50,8 @@ module.exports =
         hjsv: 5
       google_analytics:
         account: 'UA-74824574-3'
+      stripe:
+        publishable_key: 'pk_live_OaMTNwWnnagp4nLqJhwrkiUU'
     api: url: 'https://api.gymcloud.com'
     mobile:
       app: 'gymcloud://'
