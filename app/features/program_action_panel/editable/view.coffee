@@ -45,6 +45,10 @@ define [
             observe: 'person_id'
             visible: (value) ->
               @model.type is 'PersonalProgram'
+          '.widgets':
+            observe: 'position'
+            visible: (value) ->
+              value is 'top'
 
       regioned:
         views: [
@@ -66,8 +70,8 @@ define [
       'click .back-to-overview': '_backToOverview'
 
     initialize: ->
-      @options.position ||= 'top'
       @data = new DataModel
+        position: @options.position || 'top'
       @listenTo @model, 'change:person_id', =>
         @data.set(person_id: @model.get('person_id'))
       @listenTo @model.weeks, 'reset add remove', =>
@@ -105,7 +109,7 @@ define [
         wait: true
 
     _calculatePosition: (collection) ->
-      if @options.position is 'bottom'
+      if @data.get('position') is 'bottom'
         lastModelPosition = collection.last()?.get('position') or 0
         lastModelPosition + 1
       else
