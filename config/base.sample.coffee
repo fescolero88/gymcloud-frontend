@@ -36,10 +36,10 @@ module.exports =
     vendor:
       facebook: app_id: '1457484574486556'
       google: client_id: '686822539338-h8pp1erjru867em1h45f7rf0qe0ftpdf.apps.googleusercontent.com'
-    api: url: '//api.s.gymcloud.com'
+    api: url: 'https://api.s.gymcloud.com'
     mobile:
       app: 'gymcloud://'
-      url: '//mobile.s.gymcloud.com'
+      url: 'https://mobile.s.gymcloud.com'
 
   production: $.extend true, {}, defaults,
     vendor:
@@ -50,10 +50,10 @@ module.exports =
         hjsv: 5
       google_analytics:
         account: 'UA-74824574-3'
-    api: url: '//api.gymcloud.com'
+    api: url: 'https://api.gymcloud.com'
     mobile:
       app: 'gymcloud://'
-      url: '//mobile.gymcloud.com'
+      url: 'https://mobile.gymcloud.com'
     features:
       sign_up: enabled: false
       search_global: enabled: false
