@@ -1,6 +1,10 @@
 define ->
 
-  tour = JSON.parse(window.localStorage.tour || '[]') || []
+  tour = null
+  getFinishedSteps = ->
+    return unless App.reqres.hasHandler('current_user_id')
+    name = "tour_#{App.request('current_user_id')}"
+    tour = JSON.parse(window.localStorage[name] || '[]') || []
 
   class TutorialStepsCollection extends Backbone.Collection
 
@@ -8,6 +12,7 @@ define ->
       step.get('id')
 
     add: (models, options) ->
+      getFinishedSteps() unless tour
       steps = if _.isArray(models) then models else [models]
       models = _.filter(steps, (s) -> s and !_.include(tour, s?.uniq_id))
       super
@@ -21,4 +26,5 @@ define ->
       return null unless step
       uid = step.get('uniq_id')
       tour.push(uid) unless _.include(tour, uid)
-      window.localStorage.tour = JSON.stringify(tour)
+      name = "tour_#{App.request('current_user_id')}"
+      window.localStorage[name] = JSON.stringify(tour)
