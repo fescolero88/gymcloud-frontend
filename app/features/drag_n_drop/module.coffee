@@ -63,10 +63,10 @@ define [
 
     _scrollDown: (container, pageY) ->
       if @smaug.dragging and pageY == @_pageY
-        container.scrollTop += 5
-        setTimeout @_scrollDown.bind(@, container, pageY), 20
+        container.scrollTop += 18
+        setTimeout @_scrollDown.bind(@, container, pageY), 5
 
     _scrollUp: (container, pageY) ->
       if @smaug.dragging and pageY == @_pageY
-        container.scrollTop -= 5
-        setTimeout @_scrollUp.bind(@, container, pageY), 20
+        container.scrollTop -= 25
+        setTimeout @_scrollUp.bind(@, container, pageY), 5
