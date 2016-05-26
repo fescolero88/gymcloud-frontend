@@ -65,7 +65,7 @@ gulp.task 'webpack:build', ['build:clean'], (callback) ->
 
 # modify some webpack config options
 myDevConfig = Object.create(webpackConfig)
-myDevConfig.devtool = 'sourcemap'
+myDevConfig.devtool = '#source-map'
 myDevConfig.debug = true
 
 # create a single instance of the compiler to allow caching
@@ -85,7 +85,7 @@ gulp.task 'webpack-dev-server', (callback) ->
 
   # modify some webpack config options
   myConfig = Object.create(webpackConfig)
-  myConfig.devtool = 'eval'
+  myConfig.devtool = '#source-map'
   myConfig.debug = true
   devServerConfig =
     publicPath: '/' + myConfig.output.publicPath
