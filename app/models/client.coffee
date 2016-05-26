@@ -43,6 +43,3 @@ define [
             attrs.last_name
           ] = _.compact(value.split(' '))
         toJSON: false
-
-    initialize: ->
-      @computedFields = new Backbone.ComputedFields(@)

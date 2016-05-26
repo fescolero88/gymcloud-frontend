@@ -23,10 +23,7 @@ define [
 
     viewComparator: (model) ->
       name = model.get('name') ||
-        [
-          model.get('user_profile.first_name')
-          model.get('user_profile.last_name')
-        ].join(' ')
+        model.get('user_profile.full_name')
       _.underscored(name)
 
     initialize: (options) ->
