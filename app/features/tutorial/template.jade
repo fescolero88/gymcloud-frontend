@@ -1,10 +1,10 @@
 .popover.tutorial
   .arrow
-  button.btn.btn-default.close(data-role='end')
-    i.fa.fa-close
+  button.btn.btn-default.close(data-role='finish_tour')
+    | Exit Tour
   .content
     .order
-      = id + 1
+      | #{currentIndex} of #{totalCount}
     .text
       h3.popover-title
         = title
@@ -15,7 +15,7 @@
       target='_blank'
       href="http://gymcloud.freshdesk.com/solution/articles/#{docs}"
     )
-      | Got any docs?
+      | Learn More
     .popover-navigation
       button.btn.btn-link(data-role='prev')
         | Prev

@@ -13,7 +13,7 @@ define [
 
     initialize: ->
       @tour = @_initTour()
-      App.reqres.setHandler('tour', -> @tour)
+      App.reqres.setHandler('tour', => @tour)
       App.vent.on('app:view:show', @onShowView, @)
       App.vent.on('app:view:destroy', @onBeforeDestroyView, @)
 
@@ -72,7 +72,12 @@ define [
         backdropContainer: 'body'
         backdropPadding: 0
         onShown: (tour) -> tour.collection.saveShowedStep(tour.getCurrentStep())
-        template: (i, step) -> template(step)
+        template: (i, step) ->
+          tour = App.request('tour')
+          params = _.extend {}, step,
+            currentIndex: i + 1
+            totalCount: tour.collection.length - 1
+          template(params)
 
     _lastStep: ->
       id: 99
