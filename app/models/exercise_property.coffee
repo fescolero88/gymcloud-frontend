@@ -1,11 +1,11 @@
 define [
   './concerns/nested_models'
   './personal_property'
-  'mathjs'
+  'models/concerns/unit_convertion'
 ], (
   NestedModelsConcern
   PersonalProperty
-  mathjs
+  unit_convertion
 ) ->
 
   class ExerciseProperty extends Backbone.Model
@@ -15,43 +15,16 @@ define [
     urlRoot: '/exercise_properties'
 
     computed: ->
-      round = (value, decimals) ->
-        Number(Math.round(value + 'e' + decimals) + 'e-' + decimals)
-
-      get = (name, attrs) ->
-        if !attrs[name] or
-          _.include([0, 1], @personal_property.property_units.length) or
-          !@get('property_unit_id')
-
-            return round(attrs[name], 2)
-
-        saveUnit = @personal_property.get('save_unit').short_name
-        unit = mathjs.unit("#{attrs[name]} #{saveUnit}")
-        value = unit.toNumber(@get('property_unit_name'))
-        round(value, 2)
-
-      set = (name, value, attrs) ->
-        if !value or
-          _.include([0, 1], @personal_property.property_units.length) or
-          !@get('property_unit_id')
-
-            return attrs[name] = round(value, 2) || null
-
-        saveUnit = @personal_property.get('save_unit').short_name
-        unit = mathjs.unit("#{value} #{@get('property_unit_name')}")
-        newValue = unit.toNumber(saveUnit)
-        attrs[name] = round(newValue, 2) || null
-
       value_converted:
         depends: ['personal_property', 'property_unit_name', 'value']
-        get: _.bind(get, @, 'value')
-        set: _.bind(set, @, 'value')
+        get: _.bind(unit_convertion.get, @, 'value')
+        set: _.bind(unit_convertion.set, @, 'value')
         toJSON: false
 
       value2_converted:
         depends: ['personal_property', 'property_unit_name', 'value2']
-        get: _.bind(get, @, 'value2')
-        set: _.bind(set, @, 'value2')
+        get: _.bind(unit_convertion.get, @, 'value2')
+        set: _.bind(unit_convertion.set, @, 'value2')
         toJSON: false
 
     validation:

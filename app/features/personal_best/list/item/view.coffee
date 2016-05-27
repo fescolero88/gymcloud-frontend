@@ -1,8 +1,10 @@
 define [
   './template'
+  './exercise_result_items_list/view'
   'moment'
 ], (
   template
+  ExerciseResultItemCollectionView
   moment
 ) ->
 
@@ -12,11 +14,19 @@ define [
 
     template: template
 
-    behaviors:
+    behaviors: ->
 
       stickit:
         bindings:
           '.title span': 'name'
+
+      regioned:
+        views: [
+            region: 'exercise_result_items'
+            klass: ExerciseResultItemCollectionView
+            options: ->
+              collection: @model.exercise_result_items
+        ]
 
     events:
       'click .delete': '_destroyResult'
