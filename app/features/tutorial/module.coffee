@@ -16,6 +16,10 @@ define [
       App.reqres.setHandler('tour', => @tour)
       App.vent.on('app:view:show', @onShowView, @)
       App.vent.on('app:view:destroy', @onBeforeDestroyView, @)
+      $(document).one 'click', "button[data-role='finish_tour']", =>
+        steps = _.pluck(tooltips, 'uniq_id')
+        @tour.collection.skipSteps(steps)
+        @tour.end() unless @tour.ended()
 
     _getTourClass: ->
       window.Tour::addStep = (step) ->

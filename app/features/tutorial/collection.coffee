@@ -3,8 +3,8 @@ define ->
   tour = null
   getFinishedSteps = ->
     return unless App.reqres.hasHandler('current_user_id')
-    name = "tour_#{App.request('current_user_id')}"
-    tour = JSON.parse(window.localStorage[name] || '[]') || []
+    settings = App.request('current_user').user_settings
+    tour = settings.get('tutorial_steps')
 
   class TutorialStepsCollection extends Backbone.Collection
 
@@ -25,6 +25,9 @@ define ->
       step = @at(i)
       return null unless step
       uid = step.get('uniq_id')
-      tour.push(uid) unless _.include(tour, uid)
-      name = "tour_#{App.request('current_user_id')}"
-      window.localStorage[name] = JSON.stringify(tour)
+      @skipSteps([uid]) unless _.include(tour, uid)
+
+    skipSteps: (steps = []) ->
+      tour = _.uniq(tour.concat(steps))
+      settings = App.request('current_user').user_settings
+      settings.patch(tutorial_steps: tour)
