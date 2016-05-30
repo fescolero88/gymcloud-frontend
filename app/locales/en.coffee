@@ -34,6 +34,10 @@ define ->
         changed:
           '[s] Account type successfully changed'
 
+    client:
+      added:
+        '[s] Client successfully saved'
+
     item:
       added:
         '[s] New item added'
