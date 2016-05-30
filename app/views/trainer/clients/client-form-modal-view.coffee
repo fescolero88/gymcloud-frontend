@@ -94,6 +94,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
       message: message
 
   onSync: (model, response, options) ->
+    App.request('messenger:explain', 'client.added')
     @trigger 'modal:close'
     @trigger 'addToClientsCollection', model
     App.request('current_user').clients.add(@model)
