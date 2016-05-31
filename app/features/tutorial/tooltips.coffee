@@ -112,8 +112,8 @@ define ->
     ,
       id: 1
       uniq_id: 'workout_constructor_add_exercise'
-      key: 'WorkoutOverviewView'
-      element: (view) -> view.$('.gc-exercises-list-actions .quick-add')
+      key: 'QuickAddView'
+      element: (view) -> view.$('.quick-add')
       rule: -> /\/#workout_templates\/\d+/.test(window.location.href)
       title: 'Add Exercise.'
       content: '''Add the exercises you want to include in your workout by
@@ -122,8 +122,8 @@ define ->
     ,
       id: 2
       uniq_id: 'workout_constructor_add_exercise_note'
-      key: 'WorkoutOverviewView'
-      element: (view) -> view.$('.gc-workout-exercise-note:first')
+      key: 'WorkoutExercisesListItemView'
+      element: (view) -> view.ui.note
       rule: -> /\/#workout_templates\/\d+/.test(window.location.href)
       title: '''Adding notes to exercises in a workout is useful to help your
                 clients execute exercises correctly.'''
@@ -132,8 +132,8 @@ define ->
     ,
       id: 3
       uniq_id: 'workout_constructor_add_exercise_property'
-      key: 'WorkoutOverviewView'
-      element: (view) -> view.$('.gc-add-single-property-button:first')
+      key: 'WorkoutExercisesListItemView'
+      element: (view) -> view.ui.addSingleProperty
       rule: -> /\/#workout_templates\/\d+/.test(window.location.href)
       title: '''Provide your client instructions by adding properties to your
                 exercises in a workout.'''
@@ -143,8 +143,8 @@ define ->
     ,
       id: 4
       uniq_id: 'workout_constructor_add_exercise_order'
-      key: 'WorkoutOverviewView'
-      element: (view) -> view.$('.gc-workout-exercise-circle:first')
+      key: 'WorkoutExercisesListItemView'
+      element: (view) -> view.$('.gc-workout-exercise-circle')
       rule: -> /\/#workout_templates\/\d+/.test(window.location.href)
       title: '''Change the order of your exercises to alphanumeric. Those that
                 have the same letter are in one set.'''

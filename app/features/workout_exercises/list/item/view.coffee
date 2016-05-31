@@ -8,6 +8,8 @@ define [
 
   class WorkoutExercisesListItemView extends Marionette.LayoutView
 
+    key: 'WorkoutExercisesListItemView'
+
     template: template
 
     tagName: 'li'

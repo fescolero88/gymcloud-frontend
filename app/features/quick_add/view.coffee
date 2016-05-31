@@ -6,7 +6,9 @@ define [
   Model
 ) ->
 
-  class View extends Marionette.ItemView
+  class QuickAddView extends Marionette.ItemView
+
+    key: 'QuickAddView'
 
     template: template
 
