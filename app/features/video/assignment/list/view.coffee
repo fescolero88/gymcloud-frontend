@@ -3,11 +3,13 @@ define [
   './empty/start_search'
   './empty/no_results'
   './empty/in_progress'
+  './empty/no_videos_uploaded'
 ], (
   AssignVideoItemView
   StartSearchView
   NoResultsView
   InProgressView
+  NoVideosUploadedView
 ) ->
 
   class AssignVideosView extends Marionette.CollectionView
@@ -21,6 +23,7 @@ define [
         when 'search_not_started' then StartSearchView
         when 'no_results' then NoResultsView
         when 'in_progress' then InProgressView
+        when 'no_videos_uploaded' then NoVideosUploadedView
 
     childEvents:
       assign: 'sendEvent'

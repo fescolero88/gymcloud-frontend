@@ -41,6 +41,7 @@ define [
       @searchInput = new SearchInputView
         model: new Backbone.Model
           query: @model.get('name')
+      @searchScope = 'mine'
       @view = new AssignVideosView
         collection: @collection
         model: @model
@@ -90,7 +91,11 @@ define [
       @request
         .then (response) =>
           @collection.trigger('request')
-          @view.viewState.set('state', 'no_results') unless response.length
+          unless response.length
+            if @searchScope is 'mine'
+              @view.viewState.set('state', 'no_videos_uploaded')
+            else
+              @view.viewState.set('state', 'no_results')
         .fail ->
           return false if arguments[1] is 'abort'
           App.request('messenger:explain', 'video.search.error')
