@@ -110,10 +110,10 @@ define [
 
     _calculatePosition: (collection) ->
       if @data.get('position') is 'bottom'
-        lastModelPosition = collection.last()?.get('position') or 0
+        lastModelPosition = collection.last()?.get('position') or null
         lastModelPosition + 1
       else
-        firstModelPosition = collection.first()?.get('position') or 1
+        firstModelPosition = collection.first()?.get('position') or null
         firstModelPosition - 1
 
     _backToOverview: ->
