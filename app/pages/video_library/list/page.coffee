@@ -16,7 +16,6 @@ define [
         data: [
             id: 'recent'
             title: 'Recent'
-            active: true
           ,
             id: 'oldest'
             title: 'Oldest'
@@ -26,9 +25,6 @@ define [
 
     regions:
       page_content: 'region[data-name="page_content"]'
-
-    init: ->
-      @model.set('state.subpage', @options.state)
 
     initViews: ->
       list: ->

@@ -28,9 +28,6 @@ define [
     regions:
       page_content: 'region[data-name="page_content"]'
 
-    init: ->
-      @model.set('state.subpage', @options.state)
-
     initModel: ->
       new PersonalProgram
         id: @options.id

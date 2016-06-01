@@ -26,7 +26,6 @@ define [
         data: [
             id: 'overview'
             title: 'Overview'
-            active: true
           ,
             id: 'assign'
             title: 'Assign'

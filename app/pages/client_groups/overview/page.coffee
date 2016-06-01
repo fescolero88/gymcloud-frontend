@@ -29,7 +29,6 @@ define [
         data: [
             id: 'members'
             title: 'Members'
-            active: true
           ,
             id: 'programs'
             title: 'Programs'

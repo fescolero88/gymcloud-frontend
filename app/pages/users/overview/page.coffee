@@ -64,9 +64,6 @@ define [
       'click .gc-content-nav-delete': '_deleteButtonClick'
       'click .gc-content-nav-add': '_assignNewOne'
 
-    init: ->
-      _.defer => @model.set('state.subpage', @options.state)
-
     initModel: ->
       user = App.request('current_user')
       user.clients.get(@options.id) || new Client(id: @options.id)

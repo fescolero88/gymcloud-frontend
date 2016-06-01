@@ -28,7 +28,6 @@ define [
         data: [
             id: 'overview'
             title: 'Overview'
-            active: true
           ,
             id: 'video'
             title: 'Video'
@@ -50,9 +49,6 @@ define [
 
     regions:
       page_content: 'region[data-name="page_content"]'
-
-    init: ->
-      @model.set('state.subpage', @options.state)
 
     initModel: ->
       user = App.request('current_user')
