@@ -3,37 +3,40 @@
     width: 20%
 
 @media only screen and (max-width: 1500px)
-  .gc-manage-videos .gc-video-thumb 
+  .gc-manage-videos .gc-video-thumb
     width: 25%
 
-@media only screen and (max-width: 1350px) 
-  .gc-manage-videos .gc-video-thumb 
+@media only screen and (max-width: 1350px)
+  .gc-manage-videos .gc-video-thumb
     width: 33.33333%
 
 @media only screen and (max-width: 1080px)
   .gc-manage-videos .gc-video-thumb
     width: 50%
 
-.gc-manage-videos .gc-video-details
-  border-top 1px solid gray
-
-.gc-manage-videos .gc-video-preview
-  height: 184px
-
-.gc-manage-videos .gc-video-thumb
-  float left
-  position relative
-  min-height 1px
-  padding-left: 15px
-  padding-right: 15px
-
 .gc-manage-videos
   margin: 10px -15px
 
-.gc-manage-videos .gc-video-player,
-.gc-manage-videos .gc-video-preview,
-.gc-manage-videos .gc-video-details
-  display: block
-  
-.gc-manage-videos .gc-video-title
-  width: 90%
+  .gc-video-details
+    border-top: 1px solid gray
+
+    i.gc-icon-trash
+      cursor: pointer
+
+  .gc-video-preview
+    height: 184px
+
+  .gc-video-thumb
+    float: left
+    position: relative
+    min-height: 1px
+    padding-left: 15px
+    padding-right: 15px
+
+  .gc-video-player,
+  .gc-video-preview,
+  .gc-video-details
+    display: block
+
+  .gc-video-title
+    width: 90%
