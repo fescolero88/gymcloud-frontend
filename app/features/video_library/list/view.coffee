@@ -1,5 +1,5 @@
 define [
-  'features/video/assignment/list/item/view'
+  './item/view'
   'features/video/assignment/list/empty/start_search'
   'features/video/assignment/list/empty/no_results'
 ], (

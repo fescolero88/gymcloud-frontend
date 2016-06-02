@@ -1,21 +1,13 @@
 define [
   'moment'
-  'collections/videos_list'
   './template'
-  'features/video_library/list/item/template'
 ], (
   moment
-  VideosCollection
   template
-  VideoLibraryTemplate
 )->
   class AssignVideoItemView extends Marionette.ItemView
 
-    getTemplate: ->
-      if @options.set_template?
-        VideoLibraryTemplate
-      else
-        template
+    template: template
 
     className: 'col-xs-4 gc-video-thumb'
 
@@ -54,5 +46,15 @@ define [
       isAssigned: @options.isAssigned
 
     removeModel: ->
-      @model.collection = new VideosCollection
-      App.request('modal:confirm:delete', @model)
+      @model.urlRoot = '/videos'
+      App.request 'modal:confirm',
+        title: 'Delete video'
+        content: """Are you sure you want to delete video
+                    (#{@model.get('nameFormatted')})?"""
+        confirmBtn: 'Yes'
+        cancelButton: 'No'
+        confirmCallBack: =>
+          @model.destroy(wait: true)
+            .then =>
+              App.request 'messenger:explain', 'item.deleted',
+                type: @model.type

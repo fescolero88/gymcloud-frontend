@@ -1,6 +1,8 @@
 define [
+  './model'
   './template'
 ], (
+  ConfirmModel
   template
 ) ->
 
@@ -24,9 +26,10 @@ define [
           '.title': 'title'
           '.modal-body p': 'content'
           '.gc-rm-buttons .confirm': 'confirmBtn'
+          '.gc-rm-buttons .cancel': 'cancelButton'
 
     initialize: (data)->
-      @model = new Backbone.Model
+      @model = new ConfirmModel
       @model.set(data)
 
     confirmEvent: ->
