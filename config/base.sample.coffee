@@ -17,7 +17,7 @@ defaults =
     payments: enabled: false
     rating_widget: enabled: false
     user_profile_progress: enabled: false
-    user_account_type: enabled: false
+    user_account_type: enabled: true
     hotjar: enabled: false
     freshdesk_widget: enabled: false
     google_analytics: enabled: false
