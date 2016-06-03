@@ -1,9 +1,11 @@
 define [
   './template'
   'features/user_authentications/view'
+  './user_account_type/view'
 ], (
   template
   UserAuthenticationsView
+  UserAccountTypeView
 ) ->
 
   class NewProfileView extends Marionette.LayoutView
@@ -86,6 +88,13 @@ define [
       'change .upload-avatar': 'showThumbnail'
       'blur input': 'validateInput'
       'change @ui.avatarInput': 'uploadAvatar'
+      'click .control-links .change': 'changeAccountType'
+
+    onShow: ->
+      $('.gc-main').css('padding-left', '0px')
+      $('.gc-main').css('padding-right', '0px')
+      $.get("/users/#{@model.get('user_id')}").done (user) ->
+        $('input[name="email"]').val(user.email)
 
     validateInput: (ev) ->
       $input = $(ev.target)
@@ -113,8 +122,13 @@ define [
     successCallback: (json) =>
       @views.user_authentications.trigger('oauthCreated', json)
 
-    onShow: =>
-      $('.gc-main').css('padding-left', '0px')
-      $('.gc-main').css('padding-right', '0px')
-      $.get("/users/#{@model.get('user_id')}").done (user) ->
-        $('input[name="email"]').val(user.email)
+    changeAccountType: ->
+      view = new UserAccountTypeView
+
+      region = App.baseView.getRegion('modal')
+      region.show(view)
+      region.$el.modal('show')
+
+      App.listenToOnce view, 'modal:closed', ->
+        region.$el.modal('hide')
+        region.destroy()

@@ -33,6 +33,8 @@ define ->
       account_type:
         changed:
           '[s] Account type successfully changed'
+        not_selected:
+          '[w] Please select your Account Type'
 
     client:
       added:

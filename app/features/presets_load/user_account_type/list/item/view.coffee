@@ -39,8 +39,4 @@ define [
     changeSelected: ->
       currentId = @settings.get('user_account_type_id')
       return false if currentId is @model.id
-
-      @settings.save({
-        user_account_type_id: @model.id
-      }, wait: true).then ->
-        App.request('messenger:explain', 'user.account_type.changed')
+      @settings.set(user_account_type_id: @model.id)

@@ -22,4 +22,5 @@ define [
       'click a.change-account-type': '_goNext'
 
     _goNext: ->
-      @trigger('changeView', 'next')
+      isAccountTypeSelected = @views.user_account_types.saveAccountType()
+      @trigger('changeView', 'next') if isAccountTypeSelected
