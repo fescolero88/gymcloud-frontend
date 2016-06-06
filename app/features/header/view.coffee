@@ -23,6 +23,9 @@ define [
           '.is_pro':
             observe: 'is_pro'
             visible: true
+          '.is_client':
+            observe: 'is_pro'
+            visible: (value) -> !value
           '.gc-topbar-avatar a':
             classes:
               'presents':
