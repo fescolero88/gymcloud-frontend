@@ -1,0 +1,216 @@
+list.exercise-results
+  display: block
+
+.gc-workout-enter-result-view
+  margin-top: 30px
+
+  .flex-center-aligment
+    display: flex
+    align-items: center
+
+  .workout-enter-header
+    padding: 20px 70px 20px 25px
+    background-color: #fafafa
+    border: 1px solid #ededed
+    border-radius: 10px 10px 0 0
+
+    .avatar-section,
+    .details-section
+      float: left
+
+    .details-section
+      margin-left: 15px
+      span
+        display: block
+        font-size: 12px
+
+    .gc-workout-exercise-name
+      margin-left: 0
+
+    .gc-workout-exercise-circle
+      float: left
+      width: 20px
+      height: 20px
+      line-height: 20px
+      font-size: 9px
+
+  .property-items
+    float: right
+    display: flex
+    align-items: center
+
+  .delete-button
+    display: none
+    position: absolute
+    top: 50%
+    right: -36px
+    border: 0
+    outline: none
+    color: #acacac
+    opacity: .8
+    font-size: 26px
+    background-color: transparent
+    transform: translate(0,-50%)
+
+    &:hover
+      opacity: 1
+
+  .property-item
+    float: left
+    padding-left: 30px
+    background: url('../../../images/label-property-icon.png') no-repeat left center
+
+    &:not(:last-of-type)
+      margin-right: 45px
+
+  .personal-best-check
+    float: left
+    width: 16px
+    height: 18px
+    margin-right: 36px
+    background: url('../../../images/personal-best.png') no-repeat
+    cursor: pointer
+    transition: background .3s ease-in-out
+
+    &.active,
+    &:hover
+      background-image: url('../../../images/personal-best-active.png')
+
+    &.active
+      &:hover
+        background-image: url('../../../images/personal-best.png')
+
+  .workout-enter-middle
+    padding: 30px 70px 30px 25px
+    border-left: 1px solid #ededed
+    border-right: 1px solid #ededed
+
+    &:hover
+      .delete-button
+        display: inline-block
+
+    .middle-item
+      position: relative
+      cursor: pointer
+
+    .workout-enter-prev-result
+      span:first-child
+        margin-right 7px
+
+  .workout-enter-footer
+    padding: 15px 0px 15px 25px
+    border-radius: 0 0 10px 10px
+    border: 1px solid #ededed
+    background-color: #fafafa
+
+    .top-section
+      display: flex
+      padding-right: 70px
+      justify-content: space-between
+
+
+  .add-btn
+    padding-left: 24px
+    font-size: 12px
+    text-transform: uppercase
+    color: #3a99d8
+    background-color: transparent
+    background-position: left center
+    background-repeat: no-repeat
+    border: 0
+    outline: none !important
+    transition: all .2s ease-in-out
+
+    &.opened,
+    &:hover
+      color: #acb7bb
+
+    &.result-btn
+      background-image: url('../../../images/new-plus-blue-icon.png')
+
+      &.opened,
+      &:hover
+        background-image: url('../../../images/new-plus-gray-icon.png')
+
+    &.comment-btn
+      background-image: url('../../../images/comment-icon-blue.png')
+
+      &:hover,
+      &.opened
+        background-image: url('../../../images/comment-icon-gray.png')
+
+  .workout-enter-results
+    position: relative
+    display: none
+    padding: 30px 70px 30px 25px
+    border: 1px solid #ededed
+    border-bottom: 0
+    transition: all .3s ease-in-out
+
+    &.opened
+      display: block
+
+    .workouts-result-inputs
+      float: right
+
+      .input-wrapper
+        float: left
+
+        &:not(:last-of-type)
+          margin-right: 15px
+
+      input
+        float: left
+        clear: both
+        max-width: 98px
+        padding: 10px
+        border: 1px solid #ededed
+        border-radius: 5px
+        text-align: right
+
+      label
+        display: block
+        float: left
+        color: #3a99d8
+        font-weight: 400
+
+      .add-result-submit
+        position: absolute
+        right: -36px
+        float: right
+        width: 25px
+        margin-top: 33px
+        margin-left: 13px
+        background-color: transparent
+        border: 0
+
+.gc-comment-enter-message
+  float: right
+  width: 96%
+  margin-top: 30px
+  padding: 15px 20px 30px
+  border: 1px solid #d0d8db
+  border-radius: 5px
+  background-color: #fff
+
+  textarea
+    resize: none
+    float: left
+    width: 85%
+    border: 0
+    outline: none
+
+  button[type='submit']
+    position: relative
+    padding-left: 25px
+    padding-right: 25px
+
+    &:after
+      content: 'or press  ⏎'
+      position: absolute
+      top: 35px
+      left: 3px
+      display: block
+      color: #a3afb4
+      font-size: 12px
+      text-transform: none

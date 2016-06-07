@@ -4,7 +4,6 @@ define [
 ], (
   BasePage
   template
-  AddResultView
 ) ->
 
   class Page extends BasePage
@@ -20,4 +19,3 @@ define [
 
     initViews: ->
       root: ->
-        view = new AddResultView

@@ -1,0 +1,16 @@
+region(data-name='user_stats')
+.row.gc-nav-wrapper
+  .col-sm-8
+    a.gc-content-nav-back
+      span.fa.fa-chevron-left
+    region(data-name='breadcrumbs')
+  .col-xs-12.col-sm-4.text-sm-right
+.gc-workspace-content
+  region(data-name='page_content')
+
+  .gc-box-content
+    .gc-workout-enter-bottom-btns
+      button.btn.btn-danger.gc-action-button.type-delete
+        | Remove all results
+      button.btn.btn-primary.gc-custom
+        | Finished
