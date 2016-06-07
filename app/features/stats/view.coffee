@@ -30,7 +30,7 @@ define [
             enabled: ->
               date = @model.get('subscription_end_at')
               daysLeft = moment(date).diff(moment(), 'days')
-              @model.get('is_pro') && @model.get('is_trialing') && daysLeft < 5
+              !@model.get('is_pro') && @model.get('is_trialing') && daysLeft < 5
         ]
 
       stickit:
