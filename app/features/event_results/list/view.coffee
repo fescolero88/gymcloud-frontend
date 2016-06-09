@@ -8,9 +8,7 @@ define [
 
   class EventExerciseResultCollectionView extends Marionette.CollectionView
 
-    tagName: 'list'
-
-    className: 'gc-box-content exercise-results'
+    className: 'gc-box-content'
 
     childView: EventExerciseItemView
 

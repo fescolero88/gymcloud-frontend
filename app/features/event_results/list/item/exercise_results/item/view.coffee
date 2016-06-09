@@ -21,5 +21,3 @@ define [
             options: ->
               collection: new Backbone.Collection([{}, {}])
         ]
-
-

@@ -6,6 +6,4 @@ define [
 
   class CommentCollectionView extends Marionette.CollectionView
 
-    tagName: 'list'
-
     childView: CommentItemView
