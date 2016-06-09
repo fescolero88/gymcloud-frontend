@@ -58,4 +58,5 @@ define [
   'features/personal_best/styles'
   'features/tutorial/styles'
   'styles/workout_enter_result'
+  'features/event_results/list/styles'
 ], ->
