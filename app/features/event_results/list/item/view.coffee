@@ -18,24 +18,32 @@ define [
 
     className: 'gc-workout-enter-result-view'
 
-    behaviors:
+    behaviors: ->
+
+      stickit:
+
+        bindings:
+          '.gc-workout-exercise-circle': 'order_name'
+          '.gc-workout-exercise-name': 'name'
+          '.details-section span': 'note'
+          '.details-section span':
+            observe: 'note'
+            visible: true
 
       regioned:
         views: [
             region: 'exercise_properties'
             klass: ExercisePropertiesCollectionView
             options: ->
-              collection: new Backbone.Collection([{}, {}])
+              collection: @model.properties
           ,
             region: 'exercise_result_items'
             klass: ExerciseResultCollectionView
             options: ->
-              collection: new Backbone.Collection([{}, {}])
+              collection: @model.exercise_results
           ,
             region: 'new_exercise_result'
             klass: NewExerciseResultView
-            options: ->
-              collection: new Backbone.Collection([{}, {}])
           ,
             region: 'comments'
             klass: CommentsLayoutView
