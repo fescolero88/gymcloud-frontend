@@ -18,7 +18,10 @@ define [
       new WorkoutEnterResultPage
 
     results: (eventId) ->
-      new EventResultsPage(state: 'root')
+      new EventResultsPage(
+        id: eventId
+        state: 'root'
+      )
 
   Router: Router
   Controller: Controller

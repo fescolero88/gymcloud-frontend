@@ -1,9 +1,7 @@
 define [
   './item/view'
-  './collection'
 ], (
   EventExerciseItemView
-  EventExercisesCollection
 ) ->
 
   class EventExerciseResultCollectionView extends Marionette.CollectionView
@@ -13,4 +11,4 @@ define [
     childView: EventExerciseItemView
 
     initialize: ->
-      @collection = new EventExercisesCollection([{}])
+      @collection = @model.exercises

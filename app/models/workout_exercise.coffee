@@ -1,6 +1,8 @@
 define [
+  './concerns/nested_models'
   'collections/exercise_properties'
 ], (
+  NestedModelsConcern
   ExerciseProperties
 ) ->
 
@@ -21,6 +23,12 @@ define [
       exercise_id:
         required: true
 
+    constructor: ->
+      @_nestedModelsInit
+        properties: ExerciseProperties
+        exercise_properties: ExerciseProperties
+      super
+
     initialize: ->
       @listenTo(@, 'change:order_name', @_syncOrderName)
       @_syncOrderName()
@@ -36,10 +44,7 @@ define [
       if _.isEmpty(result) then false else result
 
     parse: (data) ->
-      @properties ||= new ExerciseProperties
-      if @properties.length is 0
-        @properties.add(data.exercise_properties, parse: true)
-      delete data.exercise_properties
+      @_nestedModelsParseAll(data)
       data
 
     _syncOrderName: ->
@@ -49,3 +54,7 @@ define [
       @set
         order_letter: match?[1] || '~'
         order_number: match?[2]
+
+  _.extend(WorkoutsExercise::, NestedModelsConcern)
+
+  WorkoutsExercise
