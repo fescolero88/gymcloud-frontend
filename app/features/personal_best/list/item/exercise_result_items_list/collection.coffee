@@ -9,7 +9,4 @@ define [
     model: ExerciseResultItem
 
     url: ->
-      "/exercise_results/#{@exerciseId}/items"
-
-    initialize: (models, options) ->
-      @exerciseId = options?.exerciseId
+      "/exercise_results/#{@exercise_result.id}/items"
