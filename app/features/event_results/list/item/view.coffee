@@ -44,9 +44,45 @@ define [
           ,
             region: 'new_exercise_result'
             klass: NewExerciseResultView
+            options: ->
+              properties: @model.properties
           ,
             region: 'comments'
             klass: CommentsLayoutView
             options: ->
               collection: new Backbone.Collection([{}, {}])
         ]
+    ui:
+      addNewResultButton: '.add-btn.result-btn'
+
+    events:
+      'click @ui.addNewResultButton': '_onAddNewResultButtonClick'
+
+    onShow: ->
+      @listenTo(@views.new_exercise_result, 'add_new', @_onAddNewResult)
+
+    _onAddNewResultButtonClick: ->
+      @ui.addNewResultButton.toggleClass('opened')
+      @views.new_exercise_result.$el.toggleClass('opened')
+
+    _onAddNewResult: (properties) ->
+      ExerciseResult = @model.exercise_results.model
+      result = new ExerciseResult
+        workout_event_id: @model.get('workout_event_id')
+        workout_exercise_id: @model.get('workout_exercise_id')
+
+      ResultItem = result.exercise_result_items.model
+      resultItems = _.map(properties, _.bind(@_buildResultItem, @, ResultItem))
+
+      result.exercise_result_items.add(resultItems)
+      @model.exercise_results.add(result)
+      @_onAddNewResultButtonClick()
+
+    _buildResultItem: (ExerciseResultItem, prop) ->
+      item = new ExerciseResultItem
+      item.exercise_property.personal_property = prop.personal_property
+      item.exercise_property.set(prop.attributes)
+      item.set
+        exercise_property_id: prop.id
+        value: prop.get('value')
+      item

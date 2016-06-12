@@ -24,6 +24,7 @@ define [
     constructor: ->
       @_nestedModelsInit
         exercise_result_items: ExerciseResultItemCollection
+      @exercise_result_items.exercise_result = @
       super
 
     initialize: ->
