@@ -22,4 +22,9 @@ define [
         return false if _.isEmpty(attrs)
       @save(attrs, patch: true, wait: true)
 
+  oBackbone.Stickit.addHandler
+    selector: '[contenteditable]'
+    updateMethod: 'text'
+    events: ['input', 'change']
+
   oBackbone
