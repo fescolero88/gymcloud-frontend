@@ -22,8 +22,12 @@
 .gc-video-assigned
 
   .gc-video-controls
-    margin: 15px 0
-    max-height: 25px
+    height: 50px
+    display: flex
+    align-items: center
+    padding: 0 17px
+    background-color: #f9f9f9
+    margin: -20px 0 20px
 
     .btn-link + .btn-link
       margin-left: 10px
@@ -59,9 +63,34 @@
         background: transparent
         color: #ee6d5d
 
+    .gc-icon-trash
+      width: 13px
+      height: 15px
+      vertical-align: -1px
+      cursor: pointer
+
+  .gc-video-duration
+    padding: 0 4px
+    background-color: rgba(78,78,78,0.5)
+    color: #fff
+    border-radius: 3px
+    position: absolute
+    bottom: 20px
+    left: 20px
+    font-weight: 300
+    line-height: 18px
+    font-size: 14px
+
+  .iframe
+    height:100%
+
 .gc-video-assigned-placeholder
   background: #f9f9f9
   padding: 30px 15px
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
 
   .placeholder-icon
     background: #fefefe
@@ -91,3 +120,19 @@
     border-radius: 50px
     text-align: center
     line-height: 16px
+
+.gc-video-uploaded-at-wrapper
+  line-height: 17px
+  font-size: 13px
+  font-weight: 300
+  color: #757575
+  margin-left: 15px
+
+.gc-video-replace
+  line-height: 18px
+  font-size: 14px
+  font-weight: 300
+  color: #3a99d8
+  cursor: pointer
+  margin-right: 10px
+  margin-left: auto

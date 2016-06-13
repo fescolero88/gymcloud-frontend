@@ -20,7 +20,8 @@ define [
       author_widget: true
       privacy_button: true
       add_to_library: true
-      video_preview: true
+      video_assigned:
+        controls: false
 
       stickit:
         bindings:

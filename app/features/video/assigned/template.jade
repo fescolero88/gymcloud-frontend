@@ -1,20 +1,24 @@
 .gc-video-assigned-wrapper
-  .iframe
-    iframe(
-      width='160'
-      height='90'
-      frameborder='0'
-      allowfullscreen=''
-    )
-  .row.gc-video-controls
-    .col-xs-6
-      a.gc-video-link(target='_blank')
-        span.name
-        i.gc-video-icon
-        span.type
-    .col-xs-6.text-right
-      button.btn.btn-link.gc-video-delete
-        | Delete
+  .gc-video-player
+    .gc-video-preview
+      .iframe
+        iframe(
+          hidden='true'
+          allowfullscreen=''
+        )
+      i.gc-video-play
+      span.gc-video-duration
+  .gc-video-controls
+    a.gc-video-link(target='_blank')
+      span.name
+      i.gc-video-icon
+      span.type
+    span.gc-video-uploaded-at-wrapper
+      | Uploaded: 
+      span.gc-video-uploaded-at
+    span.gc-video-replace
+      | REPLACE VIDEO
+    span.gc-icon-trash
 
 .gc-video-assigned-placeholder.own-entity.text-center
   .placeholder-icon
@@ -25,9 +29,3 @@
     | You can either upload one or select from a list
   button.btn.btn-primary.gc-add-video
     | Assign video
-
-.gc-video-assigned-placeholder.public-entity.text-center
-  .placeholder-icon
-    i.glyphicon.glyphicon-play
-  p
-    | There is no assigned video

@@ -27,6 +27,7 @@ define [
   'styles/video_library'
   'features/video/assigned/styles'
   'features/privacy/toggle/styles'
+  'features/privacy/toggle2/styles'
   'features/author/widget/styles'
   'features/rating/widget/styles'
   'features/delete_button/styles'

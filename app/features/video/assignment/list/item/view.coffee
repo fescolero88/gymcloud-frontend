@@ -41,6 +41,9 @@ define [
             observe: 'uploaded_at'
             onGet: (date) ->
               moment(date).format 'Do of MMM'
+          '.gc-video-duration':
+            observe: 'durationFormatted'
+            updateModel: false
 
     templateHelpers: =>
       isAssigned: @options.isAssigned

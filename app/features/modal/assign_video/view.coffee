@@ -19,4 +19,5 @@ define [
               className: 'modal-video-assign-sec'
               model: @model
               type: @options.type
+              instantSave: @options.instantSave
         ]

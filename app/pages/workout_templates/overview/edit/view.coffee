@@ -22,6 +22,7 @@ define [
       video_assigned: true
       delete_button:
         enabled: @_enabled
+        short: true
 
       stickit:
         bindings:

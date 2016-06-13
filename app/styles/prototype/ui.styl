@@ -1076,12 +1076,16 @@ region[data-name="pagination"] > div
   content ' '
   clear both
 
-.gc-assign-videos .gc-video-thumb
-  float left
-  position relative
-  min-height 1px
-  padding-right 15px
-  padding-left 15px
+.gc-assign-videos
+  .gc-video-thumb
+    float left
+    position relative
+    min-height 1px
+    padding-right 15px
+    padding-left 15px
+
+  .gc-video-preview
+    height: 184px
 
 .gc-video-player
   border-radius 4px
@@ -1164,7 +1168,6 @@ region[data-name="pagination"] > div
 
   .gc-video-preview
     position relative
-    height: 184px
     background: center center no-repeat
     background-size: cover
 
@@ -1179,13 +1182,13 @@ region[data-name="pagination"] > div
       background-color rgba(255, 255, 255, 0.7)
       position absolute
       left 50%
-      top 40%
+      top 50%
       border-radius 44px
       overflow hidden
       background-image url("../../images/icon-video-play.png")
       background-repeat no-repeat
       background-position center
-      transform translateX(-50%)
+      transform translate(-50%,-50%)
 
 .gc-progress-panel
   padding 10px 0
