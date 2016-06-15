@@ -27,6 +27,7 @@ define [
       mainCheckbox: '.gc-content-nav-checkall input'
       collectionRegion: 'region[data-name="collection"]'
       folderAddButton: '.gc-show-add-exercise-folder-modal'
+      folderEditButton: '.gc-show-edit-folder-modal'
       itemAddButton: '.gc-show-add-exercise-modal'
       itemDuplicateButton: '.gc-show-duplicate-modal'
       itemDeleteButton: '[data-action="remove"]'
@@ -36,6 +37,7 @@ define [
     events:
       'click @ui.mainCheckbox': 'toggleCheck'
       'click @ui.folderAddButton': '_showAddFolderModal'
+      'click @ui.folderEditButton': '_showEditFolderModal'
       'click @ui.itemAddButton': '_showAddEntityModal'
       'click @ui.itemDuplicateButton': '_showDuplicateModal'
       'click @ui.itemDeleteButton': '_showDestroySelectedModal'
@@ -57,6 +59,16 @@ define [
           id: item.get('id')
           name: item.get('name')
           label: item.get('name')
+
+      stickit:
+        bindings:
+          '.gc-show-edit-folder-modal':
+            observe: 'id'
+            visible: (value) ->
+              user = App.request('current_user')
+              rootFolder = user.library.first()
+              ids = rootFolder.items.pluck('id')
+              !_.contains(ids.concat(rootFolder.id), value)
 
     templateHelpers: ->
       type: @typeName
@@ -128,6 +140,13 @@ define [
 
       @getRegion('modalRegion').show(view)
       @ui.actionModal.modal('show')
+
+    _showEditFolderModal: ->
+      App.request 'modal:prompt',
+        title: 'Edit Folder Name'
+        confirmBtn: 'Rename'
+        cancelCallBack: -> # nothing
+        confirmCallBack: (name) => @model.patch(name: name)
 
     _showDuplicateModal: (ev) =>
       view = new DuplicateModalView
