@@ -18,6 +18,9 @@ define [
 
       stickit:
         bindings:
+          '.personal-best-check':
+            classes:
+              active: 'is_personal_best'
           '.workout-enter-prev-result span:last':
             observe: 'created_at'
             onGet: (value) ->
@@ -30,3 +33,9 @@ define [
             options: ->
               collection: @model.exercise_result_items
         ]
+
+    events:
+      'click .personal-best-check': '_changeIsPersonalBest'
+
+    _changeIsPersonalBest: ->
+      @model.patch(is_personal_best: !@model.get('is_personal_best'))
