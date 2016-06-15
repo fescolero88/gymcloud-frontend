@@ -36,6 +36,10 @@ define [
 
     events:
       'click .personal-best-check': '_changeIsPersonalBest'
+      'click .delete-button': '_remove'
 
     _changeIsPersonalBest: ->
       @model.patch(is_personal_best: !@model.get('is_personal_best'))
+
+    _remove: ->
+      App.request('modal:confirm:delete', @model)
