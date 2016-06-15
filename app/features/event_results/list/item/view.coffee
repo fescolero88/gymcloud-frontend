@@ -58,6 +58,9 @@ define [
     events:
       'click @ui.addNewResultButton': '_onAddNewResultButtonClick'
 
+    initialize: ->
+      @listenTo(@, 'remove:results', @_removeResults)
+
     onShow: ->
       @listenTo(@views.new_exercise_result, 'add_new', @_onAddNewResult)
 
@@ -92,3 +95,6 @@ define [
         .then ->
           result.exercise_result_items.add(resultItems)
           result.exercise_result_items.each((item) -> item.save())
+
+    _removeResults: ->
+      @model.exercise_results.each((result) -> result.destroy(wait: true))

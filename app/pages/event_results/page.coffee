@@ -21,6 +21,9 @@ define [
     regions:
       page_content: 'region[data-name="page_content"]'
 
+    events:
+      'click .type-delete': '_removeAllResults'
+
     initModel: ->
       new WorkoutsEvent
         id: @options.id
@@ -29,3 +32,7 @@ define [
       root: ->
         new EventExerciseResultCollectionView
           model: @model.get('data.model')
+
+    _removeAllResults: ->
+      region = @getRegion('page_content')
+      region.currentView.trigger('remove:results')
