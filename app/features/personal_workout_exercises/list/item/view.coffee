@@ -21,7 +21,7 @@ define [
           klass: ExercisePropertiesListView
           region: 'exercise_properties'
           options: ->
-            collection: @model.properties
+            collection: @model.exercise_properties
         ]
 
       stickit:
