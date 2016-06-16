@@ -25,7 +25,6 @@ define [
 
     constructor: ->
       @_nestedModelsInit
-        properties: ExerciseProperties
         exercise_properties: ExerciseProperties
       super
 

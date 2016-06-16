@@ -35,7 +35,7 @@ define [
             region: 'exercise_properties'
             klass: ExercisePropertiesCollectionView
             options: ->
-              collection: @model.properties
+              collection: @model.exercise_properties
           ,
             region: 'exercise_result_items'
             klass: ExerciseResultCollectionView
@@ -45,7 +45,7 @@ define [
             region: 'new_exercise_result'
             klass: NewExerciseResultView
             options: ->
-              properties: @model.properties
+              properties: @model.exercise_properties
           ,
             region: 'comments'
             klass: CommentsLayoutView
