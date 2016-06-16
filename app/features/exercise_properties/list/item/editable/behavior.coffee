@@ -118,7 +118,7 @@ define [
       char = String.fromCharCode(key)
       currentValue = $(ev.currentTarget).text()
 
-      if key in [8, 46]
+      if key in [8..46]
         return true
       else if not @_inputValuesLengthIsValid(currentValue)
         return false
