@@ -106,7 +106,7 @@ define [
 
     onShowView: (view) ->
       steps = _.reduce tooltips, (memo, step) ->
-        if step.key is view.key and step.rule()
+        if step.key is view.key and _.bind(step.rule, view, view)()
           newStep = _.clone(step)
           newStep.element = step.element(view)
           newStep.view = view

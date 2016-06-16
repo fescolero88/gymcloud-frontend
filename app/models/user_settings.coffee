@@ -15,6 +15,7 @@ define ->
       is_tutorial_finished: false
       is_presets_loaded: false
       client_title: ''
+      tutorial_steps: []
 
     computed: ->
       clients_title:

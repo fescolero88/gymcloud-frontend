@@ -6,7 +6,9 @@ define [
   PersonalCollectionItemView
 )->
 
-  class PersonalCollectionView extends Marionette.CompositeView
+  class SidebarPersonalRootFolderView extends Marionette.CompositeView
+
+    key: 'SidebarPersonalRootFolderView'
 
     template: template
 
