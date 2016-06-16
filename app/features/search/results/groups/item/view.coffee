@@ -23,4 +23,5 @@ define [
     childView: ItemView
 
     childViewOptions: ->
-      entity_context: @model.get('title').toLowerCase()
+      entity_context:
+        _.chain(@model.get('klass')).humanize().titleize().pluralize().value()

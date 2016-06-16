@@ -24,7 +24,7 @@ define [
 
     initialize: ->
       user = App.request('current_user')
-      @options.type = _.chain(@options.model.type)
+      @options.type ||= _.chain(@options.model.type)
         .underscored()
         .pluralize()
         .value()
