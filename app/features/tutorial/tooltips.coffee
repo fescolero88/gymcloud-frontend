@@ -257,4 +257,55 @@ define ->
       title: 'Assigning Items To A Client.'
       content: '''To do this, start by clicking your client's name.'''
       docs: '3000050220--web-clients-how-to-assign-workouts-and-programs'
+    ,
+      id: 0
+      uniq_id: 'clients_sidebar_programs1'
+      key: 'SidebarPersonalRootFolderView'
+      element: (view) -> view.el
+      rule: (view) -> view.type is 'personal_programs'
+      main: true
+      title: 'Program Overview'
+      content: '''With a GymCloud account, you can easily view all the
+                  exercises, workouts and programs assigned to you.'''
+      docs: '3000049945--web-client-program-overview'
+    ,
+      id: 1
+      uniq_id: 'clients_sidebar_programs2'
+      key: 'SidebarPersonalRootFolderView'
+      element: (view) -> view.el
+      rule: (view) -> view.type is 'personal_programs'
+      title: 'Program Overview'
+      content: '''To see the programs assigned to you by your trainer, this is
+                  the button you will click.'''
+      docs: '3000049945--web-client-program-overview'
+    ,
+      id: 2
+      uniq_id: 'clients_sidebar_workouts'
+      key: 'SidebarPersonalRootFolderView'
+      element: (view) -> view.el
+      rule: (view) -> view.type is 'personal_workouts'
+      title: 'Workout Overview'
+      content: '''To view the workouts assigned to you by your trainer, this is
+                  the button you will use.'''
+      docs: '3000049944--web-client-workout-overview'
+    ,
+      id: 3
+      uniq_id: 'clients_sidebar_exercises'
+      key: 'SidebarPersonalRootFolderView'
+      element: (view) -> view.el
+      rule: (view) -> view.type is 'workout_exercises'
+      title: 'Exercise Overview'
+      content: '''You will also have an exercise library, which includes
+                  exercises from your workouts and programs.'''
+      docs: '3000053218--web-client-exercise-overview'
+    ,
+      id: 4
+      uniq_id: 'clients_sidebar_exercises'
+      key: 'SidebarPersonalRootFolderView'
+      element: (view) -> view.el
+      rule: (view) -> view.type is 'workout_exercises'
+      title: 'Exercise Overview'
+      content: '''To check your list of exercises, the is the button you will
+                  click.'''
+      docs: '3000053218--web-client-exercise-overview'
   ]
