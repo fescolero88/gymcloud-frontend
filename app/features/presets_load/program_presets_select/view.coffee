@@ -18,9 +18,20 @@ define [
             klass: ProgramPresetListView
         ]
 
+    ui:
+      nextButton: 'a.next'
+
     events:
-      'click a.next': '_loadPresets'
       'click a.prev': '_goBack'
+      'click @ui.nextButton': '_loadPresets'
+      'click a.skip': '_skip'
+
+    onShow: ->
+      @listenTo @views.presets.collection, 'change:is_selected', =>
+        if @views.presets.collection.where(is_selected: true).length
+          @ui.nextButton.removeClass('disabled')
+        else
+          @ui.nextButton.addClass('disabled')
 
     _loadPresets:  ->
       models = @views.presets.collection.where(is_selected: true)
@@ -51,3 +62,6 @@ define [
 
     _goBack: ->
       @trigger('changeView', 'prev')
+
+    _skip: ->
+      @trigger('changeView', 'next')
