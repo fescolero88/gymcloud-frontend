@@ -16,3 +16,10 @@ define [
       'click':
         event: 'action'
         stopPropagation: false
+
+    behaviors: ->
+      stickit:
+        bindings:
+          ':el':
+            observe: 'visible'
+            visible: (value) -> value()

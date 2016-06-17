@@ -5,4 +5,5 @@ define ->
     defaults:
       label: ''
       action: ->
+      visible: -> true
       className: ''
