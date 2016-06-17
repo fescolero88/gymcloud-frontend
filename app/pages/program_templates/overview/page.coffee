@@ -14,7 +14,7 @@ define [
 
   class Page extends BasePage
 
-    behaviors:
+    behaviors: ->
 
       navigate_back: true
 
@@ -41,6 +41,14 @@ define [
         model: -> @view.model.get('data.model')
         items: [
             label: 'Add Note'
+          ,
+            label: 'Add To Library'
+            visible: _.bind ->
+                authorId = @model.get('data.model').get('author_id')
+                authorId isnt App.request('current_user_id')
+              ,
+                @
+            action: @_onAddToLibrary
           ,
             label: 'Delete'
             className: 'text-danger'
@@ -71,3 +79,8 @@ define [
       assign: ->
         new AssignView
           model: @model.get('data.model')
+
+    _onAddToLibrary: ->
+      App.request 'base:addToLibraryModal',
+        model: @model
+        type: 'Program Templates'
