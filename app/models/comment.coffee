@@ -22,6 +22,7 @@ define [
       title: ''
       commentable_id: @collection.commentable_id
       commentable_type: @collection.commentable_type
+      role: 'comments'
 
     computed: ->
       date:

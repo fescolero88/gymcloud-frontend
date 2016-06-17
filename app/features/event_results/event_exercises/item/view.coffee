@@ -70,7 +70,7 @@ define [
       ResultItem = result.exercise_result_items.model
       resultItems = _.map(properties, _.bind(@_buildResultItem, @, ResultItem))
 
-      @_saveResult(result, resultItems)
+      @model.exercise_results.createWithItems(result, resultItems)
       @_onAddNewResultButtonClick()
 
     _buildResultItem: (ExerciseResultItem, prop) ->
@@ -82,12 +82,5 @@ define [
         value: prop.get('value')
       item
 
-    _saveResult: (result, resultItems) ->
-      @model.exercise_results.add(result)
-      result.save()
-        .then ->
-          result.exercise_result_items.add(resultItems)
-          result.exercise_result_items.each((item) -> item.save())
-
     _removeResults: ->
-      @model.exercise_results.each((result) -> result.destroy(wait: true))
+      @model.exercise_results.destroyAll()

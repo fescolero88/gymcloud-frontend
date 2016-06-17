@@ -16,6 +16,9 @@ define [
 
       stickit:
         bindings:
+          ':el':
+            observe: 'id'
+            visible: true
           '.gc-comment-message': 'comment'
           '.gc-comment-date span:last': 'date'
 
