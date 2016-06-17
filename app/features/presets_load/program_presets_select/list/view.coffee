@@ -9,6 +9,8 @@ define [
 
     tagName: 'ul'
 
+    className: 'presets'
+
     childView: ProgramPresetItemView
 
     initialize: ->
