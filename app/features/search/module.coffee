@@ -40,7 +40,7 @@ define [
       @listenTo(@app.vent, 'search:global', @_navigateToResults)
       @listenTo(@app.vent, 'app:view:header:render', @_renderSearchBarView)
 
-    _navigateToResults: (q, entityType = 'all', searchScope = 'all') ->
+    _navigateToResults: (q, entityType = 'all', searchScope = 'public') ->
       Backbone.history.navigate "search/#{q}/#{entityType}/#{searchScope}",
         trigger: true
 

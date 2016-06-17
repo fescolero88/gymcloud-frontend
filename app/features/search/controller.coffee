@@ -6,7 +6,7 @@ define [
 
   class Controller extends Marionette.Controller
 
-    search: (q, entityType = 'all', searchScope = 'all') ->
+    search: (q, entityType = 'all', searchScope = 'public') ->
       collection =
         App.request('search:request:collection')
       model =

@@ -5,4 +5,4 @@ define ->
     defaults:
       q: ''
       entity_type: 'all'
-      search_scope: 'all'
+      search_scope: 'public'

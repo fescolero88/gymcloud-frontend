@@ -36,7 +36,7 @@ define [
       view = new SearchScopesView
         collection: @searchScopes
         model: @model
-      @getRegion('publicScopes').show(view)
+      # @getRegion('publicScopes').show(view)
 
       view = new SearchFiltersView
         collection: @searchFilters
@@ -49,17 +49,9 @@ define [
       searchScope = @model.get('search_scope')
 
       @searchScopes = new SearchScopes [
-          name: 'all'
-          value: 'all'
-          inScope: searchScope == 'all'
-        ,
           name: 'gymcloud'
           value: 'public'
           inScope: searchScope == 'public'
-        ,
-          name: 'mine'
-          value: 'own'
-          inScope: searchScope == 'own'
       ]
 
       @searchFilters = new SearchFilters [
