@@ -3,13 +3,11 @@ define [
   './exercise_properties/view'
   './exercise_results/view'
   './new_exercise_result/view'
-  './comments/view'
 ], (
   template
   ExercisePropertiesCollectionView
   ExerciseResultCollectionView
   NewExerciseResultView
-  CommentsLayoutView
 ) ->
 
   class EventExerciseItemView extends Marionette.LayoutView
@@ -46,11 +44,6 @@ define [
             klass: NewExerciseResultView
             options: ->
               properties: @model.exercise_properties
-          ,
-            region: 'comments'
-            klass: CommentsLayoutView
-            options: ->
-              collection: new Backbone.Collection([{}, {}])
         ]
     ui:
       addNewResultButton: '.add-btn.result-btn'
