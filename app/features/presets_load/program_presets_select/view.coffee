@@ -27,7 +27,7 @@ define [
       'click a.skip': '_skip'
 
     onShow: ->
-      @listenTo @views.presets.collection, 'change:is_selected', =>
+      @listenTo @views.presets.collection, 'add reset change:is_selected', =>
         if @views.presets.collection.where(is_selected: true).length
           @ui.nextButton.removeClass('disabled')
         else
