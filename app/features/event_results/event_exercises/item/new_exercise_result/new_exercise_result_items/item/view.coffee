@@ -22,4 +22,3 @@ define [
             observe: ['personal_property', 'property_unit_name']
             onGet: ([property, units]) ->
               "#{property.name} (#{units})"
-

@@ -4,15 +4,12 @@ define [
   EventExerciseItemView
 ) ->
 
-  class EventExerciseResultCollectionView extends Marionette.CollectionView
-
-    className: 'gc-box-content'
+  class EventExerciseCollectionView extends Marionette.CollectionView
 
     childView: EventExerciseItemView
 
     initialize: ->
       @listenTo(@, 'remove:results', @_removeAllResults)
-      @collection = @model.exercises
 
     _removeAllResults: ->
       App.request 'modal:confirm',

@@ -28,3 +28,14 @@ define [
         personal_property_id: default_property.id
         value: null
       @add(model)
+
+    getZeroedAttributes: ->
+      @map (model) ->
+        attrs = model.toJSON()
+        property_units = model.personal_property.property_units.toJSON()
+        attrs.value = attrs.value2 = 0
+        attrs.personal_property.property_units = property_units
+        attrs
+
+    zeroValues: ->
+      @each((model) -> model.set(value: 0))

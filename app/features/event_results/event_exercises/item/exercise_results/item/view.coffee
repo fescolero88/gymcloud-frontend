@@ -1,6 +1,6 @@
 define [
   './template'
-  'features/event_results/list/item/exercise_properties/view'
+  'features/event_results/event_exercises/item/exercise_properties/view'
   'moment'
 ], (
   template
