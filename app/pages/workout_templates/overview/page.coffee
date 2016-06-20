@@ -73,7 +73,15 @@ define [
           model: @model.get('data.model')
 
     onShow: ->
-      @listenTo(@model.get('data.model'), 'change:video_url', @_videoAssigned)
+      dataModel = @model.get('data.model')
+      @listenTo(dataModel, 'change:video_url', @_videoAssigned)
+      @listenTo(dataModel, 'change:user_id', @_changeContentTabsVisibility)
+
+    _changeContentTabsVisibility: ->
+      if can('update', @model.get('data.model'))
+        @navigation_content_tabs.$el.show()
+      else
+        @navigation_content_tabs.$el.hide()
 
     _videoAssigned: ->
       @model.set('state.subpage', 'overview')

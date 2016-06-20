@@ -10,7 +10,7 @@ define [
 
     className: 'gc-video-assigned'
 
-    behaviors:
+    behaviors: ->
 
       stickit:
         bindings:
@@ -46,6 +46,10 @@ define [
                 observe: 'video_url'
                 onGet: (value) ->
                   @_getVideoType(value) is 'youtube'
+          '.gc-video-delete':
+            observe: 'author_id'
+            visible: ->
+              can('update', @model)
 
     ui:
       buttonDelete: '.gc-video-delete'

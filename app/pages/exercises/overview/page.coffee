@@ -30,6 +30,7 @@ define [
             id: 'video'
             title: 'Video'
         ]
+
       privacy_widget:
         model: -> @view.model.get('data.model')
 
@@ -63,3 +64,13 @@ define [
         @listenTo view, 'video:assigned', =>
           @model.set('state.subpage', 'overview')
         view
+
+    onShow: ->
+      dataModel = @model.get('data.model')
+      @listenTo(dataModel, 'change:user_id', @_changeContentTabsVisibility)
+
+    _changeContentTabsVisibility: ->
+      if can('update', @model.get('data.model'))
+        @navigation_content_tabs.$el.show()
+      else
+        @navigation_content_tabs.$el.hide()

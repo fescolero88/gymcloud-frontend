@@ -1,13 +1,17 @@
 define [
   './template'
   'features/program_weeks/list/view'
+  'features/program_weeks/list_readable/view'
   'features/program_workouts/list/view'
+  'features/program_workouts/list_readable/view'
   './empty/view'
   'models/program_workout'
 ], (
   template
   ProgramWeeksListView
+  ReadableProgramWeeksListView
   ProgramWorkoutsListView
+  ReadableProgramWorkoutsListView
   EmptyView
   ProgramWorkout
 ) ->
@@ -24,23 +28,11 @@ define [
 
       program_action_panel_bottom:
         model: -> @view.model
+        enabled: ->
+          can('update', @view.options.model)
 
       regioned:
         views: [
-            region: 'program_weeks'
-            klass: ProgramWeeksListView
-            options: ->
-              collection: @model.weeks
-          ,
-            region: 'program_workouts'
-            klass: ProgramWorkoutsListView
-            options: ->
-              collection = new Backbone.VirtualCollection @model.workouts,
-                filter: (model) -> !model.get('week_id')
-                comparator: 'position'
-              model: @model
-              collection: collection
-          ,
             region: 'program_empty'
             klass: EmptyView
             options: ->
@@ -48,27 +40,35 @@ define [
               workouts: @model.workouts
         ]
 
-    onShow: ->
-      @views.program_weeks.onAddChild = @_onAddChild
-      @views.program_workouts.onAddChild = @_onAddChild
+    regions:
+      program_weeks: 'region[data-name="program_weeks"]'
+      program_workouts: 'region[data-name="program_workouts"]'
 
-      App.request 'fwd',
-        context: @
-        from: @views.program_workouts_actions
-        to: @views.program_workouts
-        events: [
-          'actions:add'
-          'actions:create'
-        ]
+    initialize: ->
+      @listenTo(@model, 'sync', @_renderWorkouts)
 
-      @listenTo @views.program_weeks_actions, 'program_weeks:build', =>
-        position = @model.weeks.length + 1
-        @model.weeks.create
-          program_id: @model.get('id')
-          position: position
-          name: "Week #{position}"
-        ,
-          wait: true
+    _renderWorkouts: ->
+      Views = if can('update', @model)
+        program_weeks: ProgramWeeksListView
+        program_workouts: ProgramWorkoutsListView
+      else
+        program_weeks: ReadableProgramWeeksListView
+        program_workouts: ReadableProgramWorkoutsListView
+
+      options =
+        program_weeks:
+          collection: @model.weeks
+        program_workouts:
+          model: @model
+          collection: new Backbone.VirtualCollection @model.workouts,
+            filter: (model) -> !model.get('week_id')
+            comparator: 'position'
+
+      _.each ['program_weeks', 'program_workouts'], (name) =>
+        view = @views[name] = new Views[name](options[name])
+        view.listenTo(view, 'add:child', @_onAddChild)
+        region = @getRegion(name)
+        region.show(view)
 
     _onAddChild: (childView) ->
       childView.el.scrollIntoViewIfNeeded?()
