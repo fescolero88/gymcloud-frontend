@@ -58,7 +58,6 @@ module.exports =
       url: 'https://mobile.gymcloud.com'
     features:
       sign_up: enabled: false
-      search_global: enabled: false
       hotjar: enabled: true
       freshdesk_widget: enabled: true
       google_analytics: enabled: true
