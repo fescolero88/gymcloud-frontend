@@ -15,11 +15,17 @@ define [
     behaviorViewClass: undefined
 
     initialize: ->
-      @behaviorViewClass = if @options.readonly
+      @behaviorViewClass = if @_isReadonly()
         ReadableBehaviorView
       else
         EditableBehaviorView
       super
+
+    _isReadonly: ->
+      if _.isFunction(@options.readonly)
+        _.bind(@options.readonly, @view)()
+      else
+        @options.readonly
 
     behaviorViewOptions: ->
       position: 'top'

@@ -33,6 +33,8 @@ define [
 
       program_action_panel:
         model: -> @view.model.get('data.model')
+        readonly: ->
+          !@_canUpdateModel()
 
       add_to_library:
         model: -> @view.model.get('data.model')
@@ -41,6 +43,7 @@ define [
         model: -> @view.model.get('data.model')
         items: [
             label: 'Add Note'
+            visible: _.bind(@_canUpdateModel, @)
           ,
             label: 'Add To Library'
             visible: _.bind ->
@@ -54,6 +57,7 @@ define [
             className: 'text-danger'
             action: ->
               App.request('modal:confirm:delete', @model)
+            visible: _.bind(@_canUpdateModel, @)
         ]
 
       redirect_back_on_destroy:
@@ -79,6 +83,19 @@ define [
       assign: ->
         new AssignView
           model: @model.get('data.model')
+
+    onShow: ->
+      dataModel = @model.get('data.model')
+      @listenTo(dataModel, 'change:user_id', @_changeContentTabsVisibility)
+
+    _canUpdateModel: ->
+      can('update', @model.get('data.model'))
+
+    _changeContentTabsVisibility: ->
+      if @_canUpdateModel()
+        @navigation_content_tabs.$el.show()
+      else
+        @navigation_content_tabs.$el.hide()
 
     _onAddToLibrary: ->
       App.request 'base:addToLibraryModal',
