@@ -89,6 +89,7 @@ define [
       'blur input': 'validateInput'
       'change @ui.avatarInput': 'uploadAvatar'
       'click .control-links .change': 'changeAccountType'
+      'click .restart-tutorial': '_restartTutorial'
 
     onShow: ->
       $('.gc-main').css('padding-left', '0px')
@@ -132,3 +133,11 @@ define [
       App.listenToOnce view, 'modal:closed', ->
         region.$el.modal('hide')
         region.destroy()
+
+    _restartTutorial: ->
+      App.request('tour')
+        .restartTour()
+        .then ->
+          App.request 'messenger:show',
+            message: 'Tutorial restarted. You will see tutorial tooltips again.'
+            type: 'success'

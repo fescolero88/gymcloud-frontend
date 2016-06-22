@@ -29,5 +29,14 @@ define ->
 
     skipSteps: (steps = []) ->
       tour = _.uniq(tour.concat(steps))
-      settings = App.request('current_user').user_settings
+      user = App.request('current_user')
+      settings = user.user_settings
       settings.patch(tutorial_steps: tour)
+
+    restartTour: ->
+      tour = []
+      user = App.request('current_user')
+      settings = user.user_settings
+      settings.patch
+        tutorial_steps: tour
+        is_tutorial_finished: false
