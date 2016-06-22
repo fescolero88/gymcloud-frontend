@@ -12,12 +12,6 @@ define [
 
     className: 'gc-program-week-item'
 
-    ui:
-      removeWeek: '.gc-remove-program-week'
-
-    events:
-      'click @ui.removeWeek': 'removeModel'
-
     behaviors:
 
       stickit:
@@ -43,12 +37,21 @@ define [
               collection: collection
         ]
 
-    modelEvents:
-      'remove': 'weekRemoved'
+    ui:
+      removeWeek: '.gc-remove-program-week'
+      editButton: '.gc-program-week-actions .fa-edit'
+
+    events:
+      'click @ui.editButton': '_editName'
+      'click @ui.removeWeek': 'removeModel'
 
     removeModel: ->
       App.request('modal:confirm:delete', @model)
 
-    weekRemoved: ->
-      App.request 'messenger:explain', 'week.deleted',
-        name: @model.get('name')
+    _editName: ->
+      App.request 'modal:prompt',
+        title: 'Edit Week Name'
+        prompt: @model.get('name')
+        confirmBtn: 'Rename'
+        cancelCallBack: -> # nothing
+        confirmCallBack: (name) => @model.patch(name: name)

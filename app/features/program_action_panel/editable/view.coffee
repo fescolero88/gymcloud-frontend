@@ -104,7 +104,7 @@ define [
         program_id: @model.get('id')
         program_type: @model.type
         position: position
-        name: "Week #{position}"
+        name: 'Week'
       ,
         wait: true
 
