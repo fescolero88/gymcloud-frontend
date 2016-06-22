@@ -237,27 +237,6 @@ define ->
       onNext: ->
         $('.gc-clients-list-client-actions:first').removeClass('active')
     ,
-      id: 7
-      uniq_id: 'clients_point_client2'
-      key: 'ClientsView'
-      element: (view) -> '.gc-clients-list-client-link:first'
-      rule: -> /\/#clients/.test(window.location.href)
-      title: 'Assigning Items To A Client.'
-      content: '''One of the major features of Gymcloud is to assign a workout
-                  or a program to clients and groups.'''
-      docs: '3000050220--web-clients-how-to-assign-workouts-and-programs'
-      onPrev: ->
-        $('.gc-clients-list-client-actions:first').addClass('active')
-    ,
-      id: 8
-      uniq_id: 'clients_point_client3'
-      key: 'ClientsView'
-      element: (view) -> '.gc-clients-list-client-link:first'
-      rule: -> /\/#clients/.test(window.location.href)
-      title: 'Assigning Items To A Client.'
-      content: '''To do this, start by clicking your client's name.'''
-      docs: '3000050220--web-clients-how-to-assign-workouts-and-programs'
-    ,
       id: 0
       uniq_id: 'clients_sidebar_programs1'
       key: 'SidebarPersonalRootFolderView'
