@@ -16,10 +16,16 @@ define [
         bindings:
           '.gc-video-assigned-wrapper':
             observe: 'video_url'
-            visible: (value) -> !!value
-          '.gc-video-assigned-placeholder':
+            visible: (value) ->
+              !!value
+          '.gc-video-assigned-placeholder.own-entity':
             observe: 'video_url'
-            visible: (value) -> !value
+            visible: (value) ->
+              !value and can('update', @model)
+          '.gc-video-assigned-placeholder.public-entity':
+            observe: 'video_url'
+            visible: (value) ->
+              !value and !can('update', @model)
           'iframe':
             attributes: [
                 name: 'src'
