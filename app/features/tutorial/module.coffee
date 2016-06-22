@@ -61,6 +61,9 @@ define [
           onRedirectError: @_options.onRedirectError
         }, step)
 
+      window.Tour::restartTour = ->
+        @collection.restartTour()
+
       TourClass = window.Tour
       delete window.Tour
       TourClass
