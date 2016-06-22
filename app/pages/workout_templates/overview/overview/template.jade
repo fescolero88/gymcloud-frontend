@@ -1,18 +1,20 @@
-.row
-  .col-md-4
-    region(data-name='video_assigned')
+.row.gc-nav-wrapper
+  .col-md-6
+    region(data-name='author_widget')
+    region(data-name='privacy_button')
 
-  .col-md-8.text-sm-right
-    .text-sm-right
-      region(data-name='author_widget')
-      region(data-name='rating_widget')
-    region(data-name='editable_textarea')
+  .col-md-6.text-sm-right
+    a.btn.edit
+      | Edit
+    region(data-name='add_to_library')
+
+.row.row-margin-v
+  .col-lg-4.col-lg-offset-0.col-sm-10.col-sm-offset-1.col-xs-12
+    region(data-name='video_preview')
+
+  .col-lg-8.col-lg-offset-0.col-sm-10.col-sm-offset-1.col-xs-12
+    span.description
 
 .row.row-margin-v
   .col-md-12
     region(data-name='workout_exercises')
-
-.row.row-margin-v
-  .col-md-12.text-right
-    region(data-name='privacy_toggle')
-    region(data-name='delete_button')

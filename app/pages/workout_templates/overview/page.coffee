@@ -2,16 +2,16 @@ define [
   'pages/base/page'
   './template'
   'models/workout_template'
-  'features/video/assignment/view'
   'features/assignment_list/view'
   './overview/view'
+  './edit/view'
 ], (
   BasePage
   template
   WorkoutTemplate
-  VideoAssignmentView
   AssignView
   OverviewView
+  EditView
 ) ->
 
   class Page extends BasePage
@@ -29,18 +29,9 @@ define [
             id: 'overview'
             title: 'Overview'
           ,
-            id: 'video'
-            title: 'Video'
-          ,
             id: 'assign'
             title: 'Assign'
         ]
-
-      privacy_widget:
-        model: -> @view.model.get('data.model')
-
-      add_to_library:
-        model: -> @view.model.get('data.model')
 
       redirect_back_on_destroy:
         model: -> @view.model.get('data.model')
@@ -57,24 +48,17 @@ define [
 
     initViews: ->
       overview: ->
-        view = new OverviewView
+        new OverviewView
           model: @model.get('data.model')
-        @listenTo view, 'childview:video:assign', =>
-          @model.set('state.subpage', 'video')
-        view
-      video: ->
-        view = new VideoAssignmentView
+      edit: ->
+        new EditView
           model: @model.get('data.model')
-        @listenTo view, 'video:assigned', =>
-          @model.set('state.subpage', 'overview')
-        view
       assign: ->
         new AssignView
           model: @model.get('data.model')
 
     onShow: ->
       dataModel = @model.get('data.model')
-      @listenTo(dataModel, 'change:video_url', @_videoAssigned)
       @listenTo(dataModel, 'change:user_id', @_changeContentTabsVisibility)
 
     _changeContentTabsVisibility: ->
@@ -82,6 +66,3 @@ define [
         @navigation_content_tabs.$el.show()
       else
         @navigation_content_tabs.$el.hide()
-
-    _videoAssigned: ->
-      @model.set('state.subpage', 'overview')

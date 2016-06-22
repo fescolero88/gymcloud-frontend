@@ -14,17 +14,27 @@ define [
 
     template: template
 
-    className: 'gc-box-content'
+    className: 'gc-box-content workout-template overview'
 
     behaviors: ->
       author_widget: true
-      rating_widget: true
-      editable_textarea: true
-      video_assigned: true
-      privacy_toggle:
-        enabled: @_enabled
-      delete_button:
-        enabled: @_enabled
+      privacy_button: true
+      add_to_library: true
+      video_preview: true
+
+      stickit:
+        bindings:
+          '.description': 'description'
+          '.btn.edit':
+            observe: 'author_id'
+            visible: ->
+              can('update', @model)
+            attributes: [
+                name: 'href'
+                observe: 'id'
+                onGet: (id) ->
+                  "#workout_templates/#{id}/edit"
+            ]
 
     regions:
       workout_exercises: 'region[data-name="workout_exercises"]'

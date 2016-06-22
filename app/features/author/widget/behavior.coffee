@@ -13,4 +13,8 @@ define [
     behaviorViewClass: BehaviorView
 
     behaviorViewOptions: ->
-      parent: @view.model
+      parent: _.bind(@options.model, @)()
+
+    defaults:
+      model: ->
+        @view.model

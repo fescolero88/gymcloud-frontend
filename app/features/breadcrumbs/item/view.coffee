@@ -19,11 +19,11 @@ define ->
     modelEvents:
       'change:name': '_saveName'
 
-    initialize: (options) ->
+    initialize: ->
       @oldName = @model.get('name')
-      @isEditable = options.isEditable
 
     _saveName: ->
+      return unless @options.isEditable
       condition = !_.isUndefined(@oldName) &&
         @model.hasChanged('name') &&
         @model.get('name') != @oldName

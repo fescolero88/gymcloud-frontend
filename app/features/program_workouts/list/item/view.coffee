@@ -88,7 +88,7 @@ define [
       @ui.workoutTabsContent.find("[data-pane='#{tabName}']").addClass('active')
 
     _showAssignModal: ->
-      App.request('modal:video:assign', @model)
+      App.request('modal:video:assign', @model.workout)
 
     _openUploadPopup: ->
       view = App.request('base:uploadVideo')
