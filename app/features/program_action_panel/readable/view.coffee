@@ -52,5 +52,5 @@ define [
           as soon as you move to the next field.'''
         confirmBtn: 'Update'
         confirmCallBack: =>
-          path = "#personal_programs/#{@model.id}/edit"
+          path = ['personal_programs', @model.id, 'edit']
           App.vent.trigger('redirect:to', path, replace: false)

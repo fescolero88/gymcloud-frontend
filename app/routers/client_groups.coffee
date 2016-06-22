@@ -14,7 +14,7 @@ define [
   class Controller extends Marionette.Controller
 
     root: (id) ->
-      path = "client_groups/#{id}/members"
+      path = ['client_groups', id, 'members']
       App.vent.trigger('redirect:to', path)
 
     overview: (id, state) ->

@@ -36,8 +36,8 @@ define [
 
       auto_complete:
         onItemAdd: (id, $item, selectize) ->
-          path = "#{@options.typeName}/#{id}"
-          App.vent.trigger('redirect:to', path, replace: false)
+          App.vent.trigger 'redirect:to', [@options.typeName, id],
+            replace: false
           selectize.close()
         collection: =>
           @collection

@@ -45,7 +45,7 @@ define [
             as soon as you move to the next field.'''
           confirmBtn: 'Update'
           confirmCallBack: ->
-            path = "#personal_workouts/#{model.id}/edit"
+            path = ['personal_workouts', model.id, 'edit']
             App.vent.trigger('redirect:to', path, replace: false)
 
 
@@ -66,5 +66,5 @@ define [
       @listenToOnce model, 'sync', ->
         if can('update', model) and model.exercises.isEmpty()
           App.request('messenger:explain', 'personal_workout.empty')
-          path = "#personal_workouts/#{model.id}/edit"
+          path = ['personal_workouts', model.id, 'edit']
           App.vent.trigger('redirect:to', path)

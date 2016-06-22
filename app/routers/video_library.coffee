@@ -13,7 +13,7 @@ define [
   class Controller extends Marionette.Controller
 
     root: ->
-      path = 'videos/recent'
+      path = ['videos', 'recent']
       App.vent.trigger('redirect:to', path)
 
     list: (order) ->

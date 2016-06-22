@@ -117,5 +117,5 @@ define [
         firstModelPosition - 1
 
     _backToOverview: ->
-      path = "#personal_programs/#{@model.id}"
+      path = ['personal_programs', @model.id]
       App.vent.trigger('redirect:to', path, replace: false)
