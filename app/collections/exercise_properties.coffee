@@ -13,12 +13,18 @@ define [
     comparator: 'position'
 
     addProperties: (sourceModels, workout_exercise_id) ->
-      _.each sourceModels, (sourceModel, key) =>
+      dfds = _.map sourceModels, (sourceModel, key) =>
+        defer = new $.Deferred
         attributes = _.extend({}, sourceModel.attributes, {
           workout_exercise_id: workout_exercise_id
           position: @length + key
         })
-        @create(attributes, wait: true)
+        @create attributes,
+          wait: true
+          success: -> defer.resolve()
+          error: -> defer.reject()
+        defer.promise()
+      $.when(dfds...)
 
     initProperty: (workout_exercise_id, default_property = {}) ->
       model = new ExerciseProperty

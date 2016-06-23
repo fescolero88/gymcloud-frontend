@@ -25,6 +25,7 @@ define [
     childEvents:
       'switchTo:editable': '_switchToEditable'
       'switchTo:readable': '_switchToReadable'
+      'edited': '_edited'
 
     initialize: ->
       @editableStateId = null
@@ -45,7 +46,8 @@ define [
       @collection.addProperties(
         options.exercise_properties,
         options.workout_exercise_id
-      )
+      ).then =>
+        @trigger('edited')
 
     _switchToEditable: (childView) ->
       @_switchViewStateFor(childView, 'editable')
@@ -60,3 +62,6 @@ define [
         @editableStateId = childView.model.cid
       @collection.remove(childView.model)
       @collection.add(childView.model, at: childView._index)
+
+    _edited: ->
+      @trigger('edited')

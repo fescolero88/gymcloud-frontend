@@ -34,7 +34,8 @@ define [
         return App.request 'messenger:show',
           type: 'error'
           message: 'Please select a property.'
-      @model.save({}, {wait: true}).then ->
+      @model.save({}, {wait: true}).then =>
+        @trigger('edited')
         App.request('messenger:explain', 'exercise.updated')
       .fail ->
         App.request('messenger:explain', 'error.unknown')

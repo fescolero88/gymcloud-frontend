@@ -45,3 +45,9 @@ define [
         collection: @model.exercises
       region = @getRegion('workout_exercises')
       region.show(view)
+      @listenTo(view, 'edited', @_unlinkFromGroup)
+
+    _unlinkFromGroup: ->
+      return unless @model.type is 'PersonalWorkout'
+      if @model.get('is_default_for_group')
+        @model.save(is_default_for_group: false)
