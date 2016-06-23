@@ -97,10 +97,14 @@ define [
 
     initialize: (options) ->
       @listenTo @model, 'change:note change:order_name change:position', =>
-        @model.patch()
+        @model.patch().then =>
+          @trigger('edited')
       @listenTo(@, 'actions:multi_constructor:start', @enableCheckbox)
       @listenTo(@, 'actions:multi_constructor:stop', @disableCheckbox)
       @listenTo(@, 'actions:multi_constructor:assign', @addProperties)
+
+    onShow: ->
+      @listenTo(@views.exercise_properties, 'edited', -> @trigger('edited'))
 
     enableCheckbox: =>
       @ui.setPropertyCheckboxWrapper.removeClass 'hidden'

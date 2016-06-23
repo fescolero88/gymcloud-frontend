@@ -16,6 +16,9 @@ define [
 
     childView: ExercisesItemView
 
+    childEvents:
+      'edited': '_edited'
+
     behaviors:
       exercises_connectors: true
 
@@ -61,3 +64,6 @@ define [
           position: view.$el.index()
         view.model.patch()
       @collection.sort()
+
+    _edited: ->
+      @trigger('edited')

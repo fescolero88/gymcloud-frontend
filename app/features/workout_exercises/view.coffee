@@ -51,6 +51,8 @@ define [
           'actions:show'
         ]
 
+      @listenTo @views.workout_exercises_list, 'edited', => @trigger('edited')
+
       @listenToOnce @views.workout_exercises_actions, 'show',
         @_actionsVisibility
 
