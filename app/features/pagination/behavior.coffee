@@ -14,12 +14,3 @@ define [
 
     behaviorViewOptions: ->
       collection: @view.collection
-
-    onShow: ->
-      @listenTo(@view.collection, 'request', @_changeVisibility)
-
-    _changeVisibility: ->
-      if @view.collection.isEmpty()
-        @behaviorView.$el.hide()
-      else
-        @behaviorView.$el.show()

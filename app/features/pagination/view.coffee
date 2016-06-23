@@ -17,6 +17,12 @@ define [
       'click @ui.nextPage': 'getNextPage'
       'click @ui.searchPage': 'getSearchPage'
 
+    templateHelpers: ->
+      totalPages: @collection.state.totalPages or 1
+
+    initialize: ->
+      @listenTo(@collection, 'reset', @_renderPageNumbers)
+
     getPrevPage: (ev) ->
       ev.preventDefault()
       @collection.getPreviousPage()
@@ -29,3 +35,9 @@ define [
       ev.preventDefault()
       page = parseInt $(ev.currentTarget).text()
       @collection.getPage(page)
+
+    _renderPageNumbers: ->
+      return @$el.hide() if @collection.state.totalPages is 1
+
+      @$el.show()
+      @render()

@@ -2,7 +2,7 @@ define [
   './template'
   './list/view'
   'features/video/assignment/search/view'
-  'collections/videos'
+  './collection'
 ], (
   template
   VideosListView
