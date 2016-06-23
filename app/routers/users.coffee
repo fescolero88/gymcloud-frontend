@@ -25,7 +25,7 @@ define [
 
 
     root: (id) ->
-      path = "users/#{id}/programs"
+      path = ['users', id, 'programs']
       App.vent.trigger('redirect:to', path)
 
     overview: (id, state) ->

@@ -22,6 +22,10 @@ define [
       opts = _.defaults options,
         replace: true
         trigger: true
+      if _.isArray(path)
+        path = path
+          .join('/')
+          .replace(/^([^\#])/, '#$1')
       Backbone.history.navigate(path, opts)
 
     App.reqres.setHandler 'fwd', (options = {}) ->

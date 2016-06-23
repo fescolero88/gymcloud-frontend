@@ -17,11 +17,11 @@ define [
     toFolder: ->
       user = App.request('current_user')
       id = user.folders.findWhere(name: 'Programs').get('id')
-      path = "program_templates_folder/#{id}"
+      path = ['program_templates_folder', id]
       App.vent.trigger('redirect:to', path)
 
     root: (id) ->
-      path = "program_templates/#{id}/overview"
+      path = ['program_templates', id, 'overview']
       App.vent.trigger('redirect:to', path)
 
     overview: (id, state) ->

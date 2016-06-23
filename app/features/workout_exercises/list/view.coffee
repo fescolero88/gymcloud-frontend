@@ -48,7 +48,7 @@ define [
 
     _redirectToExercises: ->
       setTimeout ->
-        App.vent.trigger 'redirect:to', '#/exercises',
+        App.vent.trigger 'redirect:to', ['exercises'],
           replace: false
       , 100
 

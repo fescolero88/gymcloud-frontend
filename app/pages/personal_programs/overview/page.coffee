@@ -45,5 +45,5 @@ define [
       @listenToOnce model, 'sync', ->
         if can('update', model) and model.workouts.isEmpty()
           App.request('messenger:explain', 'personal_program.empty')
-          path = "#personal_programs/#{model.id}/edit"
+          path = ['personal_programs', model.id, 'edit']
           App.vent.trigger('redirect:to', path)

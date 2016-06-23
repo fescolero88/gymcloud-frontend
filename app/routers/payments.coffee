@@ -17,7 +17,7 @@ define [
   class Controller extends Marionette.Controller
 
     root: ->
-      path = 'payments/transactions'
+      path = ['payments', 'transactions']
       App.vent.trigger('redirect:to', path)
 
     overview: (state) ->

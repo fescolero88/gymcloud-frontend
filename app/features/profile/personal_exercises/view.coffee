@@ -44,8 +44,9 @@ define [
         onItemAdd: (id, $item, selectize) ->
           intId = parseInt(id, 10)
 
-          path = "#users/#{@model.id}/exercises/#{intId}"
-          App.vent.trigger('redirect:to', path, replace: false)
+          path = ['users', @model.id, 'exercises', intId]
+          App.vent.trigger 'redirect:to', path,
+            replace: false
 
           selectize.clear()
           selectize.close()
