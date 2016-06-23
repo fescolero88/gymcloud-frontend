@@ -24,7 +24,9 @@ define [
 
   oBackbone.Stickit.addHandler
     selector: '[contenteditable]'
-    updateMethod: 'text'
+    updateMethod: 'html'
+    getVal: ($el) ->
+      $el.text()
     events: ['change', 'input']
 
   oBackbone
