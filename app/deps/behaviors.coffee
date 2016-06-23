@@ -23,6 +23,7 @@ define [
   'features/privacy/widget/behavior'
   'features/rating/widget/behavior'
   'features/video/assigned/behavior'
+  'features/video/preview/behavior'
   'features/program_action_panel/behavior'
   'features/program_action_panel/behavior_bottom'
   'features/exercise_properties/list/item/editable/behavior'

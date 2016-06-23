@@ -113,7 +113,7 @@ define [
         video_url: model.get('embed_url')
         video_id: @_getVideoId(model)
       if @options.type == 'modal'
-        @model.workout.save(attrs, wait: true)
+        @model.save(attrs, wait: true)
           .then =>
             @trigger('video:assigned')
             App.vent.trigger('modal:video:close')

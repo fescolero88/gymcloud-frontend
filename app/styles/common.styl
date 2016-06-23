@@ -199,6 +199,13 @@ body.dragging *
     margin: 0
     padding: 0
 
+.gc-box-content .gc-nav-wrapper
+  height: auto
+  margin: -5px -15px 0 -15px
+  padding-bottom: 9px
+  background-color: #F9F9F9
+  z-index: 3
+
 .gc-nav-wrapper
   min-height: 50px
   padding: 9px 15px 0 0
@@ -207,6 +214,12 @@ body.dragging *
   overflow: visible
   position: relative
   z-index: 4
+
+  & + .gc-nav-wrapper
+    height: auto
+    padding-bottom: 9px
+    background-color: #F9F9F9
+    z-index: 3
 
   &.without-shadow
     box-shadow: none
@@ -218,7 +231,7 @@ body.dragging *
     margin: 6px 5px
     display block
     float: left
-  
+
   .gc-content-breadcrumbs
     display block
     overflow: hidden
