@@ -22,6 +22,7 @@ defaults =
     freshdesk_widget: enabled: false
     google_analytics: enabled: false
     tooltips_tour: enabled: true
+    mixpanel: enabled: false
 
 module.exports =
 
@@ -52,6 +53,8 @@ module.exports =
         account: 'UA-74824574-3'
       stripe:
         publishable_key: 'pk_live_OaMTNwWnnagp4nLqJhwrkiUU'
+      mixpanel:
+        key: 'e1e68dc7cedb942ee97a42fd97c3396b'
     api: url: 'https://api.gymcloud.com'
     mobile:
       app: 'gymcloud://'
@@ -61,6 +64,7 @@ module.exports =
       hotjar: enabled: true
       freshdesk_widget: enabled: true
       google_analytics: enabled: true
+      mixpanel: enabled: true
 
   test: $.extend true, {}, defaults,
     api: url: ''

@@ -3,11 +3,13 @@ define [
   './modules'
   'features/layouts/base/view'
   'modules/utils/hotjar'
+  'modules/utils/mixpanel'
 ], (
   initializers
   modules
   BaseLayoutView
   hotjar
+  mixpanel
 ) ->
 
   class Application extends Marionette.Application
@@ -60,6 +62,7 @@ define [
 
     _onStarted: ->
       feature.isEnabled('hotjar') && hotjar.init()
+      feature.isEnabled('mixpanel') && mixpanel.init()
 
     _initPromises: ->
       names = [
