@@ -524,17 +524,33 @@ region[data-name="pagination"] > div
   clear: both
   margin-left: 15px
 
-.gc-pagination-bordered > li:first-child > a
-  border-top-left-radius 50px
-  border-bottom-left-radius 50px
+.paginator
 
-.gc-pagination-bordered > li:last-child > a
-  border-top-right-radius 50px
-  border-bottom-right-radius 50px
+  display: flex
+  justify-content: space-between
+  align-items: center
 
-.gc-pagination-bordered li a
-  border-color #e6e6e6
-  color #3a99d8
+  .pagination
+    margin: 0
+
+  .current-page-info
+    color: #adadad
+
+.gc-pagination-bordered
+
+  li
+
+    &:first-child > a
+      border-top-left-radius 50px
+      border-bottom-left-radius 50px
+
+    &:last-child > a
+      border-top-right-radius 50px
+      border-bottom-right-radius 50px
+
+    a
+      border-color #e6e6e6
+      color #3a99d8
 
 .gc-pagination li a
   border none
@@ -950,7 +966,7 @@ region[data-name="pagination"] > div
   background-image url('../../images/prototypes/trash-icon.png')
   background-size contain
   background-repeat no-repeat
-  
+
   &:hover
     opacity: .8
 
