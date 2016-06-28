@@ -11,6 +11,13 @@ define [
     regions:
       content: 'region[data-name="content"]'
 
+    templateHelpers:
+      landingPath: (path) ->
+        [
+          document.location.origin.replace('app', 'www')
+          path
+        ].join('/')
+
     initialize: ->
       @_initHandlers()
 
