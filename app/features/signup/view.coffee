@@ -30,6 +30,14 @@ define [
           '[data-bind="password"]': 'password'
           '[data-bind="password_confirmation"]': 'password_confirmation'
           '[data-bind="agree"]': 'agree'
+          '.gc-user-type-trainer':
+            classes:
+              active:
+                observe: 'client_id'
+                onGet: (value) -> !value
+          '.gc-user-type-client':
+            classes:
+              active: 'client_id'
 
     ui:
       'form': 'form.gc-signup-form'
@@ -45,20 +53,21 @@ define [
 
     validateInput: (ev) ->
       $input = $(ev.target)
-      input_name = $(ev.target).attr 'name'
-      input_value = $(ev.target).val()
-      if input_value
-        $inputGroup = $input.closest('.form-group')
-        error_msg = @model.preValidate input_name, input_value
-        @trigger 'switchError', error_msg, $inputGroup
+      input_name = $input.attr('name')
+      input_value = $input.val()
+      return unless input_value
+
+      $inputGroup = $input.closest('.form-group')
+      error_msg = @model.preValidate(input_name, input_value)
+      @trigger('switchError', error_msg, $inputGroup)
 
     onRender: ->
-      if @client
-        @model.set @client
-        # hide social signup if triggered by invitation
-        @ui.socialSignup.hide()
-        @ui.form.find('.gc-signup-with-email-title').hide()
-        @ui.form.find('input[name="email"]').attr('disabled', 'disabled')
+      return unless @client
+      @model.set(@client)
+      # hide social signup if triggered by invitation
+      @ui.socialSignup.hide()
+      @ui.form.find('.gc-signup-with-email-title').hide()
+      @ui.form.find('input[name="email"]').attr('disabled', 'disabled')
 
     createAccount: ->
       # safari autocomplete hack
