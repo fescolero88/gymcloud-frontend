@@ -41,6 +41,7 @@ define [
       collection.fetch()
         .then ->
           view.clients.show(clientsView)
+          view.initRegionListeners()
 
       collection = new ClientGroups
       collection.url = "#{collection.url}/#{uid}/collections/client_groups"
