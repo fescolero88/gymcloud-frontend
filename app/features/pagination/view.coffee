@@ -40,7 +40,7 @@ define [
       @collection.getPage(page)
 
     _renderPageNumbers: ->
-      return @$el.hide() if @collection.state.totalPages is 1
+      return @$el.hide() if @collection.state.totalPages < 2
 
       @$el.show()
       @render()
