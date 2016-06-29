@@ -63,6 +63,12 @@ define [
       redirect_back_on_destroy:
         model: -> @view.model.get('data.model')
 
+      stickit:
+        bindings:
+          '.gc-nav-wrapper:last':
+            observe: 'state.subpage'
+            visible: (value) -> value is 'overview'
+
     template: template
 
     regions:
