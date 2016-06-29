@@ -16,25 +16,21 @@ define [
 
       stickit:
         bindings:
-          '[data-bind="name"]':
-            observe: 'name'
-            events: ['change']
+          '[data-bind="name"]': 'name'
+          '.workouts-count':
+            observe: 'workouts_count'
+            onGet: (value) ->
+              "(#{value})"
 
       regioned:
         views: [
             region: 'week_workouts'
             klass: ProgramWorkoutsListView
             options: ->
-              program = @model.collection.program
-              collection = new Backbone.VirtualCollection program.workouts,
-                filter: (model) => model.get('week_id') == @model.get('id')
-                comparator: 'position'
-              collection.week_id = @model.get('id')
-
               weekId: @model.get('id')
               hasEmptyView: true
-              model: program
-              collection: collection
+              model: @program
+              collection: @workouts
         ]
 
     ui:
@@ -44,6 +40,19 @@ define [
     events:
       'click @ui.editButton': '_editName'
       'click @ui.removeWeek': 'removeModel'
+      'click .gc-program-week-title': '_toggleWeek'
+
+    initialize: ->
+      @program = @model.collection.program
+      @workouts = new Backbone.VirtualCollection @program.workouts,
+        filter: (model) => model.get('week_id') == @model.get('id')
+        comparator: 'position'
+      @workouts.week_id = @model.get('id')
+      @listenTo(@workouts, 'add remove reset', @_countWorkouts)
+      @_countWorkouts()
+
+    _countWorkouts: ->
+      @model.set(workouts_count: @workouts.length)
 
     removeModel: ->
       App.request('modal:confirm:delete', @model)
@@ -55,3 +64,6 @@ define [
         confirmBtn: 'Rename'
         cancelCallBack: -> # nothing
         confirmCallBack: (name) => @model.patch(name: name)
+
+    _toggleWeek: ->
+      @$el.toggleClass('folded')

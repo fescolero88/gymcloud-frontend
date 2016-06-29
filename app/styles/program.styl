@@ -69,17 +69,45 @@
   background-color: #F9F9F9
   margin-bottom: 20px
 
-.gc-program-week-item .gc-program-week-title
-  font-size: 18px
-  color: #9ea0a1
-  line-height: 22px
-  font-weight: bold
-  margin: 5px 0 10px
-  color: #757575
+.gc-program-week-item
 
-.gc-program-week-item .gc-program-weeks-workouts-container
-  border-radius: 5px
-  background-color: #F9F9F9
+  &:hover
+    .gc-program-week-actions
+      display: block
+
+  &.folded
+    region
+      display: none
+
+    .gc-program-week-title .workouts-count
+      display: inline-block
+
+  .gc-program-week-title
+    display: flex
+    align-items: center
+    height: 33px
+    color: #757575
+
+    h2
+      margin: 0
+      font-size: 18px
+      font-weight: bold
+      cursor: pointer
+
+    .workouts-count
+      display: none
+      margin-left: 10px
+      font-size: 18px
+
+  .gc-program-weeks-workouts-container
+    border-radius: 5px
+    background-color: #F9F9F9
+
+  .gc-program-week-actions
+    list-style-type: none
+    margin: 0
+    padding: 0
+    text-align: right
 
 .gc-program-weeks-workouts-container .gc-program-workouts-list
   padding: 0px
@@ -95,39 +123,30 @@
   .gc-exercises-assign-input-wrapper
     text-align: left
 
-.gc-program-week-item .gc-program-week-actions
-  list-style-type: none
-  margin: 0
-  padding: 0
-  text-align: right
-
 .gc-program-week-actions
   display: none
 
-.gc-program-week-actions li
-  padding: 0
-  display: inline-block
-  font-size: 20px
-  color: #BDBDBD
-  vertical-align: middle
+  li
+    padding: 0
+    display: inline-block
+    font-size: 20px
+    color: #BDBDBD
+    vertical-align: middle
 
-.gc-program-week-actions li button
-  outline: none
-  background-color: transparent
-  border: none
-  margin: 0 0 0 7px
-  padding: 0 2px
-  cursor: pointer
+    &.gc-week-remove-container
+      margin-top: -2px
 
-.gc-program-week-item:hover .gc-program-week-actions
-  display: block
+      .gc-remove-program-week
+        height: 28px
+        background-position: center 7px
 
-.gc-program-week-actions li.gc-week-remove-container
-  margin-top: -2px
-
-.gc-program-week-actions li.gc-week-remove-container .gc-remove-program-week
-  height: 28px
-  background-position: center 7px
+    button
+      outline: none
+      background-color: transparent
+      border: none
+      margin: 0 0 0 7px
+      padding: 0 2px
+      cursor: pointer
 
 .gc-program-counter
   display: inline-block
