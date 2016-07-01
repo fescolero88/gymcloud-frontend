@@ -21,10 +21,12 @@ define [
     redirect: ->
       id = setTimeout (=>
         window.location.replace(@url + @hash)
-      ), 3000
+      ), 6000
       document.addEventListener 'visibilitychange', ->
         clearTimeout(id)
-      window.location.replace(@path + @hash)
+      setTimeout (=>
+        window.location.replace(@path + @hash)
+      ), 3000
 
     isMobile: ->
       !! @md.mobile()
