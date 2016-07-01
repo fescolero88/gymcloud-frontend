@@ -14,7 +14,7 @@ if (fs.existsSync(passwdFile)) {
       file: passwdFile
   });
 
-  app.use(auth.connect(basic));
+  // app.use(auth.connect(basic));
 
 }
 
