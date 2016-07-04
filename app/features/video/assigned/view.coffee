@@ -50,7 +50,8 @@ define [
                 name: 'style'
                 observe: 'preview_picture_url'
                 onGet: (val) ->
-                  "background-image: url(#{val})"
+                  if val
+                    "background-image: url(#{val})"
             ]
           '.gc-video-duration':
             observe: 'durationFormatted'
