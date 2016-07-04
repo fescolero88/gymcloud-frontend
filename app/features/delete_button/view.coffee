@@ -2,8 +2,11 @@ define ->
 
   class View extends Marionette.ItemView
 
-    template: (attrs) ->
-      "Delete #{_.humanize(attrs.type)}"
+    template: (attrs) =>
+      if @options.short
+        'Delete'
+      else
+        "Delete #{_.humanize(attrs.type)}"
 
     tagName: 'button'
 

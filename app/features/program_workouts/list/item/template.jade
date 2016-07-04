@@ -18,31 +18,5 @@
         a.gc-delete-program-workout(href='#')
           | Delete
 .gc-workout-body
-  ul.gc-content-nav.gc-workout-body-nav
-    li.active
-      a(data-toggle='tab', data-content='description')
-        | description
-    li
-      a(data-toggle='tab', data-content='video')
-        | video
-    //- li
-      a(data-toggle='tab', data-content='warmups')
-        | warmups
-  .tab-content.gc-workout-tab-content
-    .tab-pane.active(data-pane='description')
-      region(data-name='editable_textarea')
-    .tab-pane(data-pane='video')
-      .row
-        .col-md-4
-          region(data-name='video_assigned')
-    //- .tab-pane(data-pane='warmups')
-      .gc-workout-empty-warmups
-        p
-          | Seems you don’t have any warmups in your workout.
-        p
-          a.gc-quick-add(href='#')
-            | Quick Add
-          | or
-          button.btn.btn-primary.gc-custom
-            | Add Exercise
+  region(data-name='program_video')
   region(data-name='workout_exercises')

@@ -23,6 +23,7 @@ define [
       breadcrumbs:
         model: ->
           @view.model.get('data.model')
+        editable: false
 
       navigation_content_tabs:
         data: [

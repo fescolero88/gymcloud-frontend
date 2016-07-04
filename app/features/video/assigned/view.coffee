@@ -1,7 +1,11 @@
 define [
   './template'
+  'models/video'
+  'moment'
 ], (
   template
+  Video
+  moment
 ) ->
 
   class View extends Marionette.LayoutView
@@ -15,74 +19,90 @@ define [
       stickit:
         bindings:
           '.gc-video-assigned-wrapper':
-            observe: 'video_url'
-            visible: (value) ->
-              !!value
-          '.gc-video-assigned-placeholder.own-entity':
-            observe: 'video_url'
-            visible: (value) ->
-              !value and can('update', @model)
-          '.gc-video-assigned-placeholder.public-entity':
-            observe: 'video_url'
-            visible: (value) ->
-              !value and !can('update', @model)
-          'iframe':
-            attributes: [
-                name: 'src'
-                observe: 'video_url'
-            ]
+            observe: 'isAssigned'
+            visible: (value) -> value
+          '.gc-video-assigned-placeholder':
+            observe: 'isAssigned'
+            visible: (value) -> !value
           '.gc-video-link':
             attributes: [
                 name: 'href'
-                observe: 'video_url'
+                observe: 'embed_url'
             ]
           '.gc-video-link span.name': 'name'
           '.gc-video-link span.type':
-            observe: 'video_url'
+            observe: 'embed_url'
             onGet: (value) ->
               type = @_getVideoType(value)
               _.capitalize(type)
           '.gc-video-icon':
             classes:
               'gc-video-vimeo-icon':
-                observe: 'video_url'
+                observe: 'embed_url'
                 onGet: (value) ->
                   @_getVideoType(value) is 'vimeo'
               'gc-video-youtube-icon':
-                observe: 'video_url'
+                observe: 'embed_url'
                 onGet: (value) ->
                   @_getVideoType(value) is 'youtube'
-          '.gc-video-delete':
-            observe: 'author_id'
-            visible: ->
-              can('update', @model)
+          '.gc-video-preview':
+            attributes: [
+                name: 'style'
+                observe: 'preview_picture_url'
+                onGet: (val) ->
+                  "background-image: url(#{val})"
+            ]
+          '.gc-video-duration':
+            observe: 'durationFormatted'
+            visible: true
+            updateView: true
+          '.gc-video-uploaded-at':
+            observe: 'uploaded_at'
+            onGet: (date) ->
+              moment(date).format 'Do of MMM'
+          '.gc-video-controls':
+            visible: -> @options.controls
+          '.gc-add-video':
+            visible: -> @options.controls
+          '.gc-video-play':
+            observe: 'embed_url'
+            visible: true
 
     ui:
-      buttonDelete: '.gc-video-delete'
       buttonAssign: '.gc-add-video'
+      replace: '.gc-video-replace'
+      play: '.gc-video-play'
+      iframe: 'iframe'
+      duration: '.gc-video-duration'
 
     events:
-      'click @ui.buttonDelete': '_deleteVideo'
+      'click @ui.play': '_renderIframe'
 
     triggers:
       'click @ui.buttonAssign': 'video:assign'
+      'click @ui.replace': 'video:assign'
 
-    onBeforeRender: ->
-      @model = @options.model()
+    initialize: ->
+      @model = new Video
+        id: @options.video_id
+      @fetchVideo(@options.video_id)
+      @listenTo App.vent, 'fetch:video', (video_id) ->
+        @fetchVideo(video_id)
+      @listenTo @, 'video:deleted', ->
+        @model.set 'isAssigned', false
 
-    _showAssignModal: ->
-      App.request('modal:video:assign', @model)
+    fetchVideo: (video_id) ->
+      return unless video_id
+      @model.set 'id', video_id, silent: true
+      @model.fetch()
+        .then =>
+          @model.set 'isAssigned', true
 
-    _deleteVideo: ->
-      App.request 'modal:confirm',
-        title: 'Delete Video?'
-        content: 'Are you sure you want to delete this video?'
-        confirmBtn: 'Delete'
-        confirmCallBack: =>
-          @model.save
-            video_url: null
-            video_id: null
-          , wait: true
+    _renderIframe: (ev) ->
+      @ui.iframe.show()
+      @ui.iframe.attr('src', "#{@model.get('embed_url')}?autoplay=1")
+      $(ev.currentTarget).hide()
+      @ui.duration.hide()
 
     _getVideoType: (url) ->
       return unless _.any(url)

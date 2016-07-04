@@ -112,15 +112,13 @@ define [
       attrs =
         video_url: model.get('embed_url')
         video_id: @_getVideoId(model)
-      if @options.type == 'modal'
-        @model.save(attrs, wait: true)
-          .then =>
-            @trigger('video:assigned')
-            App.vent.trigger('modal:video:close')
+      if @options.instantSave is false
+        @model.set(attrs)
       else
         @model.save(attrs, wait: true)
-          .then =>
-            @trigger('video:assigned')
+      return unless @options.type is 'modal'
+      App.vent.trigger('fetch:video', attrs.video_id)
+      App.vent.trigger('modal:video:close')
 
     _getVideoId: (model) ->
       if model.get('type') is 'gymcloud'

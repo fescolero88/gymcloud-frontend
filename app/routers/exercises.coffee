@@ -1,13 +1,30 @@
 define [
-  'pages/exercises/overview/page'
+  'pages/exercise/page'
 ], (
-  ExerciseOverviewPage
+  ExercisePage
 ) ->
 
   class Router extends Marionette.AppRouter
 
-    appRoutes:
+    initialize: ->
+      @listenTo App.vent, 'unsaved:changes', ->
+        @unsavedChanges = true
+        @currentURL = Backbone.history.getFragment()
+      @listenTo App.vent, 'no:unsaved:changes', ->
+        @unsavedChanges = false
 
+    execute: (callback, args) ->
+      if @unsavedChanges is true
+        if !confirm 'Are you sure you want to leave without saving?'
+          Backbone.history.navigate @currentURL, trigger: false
+          return false
+        else
+          @unsavedChanges = false
+          callback and callback.apply(@, args)
+      else
+        callback and callback.apply(@, args)
+
+    appRoutes:
       'exercises': 'toFolder'
       'exercises/:id': 'root'
       'exercises/:id/:state': 'overview'
@@ -25,7 +42,7 @@ define [
       App.vent.trigger('redirect:to', path)
 
     overview: (id, state) ->
-      new ExerciseOverviewPage
+      new ExercisePage
         id: id
         state: state
 

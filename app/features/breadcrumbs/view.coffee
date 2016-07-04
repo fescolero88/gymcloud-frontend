@@ -15,8 +15,7 @@ define [
     childView: BreadcrumbsItemView
 
     childViewOptions: (model, index) ->
-      return {isEditable: false} if model.type is 'WorkoutTemplate'
-
+      return {isEditable: false} unless @options.editable
       isEditable = @_isEditable(model)
       options =
         isEditable: isEditable

@@ -14,6 +14,8 @@ define [
 
     behaviors:
 
+      textarea_autosize: true
+
       stickit:
         bindings: ->
           '.content':
@@ -21,8 +23,6 @@ define [
             updateModel: false
           'textarea':
             observe: 'description'
-            afterUpdate: ->
-              @_updateAutosizeDelayed()
             attributes: [
                 name: 'placeholder'
                 observe: 'description'
@@ -46,19 +46,10 @@ define [
     events:
       'blur @ui.editor': '_save'
 
-    initialize: ->
-      @_updateAutosizeDelayed = _.debounce(@_updateAutosize, 200)
-
     onBeforeRender: ->
       @model = @options.model()
       @listenToOnce @model, 'sync', ->
         @initialValue = @model.get('description')
-
-    onShow: ->
-      @_updateAutosizeDelayed()
-
-    onBeforeDestroy: ->
-      autosize.destroy(@ui.editor)
 
     _save: ->
       return if @initialValue is @model.get('description')
@@ -67,6 +58,3 @@ define [
           @initialValue = @model.get('description')
         .fail =>
           @model.set(description: @initialValue)
-
-    _updateAutosize: ->
-      autosize(@ui.editor)

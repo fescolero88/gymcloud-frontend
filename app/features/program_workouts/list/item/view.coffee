@@ -1,9 +1,11 @@
 define [
   './template'
   'features/workout_exercises/view'
+  'features/video/program_video/view'
 ], (
   template
   WorkoutExercisesView
+  ProgramVideoView
 ) ->
 
   class View extends Marionette.LayoutView
@@ -13,13 +15,6 @@ define [
     className: 'gc-program-workout-item'
 
     behaviors:
-
-      editable_textarea:
-        model: ->
-          @view.model.workout
-      video_assigned:
-        model: ->
-          @view.model.workout
 
       stickit:
         model: ->
@@ -43,15 +38,16 @@ define [
             options: ->
               model: @model.workout
               collection: @model.workout.exercises
+          ,
+            region: 'program_video'
+            klass: ProgramVideoView
+            options: ->
+              model: @model.workout
         ]
-
-    ui:
-      workoutTabsContent: '.gc-workout-tab-content'
 
     events:
       'click .gc-delete-program-workout': '_destroy'
       'click a[data-action="save_in_library"]': '_saveInLibrary'
-      'click ul.gc-content-nav li a': '_changeTab'
 
     triggers:
       'click a[data-action="duplicate"]': 'duplicate:program_workout'
@@ -59,11 +55,6 @@ define [
     initialize: ->
       @listenTo(App.vent, 'dropped:to:week', @_updateWeekId)
       @listenTo(@model.workout, 'change:name', @_patchWorkout)
-
-    onShow: ->
-      @listenToOnce @video_assigned, 'show', =>
-        @listenTo(@video_assigned.currentView, 'video:assign',
-          @_showAssignModal)
 
     _destroy: ->
       App.request('modal:confirm:delete', @model)
@@ -81,14 +72,6 @@ define [
         foldersIds: [workoutTemplatesFolder.get('id')]
       ).then ->
         App.request('messenger:explain', 'program_workout.saved')
-
-    _changeTab: (ev) ->
-      tabName = $(ev.currentTarget).data('content')
-      @ui.workoutTabsContent.find('.tab-pane.active').removeClass('active')
-      @ui.workoutTabsContent.find("[data-pane='#{tabName}']").addClass('active')
-
-    _showAssignModal: ->
-      App.request('modal:video:assign', @model.workout)
 
     _openUploadPopup: ->
       view = App.request('base:uploadVideo')

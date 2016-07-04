@@ -14,7 +14,9 @@ define [
 
     behaviorViewOptions: ->
       model: _.bind(@options.model, @)
+      editable: @options.editable
 
     defaults:
       model: ->
         @view.model
+      editable: true

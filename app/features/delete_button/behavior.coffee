@@ -14,3 +14,7 @@ define [
 
     behaviorViewOptions: ->
       model: @view.model
+      short: @options.short
+
+    defaults:
+      short: false
