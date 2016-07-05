@@ -24,6 +24,8 @@
       cursor: move
 
 .gc-program-workout-item
+  display: flex
+  flex-direction: column
   margin-bottom: 2rem
 
   .gc-workout-header
@@ -120,7 +122,7 @@
       padding: 4px 0px
       height: 30px
       width: 30px
-      
+
       &:hover
         opacity: .7
 
@@ -145,6 +147,14 @@
 
     .gc-box-content
       border: 1px solid #ededed
+
+    .gc-workouts-exercises-view
+      border-radius: 0
+      border: none
+      border-top: 1px solid #ededed
+
+      .note
+        margin: 30px 0
 
 .gc-workout-tab-content
   .tab-pane
