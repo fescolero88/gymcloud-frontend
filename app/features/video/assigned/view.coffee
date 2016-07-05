@@ -19,10 +19,10 @@ define [
       stickit:
         bindings:
           '.gc-video-assigned-wrapper':
-            observe: 'isAssigned'
+            observe: 'embed_url'
             visible: (value) -> value
           '.gc-video-assigned-placeholder':
-            observe: 'isAssigned'
+            observe: 'embed_url'
             visible: (value) -> !value
           '.gc-video-link':
             attributes: [
@@ -85,25 +85,25 @@ define [
 
     initialize: ->
       @model = new Video
-        id: @options.video_id
-      @fetchVideo(@options.video_id)
-      @listenTo App.vent, 'fetch:video', (video_id) ->
-        @fetchVideo(video_id)
-      @listenTo @, 'video:deleted', ->
-        @model.set 'isAssigned', false
+        id: @options.entity.get('video_id')
+        embed_url: @options.entity.get('video_url')
 
-    fetchVideo: (video_id) ->
-      return unless video_id
-      @model.set 'id', video_id, silent: true
-      @model.fetch()
-        .then =>
-          @model.set 'isAssigned', true
+      @listenTo(@options.entity, 'change:video_id', @_onVideoIdChange)
+      @listenTo(@options.entity, 'change:video_url', @_onVideoUrlChange)
 
     _renderIframe: (ev) ->
       @ui.iframe.show()
       @ui.iframe.attr('src', "#{@model.get('embed_url')}?autoplay=1")
       $(ev.currentTarget).hide()
       @ui.duration.hide()
+
+    _onVideoIdChange: (_entity, id) ->
+      return unless id
+      @model.set('id', id, silent: true)
+      @model.fetch()
+
+    _onVideoUrlChange: (_entity, url) ->
+      @model.set(embed_url: url)
 
     _getVideoType: (url) ->
       return unless _.any(url)
