@@ -13,26 +13,25 @@ define [
     className: 'gc-box-content gc-exercise-wrapper'
 
     behaviors:
+
       privacy_toggle2:
         instantSave: false
+
       delete_button:
         short: true
+
       video_assigned:
         instantSave: false
+
       textarea_autosize: true
 
       stickit:
         bindings:
-          '.gc-exercise-name':
-            observe: 'name'
-          'textarea':
-            observe: 'description'
-
-    ui:
-      save: '.gc-save-exercise'
+          '.gc-exercise-name': 'name'
+          'textarea': 'description'
 
     events:
-      'click @ui.save': 'saveExercise'
+      'click .gc-save-exercise': 'saveExercise'
 
     _attrs: ['name', 'description', 'video_id', 'video_url', 'is_public']
 
@@ -44,16 +43,15 @@ define [
 
     unsavedChanges: ->
       @isChanged = true
-      $(window).on 'beforeunload', =>
-        @message
-      App.vent.trigger 'unsaved:changes'
-      $('a').on 'click', @clickHandler
+      $(window).on('beforeunload', => @message)
+      App.vent.trigger('unsaved:changes')
+      $('a').on('click', @clickHandler)
 
     clickHandler: (ev) =>
       ev.preventDefault()
       path = ev.currentTarget.hash
-      if confirm @message
-        App.vent.trigger('redirect:to', path)
+
+      App.vent.trigger('redirect:to', path) if confirm(@message)
 
     saveExercise: ->
       @model.save()
@@ -63,14 +61,14 @@ define [
           @trigger 'exercise:saved'
 
     removeListeners: ->
-      $(window).off 'beforeunload'
-      App.vent.trigger 'no:unsaved:changes'
-      $('a').off 'click', @clickHandler
+      $(window).off('beforeunload')
+      App.vent.trigger('no:unsaved:changes')
+      $('a').off('click', @clickHandler)
 
     onBeforeDestroy: ->
       @removeListeners()
       return unless @isChanged
-      @model.set @oldAttrs, silent: true
+      @model.set(@oldAttrs, silent: true)
 
     videoAssign: ->
       App.request('modal:video:assign', @model, instantSave: false)

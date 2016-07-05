@@ -15,7 +15,7 @@ define [
       duration: undefined
       filter: undefined
       title: undefined
-      is_assigned: undefined
+      isAssigned: undefined
 
     initialize: ->
       @computedFields = new Backbone.ComputedFields(@)

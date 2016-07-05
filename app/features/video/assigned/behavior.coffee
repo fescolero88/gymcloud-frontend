@@ -14,7 +14,7 @@ define [
 
     behaviorViewOptions: ->
       controls: @options.controls
-      video_id: @model.get('video_id')
+      entity: @model
 
     defaults:
       controls: true
@@ -24,14 +24,11 @@ define [
       stickit:
         bindings:
           'iframe':
+            observe: 'video_url'
+            visible: true
             attributes: [
                 name: 'src'
                 observe: 'video_url'
-            ,
-                name: 'style'
-                observe: 'video_url'
-                onGet: ->
-                  'display: none'
             ]
 
     onBeforeRender: ->
