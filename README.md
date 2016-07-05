@@ -14,11 +14,13 @@ $ bower install
 
 ### Development
 
-Copy sample config and change api url if it needed:
+Copy sample config:
 ```sh
 $ cp .env.sample .env
 $ cp config/base.sample.coffee config/base.coffee
 ```
+
+Change `NODE_ENV` to `development` or `staging` in `.env` file.
 
 Run gulp watcher:
 ```sh
