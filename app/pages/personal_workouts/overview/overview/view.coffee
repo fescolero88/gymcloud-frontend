@@ -25,7 +25,10 @@ define [
       stickit:
         bindings:
           '.description': 'description'
-          '.note': 'note'
+          '.note':
+            observe: 'note'
+            visible: true
+            updateView: true
           'iframe':
             observe: 'video_url'
             visible: (value) ->
