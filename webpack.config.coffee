@@ -54,6 +54,10 @@ module.exports =
         'node_modules/jquery/dist/jquery.js'
       'marionette':
         'deps/bundles/marionette/bundle'
+      'moment_original':
+        'node_modules/moment/moment.js'
+      'moment':
+        'deps/bundles/moment/original'
       'jquery.ui.widget':
         'bower_components/blueimp-file-upload' +
           '/js/vendor/jquery.ui.widget.js'
@@ -98,6 +102,10 @@ module.exports =
       {
         test: /\.coffee$/
         loader: 'coffee'
+      }
+      {
+        test: /\.json/
+        loader: 'json'
       }
       {
         test: /\.hbs$/
@@ -192,6 +200,8 @@ module.exports =
           'deps/bundles/backbone/original'
         Marionette:
           'deps/bundles/marionette/original'
+        moment:
+          'deps/bundles/moment/bundle'
         can:
           'deps/bundles/can'
         feature:
