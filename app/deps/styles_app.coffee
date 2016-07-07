@@ -59,6 +59,6 @@ define [
   'features/personal_best/styles'
   'features/tutorial/styles'
   'styles/workout_enter_result'
-  'features/event_results/styles'
+  'pages/event_results/styles.coffee'
   'pages/workout_templates/overview/styles'
 ], ->

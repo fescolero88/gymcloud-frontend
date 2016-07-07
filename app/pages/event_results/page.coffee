@@ -12,6 +12,8 @@ define [
 
   class EventResultsPage extends BasePage
 
+    className: 'gc-event-results'
+
     behaviors:
 
       navigate_back: true

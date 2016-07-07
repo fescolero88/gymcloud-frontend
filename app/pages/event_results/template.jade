@@ -3,7 +3,19 @@ region(data-name='user_stats')
   .col-sm-8
     a.gc-content-nav-back
       span.fa.fa-chevron-left
-    region(data-name='breadcrumbs')
+    .name
+      | some workout name
   .col-xs-12.col-sm-4.text-sm-right
+    .date
+      | 12/2/2014 1:03 PM
+    nav
+      ul.pagination.gc-pagination-bordered
+        li.prev
+          a(href='#', title='Previous')
+            i.fa.fa-angle-left
+        li.next
+          a(href='#', title='Next')
+            i.fa.fa-angle-right
+
 .gc-workspace-content
   region(data-name='page_content')
