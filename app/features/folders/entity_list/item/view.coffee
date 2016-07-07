@@ -1,9 +1,7 @@
 define [
   './template'
-  'moment'
 ], (
   template
-  moment
 ) ->
 
   class EntityItemView extends Marionette.ItemView
@@ -75,7 +73,13 @@ define [
           '.gc-exercises-update-time':
             observe: 'updated_at'
             onGet: (value) ->
-              moment(value).fromNow()
+              moment.h.ago(value)
+            attributes: [
+              name: 'title'
+              observe: 'updated_at'
+              onGet: (value) ->
+                moment.h.full(value)
+            ]
 
     initialize: (options) =>
       @type = options.type
