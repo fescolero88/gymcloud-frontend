@@ -1,11 +1,9 @@
 define [
   './template'
   'features/event_results/event_exercises/item/exercise_properties/view'
-  'moment'
 ], (
   template
   ExercisePropertiesCollectionView
-  moment
 ) ->
 
   class ExerciseResultView extends Marionette.LayoutView

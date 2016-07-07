@@ -5,7 +5,6 @@ define [
   'features/presets_load/view'
   'features/video/upload/view'
   'features/video/upload/model'
-  'moment'
 ], (
   ModalAddToLibraryView
   WorkoutScheduleView
@@ -13,7 +12,6 @@ define [
   PresetsLoadModalView
   VideoUploadModalView
   VideoModel
-  moment
 ) ->
 
   (App) ->

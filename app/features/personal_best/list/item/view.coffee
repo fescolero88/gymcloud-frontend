@@ -1,11 +1,9 @@
 define [
   './template'
   './exercise_result_items_list/view'
-  'moment'
 ], (
   template
   ExerciseResultItemCollectionView
-  moment
 ) ->
 
   class PersonalBestItemView extends Marionette.LayoutView

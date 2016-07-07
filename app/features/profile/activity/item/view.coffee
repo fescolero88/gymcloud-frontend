@@ -1,10 +1,9 @@
 define [
-  'moment'
   './template'
 ], (
-  moment
   template
 ) ->
+
   class ActivityItemView extends Marionette.ItemView
 
     template: template
@@ -16,7 +15,7 @@ define [
     templateHelpers: ->
       timeAgo: do =>
         date = @model.get('created_at')
-        moment(date).fromNow()
+        moment.h.ago(date)
 
       message: do =>
         action = @model.get('key').split('.')[1]

@@ -1,8 +1,4 @@
-define [
-  'moment'
-], (
-  moment
-)->
+define ->
 
   class VideoModel extends Backbone.Model
 
