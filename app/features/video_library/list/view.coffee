@@ -2,10 +2,12 @@ define [
   './item/view'
   'features/video/assignment/list/empty/start_search'
   'features/video/assignment/list/empty/no_results'
+  'features/video/assignment/list/empty/no_videos_uploaded'
 ], (
   VideoItemView
   StartSearchView
   NoResultsView
+  EmptyView
 ) ->
 
   class ManageVideosView extends Marionette.CollectionView
@@ -20,7 +22,8 @@ define [
     getEmptyView: ->
       switch @viewState.get('state')
         when 'search_not_started' then StartSearchView
-        when 'no_results' then NoResultsView
+        when 'no_results'
+          if @collection.queryParams.q then NoResultsView else EmptyView
 
     childEvents:
       playVideo: 'replaceIframe'
