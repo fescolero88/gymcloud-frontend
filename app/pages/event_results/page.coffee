@@ -3,12 +3,14 @@ define [
   './template'
   'features/event_results/view'
   'models/workout_event'
+  'features/user_profile_stats_widget/view'
   'moment'
 ], (
   BasePage
   template
   EventExerciseResultCollectionView
   WorkoutsEvent
+  UserProfileStatsWidget
   moment
 ) ->
 
@@ -47,6 +49,14 @@ define [
               observe: 'next_id'
               onGet: @_siblingEventUrl
           ]
+
+      regioned:
+        views: [
+            region: 'user_profile_stats_widget'
+            klass: UserProfileStatsWidget
+            options: ->
+              event: @model.get('data.model')
+        ]
 
     template: template
 
