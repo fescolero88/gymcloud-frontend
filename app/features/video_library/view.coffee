@@ -71,7 +71,7 @@ define [
       @request
         .then (response) =>
           @collection.trigger('request')
-          @view.viewState.set('state', 'no_results') unless response.length
+          @view.viewState.set('state', 'no_results') unless response[1].length
         .fail ->
           return false if arguments[1] is 'abort'
           App.request('messenger:explain', 'video.search.error')
