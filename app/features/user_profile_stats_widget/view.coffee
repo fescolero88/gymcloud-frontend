@@ -19,9 +19,11 @@ define [
           '.height .value span':
             observe: 'user_profile.height'
             onGet: @_formatedValue
+            afterUpdate: @_toggleUnits
           '.weight .value span':
             observe: 'user_profile.weight'
             onGet: @_formatedValue
+            afterUpdate: @_toggleUnits
           '.bodyfat .value span':
             observe: 'user_profile.bodyfat'
             onGet: @_formatedValue
@@ -52,3 +54,9 @@ define [
 
     _formatedValue: (value) ->
       value or '-'
+
+    _toggleUnits: ($el, value) ->
+      if value is '-'
+        $el.siblings().hide()
+      else
+        $el.siblings().show()
