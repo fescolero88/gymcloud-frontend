@@ -1,9 +1,7 @@
 define [
   './template'
-  'moment'
 ], (
   template
-  moment
 ) ->
 
   class TransactionsItem extends Marionette.ItemView

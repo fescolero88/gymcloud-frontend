@@ -2,12 +2,10 @@ define [
   './template'
   './list/view'
   'features/payment/trial_ends_soon/view'
-  'moment'
 ], (
   template
   StatsListView
   TrialEndsSoonView
-  moment
 ) ->
 
   class StatsLayoutView extends Marionette.LayoutView

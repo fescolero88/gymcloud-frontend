@@ -1,9 +1,7 @@
 define [
   './template'
-  'moment'
 ], (
   template
-  moment
 ) ->
 
   class Subscription extends Marionette.ItemView

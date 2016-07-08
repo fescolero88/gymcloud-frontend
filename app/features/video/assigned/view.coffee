@@ -1,11 +1,9 @@
 define [
   './template'
   'models/video'
-  'moment'
 ], (
   template
   Video
-  moment
 ) ->
 
   class View extends Marionette.LayoutView

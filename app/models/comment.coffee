@@ -1,11 +1,9 @@
 define [
   './concerns/nested_models'
   './user'
-  'moment'
 ], (
   NestedModelsConcern
   User
-  moment
 ) ->
 
   class Comment extends Backbone.Model

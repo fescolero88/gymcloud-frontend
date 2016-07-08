@@ -1,8 +1,6 @@
 define [
-  'moment'
   './template'
 ], (
-  moment
   template
 )->
   class AssignVideoItemView extends Marionette.ItemView

@@ -1,11 +1,9 @@
 define [
   './concerns/nested_models'
   'features/personal_best/list/item/exercise_result_items_list/collection'
-  'moment'
 ], (
   NestedModelsConcern
   ExerciseResultItemCollection
-  moment
 ) ->
 
   class ExerciseResult extends Backbone.Model

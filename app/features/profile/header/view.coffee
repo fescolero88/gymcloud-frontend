@@ -1,10 +1,8 @@
 define [
   'views/trainer/clients/send-message-modal-view'
-  'moment'
   './template'
 ], (
   SendMessageModalView
-  moment
   template
 ) ->
 

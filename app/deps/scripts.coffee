@@ -5,4 +5,5 @@ define [
   'expose?Marionette!deps/bundles/marionette/bundle'
   'expose?Handlebars!handlebars'
   'expose?can!deps/bundles/can'
+  'expose?moment!deps/bundles/moment/bundle'
 ], ->

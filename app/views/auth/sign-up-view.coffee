@@ -1,5 +1,4 @@
 config = require 'config'
-moment = require 'moment'
 
 SignUpStep1Model = require 'models/auth/signup-step1-model'
 SignUpStep2Model = require 'models/auth/signup-step2-model'

@@ -1,8 +1,6 @@
 define [
-  'moment'
   'autosize'
 ], (
-  moment
   autosize
 )->
 

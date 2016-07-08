@@ -1,5 +1,3 @@
-moment = require 'moment'
-
 CalendarDayView = require 'views/trainer/calendar/calendar-day-view'
 CalendarWeekView = require 'views/trainer/calendar/calendar-week-view'
 CalendarMonthView = require 'views/trainer/calendar/calendar-month-view'
