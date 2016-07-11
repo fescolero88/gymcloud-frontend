@@ -70,12 +70,12 @@ define [
           name: 'Programs'
           isSelected: entityType == 'programs'
           href: "#search/#{q}/programs"
-        #,
-          #name: 'Clients'
-          #isSelected: entityType == 'clients'
-          #href: "#search/#{q}/clients"
-        #,
-          #name: 'Client Groups'
-          #isSelected: entityType == 'client_groups'
-          #href: "#search/#{q}/client_groups"
+        ,
+          name: 'Clients'
+          isSelected: entityType == 'clients'
+          href: "#search/#{q}/clients"
+        ,
+          name: 'Client Groups'
+          isSelected: entityType == 'client_groups'
+          href: "#search/#{q}/client_groups"
       ]
