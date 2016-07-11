@@ -68,7 +68,7 @@ define [
           type = _.humanize(view.options.collection.model.prototype.type)
           result.unshift
             id: 0
-            name: "CREATE NEW #{type}"
+            name: view.options.newButtonName || "CREATE NEW #{type}"
             icon: 'gc-icon-exercises-add'
             sort_id: '~-1-sort'
           result

@@ -57,6 +57,7 @@ define [
             options: ->
               collection: App.request('current_user').workout_templates
               typeToAdd: 'Workout'
+              newButtonName: 'Add New'
         ]
 
     ui:
