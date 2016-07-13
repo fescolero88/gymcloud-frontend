@@ -18,6 +18,7 @@ define [
   './payments'
   './video_library'
   './event_results'
+  './trainer_dashboard'
 ], ->
 
   modules = _.toArray(arguments)
