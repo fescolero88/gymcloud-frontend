@@ -40,6 +40,7 @@ define [
           'input[name="zip"]': 'zip'
           'input[name="employer"]': 'employer'
           'input[name="birthday"]': 'birthday'
+          'select[name="timezone"]': 'timezone'
           '.name': 'full_name'
           '.height-feet':
             observe: 'height_feet'
@@ -92,6 +93,7 @@ define [
       'click .restart-tutorial': '_restartTutorial'
 
     onShow: ->
+      @_initSelect2TimeZone()
       $('.gc-main').css('padding-left', '0px')
       $('.gc-main').css('padding-right', '0px')
       $.get("/users/#{@model.get('user_id')}").done (user) ->
@@ -141,3 +143,14 @@ define [
           App.request 'messenger:show',
             message: 'Tutorial restarted. You will see tutorial tooltips again.'
             type: 'success'
+
+    _initSelect2TimeZone: ->
+      zones = moment.tz.names()
+      zones = _.map zones, (zone) ->
+        id: zone
+        text: zone
+      zones.unshift
+        id: 0
+        text: 'Select Time Zone'
+      $('select[name="timezone"]').select2
+        data: zones
