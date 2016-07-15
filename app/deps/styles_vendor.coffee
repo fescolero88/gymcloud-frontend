@@ -6,4 +6,5 @@ define [
   'bower_components/eonasdan-bootstrap-datetimepicker/build/' +
     'css/bootstrap-datetimepicker.min.css'
   'node_modules/dragula/dist/dragula.min.css'
+  'node_modules/select2/dist/css/select2.min.css'
 ], ->

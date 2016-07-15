@@ -6,6 +6,8 @@ define [
   'jQuery.serializeObject'
   'tmpl'
   'imports?define=>undefined&exports=>undefined&' +
+    'jQuery=deps/bundles/jquery/original!select2'
+  'imports?define=>undefined&exports=>undefined&' +
     'jQuery=deps/bundles/jquery/original!jquery.ui.widget'
   'imports?define=>undefined&exports=>undefined&' +
     'jQuery=deps/bundles/jquery/original!jquery-iframe-transport'
