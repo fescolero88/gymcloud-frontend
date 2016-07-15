@@ -35,7 +35,7 @@ define [
       @model = @view.model
 
     ui:
-      buttonDelete: '.gc-icon-trash'
+      buttonDelete: '[role="delete-video"]'
 
     events:
       'click @ui.buttonDelete': '_deleteVideo'
