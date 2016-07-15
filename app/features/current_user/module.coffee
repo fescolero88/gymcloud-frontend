@@ -75,6 +75,8 @@ define [
 
         'current_user:init:collections': @_initUserCollections
 
+        'current_user:init:timezone': @_initUserTimezone
+
     _initUser: =>
       defer = new $.Deferred
       if @app.request('accessToken:get')
@@ -91,5 +93,16 @@ define [
       defer = new $.Deferred
       user = @app.request('current_user')
       dfds = preload(user)
-      $.when(dfds...).then(defer.resolve)
+      $.when(dfds...)
+        .then(@_initUserTimezone)
+        .then(defer.resolve)
       defer.promise()
+
+    _initUserTimezone: =>
+      user = @app.request('current_user')
+      timezone = user.user_profile.get('timezone')
+      if !timezone || timezone in ['0', '1']
+        timezone = moment.tz.guess()
+        user.user_profile.save({timezone: timezone}, {patch: true})
+      moment.tz.setDefault(timezone)
+      timezone

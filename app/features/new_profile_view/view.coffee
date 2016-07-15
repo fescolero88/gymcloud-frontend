@@ -92,6 +92,13 @@ define [
       'click .control-links .change': 'changeAccountType'
       'click .restart-tutorial': '_restartTutorial'
 
+    modelEvents: ->
+      'change:timezone': (model, value) ->
+        if value is '1'
+          App.request('current_user:init:timezone')
+      'sync': ->
+        App.request('current_user:init:timezone')
+
     onShow: ->
       @_initSelect2TimeZone()
       $('.gc-main').css('padding-left', '0px')
@@ -150,7 +157,10 @@ define [
         id: zone
         text: zone
       zones.unshift
+        id: 1
+        text: '--- Auto Detect ---'
+      zones.unshift
         id: 0
-        text: 'Select Time Zone'
+        text: '--- Select Time Zone ---'
       $('select[name="timezone"]').select2
         data: zones
