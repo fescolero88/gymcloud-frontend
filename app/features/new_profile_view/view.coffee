@@ -85,7 +85,7 @@ define [
       avatarInput: 'input[type="file"]'
 
     events:
-      'click @ui.submitButton': -> @model.save()
+      'click @ui.submitButton': '_onFormSubmit'
       'change .upload-avatar': 'showThumbnail'
       'blur input': 'validateInput'
       'change @ui.avatarInput': 'uploadAvatar'
@@ -105,6 +105,11 @@ define [
       $('.gc-main').css('padding-right', '0px')
       $.get("/users/#{@model.get('user_id')}").done (user) ->
         $('input[name="email"]').val(user.email)
+
+    _onFormSubmit: ->
+      @model.save()
+        .done ->
+          App.vent.trigger('mixpanel:userUpdate', App.request('current_user'))
 
     validateInput: (ev) ->
       $input = $(ev.target)

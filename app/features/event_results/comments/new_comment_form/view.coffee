@@ -26,7 +26,9 @@ define [
     _addComment: ->
       @options.collection.create @model.toJSON(),
         wait: true
-        success: => @model.clear()
+        success: =>
+          @model.clear()
+          App.vent.trigger('mixpanel:track', 'comment_posted', @model)
 
     _onPressEnter: (ev) ->
       keyCode = ev.keyCode or ev.which

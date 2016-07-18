@@ -38,3 +38,5 @@ define [
 
     _completeEvent: ->
       model.finish()
+        .done =>
+          App.vent.trigger('mixpanel:track', 'workout_finished', @model)

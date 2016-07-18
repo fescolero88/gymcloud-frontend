@@ -50,6 +50,7 @@ define [
           @app.request('current_user').fetch()
             .then =>
               return if @app.request('check:trial')
+              @app.vent.trigger('mixpanel:sign_in')
               @app.request('current_user:init:collections')
                 .then =>
                   @app.vent.trigger('redirect:to', '#')
@@ -85,6 +86,11 @@ define [
         @app.request('current_user').fetch()
           .success(defer.resolve)
           .fail(defer.reject)
+          .done ->
+            App.listenToOnce App, 'started', ->
+              setTimeout ->
+                App.vent.trigger('mixpanel:identify')
+              , 2000
       else
         defer.reject()
       defer.fail =>

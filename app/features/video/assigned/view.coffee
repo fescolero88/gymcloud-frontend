@@ -90,6 +90,7 @@ define [
       @listenTo(@options.entity, 'change:video_url', @_onVideoUrlChange)
 
     _renderIframe: (ev) ->
+      App.vent.trigger('mixpanel:track', 'video_watched', @model)
       @ui.iframe.show()
       @ui.iframe.attr('src', "#{@model.get('embed_url')}?autoplay=1")
       $(ev.currentTarget).hide()

@@ -54,7 +54,7 @@ module.exports =
       stripe:
         publishable_key: 'pk_live_OaMTNwWnnagp4nLqJhwrkiUU'
       mixpanel:
-        key: 'e1e68dc7cedb942ee97a42fd97c3396b'
+        token: 'e1e68dc7cedb942ee97a42fd97c3396b'
     api: url: 'https://api.gymcloud.com'
     mobile:
       app: 'gymcloud://'

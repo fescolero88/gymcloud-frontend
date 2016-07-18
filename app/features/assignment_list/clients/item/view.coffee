@@ -85,3 +85,13 @@ define [
         App.request('messenger:explain', 'item.client.assigned', type: type)
       else
         App.request('messenger:explain', 'item.client.unassigned', type: type)
+      @_mixpanelTrack(actionType)
+
+    _mixpanelTrack: (actionType) ->
+      namespace = {
+        WorkoutTemplate: 'workout'
+        ProgramTemplate: 'program'
+      }[@entity.type]
+      event = "#{namespace}_#{actionType}ed"
+      App.vent.trigger 'mixpanel:track', event, @entity,
+        user_id: @model.get('id')

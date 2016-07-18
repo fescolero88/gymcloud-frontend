@@ -69,6 +69,7 @@ define [
       @ui.footerButton.text 'Finish'
       @ui.uploadControls.removeClass 'hidden'
       @ui.videoFileName.attr 'contenteditable', true
+      App.vent.trigger('mixpanel:track', 'video_uploaded', @model)
       @trigger('videoUploaded', @model)
       @jqXHR = null
 

@@ -56,6 +56,10 @@ define [
         @model
           .removeUser(user)
           .done(_.bind(@_refreshAutocomplete, @))
+          .done =>
+            App.vent.trigger 'mixpanel:track',
+              'client_group_member_removed', @model,
+              user_id: user.get('id')
 
       @ui.removeModal.modal 'hide'
 
@@ -66,3 +70,7 @@ define [
       @model
         .addUser(user)
         .done(_.bind(@_refreshAutocomplete, @))
+        .done =>
+          App.vent.trigger 'mixpanel:track',
+            'client_group_member_added', @model,
+            user_id: user.get('id')
