@@ -21,12 +21,20 @@ define [
       stickit:
 
         bindings:
-          '.gc-workout-exercise-circle': 'order_name'
           '.gc-workout-exercise-name': 'name'
           '.details-section span': 'note'
           '.details-section span':
             observe: 'note'
             visible: true
+          '.gc-workout-exercise-circle':
+            observe: 'order_name'
+            attributes: [
+                name: 'style'
+                observe: 'color'
+                onGet: (value) ->
+                  "background-color: #{value}"
+            ]
+
 
       regioned:
         views: [

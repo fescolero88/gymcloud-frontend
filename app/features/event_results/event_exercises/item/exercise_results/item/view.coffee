@@ -19,10 +19,6 @@ define [
           '.personal-best-check':
             classes:
               active: 'is_personal_best'
-          '.workout-enter-prev-result span:last':
-            observe: 'created_at'
-            onGet: (value) ->
-              moment(value).format('YY/MM/DD HH:mm')
 
       regioned:
         views: [

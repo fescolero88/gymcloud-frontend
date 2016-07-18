@@ -8,6 +8,9 @@ define [
 
     childView: EventExerciseItemView
 
+    behaviors:
+      exercises_connectors: true
+
     initialize: ->
       @listenTo(@, 'remove:results', @_removeAllResults)
 

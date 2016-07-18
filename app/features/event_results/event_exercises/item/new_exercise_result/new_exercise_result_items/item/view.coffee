@@ -21,4 +21,7 @@ define [
           'label':
             observe: ['personal_property', 'property_unit_name']
             onGet: ([property, units]) ->
-              "#{property.name} (#{units})"
+              toDisplay = [property.name]
+              if @model.personal_property.property_units.length > 1
+                toDisplay.push(units)
+              toDisplay.join(', ')
