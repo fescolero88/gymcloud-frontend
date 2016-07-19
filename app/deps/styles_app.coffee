@@ -61,4 +61,5 @@ define [
   'styles/workout_enter_result'
   'pages/event_results/styles.coffee'
   'pages/workout_templates/overview/styles'
+  'styles/dashboard'
 ], ->

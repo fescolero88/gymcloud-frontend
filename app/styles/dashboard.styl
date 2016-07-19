@@ -1,0 +1,291 @@
+.gc-dashboard
+  color: #757575
+
+.gc-dashboard-header  
+  display: flex
+  justify-content: space-between
+  align-items: center
+  height: 79px
+  padding: 0 24px
+  color: #fff
+  background-color: #3a99d8
+  
+  .title
+    margin: 0
+    font-weight: 700
+    font-size: 30px
+  
+  .slogan
+    font-size: 13px
+    line-height: 15px
+    text-align: right
+
+.gc-dashboard-content
+  padding: 0px 23px 54px
+  
+  .dashboard-right-side
+    padding-top: 41px
+    border-left: 1px solid rgba(#282d30, 0.1)
+    text-align: center
+  
+  .dashboard-left-side
+    padding-top: 41px
+
+  .gc-workout-indicator
+    float: left
+    
+    &:not(:last-child)
+      margin-right: 58px
+  
+  .workout-amounts
+    float: left
+    
+    .workout-amount
+      text-align: right
+      width: 90%
+    
+      .counter
+        display: inline-block
+        margin-right 39px
+        font-size: 35px
+      
+      .counter-progress
+        position: relative
+        display: inline-block
+        left: -10px
+        font-size: 16px
+        margin-left -15px
+        
+        &:before
+          content: ''
+          position: relative
+          display: block
+          left: 50%
+          width: 6px
+          height: 4px
+          background-size: contain
+          transform: translate(-50%,0)
+        
+        &.positive
+          color: #39ca74
+          
+          &:before
+            background: url('../images/amount-positive.svg') no-repeat
+        
+        &.negative
+          color: red
+          
+          &:before
+            background: url('../images/amount-negative.svg') no-repeat
+      
+      .counter-text
+        display: inline-block
+        width: 45%
+        margin-left: 8px
+        font-size: 12px
+        text-align: left
+    
+    .calendar-button
+      margin-top 25px
+      float: right
+      padding: 8px 29px
+  
+  .gc-dashboard-table
+    margin-top: 55px
+    
+    .header
+      height: 56px
+      padding: 0 21px
+      border: 1px solid #e9eaea
+      border-top-left-radius: 5px
+      border-top-right-radius: 5px
+      background-color: #fafafa
+    
+      .tab-link
+        display: block
+        height: 55px
+        float: left
+        text-transform: uppercase
+        background-color: transparent
+        border: 0
+        color: #9ea0a1
+        
+        &:not(:last-child)
+          margin-right: 53px
+        
+        &:hover,
+        &:active
+          color: #3a99d8
+        
+        &.active
+          color: #3a99d8
+          border-bottom: 2px solid #3a99d8
+    
+    .content
+      border: 1px solid #e9eaea
+      border-top: 0
+      border-bottom-left-radius: 5px
+      border-bottom-right-radius: 5px
+      
+      .table-container
+        padding: 21px 21px 0px
+        
+        &:first-child
+          padding-top: 32px
+        
+        &:last-child
+          padding-bottom: 21px
+        
+        &.with-bg
+          background-color: rgba(#f0f0f0, 0.5)
+        
+        &.performance-table
+          padding-right: 0
+        
+          th,
+          td
+            &:first-child
+              width: 85%
+          
+          th
+            text-align: center
+            
+            &:first-child
+              text-align: left
+          
+          td
+            &:not(:first-child)
+              text-align: center
+
+      table
+        width 100%
+        
+        &:not(:last-child)
+          margin-bottom: 22px
+        
+        .table-title
+          margin-bottom 33px
+          padding: 0
+          font-weight: 700
+          font-size: 16px
+          color: #404447
+
+        th,
+        td
+          &:first-child
+            width: 72%
+
+        th
+          padding-bottom: 7px
+          font-weight: 400
+          font-size 12px
+          color: #757575
+          vertical-align: middle
+          text-align: right
+          
+          &:first-child
+            text-align: left
+        
+        td
+          vertical-align: middle
+          text-align: right
+          border-bottom: 1px solid #ededed
+          padding: 16px 0
+          
+          &:first-child
+            text-align: left
+        
+        .user-avatar
+          display: inline-block
+          width: 24px
+          height: 24px
+          margin-right: 9px
+          vertical-align: middle
+          border-radius: 50%
+          background: #b0c237 url('../images/client-avatar-placeholder.svg') center center no-repeat
+          
+          img
+            display: inline-block
+            width: inherit
+            height: inherit
+            border-radius: 50%
+            
+            &[src='']
+              display: none
+        
+        .user-link
+          display: inline-block
+          vertical-align: middle
+          text-transform: uppercase
+          color: #3a99d8
+          
+          &:hover
+            color: #000
+        
+        .dynamic-counter
+          
+          &:after
+            content: ''
+            display: inline-block
+            width: 5px
+            height: 9px
+            margin-left: 10px
+            background-size: contain
+            background-repeat: no-repeat
+
+          &.positive
+            color: #39ca74
+            
+            &:after
+              background-image: url('../images/positive-dynamic.svg')
+        
+          &.negative
+            color: #ec6e61
+              
+            &:after
+              background-image: url('../images/negative-dynamic.svg')
+        
+        .missed-workout-link
+          color: #e7594f
+          text-transform: uppercase
+          
+          &:hover
+            color: #3a99d8
+        
+        .performed-workout-link
+          text-transform: uppercase
+          color: #3a99d8
+          
+          &:hover
+            color: #000
+          
+          &.missed
+            color: #e7594f
+            
+            &:before
+              content: ''
+              position: relative
+              top: 2px
+              display: inline-block
+              width: 12px
+              height: 12px
+              margin-right: 8px
+              background: url('../images/missed-workout.svg') no-repeat
+              background-size: contain
+        
+        .with-load-btn
+          padding: 16px 0 6px
+          border-bottom: 0
+
+        .load-more-content
+          display: block
+          float: right
+          color: #3a99d8
+          
+          &:before
+            content: '↓'
+            display: inline-block
+            margin-right: 18px
+          
+          &:hover
+            color: #000
