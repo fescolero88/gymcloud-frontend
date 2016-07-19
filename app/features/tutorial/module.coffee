@@ -127,9 +127,9 @@ define [
       steps = @tour.collection.where(view: view)
       @tour.collection.remove(steps)
 
-      return unless _.where(steps, main: true).length
+      return unless steps.length
 
-      if !@tour.ended() and @tour.collection.length > 1
+      if !@tour.ended() and @tour.collection.length
         try
           @tour.end()
           @tour.collection.reset()
