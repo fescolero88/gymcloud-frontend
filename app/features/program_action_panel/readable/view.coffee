@@ -39,8 +39,9 @@ define [
       @data = new DataModel
       @listenTo @model, 'change:person_id', =>
         @data.set(person_id: @model.get('person_id'))
-      @listenTo @model.weeks, 'reset add remove', =>
-        @data.set(weeksCount: @model.weeks.length)
+      @listenTo @model, 'change:weeks_count', =>
+        return if @data.get('weeksCount') is @model.get('weeks_count')
+        @data.set(weeksCount: @model.get('weeks_count'))
       @listenTo @model.workouts, 'reset add remove', =>
         @data.set(workoutsCount: @model.workouts.length)
 
