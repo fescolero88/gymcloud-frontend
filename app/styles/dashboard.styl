@@ -21,15 +21,13 @@
     text-align: right
 
 .gc-dashboard-content
-  padding: 0px 23px 54px
-  
-  .dashboard-right-side
-    padding-top: 41px
-    border-left: 1px solid rgba(#282d30, 0.1)
-    text-align: center
+  padding-bottom: 54px
   
   .dashboard-left-side
+    width: calc(100% - 236px)
+    float: left
     padding-top: 41px
+    padding: 41px 23px 0
 
   .gc-workout-indicator
     float: left
@@ -140,12 +138,11 @@
           background-color: rgba(#f0f0f0, 0.5)
         
         &.performance-table
-          padding-right: 0
         
           th,
           td
             &:first-child
-              width: 85%
+              width: 82%
           
           th
             text-align: center
@@ -289,3 +286,201 @@
           
           &:hover
             color: #000
+  
+  .dashboard-right-side
+    width: 236px
+    float: left
+    padding: 41px 21px 0
+    border-left: 1px solid rgba(#282d30, 0.1)
+    text-align: center
+    
+    .trainer-library
+      line-height: 13px
+      
+      .right-side
+        float: left
+        margin-left: 14px
+        text-align: left
+      
+      .icon
+        width: 42px
+        height: 47px
+        float: left
+        background: url('../images/trainer-library.svg') no-repeat
+        background-size: contain
+      
+      .title
+        display: inline-block
+        margin: 0 0 5px
+        font-weight: 700
+        font-size: 15px
+        color: #404447
+      
+      .subtitle
+        display: block
+      
+    .ewp-links
+      margin-top 34px
+      
+      a
+        display: block
+        float: left
+        clear: both
+        color: #3a99d8
+        
+        &:not(:last-child)
+          margin-bottom: 16px
+        
+        &:hover
+          color: #000
+        
+        &:before
+          content: ''
+          position: relative
+          top: 5px
+          display: inline-block
+          width: 18px
+          height: 19px
+          margin-right: 18px
+          background-repeat: no-repeat
+          background-position: center center
+        
+        &.exercise-link
+          
+          &:before
+            background-image: url('../images/exercise.svg')
+            
+          &:hover
+            
+            &:before
+              background-image: url('../images/exercise-hover.svg')
+        
+        &.workout-link
+          
+          &:before
+            background-image: url('../images/workout.svg')
+          
+          &:hover
+            
+            &:before
+              background-image: url('../images/workout-hover.svg')
+          
+        &.program-link
+          
+          &:before
+            background-image: url('../images/program.svg')
+          
+          &:hover
+            
+            &:before
+              background-image: url('../images/program-hover.svg')
+  
+  .gc-recent-activity
+    margin-top: 73px
+    text-align: left
+    
+    .title
+      display: block
+      margin-bottom 12px
+      font-size: 16px
+      color: rgba(#757575, 0.5)
+    
+    .load-more-activity
+      display: block
+      margin-top: 35px
+      font-size: 13px
+      color: #3a99d8
+      
+      &:hover
+        color: #000
+
+    .gc-activity-block
+      position: relative
+      width: 100%
+      padding: 17px 0
+      border-bottom: 1px solid #ededed
+      
+      a
+        color: #3a99d8
+        
+        &:hover
+          color: #000
+      
+      .icon
+        position: absolute
+        top: 50%
+        float: left
+        width: 24px
+        height: 24px
+        background-color: gray
+        border-radius: 50%
+        transform: translateY(-50%)
+        
+        &:before
+          content: ''
+          position: absolute
+          top: 50%
+          left: 50%
+          display: block
+          margin: 0 auto
+          background-repeat: no-repeat
+          background-size: contain
+          transform: translate(-50%, -50%)
+      
+      .text
+        color: grey
+        font-size: 13px
+        overflow: hidden
+        padding-left: 36px
+      
+      &.message
+        
+        .icon
+          background-color: #39ca74
+          
+          &:before
+            width: 10px
+            height: 8px
+            background-image: url('../images/activity-message.svg')
+          
+      
+      &.comment
+        
+        .icon
+          background-color: #e54d42
+          
+          &:before
+            width: 10px
+            height: 9px
+            background-image: url('../images/activity-comment.svg')
+      
+      &.event
+        
+        .icon
+          background-color: #3a99d8
+          
+          &:before
+            width: 10px
+            height: 11px
+            background-image: url('../images/activity-event.svg')
+
+      
+      &.performed
+        
+        .icon
+          background-color: #8bc8f1
+          
+          &:before
+            width: 12px
+            height: 7px
+            background-image: url('../images/activity-performed.svg')
+      
+      &.entered-result
+        
+        .icon
+          background-color: #ffda2b
+          
+          &:before
+            width: 10px
+            height: 14px
+            background-image: url('../images/activity-entered-result.svg')

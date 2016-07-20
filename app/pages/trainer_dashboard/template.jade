@@ -1,463 +1,512 @@
 .gc-workspace-content
-  region(data-name='page_content')
-    .gc-dashboard
-      header.gc-dashboard-header
-        h1.title
-          | Dashboard
-        span.slogan
-          | “I always felt that my greatest asset was 
-          br
-          | not my physical ability, it was my mental ability.” 
-          br
-          b
-           | Bruce Jenner
-      .gc-dashboard-content
-        .row
-          .col-xs-12.col-sm-8.col-md-10.col-lg-10
-            .dashboard-left-side
-              .top-section.clearfix
-                .workout-indicators
-                  .gc-workout-indicator
-                    svg(viewbox='0 1 10 9')
-                      path.stroke.default(d='M2 8 A 4 4 0 1 1 8 8')
-                      //- For managing progress, change first number in stroke-dasharray:
-                      path.stroke.progress(d='M2 8 A 4 4 0 1 1 8 8', style='stroke-dasharray: 15 20')
-                      .content
-                        span.counter
-                          | 5
-                        span.counter-text
-                          | Workouts remaining today
-                  .gc-workout-indicator
-                    svg(viewbox='0 1 10 9')
-                      path.stroke.default(d='M2 8 A 4 4 0 1 1 8 8')
-                      //- For managing progress, change first number in stroke-dasharray:
-                      path.stroke.progress(d='M2 8 A 4 4 0 1 1 8 8', style='stroke-dasharray: 20 20')
-                    .content
-                      span.counter
-                        | 23
-                      span.counter-text
-                        | Workouts completed by clients this week
-                .workout-amounts
-                  .workout-amount
-                    span.counter
-                      | 2
-                    span.counter-text
-                      | Workouts scheduled tomorrow
-                  .workout-amount
-                    span.counter
-                      | 27
-                    span.counter-progress.positive
-                      | 25
-                    span.counter-text
-                      | Workouts scheduled this week vs. last week
-                  button.btn.btn-primary.gc-custom.calendar-button My Calendar
-              .gc-dashboard-table
-                header.header
-                  button.tab-link.active
-                    | Workouts this week
-                  button.tab-link
-                    | Client Performance
-                  button.tab-link
-                    | Missed workouts
+  .gc-dashboard
+    header.gc-dashboard-header
+      h1.title
+        | Dashboard
+      span.slogan
+        | “I always felt that my greatest asset was 
+        br
+        | not my physical ability, it was my mental ability.” 
+        br
+        b
+         | Bruce Jenner
+    .gc-dashboard-content
+      .dashboard-left-side
+        .top-section.clearfix
+          .workout-indicators
+            .gc-workout-indicator
+              svg(viewbox='0 1 10 9')
+                path.stroke.default(d='M2 8 A 4 4 0 1 1 8 8')
+                //- For managing progress, change first number in stroke-dasharray:
+                path.stroke.progress(d='M2 8 A 4 4 0 1 1 8 8', style='stroke-dasharray: 15 20')
                 .content
-                  
-                  .tab-content.hidden(id='this-week-tab')
-                    .table-container.with-bg
-                      table
-                        caption.table-title
-                          | Yesterday, 20th of March
-                        tr
-                          th
-                            | Client
-                          th
-                            | Performed workout
-                          th
-                            | Time
-                        tr
-                          td
-                            a.user-avatar
-                              img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                            a.user-link
-                              | Helen Schmidt
-                          td
-                            a(href="#").performed-workout-link
-                              | Cable Crunch
-                          td
-                            | 5:00 PM
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #b0c237")
-                              img(src="", alt="")
-                            a.user-link
-                              | Meredith Romero
-                          td
-                            a(href="#").performed-workout-link.missed
-                              | Upperbody workout
-                          td
-                            | 2:33 PM
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #48c9d5")
-                              img(src="", alt="")
-                            a.user-link
-                              | Alice Baldwin
-                          td
-                            a(href="#").performed-workout-link
-                              | Strength week 1/2
-                          td
-                            | 1:46 PM
-                        tr
-                          td
-                            a.user-avatar
-                              img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                            a.user-link
-                              | Helen Schmidt
-                          td
-                            a(href="#").performed-workout-link
-                              | Cable Crunch
-                          td
-                            | 5:00 PM
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #b0c237")
-                              img(src="", alt="")
-                            a.user-link
-                              | Meredith Romero
-                          td
-                            a(href="#").performed-workout-link
-                              | Upperbody workout
-                          td
-                            | 2:33 PM
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #48c9d5")
-                              img(src="", alt="")
-                            a.user-link
-                              | Alice Baldwin
-                          td
-                            a(href="#").performed-workout-link
-                              | Strength week 1/2
-                          td
-                            | 1:46 PM
-                        tr
-                          td.with-load-btn(colspan="3")
-                            a.load-more-content(href="#")
-                              | Load all (5)
+                  span.counter
+                    | 5
+                  span.counter-text
+                    | Workouts remaining today
+            .gc-workout-indicator
+              svg(viewbox='0 1 10 9')
+                path.stroke.default(d='M2 8 A 4 4 0 1 1 8 8')
+                //- For managing progress, change first number in stroke-dasharray:
+                path.stroke.progress(d='M2 8 A 4 4 0 1 1 8 8', style='stroke-dasharray: 20 20')
+              .content
+                span.counter
+                  | 23
+                span.counter-text
+                  | Workouts completed by clients this week
+          .workout-amounts
+            .workout-amount
+              span.counter
+                | 2
+              span.counter-text
+                | Workouts scheduled tomorrow
+            .workout-amount
+              span.counter
+                | 27
+              span.counter-progress.positive
+                | 25
+              span.counter-text
+                | Workouts scheduled this week vs. last week
+            button.btn.btn-primary.gc-custom.calendar-button My Calendar
+        .gc-dashboard-table
+          header.header
+            button.tab-link.active
+              | Workouts this week
+            button.tab-link
+              | Client Performance
+            button.tab-link
+              | Missed workouts
+          .content
+            
+            .tab-content.hidden(id='this-week-tab')
+              .table-container.with-bg
+                table
+                  caption.table-title
+                    | Yesterday, 20th of March
+                  tr
+                    th
+                      | Client
+                    th
+                      | Performed workout
+                    th
+                      | Time
+                  tr
+                    td
+                      a.user-avatar
+                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                      a.user-link
+                        | Helen Schmidt
+                    td
+                      a(href="#").performed-workout-link
+                        | Cable Crunch
+                    td
+                      | 5:00 PM
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #b0c237")
+                        img(src="", alt="")
+                      a.user-link
+                        | Meredith Romero
+                    td
+                      a(href="#").performed-workout-link.missed
+                        | Upperbody workout
+                    td
+                      | 2:33 PM
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #48c9d5")
+                        img(src="", alt="")
+                      a.user-link
+                        | Alice Baldwin
+                    td
+                      a(href="#").performed-workout-link
+                        | Strength week 1/2
+                    td
+                      | 1:46 PM
+                  tr
+                    td
+                      a.user-avatar
+                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                      a.user-link
+                        | Helen Schmidt
+                    td
+                      a(href="#").performed-workout-link
+                        | Cable Crunch
+                    td
+                      | 5:00 PM
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #b0c237")
+                        img(src="", alt="")
+                      a.user-link
+                        | Meredith Romero
+                    td
+                      a(href="#").performed-workout-link
+                        | Upperbody workout
+                    td
+                      | 2:33 PM
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #48c9d5")
+                        img(src="", alt="")
+                      a.user-link
+                        | Alice Baldwin
+                    td
+                      a(href="#").performed-workout-link
+                        | Strength week 1/2
+                    td
+                      | 1:46 PM
+                  tr
+                    td.with-load-btn(colspan="3")
+                      a.load-more-content(href="#")
+                        | Load all (5)
 
-                    .table-container
-                      table
-                        caption.table-title
-                          | Today, 21st of March
-                        tr
-                          th
-                            | Client
-                          th
-                            | Performed workout
-                          th
-                            | Time
-                        tr
-                          td
-                            a.user-avatar
-                              img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                            a.user-link
-                              | Helen Schmidt
-                          td
-                            a(href="#").performed-workout-link
-                              | Cable Crunch
-                          td
-                            | 5:00 PM
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #b0c237")
-                              img(src="", alt="")
-                            a.user-link
-                              | Meredith Romero
-                          td
-                            a(href="#").performed-workout-link
-                              | Upperbody workout
-                          td
-                            | 2:33 PM
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #48c9d5")
-                              img(src="", alt="")
-                            a.user-link
-                              | Alice Baldwin
-                          td
-                            a(href="#").performed-workout-link
-                              | Strength week 1/2
-                          td
-                            | 1:46 PM
-                        tr
-                          td
-                            a.user-avatar
-                              img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                            a.user-link
-                              | Helen Schmidt
-                          td
-                            a(href="#").performed-workout-link
-                              | Cable Crunch
-                          td
-                            | 5:00 PM
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #b0c237")
-                              img(src="", alt="")
-                            a.user-link
-                              | Meredith Romero
-                          td
-                            a(href="#").performed-workout-link
-                              | Upperbody workout
-                          td
-                            | 2:33 PM
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #48c9d5")
-                              img(src="", alt="")
-                            a.user-link
-                              | Alice Baldwin
-                          td
-                            a(href="#").performed-workout-link
-                              | Strength week 1/2
-                          td
-                            | 1:46 PM
+              .table-container
+                table
+                  caption.table-title
+                    | Today, 21st of March
+                  tr
+                    th
+                      | Client
+                    th
+                      | Performed workout
+                    th
+                      | Time
+                  tr
+                    td
+                      a.user-avatar
+                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                      a.user-link
+                        | Helen Schmidt
+                    td
+                      a(href="#").performed-workout-link
+                        | Cable Crunch
+                    td
+                      | 5:00 PM
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #b0c237")
+                        img(src="", alt="")
+                      a.user-link
+                        | Meredith Romero
+                    td
+                      a(href="#").performed-workout-link
+                        | Upperbody workout
+                    td
+                      | 2:33 PM
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #48c9d5")
+                        img(src="", alt="")
+                      a.user-link
+                        | Alice Baldwin
+                    td
+                      a(href="#").performed-workout-link
+                        | Strength week 1/2
+                    td
+                      | 1:46 PM
+                  tr
+                    td
+                      a.user-avatar
+                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                      a.user-link
+                        | Helen Schmidt
+                    td
+                      a(href="#").performed-workout-link
+                        | Cable Crunch
+                    td
+                      | 5:00 PM
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #b0c237")
+                        img(src="", alt="")
+                      a.user-link
+                        | Meredith Romero
+                    td
+                      a(href="#").performed-workout-link
+                        | Upperbody workout
+                    td
+                      | 2:33 PM
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #48c9d5")
+                        img(src="", alt="")
+                      a.user-link
+                        | Alice Baldwin
+                    td
+                      a(href="#").performed-workout-link
+                        | Strength week 1/2
+                    td
+                      | 1:46 PM
 
-                    .table-container
-                      table
-                        caption.table-title
-                          | Tuesday, 22nd of March
-                        tr
-                          th
-                            | Client
-                          th
-                            | Performed workout
-                          th
-                            | Time
-                        tr
-                          td
-                            a.user-avatar
-                              img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                            a.user-link
-                              | Helen Schmidt
-                          td
-                            a(href="#").performed-workout-link
-                              | Cable Crunch
-                          td
-                            | 5:00 PM
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #b0c237")
-                              img(src="", alt="")
-                            a.user-link
-                              | Meredith Romero
-                          td
-                            a(href="#").performed-workout-link
-                              | Upperbody workout
-                          td
-                            | 2:33 PM
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #48c9d5")
-                              img(src="", alt="")
-                            a.user-link
-                              | Alice Baldwin
-                          td
-                            a(href="#").performed-workout-link
-                              | Strength week 1/2
-                          td
-                            | 1:46 PM
-                        tr
-                          td
-                            a.user-avatar
-                              img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                            a.user-link
-                              | Helen Schmidt
-                          td
-                            a(href="#").performed-workout-link
-                              | Cable Crunch
-                          td
-                            | 5:00 PM
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #b0c237")
-                              img(src="", alt="")
-                            a.user-link
-                              | Meredith Romero
-                          td
-                            a(href="#").performed-workout-link
-                              | Upperbody workout
-                          td
-                            | 2:33 PM
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #48c9d5")
-                              img(src="", alt="")
-                            a.user-link
-                              | Alice Baldwin
-                          td
-                            a(href="#").performed-workout-link
-                              | Strength week 1/2
-                          td
-                            | 1:46 PM
-                        tr
-                          td.text-right.with-load-btn(colspan="3")
-                            a.load-more-content(href="#")
-                              | Load all (5)
-                  
-                  .tab-content(id='performance-tab')
-                    .table-container.performance-table
-                      table
-                        tr
-                          th
-                            | Client
-                          th
-                            | Last Week
-                          th
-                            | This week
-                        tr
-                          td
-                            a.user-avatar
-                              img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                            a.user-link
-                              | Helen Schmidt
-                          td
-                            | 45%
-                          td
-                            span.dynamic-counter.positive
-                              | 46%
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #b0c237")
-                              img(src="", alt="")
-                            a.user-link
-                              | Meredith Romero
-                          td
-                            | 47%
-                          td
-                            span.dynamic-counter.positive
-                              | 50%
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #48c9d5")
-                              img(src="", alt="")
-                            a.user-link
-                              | Alice Baldwin
-                          td
-                            | 44%
-                          td
-                            span.dynamic-counter.positive
-                              | 55%
-                        tr
-                          td
-                            a.user-avatar
-                              img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                            a.user-link
-                              | Helen Schmidt
-                          td
-                            | 45%
-                          td
-                            span.dynamic-counter.negative
-                              | 30%
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #b0c237")
-                              img(src="", alt="")
-                            a.user-link
-                              | Meredith Romero
-                          td
-                            | 47%
-                          td
-                            span.dynamic-counter.negative
-                              | 40%
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #48c9d5")
-                              img(src="", alt="")
-                            a.user-link
-                              | Alice Baldwin
-                          td
-                            | 44%
-                          td
-                            span.dynamic-counter.negative
-                              | 10%
-                  
-                  .tab-content.hidden(id='workouts-missed-tab')
-                    .table-container
-                      table
-                        tr
-                          th
-                            | Client
-                          th
-                            | Workout missed
-                          th
-                            | Time
-                        tr
-                          td
-                            a.user-avatar
-                              img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                            a.user-link
-                              | Helen Schmidt
-                          td
-                            a(href="#").missed-workout-link
-                              | Cable Crunch
-                          td
-                            | 5:00 PM
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #b0c237")
-                              img(src="", alt="")
-                            a.user-link
-                              | Meredith Romero
-                          td
-                            a(href="#").missed-workout-link
-                              | Upperbody workout
-                          td
-                            | 2:33 PM
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #48c9d5")
-                              img(src="", alt="")
-                            a.user-link
-                              | Alice Baldwin
-                          td
-                            a(href="#").missed-workout-link
-                              | Strength week 1/2
-                          td
-                            | 1:46 PM
-                        tr
-                          td
-                            a.user-avatar
-                              img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                            a.user-link
-                              | Helen Schmidt
-                          td
-                            a(href="#").missed-workout-link
-                              | Cable Crunch
-                          td
-                            | 5:00 PM
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #b0c237")
-                              img(src="", alt="")
-                            a.user-link
-                              | Meredith Romero
-                          td
-                            a(href="#").missed-workout-link
-                              | Upperbody workout
-                          td
-                            | 2:33 PM
-                        tr
-                          td
-                            a.user-avatar(style="background-color: #48c9d5")
-                              img(src="", alt="")
-                            a.user-link
-                              | Alice Baldwin
-                          td
-                            a(href="#").missed-workout-link
-                              | Strength week 1/2
-                          td
-                            | 1:46 PM
+              .table-container
+                table
+                  caption.table-title
+                    | Tuesday, 22nd of March
+                  tr
+                    th
+                      | Client
+                    th
+                      | Performed workout
+                    th
+                      | Time
+                  tr
+                    td
+                      a.user-avatar
+                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                      a.user-link
+                        | Helen Schmidt
+                    td
+                      a(href="#").performed-workout-link
+                        | Cable Crunch
+                    td
+                      | 5:00 PM
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #b0c237")
+                        img(src="", alt="")
+                      a.user-link
+                        | Meredith Romero
+                    td
+                      a(href="#").performed-workout-link
+                        | Upperbody workout
+                    td
+                      | 2:33 PM
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #48c9d5")
+                        img(src="", alt="")
+                      a.user-link
+                        | Alice Baldwin
+                    td
+                      a(href="#").performed-workout-link
+                        | Strength week 1/2
+                    td
+                      | 1:46 PM
+                  tr
+                    td
+                      a.user-avatar
+                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                      a.user-link
+                        | Helen Schmidt
+                    td
+                      a(href="#").performed-workout-link
+                        | Cable Crunch
+                    td
+                      | 5:00 PM
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #b0c237")
+                        img(src="", alt="")
+                      a.user-link
+                        | Meredith Romero
+                    td
+                      a(href="#").performed-workout-link
+                        | Upperbody workout
+                    td
+                      | 2:33 PM
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #48c9d5")
+                        img(src="", alt="")
+                      a.user-link
+                        | Alice Baldwin
+                    td
+                      a(href="#").performed-workout-link
+                        | Strength week 1/2
+                    td
+                      | 1:46 PM
+                  tr
+                    td.text-right.with-load-btn(colspan="3")
+                      a.load-more-content(href="#")
+                        | Load all (5)
+            
+            .tab-content(id='performance-tab')
+              .table-container.performance-table
+                table
+                  tr
+                    th
+                      | Client
+                    th
+                      | Last Week
+                    th
+                      | This week
+                  tr
+                    td
+                      a.user-avatar
+                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                      a.user-link
+                        | Helen Schmidt
+                    td
+                      | 45%
+                    td
+                      span.dynamic-counter.positive
+                        | 46%
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #b0c237")
+                        img(src="", alt="")
+                      a.user-link
+                        | Meredith Romero
+                    td
+                      | 47%
+                    td
+                      span.dynamic-counter.positive
+                        | 50%
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #48c9d5")
+                        img(src="", alt="")
+                      a.user-link
+                        | Alice Baldwin
+                    td
+                      | 44%
+                    td
+                      span.dynamic-counter.positive
+                        | 55%
+                  tr
+                    td
+                      a.user-avatar
+                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                      a.user-link
+                        | Helen Schmidt
+                    td
+                      | 45%
+                    td
+                      span.dynamic-counter.negative
+                        | 30%
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #b0c237")
+                        img(src="", alt="")
+                      a.user-link
+                        | Meredith Romero
+                    td
+                      | 47%
+                    td
+                      span.dynamic-counter.negative
+                        | 40%
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #48c9d5")
+                        img(src="", alt="")
+                      a.user-link
+                        | Alice Baldwin
+                    td
+                      | 44%
+                    td
+                      span.dynamic-counter.negative
+                        | 10%
+            
+            .tab-content.hidden(id='workouts-missed-tab')
+              .table-container
+                table
+                  tr
+                    th
+                      | Client
+                    th
+                      | Workout missed
+                    th
+                      | Time
+                  tr
+                    td
+                      a.user-avatar
+                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                      a.user-link
+                        | Helen Schmidt
+                    td
+                      a(href="#").missed-workout-link
+                        | Cable Crunch
+                    td
+                      | 5:00 PM
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #b0c237")
+                        img(src="", alt="")
+                      a.user-link
+                        | Meredith Romero
+                    td
+                      a(href="#").missed-workout-link
+                        | Upperbody workout
+                    td
+                      | 2:33 PM
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #48c9d5")
+                        img(src="", alt="")
+                      a.user-link
+                        | Alice Baldwin
+                    td
+                      a(href="#").missed-workout-link
+                        | Strength week 1/2
+                    td
+                      | 1:46 PM
+                  tr
+                    td
+                      a.user-avatar
+                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                      a.user-link
+                        | Helen Schmidt
+                    td
+                      a(href="#").missed-workout-link
+                        | Cable Crunch
+                    td
+                      | 5:00 PM
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #b0c237")
+                        img(src="", alt="")
+                      a.user-link
+                        | Meredith Romero
+                    td
+                      a(href="#").missed-workout-link
+                        | Upperbody workout
+                    td
+                      | 2:33 PM
+                  tr
+                    td
+                      a.user-avatar(style="background-color: #48c9d5")
+                        img(src="", alt="")
+                      a.user-link
+                        | Alice Baldwin
+                    td
+                      a(href="#").missed-workout-link
+                        | Strength week 1/2
+                    td
+                      | 1:46 PM
 
-          .col-xs-12.col-sm-4.col-md-2.col-lg-2
-            .dashboard-right-side
-              img(src="data:image/png;base64,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", alt="")
+      .dashboard-right-side.clearfix
+        .trainer-library.clearfix
+          i.icon
+          .right-side
+            h2.title
+              | Training Library
+            span.subtitle
+              | Exercises, Workouts &
+              br
+              | Programs
+
+        .ewp-links.clearfix
+          a.exercise-link(href="#")
+            | List of Exercises 
+          a.workout-link(href="#")
+            | List of Workouts
+          a.program-link(href="#")
+            | List of Programs
+
+        .gc-recent-activity.clearfix
+          span.title
+            | Recent Activity:
+          .gc-activity-block.message
+            .icon
+            .text
+              | Gymcloud Gymcloud sent you a new 
+              a(href="#")
+                | message
+          .gc-activity-block.comment
+            .icon
+            .text
+              | Gymcloud Gymcloud sent you a new 
+              a(href="#")
+                | comment
+          .gc-activity-block.event
+            .icon
+            .text
+              | Test Client1 has the 
+              a(href="#")
+                | new event 
+              | scheduled
+          .gc-activity-block.performed
+            .icon
+            .text
+              a(href="#")
+                | Meredith Romero 
+              | performed Barbell Press
+          .gc-activity-block.entered-result
+            .icon
+            .text
+              | Meredith Romero entered new 
+              a(href="#")
+                | result
+          a(href="#").load-more-activity
+            | Load more...
