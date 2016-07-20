@@ -33,7 +33,10 @@ define [
 
           '.counter.weeks':
             observe: 'weeksCount'
+            events: ['change', 'blur']
             afterUpdate: highlight
+            onSet: (value) ->
+              0 + (value + '').replace(/\D/g, '') or 0
           '.counter.workouts':
             observe: 'workoutsCount'
             afterUpdate: highlight
@@ -69,16 +72,27 @@ define [
       'click @ui.addWeekBtn': '_addWeek'
       'click @ui.addWorkoutBtn': '_showAutocomplete'
       'click .back-to-overview': '_backToOverview'
+      'keypress .counter.weeks': '_onWeeksCountChange'
 
     initialize: ->
       @data = new DataModel
         position: @options.position || 'top'
+        weeksCount: @model.get('weeks_count')
       @listenTo @model, 'change:person_id', =>
         @data.set(person_id: @model.get('person_id'))
-      @listenTo @model.weeks, 'reset add remove', =>
-        @data.set(weeksCount: @model.weeks.length)
+      @listenTo @model, 'change:weeks_count', =>
+        return if @data.get('weeksCount') is @model.get('weeks_count')
+        @data.set(weeksCount: @model.get('weeks_count'))
       @listenTo @model.workouts, 'reset add remove', =>
         @data.set(workoutsCount: @model.workouts.length)
+      @listenTo @model.weeks, 'add', =>
+        @model.save({weeks_count: @model.get('weeks_count') + 1}, wait: true)
+      @listenTo @model.weeks, 'remove', =>
+        count = @model.get('weeks_count') - 1
+        count = 0 if count < 0
+        @model.save({weeks_count: count}, wait: true)
+      @listenTo @data, 'change:weeksCount', =>
+        @model.save({weeks_count: @data.get('weeksCount')}, wait: true)
 
     onShow: ->
       @listenTo @views.quick_add, 'quick_add:chosen', (id) =>
@@ -120,3 +134,8 @@ define [
     _backToOverview: ->
       path = ['personal_programs', @model.id]
       App.vent.trigger('redirect:to', path, replace: false)
+
+    _onWeeksCountChange: (ev) ->
+      return false if ev.currentTarget.innerText.length >= 3
+      char = String.fromCharCode(ev.keyCode || ev.which)
+      return false unless char.match(/[\d]/)
