@@ -424,3 +424,47 @@ body.dragging *
   border-top-left-radius: 0
   border-top-right-radius: 0
   border-color: #cccccc
+
+.gc-workout-indicator
+  position: relative
+  width: 180px
+  height: 180px
+  
+  svg
+    width: inherit
+    height: inherit
+    stroke-dashoffset: 1
+  
+    .stroke
+      fill: none
+      stroke-width: 1.5
+      transition: stroke-dasharray .3s linear
+      stroke-linecap: round
+      
+      &.default
+        stroke: #dbdbdb
+      
+      &.progress
+        stroke: #14bf44
+        stroke-dasharray: 0 20
+        stroke-dashoffset: .9
+  
+  .content
+    position: absolute
+    top: 50%
+    left: 50%
+    width: 50%
+    text-align: center
+    transform: translate(-50%,-50%)
+  
+  .counter
+    display: block
+    font-size: 50px
+    line-height: 40px
+    color: #757575
+  
+  .counter-text
+    display: block
+    margin-top: 8px
+    font-size: 10px
+    line-height: 11px
