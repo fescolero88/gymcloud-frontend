@@ -10,6 +10,9 @@
   color: #fff
   background-color: #3a99d8
   
+  &.client
+    justify-content: flex-end
+  
   .title
     margin: 0
     font-weight: 700
@@ -19,6 +22,38 @@
     font-size: 13px
     line-height: 15px
     text-align: right
+  
+  .trainer-info
+    color: rgba(#fff, 0.5)
+    
+    .trainer-link
+      margin-left: 10px
+      color: #fff !important
+
+  .trainer-message-btn
+    display: block
+    margin-top: 5px
+    margin-left: 22px
+    font-size: 12px
+    border-radius: 50px
+    color: #fff
+    border-color: #fff
+    background-color: transparent
+    text-transform: uppercase
+    
+    &:active
+      background-color: transparent
+      opacity: .7
+      border-color: #fff
+      color: #fff
+    
+  .trainer-avatar
+    display: block
+    width: 53px
+    height: 53px
+    margin-left: 15px
+    margin-right: 22px
+    border-radius: 50%
 
 .gc-dashboard-content
   padding-bottom: 54px
@@ -34,6 +69,10 @@
     
     &:not(:last-child)
       margin-right: 58px
+    
+    &.client
+      .progress
+        stroke: #edcf27
   
   .workout-amounts
     float: left
@@ -270,6 +309,18 @@
               background: url('../images/missed-workout.svg') no-repeat
               background-size: contain
         
+        .workout-status
+          display: block
+          float: right
+          margin-right: 6px
+          width: 20px
+          height: 20px
+          background-repeat: no-repeat
+          background-size: contain
+          
+          &.completed
+            background-image: url('../images/workout-complete.svg')
+        
         .with-load-btn
           padding: 16px 0 6px
           border-bottom: 0
@@ -287,6 +338,59 @@
           &:hover
             color: #000
   
+  .gc-workout-calendar
+    width: 430px
+    float: left
+    margin-left: 56px
+    
+    .header
+      display: flex
+      align-items: center
+      height: 55px
+      padding: 0 21px 0 32px
+      border: 1px solid #e9eaea
+      border-top-left-radius: 5px
+      border-top-right-radius: 5px
+      background-color: #fafafa
+      
+    .workout-icon
+      display: inline-block
+      width: 26px
+      height: 30px
+      margin-right: 18px
+      background: url('../images/icon-workouts.png')no-repeat
+      background-size: cover
+      background-position: center right
+
+    .title
+      display: block
+      font-size: 12px
+      color: #c6c6c6
+      
+    .workout-date
+      display: block
+    
+    .workout-link
+      display: block
+      font-size: 16px
+      text-transform: uppercase
+      color: #3a99d8
+      margin-top: 2px
+      
+      &:hover
+        color: #000
+    
+    .content
+      display: flex
+      justify-content: center
+      flex-direction: column
+      padding: 24px 39px 31px
+      border: 1px solid #e9eaea
+      border-top: 0
+      border-bottom-left-radius: 5px
+      border-bottom-right-radius: 5px
+      background-color: #fff
+
   .dashboard-right-side
     width: 236px
     float: left
@@ -374,7 +478,70 @@
             
             &:before
               background-image: url('../images/program-hover.svg')
-  
+    
+    .user-best-result
+      padding-bottom: 29px
+      border-bottom: 1px solid #ededed
+      
+      .icon
+        display: inline-block
+        width: 45px
+        height: 45px
+        background: url('../images/user-best-result.png') no-repeat
+      
+      .description
+        margin-top: 10px
+      
+      .date
+        margin: 4px 0 23px
+        color: #3a99d8
+      
+      .property
+        display: flex 
+        justify-content: space-between
+    
+    .weight-block
+      margin-top: 34px
+      text-align: left
+      
+      .title
+        display: block
+        width: 70%
+        margin-bottom 22px
+        font-size: 17px
+        text-transform: uppercase
+      
+      .description
+        display: block
+        font-size: 13px
+        margin-bottom 20px
+      
+      .input-group
+        margin-bottom: 14px
+      
+      .weight-input
+        position: relative
+        width: 100%
+        
+        .form-control
+          padding-right: 45px
+          border-top-right-radius: 4px
+          border-bottom-right-radius: 4px
+
+        .weight-label
+          position: absolute
+          z-index: 3
+          top: 50%
+          right: 15px
+          color: #808080
+          transform: translateY(-50%)
+
+      .submit-btn
+        width: 100%
+        padding-top: 8px
+        padding-bottom: 8px
+        font-size: 15px
+
   .gc-recent-activity
     margin-top: 73px
     text-align: left
@@ -484,3 +651,4 @@
             width: 10px
             height: 14px
             background-image: url('../images/activity-entered-result.svg')
+      

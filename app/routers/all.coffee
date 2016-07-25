@@ -20,6 +20,7 @@ define [
   './video_library'
   './event_results'
   './trainer_dashboard'
+  './client_dashboard'
 ], ->
 
   modules = _.toArray(arguments)
