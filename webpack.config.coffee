@@ -79,6 +79,8 @@ module.exports =
         'bower_components/blueimp-file-upload/js/jquery.fileupload-validate.js'
       'jquery-file-upload-ui':
         'bower_components/blueimp-file-upload/js/jquery.fileupload-ui.js'
+      'owl-carousel':
+        'bower_components/owl-carousel/owl-carousel/owl.carousel.js'
 
     extensions: [
       ''
