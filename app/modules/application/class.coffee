@@ -98,6 +98,7 @@ define [
           /signup/
           /reset/
           /prototype\/ui/
+          /accessToken/
         ]
         exclusion = _.any exclusions, (rule) ->
           path.match(rule)

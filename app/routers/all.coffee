@@ -1,4 +1,5 @@
 define [
+  './common'
   './auth'
   './clients'
   './client_groups'
