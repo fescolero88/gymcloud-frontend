@@ -1,12 +1,10 @@
 define [
-  './templates/entity'
-  './templates/clients'
   '../../entities/item/view'
+  '../../entities/client/view'
   '../collection'
 ], (
-  templateEntity
-  templateClients
   ItemView
+  ClientItemView
   Collection
 ) ->
 
@@ -20,7 +18,11 @@ define [
       @collection = new Collection(opts.model.get('items'))
       @collection.klass = @model.get('klass')
 
-    childView: ItemView
+    getChildView: (model) ->
+      if _.include(['User', 'ClientGroup'], @model.get('klass'))
+        ClientItemView
+      else
+        ItemView
 
     childViewOptions: ->
       entity_context:
