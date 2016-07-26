@@ -12,9 +12,11 @@ define [
 
     initialize: ->
 
-      @on 'start', ->
+      @on 'before:start', ->
         @_initTokenHandlers()
         @_initUserHandlers()
+
+      @on 'start', ->
         @app.request('current_user:reset')
 
     _initTokenHandlers: ->
