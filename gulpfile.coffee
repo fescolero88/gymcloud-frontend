@@ -41,11 +41,6 @@ gulp.task 'webpack:build', ['build:clean'], (callback) ->
       )
     ,
       new webpack.optimize.DedupePlugin()
-    ,
-      new webpack.optimize.UglifyJsPlugin(
-        output:
-          comments: false
-      )
   ]
 
   # run webpack
