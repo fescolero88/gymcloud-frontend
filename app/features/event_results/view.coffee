@@ -31,6 +31,10 @@ define [
 
     events:
       'click .type-delete': '_removeAllResults'
+      'click .finish': '_completeEvent'
 
     _removeAllResults: ->
       @views.event_exercises.trigger('remove:results')
+
+    _completeEvent: ->
+      model.save({is_completed: true}, wait: true)

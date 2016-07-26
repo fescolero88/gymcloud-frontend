@@ -8,9 +8,9 @@ define [
   Comments
 ) ->
 
-  class WorkoutsEvent extends Backbone.Model
+  class WorkoutEvent extends Backbone.Model
 
-    type: 'WorkoutsEvent'
+    type: 'WorkoutEvent'
 
     url: -> "/workout_events/#{@id}/full"
 
@@ -25,6 +25,6 @@ define [
       @_nestedModelsParseAll(data)
       data
 
-  _.extend(WorkoutsEvent::, NestedModelsConcern)
+  _.extend(WorkoutEvent::, NestedModelsConcern)
 
-  WorkoutsEvent
+  WorkoutEvent
