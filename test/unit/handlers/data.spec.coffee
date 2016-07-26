@@ -16,6 +16,6 @@ define [
     it 'can answer on request', ->
       expect(@subject).to.respondTo('request')
 
-    it 'has container data property', ->
+    it.skip 'has container data property', ->
       expect(@subject).to.have.property('data')
         .that.is.an('object')
