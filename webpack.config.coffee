@@ -118,7 +118,7 @@ module.exports =
           ]
       }
       {
-        test: /\.jade/
+        test: /\.jade$/
         loader: 'jade'
       }
       {

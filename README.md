@@ -3,7 +3,7 @@
 You need installed globally:
 
 ```sh
-$ npm i -g bower gulp karma
+$ npm i -g bower gulp karma-cli
 ```
 
 You need installed locally:

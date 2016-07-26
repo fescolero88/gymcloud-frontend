@@ -6,7 +6,7 @@ coffeelint = require('gulp-coffeelint')
 stylish = require('coffeelint-stylish')
 lazypipe = require('lazypipe')
 webpack = require('webpack')
-gulpWebpack = require('gulp-webpack')
+webpackStream = require('webpack-stream')
 WebpackDevServer = require('webpack-dev-server')
 webpackConfig = require('./webpack.config.js')
 settings = require('./settings')
@@ -60,7 +60,7 @@ gulp.task 'webpack:build', ['build:clean'], (callback) ->
           process.exit(1)
       )
     )
-    .pipe(gulpWebpack(myConfig), webpack)
+    .pipe(webpackStream(myConfig), webpack)
     .pipe(gulp.dest('build/'))
 
 # modify some webpack config options
