@@ -9,5 +9,5 @@ define [
   'node_modules/select2/dist/css/select2.min.css'
   'bower_components/owl-carousel/owl-carousel/owl.carousel.css'
   'bower_components/owl-carousel/owl-carousel/owl.theme.css'
-	'bower_components/owl-carousel/owl-carousel/owl.transitions.css'
+  'bower_components/owl-carousel/owl-carousel/owl.transitions.css'
 ], ->

@@ -1,5 +1,7 @@
 .gc-dashboard
   color: #757575
+  height: 100%
+  overflow: hidden
 
 .gc-dashboard-header  
   display: flex
@@ -58,12 +60,14 @@
 
 .gc-dashboard-content
   padding-bottom: 54px
+  height: 100%
+  overflow-y: auto
   
   .dashboard-left-side
     width: calc(100% - 236px)
     float: left
     padding-top: 41px
-    padding: 41px 23px 0
+    padding: 41px 23px 54px
 
   .gc-workout-indicator
     float: left
@@ -362,7 +366,7 @@
       width: 26px
       height: 30px
       margin-right: 18px
-      background: url('../images/icon-workouts.png')no-repeat
+      background: url('../images/icon-workouts.png') no-repeat
       background-size: cover
       background-position: center right
 
@@ -454,8 +458,9 @@
 
   .dashboard-right-side
     width: 236px
+    height: 100%
     float: left
-    padding: 41px 21px 0
+    padding: 41px 21px 54px
     border-left: 1px solid rgba(#282d30, 0.1)
     text-align: center
     

@@ -20,11 +20,13 @@ define [
     initViews: ->
       root: ->
 
-    onDomRefresh: ->
-      @owlCarouselInit()
+    ui: calendar: '#workout-calendar'
 
-    owlCarouselInit: ->
-      $('#workout-calendar').owlCarousel
+    onDomRefresh: ->
+      @_owlCarouselInit()
+
+    _owlCarouselInit: ->
+      @ui.calendar.owlCarousel
         navigation: true
         slideSpeed: 250
         paginationSpeed: 250

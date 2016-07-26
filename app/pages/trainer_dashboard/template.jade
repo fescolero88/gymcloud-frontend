@@ -1,512 +1,511 @@
-.gc-workspace-content
-  .gc-dashboard
-    header.gc-dashboard-header
-      h1.title
-        | Dashboard
-      span.slogan
-        | “I always felt that my greatest asset was 
-        br
-        | not my physical ability, it was my mental ability.” 
-        br
-        b
-         | Bruce Jenner
-    .gc-dashboard-content
-      .dashboard-left-side
-        .top-section.clearfix
-          .workout-indicators
-            .gc-workout-indicator
-              svg(viewbox='0 1 10 9')
-                path.stroke.default(d='M2 8 A 4 4 0 1 1 8 8')
-                //- For managing progress, change first number in stroke-dasharray:
-                path.stroke.progress(d='M2 8 A 4 4 0 1 1 8 8', style='stroke-dasharray: 15 20')
-                .content
-                  span.counter
-                    | 5
-                  span.counter-text
-                    | Workouts remaining today
-            .gc-workout-indicator
-              svg(viewbox='0 1 10 9')
-                path.stroke.default(d='M2 8 A 4 4 0 1 1 8 8')
-                //- For managing progress, change first number in stroke-dasharray:
-                path.stroke.progress(d='M2 8 A 4 4 0 1 1 8 8', style='stroke-dasharray: 20 20')
+.gc-dashboard
+  header.gc-dashboard-header
+    h1.title
+      | Dashboard
+    span.slogan
+      | “I always felt that my greatest asset was 
+      br
+      | not my physical ability, it was my mental ability.” 
+      br
+      b
+       | Bruce Jenner
+  .gc-dashboard-content
+    .dashboard-left-side
+      .top-section.clearfix
+        .workout-indicators
+          .gc-workout-indicator
+            svg(viewbox='0 1 10 9')
+              path.stroke.default(d='M2 8 A 4 4 0 1 1 8 8')
+              //- For managing progress, change first number in stroke-dasharray:
+              path.stroke.progress(d='M2 8 A 4 4 0 1 1 8 8', style='stroke-dasharray: 15 20')
               .content
                 span.counter
-                  | 23
+                  | 5
                 span.counter-text
-                  | Workouts completed by clients this week
-          .workout-amounts
-            .workout-amount
+                  | Workouts remaining today
+          .gc-workout-indicator
+            svg(viewbox='0 1 10 9')
+              path.stroke.default(d='M2 8 A 4 4 0 1 1 8 8')
+              //- For managing progress, change first number in stroke-dasharray:
+              path.stroke.progress(d='M2 8 A 4 4 0 1 1 8 8', style='stroke-dasharray: 20 20')
+            .content
               span.counter
-                | 2
+                | 23
               span.counter-text
-                | Workouts scheduled tomorrow
-            .workout-amount
-              span.counter
-                | 27
-              span.counter-progress.positive
-                | 25
-              span.counter-text
-                | Workouts scheduled this week vs. last week
-            button.btn.btn-primary.gc-custom.calendar-button My Calendar
-        .gc-dashboard-table
-          header.header
-            button.tab-link.active
-              | Workouts this week
-            button.tab-link
-              | Client Performance
-            button.tab-link
-              | Missed workouts
-          .content
-            
-            .tab-content.hidden(id='this-week-tab')
-              .table-container.with-bg
-                table
-                  caption.table-title
-                    | Yesterday, 20th of March
-                  tr
-                    th
-                      | Client
-                    th
-                      | Performed workout
-                    th
-                      | Time
-                  tr
-                    td
-                      a.user-avatar
-                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                      a.user-link
-                        | Helen Schmidt
-                    td
-                      a(href="#").performed-workout-link
-                        | Cable Crunch
-                    td
-                      | 5:00 PM
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #b0c237")
-                        img(src="", alt="")
-                      a.user-link
-                        | Meredith Romero
-                    td
-                      a(href="#").performed-workout-link.missed
-                        | Upperbody workout
-                    td
-                      | 2:33 PM
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #48c9d5")
-                        img(src="", alt="")
-                      a.user-link
-                        | Alice Baldwin
-                    td
-                      a(href="#").performed-workout-link
-                        | Strength week 1/2
-                    td
-                      | 1:46 PM
-                  tr
-                    td
-                      a.user-avatar
-                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                      a.user-link
-                        | Helen Schmidt
-                    td
-                      a(href="#").performed-workout-link
-                        | Cable Crunch
-                    td
-                      | 5:00 PM
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #b0c237")
-                        img(src="", alt="")
-                      a.user-link
-                        | Meredith Romero
-                    td
-                      a(href="#").performed-workout-link
-                        | Upperbody workout
-                    td
-                      | 2:33 PM
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #48c9d5")
-                        img(src="", alt="")
-                      a.user-link
-                        | Alice Baldwin
-                    td
-                      a(href="#").performed-workout-link
-                        | Strength week 1/2
-                    td
-                      | 1:46 PM
-                  tr
-                    td.with-load-btn(colspan="3")
-                      a.load-more-content(href="#")
-                        | Load all (5)
+                | Workouts completed by clients this week
+        .workout-amounts
+          .workout-amount
+            span.counter
+              | 2
+            span.counter-text
+              | Workouts scheduled tomorrow
+          .workout-amount
+            span.counter
+              | 27
+            span.counter-progress.positive
+              | 25
+            span.counter-text
+              | Workouts scheduled this week vs. last week
+          button.btn.btn-primary.gc-custom.calendar-button My Calendar
+      .gc-dashboard-table
+        header.header
+          button.tab-link.active
+            | Workouts this week
+          button.tab-link
+            | Client Performance
+          button.tab-link
+            | Missed workouts
+        .content
+          
+          .tab-content.hidden(id='this-week-tab')
+            .table-container.with-bg
+              table
+                caption.table-title
+                  | Yesterday, 20th of March
+                tr
+                  th
+                    | Client
+                  th
+                    | Performed workout
+                  th
+                    | Time
+                tr
+                  td
+                    a.user-avatar
+                      img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                    a.user-link
+                      | Helen Schmidt
+                  td
+                    a(href="#").performed-workout-link
+                      | Cable Crunch
+                  td
+                    | 5:00 PM
+                tr
+                  td
+                    a.user-avatar(style="background-color: #b0c237")
+                      img(src="", alt="")
+                    a.user-link
+                      | Meredith Romero
+                  td
+                    a(href="#").performed-workout-link.missed
+                      | Upperbody workout
+                  td
+                    | 2:33 PM
+                tr
+                  td
+                    a.user-avatar(style="background-color: #48c9d5")
+                      img(src="", alt="")
+                    a.user-link
+                      | Alice Baldwin
+                  td
+                    a(href="#").performed-workout-link
+                      | Strength week 1/2
+                  td
+                    | 1:46 PM
+                tr
+                  td
+                    a.user-avatar
+                      img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                    a.user-link
+                      | Helen Schmidt
+                  td
+                    a(href="#").performed-workout-link
+                      | Cable Crunch
+                  td
+                    | 5:00 PM
+                tr
+                  td
+                    a.user-avatar(style="background-color: #b0c237")
+                      img(src="", alt="")
+                    a.user-link
+                      | Meredith Romero
+                  td
+                    a(href="#").performed-workout-link
+                      | Upperbody workout
+                  td
+                    | 2:33 PM
+                tr
+                  td
+                    a.user-avatar(style="background-color: #48c9d5")
+                      img(src="", alt="")
+                    a.user-link
+                      | Alice Baldwin
+                  td
+                    a(href="#").performed-workout-link
+                      | Strength week 1/2
+                  td
+                    | 1:46 PM
+                tr
+                  td.with-load-btn(colspan="3")
+                    a.load-more-content(href="#")
+                      | Load all (5)
 
-              .table-container
-                table
-                  caption.table-title
-                    | Today, 21st of March
-                  tr
-                    th
-                      | Client
-                    th
-                      | Performed workout
-                    th
-                      | Time
-                  tr
-                    td
-                      a.user-avatar
-                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                      a.user-link
-                        | Helen Schmidt
-                    td
-                      a(href="#").performed-workout-link
-                        | Cable Crunch
-                    td
-                      | 5:00 PM
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #b0c237")
-                        img(src="", alt="")
-                      a.user-link
-                        | Meredith Romero
-                    td
-                      a(href="#").performed-workout-link
-                        | Upperbody workout
-                    td
-                      | 2:33 PM
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #48c9d5")
-                        img(src="", alt="")
-                      a.user-link
-                        | Alice Baldwin
-                    td
-                      a(href="#").performed-workout-link
-                        | Strength week 1/2
-                    td
-                      | 1:46 PM
-                  tr
-                    td
-                      a.user-avatar
-                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                      a.user-link
-                        | Helen Schmidt
-                    td
-                      a(href="#").performed-workout-link
-                        | Cable Crunch
-                    td
-                      | 5:00 PM
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #b0c237")
-                        img(src="", alt="")
-                      a.user-link
-                        | Meredith Romero
-                    td
-                      a(href="#").performed-workout-link
-                        | Upperbody workout
-                    td
-                      | 2:33 PM
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #48c9d5")
-                        img(src="", alt="")
-                      a.user-link
-                        | Alice Baldwin
-                    td
-                      a(href="#").performed-workout-link
-                        | Strength week 1/2
-                    td
-                      | 1:46 PM
+            .table-container
+              table
+                caption.table-title
+                  | Today, 21st of March
+                tr
+                  th
+                    | Client
+                  th
+                    | Performed workout
+                  th
+                    | Time
+                tr
+                  td
+                    a.user-avatar
+                      img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                    a.user-link
+                      | Helen Schmidt
+                  td
+                    a(href="#").performed-workout-link
+                      | Cable Crunch
+                  td
+                    | 5:00 PM
+                tr
+                  td
+                    a.user-avatar(style="background-color: #b0c237")
+                      img(src="", alt="")
+                    a.user-link
+                      | Meredith Romero
+                  td
+                    a(href="#").performed-workout-link
+                      | Upperbody workout
+                  td
+                    | 2:33 PM
+                tr
+                  td
+                    a.user-avatar(style="background-color: #48c9d5")
+                      img(src="", alt="")
+                    a.user-link
+                      | Alice Baldwin
+                  td
+                    a(href="#").performed-workout-link
+                      | Strength week 1/2
+                  td
+                    | 1:46 PM
+                tr
+                  td
+                    a.user-avatar
+                      img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                    a.user-link
+                      | Helen Schmidt
+                  td
+                    a(href="#").performed-workout-link
+                      | Cable Crunch
+                  td
+                    | 5:00 PM
+                tr
+                  td
+                    a.user-avatar(style="background-color: #b0c237")
+                      img(src="", alt="")
+                    a.user-link
+                      | Meredith Romero
+                  td
+                    a(href="#").performed-workout-link
+                      | Upperbody workout
+                  td
+                    | 2:33 PM
+                tr
+                  td
+                    a.user-avatar(style="background-color: #48c9d5")
+                      img(src="", alt="")
+                    a.user-link
+                      | Alice Baldwin
+                  td
+                    a(href="#").performed-workout-link
+                      | Strength week 1/2
+                  td
+                    | 1:46 PM
 
-              .table-container
-                table
-                  caption.table-title
-                    | Tuesday, 22nd of March
-                  tr
-                    th
-                      | Client
-                    th
-                      | Performed workout
-                    th
-                      | Time
-                  tr
-                    td
-                      a.user-avatar
-                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                      a.user-link
-                        | Helen Schmidt
-                    td
-                      a(href="#").performed-workout-link
-                        | Cable Crunch
-                    td
-                      | 5:00 PM
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #b0c237")
-                        img(src="", alt="")
-                      a.user-link
-                        | Meredith Romero
-                    td
-                      a(href="#").performed-workout-link
-                        | Upperbody workout
-                    td
-                      | 2:33 PM
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #48c9d5")
-                        img(src="", alt="")
-                      a.user-link
-                        | Alice Baldwin
-                    td
-                      a(href="#").performed-workout-link
-                        | Strength week 1/2
-                    td
-                      | 1:46 PM
-                  tr
-                    td
-                      a.user-avatar
-                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                      a.user-link
-                        | Helen Schmidt
-                    td
-                      a(href="#").performed-workout-link
-                        | Cable Crunch
-                    td
-                      | 5:00 PM
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #b0c237")
-                        img(src="", alt="")
-                      a.user-link
-                        | Meredith Romero
-                    td
-                      a(href="#").performed-workout-link
-                        | Upperbody workout
-                    td
-                      | 2:33 PM
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #48c9d5")
-                        img(src="", alt="")
-                      a.user-link
-                        | Alice Baldwin
-                    td
-                      a(href="#").performed-workout-link
-                        | Strength week 1/2
-                    td
-                      | 1:46 PM
-                  tr
-                    td.text-right.with-load-btn(colspan="3")
-                      a.load-more-content(href="#")
-                        | Load all (5)
-            
-            .tab-content(id='performance-tab')
-              .table-container.performance-table
-                table
-                  tr
-                    th
-                      | Client
-                    th
-                      | Last Week
-                    th
-                      | This week
-                  tr
-                    td
-                      a.user-avatar
-                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                      a.user-link
-                        | Helen Schmidt
-                    td
-                      | 45%
-                    td
-                      span.dynamic-counter.positive
-                        | 46%
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #b0c237")
-                        img(src="", alt="")
-                      a.user-link
-                        | Meredith Romero
-                    td
-                      | 47%
-                    td
-                      span.dynamic-counter.positive
-                        | 50%
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #48c9d5")
-                        img(src="", alt="")
-                      a.user-link
-                        | Alice Baldwin
-                    td
-                      | 44%
-                    td
-                      span.dynamic-counter.positive
-                        | 55%
-                  tr
-                    td
-                      a.user-avatar
-                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                      a.user-link
-                        | Helen Schmidt
-                    td
-                      | 45%
-                    td
-                      span.dynamic-counter.negative
-                        | 30%
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #b0c237")
-                        img(src="", alt="")
-                      a.user-link
-                        | Meredith Romero
-                    td
-                      | 47%
-                    td
-                      span.dynamic-counter.negative
-                        | 40%
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #48c9d5")
-                        img(src="", alt="")
-                      a.user-link
-                        | Alice Baldwin
-                    td
-                      | 44%
-                    td
-                      span.dynamic-counter.negative
-                        | 10%
-            
-            .tab-content.hidden(id='workouts-missed-tab')
-              .table-container
-                table
-                  tr
-                    th
-                      | Client
-                    th
-                      | Workout missed
-                    th
-                      | Time
-                  tr
-                    td
-                      a.user-avatar
-                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                      a.user-link
-                        | Helen Schmidt
-                    td
-                      a(href="#").missed-workout-link
-                        | Cable Crunch
-                    td
-                      | 5:00 PM
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #b0c237")
-                        img(src="", alt="")
-                      a.user-link
-                        | Meredith Romero
-                    td
-                      a(href="#").missed-workout-link
-                        | Upperbody workout
-                    td
-                      | 2:33 PM
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #48c9d5")
-                        img(src="", alt="")
-                      a.user-link
-                        | Alice Baldwin
-                    td
-                      a(href="#").missed-workout-link
-                        | Strength week 1/2
-                    td
-                      | 1:46 PM
-                  tr
-                    td
-                      a.user-avatar
-                        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
-                      a.user-link
-                        | Helen Schmidt
-                    td
-                      a(href="#").missed-workout-link
-                        | Cable Crunch
-                    td
-                      | 5:00 PM
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #b0c237")
-                        img(src="", alt="")
-                      a.user-link
-                        | Meredith Romero
-                    td
-                      a(href="#").missed-workout-link
-                        | Upperbody workout
-                    td
-                      | 2:33 PM
-                  tr
-                    td
-                      a.user-avatar(style="background-color: #48c9d5")
-                        img(src="", alt="")
-                      a.user-link
-                        | Alice Baldwin
-                    td
-                      a(href="#").missed-workout-link
-                        | Strength week 1/2
-                    td
-                      | 1:46 PM
+            .table-container
+              table
+                caption.table-title
+                  | Tuesday, 22nd of March
+                tr
+                  th
+                    | Client
+                  th
+                    | Performed workout
+                  th
+                    | Time
+                tr
+                  td
+                    a.user-avatar
+                      img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                    a.user-link
+                      | Helen Schmidt
+                  td
+                    a(href="#").performed-workout-link
+                      | Cable Crunch
+                  td
+                    | 5:00 PM
+                tr
+                  td
+                    a.user-avatar(style="background-color: #b0c237")
+                      img(src="", alt="")
+                    a.user-link
+                      | Meredith Romero
+                  td
+                    a(href="#").performed-workout-link
+                      | Upperbody workout
+                  td
+                    | 2:33 PM
+                tr
+                  td
+                    a.user-avatar(style="background-color: #48c9d5")
+                      img(src="", alt="")
+                    a.user-link
+                      | Alice Baldwin
+                  td
+                    a(href="#").performed-workout-link
+                      | Strength week 1/2
+                  td
+                    | 1:46 PM
+                tr
+                  td
+                    a.user-avatar
+                      img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                    a.user-link
+                      | Helen Schmidt
+                  td
+                    a(href="#").performed-workout-link
+                      | Cable Crunch
+                  td
+                    | 5:00 PM
+                tr
+                  td
+                    a.user-avatar(style="background-color: #b0c237")
+                      img(src="", alt="")
+                    a.user-link
+                      | Meredith Romero
+                  td
+                    a(href="#").performed-workout-link
+                      | Upperbody workout
+                  td
+                    | 2:33 PM
+                tr
+                  td
+                    a.user-avatar(style="background-color: #48c9d5")
+                      img(src="", alt="")
+                    a.user-link
+                      | Alice Baldwin
+                  td
+                    a(href="#").performed-workout-link
+                      | Strength week 1/2
+                  td
+                    | 1:46 PM
+                tr
+                  td.text-right.with-load-btn(colspan="3")
+                    a.load-more-content(href="#")
+                      | Load all (5)
+          
+          .tab-content(id='performance-tab')
+            .table-container.performance-table
+              table
+                tr
+                  th
+                    | Client
+                  th
+                    | Last Week
+                  th
+                    | This week
+                tr
+                  td
+                    a.user-avatar
+                      img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                    a.user-link
+                      | Helen Schmidt
+                  td
+                    | 45%
+                  td
+                    span.dynamic-counter.positive
+                      | 46%
+                tr
+                  td
+                    a.user-avatar(style="background-color: #b0c237")
+                      img(src="", alt="")
+                    a.user-link
+                      | Meredith Romero
+                  td
+                    | 47%
+                  td
+                    span.dynamic-counter.positive
+                      | 50%
+                tr
+                  td
+                    a.user-avatar(style="background-color: #48c9d5")
+                      img(src="", alt="")
+                    a.user-link
+                      | Alice Baldwin
+                  td
+                    | 44%
+                  td
+                    span.dynamic-counter.positive
+                      | 55%
+                tr
+                  td
+                    a.user-avatar
+                      img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                    a.user-link
+                      | Helen Schmidt
+                  td
+                    | 45%
+                  td
+                    span.dynamic-counter.negative
+                      | 30%
+                tr
+                  td
+                    a.user-avatar(style="background-color: #b0c237")
+                      img(src="", alt="")
+                    a.user-link
+                      | Meredith Romero
+                  td
+                    | 47%
+                  td
+                    span.dynamic-counter.negative
+                      | 40%
+                tr
+                  td
+                    a.user-avatar(style="background-color: #48c9d5")
+                      img(src="", alt="")
+                    a.user-link
+                      | Alice Baldwin
+                  td
+                    | 44%
+                  td
+                    span.dynamic-counter.negative
+                      | 10%
+          
+          .tab-content.hidden(id='workouts-missed-tab')
+            .table-container
+              table
+                tr
+                  th
+                    | Client
+                  th
+                    | Workout missed
+                  th
+                    | Time
+                tr
+                  td
+                    a.user-avatar
+                      img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                    a.user-link
+                      | Helen Schmidt
+                  td
+                    a(href="#").missed-workout-link
+                      | Cable Crunch
+                  td
+                    | 5:00 PM
+                tr
+                  td
+                    a.user-avatar(style="background-color: #b0c237")
+                      img(src="", alt="")
+                    a.user-link
+                      | Meredith Romero
+                  td
+                    a(href="#").missed-workout-link
+                      | Upperbody workout
+                  td
+                    | 2:33 PM
+                tr
+                  td
+                    a.user-avatar(style="background-color: #48c9d5")
+                      img(src="", alt="")
+                    a.user-link
+                      | Alice Baldwin
+                  td
+                    a(href="#").missed-workout-link
+                      | Strength week 1/2
+                  td
+                    | 1:46 PM
+                tr
+                  td
+                    a.user-avatar
+                      img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/541/thumb_10ideasclub_logo_large.png", alt="")
+                    a.user-link
+                      | Helen Schmidt
+                  td
+                    a(href="#").missed-workout-link
+                      | Cable Crunch
+                  td
+                    | 5:00 PM
+                tr
+                  td
+                    a.user-avatar(style="background-color: #b0c237")
+                      img(src="", alt="")
+                    a.user-link
+                      | Meredith Romero
+                  td
+                    a(href="#").missed-workout-link
+                      | Upperbody workout
+                  td
+                    | 2:33 PM
+                tr
+                  td
+                    a.user-avatar(style="background-color: #48c9d5")
+                      img(src="", alt="")
+                    a.user-link
+                      | Alice Baldwin
+                  td
+                    a(href="#").missed-workout-link
+                      | Strength week 1/2
+                  td
+                    | 1:46 PM
 
-      .dashboard-right-side.clearfix
-        .trainer-library.clearfix
-          i.icon
-          .right-side
-            h2.title
-              | Training Library
-            span.subtitle
-              | Exercises, Workouts &
-              br
-              | Programs
+    .dashboard-right-side.clearfix
+      .trainer-library.clearfix
+        i.icon
+        .right-side
+          h2.title
+            | Training Library
+          span.subtitle
+            | Exercises, Workouts &
+            br
+            | Programs
 
-        .ewp-links.clearfix
-          a.exercise-link(href="#")
-            | List of Exercises 
-          a.workout-link(href="#")
-            | List of Workouts
-          a.program-link(href="#")
-            | List of Programs
+      .ewp-links.clearfix
+        a.exercise-link(href="#")
+          | List of Exercises 
+        a.workout-link(href="#")
+          | List of Workouts
+        a.program-link(href="#")
+          | List of Programs
 
-        .gc-recent-activity.clearfix
-          span.title
-            | Recent Activity:
-          .gc-activity-block.message
-            .icon
-            .text
-              | Gymcloud Gymcloud sent you a new 
-              a(href="#")
-                | message
-          .gc-activity-block.comment
-            .icon
-            .text
-              | Gymcloud Gymcloud sent you a new 
-              a(href="#")
-                | comment
-          .gc-activity-block.event
-            .icon
-            .text
-              | Test Client1 has the 
-              a(href="#")
-                | new event 
-              | scheduled
-          .gc-activity-block.performed
-            .icon
-            .text
-              a(href="#")
-                | Meredith Romero 
-              | performed Barbell Press
-          .gc-activity-block.entered-result
-            .icon
-            .text
-              | Meredith Romero entered new 
-              a(href="#")
-                | result
-          a(href="#").load-more-activity
-            | Load more...
+      .gc-recent-activity.clearfix
+        span.title
+          | Recent Activity:
+        .gc-activity-block.message
+          .icon
+          .text
+            | Gymcloud Gymcloud sent you a new 
+            a(href="#")
+              | message
+        .gc-activity-block.comment
+          .icon
+          .text
+            | Gymcloud Gymcloud sent you a new 
+            a(href="#")
+              | comment
+        .gc-activity-block.event
+          .icon
+          .text
+            | Test Client1 has the 
+            a(href="#")
+              | new event 
+            | scheduled
+        .gc-activity-block.performed
+          .icon
+          .text
+            a(href="#")
+              | Meredith Romero 
+            | performed Barbell Press
+        .gc-activity-block.entered-result
+          .icon
+          .text
+            | Meredith Romero entered new 
+            a(href="#")
+              | result
+        a(href="#").load-more-activity
+          | Load more...
