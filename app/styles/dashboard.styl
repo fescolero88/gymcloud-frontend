@@ -9,10 +9,7 @@
   padding: 0 24px
   color: #fff
   background-color: #3a99d8
-  
-  &.client
-    justify-content: flex-end
-  
+    
   .title
     margin: 0
     font-weight: 700
@@ -29,6 +26,10 @@
     .trainer-link
       margin-left: 10px
       color: #fff !important
+  
+  .right-section
+    display: flex
+    align-items: center
 
   .trainer-message-btn
     display: block
@@ -320,6 +321,9 @@
           
           &.completed
             background-image: url('../images/workout-complete.svg')
+          
+          &.incomplete
+            background-image: url('../images/workout-incomplete.svg')
         
         .with-load-btn
           padding: 16px 0 6px
