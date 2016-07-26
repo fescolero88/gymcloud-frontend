@@ -39,13 +39,16 @@ define [
 
     _onStart: ->
       defer = new $.Deferred
-      @request('current_user:init:user')
-        .then( =>
-          @request('current_user:init:collections')
-            .always(@promises.collections.resolve)
-        )
-        .fail(@promises.collections.resolve)
-        .always(@promises.user.resolve)
+
+      @promises.modules
+        .done =>
+          @request('current_user:init:user')
+            .then( =>
+              @request('current_user:init:collections')
+                .always(@promises.collections.resolve)
+            )
+            .fail(@promises.collections.resolve)
+            .always(@promises.user.resolve)
 
       dfds = _.values(@promises)
       $.when(dfds...).done =>
