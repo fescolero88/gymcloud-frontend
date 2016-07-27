@@ -17,8 +17,7 @@ define [
       mobile_only_features: true
 
       enter_results_for_new_workout_event:
-        el: 'a.btn[enter-results]'
-        personal_workout_id: => @model.id
+        id: => @model.id
 
       stickit:
         bindings:
@@ -57,4 +56,4 @@ define [
           '.schedule-buttons':
             observe: 'id'
             visible: (value) ->
-              'PersonalWorkout' is @model.type
+              @model.type is 'PersonalWorkout'

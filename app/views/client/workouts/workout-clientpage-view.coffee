@@ -24,9 +24,12 @@ module.exports = class WorkoutGlobalView extends Marionette.LayoutView
     'click @ui.innerNavLinks': 'changeOverviewActiveTab'
     'click @ui.contentNavLinks': 'changeActiveTab'
 
-  behaviors:
+  behaviors: ->
 
     navigate_back: true
+
+    enter_results_for_new_workout_event:
+      id: => @model.id
 
   onShow: ->
     @changeView 'description'

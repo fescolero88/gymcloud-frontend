@@ -25,6 +25,9 @@ define [
       @_nestedModelsParseAll(data)
       data
 
+    finish: ->
+      @save({is_completed: true}, wait: true)
+
   _.extend(WorkoutEvent::, NestedModelsConcern)
 
   WorkoutEvent

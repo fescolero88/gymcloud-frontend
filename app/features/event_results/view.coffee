@@ -37,4 +37,4 @@ define [
       @views.event_exercises.trigger('remove:results')
 
     _completeEvent: ->
-      model.save({is_completed: true}, wait: true)
+      model.finish()

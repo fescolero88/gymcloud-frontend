@@ -14,9 +14,13 @@ define [
 
     className: 'gc-program-workout-item personal'
 
-    behaviors:
+    behaviors: ->
 
       mobile_only_features: true
+
+      enter_results_for_new_workout_event:
+        id: => @model.workout.id
+
       stickit:
         model: -> @model.workout
         bindings:

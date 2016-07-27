@@ -12,7 +12,7 @@ define [
 
   class Page extends BasePage
 
-    behaviors:
+    behaviors: ->
 
       breadcrumbs:
         model: ->
@@ -21,6 +21,9 @@ define [
       navigate_back: true
 
       mobile_only_features: true
+
+      enter_results_for_new_workout_event:
+        id: => @options.id
 
       stickit:
         model: ->
