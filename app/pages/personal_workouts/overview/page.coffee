@@ -12,7 +12,7 @@ define [
 
   class Page extends BasePage
 
-    behaviors:
+    behaviors: ->
 
       navigate_back: true
 
@@ -20,6 +20,10 @@ define [
         model: -> @view.model.get('data.model')
 
       mobile_only_features: true
+
+      enter_results_for_new_workout_event:
+        el: 'button.btn[enter-results]'
+        personal_workout_id: => @options.id
 
       stickit:
         model: ->
