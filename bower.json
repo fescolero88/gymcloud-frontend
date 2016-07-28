@@ -8,6 +8,7 @@
     "jQuery.serializeObject": "~2.0.3",
     "messenger": "~1.4.1",
     "selectize": "~0.11.2",
-    "spin.js": "~2.0.1"
+    "spin.js": "~2.0.1",
+    "owl-carousel": "^1.3.2"
   }
 }
