@@ -82,7 +82,9 @@ define [
     _initModules: ->
       defer = new $.Deferred
       modules(@)
-      defer.resolve()
+      setTimeout ->
+        defer.resolve()
+      , 1000
       defer.promise()
 
     _initLayout: ->
