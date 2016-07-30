@@ -30,4 +30,4 @@ define [
       !! @md.mobile()
 
     shouldRedirect: ->
-      !! @path
+      !! @path and @hash isnt '#payments/info'
