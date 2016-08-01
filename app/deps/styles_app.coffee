@@ -62,4 +62,5 @@ define [
   'pages/event_results/styles.coffee'
   'pages/workout_templates/overview/styles'
   'styles/dashboard'
+  'styles/certification_modal'
 ], ->

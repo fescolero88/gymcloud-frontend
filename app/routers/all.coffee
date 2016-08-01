@@ -21,6 +21,7 @@ define [
   './event_results'
   './trainer_dashboard'
   './client_dashboard'
+  './trainer_certification'
 ], ->
 
   modules = _.toArray(arguments)
