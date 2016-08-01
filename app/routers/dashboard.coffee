@@ -1,7 +1,11 @@
 define [
+  'pages/dashboard/client/page'
+  'pages/dashboard/pro/page'
   'features/stats/collection'
   'features/stats/view'
 ], (
+  ClientDashboard
+  TrainerDashboard
   StatsCollection
   StatsCompositeView
 ) ->
@@ -11,6 +15,8 @@ define [
     appRoutes:
 
       'welcome' : 'stats'
+      'dashboard/client': 'client_dashboard'
+      'dashboard/pro': 'pro_dashboard'
 
   class Controller extends Marionette.Controller
 
@@ -21,6 +27,12 @@ define [
       view = new StatsCompositeView
         collection: collection
       @_showView(view)
+
+    client_dashboard: ->
+      new ClientDashboard
+
+    pro_dashboard: ->
+      new TrainerDashboard
 
     _showView: (view) ->
       App.request('views:show', view)

@@ -3,7 +3,7 @@
   height: 100%
   overflow: hidden
 
-.gc-dashboard-header  
+.gc-dashboard-header
   display: flex
   justify-content: space-between
   align-items: center
@@ -11,24 +11,24 @@
   padding: 0 24px
   color: #fff
   background-color: #3a99d8
-    
+
   .title
     margin: 0
     font-weight: 700
     font-size: 30px
-  
+
   .slogan
     font-size: 13px
     line-height: 15px
     text-align: right
-  
+
   .trainer-info
     color: rgba(#fff, 0.5)
-    
+
     .trainer-link
       margin-left: 10px
       color: #fff !important
-  
+
   .right-section
     display: flex
     align-items: center
@@ -43,13 +43,13 @@
     border-color: #fff
     background-color: transparent
     text-transform: uppercase
-    
+
     &:active
       background-color: transparent
       opacity: .7
       border-color: #fff
       color: #fff
-    
+
   .trainer-avatar
     display: block
     width: 53px
@@ -62,7 +62,7 @@
   padding-bottom: 54px
   height: 100%
   overflow-y: auto
-  
+
   .dashboard-left-side
     width: calc(100% - 236px)
     float: left
@@ -71,33 +71,33 @@
 
   .gc-workout-indicator
     float: left
-    
+
     &:not(:last-child)
       margin-right: 58px
-    
+
     &.client
       .progress
         stroke: #edcf27
-  
+
   .workout-amounts
     float: left
-    
+
     .workout-amount
       text-align: right
       width: 90%
-    
+
       .counter
         display: inline-block
         margin-right 39px
         font-size: 35px
-      
+
       .counter-progress
         position: relative
         display: inline-block
         left: -10px
         font-size: 16px
         margin-left -15px
-        
+
         &:before
           content: ''
           position: relative
@@ -107,34 +107,34 @@
           height: 4px
           background-size: contain
           transform: translate(-50%,0)
-        
+
         &.positive
           color: #39ca74
-          
+
           &:before
             background: url('../images/amount-positive.svg') no-repeat
-        
+
         &.negative
           color: red
-          
+
           &:before
             background: url('../images/amount-negative.svg') no-repeat
-      
+
       .counter-text
         display: inline-block
         width: 45%
         margin-left: 8px
         font-size: 12px
         text-align: left
-    
+
     .calendar-button
       margin-top 25px
       float: right
       padding: 8px 29px
-  
+
   .gc-dashboard-table
     margin-top: 55px
-    
+
     .header
       height: 56px
       padding: 0 21px
@@ -142,7 +142,7 @@
       border-top-left-radius: 5px
       border-top-right-radius: 5px
       background-color: #fafafa
-    
+
       .tab-link
         display: block
         height: 55px
@@ -151,59 +151,59 @@
         background-color: transparent
         border: 0
         color: #9ea0a1
-        
+
         &:not(:last-child)
           margin-right: 53px
-        
+
         &:hover,
         &:active
           color: #3a99d8
-        
+
         &.active
           color: #3a99d8
           border-bottom: 2px solid #3a99d8
-    
+
     .content
       border: 1px solid #e9eaea
       border-top: 0
       border-bottom-left-radius: 5px
       border-bottom-right-radius: 5px
-      
+
       .table-container
         padding: 21px 21px 0px
-        
+
         &:first-child
           padding-top: 32px
-        
+
         &:last-child
           padding-bottom: 21px
-        
+
         &.with-bg
           background-color: rgba(#f0f0f0, 0.5)
-        
+
         &.performance-table
-        
+
           th,
           td
             &:first-child
               width: 82%
-          
+
           th
             text-align: center
-            
+
             &:first-child
               text-align: left
-          
+
           td
             &:not(:first-child)
               text-align: center
 
       table
         width 100%
-        
+
         &:not(:last-child)
           margin-bottom: 22px
-        
+
         .table-title
           margin-bottom 33px
           padding: 0
@@ -223,19 +223,19 @@
           color: #757575
           vertical-align: middle
           text-align: right
-          
+
           &:first-child
             text-align: left
-        
+
         td
           vertical-align: middle
           text-align: right
           border-bottom: 1px solid #ededed
           padding: 16px 0
-          
+
           &:first-child
             text-align: left
-        
+
         .user-avatar
           display: inline-block
           width: 24px
@@ -244,27 +244,27 @@
           vertical-align: middle
           border-radius: 50%
           background: #b0c237 url('../images/client-avatar-placeholder.svg') center center no-repeat
-          
+
           img
             display: inline-block
             width: inherit
             height: inherit
             border-radius: 50%
-            
+
             &[src='']
               display: none
-        
+
         .user-link
           display: inline-block
           vertical-align: middle
           text-transform: uppercase
           color: #3a99d8
-          
+
           &:hover
             color: #000
-        
+
         .dynamic-counter
-          
+
           &:after
             content: ''
             display: inline-block
@@ -276,33 +276,33 @@
 
           &.positive
             color: #39ca74
-            
+
             &:after
               background-image: url('../images/positive-dynamic.svg')
-        
+
           &.negative
             color: #ec6e61
-              
+
             &:after
               background-image: url('../images/negative-dynamic.svg')
-        
+
         .missed-workout-link
           color: #e7594f
           text-transform: uppercase
-          
+
           &:hover
             color: #3a99d8
-        
+
         .performed-workout-link
           text-transform: uppercase
           color: #3a99d8
-          
+
           &:hover
             color: #000
-          
+
           &.missed
             color: #e7594f
-            
+
             &:before
               content: ''
               position: relative
@@ -313,7 +313,7 @@
               margin-right: 8px
               background: url('../images/missed-workout.svg') no-repeat
               background-size: contain
-        
+
         .workout-status
           display: block
           float: right
@@ -322,13 +322,13 @@
           height: 20px
           background-repeat: no-repeat
           background-size: contain
-          
+
           &.completed
             background-image: url('../images/workout-complete.svg')
-          
+
           &.incomplete
             background-image: url('../images/workout-incomplete.svg')
-        
+
         .with-load-btn
           padding: 16px 0 6px
           border-bottom: 0
@@ -337,12 +337,12 @@
           display: block
           float: right
           color: #3a99d8
-          
+
           &:before
             content: '↓'
             display: inline-block
             margin-right: 18px
-          
+
           &:hover
             color: #000
 
@@ -350,7 +350,7 @@
     width: 430px
     float: left
     margin-left: 56px
-    
+
     .header
       display: flex
       align-items: center
@@ -360,7 +360,7 @@
       border-top-left-radius: 5px
       border-top-right-radius: 5px
       background-color: #fafafa
-      
+
     .workout-icon
       display: inline-block
       width: 26px
@@ -374,20 +374,20 @@
       display: block
       font-size: 12px
       color: #c6c6c6
-      
+
     .workout-date
       display: block
-    
+
     .workout-link
       display: block
       font-size: 16px
       text-transform: uppercase
       color: #3a99d8
       margin-top: 2px
-      
+
       &:hover
         color: #000
-    
+
     .content
       display: flex
       justify-content: center
@@ -401,21 +401,21 @@
 
     // Owl carousel styles redefinition:
 
-    .owl-theme 
-      
+    .owl-theme
+
       .owl-controls
         text-align: left
 
         .owl-page
-      
+
           span
             width: 6px
             height: 6px
             background-color: #ededed
             opacity: 1
-          
+
           &.active
-            
+
             span
               background-color: #3a99d8
 
@@ -426,32 +426,32 @@
           position: absolute
           top: 11px
           right: 15px
-          
+
           div
             display: inline-block
             font-size: 12px
             color: #3a99d8
             background-color: transparent
             opacity: 1
-            
+
             &:before,
             &:after
               content: ''
               font: normal normal normal 14px/1 FontAwesome
               text-rendering: auto
               vertical-align: -1px
-            
+
             &:hover
               color: #000
-              
+
             &.owl-next
-              
+
               &:after
                 content: '\f105'
                 margin-left: 5px
-            
+
             &.owl-prev
-              
+
               &:before
                 content: '\f104'
                 margin-right: 5px
@@ -463,47 +463,47 @@
     padding: 41px 21px 54px
     border-left: 1px solid rgba(#282d30, 0.1)
     text-align: center
-    
+
     .trainer-library
       line-height: 13px
-      
+
       .right-side
         float: left
         margin-left: 14px
         text-align: left
-      
+
       .icon
         width: 42px
         height: 47px
         float: left
         background: url('../images/trainer-library.svg') no-repeat
         background-size: contain
-      
+
       .title
         display: inline-block
         margin: 0 0 5px
         font-weight: 700
         font-size: 15px
         color: #404447
-      
+
       .subtitle
         display: block
-      
+
     .ewp-links
       margin-top 34px
-      
+
       a
         display: block
         float: left
         clear: both
         color: #3a99d8
-        
+
         &:not(:last-child)
           margin-bottom: 16px
-        
+
         &:hover
           color: #000
-        
+
         &:before
           content: ''
           position: relative
@@ -514,81 +514,81 @@
           margin-right: 18px
           background-repeat: no-repeat
           background-position: center center
-        
+
         &.exercise-link
-          
+
           &:before
             background-image: url('../images/exercise.svg')
-            
+
           &:hover
-            
+
             &:before
               background-image: url('../images/exercise-hover.svg')
-        
+
         &.workout-link
-          
+
           &:before
             background-image: url('../images/workout.svg')
-          
+
           &:hover
-            
+
             &:before
               background-image: url('../images/workout-hover.svg')
-          
+
         &.program-link
-          
+
           &:before
             background-image: url('../images/program.svg')
-          
+
           &:hover
-            
+
             &:before
               background-image: url('../images/program-hover.svg')
-    
+
     .user-best-result
       padding-bottom: 29px
       border-bottom: 1px solid #ededed
-      
+
       .icon
         display: inline-block
         width: 45px
         height: 45px
         background: url('../images/user-best-result.png') no-repeat
-      
+
       .description
         margin-top: 10px
-      
+
       .date
         margin: 4px 0 23px
         color: #3a99d8
-      
+
       .property
-        display: flex 
+        display: flex
         justify-content: space-between
-    
+
     .weight-block
       margin-top: 34px
       text-align: left
-      
+
       .title
         display: block
         width: 70%
         margin-bottom 22px
         font-size: 17px
         text-transform: uppercase
-      
+
       .description
         display: block
         font-size: 13px
         margin-bottom 20px
-      
+
       .input-group
         margin-bottom: 14px
-      
+
       .weight-input
         position: relative
         width: 100%
-        
+
         .form-control
           padding-right: 45px
           border-top-right-radius: 4px
@@ -611,19 +611,19 @@
   .gc-recent-activity
     margin-top: 73px
     text-align: left
-    
+
     .title
       display: block
       margin-bottom 12px
       font-size: 16px
       color: rgba(#757575, 0.5)
-    
+
     .load-more-activity
       display: block
       margin-top: 35px
       font-size: 13px
       color: #3a99d8
-      
+
       &:hover
         color: #000
 
@@ -632,13 +632,13 @@
       width: 100%
       padding: 17px 0
       border-bottom: 1px solid #ededed
-      
+
       a
         color: #3a99d8
-        
+
         &:hover
           color: #000
-      
+
       .icon
         position: absolute
         top: 50%
@@ -648,7 +648,7 @@
         background-color: gray
         border-radius: 50%
         transform: translateY(-50%)
-        
+
         &:before
           content: ''
           position: absolute
@@ -659,60 +659,60 @@
           background-repeat: no-repeat
           background-size: contain
           transform: translate(-50%, -50%)
-      
+
       .text
         color: grey
         font-size: 13px
         overflow: hidden
         padding-left: 36px
-      
+
       &.message
-        
+
         .icon
           background-color: #39ca74
-          
+
           &:before
             width: 10px
             height: 8px
             background-image: url('../images/activity-message.svg')
-          
-      
+
+
       &.comment
-        
+
         .icon
           background-color: #e54d42
-          
+
           &:before
             width: 10px
             height: 9px
             background-image: url('../images/activity-comment.svg')
-      
+
       &.event
-        
+
         .icon
           background-color: #3a99d8
-          
+
           &:before
             width: 10px
             height: 11px
             background-image: url('../images/activity-event.svg')
 
-      
+
       &.performed
-        
+
         .icon
           background-color: #8bc8f1
-          
+
           &:before
             width: 12px
             height: 7px
             background-image: url('../images/activity-performed.svg')
-      
+
       &.entered-result
-        
+
         .icon
           background-color: #ffda2b
-          
+
           &:before
             width: 10px
             height: 14px

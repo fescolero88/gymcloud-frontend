@@ -3,15 +3,7 @@
     h1.title
       | Dashboard
     .right-section
-      .trainer-info
-        span.trainer-label
-          | Trainer:
-        a.trainer-link(href="#")
-          | Alex Smithson
-        button.btn.btn-default.trainer-message-btn
-          | Message trainer
-      a(href="#")
-        img(src="https://gymcloudstaging.s3.amazonaws.com/uploads/user_profile/avatar/556/thumb_1.jpg?AWSAccessKeyId=AKIAJKLC7C67JNL3ZZEQ&Expires=1469792427&Signature=TY6uDsE9NMZVIUK4OdUtYLPsze8%3D", alt="").trainer-avatar
+      region(data-name="trainer-info")
   .gc-dashboard-content
     .dashboard-left-side
       .top-section.clearfix
@@ -36,9 +28,9 @@
                     | Next Workout:
                   span.workout-date
                     b
-                      | Mar 19 
+                      | Mar 19
                     | at
-                    b 
+                    b
                       | 17:00 PM
                 .owl-controls.clickable
                   .owl-buttons
@@ -57,9 +49,9 @@
                     | Next Workout:
                   span.workout-date
                     b
-                      | Mar 19 
+                      | Mar 19
                     | at
-                    b 
+                    b
                       | 17:00 PM
                 .owl-controls.clickable
                   .owl-buttons
@@ -78,9 +70,9 @@
                     | Next Workout:
                   span.workout-date
                     b
-                      | Mar 19 
+                      | Mar 19
                     | at
-                    b 
+                    b
                       | 17:00 PM
                 .owl-controls.clickable
                   .owl-buttons
@@ -99,7 +91,7 @@
           button.tab-link
             | Workouts completed this week
         .content
-                      
+
           .tab-content.hidden(id='scheduled-this-week')
             .table-container
               table

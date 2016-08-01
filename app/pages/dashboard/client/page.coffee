@@ -8,14 +8,13 @@ define [
 
   class Page extends BasePage
 
-    behaviors:
-
-      navigate_back: true
-
     template: template
 
     regions:
       page_content: 'region[data-name="page_content"]'
+
+    initModel: ->
+      new Backbone.Model
 
     initViews: ->
       root: ->
