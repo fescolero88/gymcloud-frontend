@@ -82,6 +82,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
     @model.invite(email)
       .then ->
         App.request('messenger:explain', 'user.invitation.sent')
+        App.vent.trigger('mixpanel:track', 'client_invited', @model)
       .fail(@_onRequestFail)
 
   _onRequestFail: (xhr, error, errorType) ->
@@ -95,6 +96,7 @@ module.exports = class ClientFormModalView extends Marionette.ItemView
 
   onSync: (model, response, options) ->
     App.request('messenger:explain', 'client.added')
+    App.vent.trigger('mixpanel:track', 'client_added', @model)
     @trigger 'modal:close'
     @trigger 'addToClientsCollection', model
     App.request('current_user').clients.add(@model)

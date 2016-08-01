@@ -68,6 +68,7 @@ define [
       App.request('accessToken:remove')
       App.request('data:all:clear')
       App.request('current_user:reset')
+      App.vent.trigger('mixpanel:sign_out')
       App.vent.trigger('redirect:to', '#login')
 
     forgotPassword: ->

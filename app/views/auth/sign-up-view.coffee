@@ -45,6 +45,8 @@ class SignUpStep1 extends Marionette.ItemView
         loginModel.once 'model:login:success', (response) =>
           App.request 'accessToken:set', response.access_token
           App.request('current_user').fetch()
+            .done ->
+              App.vent.trigger('mixpanel:sign_up')
           @trigger 'next', @model
         loginModel.login()
       error: (model, xhr, error) =>

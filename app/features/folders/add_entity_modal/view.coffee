@@ -53,6 +53,8 @@ define [
         @folder.items.add(@model)
         @$el.parent().modal('hide')
         @_showSuccessMessage()
+        event = "#{_.underscored(@model.type)}_created"
+        App.vent.trigger('mixpanel:track', event, @model)
 
     _showSuccessMessage: ->
       App.request('messenger:explain', 'item.added')

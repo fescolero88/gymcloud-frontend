@@ -16,6 +16,8 @@ define [
       promise.then ->
         result.exercise_result_items.add(resultItems)
         result.exercise_result_items.each((item) -> item.save())
+      promise.done ->
+        App.vent.trigger('mixpanel:track', 'results_entered', result)
       promise
 
     destroyAll: ->

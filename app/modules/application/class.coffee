@@ -3,7 +3,7 @@ define [
   './modules'
   'features/layouts/base/view'
   'modules/utils/hotjar'
-  'modules/utils/mixpanel'
+  'modules/utils/mixpanel/module'
 ], (
   initializers
   modules
