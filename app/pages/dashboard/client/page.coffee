@@ -1,8 +1,12 @@
 define [
   'pages/base/page'
+  'features/dashboard/completion_ring/view'
+  'features/dashboard/trainer_info/view'
   './template'
 ], (
   BasePage
+  CompletionRingView
+  TrainerInfoView
   template
 ) ->
 
@@ -13,13 +17,33 @@ define [
     regions:
       page_content: 'region[data-name="page_content"]'
 
+    ui: calendar: '#workout-calendar'
+
+    behaviors: ->
+
+      regioned:
+        views: [
+            region: 'trainer_info'
+            klass: TrainerInfoView
+          ,
+            region: 'completion_ring'
+            klass: CompletionRingView
+            options: ->
+              model = @model.get('data.model')
+
+              completed: model.get('events_completed_this_week_count')
+              total: model.get('events_scheduled_this_week_count')
+              description: 'Workouts completed this week'
+              className: 'gc-workout-indicator client'
+        ]
+
     initModel: ->
-      new Backbone.Model
+      model = new Backbone.Model
+      model.urlRoot = '/dashboards/client'
+      model
 
     initViews: ->
       root: ->
-
-    ui: calendar: '#workout-calendar'
 
     onDomRefresh: ->
       @_owlCarouselInit()

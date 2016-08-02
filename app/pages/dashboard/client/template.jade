@@ -3,21 +3,12 @@
     h1.title
       | Dashboard
     .right-section
-      region(data-name="trainer-info")
+      region(data-name="trainer_info")
   .gc-dashboard-content
     .dashboard-left-side
       .top-section.clearfix
         .workout-indicators
-          .gc-workout-indicator.client
-            svg(viewbox='0 1 10 9')
-              path.stroke.default(d='M2 8 A 4 4 0 1 1 8 8')
-              //- For managing progress, change first number in stroke-dasharray:
-              path.stroke.progress(d='M2 8 A 4 4 0 1 1 8 8', style='stroke-dasharray: 15 20')
-              .content
-                span.counter
-                  | 4/5
-                span.counter-text
-                  | Workouts completed this week
+          region(data-name="completion_ring", style='display:block;')
         .gc-workout-calendar
           #workout-calendar.owl-carousel.owl-theme
             .item
