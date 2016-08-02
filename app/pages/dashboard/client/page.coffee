@@ -1,12 +1,16 @@
 define [
   'pages/base/page'
-  'features/dashboard/completion_ring/view'
+  'features/dashboard/client_model'
   'features/dashboard/trainer_info/view'
+  'features/dashboard/completion_ring/view'
+  'features/dashboard/scheduled_workout_slider/view'
   './template'
 ], (
   BasePage
-  CompletionRingView
+  ClientDashboardModel
   TrainerInfoView
+  CompletionRingView
+  ScheduledWorkoutSliderView
   template
 ) ->
 
@@ -35,22 +39,15 @@ define [
               total: model.get('events_scheduled_this_week_count')
               description: 'Workouts completed this week'
               className: 'gc-workout-indicator client'
+          ,
+            region: 'scheduled_workout_slider'
+            klass: ScheduledWorkoutSliderView
+            options: ->
+              collection: @model.get('data.model').scheduled_workouts
         ]
 
     initModel: ->
-      model = new Backbone.Model
-      model.urlRoot = '/dashboards/client'
-      model
+      new ClientDashboardModel
 
     initViews: ->
       root: ->
-
-    onDomRefresh: ->
-      @_owlCarouselInit()
-
-    _owlCarouselInit: ->
-      @ui.calendar.owlCarousel
-        navigation: true
-        slideSpeed: 250
-        paginationSpeed: 250
-        singleItem: true

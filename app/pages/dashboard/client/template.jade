@@ -3,77 +3,14 @@
     h1.title
       | Dashboard
     .right-section
-      region(data-name="trainer_info")
+      region(data-name='trainer_info')
   .gc-dashboard-content
     .dashboard-left-side
       .top-section.clearfix
         .workout-indicators
-          region(data-name="completion_ring", style='display:block;')
+          region(data-name='completion_ring', style='display:block;')
         .gc-workout-calendar
-          #workout-calendar.owl-carousel.owl-theme
-            .item
-              header.header
-                i.workout-icon
-                .workout-info
-                  span.title
-                    | Next Workout:
-                  span.workout-date
-                    b
-                      | Mar 19
-                    | at
-                    b
-                      | 17:00 PM
-                .owl-controls.clickable
-                  .owl-buttons
-                    .owl-prev Prev
-                    .owl-next Next
-              .content
-                span.title
-                  | Workout
-                a.workout-link(href="#")
-                  | Upperbody workout
-            .item
-              header.header
-                i.workout-icon
-                .workout-info
-                  span.title
-                    | Next Workout:
-                  span.workout-date
-                    b
-                      | Mar 19
-                    | at
-                    b
-                      | 17:00 PM
-                .owl-controls.clickable
-                  .owl-buttons
-                    .owl-prev Prev
-                    .owl-next Next
-              .content
-                span.title
-                  | Workout
-                a.workout-link(href="#")
-                  | Upperbody workout
-            .item
-              header.header
-                i.workout-icon
-                .workout-info
-                  span.title
-                    | Next Workout:
-                  span.workout-date
-                    b
-                      | Mar 19
-                    | at
-                    b
-                      | 17:00 PM
-                .owl-controls.clickable
-                  .owl-buttons
-                    .owl-prev Prev
-                    .owl-next Next
-              .content
-                span.title
-                  | Workout
-                a.workout-link(href="#")
-                  | Upperbody workout
+          region(data-name='scheduled_workout_slider')
 
       .gc-dashboard-table
         header.header
