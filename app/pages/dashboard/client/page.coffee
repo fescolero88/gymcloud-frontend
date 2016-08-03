@@ -4,6 +4,7 @@ define [
   'features/dashboard/trainer_info/view'
   'features/dashboard/completion_ring/view'
   'features/dashboard/scheduled_workout_slider/view'
+  'features/dashboard/workout_events/view'
   './template'
 ], (
   BasePage
@@ -11,6 +12,7 @@ define [
   TrainerInfoView
   CompletionRingView
   ScheduledWorkoutSliderView
+  WorkoutEventsView
   template
 ) ->
 
@@ -44,6 +46,12 @@ define [
             klass: ScheduledWorkoutSliderView
             options: ->
               collection: @model.get('data.model').scheduled_workouts
+          ,
+            region: 'workout_events'
+            klass: WorkoutEventsView
+            options: ->
+              scheduled_workouts: @model.get('data.model').scheduled_workouts
+              completed_workouts: @model.get('data.model').completed_workouts
         ]
 
     initModel: ->

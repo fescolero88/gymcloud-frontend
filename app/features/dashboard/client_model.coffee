@@ -15,6 +15,7 @@ define [
     constructor: ->
       @_nestedModelsInit
         scheduled_workouts: WorkoutEventCollection
+        completed_workouts: WorkoutEventCollection
       super
 
     parse: (data) ->
