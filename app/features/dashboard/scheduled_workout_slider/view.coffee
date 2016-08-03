@@ -13,12 +13,23 @@ define [
 
     childView: ScheduledWorkoutSliderItemView
 
+    childEvents:
+      'owl:prev': '_onOwlPrev'
+      'owl:next': '_onOwlNext'
+
     onRenderCollection: ->
-      @owlCarousel = @$el.owlCarousel
+      @$el.owlCarousel
         navigation: false
         slideSpeed: 250
         paginationSpeed: 250
         singleItem: true
+      @owlCarousel = @$el.data('owlCarousel')
 
     onDestroy: ->
       @owlCarousel?.destroy?()
+
+    _onOwlPrev: ->
+      @owlCarousel?.prev?()
+
+    _onOwlNext: ->
+      @owlCarousel?.next?()
