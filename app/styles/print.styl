@@ -12,12 +12,17 @@
   region[data-name='video_assigned'],
   region[data-name='author_widget'],
   region[data-name='privacy_button'],
+  region[data-name='page_content'] .gc-nav-wrapper
   .gc-exercises-cell.drag-area,
   .gc-program-workout-item .gc-workout-body-nav,
   .gc-workout-actions,
   .gc-btn-primary-outline,
   .program-action-panel .widgets,
-  .gc-workout-exercise-note.empty
+  .gc-workout-exercise-note.empty,
+  .gc-property-item.empty,
+  .note,
+  .btn.edit,
+  .gc-workout-body-nav
     display: none !important
   
   .row-margin-v
@@ -43,7 +48,12 @@
   .gc-breadcrumbs-title
     
     span
-      display: none
+      display: inline-block
+      font-size 31px
+      width: 445px
+      
+      &:not(:last-child)
+        display: none
     
     span[contenteditable]
       display: inline-block
@@ -93,7 +103,11 @@
       float: right
       display: block
       font-size 18px
-  
+    
+    .btn-primary.gc-custom
+      border: none
+      margin-right: 20px
+
   ul.gc-workout-exercises-list 
     
     li 
@@ -108,25 +122,23 @@
       font-size 18px
       color: #393939 !important
       opacity: 0.5
-     
+
      &:before 
       float: left
-    
+
     &:after
       position: absolute
       right: 28px
-  
+
   .gc-workout-exercise-name
     font-size: 21px
     font-weight: 700
-    width 58%
     float: left
-  
+
   .gc-workouts-exercises-view
     border: none
     border-radius: 0
     padding-left: 15px
-  
 
   ul.gc-workout-exercises-list li.hover-enabled .gc-hover-hidden
     display: none !important
@@ -134,7 +146,7 @@
   .gc-property-item
     padding: 0
     float: right
-  
+
   .workout-exercise-properties
     padding: 0
   
