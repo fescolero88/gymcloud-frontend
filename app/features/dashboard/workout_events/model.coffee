@@ -3,4 +3,4 @@ define ->
   class DataModel extends Backbone.Model
 
     defaults:
-      tab: 'scheduled'
+      tab: 'scheduled_workouts'

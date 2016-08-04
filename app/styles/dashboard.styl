@@ -211,6 +211,27 @@
           font-size: 16px
           color: #404447
 
+        tr.empty
+          height: 200px
+
+          td:before
+            content: ' '
+            display: block
+            position: relative
+            left: 0
+            top: 0
+            width: 100%
+            height: 50px
+            z-index: 1
+            opacity: 0.6
+            background-image: url('../images/workouts-single.png')
+            background-repeat: no-repeat
+            background-position: center center
+
+          td
+            border: none
+            text-align: center
+
         th,
         td
           &:first-child

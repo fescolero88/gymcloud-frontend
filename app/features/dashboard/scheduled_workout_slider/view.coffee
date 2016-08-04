@@ -17,7 +17,10 @@ define [
       'owl:prev': '_onOwlPrev'
       'owl:next': '_onOwlNext'
 
-    onRenderCollection: ->
+    initialize: ->
+      @listenTo(@collection, 'sync', @onCollectionSync)
+
+    onCollectionSync: ->
       @$el.owlCarousel
         navigation: false
         slideSpeed: 250

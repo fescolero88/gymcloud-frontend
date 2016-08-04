@@ -25,4 +25,13 @@ define [
             ]
 
     initialize: ->
-      @model = new Model(@options)
+      event = @options.event
+
+      @model = new Model _.extend {}, @options,
+        completed: event.get('completed_count')
+        total: event.get('scheduled_count')
+
+      @listenTo event, 'change', ->
+        @model.set
+          completed: event.get('completed_count')
+          total: event.get('scheduled_count')

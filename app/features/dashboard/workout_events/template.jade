@@ -1,7 +1,7 @@
 header.header
-  button.tab-link.active
+  button.tab-link(tab-name='scheduled_workouts').active
     | Workouts scheduled this week
-  button.tab-link
+  button.tab-link(tab-name='completed_workouts')
     | Workouts completed this week
 .content
   region(data-name='scheduled_workouts')

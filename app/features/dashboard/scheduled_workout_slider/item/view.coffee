@@ -17,7 +17,13 @@ define [
     behaviors: ->
       stickit:
         bindings:
-          '.workout-link': 'workout_name'
+          '.workout-link':
+            observe: 'workout_name'
+            attributes: [
+                name: 'href'
+                observe: 'id'
+                onGet: (id) -> "/#events/#{id}/results"
+            ]
           '.date':
             observe: 'begins_at'
             onGet: (value) ->

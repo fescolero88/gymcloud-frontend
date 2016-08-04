@@ -35,10 +35,7 @@ define [
             region: 'completion_ring'
             klass: CompletionRingView
             options: ->
-              model = @model.get('data.model')
-
-              completed: model.get('events_completed_this_week_count')
-              total: model.get('events_scheduled_this_week_count')
+              event: @model.get('data.model')
               description: 'Workouts completed this week'
               className: 'gc-workout-indicator client'
           ,
@@ -51,7 +48,7 @@ define [
             klass: WorkoutEventsView
             options: ->
               scheduled_workouts: @model.get('data.model').scheduled_workouts
-              completed_workouts: @model.get('data.model').completed_workouts
+              past_workouts: @model.get('data.model').past_workouts
         ]
 
     initModel: ->

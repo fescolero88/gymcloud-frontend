@@ -16,7 +16,14 @@ define [
     behaviors: ->
       stickit:
         bindings:
-          '.performed-workout-link': 'workout_name'
+          '.performed-workout-link':
+            observe: 'workout_name'
+            attributes: [
+                name: 'href'
+                observe: 'id'
+                onGet: (id) -> "/#events/#{id}/results"
+            ]
+
           '.date':
             observe: 'begins_at'
             onGet: (value) ->
@@ -25,3 +32,9 @@ define [
             observe: 'begins_at'
             onGet: (value) ->
               moment(value).format('HH:mm A')
+          'i.workout-status':
+            classes:
+              completed: 'is_completed',
+              incomplete:
+                observe: 'is_completed'
+                onGet: (bool) -> !bool
