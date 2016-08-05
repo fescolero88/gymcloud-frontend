@@ -4,10 +4,13 @@ define ->
 
     type: 'PromptModel'
 
-    defalts:
+    defaults:
       title: 'Title'
       confirmBtn: 'Confirm'
+      label: 'Enter name'
       prompt: ''
+      input_type: 'text'
+      dismiss_on_submit: true
 
     validation:
       prompt:
