@@ -23,7 +23,6 @@ define [
                 observe: 'id'
                 onGet: (id) -> "/#events/#{id}/results"
             ]
-
           '.date':
             observe: 'begins_at'
             onGet: (value) ->

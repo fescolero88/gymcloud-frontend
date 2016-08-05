@@ -12,9 +12,8 @@ define [
 
     urlRoot: '/dashboards/client'
 
-    constructor: ->
-      @_nestedModelsInit
-        workout_events: WorkoutEventCollection
+    constructor: (attrs, options) ->
+      @workout_events = new WorkoutEventCollection([], user_id: options.user_id)
 
       @scheduled_workouts = new Backbone.VirtualCollection @workout_events,
         filter: (model) -> model.get('begins_at_int') > moment().valueOf()

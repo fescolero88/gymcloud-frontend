@@ -29,10 +29,10 @@ define [
       @owlCarousel = @$el.data('owlCarousel')
 
     onDestroy: ->
-      @owlCarousel?.destroy?()
+      @owlCarousel.destroy()
 
     _onOwlPrev: ->
-      @owlCarousel?.prev?()
+      @owlCarousel.prev()
 
     _onOwlNext: ->
-      @owlCarousel?.next?()
+      @owlCarousel.next()

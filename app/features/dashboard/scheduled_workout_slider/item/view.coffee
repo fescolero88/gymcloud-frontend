@@ -27,8 +27,8 @@ define [
           '.date':
             observe: 'begins_at'
             onGet: (value) ->
-              moment(value).format('MMM DD')
+              moment.h.onlyDate(value)
           '.time':
             observe: 'begins_at'
             onGet: (value) ->
-              moment(value).format('HH:mm A')
+              moment.h.onlyTime(value)

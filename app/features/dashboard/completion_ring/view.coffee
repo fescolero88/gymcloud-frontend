@@ -20,8 +20,7 @@ define [
                 name: 'style'
                 observe: ['progress', 'progress_max']
                 onGet: (values) ->
-                  parts = ['stroke-dasharray:'].concat(values)
-                  parts.join(' ')
+                  ['stroke-dasharray:'].concat(values).join(' ')
             ]
 
     initialize: ->
@@ -31,7 +30,7 @@ define [
         completed: event.get('completed_count')
         total: event.get('scheduled_count')
 
-      @listenTo event, 'change', ->
+      @listenTo event, 'change:completed_count change:scheduled_count', ->
         @model.set
           completed: event.get('completed_count')
           total: event.get('scheduled_count')
