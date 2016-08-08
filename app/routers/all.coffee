@@ -19,8 +19,6 @@ define [
   './payments'
   './video_library'
   './event_results'
-  './trainer_dashboard'
-  './client_dashboard'
   './trainer_certification'
 ], ->
 

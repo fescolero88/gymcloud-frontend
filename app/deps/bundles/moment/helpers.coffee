@@ -9,3 +9,9 @@ define ->
 
     full: (value) ->
       @moment(value).format('LLL')
+
+    onlyDate: (value) ->
+      @moment(value).format('MMM DD')
+
+    onlyTime: (value) ->
+      @moment(value).format('HH:mm A')
