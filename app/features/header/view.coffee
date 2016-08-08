@@ -45,6 +45,9 @@ define [
                 observe: 'user_profile.avatar.thumb.url'
             ]
 
+    events:
+      'click [refer-friend]': '_referFriend'
+
     initialize: ->
       @listenTo(App.vent, 'profile:ready', @render)
       @model = App.request('current_user')
@@ -61,3 +64,27 @@ define [
 
     _onImgError: =>
       @model.set('user_profile.avatar.url', undefined)
+
+    _referFriend: ->
+      App.request 'modal:prompt',
+        title: 'Refer a friend'
+        label: 'Email'
+        input_type: 'email'
+        confirmBtn: 'SEND INVITATION'
+        confirmCallBack: (str) ->
+          $.ajax
+            url: '/pros'
+            type: 'POST'
+            dataType: 'json'
+            data: JSON.stringify(email: str)
+            success: ->
+              App.request('messenger:explain', 'user.invitation.sent')
+            error: (xhr, error, errorType) ->
+              try
+                messages = []
+                _.each xhr.responseJSON.error, (val, key) ->
+                  message.push("#{key}: #{val.join(', ')}")
+                message = messages.join('; ')
+              catch error
+                message = errorType
+              App.request('messenger:show', type: 'error', message: message)

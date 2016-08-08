@@ -18,7 +18,7 @@ define [
       modal: '.modal'
 
     events:
-      'click @ui.confirmButton': 'confirmEvent'
+      'submit form': 'confirmEvent'
       'click @ui.cancelButton': 'cancelEvent'
       'hidden.bs.modal @ui.modal': 'onModalClosed'
       'keyup input': '_validateInput'
@@ -30,8 +30,14 @@ define [
       stickit:
         bindings:
           '.title': 'title'
-          'input': 'prompt'
+          'label.control-label': 'label'
           '.gc-rm-buttons .confirm': 'confirmBtn'
+          'input':
+            observe: 'prompt'
+            attributes: [
+                name: 'type'
+                observe: 'input_type'
+            ]
 
     initialize: (data)->
       @model = new PromptModel(data)
@@ -43,6 +49,7 @@ define [
       return false unless @_isValid()
 
       @model.get('confirmCallBack')?(str)
+      @trigger('modal:closed') if @model.get('dismiss_on_submit')
 
     cancelEvent: ->
       @model.get('cancelCallBack')?()
