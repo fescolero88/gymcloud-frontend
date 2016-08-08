@@ -5,14 +5,15 @@
   .gc-topbar,
   region[data-name='header'],
   .gc-sidebar-wrapper,
-  .gc-nav-wrapper .col-xs-12,
+  .gc-nav-wrapper > .text-sm-right,
   .gc-exercises-list-actions,
   region[data-name='privacy_toggle'],
   region[data-name='delete_button'],
   region[data-name='video_assigned'],
   region[data-name='author_widget'],
   region[data-name='privacy_button'],
-  region[data-name='page_content'] .gc-nav-wrapper
+  region[data-name='page_content'] .gc-nav-wrapper,
+  region[data-name='page_content'] .program-action-panel,
   .gc-exercises-cell.drag-area,
   .gc-program-workout-item .gc-workout-body-nav,
   .gc-workout-actions,
@@ -22,7 +23,9 @@
   .gc-property-item.empty,
   .note,
   .btn.edit,
-  .gc-workout-body-nav
+  .gc-workout-body-nav,
+  .gc-program-week-actions,
+  .gc-week-workouts-empty
     display: none !important
   
   .row-margin-v
@@ -35,6 +38,9 @@
       max-height: 100% !important
       padding-left: 0
    
+  .gc-box-content
+    border: none
+
   .gc-workout-exercise-circle
     background-color #717171 !important
     color: #fff !important
@@ -51,6 +57,7 @@
       display: inline-block
       font-size 31px
       width: 445px
+      margin-left: 0
       
       &:not(:last-child)
         display: none
@@ -64,15 +71,22 @@
     border-bottom: 1px solid rgba(40,45,48,0.1)
     padding-right: 0
     
+    + .gc-nav-wrapper
+      border-bottom: none
+    
     &.program
       border: none
       float: right
     
     .col-sm-8
       width: 100%
+      padding-left: 0
     
     .col-sm-6
       width: 100%
+      padding-left: 0
+    
+    .col-sm-12
       padding-left: 0
     
     .gc-content-nav-back
@@ -138,7 +152,7 @@
   .gc-workouts-exercises-view
     border: none
     border-radius: 0
-    padding-left: 15px
+    padding-left: 0
 
   ul.gc-workout-exercises-list li.hover-enabled .gc-hover-hidden
     display: none !important
@@ -168,16 +182,15 @@
   .gc-cell-property
     width: 45%
   
-  region[data-name='page_content']
-    .col-md-12
-      padding: 0
-  
   .form-control
     font-size: 17px
     color: #393939 !important
   
   .gc-program-workout-item 
     
+    .gc-workouts-exercises-view
+      padding-left: 15px
+
     .gc-workout-body
       border: none
       padding-left: 0
@@ -207,7 +220,8 @@
       padding: 0
 
     .counters
-      height: auto
+      height: 75px !important
+      margin-top: 20px
     
     .counter-group
       width: 115px
@@ -229,24 +243,40 @@
       
       span
         display: block
-      
+
       .counter
         margin-right: 0
-  
+
   .gc-main-workspace
     
     .gc-workspace-content
       overflow: visible
-      
-      &.program
-        
-        .row-margin-v
-          float: left
-          width: 65%
-  
+
   .gc-programs-weeks-list-container
+    padding-left: 0
+    
     .gc-program-workout-item
       page-break-after: always
-  
+
   .gc-program-week-item
     border: none !important
+    padding-left: 0 !important
+  
+  .gc-program-workout-item.personal 
+    .gc-box-content,
+    .gc-workouts-exercises-view
+      border: none
+
+  .gc-workout-exercise-note
+    float: left
+
+  .gc-workout-body
+    padding-top 10px !important
+  
+  .gc-program-week-title
+    font-size: 18px
+    font-weight: 700
+  
+  region[data-name='workout_body'] .gc-box-content
+    .gc-workout-exercises-list
+      padding-left: 15px !important
