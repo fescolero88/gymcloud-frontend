@@ -16,7 +16,7 @@ define [
 
   class EventResultsPage extends BasePage
 
-    className: 'gc-event-results'
+    className: 'gc-event-results gc-main-workspace'
 
     behaviors: ->
 
