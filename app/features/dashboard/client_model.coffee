@@ -26,7 +26,7 @@ define [
     fetch: ->
       @workout_events.fetch
         data:
-          range_from: moment().subtract(7,'day').toString()
+          range_from: moment().subtract(7, 'day').toString()
           range_to: moment().endOf('week').toString()
         processData: true
       super
