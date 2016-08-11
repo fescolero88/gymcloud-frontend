@@ -20,6 +20,7 @@ define [
       author_widget: true
       privacy_button: true
       add_to_library: true
+      print_button: true
       video_assigned:
         controls: false
 

@@ -45,6 +45,9 @@ define [
             label: 'Add Note'
             visible: _.bind(@_canUpdateModel, @)
           ,
+            label: 'Print'
+            action: @_print
+          ,
             label: 'Add To Library'
             visible: _.bind ->
                 authorId = @model.get('data.model').get('author_id')
@@ -107,3 +110,6 @@ define [
       App.request 'base:addToLibraryModal',
         model: @model
         type: 'Program Templates'
+
+    _print: ->
+      window.print()
