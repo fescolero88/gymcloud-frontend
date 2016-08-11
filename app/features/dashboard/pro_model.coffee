@@ -1,9 +1,9 @@
 define [
   './scheduled_workout_slider/collection'
-  # 'collections/clients'
+  './client_performance/collection'
 ], (
   WorkoutEventCollection
-  # ClientPerformance
+  ClientPerformance
 ) ->
 
   class ProDashboardModel extends Backbone.Model
@@ -13,7 +13,7 @@ define [
     urlRoot: '/dashboards/pro'
 
     constructor: (attrs, options) ->
-      # @client_performance = new ClientPerformance
+      @client_performance = new ClientPerformance
 
       @workout_events = new WorkoutEventCollection([], user_id: options.user_id)
 
