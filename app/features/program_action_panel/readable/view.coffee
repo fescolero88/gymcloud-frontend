@@ -14,6 +14,8 @@ define [
 
     behaviors:
 
+      print_button: true
+
       stickit:
         model: -> @data
         bindings: ->
@@ -33,7 +35,7 @@ define [
               can('update', @model)
 
     events:
-      'click button': '_onEdit'
+      'click button.btn-warning': '_onEdit'
 
     initialize: ->
       @data = new DataModel

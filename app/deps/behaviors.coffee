@@ -29,6 +29,7 @@ define [
   'features/program_action_panel/behavior_bottom'
   'features/exercise_properties/list/item/editable/behavior'
   'features/event_results/behavior'
+  'features/print_button/behavior'
 ], ->
 
   klasses = _.toArray(arguments)

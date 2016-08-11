@@ -16,6 +16,8 @@ define [
 
       navigate_back: true
 
+      print_button: true
+
       breadcrumbs:
         model: -> @view.model.get('data.model')
 
