@@ -24,13 +24,14 @@ define [
             ]
 
     initialize: ->
-      event = @options.event
+      @model = new Model _.extend {},
+        customName: @options.customName
+        description: @options.description
+        completed: @options.dataModel.get(@options.listen[0])
+        total: @options.dataModel.get(@options.listen[1])
 
-      @model = new Model _.extend {}, @options,
-        completed: event.get('completed_count')
-        total: event.get('scheduled_count')
-
-      @listenTo event, 'change:completed_count change:scheduled_count', ->
+      events = "change:#{@options.listen[0]} change:#{@options.listen[1]}"
+      @listenTo @options.dataModel, events, ->
         @model.set
-          completed: event.get('completed_count')
-          total: event.get('scheduled_count')
+          completed: @options.dataModel.get(@options.listen[0])
+          total: @options.dataModel.get(@options.listen[1])

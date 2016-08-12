@@ -17,6 +17,7 @@ define ->
           'total'
         ]
         get: (attrs) ->
+          return @get(@get('customName')) if @get('customName')
           "#{attrs.completed}/#{attrs.total}"
         toJSON: false
       progress:

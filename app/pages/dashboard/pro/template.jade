@@ -13,37 +13,16 @@
     .dashboard-left-side
       .top-section.clearfix
         .workout-indicators
-          .gc-workout-indicator
-            svg(viewbox='0 1 10 9')
-              path.stroke.default(d='M2 8 A 4 4 0 1 1 8 8')
-              //- For managing progress, change first number in stroke-dasharray:
-              path.stroke.progress(d='M2 8 A 4 4 0 1 1 8 8', style='stroke-dasharray: 15 20')
-              .content
-                span.counter
-                  | 5
-                span.counter-text
-                  | Workouts remaining today
-          .gc-workout-indicator
-            svg(viewbox='0 1 10 9')
-              path.stroke.default(d='M2 8 A 4 4 0 1 1 8 8')
-              //- For managing progress, change first number in stroke-dasharray:
-              path.stroke.progress(d='M2 8 A 4 4 0 1 1 8 8', style='stroke-dasharray: 20 20')
-            .content
-              span.counter
-                | 23
-              span.counter-text
-                | Workouts completed by clients this week
+          region(data-name='completion_ring_today')
+          region(data-name='completion_ring_this_week')
         .workout-amounts
           .workout-amount
             span.counter
-              | 2
             span.counter-text
               | Workouts scheduled tomorrow
           .workout-amount
             span.counter
-              | 27
             span.counter-progress.positive
-              | 25
             span.counter-text
               | Workouts scheduled this week vs. last week
           button.btn.btn-primary.gc-custom.calendar-button My Calendar

@@ -40,7 +40,8 @@ define [
             region: 'completion_ring'
             klass: CompletionRingView
             options: ->
-              event: @model.get('data.model')
+              dataModel: @model.get('data.model')
+              listen: ['completed_count', 'scheduled_count']
               description: 'Workouts completed this week'
               className: 'gc-workout-indicator client'
           ,

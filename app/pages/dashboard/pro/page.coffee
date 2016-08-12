@@ -2,6 +2,7 @@ define [
   'pages/base/page'
   './template'
   'features/dashboard/pro_model'
+  'features/dashboard/completion_ring/view'
   'features/dashboard/info_tables/view'
   'features/dashboard/client_performance/view'
   'features/dashboard/missed_workout_events/view'
@@ -10,6 +11,7 @@ define [
   BasePage
   template
   ProDashboardModel
+  CompletionRingView
   InfoTablesView
   ClientPerformanceCollectionView
   MissedWorkoutEventsView
@@ -43,6 +45,24 @@ define [
 
       regioned:
         views: [
+            region: 'completion_ring_today'
+            klass: CompletionRingView
+            options: ->
+              dataModel: @model.get('data.model')
+              customName: 'completed'
+              listen: ['completed_today_count', 'scheduled_today_count']
+              description: 'Workouts remaining today'
+              className: 'gc-workout-indicator'
+          ,
+            region: 'completion_ring_this_week'
+            klass: CompletionRingView
+            options: ->
+              dataModel: @model.get('data.model')
+              customName: 'completed'
+              listen: ['completed_count', 'scheduled_count']
+              description: 'Workouts completed by clients this week'
+              className: 'gc-workout-indicator'
+          ,
             region: 'info_tables'
             klass: InfoTablesView
             options: ->
