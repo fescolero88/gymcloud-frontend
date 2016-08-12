@@ -25,6 +25,16 @@ define [
     regions:
       page_content: 'region[data-name="page_content"]'
 
+    templateHelpers: ->
+      user = App.request('current_user')
+      exercises_folder_id = user.getRootFolderFor('Exercises').id
+      workouts_folder_id = user.getRootFolderFor('Workout Templates').id
+      programs_folder_id = user.getRootFolderFor('Program Templates').id
+
+      exercise_link: "/#exercises_folder/#{exercises_folder_id}"
+      workout_link: "/#workout_templates_folder/#{workouts_folder_id}"
+      program_link: "/#program_templates_folder/#{programs_folder_id}"
+
     behaviors: ->
       stickit:
         model: -> @model.get('data.model')
