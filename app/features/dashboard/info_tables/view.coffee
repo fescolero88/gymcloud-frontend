@@ -27,8 +27,7 @@ define [
 
       stickit:
         bindings: _.reduce(@options.tables, (obj, table) ->
-          obj[table.region] = getBindingFor(table.region)
-          obj
+          _.extend(obj, getBindingFor(table.region))
         , {})
 
       regioned:

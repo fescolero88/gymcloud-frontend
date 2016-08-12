@@ -4,12 +4,14 @@ define [
   'features/dashboard/pro_model'
   'features/dashboard/info_tables/view'
   'features/dashboard/client_performance/view'
+  'features/dashboard/missed_workout_events/view'
 ], (
   BasePage
   template
   ProDashboardModel
   InfoTablesView
   ClientPerformanceCollectionView
+  MissedWorkoutEventsView
 ) ->
 
   class Page extends BasePage
@@ -27,20 +29,18 @@ define [
             klass: InfoTablesView
             options: ->
               tables: [
-                #   region: 'scheduled_workouts'
-                #   klass: WorkoutEventsTableView
-                #   options: =>
-                #     collection: @options.scheduled_workouts
-                #     withStatus: false
-                # ,
                 # | Workouts this week
-                # | Client Performance
-                # | Missed workouts
                   region: 'client_performance'
                   name: 'Client Performance'
                   klass: ClientPerformanceCollectionView
                   options: =>
                     collection: @model.get('data.model').client_performance
+                ,
+                  region: 'missed_workout_events'
+                  name: 'Missed workouts'
+                  klass: MissedWorkoutEventsView
+                  options: =>
+                    collection: @model.get('data.model').missed_events
               ]
         ]
 

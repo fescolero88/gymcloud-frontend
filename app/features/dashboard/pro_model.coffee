@@ -17,7 +17,7 @@ define [
 
       @workout_events = new WorkoutEventCollection([], user_id: options.user_id)
 
-      @missed_workouts = new Backbone.VirtualCollection @workout_events,
+      @missed_events = new Backbone.VirtualCollection @workout_events,
         filter: (model) ->
           !model.get('is_completed') and
             model.get('ends_at_int') < moment().valueOf()

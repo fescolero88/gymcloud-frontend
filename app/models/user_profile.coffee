@@ -2,7 +2,7 @@ define [
   './concerns/avatar_background_color'
 ], (
   AvatarBackgroundColor
-)->
+) ->
 
   class UserProfile extends Backbone.Model
 
