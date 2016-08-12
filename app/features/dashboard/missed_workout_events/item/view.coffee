@@ -11,10 +11,6 @@ define [
     tagName: 'tr'
 
     behaviors: ->
-      getPercent = (value) ->
-        percent = 100 * value
-        number = Number(Math.round(percent + 'e2') + 'e-2') or 0
-        "#{number}%"
 
       stickit:
         bindings:

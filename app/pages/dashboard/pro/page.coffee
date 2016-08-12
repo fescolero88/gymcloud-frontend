@@ -5,6 +5,7 @@ define [
   'features/dashboard/info_tables/view'
   'features/dashboard/client_performance/view'
   'features/dashboard/missed_workout_events/view'
+  'features/dashboard/workout_events_this_week/view'
 ], (
   BasePage
   template
@@ -12,6 +13,7 @@ define [
   InfoTablesView
   ClientPerformanceCollectionView
   MissedWorkoutEventsView
+  WorkoutEventsThisWeekView
 ) ->
 
   class Page extends BasePage
@@ -22,25 +24,47 @@ define [
       page_content: 'region[data-name="page_content"]'
 
     behaviors: ->
+      stickit:
+        model: -> @model.get('data.model')
+        bindings:
+          '.workout-amount:first .counter': 'scheduled_tomorrow_count'
+          '.workout-amount:last .counter': 'scheduled_count'
+          '.workout-amount:last .counter-progress':
+            observe: 'scheduled_last_week_count'
+            classes:
+              positive:
+                observe: ['scheduled_last_week_count', 'scheduled_count']
+                onGet: (values) ->
+                  values[0] < values[1]
+              negative:
+                observe: ['scheduled_last_week_count', 'scheduled_count']
+                onGet: (values) ->
+                  values[0] > values[1]
 
       regioned:
         views: [
             region: 'info_tables'
             klass: InfoTablesView
             options: ->
+              model = @model.get('data.model')
               tables: [
-                # | Workouts this week
+                  region: 'scheduled_workouts'
+                  name: 'Workouts this week'
+                  klass: WorkoutEventsThisWeekView
+                  options: ->
+                    events: model.workout_events
+                ,
                   region: 'client_performance'
                   name: 'Client Performance'
                   klass: ClientPerformanceCollectionView
-                  options: =>
-                    collection: @model.get('data.model').client_performance
+                  options: ->
+                    collection: model.client_performance
                 ,
                   region: 'missed_workout_events'
                   name: 'Missed workouts'
                   klass: MissedWorkoutEventsView
-                  options: =>
-                    collection: @model.get('data.model').missed_events
+                  options: ->
+                    collection: model.missed_events
               ]
         ]
 
