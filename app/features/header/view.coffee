@@ -68,23 +68,31 @@ define [
     _referFriend: ->
       App.request 'modal:prompt',
         title: 'Refer a friend'
+        description: '''Share GymCloud with your friends!
+                        Invite another fitness pro to join us.'''
         label: 'Email'
         input_type: 'email'
         confirmBtn: 'SEND INVITATION'
         confirmCallBack: (str) ->
-          $.ajax
+          creation = $.ajax
             url: '/pros'
             type: 'POST'
             dataType: 'json'
             data: JSON.stringify(email: str)
-            success: ->
-              App.request('messenger:explain', 'user.invitation.sent')
-            error: (xhr, error, errorType) ->
-              try
-                messages = []
-                _.each xhr.responseJSON.error, (val, key) ->
-                  message.push("#{key}: #{val.join(', ')}")
-                message = messages.join('; ')
-              catch error
-                message = errorType
-              App.request('messenger:show', type: 'error', message: message)
+          creation.then ->
+            $.ajax
+              url: '/pros/invitation'
+              type: 'POST'
+              dataType: 'json'
+              data: JSON.stringify(email: str)
+              success: ->
+                App.request('messenger:explain', 'user.invitation.sent')
+              error: (xhr, error, errorType) ->
+                try
+                  messages = []
+                  _.each xhr.responseJSON.error, (val, key) ->
+                    message.push("#{key}: #{val.join(', ')}")
+                  message = messages.join('; ')
+                catch error
+                  message = errorType
+                App.request('messenger:show', type: 'error', message: message)

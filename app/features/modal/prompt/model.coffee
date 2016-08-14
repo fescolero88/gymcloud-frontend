@@ -6,6 +6,7 @@ define ->
 
     defaults:
       title: 'Title'
+      description: ''
       confirmBtn: 'Confirm'
       label: 'Enter name'
       prompt: ''

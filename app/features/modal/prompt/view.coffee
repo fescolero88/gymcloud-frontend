@@ -32,6 +32,10 @@ define [
           '.title': 'title'
           'label.control-label': 'label'
           '.gc-rm-buttons .confirm': 'confirmBtn'
+          '.description':
+            observe: 'description'
+            visible: true
+            updateView: true
           'input':
             observe: 'prompt'
             attributes: [
