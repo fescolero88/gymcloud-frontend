@@ -5,6 +5,7 @@ define [
   'features/dashboard/trainer_info/view'
   'features/dashboard/completion_ring/view'
   'features/dashboard/scheduled_workout_slider/view'
+  'features/dashboard/info_tables/view'
   'features/dashboard/workout_events/view'
 ], (
   BasePage
@@ -13,7 +14,8 @@ define [
   TrainerInfoView
   CompletionRingView
   ScheduledWorkoutSliderView
-  WorkoutEventsView
+  InfoTablesView
+  WorkoutEventsTableView
 ) ->
 
   class Page extends BasePage
@@ -50,11 +52,25 @@ define [
             options: ->
               collection: @model.get('data.model').scheduled_workouts
           ,
-            region: 'workout_events'
-            klass: WorkoutEventsView
+            region: 'info_tables'
+            klass: InfoTablesView
             options: ->
-              scheduled_workouts: @model.get('data.model').scheduled_workouts
-              past_workouts: @model.get('data.model').past_workouts
+              model = @model.get('data.model')
+              tables: [
+                  region: 'scheduled_workouts'
+                  name: 'Workouts scheduled this week'
+                  klass: WorkoutEventsTableView
+                  options: ->
+                    collection: model.scheduled_workouts
+                    withStatus: false
+                ,
+                  region: 'completed_workouts'
+                  name: 'Workouts completed this week'
+                  klass: WorkoutEventsTableView
+                  options: ->
+                    collection: model.past_workouts
+                    withStatus: true
+              ]
         ]
 
     initModel: ->

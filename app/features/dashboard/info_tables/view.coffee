@@ -1,6 +1,6 @@
 define [
   './template'
-  './../workout_events/model'
+  './model'
   'features/dashboard/client_performance/view'
 ], (
   template
