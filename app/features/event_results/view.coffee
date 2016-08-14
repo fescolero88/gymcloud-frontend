@@ -37,6 +37,6 @@ define [
       @views.event_exercises.trigger('remove:results')
 
     _completeEvent: ->
-      model.finish()
+      @model.finish()
         .done =>
           App.vent.trigger('mixpanel:track', 'workout_finished', @model)

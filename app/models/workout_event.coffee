@@ -45,7 +45,10 @@ define [
       data
 
     finish: ->
-      @save({is_completed: true}, wait: true)
+      @save({is_completed: true},
+        wait: true
+        url: "/workout_events/#{@id}"
+      )
 
   _.extend(WorkoutEvent::, NestedModelsConcern)
 
