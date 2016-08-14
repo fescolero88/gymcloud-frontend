@@ -40,3 +40,4 @@ define [
       @model.finish()
         .done =>
           App.vent.trigger('mixpanel:track', 'workout_finished', @model)
+          App.vent.trigger('redirect:to', ['welcome'], replace: false)
