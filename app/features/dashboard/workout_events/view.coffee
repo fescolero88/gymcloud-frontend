@@ -1,63 +1,42 @@
 define [
-  './model'
-  './list/view'
+  './item/view'
+  './empty/view'
   './template'
 ], (
-  DataModel
-  WorkoutEventsTableView
+  ItemView
+  EmptyView
   template
 ) ->
 
-  class WorkoutEventsView extends Marionette.LayoutView
+  class WorkoutEventsTableView extends Marionette.CompositeView
+
+    className: 'tab-content'
 
     template: template
 
-    behaviors: ->
+    templateHelpers: ->
+      withStatus: @options.withStatus
 
-      stickit:
-        bindings:
-          '[data-name="scheduled_workouts"]':
-            observe: 'tab'
-            visible: (value) ->
-              value is 'scheduled_workouts'
-          '[data-name="completed_workouts"]':
-            observe: 'tab'
-            visible: (value) ->
-              value isnt 'scheduled_workouts'
-          '[tab-name="scheduled_workouts"]':
-            classes:
-              active:
-                observe: 'tab'
-                onGet: (value) ->
-                  value is 'scheduled_workouts'
-          '[tab-name="completed_workouts"]':
-            classes:
-              active:
-                observe: 'tab'
-                onGet: (value) ->
-                  value isnt 'scheduled_workouts'
+    childView: ItemView
 
-      regioned:
-        views: [
-            region: 'scheduled_workouts'
-            klass: WorkoutEventsTableView
-            options: =>
-              collection: @options.scheduled_workouts
-              withStatus: false
-          ,
-            region: 'completed_workouts'
-            klass: WorkoutEventsTableView
-            options: =>
-              collection: @options.past_workouts
-              withStatus: true
-        ]
+    childViewContainer: 'tbody'
 
-    events:
-      'click .tab-link': '_onChangeTab'
+    childViewOptions: ->
+      withStatus: @options.withStatus
+
+    emptyView: EmptyView
+
+    ui:
+      thead: 'thead'
 
     initialize: ->
-      @model = new DataModel
+      @listenTo(@collection, 'sync', @_onCollectionSizeChange)
 
-    _onChangeTab: (ev) ->
-      tabName = $(ev.currentTarget).attr('tab-name')
-      @model.set(tab: tabName)
+    onShow: ->
+      @_onCollectionSizeChange()
+
+    _onCollectionSizeChange: ->
+      if @collection.isEmpty()
+        @ui.thead.hide()
+      else
+        @ui.thead.show()

@@ -22,13 +22,17 @@ define [
 
     stats: ->
       user = App.request('current_user')
-      return @client_dashboard() unless user.get('is_pro')
+      # collection = new StatsCollection
+      # collection.build(user)
+      # view = new StatsCompositeView
+      #   collection: collection
+      # @_showView(view)
 
-      collection = new StatsCollection
-      collection.build(user)
-      view = new StatsCompositeView
-        collection: collection
-      @_showView(view)
+      if user.get('is_pro')
+        @pro_dashboard()
+      else
+        @client_dashboard()
+
 
     client_dashboard: ->
       new ClientDashboard
@@ -36,8 +40,8 @@ define [
     pro_dashboard: ->
       new TrainerDashboard
 
-    _showView: (view) ->
-      App.request('views:show', view)
+    # _showView: (view) ->
+    #   App.request('views:show', view)
 
   Router: Router
   Controller: Controller

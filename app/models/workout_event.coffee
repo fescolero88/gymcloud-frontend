@@ -1,8 +1,10 @@
 define [
+  './concerns/avatar_background_color'
   './concerns/nested_models'
   'collections/workout_event_exercises'
   'features/event_results/comments/collection'
 ], (
+  AvatarBackgroundColor
   NestedModelsConcern
   WorkoutEventExercises
   Comments
@@ -13,7 +15,6 @@ define [
     type: 'WorkoutEvent'
 
     url: -> "/workout_events/#{@id}/full"
-
 
     computed: ->
       begins_at_int:
@@ -38,7 +39,9 @@ define [
       super
 
     initialize: ->
+      super
       @computedFields = new Backbone.ComputedFields(@)
+      @_initBgColor('person_id')
 
     parse: (data) ->
       @_nestedModelsParseAll(data)
@@ -50,6 +53,6 @@ define [
         url: "/workout_events/#{@id}"
       )
 
-  _.extend(WorkoutEvent::, NestedModelsConcern)
+  _.extend(WorkoutEvent::, NestedModelsConcern, AvatarBackgroundColor)
 
   WorkoutEvent
