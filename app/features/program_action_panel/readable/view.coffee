@@ -29,7 +29,7 @@ define [
           '.counter.workouts':
             observe: 'workoutsCount'
             afterUpdate: highlight
-          'button':
+          'button.btn-warning':
             observe: 'person_id'
             visible: (value) ->
               can('update', @model)
