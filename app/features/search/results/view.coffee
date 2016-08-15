@@ -75,7 +75,7 @@ define [
           isSelected: entityType == 'clients'
           href: "#search/#{q}/clients"
         ,
-          name: 'Client Groups'
+          name: 'Groups'
           isSelected: entityType == 'client_groups'
           href: "#search/#{q}/client_groups"
       ]
