@@ -139,14 +139,15 @@
     font-weight: 300
 
   &.personal
-    .gc-workout-body,
     .gc-box-content,
     .gc-workouts-exercises-view
       margin: 0
       padding: 0
-
-    .gc-box-content
-      border: 1px solid #ededed
+      
+    .gc-workout-body
+      border-bottom: 1px solid #ececec
+      border-bottom-left-radius: 8px
+      border-bottom-right-radius: 8px
 
     .gc-workouts-exercises-view
       border-radius: 0
@@ -155,6 +156,17 @@
 
       .note
         margin: 30px 0
+        
+    .gc-workout-title
+      padding-left: 0
+    
+    .gc-content-nav li
+      
+      &:first-child
+        margin-left 0
+    
+    .gc-workout-exercises-list
+      padding: 2px 14px
 
 .gc-workout-tab-content
   .tab-pane
