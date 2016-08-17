@@ -15,6 +15,7 @@ define [
       password: undefined
       password_confirmation: undefined
       user_profile_id: undefined
+      is_client: false
 
     validation:
 

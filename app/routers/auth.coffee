@@ -8,9 +8,9 @@ define [
   'views/auth/confirm-registration-view'
   'views/auth/resend-confirmation-view'
   'features/payment/trial_ended/view'
-  'features/signup_trainer_invite/view'
-  'features/signup_trainer_invite/not_have_trainer/view'
-  'features/signup_trainer_invite/matching_trainer/view'
+  'features/signup/trainer_invite/view'
+  'features/signup/dont_have_trainer/view'
+  'features/signup/matching_trainer/view'
 
   'models/auth/confirm-registration-model'
   'models/auth/resend-confirmation-model'
@@ -58,11 +58,11 @@ define [
 
     login: (signUp) =>
       if App.request('accessToken:get')
-        App.vent.trigger('redirect:to', '#')
-      else
-        view = new AuthView
-          signUp: signUp
-        @_showView(view)
+        return App.vent.trigger('redirect:to', '#')
+
+      view = new AuthView
+        signUp: signUp
+      @_showView(view)
 
     logout: ->
       App.request('accessToken:remove')
@@ -76,17 +76,13 @@ define [
       @_showView(view)
 
     signUp: (queryString) =>
-      unless App.request('accessToken:get')
-        queryParams = QueryString.parse queryString
-        if queryParams.invitation_token
-          client = queryParams
+      if App.request('accessToken:get')
+        return App.vent.trigger('redirect:to', '#')
 
-        view = new SignUpView
-          model: new AccountModel
-          client: client
-        @_showView(view)
-      else
-        App.vent.trigger('redirect:to', '#')
+      queryParams = QueryString.parse(queryString)
+      view = new SignUpView
+        model: new AccountModel(queryParams)
+      @_showView(view)
 
     resetPassword: (token) =>
       model = new ResetPasswordModel
