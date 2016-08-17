@@ -21,6 +21,8 @@ define [
     'jQuery=deps/bundles/jquery/original!jquery-file-upload-validate'
   'imports?define=>undefined&exports=>undefined&' +
     'jQuery=deps/bundles/jquery/original!jquery-file-upload-ui'
+  'imports?define=>undefined&exports=>undefined&' +
+    'jQuery=deps/bundles/jquery/original!custom-scroll'
   'owl-carousel'
 ], (
   o$
