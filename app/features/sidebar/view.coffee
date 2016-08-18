@@ -69,6 +69,13 @@ define [
     toggleMenu: (ev) ->
       target = $(ev.target)
       currentTarget = $(ev.currentTarget)
+      $('.gc-sidebar-wrapper').niceScroll
+        scrollspeed: '1'
+        cursorwidth: '3px'
+        railpadding: {top: 0, right: 1.5, left: 0, bottom: 0}
+        cursorborder: false
+        cursorborderradius: 0
+        cursorcolor: '#fff'
 
       # if target is caret prevent navigation
       # only cascade sub-items
@@ -83,11 +90,6 @@ define [
     toggleItem: (ev) ->
       @_removeActiveItem()
       ev.currentTarget.classList.add 'active'
-
-    onClickSidebar: (ev) ->
-      setTimeout =>
-        @$el.find('.nano').nanoScroller()
-      , 600
 
     _removeActiveItem: ->
       activeItem = @$el.find('.gc-sidebar-item > a.active')
