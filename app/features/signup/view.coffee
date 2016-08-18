@@ -91,6 +91,9 @@ define [
         @model.acceptInvite()
       else
         @model.createAccount()
+          .then =>
+            if @model.get('is_client')
+              return App.vent.trigger('redirect:to', ['dont_have_trainer'])
 
     onAccountCreated: (data, _userProfile)->
       App.request('auth:onSuccess', data)

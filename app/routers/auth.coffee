@@ -28,7 +28,7 @@ define [
   ResendConfirmationView
   TrialEndedView
   TrainerInviteView
-  NotHaveTrainerView
+  DontHaveTrainerView
   MatchingTrainerView
 
   ConfirmRegistrationModel
@@ -51,7 +51,7 @@ define [
       'confirm/:token': 'confirmRegistration'
       'trial_ended': 'trialEnded'
       'trainer_invite': 'trainerInvite'
-      'not_have_trainer': 'notHaveTrainer'
+      'dont_have_trainer': 'dontHaveTrainer'
       'matching_trainer': 'matchingTrainer'
 
   class Controller extends Marionette.Controller
@@ -112,8 +112,8 @@ define [
       view = new TrainerInviteView
       @_showView(view)
 
-    notHaveTrainer: ->
-      view = new NotHaveTrainerView
+    dontHaveTrainer: ->
+      view = new DontHaveTrainerView
       @_showView(view)
 
     matchingTrainer: ->

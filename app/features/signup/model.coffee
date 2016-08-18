@@ -47,40 +47,45 @@ define [
         acceptance: true
 
     createAccount: ->
-      user_profile_id = undefined
-      if @isValid true
-        $.post('/users.json', JSON.stringify(@_prepareInitialParams()))
-          .then( (response) =>
+      defer = new $.Deferred
 
-            # set created id and user_profile_id
-            @set('id', response.id)
-            @set('user_profile_id', user_profile_id = response.user_profile.id)
+      unless @isValid true
+        setTimeout (-> defer.reject()), 1
+        return defer.promise()
 
-            # get the token once the account is created
-            loginModel = new LoginModel
-              username: @get 'email'
-              password: @get 'password'
+      $.post('/users.json', JSON.stringify(@_prepareInitialParams()))
+        .then (user) =>
+          # set created id and user_profile_id
+          @set('id', user.id)
+          @set('user_profile_id', user.user_profile.id)
 
-            loginModel.once 'model:login:success', (response) =>
-              App.request 'accessToken:set', response.access_token
-              App.request('current_user').fetch()
+          # get the token once the account is created
+          loginModel = new LoginModel
+            username: @get 'email'
+            password: @get 'password'
 
-              # update user profile once access token is received
-              @_updateUserProfile user_profile_id, (userProfileResponse) =>
-                @trigger 'account:created', response, userProfileResponse
+          loginModel.once 'model:login:success', (response) =>
+            defer.resolve()
+            App.request 'accessToken:set', response.access_token
+            App.request('current_user').fetch()
 
-            loginModel.login()
+            # update user profile once access token is received
+            @_updateUserProfile @get('user_profile_id'), (userProfileResponse) =>
+              @trigger 'account:created', response, userProfileResponse
 
-          )
-          .fail (xhr, settings, errorThrown)  ->
-            errorJSON = xhr.responseJSON.error
-            for key of errorJSON
-              if errorJSON.hasOwnProperty(key)
-                errorMsg = "#{key} #{errorJSON[key].join(',')}"
-              break
+          loginModel.login()
 
-            App.request 'messenger:explain', 'message.error',
-              message: errorMsg
+        .fail (xhr, settings, errorThrown)  ->
+          errorJSON = xhr.responseJSON.error
+          for key of errorJSON
+            if errorJSON.hasOwnProperty(key)
+              errorMsg = "#{key} #{errorJSON[key].join(',')}"
+            break
+
+          App.request 'messenger:explain', 'message.error',
+            message: errorMsg
+
+      defer.promise()
 
     acceptInvite: ->
       if @isValid true
@@ -107,7 +112,7 @@ define [
     # Initial request payload should only include
     # email and password
     _prepareInitialParams: ->
-      user: _.pick @attributes, 'email', 'password'
+      user: _.pick @attributes, 'email', 'password', 'is_client'
 
     # once account is created, update user_profile
     _preparePatchParams: ->

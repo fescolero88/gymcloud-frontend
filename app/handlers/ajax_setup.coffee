@@ -22,6 +22,12 @@ define ->
         App.request 'messenger:explain', 'message.error',
           message: message
 
+      if jqxhr.status is 453
+        App.vent.trigger('redirect:to', ['dont_have_trainer'])
+
+      if jqxhr.status is 452
+        App.vent.trigger('redirect:to', ['matching_trainer'])
+
     _.each ['Model', 'Collection'], (namespace) ->
       oldCtr = Backbone[namespace]
       Backbone[namespace]::constructor = ->
