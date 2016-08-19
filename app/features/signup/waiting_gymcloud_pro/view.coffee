@@ -1,15 +1,15 @@
 define [
   './template'
+  '../behavior'
 ], (
   template
+  AuthBodyClassBehavior
 ) ->
 
   class WaitingGymcloudProView extends Marionette.ItemView
 
     template: template
 
-    onShow: ->
-      $('body').attr('class', 'auth')
-
-    onDestroy: ->
-      $('body').removeClass('auth')
+    behaviors:
+      authBodyClass:
+        behaviorClass: AuthBodyClassBehavior

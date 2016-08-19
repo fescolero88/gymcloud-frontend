@@ -1,9 +1,11 @@
 define [
   './template'
   './model'
+  '../behavior'
 ], (
   template
   Model
+  AuthBodyClassBehavior
 ) ->
 
   class TrainerInviteView extends Marionette.ItemView
@@ -12,22 +14,19 @@ define [
 
     behaviors: ->
 
+      authBodyClass:
+        behaviorClass: AuthBodyClassBehavior
+
       stickit:
         bindings:
-          'input[name="name"]':'name'
-          'input[name="email"]':'email'
+          'input[name="name"]': 'name'
+          'input[name="email"]': 'email'
 
     events:
       'submit form': '_onFormSubmit'
 
     initialize: ->
       @model = new Model
-
-    onShow: ->
-      $('body').attr('class', 'auth')
-
-    onDestroy: ->
-      $('body').removeClass('auth')
 
     _onFormSubmit: ->
       @model.save()
@@ -39,4 +38,5 @@ define [
         .then(@_onInvite)
 
     _onInvite: ->
-      App.vent.trigger('redirect:to', ['pro_invite_success'], replace: false)
+      App.vent.trigger 'redirect:to', ['auth', 'pro_invite_success'],
+        replace: false

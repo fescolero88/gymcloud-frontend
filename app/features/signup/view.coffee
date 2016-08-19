@@ -93,7 +93,7 @@ define [
         @model.createAccount()
           .then =>
             if @model.get('is_client')
-              return App.vent.trigger('redirect:to', ['client_signup'])
+              return App.vent.trigger('redirect:to', ['auth', 'client_signup'])
 
     onAccountCreated: (data, _userProfile)->
       App.request('auth:onSuccess', data)

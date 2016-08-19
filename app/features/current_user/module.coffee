@@ -93,7 +93,11 @@ define [
               , 2000
       else
         defer.reject()
-      defer.fail =>
+      defer.fail (xhr) =>
+        if _.include([452, 453, 454], xhr?.status)
+          token = @app.request('accessToken:get')
+          setTimeout((=> @app.request('accessToken:set', token)), 1000)
+
         @app.request('accessToken:remove')
       defer.promise()
 

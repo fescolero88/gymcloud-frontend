@@ -1,9 +1,11 @@
 define [
   './template'
   './model'
+  '../behavior'
 ], (
   template
   Model
+  AuthBodyClassBehavior
 ) ->
 
   class View extends Marionette.ItemView
@@ -11,6 +13,9 @@ define [
     template: template
 
     behaviors: ->
+
+      authBodyClass:
+        behaviorClass: AuthBodyClassBehavior
 
       stickit:
         bindings:
@@ -32,12 +37,6 @@ define [
     initialize: ->
       @model = new Model
 
-    onShow: ->
-      $('body').attr('class', 'auth')
-
-    onDestroy: ->
-      $('body').removeClass('auth')
-
     _onTypeSelected: ->
-      path = [@model.get('reg_type')]
+      path = ['auth', @model.get('reg_type')]
       App.vent.trigger('redirect:to', path, replace: false)

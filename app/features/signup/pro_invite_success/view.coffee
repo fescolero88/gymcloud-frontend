@@ -1,17 +1,17 @@
 define [
   './template'
   '../pro_invite/model'
+  '../behavior'
 ], (
   template
   Model
+  AuthBodyClassBehavior
 ) ->
 
   class ProInviteSuccessView extends Marionette.ItemView
 
     template: template
 
-    onShow: ->
-      $('body').attr('class', 'auth')
-
-    onDestroy: ->
-      $('body').removeClass('auth')
+    behaviors:
+      authBodyClass:
+        behaviorClass: AuthBodyClassBehavior

@@ -1,20 +1,20 @@
 define [
   './template'
   '../pro_invite/model'
+  '../behavior'
 ], (
   template
   Model
+  AuthBodyClassBehavior
 ) ->
 
   class FindProView extends Marionette.ItemView
 
     template: template
 
-    onShow: ->
-      $('body').attr('class', 'auth')
-
-    onDestroy: ->
-      $('body').removeClass('auth')
+    behaviors:
+      authBodyClass:
+        behaviorClass: AuthBodyClassBehavior
 
     initialize: ->
       model = new Model

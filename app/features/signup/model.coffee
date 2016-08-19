@@ -61,8 +61,8 @@ define [
 
           # get the token once the account is created
           loginModel = new LoginModel
-            username: @get 'email'
-            password: @get 'password'
+            username: @get('email')
+            password: @get('password')
 
           loginModel.once 'model:login:success', (response) =>
             defer.resolve()
@@ -71,7 +71,7 @@ define [
 
             # update user profile once access token is received
             @_updateUserProfile @get('user_profile_id'), (profileResponse) =>
-              @trigger 'account:created', response, profileResponse
+              @trigger('account:created', response, profileResponse)
 
           loginModel.login()
 
@@ -96,11 +96,11 @@ define [
         ).then (response) =>
           # get the token once the account is created
           loginModel = new LoginModel
-            username: @get 'email'
-            password: @get 'password'
+            username: @get('email')
+            password: @get('password')
 
           loginModel.once 'model:login:success', (response) =>
-            App.request 'accessToken:set', response.access_token
+            App.request('accessToken:set', response.access_token)
             App.request('current_user').fetch()
 
             # update user profile once access token is received
@@ -112,15 +112,15 @@ define [
     # Initial request payload should only include
     # email and password
     _prepareInitialParams: ->
-      user: _.pick @attributes, 'email', 'password', 'is_client'
+      user: _.pick(@attributes, 'email', 'password', 'is_client')
 
     # once account is created, update user_profile
     _preparePatchParams: ->
-      params = _.pick @attributes, 'first_name', 'last_name'
+      params = _.pick(@attributes, 'first_name', 'last_name')
 
       # rename proper keys for user_profile request
-      params.user_id = @get 'id'
-      params.id = @get 'user_profile_id'
+      params.user_id = @get('id')
+      params.id = @get('user_profile_id')
       params
 
     _prepareInviteParams: ->
@@ -132,6 +132,6 @@ define [
     _updateUserProfile: (user_profile_id, doneCallback) =>
       $.ajax
         url: "/user_profiles/#{user_profile_id}"
-        data: JSON.stringify @_preparePatchParams()
+        data: JSON.stringify(@_preparePatchParams())
         type: 'PATCH'
       .then(doneCallback)

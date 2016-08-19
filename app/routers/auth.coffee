@@ -56,12 +56,12 @@ define [
       'reset/:token': 'resetPassword'
       'confirm/:token': 'confirmRegistration'
       'trial_ended': 'trialEnded'
-      'client_signup': 'clientRegSelect'
-      'pro_invite': 'proInvite'
-      'pro_invite_success': 'proInviteSuccess'
-      'pro_invite_reminder': 'proInviteReminder'
-      'waiting_gymcloud_pro': 'waitingGymcloudPro'
-      'find_a_pro': 'find_a_pro'
+      'auth/client_signup': 'clientRegSelect'
+      'auth/pro_invite': 'proInvite'
+      'auth/pro_invite_success': 'proInviteSuccess'
+      'auth/pro_invite_reminder': 'proInviteReminder'
+      'auth/waiting_gymcloud_pro': 'waitingGymcloudPro'
+      'auth/find_a_pro': 'findPro'
 
   class Controller extends Marionette.Controller
 
@@ -86,7 +86,8 @@ define [
 
     signUp: (queryString) =>
       if App.request('accessToken:get')
-        return App.vent.trigger('redirect:to', '#')
+        App.vent.trigger('redirect:to', '#')
+        return
 
       queryParams = QueryString.parse(queryString)
       view = new SignUpView
@@ -136,7 +137,7 @@ define [
       view = new WaitingGymcloudPro
       @_showView(view)
 
-    find_a_pro: ->
+    findPro: ->
       view = new FindPro
       @_showView(view)
 
