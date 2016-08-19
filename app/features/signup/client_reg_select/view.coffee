@@ -10,8 +10,6 @@ define [
 
     template: template
 
-    className: 'client-reg-select'
-
     behaviors: ->
 
       stickit:
