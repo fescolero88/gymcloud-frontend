@@ -6,18 +6,18 @@ header.gc-header-standard.gc-header-login
       form.gc-signup-form(role='form')
 
         .form-group.client-reg-type-select
-          label
-            div
+          label.invite-pro
+            .text
               | Invite my Fitness Pro to join GymCloud.
             input(type='radio', name='client_reg_type', value='trainer_invite')
             .radio-button
-          label
-            div
+          label.request-pro
+            .text
               | Find a Fitness Pro for me.
             input(type='radio', name='client_reg_type', value='find_a_pro')
             .radio-button
         .row.form-group.text-center
-            button.btn.btn-default.disabled
+            button.btn.btn-default.disabled(type='submit')
               | Next
       p.gc-login-signup-wrapper.text-center
         | Have a Gymcloud account?
