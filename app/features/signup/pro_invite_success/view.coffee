@@ -1,10 +1,12 @@
 define [
   './template'
+  '../pro_invite/model'
 ], (
   template
+  Model
 ) ->
 
-  class TrainerInviteView extends Marionette.ItemView
+  class ProInviteSuccessView extends Marionette.ItemView
 
     template: template
 

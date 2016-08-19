@@ -4,7 +4,7 @@ define [
   template
 ) ->
 
-  class NotHaveTrainerView extends Marionette.ItemView
+  class WaitingGymcloudProView extends Marionette.ItemView
 
     template: template
 

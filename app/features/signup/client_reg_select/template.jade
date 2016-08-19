@@ -1,0 +1,25 @@
+header.gc-header-standard.gc-header-login
+  .container
+    .gc-login-form-wrapper.col-sm-6.cal-xs-12
+      h1.text-center
+        | Client Sign Up
+      form.gc-signup-form(role='form')
+
+        .form-group.client-reg-type-select
+          label
+            div
+              | Invite my Fitness Pro to join GymCloud.
+            input(type='radio', name='client_reg_type', value='trainer_invite')
+            .radio-button
+          label
+            div
+              | Find a Fitness Pro for me.
+            input(type='radio', name='client_reg_type', value='find_a_pro')
+            .radio-button
+        .row.form-group.text-center
+            button.btn.btn-default.disabled
+              | Next
+      p.gc-login-signup-wrapper.text-center
+        | Have a Gymcloud account?
+        a(href='#login')
+          | Sign In

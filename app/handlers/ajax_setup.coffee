@@ -23,7 +23,7 @@ define ->
           message: message
 
       if jqxhr.status is 453
-        App.vent.trigger('redirect:to', ['dont_have_trainer'])
+        App.vent.trigger('redirect:to', ['client_signup'])
 
       if jqxhr.status is 452
         App.vent.trigger('redirect:to', ['matching_trainer'])

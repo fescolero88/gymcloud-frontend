@@ -70,8 +70,8 @@ define [
             App.request('current_user').fetch()
 
             # update user profile once access token is received
-            @_updateUserProfile @get('user_profile_id'), (userProfileResponse) =>
-              @trigger 'account:created', response, userProfileResponse
+            @_updateUserProfile @get('user_profile_id'), (profileResponse) =>
+              @trigger 'account:created', response, profileResponse
 
           loginModel.login()
 

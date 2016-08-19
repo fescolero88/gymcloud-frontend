@@ -8,9 +8,12 @@ define [
   'views/auth/confirm-registration-view'
   'views/auth/resend-confirmation-view'
   'features/payment/trial_ended/view'
-  'features/signup/trainer_invite/view'
-  'features/signup/dont_have_trainer/view'
-  'features/signup/matching_trainer/view'
+  'features/signup/client_reg_select/view'
+  'features/signup/pro_invite/view'
+  'features/signup/pro_invite_success/view'
+  'features/signup/pro_invite_reminder/view'
+  'features/signup/waiting_gymcloud_pro/view'
+  'features/signup/find_a_pro/view'
 
   'models/auth/confirm-registration-model'
   'models/auth/resend-confirmation-model'
@@ -27,9 +30,12 @@ define [
   ConfirmRegistrationView
   ResendConfirmationView
   TrialEndedView
-  TrainerInviteView
-  DontHaveTrainerView
-  MatchingTrainerView
+  ClientRegSelect
+  ProInviteView
+  ProInviteSuccessView
+  ProInviteReminderView
+  WaitingGymcloudPro
+  FindPro
 
   ConfirmRegistrationModel
   ResendConfirmationModel
@@ -50,9 +56,12 @@ define [
       'reset/:token': 'resetPassword'
       'confirm/:token': 'confirmRegistration'
       'trial_ended': 'trialEnded'
-      'trainer_invite': 'trainerInvite'
-      'dont_have_trainer': 'dontHaveTrainer'
-      'matching_trainer': 'matchingTrainer'
+      'client_signup': 'clientRegSelect'
+      'pro_invite': 'proInvite'
+      'pro_invite_success': 'proInviteSuccess'
+      'pro_invite_reminder': 'proInviteReminder'
+      'waiting_gymcloud_pro': 'waitingGymcloudPro'
+      'find_a_pro': 'find_a_pro'
 
   class Controller extends Marionette.Controller
 
@@ -108,16 +117,27 @@ define [
       view = new TrialEndedView
       @_showView(view)
 
-    trainerInvite: ->
-      view = new TrainerInviteView
+    clientRegSelect: ->
+      @_showView(new ClientRegSelect)
+
+    proInvite: ->
+      view = new ProInviteView
       @_showView(view)
 
-    dontHaveTrainer: ->
-      view = new DontHaveTrainerView
+    proInviteSuccess: ->
+      view = new ProInviteSuccessView
       @_showView(view)
 
-    matchingTrainer: ->
-      view = new MatchingTrainerView
+    proInviteReminder: ->
+      view = new ProInviteReminderView
+      @_showView(view)
+
+    waitingGymcloudPro: ->
+      view = new WaitingGymcloudPro
+      @_showView(view)
+
+    find_a_pro: ->
+      view = new FindPro
       @_showView(view)
 
     _showView: (view) ->

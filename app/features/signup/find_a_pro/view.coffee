@@ -1,10 +1,12 @@
 define [
   './template'
+  '../pro_invite/model'
 ], (
   template
+  Model
 ) ->
 
-  class MatchingTrainerView extends Marionette.ItemView
+  class FindProView extends Marionette.ItemView
 
     template: template
 
@@ -13,3 +15,7 @@ define [
 
     onDestroy: ->
       $('body').removeClass('auth')
+
+    initialize: ->
+      model = new Model
+      model.request()
