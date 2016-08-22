@@ -23,6 +23,7 @@ defaults =
     google_analytics: enabled: false
     tooltips_tour: enabled: true
     mixpanel: enabled: false
+    refer_friend: enabled: true
 
 module.exports =
 
@@ -65,6 +66,7 @@ module.exports =
       freshdesk_widget: enabled: true
       google_analytics: enabled: true
       mixpanel: enabled: true
+      refer_friend: enabled: false
 
   test: $.extend true, {}, defaults,
     api: url: ''

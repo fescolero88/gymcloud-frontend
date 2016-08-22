@@ -44,6 +44,10 @@ define [
                 name: 'src'
                 observe: 'user_profile.avatar.thumb.url'
             ]
+          '[data-feature="refer_friend"]':
+            observe: 'id'
+            visible: ->
+              feature.isEnabled('refer_friend')
 
     events:
       'click [refer-friend]': '_referFriend'
