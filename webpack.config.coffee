@@ -81,6 +81,8 @@ module.exports =
         'bower_components/blueimp-file-upload/js/jquery.fileupload-ui.js'
       'owl-carousel':
         'bower_components/owl-carousel/owl-carousel/owl.carousel.js'
+      'custom-scroll':
+        'node_modules/jquery.nicescroll/jquery.nicescroll.js'
 
     extensions: [
       ''
