@@ -26,30 +26,41 @@ define [
         bindings:
           '[data-bind="first_name"]': 'first_name'
           '[data-bind="last_name"]': 'last_name'
-          '[data-bind="email"]': 'email'
           '[data-bind="password"]': 'password'
           '[data-bind="password_confirmation"]': 'password_confirmation'
           '[data-bind="agree"]': 'agree'
+          '[data-bind="email"]':
+            observe: 'email'
+            attributes: [
+                name: 'disabled'
+                observe: 'invitation_token'
+            ]
           '.gc-user-type-trainer':
             classes:
               active:
-                observe: 'client_id'
+                observe: 'is_client'
                 onGet: (value) -> !value
           '.gc-user-type-client':
             classes:
-              active: 'client_id'
+              active: 'is_client'
+          '.gc-signup-with-email-title':
+            observe: 'is_client'
+            visible: (value) -> !value
+          '.gc-login-social':
+            observe: 'is_client'
+            visible: (value) -> !value
 
     ui:
       'form': 'form.gc-signup-form'
-      'socialSignup': '.gc-login-social'
 
     events:
       'submit @ui.form': 'createAccount'
       'blur input': 'validateInput'
+      'click .gc-signup-checkbox input': '_onChangeUserType'
 
     initialize: (options) ->
       Backbone.Validation.bind @
-      @client = options.client
+      @model.set(is_client: !!@model.get('invitation_token'))
 
     validateInput: (ev) ->
       $input = $(ev.target)
@@ -60,14 +71,6 @@ define [
       $inputGroup = $input.closest('.form-group')
       error_msg = @model.preValidate(input_name, input_value)
       @trigger('switchError', error_msg, $inputGroup)
-
-    onRender: ->
-      return unless @client
-      @model.set(@client)
-      # hide social signup if triggered by invitation
-      @ui.socialSignup.hide()
-      @ui.form.find('.gc-signup-with-email-title').hide()
-      @ui.form.find('input[name="email"]').attr('disabled', 'disabled')
 
     createAccount: ->
       # safari autocomplete hack
@@ -84,11 +87,18 @@ define [
         memo
       ), {}, @)
 
-      if @client
+      if @model.get('invitation_token')
         @model.acceptInvite()
       else
         @model.createAccount()
+          .then =>
+            if @model.get('is_client')
+              return App.vent.trigger('redirect:to', ['auth', 'client_signup'])
 
     onAccountCreated: (data, _userProfile)->
       App.request('auth:onSuccess', data)
       @trigger 'signup:complete'
+
+    _onChangeUserType: (ev) ->
+      return ev if @model.get('invitation_token')
+      @model.set(is_client: !@model.get('is_client'))

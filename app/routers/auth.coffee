@@ -8,9 +8,12 @@ define [
   'views/auth/confirm-registration-view'
   'views/auth/resend-confirmation-view'
   'features/payment/trial_ended/view'
-  'features/signup_trainer_invite/view'
-  'features/signup_trainer_invite/not_have_trainer/view'
-  'features/signup_trainer_invite/matching_trainer/view'
+  'features/signup/client_reg_select/view'
+  'features/signup/pro_invite/view'
+  'features/signup/pro_invite_success/view'
+  'features/signup/pro_invite_reminder/view'
+  'features/signup/waiting_gymcloud_pro/view'
+  'features/signup/find_a_pro/view'
 
   'models/auth/confirm-registration-model'
   'models/auth/resend-confirmation-model'
@@ -27,9 +30,12 @@ define [
   ConfirmRegistrationView
   ResendConfirmationView
   TrialEndedView
-  TrainerInviteView
-  NotHaveTrainerView
-  MatchingTrainerView
+  ClientRegSelect
+  ProInviteView
+  ProInviteSuccessView
+  ProInviteReminderView
+  WaitingGymcloudPro
+  FindPro
 
   ConfirmRegistrationModel
   ResendConfirmationModel
@@ -50,19 +56,22 @@ define [
       'reset/:token': 'resetPassword'
       'confirm/:token': 'confirmRegistration'
       'trial_ended': 'trialEnded'
-      'trainer_invite': 'trainerInvite'
-      'not_have_trainer': 'notHaveTrainer'
-      'matching_trainer': 'matchingTrainer'
+      'auth/client_signup': 'clientRegSelect'
+      'auth/pro_invite': 'proInvite'
+      'auth/pro_invite_success': 'proInviteSuccess'
+      'auth/pro_invite_reminder': 'proInviteReminder'
+      'auth/waiting_gymcloud_pro': 'waitingGymcloudPro'
+      'auth/find_a_pro': 'findPro'
 
   class Controller extends Marionette.Controller
 
     login: (signUp) =>
       if App.request('accessToken:get')
-        App.vent.trigger('redirect:to', '#')
-      else
-        view = new AuthView
-          signUp: signUp
-        @_showView(view)
+        return App.vent.trigger('redirect:to', '#')
+
+      view = new AuthView
+        signUp: signUp
+      @_showView(view)
 
     logout: ->
       App.request('accessToken:remove')
@@ -76,17 +85,14 @@ define [
       @_showView(view)
 
     signUp: (queryString) =>
-      unless App.request('accessToken:get')
-        queryParams = QueryString.parse queryString
-        if queryParams.invitation_token
-          client = queryParams
-
-        view = new SignUpView
-          model: new AccountModel
-          client: client
-        @_showView(view)
-      else
+      if App.request('accessToken:get')
         App.vent.trigger('redirect:to', '#')
+        return
+
+      queryParams = QueryString.parse(queryString)
+      view = new SignUpView
+        model: new AccountModel(queryParams)
+      @_showView(view)
 
     resetPassword: (token) =>
       model = new ResetPasswordModel
@@ -112,16 +118,27 @@ define [
       view = new TrialEndedView
       @_showView(view)
 
-    trainerInvite: ->
-      view = new TrainerInviteView
+    clientRegSelect: ->
+      @_showView(new ClientRegSelect)
+
+    proInvite: ->
+      view = new ProInviteView
       @_showView(view)
 
-    notHaveTrainer: ->
-      view = new NotHaveTrainerView
+    proInviteSuccess: ->
+      view = new ProInviteSuccessView
       @_showView(view)
 
-    matchingTrainer: ->
-      view = new MatchingTrainerView
+    proInviteReminder: ->
+      view = new ProInviteReminderView
+      @_showView(view)
+
+    waitingGymcloudPro: ->
+      view = new WaitingGymcloudPro
+      @_showView(view)
+
+    findPro: ->
+      view = new FindPro
       @_showView(view)
 
     _showView: (view) ->

@@ -15,6 +15,7 @@ define [
       password: undefined
       password_confirmation: undefined
       user_profile_id: undefined
+      is_client: false
 
     validation:
 
@@ -46,40 +47,45 @@ define [
         acceptance: true
 
     createAccount: ->
-      user_profile_id = undefined
-      if @isValid true
-        $.post('/users.json', JSON.stringify(@_prepareInitialParams()))
-          .then( (response) =>
+      defer = new $.Deferred
 
-            # set created id and user_profile_id
-            @set('id', response.id)
-            @set('user_profile_id', user_profile_id = response.user_profile.id)
+      unless @isValid true
+        setTimeout (-> defer.reject()), 1
+        return defer.promise()
 
-            # get the token once the account is created
-            loginModel = new LoginModel
-              username: @get 'email'
-              password: @get 'password'
+      $.post('/users.json', JSON.stringify(@_prepareInitialParams()))
+        .then (user) =>
+          # set created id and user_profile_id
+          @set('id', user.id)
+          @set('user_profile_id', user.user_profile.id)
 
-            loginModel.once 'model:login:success', (response) =>
-              App.request 'accessToken:set', response.access_token
-              App.request('current_user').fetch()
+          # get the token once the account is created
+          loginModel = new LoginModel
+            username: @get('email')
+            password: @get('password')
 
-              # update user profile once access token is received
-              @_updateUserProfile user_profile_id, (userProfileResponse) =>
-                @trigger 'account:created', response, userProfileResponse
+          loginModel.once 'model:login:success', (response) =>
+            defer.resolve()
+            App.request 'accessToken:set', response.access_token
+            App.request('current_user').fetch()
 
-            loginModel.login()
+            # update user profile once access token is received
+            @_updateUserProfile @get('user_profile_id'), (profileResponse) =>
+              @trigger('account:created', response, profileResponse)
 
-          )
-          .fail (xhr, settings, errorThrown)  ->
-            errorJSON = xhr.responseJSON.error
-            for key of errorJSON
-              if errorJSON.hasOwnProperty(key)
-                errorMsg = "#{key} #{errorJSON[key].join(',')}"
-              break
+          loginModel.login()
 
-            App.request 'messenger:explain', 'message.error',
-              message: errorMsg
+        .fail (xhr, settings, errorThrown)  ->
+          errorJSON = xhr.responseJSON.error
+          for key of errorJSON
+            if errorJSON.hasOwnProperty(key)
+              errorMsg = "#{key} #{errorJSON[key].join(',')}"
+            break
+
+          App.request 'messenger:explain', 'message.error',
+            message: errorMsg
+
+      defer.promise()
 
     acceptInvite: ->
       if @isValid true
@@ -90,11 +96,11 @@ define [
         ).then (response) =>
           # get the token once the account is created
           loginModel = new LoginModel
-            username: @get 'email'
-            password: @get 'password'
+            username: @get('email')
+            password: @get('password')
 
           loginModel.once 'model:login:success', (response) =>
-            App.request 'accessToken:set', response.access_token
+            App.request('accessToken:set', response.access_token)
             App.request('current_user').fetch()
 
             # update user profile once access token is received
@@ -106,15 +112,15 @@ define [
     # Initial request payload should only include
     # email and password
     _prepareInitialParams: ->
-      user: _.pick @attributes, 'email', 'password'
+      user: _.pick(@attributes, 'email', 'password', 'is_client')
 
     # once account is created, update user_profile
     _preparePatchParams: ->
-      params = _.pick @attributes, 'first_name', 'last_name'
+      params = _.pick(@attributes, 'first_name', 'last_name')
 
       # rename proper keys for user_profile request
-      params.user_id = @get 'id'
-      params.id = @get 'user_profile_id'
+      params.user_id = @get('id')
+      params.id = @get('user_profile_id')
       params
 
     _prepareInviteParams: ->
@@ -126,6 +132,6 @@ define [
     _updateUserProfile: (user_profile_id, doneCallback) =>
       $.ajax
         url: "/user_profiles/#{user_profile_id}"
-        data: JSON.stringify @_preparePatchParams()
+        data: JSON.stringify(@_preparePatchParams())
         type: 'PATCH'
       .then(doneCallback)

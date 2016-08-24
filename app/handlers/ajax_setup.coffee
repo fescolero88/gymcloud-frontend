@@ -22,6 +22,15 @@ define ->
         App.request 'messenger:explain', 'message.error',
           message: message
 
+      if jqxhr.status is 452
+        App.vent.trigger('redirect:to', ['auth', 'waiting_gymcloud_pro'])
+
+      if jqxhr.status is 453
+        App.vent.trigger('redirect:to', ['auth', 'pro_invite_reminder'])
+
+      if jqxhr.status is 454
+        App.vent.trigger('redirect:to', ['auth', 'client_signup'])
+
     _.each ['Model', 'Collection'], (namespace) ->
       oldCtr = Backbone[namespace]
       Backbone[namespace]::constructor = ->

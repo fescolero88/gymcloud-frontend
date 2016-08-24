@@ -7,7 +7,7 @@ define ->
       element: (view) -> view.ui.itemAddButton
       rule: -> /\/#exercises/.test(window.location.href)
       main: true
-      title: '''The first step in maximizing your Gymcloud experience as a
+      title: '''The first step in maximizing your GymCloud experience as a
                 fitness professional is creating exercises.'''
       content: 'Click this button to start creating your first exercise.'
       docs: '3000047997--web-trainer-exercises-how-to-add-a-folder'
@@ -170,7 +170,7 @@ define ->
       element: (view) -> '.gc-client-modal input:first'
       rule: -> /\/#clients/.test(window.location.href)
       title: '''Allow your client to manage his/her own workouts and programs
-                by inviting him/her to Gymcloud.'''
+                by inviting him/her to GymCloud.'''
       content: 'First, click your client\'s name.'
       docs: '3000048491--web-clients-how-to-register'
       orphan: true
@@ -181,7 +181,7 @@ define ->
       key: 'ClientsView'
       element: (view) -> '.gc-client-modal button[type="submit"]:first'
       rule: -> /\/#clients/.test(window.location.href)
-      title: 'Inviting A Client To Gymcloud'
+      title: 'Inviting A Client To GymCloud'
       content: 'Then, hit this button and enter your client\'s email address.'
       docs: '3000048491--web-clients-how-to-register'
       onNext: -> @view.ui.modalContainer.modal('hide')

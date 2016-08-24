@@ -99,58 +99,57 @@ body.auth
 .gc-login-social .btn-primary
   background-color: #1f57b5
 
-.gc-login-form-wrapper form .form-group
-  padding: 0 15px
-  position: relative
-
-.gc-login-form-wrapper form label
-  font-size: 13px
-  font-weight: normal
-  color: #a6a7aa
-  font-weight: 400
-
-.gc-login-form-wrapper form .checkbox label
-  font-size: 12.5px
-  color: #a6a7aa
-
-.gc-login-form-wrapper form .checkbox input
-  margin: 3px 0 0 -18px
-
-.gc-login-form-wrapper form .form-control
-  height: 40px
-  font-size: 16px
-
-.gc-login-form-wrapper form .gc-invalid .checkbox label
-  color: #ff560a
-
 .form-group-radio.gc-invalid label
   color: #ff560a
 
-.gc-login-form-wrapper form [type=submit],
-.gc-login-form-wrapper form .gc-form-submit-button
-  color: #3a99d8
-  padding: 10px 28px
-  border-radius: 50px
-  font-weight: bold
-  text-transform: uppercase
-  border: 2px solid #3a99d8
-  margin-top: 20px
-  font-size: 18px
-  line-height: 24px
+.gc-login-form-wrapper
+  form
+    .form-group
+      padding: 0 15px
+      position: relative
 
-.gc-login-form-wrapper form [type=submit]:hover,
-.gc-login-form-wrapper form [type=submit]:focus,
-.gc-login-form-wrapper form [type=submit]:active,
-.gc-login-form-wrapper form .gc-form-submit-button:hover,
-.gc-login-form-wrapper form .gc-form-submit-button:focus,
-.gc-login-form-wrapper form .gc-form-submit-button:active
-  background: transparent
-  outline: none
+    label
+      font-size: 13px
+      font-weight: normal
+      color: #a6a7aa
+      font-weight: 400
 
-.gc-login-form-wrapper form [type=submit]:hover,
-.gc-login-form-wrapper form .gc-form-submit-button:hover
-  background-color: #3a99d8
-  color: #fff
+    .checkbox
+      label
+        font-size: 12.5px
+        color: #a6a7aa
+
+      input
+        margin: 3px 0 0 -18px
+
+    .form-control
+      height: 45px
+      font-size: 16px
+
+    .gc-invalid .checkbox label
+      color: #ff560a
+
+    [type=submit],
+    .gc-form-submit-button
+      color: #3a99d8
+      padding: 10px 28px
+      border-radius: 50px
+      font-weight: bold
+      text-transform: uppercase
+      border: 2px solid #3a99d8
+      margin-top: 20px
+      font-size: 18px
+      line-height: 24px
+
+      &:hover,
+      &:focus,
+      &:active,
+        background: transparent
+        outline: none
+
+      &:hover
+        background-color: #3a99d8
+        color: #fff
 
 .gc-login-signup-wrapper
   color: #a6a7aa
@@ -158,9 +157,6 @@ body.auth
 
 .gc-login-signup-wrapper a
   color: #3a99d8
-
-.gc-login-form-wrapper form .form-control
-  height: 45px
 
 .forgot-password-link
   font-size: 13px
@@ -227,11 +223,11 @@ body.auth
 .gc-trainer-type input,
 .gc-signup-checkbox input
   display: none
-  
+
 .gc-signup-checkbox
   width: 90%
   height: 85px
-    
+
   span
     margin-top: 28px
     float: right
@@ -250,7 +246,7 @@ body.auth
 .gc-not-have-trainer-icon
   span
     width: 51%
-  
+
 .gc-user-type-trainer
   background: transparent url('../images/signup-type-1.png') 30% center no-repeat
 
@@ -304,6 +300,11 @@ form .checkbox
   text-align: center
   margin: 0 0 25px 0
 
+  .gc-have-trainer-icon
+    margin: 30px auto 15px auto
+    width: 52px
+    height: 43px
+
 #gc-signup-message .modal-body p
   font-size: 16px
   margin: 0
@@ -336,6 +337,84 @@ form .checkbox
 .gc-reset-password-text
   text-align: center
   margin-bottom: 20px
+
+.client-reg-type-select
+  margin: 50px 39px 25px 39px
+  display: flex
+  flex-flow: column
+
+
+  label
+    padding: 35px
+    display: flex
+    align-items: center
+
+    &:first-child
+      border-bottom: 1px solid #eaeaea
+
+    &.invite-pro:before
+      content: ""
+      display: block
+      width: 52px
+      height: 43px
+      background: transparent url('../images/have-trainer.png') 17% center no-repeat
+
+    &.request-pro:before
+      content: ""
+      display: block
+      width: 52px
+      height: 43px
+      background: transparent url('../images/not-have-trainer.png') 17% center no-repeat
+
+    .text
+      width: 165px
+      padding-left: 25px
+      font-size: 16px
+      font-weight: 400
+      color: #555555
+
+    input
+      display: none
+
+    .radio-button
+      width: 39px
+      height: 39px
+      margin-left: auto
+      background-color: #cfe3f4
+      border-radius: 50%
+      transition: all 0.5s ease
+
+    input:checked + .radio-button
+      border: 6px solid #cfe3f4
+      background-color: #0074d9
+
+.invite-sent-icon
+  width: 81px
+  height: 55px
+  margin: 82px auto 23px auto
+  background: transparent url('../images/invite_sent.svg') no-repeat
+
+.waiting-gymcloud-pro
+  width: 62px
+  height: 82px
+  margin: 82px auto 23px auto
+  background: transparent url('../images/waiting_gymcloud_pro.svg') no-repeat
+
+.find-a-pro
+  width: 66px
+  height: 52px
+  margin: 82px auto 23px auto
+  background: transparent url('../images/find_a_pro.svg') no-repeat
+
+.send-reminder
+  margin: auto
+  display: block
+  border: none
+  background: none
+  font-size: 16px
+  font-weight: 700
+  text-align: center
+  color: #0074d9
 
 @media (min-width: 768px)
   .gc-nav-top
